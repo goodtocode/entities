@@ -1,6 +1,6 @@
 using System;
 
-namespace Business.Application.Mvc.Models
+namespace GoodToCode.Business
 {
     public class ErrorViewModel
     {

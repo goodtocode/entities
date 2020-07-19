@@ -1,7 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <AssemblyName>GoodToCode.Business.Domain.Objects</AssemblyName>
+    <RootNamespace>GoodToCode.Business</RootNamespace>
   </PropertyGroup>
 
 </Project>

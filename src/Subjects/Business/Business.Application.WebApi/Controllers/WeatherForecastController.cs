@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Business.Application.WebApi.Controllers
+namespace GoodToCode.Business
 {
     [ApiController]
     [Route("[controller]")]

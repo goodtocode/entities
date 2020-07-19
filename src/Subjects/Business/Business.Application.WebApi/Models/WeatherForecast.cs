@@ -1,6 +1,6 @@
 using System;
 
-namespace Business.Application.WebApi
+namespace GoodToCode.Business
 {
     public class WeatherForecast
     {
