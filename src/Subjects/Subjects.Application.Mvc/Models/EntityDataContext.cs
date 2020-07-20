@@ -90,7 +90,7 @@ namespace GoodToCode.Subjects.Models
               .AddJsonFile("appsettings.json")
               .Build();
             var connectionString = config.GetConnectionString("DefaultConnection");
-            connectionString = "Server=tcp:GoodToCode.database.windows.net,1433;Initial Catalog=EntityData;user id=TestUser; password=;Persist Security Info=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Application Name=GoodToCodeEntities;";
+            connectionString = "Server=tcp:GoodToCode.database.windows.net,1433;Initial Catalog=EntityData;user id=TestUser; password=57595709-9E9C-47EA-ABBF-4F3BAA1B0D37;Persist Security Info=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Application Name=GoodToCodeEntities;";
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(connectionString);
@@ -213,7 +213,7 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
 
                 entity.HasOne(d => d.DetailTypeKeyNavigation)
-                    .WithMany(p => p.Detail)
+                    .WithMany(p => (System.Collections.Generic.IEnumerable<Detail>)p.Detail)
                     .HasPrincipalKey(p => p.DetailTypeKey)
                     .HasForeignKey(d => d.DetailTypeKey)
                     .OnDelete(DeleteBehavior.ClientSetNull)

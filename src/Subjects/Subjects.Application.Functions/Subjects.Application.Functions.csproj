@@ -17,4 +17,16 @@
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entity\" />
+    <Folder Include="Item\" />
+    <Folder Include="Resource\" />
+    <Folder Include="Person\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Subjects.Abstractions\Subjects.Abstractions.csproj" />
+    <ProjectReference Include="..\Subjects.Domain.Aggregates\Subjects.Domain.Aggregates.csproj" />
+    <ProjectReference Include="..\Subjects.Domain.Objects\Subjects.Domain.Objects.csproj" />
+    <ProjectReference Include="..\Subjects.Infrastructure.Persistence\Subjects.Infrastructure.Persistence.csproj" />
+  </ItemGroup>
 </Project>

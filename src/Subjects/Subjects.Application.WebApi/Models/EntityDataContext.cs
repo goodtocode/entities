@@ -1,6 +1,9 @@
-﻿using System;
+﻿
+//https://www.syncfusion.com/blogs/post/build-crud-application-with-asp-net-core-entity-framework-visual-studio-2019.aspx
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace GoodToCode.Subjects.Models
 {
@@ -45,6 +48,7 @@ namespace GoodToCode.Subjects.Models
         public virtual DbSet<LocationArea> LocationArea { get; set; }
         public virtual DbSet<LocationTimeRecurring> LocationTimeRecurring { get; set; }
         public virtual DbSet<LocationType> LocationType { get; set; }
+        public virtual DbSet<MigrationHistory> MigrationHistory { get; set; }
         public virtual DbSet<Option> Option { get; set; }
         public virtual DbSet<OptionGroup> OptionGroup { get; set; }
         public virtual DbSet<Person> Person { get; set; }
@@ -57,6 +61,8 @@ namespace GoodToCode.Subjects.Models
         public virtual DbSet<Schedule> Schedule { get; set; }
         public virtual DbSet<ScheduleSlot> ScheduleSlot { get; set; }
         public virtual DbSet<ScheduleType> ScheduleType { get; set; }
+        public virtual DbSet<Setting> Setting { get; set; }
+        public virtual DbSet<SettingType> SettingType { get; set; }
         public virtual DbSet<Slot> Slot { get; set; }
         public virtual DbSet<SlotLocation> SlotLocation { get; set; }
         public virtual DbSet<SlotResource> SlotResource { get; set; }
@@ -69,6 +75,8 @@ namespace GoodToCode.Subjects.Models
         public virtual DbSet<Venture> Venture { get; set; }
         public virtual DbSet<VentureAppointment> VentureAppointment { get; set; }
         public virtual DbSet<VentureDetail> VentureDetail { get; set; }
+
+
         public virtual DbSet<VentureEntityOption> VentureEntityOption { get; set; }
         public virtual DbSet<VentureLocation> VentureLocation { get; set; }
         public virtual DbSet<VentureOption> VentureOption { get; set; }
@@ -77,16 +85,20 @@ namespace GoodToCode.Subjects.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            var config = new ConfigurationBuilder()
+              .AddJsonFile($"appsettings.{(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT ") ?? "Development")}.json")
+              .AddJsonFile("appsettings.json")
+              .Build();
+            var connectionString = config.GetConnectionString("DefaultConnection");
+            connectionString = "Server=tcp:GoodToCode.database.windows.net,1433;Initial Catalog=EntityData;user id=TestUser; password=57595709-9E9C-47EA-ABBF-4F3BAA1B0D37;Persist Security Info=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Application Name=GoodToCodeEntities;";
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=tcp:GoodToCode.database.windows.net,1433;Initial Catalog=EntityData;user id=TestUser; password=;Persist Security Info=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Application Name=GoodToCodeEntities;");
+                optionsBuilder.UseSqlServer(connectionString);
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
             modelBuilder.Entity<Appointment>(entity =>
             {
                 entity.ToTable("Appointment", "Entity");
@@ -201,7 +213,7 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
 
                 entity.HasOne(d => d.DetailTypeKeyNavigation)
-                    .WithMany(p => p.Detail)
+                    .WithMany(p => (System.Collections.Generic.IEnumerable<Detail>)p.Detail)
                     .HasPrincipalKey(p => p.DetailTypeKey)
                     .HasForeignKey(d => d.DetailTypeKey)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -1050,6 +1062,24 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
+            modelBuilder.Entity<MigrationHistory>(entity =>
+            {
+                entity.HasKey(e => new { e.MigrationId, e.ContextKey })
+                    .HasName("PK_MigrationHistory");
+
+                entity.ToTable("__MigrationHistory", "Identity");
+
+                entity.Property(e => e.MigrationId).HasMaxLength(150);
+
+                entity.Property(e => e.ContextKey).HasMaxLength(300);
+
+                entity.Property(e => e.Model).IsRequired();
+
+                entity.Property(e => e.ProductVersion)
+                    .IsRequired()
+                    .HasMaxLength(32);
+            });
+
             modelBuilder.Entity<Option>(entity =>
             {
                 entity.ToTable("Option", "Entity");
@@ -1452,6 +1482,42 @@ namespace GoodToCode.Subjects.Models
                     .HasMaxLength(250);
 
                 entity.Property(e => e.ScheduleTypeName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Setting>(entity =>
+            {
+                entity.ToTable("Setting", "Setting");
+
+                entity.HasIndex(e => e.SettingKey)
+                    .HasName("IX_Setting_Key")
+                    .IsUnique();
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.SettingName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.SettingValue)
+                    .IsRequired()
+                    .HasMaxLength(200);
+            });
+
+            modelBuilder.Entity<SettingType>(entity =>
+            {
+                entity.ToTable("SettingType", "Setting");
+
+                entity.HasIndex(e => e.SettingTypeKey)
+                    .HasName("IX_SettingType_Key")
+                    .IsUnique();
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.SettingTypeName)
                     .IsRequired()
                     .HasMaxLength(50);
             });

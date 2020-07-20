@@ -1,9 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>GoodToCode.Subjects.Domain.Objects</AssemblyName>
     <RootNamespace>GoodToCode.Subjects</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Subjects.Abstractions\Subjects.Abstractions.csproj" />
+  </ItemGroup>
 
 </Project>

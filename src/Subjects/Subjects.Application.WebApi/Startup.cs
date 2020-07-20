@@ -49,6 +49,7 @@ namespace GoodToCode.Subjects.Application
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API");
             });
+
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
