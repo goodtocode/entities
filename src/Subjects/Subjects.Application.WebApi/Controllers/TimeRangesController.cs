@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class TimeRangesController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public TimeRangesController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/TimeRanges
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<TimeRange>>> GetTimeRange()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.TimeRange.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/TimeRanges/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<TimeRange>> GetTimeRange(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var timeRange = await _context.TimeRange.FindAsync(id);
 
-            if (business == null)
+            if (timeRange == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return timeRange;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/TimeRanges/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutTimeRange(int id, TimeRange timeRange)
         {
-            if (id != business.BusinessId)
+            if (id != timeRange.TimeRangeId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(timeRange).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!TimeRangeExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/TimeRanges
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<TimeRange>> PostTimeRange(TimeRange timeRange)
         {
-            _context.Business.Add(business);
+            _context.TimeRange.Add(timeRange);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetTimeRange", new { id = timeRange.TimeRangeId }, timeRange);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/TimeRanges/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<TimeRange>> DeleteTimeRange(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var timeRange = await _context.TimeRange.FindAsync(id);
+            if (timeRange == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.TimeRange.Remove(timeRange);
             await _context.SaveChangesAsync();
 
-            return business;
+            return timeRange;
         }
 
-        private bool BusinessExists(int id)
+        private bool TimeRangeExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.TimeRange.Any(e => e.TimeRangeId == id);
         }
     }
 }

@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class EventResourcesController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public EventResourcesController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/EventResources
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<EventResource>>> GetEventResource()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.EventResource.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/EventResources/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<EventResource>> GetEventResource(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var eventResource = await _context.EventResource.FindAsync(id);
 
-            if (business == null)
+            if (eventResource == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return eventResource;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/EventResources/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutEventResource(int id, EventResource eventResource)
         {
-            if (id != business.BusinessId)
+            if (id != eventResource.EventResourceId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(eventResource).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!EventResourceExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/EventResources
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<EventResource>> PostEventResource(EventResource eventResource)
         {
-            _context.Business.Add(business);
+            _context.EventResource.Add(eventResource);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetEventResource", new { id = eventResource.EventResourceId }, eventResource);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/EventResources/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<EventResource>> DeleteEventResource(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var eventResource = await _context.EventResource.FindAsync(id);
+            if (eventResource == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.EventResource.Remove(eventResource);
             await _context.SaveChangesAsync();
 
-            return business;
+            return eventResource;
         }
 
-        private bool BusinessExists(int id)
+        private bool EventResourceExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.EventResource.Any(e => e.EventResourceId == id);
         }
     }
 }

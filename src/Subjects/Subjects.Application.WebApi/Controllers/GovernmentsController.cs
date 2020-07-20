@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class GovernmentsController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public GovernmentsController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/Governments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<Government>>> GetGovernment()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.Government.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/Governments/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<Government>> GetGovernment(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var government = await _context.Government.FindAsync(id);
 
-            if (business == null)
+            if (government == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return government;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/Governments/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutGovernment(int id, Government government)
         {
-            if (id != business.BusinessId)
+            if (id != government.GovernmentId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(government).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!GovernmentExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/Governments
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<Government>> PostGovernment(Government government)
         {
-            _context.Business.Add(business);
+            _context.Government.Add(government);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetGovernment", new { id = government.GovernmentId }, government);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/Governments/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<Government>> DeleteGovernment(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var government = await _context.Government.FindAsync(id);
+            if (government == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.Government.Remove(government);
             await _context.SaveChangesAsync();
 
-            return business;
+            return government;
         }
 
-        private bool BusinessExists(int id)
+        private bool GovernmentExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.Government.Any(e => e.GovernmentId == id);
         }
     }
 }

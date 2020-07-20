@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class TimeRecurringsController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public TimeRecurringsController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/TimeRecurrings
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<TimeRecurring>>> GetTimeRecurring()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.TimeRecurring.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/TimeRecurrings/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<TimeRecurring>> GetTimeRecurring(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var timeRecurring = await _context.TimeRecurring.FindAsync(id);
 
-            if (business == null)
+            if (timeRecurring == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return timeRecurring;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/TimeRecurrings/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutTimeRecurring(int id, TimeRecurring timeRecurring)
         {
-            if (id != business.BusinessId)
+            if (id != timeRecurring.TimeRecurringId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(timeRecurring).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!TimeRecurringExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/TimeRecurrings
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<TimeRecurring>> PostTimeRecurring(TimeRecurring timeRecurring)
         {
-            _context.Business.Add(business);
+            _context.TimeRecurring.Add(timeRecurring);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetTimeRecurring", new { id = timeRecurring.TimeRecurringId }, timeRecurring);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/TimeRecurrings/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<TimeRecurring>> DeleteTimeRecurring(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var timeRecurring = await _context.TimeRecurring.FindAsync(id);
+            if (timeRecurring == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.TimeRecurring.Remove(timeRecurring);
             await _context.SaveChangesAsync();
 
-            return business;
+            return timeRecurring;
         }
 
-        private bool BusinessExists(int id)
+        private bool TimeRecurringExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.TimeRecurring.Any(e => e.TimeRecurringId == id);
         }
     }
 }

@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class ScheduleSlotsController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public ScheduleSlotsController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/ScheduleSlots
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<ScheduleSlot>>> GetScheduleSlot()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.ScheduleSlot.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/ScheduleSlots/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<ScheduleSlot>> GetScheduleSlot(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var scheduleSlot = await _context.ScheduleSlot.FindAsync(id);
 
-            if (business == null)
+            if (scheduleSlot == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return scheduleSlot;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/ScheduleSlots/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutScheduleSlot(int id, ScheduleSlot scheduleSlot)
         {
-            if (id != business.BusinessId)
+            if (id != scheduleSlot.ScheduleSlotId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(scheduleSlot).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!ScheduleSlotExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/ScheduleSlots
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<ScheduleSlot>> PostScheduleSlot(ScheduleSlot scheduleSlot)
         {
-            _context.Business.Add(business);
+            _context.ScheduleSlot.Add(scheduleSlot);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetScheduleSlot", new { id = scheduleSlot.ScheduleSlotId }, scheduleSlot);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/ScheduleSlots/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<ScheduleSlot>> DeleteScheduleSlot(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var scheduleSlot = await _context.ScheduleSlot.FindAsync(id);
+            if (scheduleSlot == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.ScheduleSlot.Remove(scheduleSlot);
             await _context.SaveChangesAsync();
 
-            return business;
+            return scheduleSlot;
         }
 
-        private bool BusinessExists(int id)
+        private bool ScheduleSlotExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.ScheduleSlot.Any(e => e.ScheduleSlotId == id);
         }
     }
 }

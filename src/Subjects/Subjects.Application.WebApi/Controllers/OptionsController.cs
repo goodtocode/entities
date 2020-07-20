@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class OptionsController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public OptionsController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/Options
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<Option>>> GetOption()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.Option.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/Options/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<Option>> GetOption(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var option = await _context.Option.FindAsync(id);
 
-            if (business == null)
+            if (option == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return option;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/Options/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutOption(int id, Option option)
         {
-            if (id != business.BusinessId)
+            if (id != option.OptionId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(option).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!OptionExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/Options
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<Option>> PostOption(Option option)
         {
-            _context.Business.Add(business);
+            _context.Option.Add(option);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetOption", new { id = option.OptionId }, option);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/Options/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<Option>> DeleteOption(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var option = await _context.Option.FindAsync(id);
+            if (option == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.Option.Remove(option);
             await _context.SaveChangesAsync();
 
-            return business;
+            return option;
         }
 
-        private bool BusinessExists(int id)
+        private bool OptionExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.Option.Any(e => e.OptionId == id);
         }
     }
 }

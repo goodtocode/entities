@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class ScheduleTypesController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public ScheduleTypesController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/ScheduleTypes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<ScheduleType>>> GetScheduleType()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.ScheduleType.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/ScheduleTypes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<ScheduleType>> GetScheduleType(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var scheduleType = await _context.ScheduleType.FindAsync(id);
 
-            if (business == null)
+            if (scheduleType == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return scheduleType;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/ScheduleTypes/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutScheduleType(int id, ScheduleType scheduleType)
         {
-            if (id != business.BusinessId)
+            if (id != scheduleType.ScheduleTypeId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(scheduleType).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!ScheduleTypeExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/ScheduleTypes
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<ScheduleType>> PostScheduleType(ScheduleType scheduleType)
         {
-            _context.Business.Add(business);
+            _context.ScheduleType.Add(scheduleType);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetScheduleType", new { id = scheduleType.ScheduleTypeId }, scheduleType);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/ScheduleTypes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<ScheduleType>> DeleteScheduleType(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var scheduleType = await _context.ScheduleType.FindAsync(id);
+            if (scheduleType == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.ScheduleType.Remove(scheduleType);
             await _context.SaveChangesAsync();
 
-            return business;
+            return scheduleType;
         }
 
-        private bool BusinessExists(int id)
+        private bool ScheduleTypeExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.ScheduleType.Any(e => e.ScheduleTypeId == id);
         }
     }
 }

@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class LocationAreasController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public LocationAreasController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/LocationAreas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<LocationArea>>> GetLocationArea()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.LocationArea.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/LocationAreas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<LocationArea>> GetLocationArea(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var locationArea = await _context.LocationArea.FindAsync(id);
 
-            if (business == null)
+            if (locationArea == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return locationArea;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/LocationAreas/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutLocationArea(int id, LocationArea locationArea)
         {
-            if (id != business.BusinessId)
+            if (id != locationArea.LocationAreaId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(locationArea).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!LocationAreaExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/LocationAreas
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<LocationArea>> PostLocationArea(LocationArea locationArea)
         {
-            _context.Business.Add(business);
+            _context.LocationArea.Add(locationArea);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetLocationArea", new { id = locationArea.LocationAreaId }, locationArea);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/LocationAreas/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<LocationArea>> DeleteLocationArea(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var locationArea = await _context.LocationArea.FindAsync(id);
+            if (locationArea == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.LocationArea.Remove(locationArea);
             await _context.SaveChangesAsync();
 
-            return business;
+            return locationArea;
         }
 
-        private bool BusinessExists(int id)
+        private bool LocationAreaExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.LocationArea.Any(e => e.LocationAreaId == id);
         }
     }
 }

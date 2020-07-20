@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class VentureDetailsController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public VentureDetailsController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/VentureDetails
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<VentureDetail>>> GetVentureDetail()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.VentureDetail.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/VentureDetails/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<VentureDetail>> GetVentureDetail(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var ventureDetail = await _context.VentureDetail.FindAsync(id);
 
-            if (business == null)
+            if (ventureDetail == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return ventureDetail;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/VentureDetails/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutVentureDetail(int id, VentureDetail ventureDetail)
         {
-            if (id != business.BusinessId)
+            if (id != ventureDetail.VentureDetailId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(ventureDetail).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!VentureDetailExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/VentureDetails
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<VentureDetail>> PostVentureDetail(VentureDetail ventureDetail)
         {
-            _context.Business.Add(business);
+            _context.VentureDetail.Add(ventureDetail);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetVentureDetail", new { id = ventureDetail.VentureDetailId }, ventureDetail);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/VentureDetails/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<VentureDetail>> DeleteVentureDetail(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var ventureDetail = await _context.VentureDetail.FindAsync(id);
+            if (ventureDetail == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.VentureDetail.Remove(ventureDetail);
             await _context.SaveChangesAsync();
 
-            return business;
+            return ventureDetail;
         }
 
-        private bool BusinessExists(int id)
+        private bool VentureDetailExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.VentureDetail.Any(e => e.VentureDetailId == id);
         }
     }
 }

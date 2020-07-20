@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class AppointmentsController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public AppointmentsController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/Appointments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<Appointment>>> GetAppointment()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.Appointment.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/Appointments/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<Appointment>> GetAppointment(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var appointment = await _context.Appointment.FindAsync(id);
 
-            if (business == null)
+            if (appointment == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return appointment;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/Appointments/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutAppointment(int id, Appointment appointment)
         {
-            if (id != business.BusinessId)
+            if (id != appointment.AppointmentId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(appointment).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!AppointmentExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/Appointments
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<Appointment>> PostAppointment(Appointment appointment)
         {
-            _context.Business.Add(business);
+            _context.Appointment.Add(appointment);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetAppointment", new { id = appointment.AppointmentId }, appointment);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/Appointments/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<Appointment>> DeleteAppointment(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var appointment = await _context.Appointment.FindAsync(id);
+            if (appointment == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.Appointment.Remove(appointment);
             await _context.SaveChangesAsync();
 
-            return business;
+            return appointment;
         }
 
-        private bool BusinessExists(int id)
+        private bool AppointmentExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.Appointment.Any(e => e.AppointmentId == id);
         }
     }
 }

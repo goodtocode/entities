@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class ResourcesController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public ResourcesController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/Resources
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<Resource>>> GetResource()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.Resource.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/Resources/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<Resource>> GetResource(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var resource = await _context.Resource.FindAsync(id);
 
-            if (business == null)
+            if (resource == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return resource;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/Resources/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutResource(int id, Resource resource)
         {
-            if (id != business.BusinessId)
+            if (id != resource.ResourceId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(resource).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!ResourceExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/Resources
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<Resource>> PostResource(Resource resource)
         {
-            _context.Business.Add(business);
+            _context.Resource.Add(resource);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetResource", new { id = resource.ResourceId }, resource);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/Resources/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<Resource>> DeleteResource(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var resource = await _context.Resource.FindAsync(id);
+            if (resource == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.Resource.Remove(resource);
             await _context.SaveChangesAsync();
 
-            return business;
+            return resource;
         }
 
-        private bool BusinessExists(int id)
+        private bool ResourceExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.Resource.Any(e => e.ResourceId == id);
         }
     }
 }

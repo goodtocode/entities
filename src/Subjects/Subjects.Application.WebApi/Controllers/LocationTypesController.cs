@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class LocationTypesController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public LocationTypesController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/LocationTypes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<LocationType>>> GetLocationType()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.LocationType.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/LocationTypes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<LocationType>> GetLocationType(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var locationType = await _context.LocationType.FindAsync(id);
 
-            if (business == null)
+            if (locationType == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return locationType;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/LocationTypes/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutLocationType(int id, LocationType locationType)
         {
-            if (id != business.BusinessId)
+            if (id != locationType.LocationTypeId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(locationType).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!LocationTypeExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/LocationTypes
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<LocationType>> PostLocationType(LocationType locationType)
         {
-            _context.Business.Add(business);
+            _context.LocationType.Add(locationType);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetLocationType", new { id = locationType.LocationTypeId }, locationType);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/LocationTypes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<LocationType>> DeleteLocationType(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var locationType = await _context.LocationType.FindAsync(id);
+            if (locationType == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.LocationType.Remove(locationType);
             await _context.SaveChangesAsync();
 
-            return business;
+            return locationType;
         }
 
-        private bool BusinessExists(int id)
+        private bool LocationTypeExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.LocationType.Any(e => e.LocationTypeId == id);
         }
     }
 }

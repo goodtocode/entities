@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace GoodToCode.Subjects
+namespace GoodToCode.Subjects.Controllers
 {
     [ApiController]
     [Route("[controller]")]

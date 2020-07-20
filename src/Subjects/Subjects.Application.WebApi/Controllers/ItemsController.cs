@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class ItemsController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public ItemsController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/Items
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<Item>>> GetItem()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.Item.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/Items/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<Item>> GetItem(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var item = await _context.Item.FindAsync(id);
 
-            if (business == null)
+            if (item == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return item;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/Items/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutItem(int id, Item item)
         {
-            if (id != business.BusinessId)
+            if (id != item.ItemId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(item).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!ItemExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/Items
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<Item>> PostItem(Item item)
         {
-            _context.Business.Add(business);
+            _context.Item.Add(item);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetItem", new { id = item.ItemId }, item);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/Items/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<Item>> DeleteItem(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var item = await _context.Item.FindAsync(id);
+            if (item == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.Item.Remove(item);
             await _context.SaveChangesAsync();
 
-            return business;
+            return item;
         }
 
-        private bool BusinessExists(int id)
+        private bool ItemExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.Item.Any(e => e.ItemId == id);
         }
     }
 }

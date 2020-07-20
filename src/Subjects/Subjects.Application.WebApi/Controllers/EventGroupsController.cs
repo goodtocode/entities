@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class EventGroupsController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public EventGroupsController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/EventGroups
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<EventGroup>>> GetEventGroup()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.EventGroup.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/EventGroups/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<EventGroup>> GetEventGroup(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var eventGroup = await _context.EventGroup.FindAsync(id);
 
-            if (business == null)
+            if (eventGroup == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return eventGroup;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/EventGroups/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutEventGroup(int id, EventGroup eventGroup)
         {
-            if (id != business.BusinessId)
+            if (id != eventGroup.EventGroupId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(eventGroup).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!EventGroupExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/EventGroups
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<EventGroup>> PostEventGroup(EventGroup eventGroup)
         {
-            _context.Business.Add(business);
+            _context.EventGroup.Add(eventGroup);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetEventGroup", new { id = eventGroup.EventGroupId }, eventGroup);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/EventGroups/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<EventGroup>> DeleteEventGroup(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var eventGroup = await _context.EventGroup.FindAsync(id);
+            if (eventGroup == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.EventGroup.Remove(eventGroup);
             await _context.SaveChangesAsync();
 
-            return business;
+            return eventGroup;
         }
 
-        private bool BusinessExists(int id)
+        private bool EventGroupExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.EventGroup.Any(e => e.EventGroupId == id);
         }
     }
 }

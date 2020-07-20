@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class SlotResourcesController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public SlotResourcesController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/SlotResources
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<SlotResource>>> GetSlotResource()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.SlotResource.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/SlotResources/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<SlotResource>> GetSlotResource(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var slotResource = await _context.SlotResource.FindAsync(id);
 
-            if (business == null)
+            if (slotResource == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return slotResource;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/SlotResources/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutSlotResource(int id, SlotResource slotResource)
         {
-            if (id != business.BusinessId)
+            if (id != slotResource.SlotResourceId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(slotResource).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!SlotResourceExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/SlotResources
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<SlotResource>> PostSlotResource(SlotResource slotResource)
         {
-            _context.Business.Add(business);
+            _context.SlotResource.Add(slotResource);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetSlotResource", new { id = slotResource.SlotResourceId }, slotResource);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/SlotResources/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<SlotResource>> DeleteSlotResource(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var slotResource = await _context.SlotResource.FindAsync(id);
+            if (slotResource == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.SlotResource.Remove(slotResource);
             await _context.SaveChangesAsync();
 
-            return business;
+            return slotResource;
         }
 
-        private bool BusinessExists(int id)
+        private bool SlotResourceExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.SlotResource.Any(e => e.SlotResourceId == id);
         }
     }
 }

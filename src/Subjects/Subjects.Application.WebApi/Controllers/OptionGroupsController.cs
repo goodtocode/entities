@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class OptionGroupsController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public OptionGroupsController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/OptionGroups
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<OptionGroup>>> GetOptionGroup()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.OptionGroup.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/OptionGroups/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<OptionGroup>> GetOptionGroup(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var optionGroup = await _context.OptionGroup.FindAsync(id);
 
-            if (business == null)
+            if (optionGroup == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return optionGroup;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/OptionGroups/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutOptionGroup(int id, OptionGroup optionGroup)
         {
-            if (id != business.BusinessId)
+            if (id != optionGroup.OptionGroupId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(optionGroup).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!OptionGroupExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/OptionGroups
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<OptionGroup>> PostOptionGroup(OptionGroup optionGroup)
         {
-            _context.Business.Add(business);
+            _context.OptionGroup.Add(optionGroup);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetOptionGroup", new { id = optionGroup.OptionGroupId }, optionGroup);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/OptionGroups/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<OptionGroup>> DeleteOptionGroup(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var optionGroup = await _context.OptionGroup.FindAsync(id);
+            if (optionGroup == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.OptionGroup.Remove(optionGroup);
             await _context.SaveChangesAsync();
 
-            return business;
+            return optionGroup;
         }
 
-        private bool BusinessExists(int id)
+        private bool OptionGroupExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.OptionGroup.Any(e => e.OptionGroupId == id);
         }
     }
 }

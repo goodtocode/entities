@@ -11,48 +11,48 @@ namespace GoodToCode.Subjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessesController : ControllerBase
+    public class TimeCyclesController : ControllerBase
     {
         private readonly EntityDataContext _context;
 
-        public BusinessesController(EntityDataContext context)
+        public TimeCyclesController(EntityDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/TimeCycles
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        public async Task<ActionResult<IEnumerable<TimeCycle>>> GetTimeCycle()
         {
-            return await _context.Business.ToListAsync();
+            return await _context.TimeCycle.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/TimeCycles/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        public async Task<ActionResult<TimeCycle>> GetTimeCycle(int id)
         {
-            var business = await _context.Business.FindAsync(id);
+            var timeCycle = await _context.TimeCycle.FindAsync(id);
 
-            if (business == null)
+            if (timeCycle == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return timeCycle;
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/TimeCycles/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        public async Task<IActionResult> PutTimeCycle(int id, TimeCycle timeCycle)
         {
-            if (id != business.BusinessId)
+            if (id != timeCycle.TimeCycleId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(timeCycle).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!TimeCycleExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace GoodToCode.Subjects.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/TimeCycles
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Business>> PostBusiness(Business business)
+        public async Task<ActionResult<TimeCycle>> PostTimeCycle(TimeCycle timeCycle)
         {
-            _context.Business.Add(business);
+            _context.TimeCycle.Add(timeCycle);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetTimeCycle", new { id = timeCycle.TimeCycleId }, timeCycle);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/TimeCycles/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        public async Task<ActionResult<TimeCycle>> DeleteTimeCycle(int id)
         {
-            var business = await _context.Business.FindAsync(id);
-            if (business == null)
+            var timeCycle = await _context.TimeCycle.FindAsync(id);
+            if (timeCycle == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
+            _context.TimeCycle.Remove(timeCycle);
             await _context.SaveChangesAsync();
 
-            return business;
+            return timeCycle;
         }
 
-        private bool BusinessExists(int id)
+        private bool TimeCycleExists(int id)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.TimeCycle.Any(e => e.TimeCycleId == id);
         }
     }
 }
