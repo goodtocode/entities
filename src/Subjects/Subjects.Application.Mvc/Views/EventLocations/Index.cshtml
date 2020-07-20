@@ -1,0 +1,72 @@
+﻿@model IEnumerable<GoodToCode.Subjects.Models.EventLocation>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EventLocationKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventKeyNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationKeyNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationTypeKeyNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecordStateKeyNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventLocationKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventKeyNavigation.EventDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationKeyNavigation.LocationDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationTypeKeyNavigation.LocationTypeDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecordStateKeyNavigation.RecordStateName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.EventLocationId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.EventLocationId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.EventLocationId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
