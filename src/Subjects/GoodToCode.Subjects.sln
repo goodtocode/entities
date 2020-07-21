@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subjects.Domain.Objects", "Subjects.Domain.Objects\Subjects.Domain.Objects.csproj", "{59F84C47-14DA-48A5-9D64-D1975F3A3855}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subjects.Domain.Objects", "Subjects.Domain.Objects\Subjects.Domain.Objects.csproj", "{59F84C47-14DA-48A5-9D64-D1975F3A3855}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subjects.Domain.Aggregates", "Subjects.Domain.Aggregates\Subjects.Domain.Aggregates.csproj", "{AE4AC345-F586-4B44-B306-C90FE83E648C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subjects.Domain.Aggregates", "Subjects.Domain.Aggregates\Subjects.Domain.Aggregates.csproj", "{AE4AC345-F586-4B44-B306-C90FE83E648C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subjects.Infrastructure.Persistence", "Subjects.Infrastructure.Persistence\Subjects.Infrastructure.Persistence.csproj", "{88FD22F3-6921-43B0-8E67-5A36BD672C0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subjects.Infrastructure.Persistence", "Subjects.Infrastructure.Persistence\Subjects.Infrastructure.Persistence.csproj", "{88FD22F3-6921-43B0-8E67-5A36BD672C0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subjects.Abstractions", "Subjects.Abstractions\Subjects.Abstractions.csproj", "{45B12F11-6AE4-44F7-9075-A3F3D56A68E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subjects.Abstractions", "Subjects.Abstractions\Subjects.Abstractions.csproj", "{45B12F11-6AE4-44F7-9075-A3F3D56A68E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subjects.Application.Functions", "Subjects.Application.Functions\Subjects.Application.Functions.csproj", "{58E9C6B2-D2B2-4EDF-B168-7B41C4588709}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subjects.Application.Functions", "Subjects.Application.Functions\Subjects.Application.Functions.csproj", "{58E9C6B2-D2B2-4EDF-B168-7B41C4588709}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subjects.Application.Mvc", "Subjects.Application.Mvc\Subjects.Application.Mvc.csproj", "{70E2CFAA-6587-4248-B179-3EA481F95EFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subjects.Application.Mvc", "Subjects.Application.Mvc\Subjects.Application.Mvc.csproj", "{70E2CFAA-6587-4248-B179-3EA481F95EFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subjects.Application.WebApi", "Subjects.Application.WebApi\Subjects.Application.WebApi.csproj", "{66CA42C3-C71F-4C6F-A94B-72020010A975}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subjects.Application.WebApi", "Subjects.Application.WebApi\Subjects.Application.WebApi.csproj", "{66CA42C3-C71F-4C6F-A94B-72020010A975}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subjects.Specs", "Subjects.Specs\Subjects.Specs.csproj", "{3F620F5C-15D5-4303-ABD0-86B4B6733026}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{66CA42C3-C71F-4C6F-A94B-72020010A975}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66CA42C3-C71F-4C6F-A94B-72020010A975}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66CA42C3-C71F-4C6F-A94B-72020010A975}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F620F5C-15D5-4303-ABD0-86B4B6733026}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F620F5C-15D5-4303-ABD0-86B4B6733026}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F620F5C-15D5-4303-ABD0-86B4B6733026}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F620F5C-15D5-4303-ABD0-86B4B6733026}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
