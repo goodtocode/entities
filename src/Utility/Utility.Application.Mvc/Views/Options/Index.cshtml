@@ -1,0 +1,78 @@
+﻿@model IEnumerable<GoodToCode.Subjects.Models.Option>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OptionKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OptionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OptionDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OptionCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SortOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OptionGroupKeyNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OptionKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OptionName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OptionDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OptionCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SortOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OptionGroupKeyNavigation.OptionGroupCode)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.OptionId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.OptionId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.OptionId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

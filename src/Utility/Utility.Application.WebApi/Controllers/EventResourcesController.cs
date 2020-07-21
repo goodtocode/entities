@@ -1,0 +1,109 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using GoodToCode.Subjects.Models;
+
+namespace GoodToCode.Subjects.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class EventResourcesController : ControllerBase
+    {
+        private readonly EntityDataContext _context;
+
+        public EventResourcesController(EntityDataContext context)
+        {
+            _context = context;
+        }
+
+        // GET: api/EventResources
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<EventResource>>> GetEventResource()
+        {
+            return await _context.EventResource.ToListAsync();
+        }
+
+        // GET: api/EventResources/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<EventResource>> GetEventResource(int id)
+        {
+            var eventResource = await _context.EventResource.FindAsync(id);
+
+            if (eventResource == null)
+            {
+                return NotFound();
+            }
+
+            return eventResource;
+        }
+
+        // PUT: api/EventResources/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutEventResource(int id, EventResource eventResource)
+        {
+            if (id != eventResource.EventResourceId)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(eventResource).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EventResourceExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // POST: api/EventResources
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost]
+        public async Task<ActionResult<EventResource>> PostEventResource(EventResource eventResource)
+        {
+            _context.EventResource.Add(eventResource);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetEventResource", new { id = eventResource.EventResourceId }, eventResource);
+        }
+
+        // DELETE: api/EventResources/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<EventResource>> DeleteEventResource(int id)
+        {
+            var eventResource = await _context.EventResource.FindAsync(id);
+            if (eventResource == null)
+            {
+                return NotFound();
+            }
+
+            _context.EventResource.Remove(eventResource);
+            await _context.SaveChangesAsync();
+
+            return eventResource;
+        }
+
+        private bool EventResourceExists(int id)
+        {
+            return _context.EventResource.Any(e => e.EventResourceId == id);
+        }
+    }
+}
