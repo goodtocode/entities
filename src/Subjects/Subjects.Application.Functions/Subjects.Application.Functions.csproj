@@ -18,10 +18,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entity\" />
     <Folder Include="Item\" />
+    <Folder Include="Venture\" />
     <Folder Include="Resource\" />
-    <Folder Include="Person\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Subjects.Abstractions\Subjects.Abstractions.csproj" />
