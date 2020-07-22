@@ -1,0 +1,60 @@
+﻿@model IEnumerable<GoodToCode.Shared.Models.Detail>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DetailKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DetailData)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DetailTypeKeyNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DetailKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DetailData)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DetailTypeKeyNavigation.DetailTypeDescription)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DetailId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DetailId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DetailId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

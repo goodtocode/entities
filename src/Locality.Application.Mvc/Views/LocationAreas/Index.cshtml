@@ -1,0 +1,60 @@
+﻿@model IEnumerable<GoodToCode.Shared.Models.LocationArea>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationAreaKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AreaKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationKeyNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationAreaKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AreaKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationKeyNavigation.LocationDescription)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.LocationAreaId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.LocationAreaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.LocationAreaId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

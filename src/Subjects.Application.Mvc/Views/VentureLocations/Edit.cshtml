@@ -1,0 +1,65 @@
+﻿@model GoodToCode.Shared.Models.VentureLocation
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>VentureLocation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="VentureLocationId" />
+            <div class="form-group">
+                <label asp-for="VentureLocationKey" class="control-label"></label>
+                <input asp-for="VentureLocationKey" class="form-control" />
+                <span asp-validation-for="VentureLocationKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VentureKey" class="control-label"></label>
+                <select asp-for="VentureKey" class="form-control" asp-items="ViewBag.VentureKey"></select>
+                <span asp-validation-for="VentureKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationKey" class="control-label"></label>
+                <select asp-for="LocationKey" class="form-control" asp-items="ViewBag.LocationKey"></select>
+                <span asp-validation-for="LocationKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationTypeKey" class="control-label"></label>
+                <select asp-for="LocationTypeKey" class="form-control" asp-items="ViewBag.LocationTypeKey"></select>
+                <span asp-validation-for="LocationTypeKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RecordStateKey" class="control-label"></label>
+                <select asp-for="RecordStateKey" class="form-control" asp-items="ViewBag.RecordStateKey"></select>
+                <span asp-validation-for="RecordStateKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedDate" class="control-label"></label>
+                <input asp-for="CreatedDate" class="form-control" />
+                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModifiedDate" class="control-label"></label>
+                <input asp-for="ModifiedDate" class="form-control" />
+                <span asp-validation-for="ModifiedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

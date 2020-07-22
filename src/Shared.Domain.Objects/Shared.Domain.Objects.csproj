@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>GoodToCode.Shared.Domain.Objects</AssemblyName>
+    <RootNamespace>GoodToCode.Shared</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

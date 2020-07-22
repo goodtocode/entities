@@ -1,0 +1,60 @@
+﻿@model IEnumerable<GoodToCode.Shared.Models.VentureOption>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VentureOptionKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OptionKeyNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VentureKeyNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VentureOptionKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OptionKeyNavigation.OptionCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VentureKeyNavigation.VentureDescription)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.VentureOptionId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.VentureOptionId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.VentureOptionId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

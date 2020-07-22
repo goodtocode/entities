@@ -1,0 +1,72 @@
+﻿@model IEnumerable<GoodToCode.Shared.Models.SlotResource>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SlotResourceKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecordStateKeyNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResourceKeyNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResourceTypeKeyNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SlotKeyNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SlotResourceKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecordStateKeyNavigation.RecordStateName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResourceKeyNavigation.ResourceDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResourceTypeKeyNavigation.ResourceTypeDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SlotKeyNavigation.SlotDescription)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SlotResourceId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SlotResourceId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SlotResourceId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

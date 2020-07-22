@@ -1,0 +1,49 @@
+﻿@model GoodToCode.Shared.Models.Gender
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Gender</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GenderKey)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GenderKey)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GenderName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GenderName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GenderCode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GenderCode)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.GenderId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
