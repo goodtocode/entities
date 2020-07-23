@@ -1,7 +1,7 @@
 ﻿using System;
 using TechTalk.SpecFlow;
 
-namespace Subjects.Specs.Business
+namespace GoodToCode.Subjects.Specs
 {
     [Binding]
     public class SpecFlowFeature1Steps

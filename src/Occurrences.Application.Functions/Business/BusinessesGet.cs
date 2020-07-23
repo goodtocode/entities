@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Business.Application.Functions
+namespace GoodToCode.Application.Functions.Functions
 {
     public static class BusinessesGet
     {
