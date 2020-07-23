@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Chronology.Specs.Business
+namespace GoodToCode.Chronology.Business
 {
     using TechTalk.SpecFlow;
     using System;

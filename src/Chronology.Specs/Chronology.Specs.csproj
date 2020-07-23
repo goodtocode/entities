@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-
     <IsPackable>false</IsPackable>
+    <AssemblyName>GoodToCode.Chronology.Specs</AssemblyName>
+    <RootNamespace>GoodToCode.Chronology</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

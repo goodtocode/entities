@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Locality.Specs.Business
+namespace GoodToCode.Locality.Business
 {
     using TechTalk.SpecFlow;
     using System;

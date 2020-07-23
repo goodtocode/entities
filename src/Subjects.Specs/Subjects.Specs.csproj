@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-
     <IsPackable>false</IsPackable>
+    <AssemblyName>GoodToCode.Subjects.Specs</AssemblyName>
+    <RootNamespace>GoodToCode.Subjects</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,6 +36,10 @@
     <PackageReference Include="SpecFlow" Version="3.3.57" />
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.3.57" />
     <PackageReference Include="SpecRun.SpecFlow" Version="3.3.41" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared.Infrastructure.Persistence\Shared.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
