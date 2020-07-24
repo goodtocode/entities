@@ -21,7 +21,7 @@ namespace GoodToCode.Subjects.Functions
             string key = req.Query["key"];
             log.LogInformation($"Subjects.BusinessGet({key})");
 
-            string defaultConnection = Environment.GetEnvironmentVariable("DefaultConnection");
+            string defaultConnection = Environment.GetEnvironmentVariable("DefaultConnection") ?? "Server=tcp:GoodToCode.database.windows.net,1433;Initial Catalog=EntityData;user id=TestUser; password=57595709-9E9C-47EA-ABBF-4F3BAA1B0D37;Persist Security Info=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Application Name=GoodToCodeEntities;";            
             var options = new DbContextOptionsBuilder<EntityDataContext>();
             options.UseSqlServer(defaultConnection);
             var businessKey = key.ToGuid();
