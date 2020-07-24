@@ -10,7 +10,7 @@ trigger:
     - master
   paths:
     include:
-    - src/Subjects.Application.Functions/*
+    - src/Occurrences.Application.Functions/*
 
 variables:
   # Azure Resource Manager connection created during pipeline creation
