@@ -18,9 +18,11 @@ namespace GoodToCode.Subjects.Specs
         private Business _sut;
         private EntityDataContext _context;
         private string _connectionString;
-        private IConfiguration _config;
-        private Uri _businessFunctionsUrl = new Uri("http://subject-functions.azurewebsites.net/api/BusinessGet?code=9AVbUx74MCU6k4wAXyO6NxEJy3SdWJMXAMwHQzm99LWB7RcVAF/1HQ==");
-        private string _businessFunctionsResult = string.Empty;
+        private IConfiguration _config;        
+        
+        private Uri businessGetFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessGet?code=9AVbUx74MCU6k4wAXyO6NxEJy3SdWJMXAMwHQzm99LWB7RcVAF/1HQ==&key={_sutKey}"); } }
+        private Uri businessesGetFunctionsUrl { get { return new Uri("https://subject-functions.azurewebsites.net/api/BusinessesGet?code=Vi0CYsNfYvLrDMy6D0hiX9ZqpO5ORX/wsN5uqK2qzgjzORaSNTEfGQ=="); } }
+        private Uri businessSaveFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessSave?code=T3KPnhwNI1Ca67SbbXSvdHUIX3PhXc5uxjbFC0nKBGcahBfyEziHvQ==&key={_sutKey}"); } }
 
         public BusinessGetByKeySteps()
         {
@@ -52,9 +54,9 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessIsQueriedByKeyViaAzureFunction()
         {
             var client = new HttpClient();
-            var response = await client.GetAsync(_businessFunctionsUrl);
-            _businessFunctionsResult = await response.Content.ReadAsStringAsync();
-            _sut = JsonSerializer.Deserialize<Business>(_businessFunctionsResult);
+            var response = await client.GetAsync(businessGetFunctionsUrl);
+            var result = await response.Content.ReadAsStringAsync();
+            _sut = JsonSerializer.Deserialize<Business>(result);
         }
         
         [When(@"the business exists in persistence")]

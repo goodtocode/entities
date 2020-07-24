@@ -6,6 +6,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -28,7 +29,7 @@ namespace GoodToCode.Subjects.Functions
             var context = new EntityDataContext(options.Options);
             var business = await context.Business.FirstAsync(x => x.BusinessKey == businessKey);
 
-            return business == null ? new NotFoundResult() : (IActionResult)new OkObjectResult(business);
+            return business == null ? new NotFoundResult() : (IActionResult)new OkObjectResult(JsonConvert.SerializeObject(business));
         }
     }
 }

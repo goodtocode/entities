@@ -34,7 +34,7 @@ namespace GoodToCode.Subjects.Functions
             context.Entry(business).State = EntityState.Modified;
             var recordsAffected = await context.SaveChangesAsync();
 
-            return business.BusinessKey == Guid.Empty ? new NotFoundResult() : (IActionResult)new OkObjectResult(business);
+            return business.BusinessKey == Guid.Empty ? new NotFoundResult() : (IActionResult)new OkObjectResult(JsonConvert.SerializeObject(business));
         }
     }
 }
