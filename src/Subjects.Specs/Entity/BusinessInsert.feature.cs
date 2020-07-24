@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace GoodToCode.Subjects.Business
+namespace GoodToCode.Subjects.Entity
 {
     using TechTalk.SpecFlow;
     using System;
@@ -19,7 +19,7 @@ namespace GoodToCode.Subjects.Business
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.3.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Business Insert", Description="\tInsert a new business into persistence", SourceFile="Business\\BusinessInsert.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("Business Insert", Description="\tInsert a new business into persistence", SourceFile="Entity\\BusinessInsert.feature", SourceLine=0)]
     public partial class BusinessInsertFeature
     {
         

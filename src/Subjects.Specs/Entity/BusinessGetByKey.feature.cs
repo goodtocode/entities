@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace GoodToCode.Subjects.Business
+namespace GoodToCode.Subjects.Entity
 {
     using TechTalk.SpecFlow;
     using System;
@@ -19,7 +19,7 @@ namespace GoodToCode.Subjects.Business
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.3.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Business Get by Key", Description="\tGet a Business from persistence", SourceFile="Business\\BusinessGetByKey.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("Business Get by Key", Description="\tGet a Business from persistence", SourceFile="Entity\\BusinessGetByKey.feature", SourceLine=0)]
     public partial class BusinessGetByKeyFeature
     {
         
