@@ -2,10 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
@@ -13,16 +13,14 @@ namespace GoodToCode.Subjects.Specs
 {
     [Binding]
     public class BusinessGetByKeySteps
-    {
-        private Guid _sutKey;
-        private Business _sut;
-        private EntityDataContext _context;
-        private string _connectionString;
-        private IConfiguration _config;        
-        
-        private Uri businessGetFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessGet?code=9AVbUx74MCU6k4wAXyO6NxEJy3SdWJMXAMwHQzm99LWB7RcVAF/1HQ==&key={_sutKey}"); } }
-        private Uri businessesGetFunctionsUrl { get { return new Uri("https://subject-functions.azurewebsites.net/api/BusinessesGet?code=Vi0CYsNfYvLrDMy6D0hiX9ZqpO5ORX/wsN5uqK2qzgjzORaSNTEfGQ=="); } }
-        private Uri businessSaveFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessSave?code=T3KPnhwNI1Ca67SbbXSvdHUIX3PhXc5uxjbFC0nKBGcahBfyEziHvQ==&key={_sutKey}"); } }
+    {        
+        private readonly EntityDataContext _context;
+        private readonly string _connectionString;
+        private readonly IConfiguration _config;
+
+        private Guid SutKey { get; set; }
+        private Business Sut { get; set; }
+        private Uri BusinessGetFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessGet?code=9AVbUx74MCU6k4wAXyO6NxEJy3SdWJMXAMwHQzm99LWB7RcVAF/1HQ==&key={SutKey}"); } }
 
         public BusinessGetByKeySteps()
         {
@@ -41,41 +39,41 @@ namespace GoodToCode.Subjects.Specs
         public async Task GivenIHaveABusinessKey()
         {
             var item = await _context.Business.FirstAsync();
-            _sutKey = item.BusinessKey;
+            SutKey = item.BusinessKey;
         }
         
         [Given(@"the key is type Guid")]
         public void GivenTheKeyIsTypeGuid()
         {
-            Assert.IsTrue(_sutKey is Guid);
+            Assert.IsTrue(SutKey is Guid);
         }
         
         [When(@"Business is queried by key via Azure Function")]
         public async Task WhenBusinessIsQueriedByKeyViaAzureFunction()
         {
             var client = new HttpClient();
-            var response = await client.GetAsync(businessGetFunctionsUrl);
+            var response = await client.GetAsync(BusinessGetFunctionsUrl);
             var result = await response.Content.ReadAsStringAsync();
-            _sut = JsonSerializer.Deserialize<Business>(result);
+            Sut = JsonConvert.DeserializeObject<Business>(result);
         }
         
         [When(@"the business exists in persistence")]
         public void WhenTheBusinessExistsInPersistence()
         {
-            Assert.IsTrue(_sutKey != Guid.Empty);
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
         
         [When(@"Business is queried by key via Entity framework")]
         public async Task WhenBusinessIsQueriedByKeyViaEntityFramework()
         {
-            _sut = await _context.Business.FirstAsync(x => x.BusinessKey == _sutKey);
-            Assert.IsTrue(_sut.BusinessKey != Guid.Empty);
+            Sut = await _context.Business.FirstAsync(x => x.BusinessKey == SutKey);
+            Assert.IsTrue(Sut.BusinessKey != Guid.Empty);
         }
         
         [Then(@"the matching business is returned")]
         public void ThenTheMatchingBusinessIsReturned()
         {
-            Assert.IsTrue(_sut.BusinessKey == _sutKey);
+            Assert.IsTrue(Sut.BusinessKey == SutKey);
         }
     }
 }
