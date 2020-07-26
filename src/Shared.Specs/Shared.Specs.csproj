@@ -5,9 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <SpecFlowObsoleteCodeBehindFiles Remove="Persistence\BusinessesGet.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Persistence\BusinessGetByKey.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Persistence\BusinessInsert.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Subjects\Entity\BusinessesGet.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Subjects\Entity\BusinessGetByKey.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Subjects\Entity\BusinessInsert - Copy.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Subjects\Entity\BusinessInsert.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,30 +39,43 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Persistence\PersistenceGet.feature.cs">
-      <DependentUpon>PersistenceGet.feature</DependentUpon>
+    <Compile Update="Subjects\Entity\BusinessesGet.feature.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="Persistence\PersistenceGetByKey.feature.cs">
-      <DependentUpon>PersistenceGetByKey.feature</DependentUpon>
+    <Compile Update="Subjects\Entity\BusinessGetByKey.feature.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="Persistence\PersistenceInsert.feature.cs">
-      <DependentUpon>PersistenceInsert.feature</DependentUpon>
+    <Compile Update="Subjects\Entity\BusinessUpdate.feature.cs">
+      <DependentUpon>BusinessUpdate.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Subjects\Entity\BusinessInsert.feature.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <SpecFlowFeatureFiles Update="Persistence\PersistenceGet.feature">
+    <SpecFlowFeatureFiles Update="Subjects\Entity\BusinessesGet.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Persistence\PersistenceGetByKey.feature">
+    <SpecFlowFeatureFiles Update="Subjects\Entity\BusinessGetByKey.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Persistence\PersistenceInsert.feature">
+    <SpecFlowFeatureFiles Update="Subjects\Entity\BusinessUpdate.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Subjects\Entity\BusinessInsert.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Locality\" />
+    <Folder Include="Chronology\" />
+    <Folder Include="Occurrences\" />
   </ItemGroup>
 
 </Project>

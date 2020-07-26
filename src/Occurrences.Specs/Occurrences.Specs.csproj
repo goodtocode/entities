@@ -38,4 +38,9 @@
     <PackageReference Include="SpecRun.SpecFlow" Version="3.3.41" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Aggregate\" />
+    <Folder Include="Application\" />
+  </ItemGroup>
+
 </Project>

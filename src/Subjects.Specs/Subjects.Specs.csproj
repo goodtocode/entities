@@ -43,4 +43,9 @@
     <ProjectReference Include="..\Shared.Infrastructure.Persistence\Shared.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Aggregate\" />
+    <Folder Include="Application\" />
+  </ItemGroup>
+
 </Project>
