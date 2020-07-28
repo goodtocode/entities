@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>GoodToCode.Subjects.Domain.Services</AssemblyName>
+    <RootNamespace>GoodToCode.Subjects</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Detail\Commands\" />
+    <Folder Include="Detail\Queries\" />
+    <Folder Include="Entity\Commands\" />
+    <Folder Include="Entity\Queries\" />
+    <Folder Include="Item\Commands\" />
+    <Folder Include="Item\Queries\" />
+    <Folder Include="Option\Commands\" />
+    <Folder Include="Option\Queries\" />
+    <Folder Include="Resource\Commands\" />
+    <Folder Include="Resource\Queries\" />
+    <Folder Include="Venture\Commands\" />
+    <Folder Include="Venture\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="9.0.1" />
+    <PackageReference Include="MediatR" Version="8.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+  </ItemGroup>
+
+</Project>

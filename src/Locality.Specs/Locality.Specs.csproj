@@ -39,8 +39,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Aggregate\" />
-    <Folder Include="Application\" />
+    <Folder Include="Geography\" />
+    <Folder Include="Geometry\" />
+    <Folder Include="Location\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>GoodToCode.Occurrences.Domain.Aggregates</AssemblyName>
+    <RootNamespace>GoodToCode.Occurrences</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Appointment\" />
+    <Folder Include="Event\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>GoodToCode.Locality.Domain.Aggregates</AssemblyName>
+    <RootNamespace>GoodToCode.Locality</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Location\" />
+    <Folder Include="Geometry\" />
+    <Folder Include="Geography\" />
+  </ItemGroup>
+
+</Project>

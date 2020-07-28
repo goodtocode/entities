@@ -39,8 +39,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Aggregate\" />
-    <Folder Include="Application\" />
+    <Folder Include="Appointment\" />
+    <Folder Include="Event\" />
   </ItemGroup>
 
 </Project>

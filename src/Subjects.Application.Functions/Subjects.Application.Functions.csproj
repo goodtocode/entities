@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AzureFunctionsVersion>v3</AzureFunctionsVersion>
+    <AssemblyName>GoodToCode.Subjects.Application.Functions</AssemblyName>
+    <RootNamespace>GoodToCode.Subjects</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Person\**" />
+    <Compile Remove="Resource\**" />
+    <EmbeddedResource Remove="Person\**" />
+    <EmbeddedResource Remove="Resource\**" />
+    <None Remove="Person\**" />
+    <None Remove="Resource\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="host.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="local.settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Item\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
+    <ProjectReference Include="..\Shared.Infrastructure.Persistence\Shared.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\Subjects.Domain.Models\Subjects.Domain.Models.csproj" />
+    <ProjectReference Include="..\Subjects.Domain.Services\Subjects.Domain.Services.csproj" />
+  </ItemGroup>
+</Project>
