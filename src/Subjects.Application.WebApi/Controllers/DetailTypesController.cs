@@ -1,13 +1,11 @@
-﻿using System;
+﻿using GoodToCode.Shared.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GoodToCode.Subjects.Application.Models;
 
-namespace GoodToCode.Subjects.Application.Controllers
+namespace GoodToCode.Shared.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace GoodToCode.Subjects.Models
 {
-    public partial class SubjectsDbContext : DbContext, ISubjectsDbContext
+    public partial class SubjectsDbContext : DbContext
     {
         public SubjectsDbContext()
         {

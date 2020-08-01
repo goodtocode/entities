@@ -1,28 +1,29 @@
-﻿//using FluentValidation;
+﻿using FluentValidation;
+using GoodToCode.Subjects.Models;
 
-//namespace GoodToCode.Subjects.Domain
-//{
-//    public class BusinessSaveCommandValidator : AbstractValidator<BusinessSaveResultCommand>
-//    {
-//        public BusinessSaveCommandValidator()
-//        {
-//            RuleFor(v => v.Vendor).NotEmpty().NotNull().Equal("testrun").MaximumLength(25);
-//            RuleFor(v => v.ExamType).NotEmpty().NotNull().Equal("microcredential").MaximumLength(25);
-//            RuleFor(v => v.CustomerId).NotEmpty().GreaterThanOrEqualTo(1);
-//            RuleFor(v => v.ProgramId).NotEmpty().GreaterThanOrEqualTo(1);
-//            RuleFor(v => v.ExamId).NotEmpty().GreaterThanOrEqualTo(1);
-//            RuleFor(v => v.Attempts).NotEmpty().GreaterThanOrEqualTo(1);
-//            RuleFor(v => v.QuestionsCorrect).GreaterThanOrEqualTo(1);
-//            RuleFor(v => v.QuestionsCount).NotEmpty().GreaterThanOrEqualTo(1);
-//            RuleFor(v => v.ExamTakenDateTime).NotEmpty().GreaterThanOrEqualTo(1);
+namespace GoodToCode.Shared.Domain
+{
+    public class BusinessSaveCommandValidator : AbstractValidator<Business>
+    {
+        public BusinessSaveCommandValidator()
+        {            
+            //RuleFor(v => v.Vendor).NotEmpty().NotNull().Equal("testrun").MaximumLength(25);
+            //RuleFor(v => v.ExamType).NotEmpty().NotNull().Equal("microcredential").MaximumLength(25);
+            //RuleFor(v => v.CustomerId).NotEmpty().GreaterThanOrEqualTo(1);
+            //RuleFor(v => v.ProgramId).NotEmpty().GreaterThanOrEqualTo(1);
+            //RuleFor(v => v.ExamId).NotEmpty().GreaterThanOrEqualTo(1);
+            //RuleFor(v => v.Attempts).NotEmpty().GreaterThanOrEqualTo(1);
+            //RuleFor(v => v.QuestionsCorrect).GreaterThanOrEqualTo(1);
+            //RuleFor(v => v.QuestionsCount).NotEmpty().GreaterThanOrEqualTo(1);
+            //RuleFor(v => v.ExamTakenDateTime).NotEmpty().GreaterThanOrEqualTo(1);
 
-//            RuleFor(v => v.Status).NotNull().NotEmpty().MaximumLength(15)
-//                .When(v => v.Status != "Pass" || v.Status != "Fail")
-//                .WithMessage($"Status should be either 'Pass' or 'Fail'");
+            //RuleFor(v => v.Status).NotNull().NotEmpty().MaximumLength(15)
+            //    .When(v => v.Status != "Pass" || v.Status != "Fail")
+            //    .WithMessage($"Status should be either 'Pass' or 'Fail'");
 
-//            RuleFor(v => v.QuestionsCorrect).NotNull().NotEmpty()
-//                .When(v => v.QuestionsCorrect > v.QuestionsCount)
-//                .WithMessage($"Questions Correct cannot be greater than Questions Count");
-//        }
-//    }
-//}
+            //RuleFor(v => v.QuestionsCorrect).NotNull().NotEmpty()
+            //    .When(v => v.QuestionsCorrect > v.QuestionsCount)
+            //    .WithMessage($"Questions Correct cannot be greater than Questions Count");
+        }
+    }
+}

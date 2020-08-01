@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

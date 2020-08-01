@@ -5,7 +5,7 @@ namespace GoodToCode.Subjects.Specs
 {
     public class DbContextFactory
     {
-        public ISubjectsDbContext Create()
+        public SubjectsDbContext Create()
         {
             var options = new DbContextOptionsBuilder<SubjectsDbContext>();
                 options.UseSqlServer(new ConnectionStringFactory().Create());

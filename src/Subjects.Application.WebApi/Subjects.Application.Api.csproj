@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\Shared.Extensions.Mvc\Shared.Extensions.Mvc.csproj" />
     <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
     <ProjectReference Include="..\Shared.Infrastructure.Persistence\Shared.Infrastructure.Persistence.csproj" />
   </ItemGroup>

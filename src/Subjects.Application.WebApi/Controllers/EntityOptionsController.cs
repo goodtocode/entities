@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GoodToCode.Subjects.Application.Models;
 
-namespace GoodToCode.Subjects.Application.Controllers
+namespace GoodToCode.Shared.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

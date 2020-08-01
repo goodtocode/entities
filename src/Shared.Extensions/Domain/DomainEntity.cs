@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GoodToCode.Subjects.Models
+namespace GoodToCode.Shared.Models
 {
     public abstract class DomainEntity<TEntity>
     {
@@ -39,7 +39,7 @@ namespace GoodToCode.Subjects.Models
             if (ReferenceEquals(this, other))
                 return true;
 
-            if (GetRealType() != other.GetRealType())
+            if (GetType() != other.GetType())
                 return false;
 
             if (Key == Guid.Empty || other.Key == Guid.Empty)
@@ -66,17 +66,8 @@ namespace GoodToCode.Subjects.Models
 
         public override int GetHashCode()
         {
-            return (GetRealType().ToString() + Key).GetHashCode();
+            return (GetType().ToString() + Key).GetHashCode();
         }
-
-        private Type GetRealType()
-        {
-            Type type = GetType();
-
-            if (type.ToString().Contains("Aacn.Exams"))
-                return type.BaseType;
-
-            return type;
-        }
+       
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
-using Aacn.Exams.Presentation.Api.External.Common;
+using GoodToCode.Extensions.Mvc;
+using GoodToCode.Shared.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 
-namespace GoodToCode.Subjects.Application.Controller
+namespace GoodToCode.Shared.Application.Controller
 {
     [Produces("application/json", "application/xml")]
     [ApiExplorerSettings(GroupName = "ExamsAPISpecification")]

@@ -2,7 +2,7 @@
 using GoodToCode.Shared.Models;
 using GoodToCode.Subjects.Models;
 
-namespace GoodToCode.Subjects.Domain
+namespace GoodToCode.Shared.Domain
 {
     public sealed class EntityUpdatedEvent : IDomainEvent<Entity>
     {

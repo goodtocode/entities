@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>GoodToCode.Subjects.Domain.Aggregates</AssemblyName>
+    <AssemblyName>GoodToCode.Subjects.Domain.Models</AssemblyName>
     <RootNamespace>GoodToCode.Subjects</RootNamespace>
   </PropertyGroup>
 

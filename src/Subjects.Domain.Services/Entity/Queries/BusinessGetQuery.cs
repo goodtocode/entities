@@ -7,7 +7,7 @@
 //using System.Threading;
 //using System.Threading.Tasks;
 
-//namespace GoodToCode.Subjects.Domain
+//namespace GoodToCode.Shared.Domain
 //{
 //    public class BusinessGetQuery : IRequest<QueryResponseWrapper<ExamResultVm>>
 //    {
