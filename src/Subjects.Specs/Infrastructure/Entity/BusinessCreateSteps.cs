@@ -13,7 +13,7 @@ using TechTalk.SpecFlow;
 namespace GoodToCode.Subjects.Specs
 {
     [Binding]
-    public class BusinessInsertSteps
+    public class BusinessCreateSteps
     {
         private readonly SubjectsDbContext _context;
         private readonly string _connectionString;
@@ -24,7 +24,7 @@ namespace GoodToCode.Subjects.Specs
         private Uri BusinessGetFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessGet?code=9AVbUx74MCU6k4wAXyO6NxEJy3SdWJMXAMwHQzm99LWB7RcVAF/1HQ==&key={SutKey}"); } }
         private Uri BusinessSaveFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessSave?code=T3KPnhwNI1Ca67SbbXSvdHUIX3PhXc5uxjbFC0nKBGcahBfyEziHvQ==&key={SutKey}"); } }
 
-        public BusinessInsertSteps()
+        public BusinessCreateSteps()
         {
             _config = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs"))
               .AddJsonFile($"appsettings.{(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT ") ?? "Development")}.json")
@@ -49,7 +49,7 @@ namespace GoodToCode.Subjects.Specs
                 Business = new Business()
                 {
                     BusinessKey = SutKey,
-                    BusinessName = "BusinessInsertSteps Test",
+                    BusinessName = "BusinessCreateSteps.cs Test",
                     TaxNumber = string.Empty,
                     CreatedDate = DateTime.UtcNow,
                     ModifiedDate = DateTime.UtcNow                    

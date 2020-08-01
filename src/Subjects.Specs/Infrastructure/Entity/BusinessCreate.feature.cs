@@ -19,22 +19,22 @@ namespace GoodToCode.Subjects.Infrastructure.Entity
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.3.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Business Insert", Description="\tInsert a new business into persistence", SourceFile="Infrastructure\\Entity\\BusinessInsert.feature", SourceLine=0)]
-    public partial class BusinessInsertFeature
+    [TechTalk.SpecRun.FeatureAttribute("Business Create", Description="\tCreate a new business in persistence", SourceFile="Infrastructure\\Entity\\BusinessCreate.feature", SourceLine=0)]
+    public partial class BusinessCreateFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "BusinessInsert.feature"
+#line 1 "BusinessCreate.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Business Insert", "\tInsert a new business into persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Business Create", "\tCreate a new business in persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -70,16 +70,16 @@ namespace GoodToCode.Subjects.Infrastructure.Entity
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Insert a new business via Entity Framework", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("Create a new business via Entity Framework", new string[] {
                 "command",
                 "entityFramework"}, SourceLine=4)]
-        public virtual void InsertANewBusinessViaEntityFramework()
+        public virtual void CreateANewBusinessViaEntityFramework()
         {
             string[] tagsOfScenario = new string[] {
                     "command",
                     "entityFramework"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Insert a new business via Entity Framework", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new business via Entity Framework", null, tagsOfScenario, argumentsOfScenario);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

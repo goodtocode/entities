@@ -1,8 +1,8 @@
-﻿Feature: Business Insert
-	Insert a new business into persistence
+﻿Feature: Business Create
+	Create a new business in persistence
 
 @command @entityFramework
-Scenario: Insert a new business via Entity Framework
+Scenario: Create a new business via Entity Framework
 	Given A new Business has been created
 		And a business key has been provided
 		And a business name has been provided

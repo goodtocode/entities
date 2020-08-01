@@ -69,8 +69,8 @@
     <Compile Update="Infrastructure\Entity\BusinessGetByKey.feature.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="Infrastructure\Entity\BusinessInsert.feature.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
+    <Compile Update="Infrastructure\Entity\BusinessCreate.feature.cs">
+      <DependentUpon>BusinessCreate.feature</DependentUpon>
     </Compile>
     <Compile Update="Infrastructure\Entity\BusinessUpdate.feature.cs">
       <DependentUpon>%(Filename)</DependentUpon>
@@ -86,7 +86,7 @@
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Infrastructure\Entity\BusinessInsert.feature">
+    <SpecFlowFeatureFiles Update="Infrastructure\Entity\BusinessCreate.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
