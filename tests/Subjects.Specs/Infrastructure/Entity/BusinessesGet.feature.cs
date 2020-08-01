@@ -70,16 +70,16 @@ namespace GoodToCode.Subjects.Infrastructure.Entity
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Get all businesses via Entity framework", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("Get all businesses via Azure Function", new string[] {
                 "query",
-                "entityFramework"}, SourceLine=4)]
-        public virtual void GetAllBusinessesViaEntityFramework()
+                "azureFunction"}, SourceLine=4)]
+        public virtual void GetAllBusinessesViaAzureFunction()
         {
             string[] tagsOfScenario = new string[] {
                     "query",
-                    "entityFramework"};
+                    "azureFunction"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all businesses via Entity framework", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all businesses via Azure Function", null, tagsOfScenario, argumentsOfScenario);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -104,7 +104,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I request the list of businesses", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- testRunner.When("Businesses are queried via Entity framework", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("Businesses are queried via Azure Function", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
  testRunner.Then("All persisted businesses are returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

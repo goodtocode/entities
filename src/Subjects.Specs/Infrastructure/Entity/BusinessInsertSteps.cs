@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
-namespace GoodToCode.Shared.Specs
+namespace GoodToCode.Subjects.Specs
 {
     [Binding]
     public class BusinessInsertSteps
@@ -20,8 +20,8 @@ namespace GoodToCode.Shared.Specs
         private readonly IConfiguration _config;
 
         private Guid SutKey { get; set; }
-        private Business Sut { get; set; }
-        private Uri BusinessGetFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessGet?code=9AVbUx74MCU6k4wAXyO6NxEJy3SdWJMXAMwHQzm99LWB7RcVAF/1HQ==&key={SutKey}"); } }        
+        private Entity Sut { get; set; }
+        private Uri BusinessGetFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessGet?code=9AVbUx74MCU6k4wAXyO6NxEJy3SdWJMXAMwHQzm99LWB7RcVAF/1HQ==&key={SutKey}"); } }
         private Uri BusinessSaveFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessSave?code=T3KPnhwNI1Ca67SbbXSvdHUIX3PhXc5uxjbFC0nKBGcahBfyEziHvQ==&key={SutKey}"); } }
 
         public BusinessInsertSteps()
@@ -37,54 +37,59 @@ namespace GoodToCode.Shared.Specs
             _context = new SubjectsDbContext(options.Options);
         }
 
-        [Given(@"I have an empty business key")]
-        public void GivenIHaveAnEmptyBusinessKey()
+        [Given(@"A new Business has been created")]
+        public void GivenANewBusinessHasBeenCreated()
         {
-            SutKey = Guid.Empty;
+            SutKey = Guid.NewGuid();
+            Sut = new Entity()
+            {
+                EntityKey = Guid.NewGuid(),
+                CreatedDate = DateTime.UtcNow,
+                ModifiedDate = DateTime.UtcNow,
+                Business = new Business()
+                {
+                    BusinessKey = SutKey,
+                    BusinessName = "BusinessInsertSteps Test",
+                    TaxNumber = string.Empty,
+                    CreatedDate = DateTime.UtcNow,
+                    ModifiedDate = DateTime.UtcNow                    
+                }
+            };
         }
-        
-        [Given(@"the business name is provided")]
-        public void GivenTheBusinessNameIsProvided()
+
+        [Given(@"a business key has been provided")]
+        public void GivenABusinessKeyHasBeenProvided()
         {
-            Sut = new Business() { BusinessName = "BusinessInsertSteps Test" };
+            Assert.IsTrue(Sut.EntityKey != Guid.Empty);
         }
-        
-        [When(@"Business is posted via Azure Function")]
-        public async Task WhenBusinessIsPostedViaAzureFunction()
+
+        [Given(@"a business name has been provided")]
+        public void GivenABusinessNameHasBeenProvided()
         {
-            var client = new HttpClient();
-            var response = await client.PostAsync(BusinessSaveFunctionsUrl, new StringContent(JsonConvert.SerializeObject(Sut)));
-            var result = await response.Content.ReadAsStringAsync();
-            Sut = JsonConvert.DeserializeObject<Business>(result);
+            Assert.IsTrue(Sut.EntityKey != Guid.Empty);
         }
-        
-        [When(@"the business does not exist in persistence")]
-        public async Task WhenTheBusinessDoesNotExistInPersistence()
+
+        [When(@"the Business does not exist in persistence by key")]
+        public async Task WhenTheBusinessDoesNotExistInPersistenceByKey()
         {
             var found = await _context.Business.Where(x => x.BusinessKey == SutKey).AnyAsync();
             Assert.IsFalse(found);
         }
-        
-        [When(@"Business is posted via Entity Framework")]
-        public async Task WhenBusinessIsPostedViaEntityFramework()
-        {            
-            Sut.CreatedDate = DateTime.UtcNow;
-            Sut.ModifiedDate = DateTime.UtcNow;
-            Sut.TaxNumber = string.Empty;
-            var entity = new Entity() { Business = Sut };
-            entity.CreatedDate = DateTime.UtcNow;
-            entity.ModifiedDate = DateTime.UtcNow;
-            _context.Entity.Add(entity);
+
+        [When(@"Business is inserted via Entity Framework")]
+        public async Task WhenBusinessIsInsertedViaEntityFramework()
+        {
+            _context.Entity.Add(Sut);
             var result = await _context.SaveChangesAsync();
-            SutKey = Sut.BusinessKey;
+            SutKey = Sut.Business.BusinessKey;
             Assert.IsTrue(result > 0);
         }
-        
-        [Then(@"the business is inserted to persistence")]
-        public async Task ThenTheBusinessIsInsertedToPersistence()
+
+        [Then(@"the new business can be queried by key")]
+        public async Task ThenTheNewBusinessCanBeQueriedByKey()
         {
-            Sut = await _context.Business.FirstAsync(x => x.BusinessKey == SutKey);
-            Assert.IsTrue(Sut.BusinessKey != Guid.Empty);
+            var found = await _context.Business.Where(x => x.BusinessKey == SutKey).AnyAsync();
+            Assert.IsTrue(found);
         }
     }
 }

@@ -16,7 +16,6 @@ namespace GoodToCode.Subjects.Specs
     [Binding]
     public class BusinessesGetSteps
     {
-        private readonly SubjectsDbContext _context;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
         private List<Business> Sut { get; set; }
@@ -28,10 +27,6 @@ namespace GoodToCode.Subjects.Specs
               .AddJsonFile($"appsettings.{(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT ") ?? "Development")}.json")
               .AddJsonFile("appsettings.json")
               .Build();
-            _connectionString = _config.GetConnectionString("DefaultConnection");
-            var options = new DbContextOptionsBuilder<SubjectsDbContext>();
-            options.UseSqlServer(_connectionString);
-            _context = new SubjectsDbContext(options.Options);
         }
 
         [Given(@"I request the list of businesses")]
@@ -40,10 +35,13 @@ namespace GoodToCode.Subjects.Specs
             Sut = new List<Business>();
         }
 
-        [When(@"Businesses are queried via Entity framework")]
-        public async Task WhenBusinessesAreQueriedViaEntityFrameworkAsync()
+        [When(@"Businesses are queried via Azure Function")]
+        public async Task WhenBusinessesAreQueriedViaAzureFunction()
         {
-            Sut = await _context.Business.Take(10).ToListAsync();
+            var client = new HttpClient();
+            var response = await client.GetAsync(BusinessesGetFunctionsUrl);
+            var result = await response.Content.ReadAsStringAsync();
+            Sut = JsonSerializer.Deserialize<List<Business>>(result);
         }
 
         [Then(@"All persisted businesses are returned")]

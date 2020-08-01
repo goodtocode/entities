@@ -28,10 +28,6 @@ namespace GoodToCode.Subjects.Specs
               .AddJsonFile($"appsettings.{(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT ") ?? "Development")}.json")
               .AddJsonFile("appsettings.json")
               .Build();
-            _connectionString = _config.GetConnectionString("DefaultConnection");
-            var options = new DbContextOptionsBuilder<SubjectsDbContext>();
-            options.UseSqlServer(_connectionString);
-            _context = new SubjectsDbContext(options.Options);
         }
 
         [Given(@"I have a business key")]
@@ -45,19 +41,21 @@ namespace GoodToCode.Subjects.Specs
         public void GivenTheKeyIsTypeGuid()
         {
             Assert.IsTrue(SutKey is Guid);
-        }        
+        }
+        
+        [When(@"Business is queried by key via Azure Function")]
+        public async Task WhenBusinessIsQueriedByKeyViaAzureFunction()
+        {
+            var client = new HttpClient();
+            var response = await client.GetAsync(BusinessGetFunctionsUrl);
+            var result = await response.Content.ReadAsStringAsync();
+            Sut = JsonConvert.DeserializeObject<Business>(result);
+        }
         
         [When(@"the business exists in persistence")]
         public void WhenTheBusinessExistsInPersistence()
         {
             Assert.IsTrue(SutKey != Guid.Empty);
-        }
-        
-        [When(@"Business is queried by key via Entity framework")]
-        public async Task WhenBusinessIsQueriedByKeyViaEntityFramework()
-        {
-            Sut = await _context.Business.FirstAsync(x => x.BusinessKey == SutKey);
-            Assert.IsTrue(Sut.BusinessKey != Guid.Empty);
         }
         
         [Then(@"the matching business is returned")]

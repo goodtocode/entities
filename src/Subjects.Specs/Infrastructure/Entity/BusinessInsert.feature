@@ -1,18 +1,11 @@
 ﻿Feature: Business Insert
 	Insert a new business into persistence
 
-@command @azureFunction
-Scenario: Insert a new business via Azure Function
-	Given I have an empty business key
-		And the business name is provided
-	When Business is posted via Azure Function
-		And the business does not exist in persistence
-	Then the business is inserted to persistence
-
 @command @entityFramework
 Scenario: Insert a new business via Entity Framework
-	Given I have an empty business key
-		And the business name is provided
-	When Business is posted via Entity Framework
-		And the business does not exist in persistence
-	Then the business is inserted to persistence
+	Given A new Business has been created
+		And a business key has been provided
+		And a business name has been provided
+	When the Business does not exist in persistence by key
+		And Business is inserted via Entity Framework
+	Then the new business can be queried by key

@@ -19,22 +19,22 @@ namespace GoodToCode.Subjects.Infrastructure.Entity
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.3.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Businesses Get", Description="\tGet all Businesses from persistence", SourceFile="Infrastructure\\Entity\\BusinessesGet.feature", SourceLine=0)]
-    public partial class BusinessesGetFeature
+    [TechTalk.SpecRun.FeatureAttribute("Business Get by Key", Description="\tGet a Business from persistence", SourceFile="Infrastructure\\Entity\\BusinessGetByKey.feature", SourceLine=0)]
+    public partial class BusinessGetByKeyFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "BusinessesGet.feature"
+#line 1 "BusinessGetByKey.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Businesses Get", "\tGet all Businesses from persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Business Get by Key", "\tGet a Business from persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -70,16 +70,16 @@ namespace GoodToCode.Subjects.Infrastructure.Entity
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Get all businesses via Entity framework", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("Get a business by key via Azure Function", new string[] {
                 "query",
-                "entityFramework"}, SourceLine=4)]
-        public virtual void GetAllBusinessesViaEntityFramework()
+                "azureFunction"}, SourceLine=4)]
+        public virtual void GetABusinessByKeyViaAzureFunction()
         {
             string[] tagsOfScenario = new string[] {
                     "query",
-                    "entityFramework"};
+                    "azureFunction"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all businesses via Entity framework", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get a business by key via Azure Function", null, tagsOfScenario, argumentsOfScenario);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -101,13 +101,19 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 6
- testRunner.Given("I request the list of businesses", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have a business key", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- testRunner.When("Businesses are queried via Entity framework", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("the key is type Guid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 8
- testRunner.Then("All persisted businesses are returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("Business is queried by key via Azure Function", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 9
+  testRunner.And("the business exists in persistence", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 10
+ testRunner.Then("the matching business is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
