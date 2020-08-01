@@ -8,8 +8,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Aggregate\**" />
+    <EmbeddedResource Remove="Aggregate\**" />
+    <None Remove="Aggregate\**" />
+    <SpecFlowFeatureFiles Remove="Aggregate\**" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Aggregate\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Entity\BusinessesGet.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Entity\BusinessGetByKey.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Entity\BusinessInsert.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Entity\BusinessUpdate.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,12 +55,45 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared.Infrastructure.Persistence\Shared.Infrastructure.Persistence.csproj" />
+    <Folder Include="Domain\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Aggregate\" />
-    <Folder Include="Application\" />
+    <ProjectReference Include="..\Subjects.Infrastructure.Persistence\Subjects.Infrastructure.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Infrastructure\Entity\BusinessesGet.feature.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Infrastructure\Entity\BusinessGetByKey.feature.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Infrastructure\Entity\BusinessInsert.feature.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Infrastructure\Entity\BusinessUpdate.feature.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="Infrastructure\Entity\BusinessesGet.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Infrastructure\Entity\BusinessGetByKey.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Infrastructure\Entity\BusinessInsert.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Infrastructure\Entity\BusinessUpdate.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
   </ItemGroup>
 
 </Project>

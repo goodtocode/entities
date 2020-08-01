@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GoodToCode.Shared.Models
+namespace GoodToCode.Subjects.Models
 {
     public interface IItem
     {

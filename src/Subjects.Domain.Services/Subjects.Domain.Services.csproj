@@ -9,8 +9,6 @@
   <ItemGroup>
     <Folder Include="Detail\Commands\" />
     <Folder Include="Detail\Queries\" />
-    <Folder Include="Entity\Commands\" />
-    <Folder Include="Entity\Queries\" />
     <Folder Include="Item\Commands\" />
     <Folder Include="Item\Queries\" />
     <Folder Include="Option\Commands\" />
@@ -25,6 +23,14 @@
     <PackageReference Include="FluentValidation" Version="9.0.1" />
     <PackageReference Include="MediatR" Version="8.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
+    <ProjectReference Include="..\Subjects.Domain.Models\Subjects.Domain.Models.csproj" />
   </ItemGroup>
 
 </Project>

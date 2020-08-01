@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoodToCode.Shared.Models
+namespace GoodToCode.Subjects.Models
 {
     public interface IVentureDetail
     {

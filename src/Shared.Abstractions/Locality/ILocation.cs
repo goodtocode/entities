@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GoodToCode.Shared.Models
+namespace GoodToCode.Locality.Models
 {
     public interface ILocation
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoodToCode.Shared.Models
+namespace GoodToCode.Occurrences.Models
 {
     public interface IEventLocation
     {

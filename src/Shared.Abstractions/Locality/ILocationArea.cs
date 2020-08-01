@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoodToCode.Shared.Models
+namespace GoodToCode.Locality.Models
 {
     public interface ILocationArea
     {
