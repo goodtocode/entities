@@ -22,7 +22,7 @@ namespace GoodToCode.Subjects.Specs
         private Guid SutKey { get; set; }
         private string SutName { get; set; }
         private string SutNameNew { get; set; }
-        private Business Sut { get; set; }
+        private BusinessEntity Sut { get; set; }
         private Uri BusinessGetFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessGet?code=9AVbUx74MCU6k4wAXyO6NxEJy3SdWJMXAMwHQzm99LWB7RcVAF/1HQ==&key={SutKey}"); } }        
         private Uri BusinessSaveFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessSave?code=T3KPnhwNI1Ca67SbbXSvdHUIX3PhXc5uxjbFC0nKBGcahBfyEziHvQ==&key={SutKey}"); } }
 

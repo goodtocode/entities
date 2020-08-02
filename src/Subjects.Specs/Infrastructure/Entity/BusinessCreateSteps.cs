@@ -18,7 +18,7 @@ namespace GoodToCode.Subjects.Specs
         private readonly IConfiguration _config;
 
         private Guid SutKey { get; set; }
-        private Entity Sut { get; set; }
+        private EntityEntity Sut { get; set; }
         private Uri BusinessGetFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessGet?code=9AVbUx74MCU6k4wAXyO6NxEJy3SdWJMXAMwHQzm99LWB7RcVAF/1HQ==&key={SutKey}"); } }
         private Uri BusinessSaveFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessSave?code=T3KPnhwNI1Ca67SbbXSvdHUIX3PhXc5uxjbFC0nKBGcahBfyEziHvQ==&key={SutKey}"); } }
 
@@ -39,12 +39,12 @@ namespace GoodToCode.Subjects.Specs
         public void GivenANewBusinessHasBeenCreated()
         {
             SutKey = Guid.NewGuid();
-            Sut = new Entity()
+            Sut = new EntityEntity()
             {
                 EntityKey = Guid.NewGuid(),
                 CreatedDate = DateTime.UtcNow,
                 ModifiedDate = DateTime.UtcNow,
-                Business = new Business()
+                Business = new BusinessEntity()
                 {
                     BusinessKey = SutKey,
                     BusinessName = "BusinessCreateSteps.cs Test",

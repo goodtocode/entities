@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>GoodToCode.Chronology.Application.Services</AssemblyName>
+    <RootNamespace>GoodToCode.Chronology</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Schedule\Commands\" />
+    <Folder Include="Schedule\Queries\" />
+    <Folder Include="Time\Commands\" />
+    <Folder Include="Time\Queries\" />
+  </ItemGroup>
+
+</Project>

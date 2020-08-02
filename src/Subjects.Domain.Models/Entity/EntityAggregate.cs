@@ -1,4 +1,5 @@
 ﻿using GoodToCode.Subjects.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
 
@@ -6,6 +7,12 @@ namespace GoodToCode.Subjects.Aggregates
 {
     public class EntityAggregate
     {
+
+        public EntityAggregate(ISubjectsDbContext context, IConfiguration configuration)
+        {
+            
+        }
+
         // Business
         public async Task<Business> BusinessSaveAsync(Business business)
         {

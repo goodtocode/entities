@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
     public class Government : IGovernment
     {
         public int GovernmentId { get; set; }
+        [Key]
         public Guid GovernmentKey { get; set; }
         public string GovernmentName { get; set; }
         public Guid RecordStateKey { get; set; }

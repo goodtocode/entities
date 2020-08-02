@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>GoodToCode.Locality.Application.Services</AssemblyName>
+    <RootNamespace>GoodToCode.Locality</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Geography\Commands\" />
+    <Folder Include="Geography\Queries\" />
+    <Folder Include="Geometry\Commands\" />
+    <Folder Include="Geometry\Queries\" />
+    <Folder Include="Location\Commands\" />
+    <Folder Include="Location\Queries\" />
+  </ItemGroup>
+
+</Project>

@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <SpecFlowObsoleteCodeBehindFiles Remove="Domain\Entity\BusinessCreate.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Entity\BusinessesGet.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Entity\BusinessGetByKey.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Entity\BusinessInsert.feature.cs" />
@@ -55,14 +56,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Subjects.Infrastructure.Persistence\Subjects.Infrastructure.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Infrastructure\Entity\BusinessesGet.feature.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -94,6 +87,17 @@
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Domain\Entity\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
+    <ProjectReference Include="..\Subjects.Application.Services\Subjects.Application.Services.csproj" />
+    <ProjectReference Include="..\Subjects.Infrastructure.Persistence\Subjects.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

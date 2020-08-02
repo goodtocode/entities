@@ -19,7 +19,7 @@ namespace GoodToCode.Subjects.Specs
         private readonly IConfiguration _config;
 
         private Guid SutKey { get; set; }
-        private Business Sut { get; set; }
+        private BusinessEntity Sut { get; set; }
         private Uri BusinessGetFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessGet?code=9AVbUx74MCU6k4wAXyO6NxEJy3SdWJMXAMwHQzm99LWB7RcVAF/1HQ==&key={SutKey}"); } }
 
         public BusinessGetByKeySteps()

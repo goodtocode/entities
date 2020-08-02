@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
@@ -9,6 +10,7 @@ namespace GoodToCode.Subjects.Models
         }
 
         public int PersonId { get; set; }
+        [Key]
         public Guid PersonKey { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

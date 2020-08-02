@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
     public class EntityAppointment : IEntityAppointment
     {
         public int EntityAppointmentId { get; set; }
+        [Key]
         public Guid EntityAppointmentKey { get; set; }
         public Guid EntityKey { get; set; }
         public Guid AppointmentKey { get; set; }

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
     public class EntityLocation : IEntityLocation
     {
         public int EntityLocationId { get; set; }
+        [Key]
         public Guid EntityLocationKey { get; set; }
         public Guid EntityKey { get; set; }
         public Guid LocationKey { get; set; }

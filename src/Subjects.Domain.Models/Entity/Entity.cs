@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
@@ -9,6 +10,7 @@ namespace GoodToCode.Subjects.Models
         }
 
         public int EntityId { get; set; }
+        [Key]
         public Guid EntityKey { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }

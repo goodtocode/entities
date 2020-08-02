@@ -18,38 +18,37 @@ namespace GoodToCode.Subjects.Models
         {
         }
 
-        public virtual DbSet<Business> Business { get; set; }
-        public virtual DbSet<Detail> Detail { get; set; }
-        public virtual DbSet<DetailType> DetailType { get; set; }
-        public virtual DbSet<Entity> Entity { get; set; }
-        public virtual DbSet<EntityAppointment> EntityAppointment { get; set; }
-        public virtual DbSet<EntityDetail> EntityDetail { get; set; }
-        public virtual DbSet<EntityLocation> EntityLocation { get; set; }
-        public virtual DbSet<EntityOption> EntityOption { get; set; }
-        public virtual DbSet<EntityTimeRecurring> EntityTimeRecurring { get; set; }
-        public virtual DbSet<Gender> Gender { get; set; }
-        public virtual DbSet<Government> Government { get; set; }
-        public virtual DbSet<Item> Item { get; set; }
-        public virtual DbSet<ItemGroup> ItemGroup { get; set; }
-        public virtual DbSet<ItemType> ItemType { get; set; }
-        public virtual DbSet<MigrationHistory> MigrationHistory { get; set; }
-        public virtual DbSet<Option> Option { get; set; }
-        public virtual DbSet<OptionGroup> OptionGroup { get; set; }
-        public virtual DbSet<Person> Person { get; set; }
-        public virtual DbSet<RecordState> RecordState { get; set; }
-        public virtual DbSet<Resource> Resource { get; set; }
-        public virtual DbSet<ResourceItem> ResourceItem { get; set; }
-        public virtual DbSet<ResourcePerson> ResourcePerson { get; set; }
-        public virtual DbSet<ResourceTimeRecurring> ResourceTimeRecurring { get; set; }
-        public virtual DbSet<ResourceType> ResourceType { get; set; }
-        public virtual DbSet<Venture> Venture { get; set; }
-        public virtual DbSet<VentureAppointment> VentureAppointment { get; set; }
-        public virtual DbSet<VentureDetail> VentureDetail { get; set; }
-        public virtual DbSet<VentureEntityOption> VentureEntityOption { get; set; }
-        public virtual DbSet<VentureLocation> VentureLocation { get; set; }
-        public virtual DbSet<VentureOption> VentureOption { get; set; }
-        public virtual DbSet<VentureResource> VentureResource { get; set; }
-        public virtual DbSet<VentureSchedule> VentureSchedule { get; set; }
+        public virtual DbSet<BusinessEntity> Business { get; set; }
+        public virtual DbSet<DetailEntity> Detail { get; set; }
+        public virtual DbSet<DetailTypeEntity> DetailType { get; set; }
+        public virtual DbSet<EntityEntity> Entity { get; set; }
+        public virtual DbSet<EntityAppointmentEntity> EntityAppointment { get; set; }
+        public virtual DbSet<EntityDetailEntity> EntityDetail { get; set; }
+        public virtual DbSet<EntityLocationEntity> EntityLocation { get; set; }
+        public virtual DbSet<EntityOptionEntity> EntityOption { get; set; }
+        public virtual DbSet<EntityTimeRecurringEntity> EntityTimeRecurring { get; set; }
+        public virtual DbSet<GenderEntity> Gender { get; set; }
+        public virtual DbSet<GovernmentEntity> Government { get; set; }
+        public virtual DbSet<ItemEntity> Item { get; set; }
+        public virtual DbSet<ItemGroupEntity> ItemGroup { get; set; }
+        public virtual DbSet<ItemTypeEntity> ItemType { get; set; }
+        public virtual DbSet<OptionEntity> Option { get; set; }
+        public virtual DbSet<OptionGroupEntity> OptionGroup { get; set; }
+        public virtual DbSet<PersonEntity> Person { get; set; }
+        public virtual DbSet<RecordStateEntity> RecordState { get; set; }
+        public virtual DbSet<ResourceEntity> Resource { get; set; }
+        public virtual DbSet<ResourceItemEntity> ResourceItem { get; set; }
+        public virtual DbSet<ResourcePersonEntity> ResourcePerson { get; set; }
+        public virtual DbSet<ResourceTimeRecurringEntity> ResourceTimeRecurring { get; set; }
+        public virtual DbSet<ResourceTypeEntity> ResourceType { get; set; }
+        public virtual DbSet<VentureEntity> Venture { get; set; }
+        public virtual DbSet<VentureAppointmentEntity> VentureAppointment { get; set; }
+        public virtual DbSet<VentureDetailEntity> VentureDetail { get; set; }
+        public virtual DbSet<VentureEntityOptionEntity> VentureEntityOption { get; set; }
+        public virtual DbSet<VentureLocationEntity> VentureLocation { get; set; }
+        public virtual DbSet<VentureOptionEntity> VentureOption { get; set; }
+        public virtual DbSet<VentureResourceEntity> VentureResource { get; set; }
+        public virtual DbSet<VentureScheduleEntity> VentureSchedule { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -62,10 +61,9 @@ namespace GoodToCode.Subjects.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Business>(entity =>
+            modelBuilder.Entity<BusinessEntity>(entity =>
             {
-                entity.ToTable("Business", "Entity");
-
+                entity.ToTable("Business", "Entity");                
                 entity.HasIndex(e => e.BusinessKey)
                     .HasName("IX_BusinessEntity_Entity")
                     .IsUnique();
@@ -84,8 +82,8 @@ namespace GoodToCode.Subjects.Models
 
                 entity.HasOne(d => d.BusinessKeyNavigation)
                     .WithOne(p => p.Business)
-                    .HasPrincipalKey<Entity>(p => p.EntityKey)
-                    .HasForeignKey<Business>(d => d.BusinessKey)
+                    .HasPrincipalKey<EntityEntity>(p => p.EntityKey)
+                    .HasForeignKey<BusinessEntity>(d => d.BusinessKey)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Business_Entity");
 
@@ -97,7 +95,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_Business_RecordState");
             });
 
-            modelBuilder.Entity<Detail>(entity =>
+            modelBuilder.Entity<DetailEntity>(entity =>
             {
                 entity.ToTable("Detail", "Entity");
 
@@ -114,14 +112,14 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
 
                 entity.HasOne(d => d.DetailTypeKeyNavigation)
-                    .WithMany(p => (System.Collections.Generic.IEnumerable<Detail>)p.Detail)
+                    .WithMany(p => (System.Collections.Generic.IEnumerable<DetailEntity>)p.Detail)
                     .HasPrincipalKey(p => p.DetailTypeKey)
                     .HasForeignKey(d => d.DetailTypeKey)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Detail_DetailType");
             });
 
-            modelBuilder.Entity<DetailType>(entity =>
+            modelBuilder.Entity<DetailTypeEntity>(entity =>
             {
                 entity.ToTable("DetailType", "Entity");
 
@@ -142,7 +140,7 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<Entity>(entity =>
+            modelBuilder.Entity<EntityEntity>(entity =>
             {
                 entity.ToTable("Entity", "Entity");
 
@@ -155,7 +153,7 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<EntityAppointment>(entity =>
+            modelBuilder.Entity<EntityAppointmentEntity>(entity =>
             {
                 entity.ToTable("EntityAppointment", "Entity");
 
@@ -186,7 +184,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_EntityAppointment_RecordState");
             });
 
-            modelBuilder.Entity<EntityDetail>(entity =>
+            modelBuilder.Entity<EntityDetailEntity>(entity =>
             {
                 entity.ToTable("EntityDetail", "Entity");
 
@@ -217,7 +215,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_EntityDetail_Entity");
             });
 
-            modelBuilder.Entity<EntityLocation>(entity =>
+            modelBuilder.Entity<EntityLocationEntity>(entity =>
             {
                 entity.ToTable("EntityLocation", "Entity");
 
@@ -244,7 +242,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_EntityLocation_RecordState");
             });
 
-            modelBuilder.Entity<EntityOption>(entity =>
+            modelBuilder.Entity<EntityOptionEntity>(entity =>
             {
                 entity.ToTable("EntityOption", "Entity");
 
@@ -264,7 +262,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_EntityOption_Option");
             });
 
-            modelBuilder.Entity<EntityTimeRecurring>(entity =>
+            modelBuilder.Entity<EntityTimeRecurringEntity>(entity =>
             {
                 entity.ToTable("EntityTimeRecurring", "Entity");
 
@@ -303,7 +301,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_EntityTimeRecurring_RecordState");
             });
 
-            modelBuilder.Entity<Gender>(entity =>
+            modelBuilder.Entity<GenderEntity>(entity =>
             {
                 entity.ToTable("Gender", "Entity");
 
@@ -330,7 +328,7 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<Government>(entity =>
+            modelBuilder.Entity<GovernmentEntity>(entity =>
             {
                 entity.ToTable("Government", "Entity");
 
@@ -348,8 +346,8 @@ namespace GoodToCode.Subjects.Models
 
                 entity.HasOne(d => d.GovernmentKeyNavigation)
                     .WithOne(p => p.Government)
-                    .HasPrincipalKey<Entity>(p => p.EntityKey)
-                    .HasForeignKey<Government>(d => d.GovernmentKey)
+                    .HasPrincipalKey<EntityEntity>(p => p.EntityKey)
+                    .HasForeignKey<GovernmentEntity>(d => d.GovernmentKey)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Government_Entity");
 
@@ -361,7 +359,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_Government_RecordState");
             });
 
-            modelBuilder.Entity<Item>(entity =>
+            modelBuilder.Entity<ItemEntity>(entity =>
             {
                 entity.ToTable("Item", "Entity");
 
@@ -388,7 +386,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_Item_RecordState");
             });
 
-            modelBuilder.Entity<ItemGroup>(entity =>
+            modelBuilder.Entity<ItemGroupEntity>(entity =>
             {
                 entity.ToTable("ItemGroup", "Entity");
 
@@ -409,7 +407,7 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<ItemType>(entity =>
+            modelBuilder.Entity<ItemTypeEntity>(entity =>
             {
                 entity.ToTable("ItemType", "Entity");
 
@@ -437,25 +435,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_ItemType_ItemGroup");
             });
 
-            modelBuilder.Entity<MigrationHistory>(entity =>
-            {
-                entity.HasKey(e => new { e.MigrationId, e.ContextKey })
-                    .HasName("PK_MigrationHistory");
-
-                entity.ToTable("__MigrationHistory", "Identity");
-
-                entity.Property(e => e.MigrationId).HasMaxLength(150);
-
-                entity.Property(e => e.ContextKey).HasMaxLength(300);
-
-                entity.Property(e => e.Model).IsRequired();
-
-                entity.Property(e => e.ProductVersion)
-                    .IsRequired()
-                    .HasMaxLength(32);
-            });
-
-            modelBuilder.Entity<Option>(entity =>
+            modelBuilder.Entity<OptionEntity>(entity =>
             {
                 entity.ToTable("Option", "Entity");
 
@@ -490,7 +470,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_Option_OptionGroup");
             });
 
-            modelBuilder.Entity<OptionGroup>(entity =>
+            modelBuilder.Entity<OptionGroupEntity>(entity =>
             {
                 entity.ToTable("OptionGroup", "Entity");
 
@@ -519,7 +499,7 @@ namespace GoodToCode.Subjects.Models
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Person>(entity =>
+            modelBuilder.Entity<PersonEntity>(entity =>
             {
                 entity.ToTable("Person", "Entity");
 
@@ -556,8 +536,8 @@ namespace GoodToCode.Subjects.Models
 
                 entity.HasOne(d => d.PersonKeyNavigation)
                     .WithOne(p => p.Person)
-                    .HasPrincipalKey<Entity>(p => p.EntityKey)
-                    .HasForeignKey<Person>(d => d.PersonKey)
+                    .HasPrincipalKey<EntityEntity>(p => p.EntityKey)
+                    .HasForeignKey<PersonEntity>(d => d.PersonKey)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Person_Entity");
 
@@ -569,7 +549,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_Person_RecordState");
             });
 
-            modelBuilder.Entity<RecordState>(entity =>
+            modelBuilder.Entity<RecordStateEntity>(entity =>
             {
                 entity.ToTable("RecordState", "Entity");
 
@@ -588,7 +568,7 @@ namespace GoodToCode.Subjects.Models
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Resource>(entity =>
+            modelBuilder.Entity<ResourceEntity>(entity =>
             {
                 entity.ToTable("Resource", "Entity");
 
@@ -615,7 +595,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_Resource_RecordState");
             });
 
-            modelBuilder.Entity<ResourceItem>(entity =>
+            modelBuilder.Entity<ResourceItemEntity>(entity =>
             {
                 entity.ToTable("ResourceItem", "Entity");
 
@@ -659,7 +639,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_ResourceItem_Resource");
             });
 
-            modelBuilder.Entity<ResourcePerson>(entity =>
+            modelBuilder.Entity<ResourcePersonEntity>(entity =>
             {
                 entity.ToTable("ResourcePerson", "Entity");
 
@@ -703,7 +683,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_ResourceResource_Resource");
             });
 
-            modelBuilder.Entity<ResourceTimeRecurring>(entity =>
+            modelBuilder.Entity<ResourceTimeRecurringEntity>(entity =>
             {
                 entity.ToTable("ResourceTimeRecurring", "Entity");
 
@@ -742,7 +722,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_ResourceTimeRecurring_Resource");
             });
 
-            modelBuilder.Entity<ResourceType>(entity =>
+            modelBuilder.Entity<ResourceTypeEntity>(entity =>
             {
                 entity.ToTable("ResourceType", "Entity");
 
@@ -763,7 +743,7 @@ namespace GoodToCode.Subjects.Models
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Venture>(entity =>
+            modelBuilder.Entity<VentureEntity>(entity =>
             {
                 entity.ToTable("Venture", "Entity");
 
@@ -794,7 +774,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_Venture_RecordState");
             });
 
-            modelBuilder.Entity<VentureAppointment>(entity =>
+            modelBuilder.Entity<VentureAppointmentEntity>(entity =>
             {
                 entity.ToTable("VentureAppointment", "Entity");
 
@@ -825,7 +805,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_VentureAppointment_Venture");
             });
 
-            modelBuilder.Entity<VentureDetail>(entity =>
+            modelBuilder.Entity<VentureDetailEntity>(entity =>
             {
                 entity.ToTable("VentureDetail", "Entity");
 
@@ -856,7 +836,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_VentureDetail_Venture");
             });
 
-            modelBuilder.Entity<VentureEntityOption>(entity =>
+            modelBuilder.Entity<VentureEntityOptionEntity>(entity =>
             {
                 entity.ToTable("VentureEntityOption", "Entity");
 
@@ -890,7 +870,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_VentureEntityOption_Venture");
             });
 
-            modelBuilder.Entity<VentureLocation>(entity =>
+            modelBuilder.Entity<VentureLocationEntity>(entity =>
             {
                 entity.ToTable("VentureLocation", "Entity");
 
@@ -921,7 +901,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_VentureLocation_Venture");
             });
 
-            modelBuilder.Entity<VentureOption>(entity =>
+            modelBuilder.Entity<VentureOptionEntity>(entity =>
             {
                 entity.ToTable("VentureOption", "Entity");
 
@@ -948,7 +928,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_VentureOption_Venture");
             });
 
-            modelBuilder.Entity<VentureResource>(entity =>
+            modelBuilder.Entity<VentureResourceEntity>(entity =>
             {
                 entity.ToTable("VentureResource", "Entity");
 
@@ -992,7 +972,7 @@ namespace GoodToCode.Subjects.Models
                     .HasConstraintName("FK_VentureResource_Venture");
             });
 
-            modelBuilder.Entity<VentureSchedule>(entity =>
+            modelBuilder.Entity<VentureScheduleEntity>(entity =>
             {
                 entity.ToTable("VentureSchedule", "Entity");
 

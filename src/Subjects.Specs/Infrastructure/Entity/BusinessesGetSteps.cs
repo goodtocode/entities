@@ -19,7 +19,7 @@ namespace GoodToCode.Subjects.Specs
         private readonly SubjectsDbContext _context;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
-        private List<Business> Sut { get; set; }
+        private List<BusinessEntity> Sut { get; set; }
         private Uri BusinessesGetFunctionsUrl { get { return new Uri("https://subject-functions.azurewebsites.net/api/BusinessesGet?code=Vi0CYsNfYvLrDMy6D0hiX9ZqpO5ORX/wsN5uqK2qzgjzORaSNTEfGQ=="); } }
 
         public BusinessesGetSteps()
@@ -37,7 +37,7 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"I request the list of businesses")]
         public void GivenIRequestTheListOfBusinesses()
         {
-            Sut = new List<Business>();
+            Sut = new List<BusinessEntity>();
         }
 
         [When(@"Businesses are queried via Entity framework")]
