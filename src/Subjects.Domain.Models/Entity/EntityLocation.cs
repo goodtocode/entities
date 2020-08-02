@@ -5,8 +5,8 @@ namespace GoodToCode.Subjects.Models
 {
     public class EntityLocation : IEntityLocation
     {
-        public int EntityLocationId { get; set; }
         [Key]
+        public int EntityLocationId { get; set; }
         public Guid EntityLocationKey { get; set; }
         public Guid EntityKey { get; set; }
         public Guid LocationKey { get; set; }

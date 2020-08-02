@@ -5,8 +5,8 @@ namespace GoodToCode.Subjects.Models
 {
     public class Government : IGovernment
     {
-        public int GovernmentId { get; set; }
         [Key]
+        public int GovernmentId { get; set; }
         public Guid GovernmentKey { get; set; }
         public string GovernmentName { get; set; }
         public Guid RecordStateKey { get; set; }

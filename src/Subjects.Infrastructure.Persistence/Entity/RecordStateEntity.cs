@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
@@ -27,6 +28,7 @@ namespace GoodToCode.Subjects.Models
         }
 
         public int RecordStateId { get; set; }
+        [Key]
         public Guid RecordStateKey { get; set; }
         public string RecordStateName { get; set; }
         public DateTime CreatedDate { get; set; }

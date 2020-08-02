@@ -5,8 +5,8 @@ namespace GoodToCode.Subjects.Models
 {
     public class ResourcePerson : IResourcePerson
     {
-        public int ResourcePersonId { get; set; }
         [Key]
+        public int ResourcePersonId { get; set; }
         public Guid ResourcePersonKey { get; set; }
         public Guid ResourceKey { get; set; }
         public Guid PersonKey { get; set; }

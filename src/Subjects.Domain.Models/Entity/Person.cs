@@ -5,12 +5,8 @@ namespace GoodToCode.Subjects.Models
 {
     public class Person : IPerson
     {
-        public Person()
-        {
-        }
-
-        public int PersonId { get; set; }
         [Key]
+        public int PersonId { get; set; }
         public Guid PersonKey { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

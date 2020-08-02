@@ -6,12 +6,8 @@ namespace GoodToCode.Subjects.Models
 {
     public class ResourceType : IResourceType
     {
-        public ResourceType()
-        {
-        }
-
-        public int ResourceTypeId { get; set; }
         [Key]
+        public int ResourceTypeId { get; set; }
         public Guid ResourceTypeKey { get; set; }
         public string ResourceTypeName { get; set; }
         public string ResourceTypeDescription { get; set; }

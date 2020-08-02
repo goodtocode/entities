@@ -1,6 +1,5 @@
 ﻿using GoodToCode.Subjects.Models;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Subjects.Aggregates
