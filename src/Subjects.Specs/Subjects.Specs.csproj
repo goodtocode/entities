@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <SpecFlowObsoleteCodeBehindFiles Remove="Domain\Entity\BusinessCreate.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Application\Entity\BusinessCreate.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Entity\BusinessesGet.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Entity\BusinessGetByKey.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Entity\BusinessInsert.feature.cs" />
@@ -90,7 +90,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Entity\" />
+    <Folder Include="Application\Entity\" />
+    <Folder Include="Domain\" />
   </ItemGroup>
 
   <ItemGroup>

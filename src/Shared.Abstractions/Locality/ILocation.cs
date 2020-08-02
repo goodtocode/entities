@@ -7,7 +7,6 @@ namespace GoodToCode.Locality.Models
     {
         DateTime CreatedDate { get; set; }
         string LocationDescription { get; set; }
-        int LocationId { get; set; }
         Guid LocationKey { get; set; }
         string LocationName { get; set; }
         DateTime ModifiedDate { get; set; }

@@ -8,7 +8,6 @@ namespace GoodToCode.Occurrences.Models
         DateTime CreatedDate { get; set; }
         Guid EventGroupKey { get; set; }
         string EventTypeDescription { get; set; }
-        int EventTypeId { get; set; }
         Guid EventTypeKey { get; set; }
         string EventTypeName { get; set; }
         DateTime ModifiedDate { get; set; }

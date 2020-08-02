@@ -6,7 +6,6 @@ namespace GoodToCode.Subjects.Models
     public class Venture : IVenture
     {
         [Key]
-        public int VentureId { get; set; }
         public Guid VentureKey { get; set; }
         public Guid? VentureGroupKey { get; set; }
         public Guid? VentureTypeKey { get; set; }

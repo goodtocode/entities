@@ -10,7 +10,6 @@ namespace GoodToCode.Subjects.Models
         }
         public virtual GenderEntity Gender { get; set; }
         public virtual EntityEntity PersonKeyNavigation { get; set; }
-        public virtual RecordStateEntity RecordStateKeyNavigation { get; set; }
         public virtual ICollection<ResourcePersonEntity> ResourcePerson { get; set; }
     }
 }

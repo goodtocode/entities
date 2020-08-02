@@ -6,13 +6,12 @@ namespace GoodToCode.Subjects.Models
     public class Person : IPerson
     {
         [Key]
-        public int PersonId { get; set; }
         public Guid PersonKey { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
-        public int GenderId { get; set; }
+        public string GenderCode { get; set; }
         public Guid RecordStateKey { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }

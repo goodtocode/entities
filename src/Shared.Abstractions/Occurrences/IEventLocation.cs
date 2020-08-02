@@ -6,7 +6,6 @@ namespace GoodToCode.Occurrences.Models
     {
         DateTime CreatedDate { get; set; }
         Guid EventKey { get; set; }
-        int EventLocationId { get; set; }
         Guid EventLocationKey { get; set; }
         Guid LocationKey { get; set; }
         Guid? LocationTypeKey { get; set; }

@@ -1,4 +1,4 @@
-using GoodToCode.Shared.Models;
+using GoodToCode.Subjects.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -20,9 +20,9 @@ namespace GoodToCode.Application.Functions.Functions
         {
             log.LogInformation($"Subjects.BusinessesGet()");
             var defaultConnection = Environment.GetEnvironmentVariable("DefaultConnection") ?? "Server=tcp:GoodToCode.database.windows.net,1433;Initial Catalog=EntityData;user id=TestUser; password=57595709-9E9C-47EA-ABBF-4F3BAA1B0D37;Persist Security Info=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Application Name=GoodToCodeEntities;";
-            var options = new DbContextOptionsBuilder<EntityDataContext>();
+            var options = new DbContextOptionsBuilder<SubjectsDbContext>();
                 options.UseSqlServer(defaultConnection);
-            var context = new EntityDataContext(options.Options);
+            var context = new SubjectsDbContext(options.Options);
             var businesses = await context.Business.ToListAsync();
 
             return businesses?.Count == 0 ? new NotFoundResult() : (IActionResult)new OkObjectResult(JsonConvert.SerializeObject(businesses));

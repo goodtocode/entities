@@ -7,7 +7,6 @@ namespace GoodToCode.Subjects.Models
     {
 
         [Key]
-        public int DetailId { get; set; }
         public Guid DetailKey { get; set; }
         public Guid DetailTypeKey { get; set; }
         public string DetailData { get; set; }

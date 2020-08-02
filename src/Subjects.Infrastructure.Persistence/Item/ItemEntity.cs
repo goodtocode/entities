@@ -9,7 +9,7 @@ namespace GoodToCode.Subjects.Models
             ResourceItem = new HashSet<ResourceItemEntity>();
         }
 
-        public virtual RecordStateEntity RecordStateKeyNavigation { get; set; }
+        
         public virtual ICollection<ResourceItemEntity> ResourceItem { get; set; }
     }
 }

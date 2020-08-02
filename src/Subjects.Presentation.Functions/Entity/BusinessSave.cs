@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -21,13 +22,16 @@ namespace GoodToCode.Subjects.Functions
             ILogger log)
         {
             log.LogInformation($"Subjects.BusinessSave({req.Query["key"]})");
-            var returnData = new Business();
-            var businessKey = req.Query["key"].ToString().ToGuid();
+            string defaultConnection = Environment.GetEnvironmentVariable("DefaultConnection") ?? "Server=tcp:GoodToCode.database.windows.net,1433;Initial Catalog=EntityData;user id=TestUser; password=57595709-9E9C-47EA-ABBF-4F3BAA1B0D37;Persist Security Info=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Application Name=GoodToCodeEntities;";
+            
+            var options = new DbContextOptionsBuilder<SubjectsDbContext>();
+                options.UseSqlServer(defaultConnection);            
+            var context = new SubjectsDbContext(options.Options);
+
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic itemToSave = JsonConvert.DeserializeObject(requestBody);
-            Business business = new Caster().Cast<Business>(itemToSave);
-            if(business.BusinessKey == Guid.Empty && businessKey != Guid.Empty) business.BusinessKey = businessKey;
-            business = await new EntityAggregate().BusinessSaveAsync(business);
+            Business business = new Caster().Cast<Business>(itemToSave);           
+            business = await new EntityAggregate(context).BusinessSaveAsync(business);
             return business.BusinessKey == Guid.Empty ? new NotFoundResult() : (IActionResult)new OkObjectResult(JsonConvert.SerializeObject(business));
         }
     }

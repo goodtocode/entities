@@ -8,7 +8,6 @@ namespace GoodToCode.Subjects.Models
     public class ItemGroup : IItemGroup
     {
         [Key]
-        public int ItemGroupId { get; set; }
         public Guid ItemGroupKey { get; set; }
         public string ItemGroupName { get; set; }
         public string ItemGroupDescription { get; set; }

@@ -8,7 +8,6 @@ namespace GoodToCode.Chronology.Models
         DateTime BeginDate { get; set; }
         DateTime CreatedDate { get; set; }
         DateTime EndDate { get; set; }
-        int TimeRangeId { get; set; }
         Guid TimeRangeKey { get; set; }
     }
 }

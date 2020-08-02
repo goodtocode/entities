@@ -9,7 +9,6 @@ namespace GoodToCode.Chronology.Models
         DateTime ModifiedDate { get; set; }
         Guid RecordStateKey { get; set; }
         string ScheduleDescription { get; set; }
-        int ScheduleId { get; set; }
         Guid ScheduleKey { get; set; }
         string ScheduleName { get; set; }
     }

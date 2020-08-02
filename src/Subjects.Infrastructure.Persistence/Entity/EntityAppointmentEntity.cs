@@ -3,6 +3,6 @@
     public class EntityAppointmentEntity : EntityAppointment, IEntityAppointment
     {
         public virtual EntityEntity EntityKeyNavigation { get; set; }
-        public virtual RecordStateEntity RecordStateKeyNavigation { get; set; }
+        
     }
 }

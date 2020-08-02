@@ -6,7 +6,6 @@ namespace GoodToCode.Subjects.Models
     public class VentureEntityOption : IVentureEntityOption
     {
         [Key]
-        public int VentureEntityOptionId { get; set; }
         public Guid VentureEntityOptionKey { get; set; }
         public Guid OptionKey { get; set; }
         public Guid VentureKey { get; set; }

@@ -6,7 +6,6 @@ namespace GoodToCode.Subjects.Models
     public class VentureSchedule : IVentureSchedule
     {
         [Key]
-        public int VentureScheduleId { get; set; }
         public Guid VentureScheduleKey { get; set; }
         public Guid VentureKey { get; set; }
         public Guid ScheduleKey { get; set; }

@@ -1,13 +1,14 @@
 ﻿
 //https://www.syncfusion.com/blogs/post/build-crud-application-with-asp-net-core-entity-framework-visual-studio-2019.aspx
 using System;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 
 namespace GoodToCode.Subjects.Models
 {
-    public partial class SubjectsDbContext : DbContext
+    public partial class SubjectsDbContext : DbContext, ISubjectsDbContext
     {
         public SubjectsDbContext()
         {
@@ -18,37 +19,36 @@ namespace GoodToCode.Subjects.Models
         {
         }
 
-        public virtual DbSet<BusinessEntity> Business { get; set; }
-        public virtual DbSet<DetailEntity> Detail { get; set; }
-        public virtual DbSet<DetailTypeEntity> DetailType { get; set; }
-        public virtual DbSet<EntityEntity> Entity { get; set; }
-        public virtual DbSet<EntityAppointmentEntity> EntityAppointment { get; set; }
-        public virtual DbSet<EntityDetailEntity> EntityDetail { get; set; }
-        public virtual DbSet<EntityLocationEntity> EntityLocation { get; set; }
-        public virtual DbSet<EntityOptionEntity> EntityOption { get; set; }
-        public virtual DbSet<EntityTimeRecurringEntity> EntityTimeRecurring { get; set; }
-        public virtual DbSet<GenderEntity> Gender { get; set; }
-        public virtual DbSet<GovernmentEntity> Government { get; set; }
-        public virtual DbSet<ItemEntity> Item { get; set; }
-        public virtual DbSet<ItemGroupEntity> ItemGroup { get; set; }
-        public virtual DbSet<ItemTypeEntity> ItemType { get; set; }
-        public virtual DbSet<OptionEntity> Option { get; set; }
-        public virtual DbSet<OptionGroupEntity> OptionGroup { get; set; }
-        public virtual DbSet<PersonEntity> Person { get; set; }
-        public virtual DbSet<RecordStateEntity> RecordState { get; set; }
-        public virtual DbSet<ResourceEntity> Resource { get; set; }
-        public virtual DbSet<ResourceItemEntity> ResourceItem { get; set; }
-        public virtual DbSet<ResourcePersonEntity> ResourcePerson { get; set; }
-        public virtual DbSet<ResourceTimeRecurringEntity> ResourceTimeRecurring { get; set; }
-        public virtual DbSet<ResourceTypeEntity> ResourceType { get; set; }
-        public virtual DbSet<VentureEntity> Venture { get; set; }
-        public virtual DbSet<VentureAppointmentEntity> VentureAppointment { get; set; }
-        public virtual DbSet<VentureDetailEntity> VentureDetail { get; set; }
-        public virtual DbSet<VentureEntityOptionEntity> VentureEntityOption { get; set; }
-        public virtual DbSet<VentureLocationEntity> VentureLocation { get; set; }
-        public virtual DbSet<VentureOptionEntity> VentureOption { get; set; }
-        public virtual DbSet<VentureResourceEntity> VentureResource { get; set; }
-        public virtual DbSet<VentureScheduleEntity> VentureSchedule { get; set; }
+        public virtual DbSet<Business> Business { get; set; }
+        public virtual DbSet<Detail> Detail { get; set; }
+        public virtual DbSet<DetailType> DetailType { get; set; }
+        public virtual DbSet<Entity> Entity { get; set; }
+        public virtual DbSet<EntityAppointment> EntityAppointment { get; set; }
+        public virtual DbSet<EntityDetail> EntityDetail { get; set; }
+        public virtual DbSet<EntityLocation> EntityLocation { get; set; }
+        public virtual DbSet<EntityOption> EntityOption { get; set; }
+        public virtual DbSet<EntityTimeRecurring> EntityTimeRecurring { get; set; }
+        public virtual DbSet<Gender> Gender { get; set; }
+        public virtual DbSet<Government> Government { get; set; }
+        public virtual DbSet<Item> Item { get; set; }
+        public virtual DbSet<ItemGroup> ItemGroup { get; set; }
+        public virtual DbSet<ItemType> ItemType { get; set; }
+        public virtual DbSet<Option> Option { get; set; }
+        public virtual DbSet<OptionGroup> OptionGroup { get; set; }
+        public virtual DbSet<Person> Person { get; set; }
+        public virtual DbSet<Resource> Resource { get; set; }
+        public virtual DbSet<ResourceItem> ResourceItem { get; set; }
+        public virtual DbSet<ResourcePerson> ResourcePerson { get; set; }
+        public virtual DbSet<ResourceTimeRecurring> ResourceTimeRecurring { get; set; }
+        public virtual DbSet<ResourceType> ResourceType { get; set; }
+        public virtual DbSet<Venture> Venture { get; set; }
+        public virtual DbSet<VentureAppointment> VentureAppointment { get; set; }
+        public virtual DbSet<VentureDetail> VentureDetail { get; set; }
+        public virtual DbSet<VentureEntityOption> VentureEntityOption { get; set; }
+        public virtual DbSet<VentureLocation> VentureLocation { get; set; }
+        public virtual DbSet<VentureOption> VentureOption { get; set; }
+        public virtual DbSet<VentureResource> VentureResource { get; set; }
+        public virtual DbSet<VentureSchedule> VentureSchedule { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -61,11 +61,11 @@ namespace GoodToCode.Subjects.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BusinessEntity>(entity =>
+            modelBuilder.Entity<Business>(entity =>
             {
                 entity.ToTable("Business", "Entity");                
                 entity.HasIndex(e => e.BusinessKey)
-                    .HasName("IX_BusinessEntity_Entity")
+                    .HasName("IX_Business_Key")
                     .IsUnique();
 
                 entity.Property(e => e.BusinessName)
@@ -80,22 +80,9 @@ namespace GoodToCode.Subjects.Models
                     .IsRequired()
                     .HasMaxLength(20);
 
-                entity.HasOne(d => d.BusinessKeyNavigation)
-                    .WithOne(p => p.Business)
-                    .HasPrincipalKey<EntityEntity>(p => p.EntityKey)
-                    .HasForeignKey<BusinessEntity>(d => d.BusinessKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Business_Entity");
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.Business)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Business_RecordState");
             });
 
-            modelBuilder.Entity<DetailEntity>(entity =>
+            modelBuilder.Entity<Detail>(entity =>
             {
                 entity.ToTable("Detail", "Entity");
 
@@ -110,16 +97,9 @@ namespace GoodToCode.Subjects.Models
                     .HasMaxLength(2000);
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.DetailTypeKeyNavigation)
-                    .WithMany(p => (System.Collections.Generic.IEnumerable<DetailEntity>)p.Detail)
-                    .HasPrincipalKey(p => p.DetailTypeKey)
-                    .HasForeignKey(d => d.DetailTypeKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Detail_DetailType");
             });
 
-            modelBuilder.Entity<DetailTypeEntity>(entity =>
+            modelBuilder.Entity<DetailType>(entity =>
             {
                 entity.ToTable("DetailType", "Entity");
 
@@ -140,7 +120,7 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<EntityEntity>(entity =>
+            modelBuilder.Entity<Entity>(entity =>
             {
                 entity.ToTable("Entity", "Entity");
 
@@ -153,7 +133,7 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<EntityAppointmentEntity>(entity =>
+            modelBuilder.Entity<EntityAppointment>(entity =>
             {
                 entity.ToTable("EntityAppointment", "Entity");
 
@@ -168,23 +148,9 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.EntityKeyNavigation)
-                    .WithMany(p => p.EntityAppointment)
-                    .HasPrincipalKey(p => p.EntityKey)
-                    .HasForeignKey(d => d.EntityKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EntityAppointment_Entity");
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.EntityAppointment)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EntityAppointment_RecordState");
             });
 
-            modelBuilder.Entity<EntityDetailEntity>(entity =>
+            modelBuilder.Entity<EntityDetail>(entity =>
             {
                 entity.ToTable("EntityDetail", "Entity");
 
@@ -199,23 +165,9 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.DetailKeyNavigation)
-                    .WithMany(p => p.EntityDetail)
-                    .HasPrincipalKey(p => p.DetailKey)
-                    .HasForeignKey(d => d.DetailKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EntityDetail_Detail");
-
-                entity.HasOne(d => d.EntityKeyNavigation)
-                    .WithMany(p => p.EntityDetail)
-                    .HasPrincipalKey(p => p.EntityKey)
-                    .HasForeignKey(d => d.EntityKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EntityDetail_Entity");
             });
 
-            modelBuilder.Entity<EntityLocationEntity>(entity =>
+            modelBuilder.Entity<EntityLocation>(entity =>
             {
                 entity.ToTable("EntityLocation", "Entity");
 
@@ -226,23 +178,9 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.EntityKeyNavigation)
-                    .WithMany(p => p.EntityLocation)
-                    .HasPrincipalKey(p => p.EntityKey)
-                    .HasForeignKey(d => d.EntityKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EntityLocation_Entity");
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.EntityLocation)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EntityLocation_RecordState");
             });
 
-            modelBuilder.Entity<EntityOptionEntity>(entity =>
+            modelBuilder.Entity<EntityOption>(entity =>
             {
                 entity.ToTable("EntityOption", "Entity");
 
@@ -253,16 +191,9 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.OptionKeyNavigation)
-                    .WithMany(p => p.EntityOption)
-                    .HasPrincipalKey(p => p.OptionKey)
-                    .HasForeignKey(d => d.OptionKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EntityOption_Option");
             });
 
-            modelBuilder.Entity<EntityTimeRecurringEntity>(entity =>
+            modelBuilder.Entity<EntityTimeRecurring>(entity =>
             {
                 entity.ToTable("EntityTimeRecurring", "Entity");
 
@@ -285,35 +216,23 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.TimeName)
                     .IsRequired()
                     .HasMaxLength(50);
-
-                entity.HasOne(d => d.EntityKeyNavigation)
-                    .WithMany(p => p.EntityTimeRecurring)
-                    .HasPrincipalKey(p => p.EntityKey)
-                    .HasForeignKey(d => d.EntityKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EntityTimeRecurring_Entity");
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.EntityTimeRecurring)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EntityTimeRecurring_RecordState");
             });
 
-            modelBuilder.Entity<GenderEntity>(entity =>
+            modelBuilder.Entity<Gender>(entity =>
             {
                 entity.ToTable("Gender", "Entity");
 
                 entity.HasIndex(e => e.GenderCode)
-                    .HasName("IX_Gender_Code")
+                    .HasName("IX_Gender_Code")                    
                     .IsUnique();
+
+                entity.HasCheckConstraint("CC_Gender_GenderCode", "GenderCode in ('M', 'F', 'N/A', 'U/K')");
 
                 entity.HasIndex(e => e.GenderKey)
                     .HasName("IX_Gender_Key")
                     .IsUnique();
 
-                entity.Property(e => e.GenderId).ValueGeneratedNever();
+                entity.Property(e => e.GenderCode).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -328,7 +247,7 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<GovernmentEntity>(entity =>
+            modelBuilder.Entity<Government>(entity =>
             {
                 entity.ToTable("Government", "Entity");
 
@@ -342,24 +261,10 @@ namespace GoodToCode.Subjects.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.GovernmentKeyNavigation)
-                    .WithOne(p => p.Government)
-                    .HasPrincipalKey<EntityEntity>(p => p.EntityKey)
-                    .HasForeignKey<GovernmentEntity>(d => d.GovernmentKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Government_Entity");
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.Government)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Government_RecordState");
+                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");              
             });
 
-            modelBuilder.Entity<ItemEntity>(entity =>
+            modelBuilder.Entity<Item>(entity =>
             {
                 entity.ToTable("Item", "Entity");
 
@@ -377,16 +282,9 @@ namespace GoodToCode.Subjects.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.Item)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Item_RecordState");
             });
 
-            modelBuilder.Entity<ItemGroupEntity>(entity =>
+            modelBuilder.Entity<ItemGroup>(entity =>
             {
                 entity.ToTable("ItemGroup", "Entity");
 
@@ -407,7 +305,7 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<ItemTypeEntity>(entity =>
+            modelBuilder.Entity<ItemType>(entity =>
             {
                 entity.ToTable("ItemType", "Entity");
 
@@ -426,16 +324,9 @@ namespace GoodToCode.Subjects.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.ItemGroupKeyNavigation)
-                    .WithMany(p => p.ItemType)
-                    .HasPrincipalKey(p => p.ItemGroupKey)
-                    .HasForeignKey(d => d.ItemGroupKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ItemType_ItemGroup");
             });
 
-            modelBuilder.Entity<OptionEntity>(entity =>
+            modelBuilder.Entity<Option>(entity =>
             {
                 entity.ToTable("Option", "Entity");
 
@@ -461,16 +352,9 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.OptionName)
                     .IsRequired()
                     .HasMaxLength(50);
-
-                entity.HasOne(d => d.OptionGroupKeyNavigation)
-                    .WithMany(p => p.Option)
-                    .HasPrincipalKey(p => p.OptionGroupKey)
-                    .HasForeignKey(d => d.OptionGroupKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Option_OptionGroup");
             });
 
-            modelBuilder.Entity<OptionGroupEntity>(entity =>
+            modelBuilder.Entity<OptionGroup>(entity =>
             {
                 entity.ToTable("OptionGroup", "Entity");
 
@@ -499,7 +383,7 @@ namespace GoodToCode.Subjects.Models
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<PersonEntity>(entity =>
+            modelBuilder.Entity<Person>(entity =>
             {
                 entity.ToTable("Person", "Entity");
 
@@ -528,47 +412,11 @@ namespace GoodToCode.Subjects.Models
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
 
-                entity.HasOne(d => d.Gender)
-                    .WithMany(p => p.Person)
-                    .HasForeignKey(d => d.GenderId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Person_Gender");
-
-                entity.HasOne(d => d.PersonKeyNavigation)
-                    .WithOne(p => p.Person)
-                    .HasPrincipalKey<EntityEntity>(p => p.EntityKey)
-                    .HasForeignKey<PersonEntity>(d => d.PersonKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Person_Entity");
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.Person)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Person_RecordState");
+                entity.Property(e => e.GenderCode).HasMaxLength(3);
+                entity.HasCheckConstraint("CC_Person_GenderCode", "GenderCode in ('M', 'F', 'N/A', 'U/K')");
             });
 
-            modelBuilder.Entity<RecordStateEntity>(entity =>
-            {
-                entity.ToTable("RecordState", "Entity");
-
-                entity.HasIndex(e => e.RecordStateKey)
-                    .HasName("IX_RecordState_Key")
-                    .IsUnique();
-
-                entity.Property(e => e.RecordStateId).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.RecordStateName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<ResourceEntity>(entity =>
+            modelBuilder.Entity<Resource>(entity =>
             {
                 entity.ToTable("Resource", "Entity");
 
@@ -586,16 +434,9 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ResourceName)
                     .IsRequired()
                     .HasMaxLength(50);
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.Resource)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Resource_RecordState");
             });
 
-            modelBuilder.Entity<ResourceItemEntity>(entity =>
+            modelBuilder.Entity<ResourceItem>(entity =>
             {
                 entity.ToTable("ResourceItem", "Entity");
 
@@ -616,30 +457,9 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.ItemKeyNavigation)
-                    .WithMany(p => p.ResourceItem)
-                    .HasPrincipalKey(p => p.ItemKey)
-                    .HasForeignKey(d => d.ItemKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ResourceItem_Item");
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.ResourceItem)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ResourceItem_RecordState");
-
-                entity.HasOne(d => d.ResourceKeyNavigation)
-                    .WithMany(p => p.ResourceItem)
-                    .HasPrincipalKey(p => p.ResourceKey)
-                    .HasForeignKey(d => d.ResourceKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ResourceItem_Resource");
             });
 
-            modelBuilder.Entity<ResourcePersonEntity>(entity =>
+            modelBuilder.Entity<ResourcePerson>(entity =>
             {
                 entity.ToTable("ResourcePerson", "Entity");
 
@@ -660,30 +480,9 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.PersonKeyNavigation)
-                    .WithMany(p => p.ResourcePerson)
-                    .HasPrincipalKey(p => p.PersonKey)
-                    .HasForeignKey(d => d.PersonKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ResourcePerson_Person");
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.ResourcePerson)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ResourcePerson_RecordState");
-
-                entity.HasOne(d => d.ResourceKeyNavigation)
-                    .WithMany(p => p.ResourcePerson)
-                    .HasPrincipalKey(p => p.ResourceKey)
-                    .HasForeignKey(d => d.ResourceKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ResourceResource_Resource");
             });
 
-            modelBuilder.Entity<ResourceTimeRecurringEntity>(entity =>
+            modelBuilder.Entity<ResourceTimeRecurring>(entity =>
             {
                 entity.ToTable("ResourceTimeRecurring", "Entity");
 
@@ -706,23 +505,9 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.TimeName)
                     .IsRequired()
                     .HasMaxLength(50);
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.ResourceTimeRecurring)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ResourceTimeRecurring_RecordState");
-
-                entity.HasOne(d => d.ResourceKeyNavigation)
-                    .WithMany(p => p.ResourceTimeRecurring)
-                    .HasPrincipalKey(p => p.ResourceKey)
-                    .HasForeignKey(d => d.ResourceKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ResourceTimeRecurring_Resource");
             });
 
-            modelBuilder.Entity<ResourceTypeEntity>(entity =>
+            modelBuilder.Entity<ResourceType>(entity =>
             {
                 entity.ToTable("ResourceType", "Entity");
 
@@ -743,7 +528,7 @@ namespace GoodToCode.Subjects.Models
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<VentureEntity>(entity =>
+            modelBuilder.Entity<Venture>(entity =>
             {
                 entity.ToTable("Venture", "Entity");
 
@@ -765,16 +550,9 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.VentureSlogan)
                     .IsRequired()
                     .HasMaxLength(50);
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.Venture)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Venture_RecordState");
             });
 
-            modelBuilder.Entity<VentureAppointmentEntity>(entity =>
+            modelBuilder.Entity<VentureAppointment>(entity =>
             {
                 entity.ToTable("VentureAppointment", "Entity");
 
@@ -789,23 +567,9 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.VentureAppointment)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VentureAppointment_RecordState");
-
-                entity.HasOne(d => d.VentureKeyNavigation)
-                    .WithMany(p => p.VentureAppointment)
-                    .HasPrincipalKey(p => p.VentureKey)
-                    .HasForeignKey(d => d.VentureKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VentureAppointment_Venture");
             });
 
-            modelBuilder.Entity<VentureDetailEntity>(entity =>
+            modelBuilder.Entity<VentureDetail>(entity =>
             {
                 entity.ToTable("VentureDetail", "Entity");
 
@@ -820,23 +584,9 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.DetailKeyNavigation)
-                    .WithMany(p => p.VentureDetail)
-                    .HasPrincipalKey(p => p.DetailKey)
-                    .HasForeignKey(d => d.DetailKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VentureDetail_Detail");
-
-                entity.HasOne(d => d.VentureKeyNavigation)
-                    .WithMany(p => p.VentureDetail)
-                    .HasPrincipalKey(p => p.VentureKey)
-                    .HasForeignKey(d => d.VentureKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VentureDetail_Venture");
             });
 
-            modelBuilder.Entity<VentureEntityOptionEntity>(entity =>
+            modelBuilder.Entity<VentureEntityOption>(entity =>
             {
                 entity.ToTable("VentureEntityOption", "Entity");
 
@@ -847,30 +597,9 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.EntityKeyNavigation)
-                    .WithMany(p => p.VentureEntityOption)
-                    .HasPrincipalKey(p => p.EntityKey)
-                    .HasForeignKey(d => d.EntityKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VentureEntityOption_Entity");
-
-                entity.HasOne(d => d.OptionKeyNavigation)
-                    .WithMany(p => p.VentureEntityOption)
-                    .HasPrincipalKey(p => p.OptionKey)
-                    .HasForeignKey(d => d.OptionKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VentureEntityOption_Option");
-
-                entity.HasOne(d => d.VentureKeyNavigation)
-                    .WithMany(p => p.VentureEntityOption)
-                    .HasPrincipalKey(p => p.VentureKey)
-                    .HasForeignKey(d => d.VentureKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VentureEntityOption_Venture");
             });
 
-            modelBuilder.Entity<VentureLocationEntity>(entity =>
+            modelBuilder.Entity<VentureLocation>(entity =>
             {
                 entity.ToTable("VentureLocation", "Entity");
 
@@ -885,23 +614,9 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.VentureLocation)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VentureLocation_RecordState");
-
-                entity.HasOne(d => d.VentureKeyNavigation)
-                    .WithMany(p => p.VentureLocation)
-                    .HasPrincipalKey(p => p.VentureKey)
-                    .HasForeignKey(d => d.VentureKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VentureLocation_Venture");
             });
 
-            modelBuilder.Entity<VentureOptionEntity>(entity =>
+            modelBuilder.Entity<VentureOption>(entity =>
             {
                 entity.ToTable("VentureOption", "Entity");
 
@@ -912,23 +627,9 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.OptionKeyNavigation)
-                    .WithMany(p => p.VentureOption)
-                    .HasPrincipalKey(p => p.OptionKey)
-                    .HasForeignKey(d => d.OptionKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VentureOption_Option");
-
-                entity.HasOne(d => d.VentureKeyNavigation)
-                    .WithMany(p => p.VentureOption)
-                    .HasPrincipalKey(p => p.VentureKey)
-                    .HasForeignKey(d => d.VentureKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VentureOption_Venture");
             });
 
-            modelBuilder.Entity<VentureResourceEntity>(entity =>
+            modelBuilder.Entity<VentureResource>(entity =>
             {
                 entity.ToTable("VentureResource", "Entity");
 
@@ -943,36 +644,9 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.VentureResource)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VentureResource_RecordState");
-
-                entity.HasOne(d => d.ResourceKeyNavigation)
-                    .WithMany(p => p.VentureResource)
-                    .HasPrincipalKey(p => p.ResourceKey)
-                    .HasForeignKey(d => d.ResourceKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VentureResource_Resource");
-
-                entity.HasOne(d => d.ResourceTypeKeyNavigation)
-                    .WithMany(p => p.VentureResource)
-                    .HasPrincipalKey(p => p.ResourceTypeKey)
-                    .HasForeignKey(d => d.ResourceTypeKey)
-                    .HasConstraintName("FK_VentureResource_ResourceType");
-
-                entity.HasOne(d => d.VentureKeyNavigation)
-                    .WithMany(p => p.VentureResource)
-                    .HasPrincipalKey(p => p.VentureKey)
-                    .HasForeignKey(d => d.VentureKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VentureResource_Venture");
             });
 
-            modelBuilder.Entity<VentureScheduleEntity>(entity =>
+            modelBuilder.Entity<VentureSchedule>(entity =>
             {
                 entity.ToTable("VentureSchedule", "Entity");
 
@@ -987,20 +661,6 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.VentureSchedule)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VentureSchedule_RecordState");
-
-                entity.HasOne(d => d.VentureKeyNavigation)
-                    .WithMany(p => p.VentureSchedule)
-                    .HasPrincipalKey(p => p.VentureKey)
-                    .HasForeignKey(d => d.VentureKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VentureSchedule_Venture");
             });
 
             OnModelCreatingPartial(modelBuilder);

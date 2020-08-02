@@ -9,7 +9,6 @@ namespace GoodToCode.Occurrences.Models
         Guid EventCreatorKey { get; set; }
         string EventDescription { get; set; }
         Guid EventGroupKey { get; set; }
-        int EventId { get; set; }
         Guid EventKey { get; set; }
         string EventName { get; set; }
         string EventSlogan { get; set; }

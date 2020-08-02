@@ -12,7 +12,6 @@ namespace GoodToCode.Chronology.Models
         DateTime EndTime { get; set; }
         int Interval { get; set; }
         Guid TimeCycleKey { get; set; }
-        int TimeRecurringId { get; set; }
         Guid TimeRecurringKey { get; set; }
     }
 }

@@ -6,7 +6,6 @@ namespace GoodToCode.Subjects.Models
     public class OptionGroup : IOptionGroup
     {
         [Key]
-        public int OptionGroupId { get; set; }
         public Guid OptionGroupKey { get; set; }
         public string OptionGroupName { get; set; }
         public string OptionGroupDescription { get; set; }

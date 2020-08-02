@@ -6,7 +6,6 @@ namespace GoodToCode.Subjects.Models
     public class ItemType : IItemType
     {
         [Key]
-        public int ItemTypeId { get; set; }
         public Guid ItemTypeKey { get; set; }
         public Guid ItemGroupKey { get; set; }
         public string ItemTypeName { get; set; }

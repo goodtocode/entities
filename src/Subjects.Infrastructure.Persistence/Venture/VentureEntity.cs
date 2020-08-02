@@ -15,7 +15,7 @@ namespace GoodToCode.Subjects.Models
             VentureSchedule = new HashSet<VentureScheduleEntity>();
         }
 
-        public virtual RecordStateEntity RecordStateKeyNavigation { get; set; }
+        
         public virtual ICollection<VentureAppointmentEntity> VentureAppointment { get; set; }
         public virtual ICollection<VentureDetailEntity> VentureDetail { get; set; }
         public virtual ICollection<VentureEntityOptionEntity> VentureEntityOption { get; set; }

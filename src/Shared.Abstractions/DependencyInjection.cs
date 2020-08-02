@@ -6,10 +6,10 @@
 //    {
 //        public static IServiceCollection AddInfrastructureAzure(this IServiceCollection services)
 //        {
-//            services.AddSingleton<IAzureEventPublisher, AzureEventPublisher>();
-//            services.AddSingleton<IBus, Bus>();
-//            services.AddSingleton<IEventDispatcher, EventDispatcher>();
-//            services.AddSingleton<IMessageBus, MessageBus>();
+//            services.AddSingleton<AzureEventPublisher, AzureEventPublisher>();
+//            services.AddSingleton<Bus, Bus>();
+//            services.AddSingleton<EventDispatcher, EventDispatcher>();
+//            services.AddSingleton<MessageBus, MessageBus>();
 //            return services;
 //        }
 //    }

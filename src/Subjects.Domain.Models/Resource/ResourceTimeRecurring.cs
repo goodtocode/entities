@@ -7,7 +7,6 @@ namespace GoodToCode.Subjects.Models
     public class ResourceTimeRecurring : IResourceTimeRecurring
     {
         [Key]
-        public int ResourceTimeRecurringId { get; set; }
         public Guid ResourceTimeRecurringKey { get; set; }
         public Guid ResourceKey { get; set; }
         public Guid TimeRecurringKey { get; set; }

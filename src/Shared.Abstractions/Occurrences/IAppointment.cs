@@ -6,7 +6,6 @@ namespace GoodToCode.Occurrences.Models
     public interface IAppointment
     {
         string AppointmentDescription { get; set; }
-        int AppointmentId { get; set; }
         Guid AppointmentKey { get; set; }
         string AppointmentName { get; set; }
         DateTime CreatedDate { get; set; }

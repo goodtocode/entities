@@ -11,7 +11,6 @@ namespace GoodToCode.Chronology.Models
         Guid ResourceKey { get; set; }
         Guid? ResourceTypeKey { get; set; }
         Guid SlotKey { get; set; }
-        int SlotResourceId { get; set; }
         Guid SlotResourceKey { get; set; }
     }
 }

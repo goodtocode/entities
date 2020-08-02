@@ -76,7 +76,7 @@ namespace GoodToCode.Shared.Application.Controllers
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<DetailType>> PostDetailType(DetailType detailType)
-        {
+        {   
             _context.DetailType.Add(detailType);
             await _context.SaveChangesAsync();
 

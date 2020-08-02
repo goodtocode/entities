@@ -8,7 +8,6 @@ namespace GoodToCode.Chronology.Models
         DateTime ModifiedDate { get; set; }
         Guid RecordStateKey { get; set; }
         Guid SlotKey { get; set; }
-        int SlotTimeRecurringId { get; set; }
         Guid SlotTimeRecurringKey { get; set; }
         Guid TimeRecurringKey { get; set; }
         Guid? TimeTypeKey { get; set; }

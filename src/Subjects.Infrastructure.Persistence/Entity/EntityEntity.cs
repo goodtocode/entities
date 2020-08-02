@@ -12,7 +12,7 @@ namespace GoodToCode.Subjects.Models
             EntityTimeRecurring = new HashSet<EntityTimeRecurringEntity>();
             VentureEntityOption = new HashSet<VentureEntityOptionEntity>();
         }
-        public virtual BusinessEntity Business { get; set; }
+        public virtual Business Business { get; set; }
         public virtual GovernmentEntity Government { get; set; }
         public virtual PersonEntity Person { get; set; }
         public virtual ICollection<EntityAppointmentEntity> EntityAppointment { get; set; }

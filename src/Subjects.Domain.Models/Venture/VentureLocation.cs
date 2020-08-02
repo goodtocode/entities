@@ -6,7 +6,6 @@ namespace GoodToCode.Subjects.Models
     public class VentureLocation : IVentureLocation
     {
         [Key]
-        public int VentureLocationId { get; set; }
         public Guid VentureLocationKey { get; set; }
         public Guid VentureKey { get; set; }
         public Guid LocationKey { get; set; }

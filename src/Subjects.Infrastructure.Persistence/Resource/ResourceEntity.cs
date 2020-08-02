@@ -12,7 +12,7 @@ namespace GoodToCode.Subjects.Models
             VentureResource = new HashSet<VentureResourceEntity>();
         }
 
-        public virtual RecordStateEntity RecordStateKeyNavigation { get; set; }
+        
         public virtual ICollection<ResourceItemEntity> ResourceItem { get; set; }
         public virtual ICollection<ResourcePersonEntity> ResourcePerson { get; set; }
         public virtual ICollection<ResourceTimeRecurringEntity> ResourceTimeRecurring { get; set; }

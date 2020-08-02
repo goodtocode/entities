@@ -48,9 +48,8 @@ namespace GoodToCode.Shared.Domain
                     {
                         var aggregate = new EntityAggregate(_context, _configuration);
 
-                        if (request.Item.BusinessId > 0) // Update
+                        if (request.Item.BusinessKey != Guid.Empty) // Update
                         {
-                            request.Item.BusinessKey = request.Item.BusinessKey == Guid.Empty ? new Guid() : request.Item.BusinessKey;
                             _context.Entry(request.Item).State = EntityState.Modified;
                         }
 
