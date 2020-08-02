@@ -1,8 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-
-namespace GoodToCode.Subjects.Models
+﻿namespace GoodToCode.Subjects.Models
 {
     public class ResourceItemEntity : ResourceItem, IResourceItem
     {

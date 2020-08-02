@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GoodToCode.Subjects.Models
+﻿namespace GoodToCode.Subjects.Models
 {
     public class EntityTimeRecurringEntity : EntityTimeRecurring, IEntityTimeRecurring
     {
