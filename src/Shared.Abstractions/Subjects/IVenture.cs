@@ -7,7 +7,7 @@ namespace GoodToCode.Subjects.Models
     {
         DateTime CreatedDate { get; set; }
         DateTime ModifiedDate { get; set; }
-        Guid RecordStateKey { get; set; }
+        
         string VentureDescription { get; set; }
         Guid? VentureGroupKey { get; set; }
         Guid VentureKey { get; set; }

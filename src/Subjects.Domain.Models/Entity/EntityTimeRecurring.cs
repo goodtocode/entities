@@ -12,7 +12,6 @@ namespace GoodToCode.Subjects.Models
         public string DayName { get; set; }
         public string TimeName { get; set; }
         public Guid? TimeTypeKey { get; set; }
-        public Guid RecordStateKey { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
     }

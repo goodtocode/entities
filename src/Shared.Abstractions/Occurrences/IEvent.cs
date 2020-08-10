@@ -14,6 +14,6 @@ namespace GoodToCode.Occurrences.Models
         string EventSlogan { get; set; }
         Guid EventTypeKey { get; set; }
         DateTime ModifiedDate { get; set; }
-        Guid RecordStateKey { get; set; }
+        
     }
 }

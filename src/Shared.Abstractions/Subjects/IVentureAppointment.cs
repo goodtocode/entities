@@ -7,7 +7,7 @@ namespace GoodToCode.Subjects.Models
         Guid AppointmentKey { get; set; }
         DateTime CreatedDate { get; set; }
         DateTime ModifiedDate { get; set; }
-        Guid RecordStateKey { get; set; }
+        
         Guid VentureAppointmentKey { get; set; }
         Guid VentureKey { get; set; }
     }

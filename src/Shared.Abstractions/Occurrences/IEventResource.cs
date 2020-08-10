@@ -8,7 +8,7 @@ namespace GoodToCode.Occurrences.Models
         Guid EventKey { get; set; }
         Guid EventResourceKey { get; set; }
         DateTime ModifiedDate { get; set; }
-        Guid RecordStateKey { get; set; }
+        
         Guid ResourceKey { get; set; }
         Guid? ResourceTypeKey { get; set; }
     }

@@ -9,7 +9,7 @@ namespace GoodToCode.Subjects.Models
         Guid EntityKey { get; set; }
         Guid EntityTimeRecurringKey { get; set; }
         DateTime ModifiedDate { get; set; }
-        Guid RecordStateKey { get; set; }
+        
         string TimeName { get; set; }
         Guid TimeRecurringKey { get; set; }
         Guid? TimeTypeKey { get; set; }

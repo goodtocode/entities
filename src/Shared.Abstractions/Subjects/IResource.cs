@@ -7,7 +7,7 @@ namespace GoodToCode.Subjects.Models
     {
         DateTime CreatedDate { get; set; }
         DateTime ModifiedDate { get; set; }
-        Guid RecordStateKey { get; set; }
+        
         string ResourceDescription { get; set; }
         Guid ResourceKey { get; set; }
         string ResourceName { get; set; }

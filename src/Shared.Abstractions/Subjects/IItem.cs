@@ -11,6 +11,6 @@ namespace GoodToCode.Subjects.Models
         string ItemName { get; set; }
         Guid ItemTypeKey { get; set; }
         DateTime ModifiedDate { get; set; }
-        Guid RecordStateKey { get; set; }
+        
     }
 }

@@ -13,6 +13,6 @@ namespace GoodToCode.Subjects.Models
         string MiddleName { get; set; }
         DateTime ModifiedDate { get; set; }
         Guid PersonKey { get; set; }
-        Guid RecordStateKey { get; set; }
+        
     }
 }

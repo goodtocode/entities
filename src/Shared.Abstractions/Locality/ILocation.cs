@@ -10,6 +10,6 @@ namespace GoodToCode.Locality.Models
         Guid LocationKey { get; set; }
         string LocationName { get; set; }
         DateTime ModifiedDate { get; set; }
-        Guid RecordStateKey { get; set; }
+        
     }
 }

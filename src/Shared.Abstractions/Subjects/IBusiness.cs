@@ -8,7 +8,7 @@ namespace GoodToCode.Subjects.Models
         string BusinessName { get; set; }
         DateTime CreatedDate { get; set; }
         DateTime ModifiedDate { get; set; }
-        Guid RecordStateKey { get; set; }
+        
         string TaxNumber { get; set; }
     }
 }

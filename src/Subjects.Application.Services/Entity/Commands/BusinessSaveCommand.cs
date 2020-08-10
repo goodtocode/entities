@@ -47,6 +47,7 @@ namespace GoodToCode.Shared.Domain
                     try
                     {
                         var aggregate = new EntityAggregate(_context, _configuration);
+                        await aggregate.BusinessSaveAsync(request.Item);
 
                         if (request.Item.BusinessKey != Guid.Empty) // Update
                         {

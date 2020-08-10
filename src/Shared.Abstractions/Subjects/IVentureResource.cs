@@ -6,7 +6,7 @@ namespace GoodToCode.Subjects.Models
     {
         DateTime CreatedDate { get; set; }
         DateTime ModifiedDate { get; set; }
-        Guid RecordStateKey { get; set; }
+        
         Guid ResourceKey { get; set; }
         Guid? ResourceTypeKey { get; set; }
         Guid VentureKey { get; set; }

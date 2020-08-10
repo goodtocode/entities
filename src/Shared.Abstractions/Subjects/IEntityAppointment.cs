@@ -9,6 +9,6 @@ namespace GoodToCode.Subjects.Models
         Guid EntityAppointmentKey { get; set; }
         Guid EntityKey { get; set; }
         DateTime ModifiedDate { get; set; }
-        Guid RecordStateKey { get; set; }
+        
     }
 }

@@ -8,7 +8,6 @@ namespace GoodToCode.Subjects.Models
         [Key]
         public Guid GovernmentKey { get; set; }
         public string GovernmentName { get; set; }
-        public Guid RecordStateKey { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
     }

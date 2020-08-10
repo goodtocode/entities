@@ -7,7 +7,7 @@ namespace GoodToCode.Subjects.Models
         DateTime CreatedDate { get; set; }
         string DayName { get; set; }
         DateTime ModifiedDate { get; set; }
-        Guid RecordStateKey { get; set; }
+        
         Guid ResourceKey { get; set; }
         Guid ResourceTimeRecurringKey { get; set; }
         string TimeName { get; set; }

@@ -10,7 +10,6 @@ namespace GoodToCode.Subjects.Models
         public Guid VentureKey { get; set; }
         public Guid ScheduleKey { get; set; }
         public Guid? ScheduleTypeKey { get; set; }
-        public Guid RecordStateKey { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
     }

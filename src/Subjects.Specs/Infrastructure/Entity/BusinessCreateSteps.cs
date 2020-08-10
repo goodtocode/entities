@@ -28,7 +28,7 @@ namespace GoodToCode.Subjects.Specs
               .AddJsonFile("appsettings.json")
               .Build();
             _connectionString = _config.GetConnectionString("DefaultConnection");
-            //_connectionString = "Server=tcp:GoodToCode.database.windows.net,1433;Initial Catalog=EntityData;user id=TestUser; password=57595709-9E9C-47EA-ABBF-4F3BAA1B0D37;Persist Security Info=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Application Name=GoodToCodeEntities;";
+            //_connectionString = "Server=tcp:goodtocodestack.database.windows.net,1433;Initial Catalog=StackData;Persist Security Info=False;User ID=LocalAdmin;Password=1202cc89-cb6f-453a-ac7e-550b3b5d2d0c;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             var options = new DbContextOptionsBuilder<SubjectsDbContext>();
             options.UseSqlServer(_connectionString);
             _context = new SubjectsDbContext(options.Options);

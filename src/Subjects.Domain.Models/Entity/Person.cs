@@ -12,7 +12,6 @@ namespace GoodToCode.Subjects.Models
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public string GenderCode { get; set; }
-        public Guid RecordStateKey { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
     }

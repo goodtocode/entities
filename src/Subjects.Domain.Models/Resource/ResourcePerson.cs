@@ -9,7 +9,6 @@ namespace GoodToCode.Subjects.Models
         public Guid ResourcePersonKey { get; set; }
         public Guid ResourceKey { get; set; }
         public Guid PersonKey { get; set; }
-        public Guid RecordStateKey { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
     }

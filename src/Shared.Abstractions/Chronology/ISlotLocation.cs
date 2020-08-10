@@ -9,7 +9,7 @@ namespace GoodToCode.Chronology.Models
         Guid LocationKey { get; set; }
         Guid? LocationTypeKey { get; set; }
         DateTime ModifiedDate { get; set; }
-        Guid RecordStateKey { get; set; }
+        
         Guid SlotKey { get; set; }
         Guid SlotLocationKey { get; set; }
     }

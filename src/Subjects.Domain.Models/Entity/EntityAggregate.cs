@@ -8,9 +8,14 @@ namespace GoodToCode.Subjects.Aggregates
 {
     public class EntityAggregate
     {
-        private ISubjectsDbContext _context;
-        private IConfiguration _configuration;
+        private readonly ISubjectsDbContext _context;
+        private readonly IConfiguration _configuration;
         private int _recordsAffected;
+
+        public EntityAggregate(int recordsAffected)
+        {
+            _recordsAffected = recordsAffected;
+        }
 
         public EntityAggregate(ISubjectsDbContext context)
         {
@@ -23,23 +28,22 @@ namespace GoodToCode.Subjects.Aggregates
         }
 
         // Business
-        public async Task<Business> BusinessSaveAsync(Business business)
+        public async Task<Business> BusinessSaveAsync(IBusiness business)
         {
             // Record locally
             // raise event with data to persistence
 
             if (business.BusinessKey == Guid.Empty)
-                _context.Entry(business).State = EntityState.Modified;
+                _context.Entry((Business)business).State = EntityState.Modified;
             else
-                _context.Business.Add(business);
+                _context.Business.Add((Business)business);
             _recordsAffected = await _context.SaveChangesAsync();
             
-
-            return business;
+            return (Business)business;
         }
 
         // Person
-        public async Task<Person> PersonSaveAsync(Person person)
+        public async Task<Person> PersonSaveAsync(IPerson person)
         {
             // Record locally
             // raise event with data to persistence
@@ -47,26 +51,25 @@ namespace GoodToCode.Subjects.Aggregates
             if (person.PersonKey == Guid.Empty)
                 _context.Entry(person).State = EntityState.Modified;
             else
-                _context.Person.Add(person);
+                _context.Person.Add((Person)person);
             _recordsAffected = await _context.SaveChangesAsync();
 
-            return person;
+            return (Person)person;
         }
 
         // Government
-        public async Task<Government> GovernmentSaveAsync(Government government)
+        public async Task<Government> GovernmentSaveAsync(IGovernment government)
         {
             // Record locally
             // raise event with data to persistence
 
-            var returnData = new Government();
             if (government.GovernmentKey == Guid.Empty)
                 _context.Entry(government).State = EntityState.Modified;
             else
-                _context.Government.Add(government);
+                _context.Government.Add((Government)government);
             _recordsAffected = await _context.SaveChangesAsync();
 
-            return government;
+            return (Government)government;
         }
     }
 }

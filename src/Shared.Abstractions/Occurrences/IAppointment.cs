@@ -10,7 +10,7 @@ namespace GoodToCode.Occurrences.Models
         string AppointmentName { get; set; }
         DateTime CreatedDate { get; set; }
         DateTime ModifiedDate { get; set; }
-        Guid RecordStateKey { get; set; }
+        
         Guid? SlotLocationKey { get; set; }
         Guid? SlotResourceKey { get; set; }
         Guid TimeRangeKey { get; set; }

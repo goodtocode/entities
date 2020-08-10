@@ -54,7 +54,7 @@ namespace GoodToCode.Subjects.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var connectionString = "Server=tcp:GoodToCode.database.windows.net,1433;Initial Catalog=EntityData;user id=TestUser; password=57595709-9E9C-47EA-ABBF-4F3BAA1B0D37;Persist Security Info=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Application Name=GoodToCodeEntities;";
+                var connectionString = "Server=tcp:goodtocodestack.database.windows.net,1433;Initial Catalog=StackData;Persist Security Info=False;User ID=LocalAdmin;Password=1202cc89-cb6f-453a-ac7e-550b3b5d2d0c;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 optionsBuilder.UseSqlServer(connectionString);
             }
         }
@@ -63,7 +63,7 @@ namespace GoodToCode.Subjects.Models
         {
             modelBuilder.Entity<Business>(entity =>
             {
-                entity.ToTable("Business", "Entity");                
+                entity.ToTable("Business", "Subjects");
                 entity.HasIndex(e => e.BusinessKey)
                     .HasName("IX_Business_Key")
                     .IsUnique();
@@ -84,7 +84,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<Detail>(entity =>
             {
-                entity.ToTable("Detail", "Entity");
+                entity.ToTable("Detail", "Subjects");
 
                 entity.HasIndex(e => e.DetailKey)
                     .HasName("IX_Detail_Key")
@@ -101,7 +101,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<DetailType>(entity =>
             {
-                entity.ToTable("DetailType", "Entity");
+                entity.ToTable("DetailType", "Subjects");
 
                 entity.HasIndex(e => e.DetailTypeKey)
                     .HasName("IX_DetailType_Key")
@@ -122,7 +122,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<Entity>(entity =>
             {
-                entity.ToTable("Entity", "Entity");
+                entity.ToTable("Entity", "Subjects");
 
                 entity.HasIndex(e => e.EntityKey)
                     .HasName("IX_EntityLocation_Entity")
@@ -135,7 +135,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<EntityAppointment>(entity =>
             {
-                entity.ToTable("EntityAppointment", "Entity");
+                entity.ToTable("EntityAppointment", "Subjects");
 
                 entity.HasIndex(e => e.EntityAppointmentKey)
                     .HasName("IX_EntityAppointment_Key")
@@ -152,7 +152,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<EntityDetail>(entity =>
             {
-                entity.ToTable("EntityDetail", "Entity");
+                entity.ToTable("EntityDetail", "Subjects");
 
                 entity.HasIndex(e => e.EntityDetailKey)
                     .HasName("IX_EntityDetail_Key")
@@ -169,7 +169,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<EntityLocation>(entity =>
             {
-                entity.ToTable("EntityLocation", "Entity");
+                entity.ToTable("EntityLocation", "Subjects");
 
                 entity.HasIndex(e => new { e.EntityKey, e.LocationKey })
                     .HasName("IX_EntityLocation_All")
@@ -182,7 +182,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<EntityOption>(entity =>
             {
-                entity.ToTable("EntityOption", "Entity");
+                entity.ToTable("EntityOption", "Subjects");
 
                 entity.HasIndex(e => new { e.EntityKey, e.OptionKey })
                     .HasName("IX_EntityOption_All")
@@ -195,7 +195,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<EntityTimeRecurring>(entity =>
             {
-                entity.ToTable("EntityTimeRecurring", "Entity");
+                entity.ToTable("EntityTimeRecurring", "Subjects");
 
                 entity.HasIndex(e => e.EntityTimeRecurringKey)
                     .HasName("IX_EntityTimeRecurring_Key")
@@ -220,10 +220,10 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<Gender>(entity =>
             {
-                entity.ToTable("Gender", "Entity");
+                entity.ToTable("Gender", "Subjects");
 
                 entity.HasIndex(e => e.GenderCode)
-                    .HasName("IX_Gender_Code")                    
+                    .HasName("IX_Gender_Code")
                     .IsUnique();
 
                 entity.HasCheckConstraint("CC_Gender_GenderCode", "GenderCode in ('M', 'F', 'N/A', 'U/K')");
@@ -249,7 +249,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<Government>(entity =>
             {
-                entity.ToTable("Government", "Entity");
+                entity.ToTable("Government", "Subjects");
 
                 entity.HasIndex(e => e.GovernmentKey)
                     .HasName("IX_Government_Entity")
@@ -261,12 +261,12 @@ namespace GoodToCode.Subjects.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");              
+                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<Item>(entity =>
             {
-                entity.ToTable("Item", "Entity");
+                entity.ToTable("Item", "Subjects");
 
                 entity.HasIndex(e => e.ItemKey)
                     .IsUnique();
@@ -286,7 +286,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<ItemGroup>(entity =>
             {
-                entity.ToTable("ItemGroup", "Entity");
+                entity.ToTable("ItemGroup", "Subjects");
 
                 entity.HasIndex(e => e.ItemGroupKey)
                     .HasName("IX_ItemGroup_Key")
@@ -307,7 +307,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<ItemType>(entity =>
             {
-                entity.ToTable("ItemType", "Entity");
+                entity.ToTable("ItemType", "Subjects");
 
                 entity.HasIndex(e => e.ItemTypeKey)
                     .HasName("IX_ItemType_Key")
@@ -328,7 +328,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<Option>(entity =>
             {
-                entity.ToTable("Option", "Entity");
+                entity.ToTable("Option", "Subjects");
 
                 entity.HasIndex(e => e.OptionKey)
                     .IsUnique();
@@ -356,7 +356,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<OptionGroup>(entity =>
             {
-                entity.ToTable("OptionGroup", "Entity");
+                entity.ToTable("OptionGroup", "Subjects");
 
                 entity.HasIndex(e => e.OptionGroupCode)
                     .HasName("IX_Option_OptionGroupCode")
@@ -385,7 +385,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<Person>(entity =>
             {
-                entity.ToTable("Person", "Entity");
+                entity.ToTable("Person", "Subjects");
 
                 entity.HasIndex(e => e.PersonKey)
                     .HasName("IX_Person_Entity")
@@ -418,7 +418,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<Resource>(entity =>
             {
-                entity.ToTable("Resource", "Entity");
+                entity.ToTable("Resource", "Subjects");
 
                 entity.HasIndex(e => e.ResourceKey)
                     .IsUnique();
@@ -438,7 +438,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<ResourceItem>(entity =>
             {
-                entity.ToTable("ResourceItem", "Entity");
+                entity.ToTable("ResourceItem", "Subjects");
 
                 entity.HasIndex(e => e.ItemKey)
                     .HasName("IX_ResourceItem_Item");
@@ -461,7 +461,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<ResourcePerson>(entity =>
             {
-                entity.ToTable("ResourcePerson", "Entity");
+                entity.ToTable("ResourcePerson", "Subjects");
 
                 entity.HasIndex(e => e.PersonKey)
                     .HasName("IX_ResourcePerson_Person");
@@ -484,7 +484,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<ResourceTimeRecurring>(entity =>
             {
-                entity.ToTable("ResourceTimeRecurring", "Entity");
+                entity.ToTable("ResourceTimeRecurring", "Subjects");
 
                 entity.HasIndex(e => e.ResourceTimeRecurringKey)
                     .HasName("IX_ResourceTimeRecurring_Resource")
@@ -509,7 +509,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<ResourceType>(entity =>
             {
-                entity.ToTable("ResourceType", "Entity");
+                entity.ToTable("ResourceType", "Subjects");
 
                 entity.HasIndex(e => e.ResourceTypeKey)
                     .HasName("IX_ResourceType_Key")
@@ -530,7 +530,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<Venture>(entity =>
             {
-                entity.ToTable("Venture", "Entity");
+                entity.ToTable("Venture", "Subjects");
 
                 entity.HasIndex(e => e.VentureKey)
                     .IsUnique();
@@ -554,7 +554,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<VentureAppointment>(entity =>
             {
-                entity.ToTable("VentureAppointment", "Entity");
+                entity.ToTable("VentureAppointment", "Subjects");
 
                 entity.HasIndex(e => e.VentureAppointmentKey)
                     .HasName("IX_VentureAppointment_Key")
@@ -571,7 +571,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<VentureDetail>(entity =>
             {
-                entity.ToTable("VentureDetail", "Entity");
+                entity.ToTable("VentureDetail", "Subjects");
 
                 entity.HasIndex(e => e.VentureDetailKey)
                     .HasName("IX_VentureDetail_Key")
@@ -588,7 +588,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<VentureEntityOption>(entity =>
             {
-                entity.ToTable("VentureEntityOption", "Entity");
+                entity.ToTable("VentureEntityOption", "Subjects");
 
                 entity.HasIndex(e => e.VentureEntityOptionKey)
                     .HasName("IX_VentureEntityOption_Key")
@@ -601,7 +601,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<VentureLocation>(entity =>
             {
-                entity.ToTable("VentureLocation", "Entity");
+                entity.ToTable("VentureLocation", "Subjects");
 
                 entity.HasIndex(e => e.VentureLocationKey)
                     .HasName("IX_VentureLocation_Key")
@@ -618,7 +618,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<VentureOption>(entity =>
             {
-                entity.ToTable("VentureOption", "Entity");
+                entity.ToTable("VentureOption", "Subjects");
 
                 entity.HasIndex(e => new { e.VentureKey, e.OptionKey })
                     .HasName("IX_VentureOption_All")
@@ -631,7 +631,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<VentureResource>(entity =>
             {
-                entity.ToTable("VentureResource", "Entity");
+                entity.ToTable("VentureResource", "Subjects");
 
                 entity.HasIndex(e => e.VentureResourceKey)
                     .HasName("IX_VentureResource_Key")
@@ -648,7 +648,7 @@ namespace GoodToCode.Subjects.Models
 
             modelBuilder.Entity<VentureSchedule>(entity =>
             {
-                entity.ToTable("VentureSchedule", "Entity");
+                entity.ToTable("VentureSchedule", "Subjects");
 
                 entity.HasIndex(e => e.VentureScheduleKey)
                     .HasName("IX_VentureSchedule_Key")

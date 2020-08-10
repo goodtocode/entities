@@ -10,6 +10,6 @@ namespace GoodToCode.Subjects.Models
         Guid LocationKey { get; set; }
         Guid? LocationTypeKey { get; set; }
         DateTime ModifiedDate { get; set; }
-        Guid RecordStateKey { get; set; }
+        
     }
 }
