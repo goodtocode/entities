@@ -1,11 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Subjects.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GoodToCode.Subjects.Application.Models;
 
 namespace GoodToCode.Subjects.Application.Controllers
 {
@@ -13,9 +12,9 @@ namespace GoodToCode.Subjects.Application.Controllers
     [ApiController]
     public class VentureSchedulesController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly SubjectsDbContext _context;
 
-        public VentureSchedulesController(EntityDataContext context)
+        public VentureSchedulesController(SubjectsDbContext context)
         {
             _context = context;
         }
@@ -28,10 +27,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         }
 
         // GET: api/VentureSchedules/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<VentureSchedule>> GetVentureSchedule(int id)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<VentureSchedule>> GetVentureSchedule(Guid key)
         {
-            var ventureSchedule = await _context.VentureSchedule.FindAsync(id);
+            var ventureSchedule = await _context.VentureSchedule.FindAsync(key);
 
             if (ventureSchedule == null)
             {
@@ -44,10 +43,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         // PUT: api/VentureSchedules/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutVentureSchedule(int id, VentureSchedule ventureSchedule)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> PutVentureSchedule(Guid key, VentureSchedule ventureSchedule)
         {
-            if (id != ventureSchedule.VentureScheduleId)
+            if (key != ventureSchedule.VentureScheduleKey)
             {
                 return BadRequest();
             }
@@ -60,7 +59,7 @@ namespace GoodToCode.Subjects.Application.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VentureScheduleExists(id))
+                if (!VentureScheduleExists(key))
                 {
                     return NotFound();
                 }
@@ -82,14 +81,14 @@ namespace GoodToCode.Subjects.Application.Controllers
             _context.VentureSchedule.Add(ventureSchedule);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVentureSchedule", new { id = ventureSchedule.VentureScheduleId }, ventureSchedule);
+            return CreatedAtAction("GetVentureSchedule", new { key = ventureSchedule.VentureScheduleKey }, ventureSchedule);
         }
 
         // DELETE: api/VentureSchedules/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<VentureSchedule>> DeleteVentureSchedule(int id)
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<VentureSchedule>> DeleteVentureSchedule(Guid key)
         {
-            var ventureSchedule = await _context.VentureSchedule.FindAsync(id);
+            var ventureSchedule = await _context.VentureSchedule.FindAsync(key);
             if (ventureSchedule == null)
             {
                 return NotFound();
@@ -101,9 +100,9 @@ namespace GoodToCode.Subjects.Application.Controllers
             return ventureSchedule;
         }
 
-        private bool VentureScheduleExists(int id)
+        private bool VentureScheduleExists(Guid key)
         {
-            return _context.VentureSchedule.Any(e => e.VentureScheduleId == id);
+            return _context.VentureSchedule.Any(e => e.VentureScheduleKey == key);
         }
     }
 }

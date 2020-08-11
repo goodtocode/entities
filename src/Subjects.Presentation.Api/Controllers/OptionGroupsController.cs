@@ -1,11 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Subjects.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GoodToCode.Subjects.Application.Models;
 
 namespace GoodToCode.Subjects.Application.Controllers
 {
@@ -13,9 +12,9 @@ namespace GoodToCode.Subjects.Application.Controllers
     [ApiController]
     public class OptionGroupsController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly SubjectsDbContext _context;
 
-        public OptionGroupsController(EntityDataContext context)
+        public OptionGroupsController(SubjectsDbContext context)
         {
             _context = context;
         }
@@ -28,10 +27,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         }
 
         // GET: api/OptionGroups/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<OptionGroup>> GetOptionGroup(int id)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<OptionGroup>> GetOptionGroup(Guid key)
         {
-            var optionGroup = await _context.OptionGroup.FindAsync(id);
+            var optionGroup = await _context.OptionGroup.FindAsync(key);
 
             if (optionGroup == null)
             {
@@ -44,10 +43,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         // PUT: api/OptionGroups/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutOptionGroup(int id, OptionGroup optionGroup)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> PutOptionGroup(Guid key, OptionGroup optionGroup)
         {
-            if (id != optionGroup.OptionGroupId)
+            if (key != optionGroup.OptionGroupKey)
             {
                 return BadRequest();
             }
@@ -60,7 +59,7 @@ namespace GoodToCode.Subjects.Application.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OptionGroupExists(id))
+                if (!OptionGroupExists(key))
                 {
                     return NotFound();
                 }
@@ -82,14 +81,14 @@ namespace GoodToCode.Subjects.Application.Controllers
             _context.OptionGroup.Add(optionGroup);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetOptionGroup", new { id = optionGroup.OptionGroupId }, optionGroup);
+            return CreatedAtAction("GetOptionGroup", new { key = optionGroup.OptionGroupKey }, optionGroup);
         }
 
         // DELETE: api/OptionGroups/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<OptionGroup>> DeleteOptionGroup(int id)
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<OptionGroup>> DeleteOptionGroup(Guid key)
         {
-            var optionGroup = await _context.OptionGroup.FindAsync(id);
+            var optionGroup = await _context.OptionGroup.FindAsync(key);
             if (optionGroup == null)
             {
                 return NotFound();
@@ -101,9 +100,9 @@ namespace GoodToCode.Subjects.Application.Controllers
             return optionGroup;
         }
 
-        private bool OptionGroupExists(int id)
+        private bool OptionGroupExists(Guid key)
         {
-            return _context.OptionGroup.Any(e => e.OptionGroupId == id);
+            return _context.OptionGroup.Any(e => e.OptionGroupKey == key);
         }
     }
 }

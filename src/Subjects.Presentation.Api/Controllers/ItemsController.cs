@@ -1,11 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Subjects.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GoodToCode.Subjects.Application.Models;
 
 namespace GoodToCode.Subjects.Application.Controllers
 {
@@ -13,9 +12,9 @@ namespace GoodToCode.Subjects.Application.Controllers
     [ApiController]
     public class ItemsController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly SubjectsDbContext _context;
 
-        public ItemsController(EntityDataContext context)
+        public ItemsController(SubjectsDbContext context)
         {
             _context = context;
         }
@@ -28,10 +27,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         }
 
         // GET: api/Items/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Item>> GetItem(int id)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<Item>> GetItem(Guid key)
         {
-            var item = await _context.Item.FindAsync(id);
+            var item = await _context.Item.FindAsync(key);
 
             if (item == null)
             {
@@ -44,10 +43,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         // PUT: api/Items/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutItem(int id, Item item)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> PutItem(Guid key, Item item)
         {
-            if (id != item.ItemId)
+            if (key != item.ItemKey)
             {
                 return BadRequest();
             }
@@ -60,7 +59,7 @@ namespace GoodToCode.Subjects.Application.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ItemExists(id))
+                if (!ItemExists(key))
                 {
                     return NotFound();
                 }
@@ -82,14 +81,14 @@ namespace GoodToCode.Subjects.Application.Controllers
             _context.Item.Add(item);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetItem", new { id = item.ItemId }, item);
+            return CreatedAtAction("GetItem", new { key = item.ItemKey }, item);
         }
 
         // DELETE: api/Items/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Item>> DeleteItem(int id)
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<Item>> DeleteItem(Guid key)
         {
-            var item = await _context.Item.FindAsync(id);
+            var item = await _context.Item.FindAsync(key);
             if (item == null)
             {
                 return NotFound();
@@ -101,9 +100,9 @@ namespace GoodToCode.Subjects.Application.Controllers
             return item;
         }
 
-        private bool ItemExists(int id)
+        private bool ItemExists(Guid key)
         {
-            return _context.Item.Any(e => e.ItemId == id);
+            return _context.Item.Any(e => e.ItemKey == key);
         }
     }
 }

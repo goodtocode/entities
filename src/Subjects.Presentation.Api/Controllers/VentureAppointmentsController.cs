@@ -1,11 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Subjects.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GoodToCode.Subjects.Application.Models;
 
 namespace GoodToCode.Subjects.Application.Controllers
 {
@@ -13,9 +12,9 @@ namespace GoodToCode.Subjects.Application.Controllers
     [ApiController]
     public class VentureAppointmentsController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly SubjectsDbContext _context;
 
-        public VentureAppointmentsController(EntityDataContext context)
+        public VentureAppointmentsController(SubjectsDbContext context)
         {
             _context = context;
         }
@@ -28,10 +27,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         }
 
         // GET: api/VentureAppointments/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<VentureAppointment>> GetVentureAppointment(int id)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<VentureAppointment>> GetVentureAppointment(Guid key)
         {
-            var ventureAppointment = await _context.VentureAppointment.FindAsync(id);
+            var ventureAppointment = await _context.VentureAppointment.FindAsync(key);
 
             if (ventureAppointment == null)
             {
@@ -44,10 +43,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         // PUT: api/VentureAppointments/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutVentureAppointment(int id, VentureAppointment ventureAppointment)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> PutVentureAppointment(Guid key, VentureAppointment ventureAppointment)
         {
-            if (id != ventureAppointment.VentureAppointmentId)
+            if (key != ventureAppointment.VentureAppointmentKey)
             {
                 return BadRequest();
             }
@@ -60,7 +59,7 @@ namespace GoodToCode.Subjects.Application.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VentureAppointmentExists(id))
+                if (!VentureAppointmentExists(key))
                 {
                     return NotFound();
                 }
@@ -82,14 +81,14 @@ namespace GoodToCode.Subjects.Application.Controllers
             _context.VentureAppointment.Add(ventureAppointment);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVentureAppointment", new { id = ventureAppointment.VentureAppointmentId }, ventureAppointment);
+            return CreatedAtAction("GetVentureAppointment", new { key = ventureAppointment.VentureAppointmentKey }, ventureAppointment);
         }
 
         // DELETE: api/VentureAppointments/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<VentureAppointment>> DeleteVentureAppointment(int id)
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<VentureAppointment>> DeleteVentureAppointment(Guid key)
         {
-            var ventureAppointment = await _context.VentureAppointment.FindAsync(id);
+            var ventureAppointment = await _context.VentureAppointment.FindAsync(key);
             if (ventureAppointment == null)
             {
                 return NotFound();
@@ -101,9 +100,9 @@ namespace GoodToCode.Subjects.Application.Controllers
             return ventureAppointment;
         }
 
-        private bool VentureAppointmentExists(int id)
+        private bool VentureAppointmentExists(Guid key)
         {
-            return _context.VentureAppointment.Any(e => e.VentureAppointmentId == id);
+            return _context.VentureAppointment.Any(e => e.VentureAppointmentKey == key);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace GoodToCode.Shared.Messaging
+﻿using GoodToCode.Shared.Domain;
+
+namespace GoodToCode.Shared.Messaging
 {
     public interface IMessageBus<TEntity>
     {

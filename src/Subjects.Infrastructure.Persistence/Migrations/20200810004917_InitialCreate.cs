@@ -59,58 +59,58 @@ namespace GoodToCode.Shared.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Entity",
+                name: "Associate",
                 schema: "Subjects",
                 columns: table => new
                 {
-                    EntityKey = table.Column<Guid>(nullable: false),
+                    AssociateKey = table.Column<Guid>(nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Entity", x => x.EntityKey);
+                    table.PrimaryKey("PK_Entity", x => x.AssociateKey);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EntityAppointment",
+                name: "AssociateAppointment",
                 schema: "Subjects",
                 columns: table => new
                 {
-                    EntityAppointmentKey = table.Column<Guid>(nullable: false),
-                    EntityKey = table.Column<Guid>(nullable: false),
+                    AssociateAppointmentKey = table.Column<Guid>(nullable: false),
+                    AssociateKey = table.Column<Guid>(nullable: false),
                     AppointmentKey = table.Column<Guid>(nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EntityAppointment", x => x.EntityAppointmentKey);
+                    table.PrimaryKey("PK_AssociateAppointment", x => x.AssociateAppointmentKey);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EntityDetail",
+                name: "AssociateDetail",
                 schema: "Subjects",
                 columns: table => new
                 {
-                    EntityDetailKey = table.Column<Guid>(nullable: false),
-                    EntityKey = table.Column<Guid>(nullable: false),
+                    AssociateDetailKey = table.Column<Guid>(nullable: false),
+                    AssociateKey = table.Column<Guid>(nullable: false),
                     DetailKey = table.Column<Guid>(nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EntityDetail", x => x.EntityDetailKey);
+                    table.PrimaryKey("PK_AssociateDetail", x => x.AssociateDetailKey);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EntityLocation",
+                name: "AssociateLocation",
                 schema: "Subjects",
                 columns: table => new
                 {
-                    EntityLocationKey = table.Column<Guid>(nullable: false),
-                    EntityKey = table.Column<Guid>(nullable: false),
+                    AssociateLocationKey = table.Column<Guid>(nullable: false),
+                    AssociateKey = table.Column<Guid>(nullable: false),
                     LocationKey = table.Column<Guid>(nullable: false),
                     LocationTypeKey = table.Column<Guid>(nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
@@ -118,32 +118,32 @@ namespace GoodToCode.Shared.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EntityLocation", x => x.EntityLocationKey);
+                    table.PrimaryKey("PK_AssociateLocation", x => x.AssociateLocationKey);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EntityOption",
+                name: "AssociateOption",
                 schema: "Subjects",
                 columns: table => new
                 {
-                    EntityOptionKey = table.Column<Guid>(nullable: false),
-                    EntityKey = table.Column<Guid>(nullable: false),
+                    AssociateOptionKey = table.Column<Guid>(nullable: false),
+                    AssociateKey = table.Column<Guid>(nullable: false),
                     OptionKey = table.Column<Guid>(nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EntityOption", x => x.EntityOptionKey);
+                    table.PrimaryKey("PK_AssociateOption", x => x.AssociateOptionKey);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EntityTimeRecurring",
+                name: "AssociateTimeRecurring",
                 schema: "Subjects",
                 columns: table => new
                 {
-                    EntityTimeRecurringKey = table.Column<Guid>(nullable: false),
-                    EntityKey = table.Column<Guid>(nullable: false),
+                    AssociateTimeRecurringKey = table.Column<Guid>(nullable: false),
+                    AssociateKey = table.Column<Guid>(nullable: false),
                     TimeRecurringKey = table.Column<Guid>(nullable: false),
                     DayName = table.Column<string>(maxLength: 50, nullable: false),
                     TimeName = table.Column<string>(maxLength: 50, nullable: false),
@@ -153,7 +153,7 @@ namespace GoodToCode.Shared.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EntityTimeRecurring", x => x.EntityTimeRecurringKey);
+                    table.PrimaryKey("PK_AssociateTimeRecurring", x => x.AssociateTimeRecurringKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -429,20 +429,20 @@ namespace GoodToCode.Shared.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "VentureEntityOption",
+                name: "VentureAssociateOption",
                 schema: "Subjects",
                 columns: table => new
                 {
-                    VentureEntityOptionKey = table.Column<Guid>(nullable: false),
+                    VentureAssociateOptionKey = table.Column<Guid>(nullable: false),
                     OptionKey = table.Column<Guid>(nullable: false),
                     VentureKey = table.Column<Guid>(nullable: false),
-                    EntityKey = table.Column<Guid>(nullable: false),
+                    AssociateKey = table.Column<Guid>(nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VentureEntityOption", x => x.VentureEntityOptionKey);
+                    table.PrimaryKey("PK_VentureAssociateOption", x => x.VentureAssociateOptionKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -534,66 +534,66 @@ namespace GoodToCode.Shared.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_EntityLocation_Entity",
+                name: "IX_AssociateLocation_Entity",
                 schema: "Subjects",
-                table: "Entity",
-                column: "EntityKey",
+                table: "Associate",
+                column: "AssociateKey",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_EntityAppointment_Key",
+                name: "IX_AssociateAppointment_Key",
                 schema: "Subjects",
-                table: "EntityAppointment",
-                column: "EntityAppointmentKey",
+                table: "AssociateAppointment",
+                column: "AssociateAppointmentKey",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_EntityAppointment_All",
+                name: "IX_AssociateAppointment_All",
                 schema: "Subjects",
-                table: "EntityAppointment",
-                columns: new[] { "EntityKey", "AppointmentKey" },
+                table: "AssociateAppointment",
+                columns: new[] { "AssociateKey", "AppointmentKey" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_EntityDetail_Key",
+                name: "IX_AssociateDetail_Key",
                 schema: "Subjects",
-                table: "EntityDetail",
-                column: "EntityDetailKey",
+                table: "AssociateDetail",
+                column: "AssociateDetailKey",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_EntityDetail_All",
+                name: "IX_AssociateDetail_All",
                 schema: "Subjects",
-                table: "EntityDetail",
-                columns: new[] { "EntityKey", "EntityDetailKey" },
+                table: "AssociateDetail",
+                columns: new[] { "AssociateKey", "AssociateDetailKey" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_EntityLocation_All",
+                name: "IX_AssociateLocation_All",
                 schema: "Subjects",
-                table: "EntityLocation",
-                columns: new[] { "EntityKey", "LocationKey" },
+                table: "AssociateLocation",
+                columns: new[] { "AssociateKey", "LocationKey" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_EntityOption_All",
+                name: "IX_AssociateOption_All",
                 schema: "Subjects",
-                table: "EntityOption",
-                columns: new[] { "EntityKey", "OptionKey" },
+                table: "AssociateOption",
+                columns: new[] { "AssociateKey", "OptionKey" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_EntityTimeRecurring_Key",
+                name: "IX_AssociateTimeRecurring_Key",
                 schema: "Subjects",
-                table: "EntityTimeRecurring",
-                column: "EntityTimeRecurringKey",
+                table: "AssociateTimeRecurring",
+                column: "AssociateTimeRecurringKey",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_EntityTimeRecurring_All",
+                name: "IX_AssociateTimeRecurring_All",
                 schema: "Subjects",
-                table: "EntityTimeRecurring",
-                columns: new[] { "EntityKey", "TimeRecurringKey" },
+                table: "AssociateTimeRecurring",
+                columns: new[] { "AssociateKey", "TimeRecurringKey" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -795,10 +795,10 @@ namespace GoodToCode.Shared.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_VentureEntityOption_Key",
+                name: "IX_VentureAssociateOption_Key",
                 schema: "Subjects",
-                table: "VentureEntityOption",
-                column: "VentureEntityOptionKey",
+                table: "VentureAssociateOption",
+                column: "VentureAssociateOptionKey",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -866,27 +866,27 @@ namespace GoodToCode.Shared.Migrations
                 schema: "Subjects");
 
             migrationBuilder.DropTable(
-                name: "Entity",
+                name: "Associate",
                 schema: "Subjects");
 
             migrationBuilder.DropTable(
-                name: "EntityAppointment",
+                name: "AssociateAppointment",
                 schema: "Subjects");
 
             migrationBuilder.DropTable(
-                name: "EntityDetail",
+                name: "AssociateDetail",
                 schema: "Subjects");
 
             migrationBuilder.DropTable(
-                name: "EntityLocation",
+                name: "AssociateLocation",
                 schema: "Subjects");
 
             migrationBuilder.DropTable(
-                name: "EntityOption",
+                name: "AssociateOption",
                 schema: "Subjects");
 
             migrationBuilder.DropTable(
-                name: "EntityTimeRecurring",
+                name: "AssociateTimeRecurring",
                 schema: "Subjects");
 
             migrationBuilder.DropTable(
@@ -954,7 +954,7 @@ namespace GoodToCode.Shared.Migrations
                 schema: "Subjects");
 
             migrationBuilder.DropTable(
-                name: "VentureEntityOption",
+                name: "VentureAssociateOption",
                 schema: "Subjects");
 
             migrationBuilder.DropTable(

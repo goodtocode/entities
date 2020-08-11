@@ -1,11 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Subjects.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GoodToCode.Subjects.Application.Models;
 
 namespace GoodToCode.Subjects.Application.Controllers
 {
@@ -13,9 +12,9 @@ namespace GoodToCode.Subjects.Application.Controllers
     [ApiController]
     public class VentureDetailsController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly SubjectsDbContext _context;
 
-        public VentureDetailsController(EntityDataContext context)
+        public VentureDetailsController(SubjectsDbContext context)
         {
             _context = context;
         }
@@ -28,10 +27,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         }
 
         // GET: api/VentureDetails/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<VentureDetail>> GetVentureDetail(int id)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<VentureDetail>> GetVentureDetail(Guid key)
         {
-            var ventureDetail = await _context.VentureDetail.FindAsync(id);
+            var ventureDetail = await _context.VentureDetail.FindAsync(key);
 
             if (ventureDetail == null)
             {
@@ -44,10 +43,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         // PUT: api/VentureDetails/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutVentureDetail(int id, VentureDetail ventureDetail)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> PutVentureDetail(Guid key, VentureDetail ventureDetail)
         {
-            if (id != ventureDetail.VentureDetailId)
+            if (key != ventureDetail.VentureDetailKey)
             {
                 return BadRequest();
             }
@@ -60,7 +59,7 @@ namespace GoodToCode.Subjects.Application.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VentureDetailExists(id))
+                if (!VentureDetailExists(key))
                 {
                     return NotFound();
                 }
@@ -82,14 +81,14 @@ namespace GoodToCode.Subjects.Application.Controllers
             _context.VentureDetail.Add(ventureDetail);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVentureDetail", new { id = ventureDetail.VentureDetailId }, ventureDetail);
+            return CreatedAtAction("GetVentureDetail", new { key = ventureDetail.VentureDetailKey }, ventureDetail);
         }
 
         // DELETE: api/VentureDetails/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<VentureDetail>> DeleteVentureDetail(int id)
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<VentureDetail>> DeleteVentureDetail(Guid key)
         {
-            var ventureDetail = await _context.VentureDetail.FindAsync(id);
+            var ventureDetail = await _context.VentureDetail.FindAsync(key);
             if (ventureDetail == null)
             {
                 return NotFound();
@@ -101,9 +100,9 @@ namespace GoodToCode.Subjects.Application.Controllers
             return ventureDetail;
         }
 
-        private bool VentureDetailExists(int id)
+        private bool VentureDetailExists(Guid key)
         {
-            return _context.VentureDetail.Any(e => e.VentureDetailId == id);
+            return _context.VentureDetail.Any(e => e.VentureDetailKey == key);
         }
     }
 }

@@ -1,11 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Subjects.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GoodToCode.Subjects.Application.Models;
 
 namespace GoodToCode.Subjects.Application.Controllers
 {
@@ -13,9 +12,9 @@ namespace GoodToCode.Subjects.Application.Controllers
     [ApiController]
     public class ItemGroupsController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly SubjectsDbContext _context;
 
-        public ItemGroupsController(EntityDataContext context)
+        public ItemGroupsController(SubjectsDbContext context)
         {
             _context = context;
         }
@@ -28,10 +27,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         }
 
         // GET: api/ItemGroups/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ItemGroup>> GetItemGroup(int id)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<ItemGroup>> GetItemGroup(Guid key)
         {
-            var itemGroup = await _context.ItemGroup.FindAsync(id);
+            var itemGroup = await _context.ItemGroup.FindAsync(key);
 
             if (itemGroup == null)
             {
@@ -44,10 +43,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         // PUT: api/ItemGroups/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutItemGroup(int id, ItemGroup itemGroup)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> PutItemGroup(Guid key, ItemGroup itemGroup)
         {
-            if (id != itemGroup.ItemGroupId)
+            if (key != itemGroup.ItemGroupKey)
             {
                 return BadRequest();
             }
@@ -60,7 +59,7 @@ namespace GoodToCode.Subjects.Application.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ItemGroupExists(id))
+                if (!ItemGroupExists(key))
                 {
                     return NotFound();
                 }
@@ -82,14 +81,14 @@ namespace GoodToCode.Subjects.Application.Controllers
             _context.ItemGroup.Add(itemGroup);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetItemGroup", new { id = itemGroup.ItemGroupId }, itemGroup);
+            return CreatedAtAction("GetItemGroup", new { key = itemGroup.ItemGroupKey }, itemGroup);
         }
 
         // DELETE: api/ItemGroups/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<ItemGroup>> DeleteItemGroup(int id)
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<ItemGroup>> DeleteItemGroup(Guid key)
         {
-            var itemGroup = await _context.ItemGroup.FindAsync(id);
+            var itemGroup = await _context.ItemGroup.FindAsync(key);
             if (itemGroup == null)
             {
                 return NotFound();
@@ -101,9 +100,9 @@ namespace GoodToCode.Subjects.Application.Controllers
             return itemGroup;
         }
 
-        private bool ItemGroupExists(int id)
+        private bool ItemGroupExists(Guid key)
         {
-            return _context.ItemGroup.Any(e => e.ItemGroupId == id);
+            return _context.ItemGroup.Any(e => e.ItemGroupKey == key);
         }
     }
 }

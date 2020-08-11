@@ -1,11 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Subjects.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GoodToCode.Subjects.Application.Models;
 
 namespace GoodToCode.Subjects.Application.Controllers
 {
@@ -13,9 +12,9 @@ namespace GoodToCode.Subjects.Application.Controllers
     [ApiController]
     public class VenturesController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly SubjectsDbContext _context;
 
-        public VenturesController(EntityDataContext context)
+        public VenturesController(SubjectsDbContext context)
         {
             _context = context;
         }
@@ -28,10 +27,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         }
 
         // GET: api/Ventures/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Venture>> GetVenture(int id)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<Venture>> GetVenture(Guid key)
         {
-            var venture = await _context.Venture.FindAsync(id);
+            var venture = await _context.Venture.FindAsync(key);
 
             if (venture == null)
             {
@@ -44,10 +43,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         // PUT: api/Ventures/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutVenture(int id, Venture venture)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> PutVenture(Guid key, Venture venture)
         {
-            if (id != venture.VentureId)
+            if (key != venture.VentureKey)
             {
                 return BadRequest();
             }
@@ -60,7 +59,7 @@ namespace GoodToCode.Subjects.Application.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VentureExists(id))
+                if (!VentureExists(key))
                 {
                     return NotFound();
                 }
@@ -82,14 +81,14 @@ namespace GoodToCode.Subjects.Application.Controllers
             _context.Venture.Add(venture);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVenture", new { id = venture.VentureId }, venture);
+            return CreatedAtAction("GetVenture", new { key = venture.VentureKey }, venture);
         }
 
         // DELETE: api/Ventures/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Venture>> DeleteVenture(int id)
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<Venture>> DeleteVenture(Guid key)
         {
-            var venture = await _context.Venture.FindAsync(id);
+            var venture = await _context.Venture.FindAsync(key);
             if (venture == null)
             {
                 return NotFound();
@@ -101,9 +100,9 @@ namespace GoodToCode.Subjects.Application.Controllers
             return venture;
         }
 
-        private bool VentureExists(int id)
+        private bool VentureExists(Guid key)
         {
-            return _context.Venture.Any(e => e.VentureId == id);
+            return _context.Venture.Any(e => e.VentureKey == key);
         }
     }
 }

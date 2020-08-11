@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GoodToCode.Shared.Domain;
+using System.Collections.Generic;
 
 namespace GoodToCode.Shared.Messaging
 {

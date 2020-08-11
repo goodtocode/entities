@@ -1,19 +1,20 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Subjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Application.Controllers
+namespace GoodToCode.Subjects.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class BusinessesOriginalController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly SubjectsDbContext _context;
 
-        public BusinessesOriginalController(EntityDataContext context)
+        public BusinessesOriginalController(SubjectsDbContext context)
         {
             _context = context;
         }
@@ -26,10 +27,10 @@ namespace GoodToCode.Shared.Application.Controllers
         }
 
         // GET: api/Businesses/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Business>> GetBusiness(int id)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<Business>> GetBusiness(Guid key)
         {
-            var business = await _context.Business.FindAsync(id);
+            var business = await _context.Business.FindAsync(key);
 
             if (business == null)
             {
@@ -42,10 +43,10 @@ namespace GoodToCode.Shared.Application.Controllers
         // PUT: api/Businesses/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness(int id, Business business)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> PutBusiness(Guid key, Business business)
         {
-            if (id != business.BusinessId)
+            if (key != business.BusinessKey)
             {
                 return BadRequest();
             }
@@ -58,7 +59,7 @@ namespace GoodToCode.Shared.Application.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!BusinessExists(key))
                 {
                     return NotFound();
                 }
@@ -80,14 +81,14 @@ namespace GoodToCode.Shared.Application.Controllers
             _context.Business.Add(business);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
+            return CreatedAtAction("GetBusiness", new { key = business.BusinessKey }, business);
         }
 
         // DELETE: api/Businesses/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Business>> DeleteBusiness(int id)
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<Business>> DeleteBusiness(Guid key)
         {
-            var business = await _context.Business.FindAsync(id);
+            var business = await _context.Business.FindAsync(key);
             if (business == null)
             {
                 return NotFound();
@@ -99,9 +100,9 @@ namespace GoodToCode.Shared.Application.Controllers
             return business;
         }
 
-        private bool BusinessExists(int id)
+        private bool BusinessExists(Guid key)
         {
-            return _context.Business.Any(e => e.BusinessId == id);
+            return _context.Business.Any(e => e.BusinessKey == key);
         }
     }
 }

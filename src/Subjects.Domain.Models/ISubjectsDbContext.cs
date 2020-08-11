@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GoodToCode.Shared.Data;
+using GoodToCode.Shared.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
@@ -6,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface ISubjectsDbContext
+    public interface ISubjectsDbContext : IDbContext
     {
         DbSet<Business> Business { get; set; }
         DbSet<Detail> Detail { get; set; }
         DbSet<DetailType> DetailType { get; set; }
-        DbSet<Entity> Entity { get; set; }
-        DbSet<EntityAppointment> EntityAppointment { get; set; }
-        DbSet<EntityDetail> EntityDetail { get; set; }
-        DbSet<EntityLocation> EntityLocation { get; set; }
-        DbSet<EntityOption> EntityOption { get; set; }
-        DbSet<EntityTimeRecurring> EntityTimeRecurring { get; set; }
+        DbSet<Associate> Associate { get; set; }
+        DbSet<AssociateAppointment> AssociateAppointment { get; set; }
+        DbSet<AssociateDetail> AssociateDetail { get; set; }
+        DbSet<AssociateLocation> AssociateLocation { get; set; }
+        DbSet<AssociateOption> AssociateOption { get; set; }
+        DbSet<AssociateTimeRecurring> AssociateTimeRecurring { get; set; }
         DbSet<Gender> Gender { get; set; }
         DbSet<Government> Government { get; set; }
         DbSet<Item> Item { get; set; }
@@ -33,13 +35,10 @@ namespace GoodToCode.Subjects.Models
         DbSet<Venture> Venture { get; set; }
         DbSet<VentureAppointment> VentureAppointment { get; set; }
         DbSet<VentureDetail> VentureDetail { get; set; }
-        DbSet<VentureEntityOption> VentureEntityOption { get; set; }
+        DbSet<VentureAssociateOption> VentureAssociateOption { get; set; }
         DbSet<VentureLocation> VentureLocation { get; set; }
         DbSet<VentureOption> VentureOption { get; set; }
         DbSet<VentureResource> VentureResource { get; set; }
-        DbSet<VentureSchedule> VentureSchedule { get; set; }
-
-        EntityEntry<TEntity> Entry<TEntity>([NotNullAttribute] TEntity entity) where TEntity : class;
-        Task<int> SaveChangesAsync(CancellationToken token = default);
+        DbSet<VentureSchedule> VentureSchedule { get; set; }        
     }
 }

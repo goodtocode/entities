@@ -1,21 +1,20 @@
-﻿using System;
+﻿using GoodToCode.Subjects.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GoodToCode.Subjects.Application.Models;
 
-namespace GoodToCode.Shared.Application.Controllers
+namespace GoodToCode.Subjects.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class GovernmentsController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly SubjectsDbContext _context;
 
-        public GovernmentsController(EntityDataContext context)
+        public GovernmentsController(SubjectsDbContext context)
         {
             _context = context;
         }
@@ -28,10 +27,10 @@ namespace GoodToCode.Shared.Application.Controllers
         }
 
         // GET: api/Governments/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Government>> GetGovernment(int id)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<Government>> GetGovernment(Guid key)
         {
-            var government = await _context.Government.FindAsync(id);
+            var government = await _context.Government.FindAsync(key);
 
             if (government == null)
             {
@@ -44,10 +43,10 @@ namespace GoodToCode.Shared.Application.Controllers
         // PUT: api/Governments/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutGovernment(int id, Government government)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> PutGovernment(Guid key, Government government)
         {
-            if (id != government.GovernmentId)
+            if (key != government.GovernmentKey)
             {
                 return BadRequest();
             }
@@ -60,7 +59,7 @@ namespace GoodToCode.Shared.Application.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GovernmentExists(id))
+                if (!GovernmentExists(key))
                 {
                     return NotFound();
                 }
@@ -82,14 +81,14 @@ namespace GoodToCode.Shared.Application.Controllers
             _context.Government.Add(government);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGovernment", new { id = government.GovernmentId }, government);
+            return CreatedAtAction("GetGovernment", new { key = government.GovernmentKey }, government);
         }
 
         // DELETE: api/Governments/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Government>> DeleteGovernment(int id)
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<Government>> DeleteGovernment(Guid key)
         {
-            var government = await _context.Government.FindAsync(id);
+            var government = await _context.Government.FindAsync(key);
             if (government == null)
             {
                 return NotFound();
@@ -101,9 +100,9 @@ namespace GoodToCode.Shared.Application.Controllers
             return government;
         }
 
-        private bool GovernmentExists(int id)
+        private bool GovernmentExists(Guid key)
         {
-            return _context.Government.Any(e => e.GovernmentId == id);
+            return _context.Government.Any(e => e.GovernmentKey == key);
         }
     }
 }

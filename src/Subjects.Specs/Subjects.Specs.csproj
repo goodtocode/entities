@@ -21,11 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <SpecFlowObsoleteCodeBehindFiles Remove="Application\Entity\BusinessCreate.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Entity\BusinessesGet.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Entity\BusinessGetByKey.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Entity\BusinessInsert.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Entity\BusinessUpdate.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Application\Associate\BusinessCreate.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Associate\BusinessesGet.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Associate\BusinessGetByKey.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Associate\BusinessInsert.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Associate\BusinessUpdate.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,41 +56,41 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Infrastructure\Entity\BusinessesGet.feature.cs">
+    <Compile Update="Infrastructure\Associate\BusinessesGet.feature.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="Infrastructure\Entity\BusinessGetByKey.feature.cs">
+    <Compile Update="Infrastructure\Associate\BusinessGetByKey.feature.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="Infrastructure\Entity\BusinessCreate.feature.cs">
+    <Compile Update="Infrastructure\Associate\BusinessCreate.feature.cs">
       <DependentUpon>BusinessCreate.feature</DependentUpon>
     </Compile>
-    <Compile Update="Infrastructure\Entity\BusinessUpdate.feature.cs">
+    <Compile Update="Infrastructure\Associate\BusinessUpdate.feature.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <SpecFlowFeatureFiles Update="Infrastructure\Entity\BusinessesGet.feature">
+    <SpecFlowFeatureFiles Update="Infrastructure\Associate\BusinessesGet.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Infrastructure\Entity\BusinessGetByKey.feature">
+    <SpecFlowFeatureFiles Update="Infrastructure\Associate\BusinessGetByKey.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Infrastructure\Entity\BusinessCreate.feature">
+    <SpecFlowFeatureFiles Update="Infrastructure\Associate\BusinessCreate.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Infrastructure\Entity\BusinessUpdate.feature">
+    <SpecFlowFeatureFiles Update="Infrastructure\Associate\BusinessUpdate.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Entity\" />
+    <Folder Include="Application\Associate\" />
     <Folder Include="Domain\" />
   </ItemGroup>
 

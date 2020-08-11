@@ -1,11 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Subjects.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GoodToCode.Subjects.Application.Models;
 
 namespace GoodToCode.Subjects.Application.Controllers
 {
@@ -13,9 +12,9 @@ namespace GoodToCode.Subjects.Application.Controllers
     [ApiController]
     public class OptionsController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly SubjectsDbContext _context;
 
-        public OptionsController(EntityDataContext context)
+        public OptionsController(SubjectsDbContext context)
         {
             _context = context;
         }
@@ -28,10 +27,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         }
 
         // GET: api/Options/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Option>> GetOption(int id)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<Option>> GetOption(Guid key)
         {
-            var option = await _context.Option.FindAsync(id);
+            var option = await _context.Option.FindAsync(key);
 
             if (option == null)
             {
@@ -44,10 +43,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         // PUT: api/Options/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutOption(int id, Option option)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> PutOption(Guid key, Option option)
         {
-            if (id != option.OptionId)
+            if (key != option.OptionKey)
             {
                 return BadRequest();
             }
@@ -60,7 +59,7 @@ namespace GoodToCode.Subjects.Application.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OptionExists(id))
+                if (!OptionExists(key))
                 {
                     return NotFound();
                 }
@@ -82,14 +81,14 @@ namespace GoodToCode.Subjects.Application.Controllers
             _context.Option.Add(option);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetOption", new { id = option.OptionId }, option);
+            return CreatedAtAction("GetOption", new { key = option.OptionKey }, option);
         }
 
         // DELETE: api/Options/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Option>> DeleteOption(int id)
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<Option>> DeleteOption(Guid key)
         {
-            var option = await _context.Option.FindAsync(id);
+            var option = await _context.Option.FindAsync(key);
             if (option == null)
             {
                 return NotFound();
@@ -101,9 +100,9 @@ namespace GoodToCode.Subjects.Application.Controllers
             return option;
         }
 
-        private bool OptionExists(int id)
+        private bool OptionExists(Guid key)
         {
-            return _context.Option.Any(e => e.OptionId == id);
+            return _context.Option.Any(e => e.OptionKey == key);
         }
     }
 }

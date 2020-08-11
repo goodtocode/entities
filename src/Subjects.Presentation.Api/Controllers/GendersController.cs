@@ -1,21 +1,20 @@
-﻿using System;
+﻿using GoodToCode.Subjects.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GoodToCode.Subjects.Application.Models;
 
-namespace GoodToCode.Shared.Application.Controllers
+namespace GoodToCode.Subjects.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class GendersController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly SubjectsDbContext _context;
 
-        public GendersController(EntityDataContext context)
+        public GendersController(SubjectsDbContext context)
         {
             _context = context;
         }
@@ -28,10 +27,10 @@ namespace GoodToCode.Shared.Application.Controllers
         }
 
         // GET: api/Genders/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Gender>> GetGender(int id)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<Gender>> GetGender(Guid key)
         {
-            var gender = await _context.Gender.FindAsync(id);
+            var gender = await _context.Gender.FindAsync(key);
 
             if (gender == null)
             {
@@ -44,10 +43,10 @@ namespace GoodToCode.Shared.Application.Controllers
         // PUT: api/Genders/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutGender(int id, Gender gender)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> PutGender(Guid key, Gender gender)
         {
-            if (id != gender.GenderId)
+            if (key != gender.GenderKey)
             {
                 return BadRequest();
             }
@@ -60,7 +59,7 @@ namespace GoodToCode.Shared.Application.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GenderExists(id))
+                if (!GenderExists(key))
                 {
                     return NotFound();
                 }
@@ -86,7 +85,7 @@ namespace GoodToCode.Shared.Application.Controllers
             }
             catch (DbUpdateException)
             {
-                if (GenderExists(gender.GenderId))
+                if (GenderExists(gender.GenderKey))
                 {
                     return Conflict();
                 }
@@ -96,14 +95,14 @@ namespace GoodToCode.Shared.Application.Controllers
                 }
             }
 
-            return CreatedAtAction("GetGender", new { id = gender.GenderId }, gender);
+            return CreatedAtAction("GetGender", new { key = gender.GenderKey }, gender);
         }
 
         // DELETE: api/Genders/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Gender>> DeleteGender(int id)
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<Gender>> DeleteGender(Guid key)
         {
-            var gender = await _context.Gender.FindAsync(id);
+            var gender = await _context.Gender.FindAsync(key);
             if (gender == null)
             {
                 return NotFound();
@@ -115,9 +114,9 @@ namespace GoodToCode.Shared.Application.Controllers
             return gender;
         }
 
-        private bool GenderExists(int id)
+        private bool GenderExists(Guid key)
         {
-            return _context.Gender.Any(e => e.GenderId == id);
+            return _context.Gender.Any(e => e.GenderKey == key);
         }
     }
 }

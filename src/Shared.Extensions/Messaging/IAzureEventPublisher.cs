@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using GoodToCode.Shared.Domain;
+using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Messaging
 {

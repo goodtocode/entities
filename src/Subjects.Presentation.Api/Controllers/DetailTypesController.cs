@@ -1,19 +1,20 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Subjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Application.Controllers
+namespace GoodToCode.Subjects.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class DetailTypesController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly SubjectsDbContext _context;
 
-        public DetailTypesController(EntityDataContext context)
+        public DetailTypesController(SubjectsDbContext context)
         {
             _context = context;
         }
@@ -26,10 +27,10 @@ namespace GoodToCode.Shared.Application.Controllers
         }
 
         // GET: api/DetailTypes/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<DetailType>> GetDetailType(int id)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<DetailType>> GetDetailType(Guid key)
         {
-            var detailType = await _context.DetailType.FindAsync(id);
+            var detailType = await _context.DetailType.FindAsync(key);
 
             if (detailType == null)
             {
@@ -42,10 +43,10 @@ namespace GoodToCode.Shared.Application.Controllers
         // PUT: api/DetailTypes/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutDetailType(int id, DetailType detailType)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> PutDetailType(Guid key, DetailType detailType)
         {
-            if (id != detailType.DetailTypeId)
+            if (key != detailType.DetailTypeKey)
             {
                 return BadRequest();
             }
@@ -58,7 +59,7 @@ namespace GoodToCode.Shared.Application.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DetailTypeExists(id))
+                if (!DetailTypeExists(key))
                 {
                     return NotFound();
                 }
@@ -80,14 +81,14 @@ namespace GoodToCode.Shared.Application.Controllers
             _context.DetailType.Add(detailType);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDetailType", new { id = detailType.DetailTypeId }, detailType);
+            return CreatedAtAction("GetDetailType", new { key = detailType.DetailTypeKey }, detailType);
         }
 
         // DELETE: api/DetailTypes/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<DetailType>> DeleteDetailType(int id)
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<DetailType>> DeleteDetailType(Guid key)
         {
-            var detailType = await _context.DetailType.FindAsync(id);
+            var detailType = await _context.DetailType.FindAsync(key);
             if (detailType == null)
             {
                 return NotFound();
@@ -99,9 +100,9 @@ namespace GoodToCode.Shared.Application.Controllers
             return detailType;
         }
 
-        private bool DetailTypeExists(int id)
+        private bool DetailTypeExists(Guid key)
         {
-            return _context.DetailType.Any(e => e.DetailTypeId == id);
+            return _context.DetailType.Any(e => e.DetailTypeKey == key);
         }
     }
 }

@@ -1,11 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Subjects.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GoodToCode.Subjects.Application.Models;
 
 namespace GoodToCode.Subjects.Application.Controllers
 {
@@ -13,9 +12,9 @@ namespace GoodToCode.Subjects.Application.Controllers
     [ApiController]
     public class ResourcesController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly SubjectsDbContext _context;
 
-        public ResourcesController(EntityDataContext context)
+        public ResourcesController(SubjectsDbContext context)
         {
             _context = context;
         }
@@ -28,10 +27,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         }
 
         // GET: api/Resources/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Resource>> GetResource(int id)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<Resource>> GetResource(Guid key)
         {
-            var resource = await _context.Resource.FindAsync(id);
+            var resource = await _context.Resource.FindAsync(key);
 
             if (resource == null)
             {
@@ -44,10 +43,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         // PUT: api/Resources/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutResource(int id, Resource resource)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> PutResource(Guid key, Resource resource)
         {
-            if (id != resource.ResourceId)
+            if (key != resource.ResourceKey)
             {
                 return BadRequest();
             }
@@ -60,7 +59,7 @@ namespace GoodToCode.Subjects.Application.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ResourceExists(id))
+                if (!ResourceExists(key))
                 {
                     return NotFound();
                 }
@@ -82,14 +81,14 @@ namespace GoodToCode.Subjects.Application.Controllers
             _context.Resource.Add(resource);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetResource", new { id = resource.ResourceId }, resource);
+            return CreatedAtAction("GetResource", new { key = resource.ResourceKey }, resource);
         }
 
         // DELETE: api/Resources/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Resource>> DeleteResource(int id)
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<Resource>> DeleteResource(Guid key)
         {
-            var resource = await _context.Resource.FindAsync(id);
+            var resource = await _context.Resource.FindAsync(key);
             if (resource == null)
             {
                 return NotFound();
@@ -101,9 +100,9 @@ namespace GoodToCode.Subjects.Application.Controllers
             return resource;
         }
 
-        private bool ResourceExists(int id)
+        private bool ResourceExists(Guid key)
         {
-            return _context.Resource.Any(e => e.ResourceId == id);
+            return _context.Resource.Any(e => e.ResourceKey == key);
         }
     }
 }

@@ -1,21 +1,20 @@
-﻿using System;
+﻿using GoodToCode.Subjects.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GoodToCode.Subjects.Application.Models;
 
-namespace GoodToCode.Shared.Application.Controllers
+namespace GoodToCode.Subjects.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class DetailsController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly SubjectsDbContext _context;
 
-        public DetailsController(EntityDataContext context)
+        public DetailsController(SubjectsDbContext context)
         {
             _context = context;
         }
@@ -28,10 +27,10 @@ namespace GoodToCode.Shared.Application.Controllers
         }
 
         // GET: api/Details/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Detail>> GetDetail(int id)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<Detail>> GetDetail(Guid key)
         {
-            var detail = await _context.Detail.FindAsync(id);
+            var detail = await _context.Detail.FindAsync(key);
 
             if (detail == null)
             {
@@ -44,10 +43,10 @@ namespace GoodToCode.Shared.Application.Controllers
         // PUT: api/Details/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutDetail(int id, Detail detail)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> PutDetail(Guid key, Detail detail)
         {
-            if (id != detail.DetailId)
+            if (key != detail.DetailKey)
             {
                 return BadRequest();
             }
@@ -60,7 +59,7 @@ namespace GoodToCode.Shared.Application.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DetailExists(id))
+                if (!DetailExists(key))
                 {
                     return NotFound();
                 }
@@ -82,14 +81,14 @@ namespace GoodToCode.Shared.Application.Controllers
             _context.Detail.Add(detail);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDetail", new { id = detail.DetailId }, detail);
+            return CreatedAtAction("GetDetail", new { key = detail.DetailKey }, detail);
         }
 
         // DELETE: api/Details/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Detail>> DeleteDetail(int id)
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<Detail>> DeleteDetail(Guid key)
         {
-            var detail = await _context.Detail.FindAsync(id);
+            var detail = await _context.Detail.FindAsync(key);
             if (detail == null)
             {
                 return NotFound();
@@ -101,9 +100,9 @@ namespace GoodToCode.Shared.Application.Controllers
             return detail;
         }
 
-        private bool DetailExists(int id)
+        private bool DetailExists(Guid key)
         {
-            return _context.Detail.Any(e => e.DetailId == id);
+            return _context.Detail.Any(e => e.DetailKey == key);
         }
     }
 }

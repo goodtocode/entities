@@ -4,11 +4,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Models
+namespace GoodToCode.Shared.Data
 {
-    public interface IDbContext<TEntity> where TEntity : class, new()
+    public interface IDbContext
     {
-        EntityEntry<T> Entry<T>([NotNullAttribute] T entity) where T : class;
+        EntityEntry<TEntity> Entry<TEntity>([NotNullAttribute] TEntity entity) where TEntity : class;
         Task<int> SaveChangesAsync(CancellationToken token = default);
     }
 }

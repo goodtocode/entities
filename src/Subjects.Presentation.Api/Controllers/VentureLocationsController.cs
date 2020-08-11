@@ -1,11 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Subjects.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GoodToCode.Subjects.Application.Models;
 
 namespace GoodToCode.Subjects.Application.Controllers
 {
@@ -13,9 +12,9 @@ namespace GoodToCode.Subjects.Application.Controllers
     [ApiController]
     public class VentureLocationsController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly SubjectsDbContext _context;
 
-        public VentureLocationsController(EntityDataContext context)
+        public VentureLocationsController(SubjectsDbContext context)
         {
             _context = context;
         }
@@ -28,10 +27,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         }
 
         // GET: api/VentureLocations/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<VentureLocation>> GetVentureLocation(int id)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<VentureLocation>> GetVentureLocation(Guid key)
         {
-            var ventureLocation = await _context.VentureLocation.FindAsync(id);
+            var ventureLocation = await _context.VentureLocation.FindAsync(key);
 
             if (ventureLocation == null)
             {
@@ -44,10 +43,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         // PUT: api/VentureLocations/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutVentureLocation(int id, VentureLocation ventureLocation)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> PutVentureLocation(Guid key, VentureLocation ventureLocation)
         {
-            if (id != ventureLocation.VentureLocationId)
+            if (key != ventureLocation.VentureLocationKey)
             {
                 return BadRequest();
             }
@@ -60,7 +59,7 @@ namespace GoodToCode.Subjects.Application.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VentureLocationExists(id))
+                if (!VentureLocationExists(key))
                 {
                     return NotFound();
                 }
@@ -82,14 +81,14 @@ namespace GoodToCode.Subjects.Application.Controllers
             _context.VentureLocation.Add(ventureLocation);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVentureLocation", new { id = ventureLocation.VentureLocationId }, ventureLocation);
+            return CreatedAtAction("GetVentureLocation", new { key = ventureLocation.VentureLocationKey }, ventureLocation);
         }
 
         // DELETE: api/VentureLocations/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<VentureLocation>> DeleteVentureLocation(int id)
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<VentureLocation>> DeleteVentureLocation(Guid key)
         {
-            var ventureLocation = await _context.VentureLocation.FindAsync(id);
+            var ventureLocation = await _context.VentureLocation.FindAsync(key);
             if (ventureLocation == null)
             {
                 return NotFound();
@@ -101,9 +100,9 @@ namespace GoodToCode.Subjects.Application.Controllers
             return ventureLocation;
         }
 
-        private bool VentureLocationExists(int id)
+        private bool VentureLocationExists(Guid key)
         {
-            return _context.VentureLocation.Any(e => e.VentureLocationId == id);
+            return _context.VentureLocation.Any(e => e.VentureLocationKey == key);
         }
     }
 }

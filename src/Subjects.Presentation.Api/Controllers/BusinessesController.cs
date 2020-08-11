@@ -1,16 +1,19 @@
-﻿using System.Net;
-using System.Threading.Tasks;
-using GoodToCode.Extensions.Mvc;
-using GoodToCode.Shared.Models;
+﻿using GoodToCode.Extensions.Mvc;
+using GoodToCode.Shared.Cqrs;
+using GoodToCode.Shared.Domain;
+using GoodToCode.Shared.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Application.Controller
+namespace GoodToCode.Subjects.Application.Controller
 {
     [Produces("application/json", "application/xml")]
-    [ApiExplorerSettings(GroupName = "ExamsAPISpecification")]
-    [Route("api/v{version:apiVersion}/{vendor}/ExamResults/{exam}")]
+    [ApiExplorerSettings(GroupName = "BusinessSpecification")]
+    [Route("/v{version:apiVersion}/BusinessSave/{key}")]
     [ApiVersion("1.0")]
     public class BusinessesController : ControllerMediator
     {
@@ -41,21 +44,22 @@ namespace GoodToCode.Shared.Application.Controller
         ///
         /// 
         /// </remarks>
-        /// <param name="item"></param>
+        /// <param name="key"></param>
         /// <returns>CommandResult</returns>
         [Authorize]
-        [HttpPost(Name = "PostExamResult")]
+        [HttpPost(Name = "BusinessSave")]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 202)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 400)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 401)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 406)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 500)]
-        public async Task<ActionResult<CommandResponseWrapper<bool>>> ReceiveExamResult([FromBody] PostExamResultCommand command, string vendor, string exam)
+        public async Task<ActionResult<CommandResponseWrapper<bool>>> BusinessSave([FromBody] BusinessSaveCommand command, Guid key)
         {
-            command.SetExamVendorAndType(vendor, exam);
-
             var cmdResponse = await Mediator.Send(command);
+
+            if (key != command.Item.BusinessKey)
+                return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest, cmdResponse);
 
             if (cmdResponse.Errors.Any())
                 return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest, cmdResponse);

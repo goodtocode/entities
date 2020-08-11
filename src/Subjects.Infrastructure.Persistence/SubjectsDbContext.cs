@@ -1,10 +1,7 @@
-﻿
-//https://www.syncfusion.com/blogs/post/build-crud-application-with-asp-net-core-entity-framework-visual-studio-2019.aspx
-using System;
-using System.Security.Cryptography.X509Certificates;
+﻿//https://www.syncfusion.com/blogs/post/build-crud-application-with-asp-net-core-entity-framework-visual-studio-2019.aspx
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Diagnostics.CodeAnalysis;
 
 namespace GoodToCode.Subjects.Models
 {
@@ -22,12 +19,12 @@ namespace GoodToCode.Subjects.Models
         public virtual DbSet<Business> Business { get; set; }
         public virtual DbSet<Detail> Detail { get; set; }
         public virtual DbSet<DetailType> DetailType { get; set; }
-        public virtual DbSet<Entity> Entity { get; set; }
-        public virtual DbSet<EntityAppointment> EntityAppointment { get; set; }
-        public virtual DbSet<EntityDetail> EntityDetail { get; set; }
-        public virtual DbSet<EntityLocation> EntityLocation { get; set; }
-        public virtual DbSet<EntityOption> EntityOption { get; set; }
-        public virtual DbSet<EntityTimeRecurring> EntityTimeRecurring { get; set; }
+        public virtual DbSet<Associate> Associate { get; set; }
+        public virtual DbSet<AssociateAppointment> AssociateAppointment { get; set; }
+        public virtual DbSet<AssociateDetail> AssociateDetail { get; set; }
+        public virtual DbSet<AssociateLocation> AssociateLocation { get; set; }
+        public virtual DbSet<AssociateOption> AssociateOption { get; set; }
+        public virtual DbSet<AssociateTimeRecurring> AssociateTimeRecurring { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<Government> Government { get; set; }
         public virtual DbSet<Item> Item { get; set; }
@@ -44,7 +41,7 @@ namespace GoodToCode.Subjects.Models
         public virtual DbSet<Venture> Venture { get; set; }
         public virtual DbSet<VentureAppointment> VentureAppointment { get; set; }
         public virtual DbSet<VentureDetail> VentureDetail { get; set; }
-        public virtual DbSet<VentureEntityOption> VentureEntityOption { get; set; }
+        public virtual DbSet<VentureAssociateOption> VentureAssociateOption { get; set; }
         public virtual DbSet<VentureLocation> VentureLocation { get; set; }
         public virtual DbSet<VentureOption> VentureOption { get; set; }
         public virtual DbSet<VentureResource> VentureResource { get; set; }
@@ -120,12 +117,12 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<Entity>(entity =>
+            modelBuilder.Entity<Associate>(entity =>
             {
-                entity.ToTable("Entity", "Subjects");
+                entity.ToTable("Associate", "Subjects");
 
-                entity.HasIndex(e => e.EntityKey)
-                    .HasName("IX_EntityLocation_Entity")
+                entity.HasIndex(e => e.AssociateKey)
+                    .HasName("IX_AssociateLocation_Associate")
                     .IsUnique();
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -133,16 +130,16 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<EntityAppointment>(entity =>
+            modelBuilder.Entity<AssociateAppointment>(entity =>
             {
-                entity.ToTable("EntityAppointment", "Subjects");
+                entity.ToTable("AssociateAppointment", "Subjects");
 
-                entity.HasIndex(e => e.EntityAppointmentKey)
-                    .HasName("IX_EntityAppointment_Key")
+                entity.HasIndex(e => e.AssociateAppointmentKey)
+                    .HasName("IX_AssociateAppointment_Key")
                     .IsUnique();
 
-                entity.HasIndex(e => new { e.EntityKey, e.AppointmentKey })
-                    .HasName("IX_EntityAppointment_All")
+                entity.HasIndex(e => new { e.AssociateKey, e.AppointmentKey })
+                    .HasName("IX_AssociateAppointment_All")
                     .IsUnique();
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -150,16 +147,16 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<EntityDetail>(entity =>
+            modelBuilder.Entity<AssociateDetail>(entity =>
             {
-                entity.ToTable("EntityDetail", "Subjects");
+                entity.ToTable("AssociateDetail", "Subjects");
 
-                entity.HasIndex(e => e.EntityDetailKey)
-                    .HasName("IX_EntityDetail_Key")
+                entity.HasIndex(e => e.AssociateDetailKey)
+                    .HasName("IX_AssociateDetail_Key")
                     .IsUnique();
 
-                entity.HasIndex(e => new { e.EntityKey, e.EntityDetailKey })
-                    .HasName("IX_EntityDetail_All")
+                entity.HasIndex(e => new { e.AssociateKey, e.AssociateDetailKey })
+                    .HasName("IX_AssociateDetail_All")
                     .IsUnique();
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -167,12 +164,12 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<EntityLocation>(entity =>
+            modelBuilder.Entity<AssociateLocation>(entity =>
             {
-                entity.ToTable("EntityLocation", "Subjects");
+                entity.ToTable("AssociateLocation", "Subjects");
 
-                entity.HasIndex(e => new { e.EntityKey, e.LocationKey })
-                    .HasName("IX_EntityLocation_All")
+                entity.HasIndex(e => new { e.AssociateKey, e.LocationKey })
+                    .HasName("IX_AssociateLocation_All")
                     .IsUnique();
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -180,12 +177,12 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<EntityOption>(entity =>
+            modelBuilder.Entity<AssociateOption>(entity =>
             {
-                entity.ToTable("EntityOption", "Subjects");
+                entity.ToTable("AssociateOption", "Subjects");
 
-                entity.HasIndex(e => new { e.EntityKey, e.OptionKey })
-                    .HasName("IX_EntityOption_All")
+                entity.HasIndex(e => new { e.AssociateKey, e.OptionKey })
+                    .HasName("IX_AssociateOption_All")
                     .IsUnique();
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -193,16 +190,16 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<EntityTimeRecurring>(entity =>
+            modelBuilder.Entity<AssociateTimeRecurring>(entity =>
             {
-                entity.ToTable("EntityTimeRecurring", "Subjects");
+                entity.ToTable("AssociateTimeRecurring", "Subjects");
 
-                entity.HasIndex(e => e.EntityTimeRecurringKey)
-                    .HasName("IX_EntityTimeRecurring_Key")
+                entity.HasIndex(e => e.AssociateTimeRecurringKey)
+                    .HasName("IX_AssociateTimeRecurring_Key")
                     .IsUnique();
 
-                entity.HasIndex(e => new { e.EntityKey, e.TimeRecurringKey })
-                    .HasName("IX_EntityTimeRecurring_All")
+                entity.HasIndex(e => new { e.AssociateKey, e.TimeRecurringKey })
+                    .HasName("IX_AssociateTimeRecurring_All")
                     .IsUnique();
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -252,7 +249,7 @@ namespace GoodToCode.Subjects.Models
                 entity.ToTable("Government", "Subjects");
 
                 entity.HasIndex(e => e.GovernmentKey)
-                    .HasName("IX_Government_Entity")
+                    .HasName("IX_Government_Associate")
                     .IsUnique();
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -388,7 +385,7 @@ namespace GoodToCode.Subjects.Models
                 entity.ToTable("Person", "Subjects");
 
                 entity.HasIndex(e => e.PersonKey)
-                    .HasName("IX_Person_Entity")
+                    .HasName("IX_Person_Associate")
                     .IsUnique();
 
                 entity.HasIndex(e => new { e.FirstName, e.MiddleName, e.LastName, e.BirthDate })
@@ -586,12 +583,12 @@ namespace GoodToCode.Subjects.Models
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<VentureEntityOption>(entity =>
+            modelBuilder.Entity<VentureAssociateOption>(entity =>
             {
-                entity.ToTable("VentureEntityOption", "Subjects");
+                entity.ToTable("VentureAssociateOption", "Subjects");
 
-                entity.HasIndex(e => e.VentureEntityOptionKey)
-                    .HasName("IX_VentureEntityOption_Key")
+                entity.HasIndex(e => e.VentureAssociateOptionKey)
+                    .HasName("IX_VentureAssociateOption_Key")
                     .IsUnique();
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");

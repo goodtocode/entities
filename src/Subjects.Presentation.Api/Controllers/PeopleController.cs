@@ -1,11 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Subjects.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GoodToCode.Subjects.Application.Models;
 
 namespace GoodToCode.Subjects.Application.Controllers
 {
@@ -13,9 +12,9 @@ namespace GoodToCode.Subjects.Application.Controllers
     [ApiController]
     public class PeopleController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly SubjectsDbContext _context;
 
-        public PeopleController(EntityDataContext context)
+        public PeopleController(SubjectsDbContext context)
         {
             _context = context;
         }
@@ -28,10 +27,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         }
 
         // GET: api/People/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Person>> GetPerson(int id)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<Person>> GetPerson(Guid key)
         {
-            var person = await _context.Person.FindAsync(id);
+            var person = await _context.Person.FindAsync(key);
 
             if (person == null)
             {
@@ -44,10 +43,10 @@ namespace GoodToCode.Subjects.Application.Controllers
         // PUT: api/People/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPerson(int id, Person person)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> PutPerson(Guid key, Person person)
         {
-            if (id != person.PersonId)
+            if (key != person.PersonKey)
             {
                 return BadRequest();
             }
@@ -60,7 +59,7 @@ namespace GoodToCode.Subjects.Application.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PersonExists(id))
+                if (!PersonExists(key))
                 {
                     return NotFound();
                 }
@@ -82,14 +81,14 @@ namespace GoodToCode.Subjects.Application.Controllers
             _context.Person.Add(person);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPerson", new { id = person.PersonId }, person);
+            return CreatedAtAction("GetPerson", new { key = person.PersonKey }, person);
         }
 
         // DELETE: api/People/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Person>> DeletePerson(int id)
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<Person>> DeletePerson(Guid key)
         {
-            var person = await _context.Person.FindAsync(id);
+            var person = await _context.Person.FindAsync(key);
             if (person == null)
             {
                 return NotFound();
@@ -101,9 +100,9 @@ namespace GoodToCode.Subjects.Application.Controllers
             return person;
         }
 
-        private bool PersonExists(int id)
+        private bool PersonExists(Guid key)
         {
-            return _context.Person.Any(e => e.PersonId == id);
+            return _context.Person.Any(e => e.PersonKey == key);
         }
     }
 }
