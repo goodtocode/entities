@@ -22,6 +22,8 @@
 
   <ItemGroup>
     <SpecFlowObsoleteCodeBehindFiles Remove="Application\Associate\BusinessCreate.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Application\BusinessCreate.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Application\BusinessGetByKey.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Associate\BusinessesGet.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Associate\BusinessGetByKey.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Associate\BusinessInsert.feature.cs" />
@@ -56,6 +58,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Application\Associate\BusinessSaveCommand.feature.cs">
+      <DependentUpon>BusinessSaveCommand.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Application\Associate\BusinessQuery.feature.cs">
+      <DependentUpon>BusinessQuery.feature</DependentUpon>
+    </Compile>
     <Compile Update="Infrastructure\Associate\BusinessesGet.feature.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -71,6 +79,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <SpecFlowFeatureFiles Update="Application\Associate\BusinessSaveCommand.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Application\Associate\BusinessQuery.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="Infrastructure\Associate\BusinessesGet.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
@@ -87,11 +103,6 @@
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Application\Associate\" />
-    <Folder Include="Domain\" />
   </ItemGroup>
 
   <ItemGroup>
