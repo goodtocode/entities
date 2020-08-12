@@ -1,11 +1,10 @@
 ﻿using GoodToCode.Shared.Domain;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
-    public class Business : IBusiness
+    public class Business : DomainModel<IBusiness>, IBusiness
     {
         [Key]
         public Guid BusinessKey { get; set; }

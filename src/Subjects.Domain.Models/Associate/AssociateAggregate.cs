@@ -46,7 +46,7 @@ namespace GoodToCode.Subjects.Aggregates
                 eventRaise = new BusinessCreatedEvent(business);
             }
             _recordsAffected = await _context.SaveChangesAsync();            
-            //business.RaiseDomainEvent(eventRaise);
+            business.RaiseDomainEvent(eventRaise);
 
             return (Business)business;
         }
