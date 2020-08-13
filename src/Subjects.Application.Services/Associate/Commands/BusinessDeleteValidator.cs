@@ -3,9 +3,9 @@ using GoodToCode.Subjects.Models;
 
 namespace GoodToCode.Shared.Domain
 {
-    public class BusinessSaveCommandValidator : AbstractValidator<Business>
+    public class BusinessDeleteValidator : AbstractValidator<Business>
     {
-        public BusinessSaveCommandValidator()
+        public BusinessDeleteValidator()
         {            
             //RuleFor(v => v.Vendor).NotEmpty().NotNull().Equal("testrun").MaximumLength(25);
             //RuleFor(v => v.ExamType).NotEmpty().NotNull().Equal("microcredential").MaximumLength(25);

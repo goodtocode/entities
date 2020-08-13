@@ -13,9 +13,9 @@ namespace GoodToCode.Chronology.Controllers
     [ApiController]
     public class SlotTimeRecurringsController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly ChronoloyDbContext _context;
 
-        public SlotTimeRecurringsController(EntityDataContext context)
+        public SlotTimeRecurringsController(ChronoloyDbContext context)
         {
             _context = context;
         }

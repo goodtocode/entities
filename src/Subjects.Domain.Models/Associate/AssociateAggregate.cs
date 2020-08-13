@@ -50,6 +50,27 @@ namespace GoodToCode.Subjects.Aggregates
 
             return (Business)business;
         }
+        public async Task<Business> BusinessDeleteAsync(IBusiness business)
+        {
+            // Record in local storage
+
+            IDomainEvent<IBusiness> eventRaise;
+
+            if (business.BusinessKey == Guid.Empty)
+            {
+                _context.Entry((Business)business).State = EntityState.Deleted;
+                eventRaise = new BusinessUpdatedEvent(business);
+            }
+            else
+            {
+                _context.Business.Add((Business)business);
+                eventRaise = new BusinessCreatedEvent(business);
+            }
+            _recordsAffected = await _context.SaveChangesAsync();
+            business.RaiseDomainEvent(eventRaise);
+
+            return (Business)business;
+        }
 
         // Person
         public async Task<Person> PersonSaveAsync(IPerson person)

@@ -13,20 +13,20 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Domain
 {
-    public class BusinessSaveCommand : IRequest<CommandResponseWrapper<bool>>
+    public class BusinessDeleteCommand : IRequest<CommandResponseWrapper<bool>>
     {
         public IBusiness Item { get; set; }
 
-        public BusinessSaveCommand() { }
+        public BusinessDeleteCommand() { }
 
-        public BusinessSaveCommand(IBusiness item)
+        public BusinessDeleteCommand(IBusiness item)
         {
             Item = item;
         }
 
-        public class Handler : IRequestHandler<BusinessSaveCommand, CommandResponseWrapper<bool>>
+        public class Handler : IRequestHandler<BusinessDeleteCommand, CommandResponseWrapper<bool>>
         {
-            private readonly BusinessSaveValidator _validator;
+            private readonly BusinessDeleteValidator _validator;
             private readonly List<KeyValuePair<string, string>> _errors;
             private readonly ISubjectsDbContext _context;
             private readonly IConfiguration _configuration;
@@ -35,11 +35,11 @@ namespace GoodToCode.Shared.Domain
             {
                 _configuration = configuration;
                 _context = context;
-                _validator = new BusinessSaveValidator();
+                _validator = new BusinessDeleteValidator();
                 _errors = new List<KeyValuePair<string, string>>();
             }
 
-            public async Task<CommandResponseWrapper<bool>> Handle(BusinessSaveCommand request, CancellationToken cancellationToken)
+            public async Task<CommandResponseWrapper<bool>> Handle(BusinessDeleteCommand request, CancellationToken cancellationToken)
             {
                 var result = new CommandResponseWrapper<bool>() { Errors = GetRequestErrors(request) };
                 int rowsAffected;
@@ -49,7 +49,7 @@ namespace GoodToCode.Shared.Domain
                     try
                     {
                         var aggregate = new AssociateAggregate(_context, _configuration);
-                        await aggregate.BusinessSaveAsync(request.Item);
+                        await aggregate.BusinessDeleteAsync(request.Item);
                         result.Result = true;
                     }
                     catch (Exception e)
@@ -66,7 +66,7 @@ namespace GoodToCode.Shared.Domain
                 return result;
             }
 
-            private List<KeyValuePair<string, string>> GetRequestErrors(BusinessSaveCommand request)
+            private List<KeyValuePair<string, string>> GetRequestErrors(BusinessDeleteCommand request)
             {
                 var issues = _validator.Validate((Business)request.Item).Errors;
 

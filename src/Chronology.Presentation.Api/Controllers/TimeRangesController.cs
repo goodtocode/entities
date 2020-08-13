@@ -13,9 +13,9 @@ namespace GoodToCode.Chronology.Controllers
     [ApiController]
     public class TimeRangesController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly ChronoloyDbContext _context;
 
-        public TimeRangesController(EntityDataContext context)
+        public TimeRangesController(ChronoloyDbContext context)
         {
             _context = context;
         }

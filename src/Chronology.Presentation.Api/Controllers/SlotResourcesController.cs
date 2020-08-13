@@ -13,9 +13,9 @@ namespace GoodToCode.Chronology.Controllers
     [ApiController]
     public class SlotResourcesController : ControllerBase
     {
-        private readonly EntityDataContext _context;
+        private readonly ChronoloyDbContext _context;
 
-        public SlotResourcesController(EntityDataContext context)
+        public SlotResourcesController(ChronoloyDbContext context)
         {
             _context = context;
         }

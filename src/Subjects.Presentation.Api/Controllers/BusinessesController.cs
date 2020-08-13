@@ -2,10 +2,14 @@
 using GoodToCode.Shared.Cqrs;
 using GoodToCode.Shared.Domain;
 using GoodToCode.Shared.Extensions;
+using GoodToCode.Subjects.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -17,37 +21,36 @@ namespace GoodToCode.Subjects.Application.Controller
     [ApiVersion("1.0")]
     public class BusinessesController : ControllerMediator
     {
-        /// <summary>
-        /// Post Exam Result
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///           Parameters:
-        /// 
-        ///           Vendor: vendor
-        ///           Exam:   exam
-        ///           Version: 1.0
-        ///
-        ///           Request Body:
-        /// 
-        ///           {
-        ///                "CustomerId": 123,
-        ///                "ProgramId": 456,
-        ///                "ExamId": 789,
-        ///                "QuestionsCount": 10,
-        ///                "QuestionsCorrect": 9,
-        ///                "Attempts": 1,
-        ///                "Status": "Pass",
-        ///                "ExamTakenDateTime": 1594238468
-        ///            }
-        ///
-        /// 
-        /// </remarks>
-        /// <param name="key"></param>
-        /// <returns>CommandResult</returns>
+        private readonly SubjectsDbContext _context;
+
+        public BusinessesController(SubjectsDbContext context)
+        {
+            _context = context;
+        }
+
+        // GET: api/Businesses
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
+        {
+            return await _context.Business.ToListAsync();
+        }
+
+        // GET: api/Businesses/5
+        [HttpGet("{key}")]
+        public async Task<ActionResult<Business>> GetBusiness(Guid key)
+        {
+            var business = await _context.Business.FindAsync(key);
+
+            if (business == null)
+            {
+                return NotFound();
+            }
+
+            return business;
+        }
+
         [Authorize]
-        [HttpPost(Name = "BusinessSave")]
+        [HttpPost("{key}"), HttpPut("{key}")]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 202)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 400)]
@@ -68,6 +71,27 @@ namespace GoodToCode.Subjects.Application.Controller
                 return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError, cmdResponse);
 
             return Accepted(cmdResponse);
+        }
+
+        // DELETE: api/Businesses/5
+        [HttpDelete("{key}")]
+        public async Task<ActionResult<Business>> DeleteBusiness(Guid key)
+        {
+            var business = await _context.Business.FindAsync(key);
+            if (business == null)
+            {
+                return NotFound();
+            }
+
+            _context.Business.Remove(business);
+            await _context.SaveChangesAsync();
+
+            return business;
+        }
+
+        private bool BusinessExists(Guid key)
+        {
+            return _context.Business.Any(e => e.BusinessKey == key);
         }
     }
 }
