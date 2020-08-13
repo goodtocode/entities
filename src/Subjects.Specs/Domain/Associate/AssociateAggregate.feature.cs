@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace GoodToCode.Subjects.Domain
+namespace GoodToCode.Subjects.Domain.Associate
 {
     using TechTalk.SpecFlow;
     using System;
@@ -20,7 +20,7 @@ namespace GoodToCode.Subjects.Domain
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.3.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [TechTalk.SpecRun.FeatureAttribute("AssociateAggregate", Description="\tIn order to avoid silly mistakes\r\n\tAs a math idiot\r\n\tI want to be told the sum o" +
-        "f two numbers", SourceFile="Domain\\AssociateAggregate.feature", SourceLine=0)]
+        "f two numbers", SourceFile="Domain\\Associate\\AssociateAggregate.feature", SourceLine=0)]
     public partial class AssociateAggregateFeature
     {
         

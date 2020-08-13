@@ -19,7 +19,7 @@ namespace GoodToCode.Subjects.Application.Associate
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.3.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Business Query", Description="\tGet a Business from persistence", SourceFile="Application\\Associate\\BusinessQuery.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("Business Query", Description="\tGet a Business from query", SourceFile="Application\\Associate\\BusinessQuery.feature", SourceLine=0)]
     public partial class BusinessQueryFeature
     {
         
@@ -34,7 +34,7 @@ namespace GoodToCode.Subjects.Application.Associate
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Business Query", "\tGet a Business from persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Business Query", "\tGet a Business from query", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -70,16 +70,14 @@ namespace GoodToCode.Subjects.Application.Associate
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Get a business by key via Entity framework", new string[] {
-                "query",
-                "entityFramework"}, SourceLine=4)]
-        public virtual void GetABusinessByKeyViaEntityFramework()
+        [TechTalk.SpecRun.ScenarioAttribute("Get a business by key via Query", new string[] {
+                "query"}, SourceLine=4)]
+        public virtual void GetABusinessByKeyViaQuery()
         {
             string[] tagsOfScenario = new string[] {
-                    "query",
-                    "entityFramework"};
+                    "query"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get a business by key via Entity framework", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get a business by key via Query", null, tagsOfScenario, argumentsOfScenario);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -101,19 +99,16 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 6
- testRunner.Given("I have a business key", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have a business key that can be Queried", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- testRunner.And("the key is type Guid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("Business is read by key via Query", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
- testRunner.When("Business is queried by key via Entity framework", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+  testRunner.And("the business exists in Query", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 9
-  testRunner.And("the business exists in persistence", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 10
- testRunner.Then("the matching business is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the matching business is returned from the Query", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

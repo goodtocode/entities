@@ -1,10 +1,14 @@
-﻿using GoodToCode.Subjects.Models;
+﻿using GoodToCode.Shared.Domain;
+using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
@@ -19,8 +23,7 @@ namespace GoodToCode.Subjects.Specs
         private readonly IConfiguration _config;
 
         private Guid SutKey { get; set; }
-        private Business Sut { get; set; }
-        private Uri BusinessGetFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessGet?code=9AVbUx74MCU6k4wAXyO6NxEJy3SdWJMXAMwHQzm99LWB7RcVAF/1HQ==&key={SutKey}"); } }
+        private List<Business> Sut { get; set; }
 
         public BusinessQuerySteps()
         {
@@ -34,36 +37,32 @@ namespace GoodToCode.Subjects.Specs
             _context = new SubjectsDbContext(options.Options);
         }
 
-        [Given(@"I have a business key")]
-        public async Task GivenIHaveABusinessKey()
+        [Given(@"I have a business key that can be Queried")]
+        public async Task GivenIHaveABusinessKeyThatCanBeQueried()
         {
             var item = await _context.Business.FirstAsync();
             SutKey = item.BusinessKey;
-        }
-        
-        [Given(@"the key is type Guid")]
-        public void GivenTheKeyIsTypeGuid()
-        {
-            Assert.IsTrue(SutKey != Guid.Empty);
-        }        
-        
-        [When(@"the business exists in persistence")]
-        public void WhenTheBusinessExistsInPersistence()
-        {
             Assert.IsTrue(SutKey != Guid.Empty);
         }
-        
-        [When(@"Business is queried by key via Entity framework")]
-        public async Task WhenBusinessIsQueriedByKeyViaEntityFramework()
+
+        [When(@"Business is read by key via Query")]
+        public void WhenBusinessIsReadByKeyViaQuery()
         {
-            Sut = await _context.Business.FirstAsync(x => x.BusinessKey == SutKey);
-            Assert.IsTrue(Sut.BusinessKey != Guid.Empty);
+            var query = new BusinessGetQuery(SutKey);
+            var handle = new BusinessGetQuery.Handler(_context);
+            //Sut = handle.Handle(query, new System.Threading.CancellationToken()).Result;
         }
-        
-        [Then(@"the matching business is returned")]
-        public void ThenTheMatchingBusinessIsReturned()
+
+        [When(@"the business exists in Query")]
+        public void WhenTheBusinessExistsInQuery()
         {
-            Assert.IsTrue(Sut.BusinessKey == SutKey);
+            Assert.IsFalse(Sut == null);
+        }
+
+        [Then(@"the matching business is returned from the Query")]
+        public void ThenTheMatchingBusinessIsReturnedFromTheQuery()
+        {
+            Assert.IsTrue(Sut.Any(x => x.BusinessKey == SutKey));
         }
     }
 }

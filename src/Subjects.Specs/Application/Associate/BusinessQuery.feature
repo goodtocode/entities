@@ -1,10 +1,9 @@
 ﻿Feature: Business Query
-	Get a Business from persistence
+	Get a Business from query
 
-@query @entityFramework
-Scenario: Get a business by key via Entity framework
-	Given I have a business key
-	And the key is type Guid
-	When Business is queried by key via Entity framework
-		And the business exists in persistence
-	Then the matching business is returned
+@query
+Scenario: Get a business by key via Query
+	Given I have a business key that can be Queried
+	When Business is read by key via Query
+		And the business exists in Query
+	Then the matching business is returned from the Query

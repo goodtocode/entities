@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GoodToCode.Subjects.Specs
+namespace GoodToCode.Shared.Specs
 {
     public class HttpClientFactory
     {

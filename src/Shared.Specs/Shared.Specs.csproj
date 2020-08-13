@@ -47,4 +47,8 @@
     <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>
