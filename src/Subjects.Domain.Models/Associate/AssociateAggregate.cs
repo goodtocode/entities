@@ -29,7 +29,7 @@ namespace GoodToCode.Subjects.Aggregates
         }
 
         // Business
-        public async Task<Business> BusinessSaveAsync(IBusiness business)
+        public async Task<int> BusinessSaveAsync(IBusiness business)
         {
             // Record in local storage
 
@@ -48,7 +48,7 @@ namespace GoodToCode.Subjects.Aggregates
             _recordsAffected = await _context.SaveChangesAsync();            
             business.RaiseDomainEvent(eventRaise);
 
-            return (Business)business;
+            return _recordsAffected;
         }
         public async Task<Business> BusinessDeleteAsync(IBusiness business)
         {
@@ -73,7 +73,7 @@ namespace GoodToCode.Subjects.Aggregates
         }
 
         // Person
-        public async Task<Person> PersonSaveAsync(IPerson person)
+        public async Task<int> PersonSaveAsync(IPerson person)
         {
             // Record locally
             // raise event with data to persistence
@@ -84,11 +84,11 @@ namespace GoodToCode.Subjects.Aggregates
                 _context.Person.Add((Person)person);
             _recordsAffected = await _context.SaveChangesAsync();
 
-            return (Person)person;
+            return _recordsAffected;
         }
 
         // Government
-        public async Task<Government> GovernmentSaveAsync(IGovernment government)
+        public async Task<int> GovernmentSaveAsync(IGovernment government)
         {
             // Record locally
             // raise event with data to persistence
@@ -99,7 +99,7 @@ namespace GoodToCode.Subjects.Aggregates
                 _context.Government.Add((Government)government);
             _recordsAffected = await _context.SaveChangesAsync();
 
-            return (Government)government;
+            return _recordsAffected;
         }
     }
 }

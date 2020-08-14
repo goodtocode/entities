@@ -31,8 +31,8 @@ namespace GoodToCode.Subjects.Functions
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic itemToSave = JsonConvert.DeserializeObject(requestBody);
             Business business = new Caster().Cast<Business>(itemToSave);           
-            business = await new AssociateAggregate(context).BusinessSaveAsync(business);
-            return business.BusinessKey == Guid.Empty ? new NotFoundResult() : (IActionResult)new OkObjectResult(JsonConvert.SerializeObject(business));
+            var recordsAffected = await new AssociateAggregate(context).BusinessSaveAsync(business);
+            return recordsAffected == 0 ? new NotFoundResult() : (IActionResult)new OkObjectResult(JsonConvert.SerializeObject(business));
         }
     }
 }
