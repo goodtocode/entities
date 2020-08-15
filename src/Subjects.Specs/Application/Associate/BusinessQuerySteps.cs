@@ -13,7 +13,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
-namespace GoodToCode.Subjects.Specs
+namespace GoodToCode.Subjects.Application
 {
     [Binding]
     public class BusinessQuerySteps

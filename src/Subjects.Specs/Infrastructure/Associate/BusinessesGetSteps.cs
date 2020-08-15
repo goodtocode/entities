@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
@@ -20,7 +18,6 @@ namespace GoodToCode.Subjects.Specs
         private readonly string _connectionString;
         private readonly IConfiguration _config;
         private List<Business> Sut { get; set; }
-        private Uri BusinessesGetFunctionsUrl { get { return new Uri("https://subject-functions.azurewebsites.net/api/BusinessesGet?code=Vi0CYsNfYvLrDMy6D0hiX9ZqpO5ORX/wsN5uqK2qzgjzORaSNTEfGQ=="); } }
 
         public BusinessesGetSteps()
         {

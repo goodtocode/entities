@@ -1,7 +1,5 @@
 ﻿using GoodToCode.Extensions.Mvc;
 using GoodToCode.Shared.Cqrs;
-using GoodToCode.Shared.Domain;
-using GoodToCode.Shared.Extensions;
 using GoodToCode.Subjects.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Subjects.Application.Controller
+namespace GoodToCode.Subjects.Application
 {
     [Produces("application/json", "application/xml")]
     [ApiExplorerSettings(GroupName = "BusinessSpecification")]
@@ -87,11 +85,6 @@ namespace GoodToCode.Subjects.Application.Controller
             await _context.SaveChangesAsync();
 
             return business;
-        }
-
-        private bool BusinessExists(Guid key)
-        {
-            return _context.Business.Any(e => e.BusinessKey == key);
         }
     }
 }

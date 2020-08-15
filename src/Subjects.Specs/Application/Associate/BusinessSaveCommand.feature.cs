@@ -70,16 +70,16 @@ namespace GoodToCode.Subjects.Application.Associate
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Create a new business via Entity Framework", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("Create a new business via CQRS Command", new string[] {
                 "command",
-                "entityFramework"}, SourceLine=4)]
-        public virtual void CreateANewBusinessViaEntityFramework()
+                "CQRS"}, SourceLine=4)]
+        public virtual void CreateANewBusinessViaCQRSCommand()
         {
             string[] tagsOfScenario = new string[] {
                     "command",
-                    "entityFramework"};
+                    "CQRS"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new business via Entity Framework", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new business via CQRS Command", null, tagsOfScenario, argumentsOfScenario);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -101,22 +101,16 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 6
- testRunner.Given("A new Business has been created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("A new Business Save Command has been created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
   testRunner.And("a business key has been provided", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 8
-  testRunner.And("a business name has been provided", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("the Business is inserted via CQRS Command", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 9
- testRunner.When("the Business does not exist in persistence by key", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 10
-  testRunner.And("Business is inserted via Entity Framework", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 11
- testRunner.Then("the new business can be queried by key", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the CQRS inserted business can be queried by key", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

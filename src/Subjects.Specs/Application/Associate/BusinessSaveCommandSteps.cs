@@ -7,8 +7,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using TechTalk.SpecRun.Common.Helper;
 
-namespace GoodToCode.Subjects.Specs
+namespace GoodToCode.Subjects.Application
 {
     [Binding]
     public class BusinessSaveCommandSteps
@@ -16,7 +17,6 @@ namespace GoodToCode.Subjects.Specs
         private readonly SubjectsDbContext _context;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
-        private int _rowsAffected;
 
         private Guid SutKey { get; set; }
         private Business Sut { get; set; }
@@ -34,8 +34,8 @@ namespace GoodToCode.Subjects.Specs
             _context = new SubjectsDbContext(options.Options);
         }
 
-        [Given(@"A new Business has been created")]
-        public void GivenANewBusinessHasBeenCreated()
+        [Given(@"A new Business Save Command has been created")]
+        public void GivenANewBusinessSaveCommandHasBeenCreated()
         {
             SutKey = Guid.NewGuid();
             Sut = new Business()
@@ -48,36 +48,24 @@ namespace GoodToCode.Subjects.Specs
             };
         }
 
-        [Given(@"a business key has been provided")]
-        public void GivenABusinessKeyHasBeenProvided()
+        [Given(@"the Business Save Command validates")]
+        public void GivenTheBusinessSaveCommandValidates()
         {
             Assert.IsTrue(Sut.BusinessKey != Guid.Empty);
+            Assert.IsFalse(Sut.BusinessName.IsNullOrWhiteSpace());
         }
 
-        [Given(@"a business name has been provided")]
-        public void GivenABusinessNameHasBeenProvided()
+        [When(@"the Business is inserted via CQRS Command")]
+        public async Task WhenTheBusinessIsInsertedViaCQRSCommand()
         {
-            Assert.IsTrue(Sut.BusinessKey != Guid.Empty);
+            var query = new BusinessSaveCommand(Sut);
+            var handle = new BusinessSaveHandler(_context, _config);
+            var response = await handle.Handle(query, new System.Threading.CancellationToken());
+            Assert.IsTrue(response.Result);
         }
 
-        [When(@"the Business does not exist in persistence by key")]
-        public async Task WhenTheBusinessDoesNotExistInPersistenceByKey()
-        {
-            var found = await _context.Business.Where(x => x.BusinessKey == SutKey).AnyAsync();
-            Assert.IsFalse(found);
-        }
-
-        [When(@"Business is inserted via Entity Framework")]
-        public async Task WhenBusinessIsInsertedViaEntityFramework()
-        {
-            _context.Business.Add(Sut);
-            _rowsAffected = await _context.SaveChangesAsync();
-            SutKey = Sut.BusinessKey;
-            Assert.IsTrue(_rowsAffected > 0);
-        }
-
-        [Then(@"the new business can be queried by key")]
-        public async Task ThenTheNewBusinessCanBeQueriedByKey()
+        [Then(@"the CQRS inserted business can be queried by key")]
+        public async Task ThenTheCQRSInsertedBusinessCanBeQueriedByKey()
         {
             var found = await _context.Business.Where(x => x.BusinessKey == SutKey).AnyAsync();
             Assert.IsTrue(found);

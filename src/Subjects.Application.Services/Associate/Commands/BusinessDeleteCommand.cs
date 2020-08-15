@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Domain
+namespace GoodToCode.Subjects.Application
 {
     public class BusinessDeleteCommand : IRequest<CommandResponseWrapper<bool>>
     {
@@ -42,7 +42,6 @@ namespace GoodToCode.Shared.Domain
             public async Task<CommandResponseWrapper<bool>> Handle(BusinessDeleteCommand request, CancellationToken cancellationToken)
             {
                 var result = new CommandResponseWrapper<bool>() { Errors = GetRequestErrors(request) };
-                int rowsAffected;
 
                 if (result.Errors.Count == 0)
                 {

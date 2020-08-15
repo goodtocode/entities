@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace GoodToCode.Shared.Domain
+namespace GoodToCode.Subjects.Application
 {
     public class GetLatestExamResultQueryValidator : AbstractValidator<BusinessGetQuery>
     {

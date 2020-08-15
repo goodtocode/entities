@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Domain
+namespace GoodToCode.Subjects.Application
 {
     public class BusinessGetQuery : IRequest<QueryResponseWrapper<List<Business>>>
     {
@@ -33,8 +33,8 @@ namespace GoodToCode.Shared.Domain
 
         private readonly GetLatestExamResultQueryValidator _validator;
         private readonly List<KeyValuePair<string, string>> _errors;
-        private ILogger<BusinessGetHandler> _logger;
-        private SubjectsDbContext _dbContext;
+        private readonly ILogger<BusinessGetHandler> _logger;
+        private readonly SubjectsDbContext _dbContext;
 
         public BusinessGetHandler(SubjectsDbContext dbContext)
         {

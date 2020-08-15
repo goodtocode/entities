@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using GoodToCode.Subjects.Models;
 
-namespace GoodToCode.Shared.Domain
+namespace GoodToCode.Subjects.Application
 {
     public class BusinessSaveValidator : AbstractValidator<Business>
     {

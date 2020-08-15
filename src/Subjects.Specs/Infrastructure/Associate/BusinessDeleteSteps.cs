@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
-namespace GoodToCode.Subjects.Infrastructure.Entity
+namespace GoodToCode.Subjects.Specs
 {
     [Binding]
     public class BusinessDeleteSteps
@@ -19,8 +19,6 @@ namespace GoodToCode.Subjects.Infrastructure.Entity
 
         private Guid SutKey { get; set; }
         private Business Sut { get; set; }
-        private Uri BusinessGetFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessGet?code=9AVbUx74MCU6k4wAXyO6NxEJy3SdWJMXAMwHQzm99LWB7RcVAF/1HQ==&key={SutKey}"); } }
-        private Uri BusinessSaveFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessSave?code=T3KPnhwNI1Ca67SbbXSvdHUIX3PhXc5uxjbFC0nKBGcahBfyEziHvQ==&key={SutKey}"); } }
 
         public BusinessDeleteSteps()
         {
