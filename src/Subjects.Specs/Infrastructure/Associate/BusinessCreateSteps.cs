@@ -48,18 +48,6 @@ namespace GoodToCode.Subjects.Specs
             };
         }
 
-        [Given(@"a business key has been provided")]
-        public void GivenABusinessKeyHasBeenProvided()
-        {
-            Assert.IsTrue(Sut.BusinessKey != Guid.Empty);
-        }
-
-        [Given(@"a business name has been provided")]
-        public void GivenABusinessNameHasBeenProvided()
-        {
-            Assert.IsTrue(Sut.BusinessKey != Guid.Empty);
-        }
-
         [When(@"the Business does not exist in persistence by key")]
         public async Task WhenTheBusinessDoesNotExistInPersistenceByKey()
         {
