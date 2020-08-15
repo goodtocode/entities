@@ -46,11 +46,12 @@ namespace GoodToCode.Subjects.Specs
         }
 
         [When(@"Business is read by key via Query")]
-        public void WhenBusinessIsReadByKeyViaQuery()
+        public async Task WhenBusinessIsReadByKeyViaQueryAsync()
         {
             var query = new BusinessGetQuery(SutKey);
-            var handle = new BusinessGetQuery.Handler(_context);
-            //Sut = handle.Handle(query, new System.Threading.CancellationToken()).Result;
+            var handle = new BusinessGetHandler(_context);
+            var response = await handle.Handle(query, new System.Threading.CancellationToken());
+            Sut = response.Result;
         }
 
         [When(@"the business exists in Query")]

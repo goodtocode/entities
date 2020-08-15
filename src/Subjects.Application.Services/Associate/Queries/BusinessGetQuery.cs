@@ -26,54 +26,54 @@ namespace GoodToCode.Shared.Domain
         }
 
         public Guid BusinessKey { get; set; }
+    }
 
-        public class Handler : IRequestHandler<BusinessGetQuery, QueryResponseWrapper<List<Business>>>
+    public class BusinessGetHandler : IRequestHandler<BusinessGetQuery, QueryResponseWrapper<List<Business>>>
+    {
+
+        private readonly GetLatestExamResultQueryValidator _validator;
+        private readonly List<KeyValuePair<string, string>> _errors;
+        private ILogger<BusinessGetHandler> _logger;
+        private SubjectsDbContext _dbContext;
+
+        public BusinessGetHandler(SubjectsDbContext dbContext)
         {
 
-            private readonly GetLatestExamResultQueryValidator _validator;
-            private readonly List<KeyValuePair<string, string>> _errors;
-            private ILogger<BusinessGetQuery.Handler> _logger;
-            private SubjectsDbContext _dbContext;
+            _dbContext = dbContext;
+            _validator = new GetLatestExamResultQueryValidator();
+            _errors = new List<KeyValuePair<string, string>>();
+        }
 
-            public Handler(SubjectsDbContext dbContext)
+        public async Task<QueryResponseWrapper<List<Business>>> Handle(BusinessGetQuery request, CancellationToken cancellationToken)
+        {
+            var response = new QueryResponseWrapper<List<Business>>() { Errors = ValidateRequest(request) };
+
+            if (!response.Errors.Any())
             {
-
-                _dbContext = dbContext;
-                _validator = new GetLatestExamResultQueryValidator();
-                _errors = new List<KeyValuePair<string, string>>();
-            }
-
-            async Task<QueryResponseWrapper<List<Business>>> IRequestHandler<BusinessGetQuery, QueryResponseWrapper<List<Business>>>.Handle(BusinessGetQuery request, CancellationToken cancellationToken)
-            {
-                var response = new QueryResponseWrapper<List<Business>>() { Errors = ValidateRequest(request) };
-
-                if (!response.Errors.Any())
+                try
                 {
-                    try
-                    {
-                        //response.Result = await _dbContext.Business.Where(request.QueryPredicate);
+                    response.Result = _dbContext.Business.Where(request.QueryPredicate).ToList();
 
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogCritical(e.ToString());
-                        response.ErrorInfo.UserErrorMessage = "Some Error Has Occured";
-                        response.ErrorInfo.HasException = true;
-                    }
                 }
-
-                return response;
+                catch (Exception e)
+                {
+                    _logger.LogCritical(e.ToString());
+                    response.ErrorInfo.UserErrorMessage = "Some Error Has Occured";
+                    response.ErrorInfo.HasException = true;
+                }
             }
 
-            private List<KeyValuePair<string, string>> ValidateRequest(BusinessGetQuery request)
-            {
-                var issues = _validator.Validate(request).Errors;
+            return response;
+        }
 
-                foreach (var issue in issues)
-                    _errors.Add(new KeyValuePair<string, string>(issue.PropertyName, issue.ErrorMessage));
+        private List<KeyValuePair<string, string>> ValidateRequest(BusinessGetQuery request)
+        {
+            var issues = _validator.Validate(request).Errors;
 
-                return _errors;
-            }
+            foreach (var issue in issues)
+                _errors.Add(new KeyValuePair<string, string>(issue.PropertyName, issue.ErrorMessage));
+
+            return _errors;
         }
     }
 }
