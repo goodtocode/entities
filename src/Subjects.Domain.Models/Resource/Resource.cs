@@ -1,17 +1,15 @@
 ﻿
+using GoodToCode.Shared.Domain;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
-    public class Resource : IResource
+    public class Resource : DomainModel<IResource>, IResource
     {
         [Key]
         public Guid ResourceKey { get; set; }
         public string ResourceName { get; set; }
         public string ResourceDescription { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
     }
 }

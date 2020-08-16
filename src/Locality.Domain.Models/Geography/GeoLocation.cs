@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace GoodToCode.Locality.Domain.Models
 {
-    public partial class GeoLocation
+    public class GeoLocation
     {
         public Guid GeoLocationKey { get; set; }
         public Guid LatLongKey { get; set; }

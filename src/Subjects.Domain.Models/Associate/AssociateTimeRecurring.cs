@@ -1,9 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
-    public class AssociateTimeRecurring : IAssociateTimeRecurring
+    public class AssociateTimeRecurring : DomainModel<IAssociateTimeRecurring>, IAssociateTimeRecurring
     {
         [Key]
         public Guid AssociateTimeRecurringKey { get; set; }
@@ -12,7 +13,7 @@ namespace GoodToCode.Subjects.Models
         public string DayName { get; set; }
         public string TimeName { get; set; }
         public Guid? TimeTypeKey { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
+        
+        
     }
 }

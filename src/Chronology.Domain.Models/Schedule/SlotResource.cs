@@ -1,8 +1,9 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public class SlotResource
+    public class SlotResource : DomainModel<ISlotResource>, ISlotResource
     {
         public Guid SlotResourceKey { get; set; }
         public Guid SlotKey { get; set; }

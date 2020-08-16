@@ -1,9 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 using System.Collections.Generic;
 
 namespace GoodToCode.Chronology.Models
 {
-    public class SlotLocation
+    public class SlotLocation : DomainModel<ISlotLocation>, ISlotLocation
     {
         public Guid SlotLocationKey { get; set; }
         public Guid SlotKey { get; set; }

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
-    public class Person : IPerson
+    public class Person : DomainModel<IPerson>, IPerson
     {
         [Key]
         public Guid PersonKey { get; set; }
@@ -12,7 +13,7 @@ namespace GoodToCode.Subjects.Models
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public string GenderCode { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
+        
+        
     }
 }

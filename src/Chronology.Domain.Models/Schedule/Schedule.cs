@@ -1,8 +1,9 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public class Schedule
+    public class Schedule : DomainModel<ISchedule>, ISchedule
     {
         public Guid ScheduleKey { get; set; }
         public string ScheduleName { get; set; }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GoodToCode.Chronology.Infrastructure
 {
-    public partial class ChronologyDbContext : DbContext
+    public partial class ChronologyDbContext : DbContext, IChronologyDbContext
     {
         public ChronologyDbContext(DbContextOptions<ChronologyDbContext> options)
             : base(options)

@@ -38,8 +38,8 @@ namespace GoodToCode.Subjects.Specs
                 BusinessKey = SutKey,
                 BusinessName = "AssociateAggregateSteps.cs Test",
                 TaxNumber = string.Empty,
-                CreatedDate = DateTime.UtcNow,
-                ModifiedDate = DateTime.UtcNow
+                
+                
             };
         }
 

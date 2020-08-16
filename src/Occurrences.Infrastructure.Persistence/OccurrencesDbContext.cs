@@ -3,12 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GoodToCode.Occurrences.Infrastructure
 {
-    public partial class OccurrencesDbContext : DbContext
+    public partial class OccurrencesDbContext : DbContext, IOccurrencesDbContext
     {
-        public OccurrencesDbContext()
-        {
-        }
-
         public OccurrencesDbContext(DbContextOptions<OccurrencesDbContext> options)
             : base(options)
         {

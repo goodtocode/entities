@@ -2,7 +2,7 @@
 
 namespace GoodToCode.Locality.Domain.Models
 {
-    public partial class Point
+    public class Point
     {
         public Guid PointKey { get; set; }
         public Point PointLocation { get; set; }

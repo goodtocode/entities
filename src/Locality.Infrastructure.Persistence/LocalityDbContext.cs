@@ -1,16 +1,11 @@
-﻿using System;
-using GoodToCode.Locality.Domain.Models;
+﻿using GoodToCode.Locality.Domain.Models;
+using GoodToCode.Locality.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace GoodToCode.Entities.WebApi1.Models
+namespace GoodToCode.Locality.Infrastructure
 {
-    public partial class LocalityDbContext : DbContext
+    public partial class LocalityDbContext : DbContext, ILocalityDbContext
     {
-        public LocalityDbContext()
-        {
-        }
-
         public LocalityDbContext(DbContextOptions<LocalityDbContext> options)
             : base(options)
         {
@@ -39,8 +34,6 @@ namespace GoodToCode.Entities.WebApi1.Models
                 entity.HasIndex(e => e.LocationKey)
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
                 entity.Property(e => e.LocationDescription)
                     .IsRequired()
                     .HasMaxLength(2000);
@@ -48,15 +41,6 @@ namespace GoodToCode.Entities.WebApi1.Models
                 entity.Property(e => e.LocationName)
                     .IsRequired()
                     .HasMaxLength(50);
-
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.Location)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Location_RecordState");
             });
 
             modelBuilder.Entity<LocationArea>(entity =>
@@ -73,17 +57,6 @@ namespace GoodToCode.Entities.WebApi1.Models
                 entity.HasIndex(e => new { e.LocationKey, e.AreaKey })
                     .HasName("IX_LocationArea_All")
                     .IsUnique();
-
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.LocationKeyNavigation)
-                    .WithMany(p => p.LocationArea)
-                    .HasPrincipalKey(p => p.LocationKey)
-                    .HasForeignKey(d => d.LocationKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_LocationArea_Location");
             });
 
             modelBuilder.Entity<LocationTimeRecurring>(entity =>
@@ -98,44 +71,13 @@ namespace GoodToCode.Entities.WebApi1.Models
                     .HasName("IX_LocationTimeRecurring_All")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
                 entity.Property(e => e.DayName)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
                 entity.Property(e => e.TimeName)
                     .IsRequired()
                     .HasMaxLength(50);
-
-                entity.HasOne(d => d.LocationKeyNavigation)
-                    .WithMany(p => p.LocationTimeRecurring)
-                    .HasPrincipalKey(p => p.LocationKey)
-                    .HasForeignKey(d => d.LocationKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_LocationTimeRecurring_Location");
-
-                entity.HasOne(d => d.RecordStateKeyNavigation)
-                    .WithMany(p => p.LocationTimeRecurring)
-                    .HasPrincipalKey(p => p.RecordStateKey)
-                    .HasForeignKey(d => d.RecordStateKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_LocationTimeRecurring_RecordState");
-
-                entity.HasOne(d => d.TimeRecurringKeyNavigation)
-                    .WithMany(p => p.LocationTimeRecurring)
-                    .HasPrincipalKey(p => p.TimeRecurringKey)
-                    .HasForeignKey(d => d.TimeRecurringKey)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_LocationTimeRecurring_TimeRecurring");
-
-                entity.HasOne(d => d.TimeTypeKeyNavigation)
-                    .WithMany(p => p.LocationTimeRecurring)
-                    .HasPrincipalKey(p => p.TimeTypeKey)
-                    .HasForeignKey(d => d.TimeTypeKey)
-                    .HasConstraintName("FK_LocationAvailable_TimeType");
             });
 
             modelBuilder.Entity<LocationType>(entity =>
@@ -146,8 +88,6 @@ namespace GoodToCode.Entities.WebApi1.Models
                     .HasName("IX_LocationType_Key")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
                 entity.Property(e => e.LocationTypeDescription)
                     .IsRequired()
                     .HasMaxLength(250);
@@ -155,8 +95,6 @@ namespace GoodToCode.Entities.WebApi1.Models
                 entity.Property(e => e.LocationTypeName)
                     .IsRequired()
                     .HasMaxLength(50);
-
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
             OnModelCreatingPartial(modelBuilder);

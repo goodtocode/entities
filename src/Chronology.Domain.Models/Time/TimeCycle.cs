@@ -1,9 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 using System.Collections.Generic;
 
 namespace GoodToCode.Chronology.Models
 {
-    public class TimeCycle
+    public class TimeCycle : DomainModel<ITimeCycle>, ITimeCycle
     {
         public Guid TimeCycleKey { get; set; }
         public string TimeCycleName { get; set; }

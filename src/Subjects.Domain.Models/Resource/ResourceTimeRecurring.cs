@@ -1,10 +1,11 @@
 ﻿
+using GoodToCode.Shared.Domain;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
-    public class ResourceTimeRecurring : IResourceTimeRecurring
+    public class ResourceTimeRecurring : DomainModel<IResourceTimeRecurring>, IResourceTimeRecurring
     {
         [Key]
         public Guid ResourceTimeRecurringKey { get; set; }
@@ -13,7 +14,5 @@ namespace GoodToCode.Subjects.Models
         public string DayName { get; set; }
         public string TimeName { get; set; }
         public Guid? TimeTypeKey { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
     }
 }

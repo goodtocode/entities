@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
-    public class Associate : DomainModel<Associate>, IAssociate
+    public class Associate : DomainModel<IAssociate>, IAssociate
     {
         [Key]
         public Guid AssociateKey { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
+        
+        
     }
 }

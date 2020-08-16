@@ -13,9 +13,9 @@
 //    [ApiController]
 //    public class ScheduleTypesController : ControllerBase
 //    {
-//        private readonly ChronoloyDbContext _context;
+//        private readonly ChronologyDbContext _context;
 
-//        public ScheduleTypesController(ChronoloyDbContext context)
+//        public ScheduleTypesController(ChronologyDbContext context)
 //        {
 //            _context = context;
 //        }

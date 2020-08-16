@@ -65,9 +65,9 @@ namespace GoodToCode.Subjects.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.TaxNumber)
                     .IsRequired()
@@ -83,13 +83,13 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_Detail_Key")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.DetailData)
                     .IsRequired()
                     .HasMaxLength(2000);
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<DetailType>(entity =>
@@ -100,7 +100,7 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_DetailType_Key")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.DetailTypeDescription)
                     .IsRequired()
@@ -110,7 +110,7 @@ namespace GoodToCode.Subjects.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<Associate>(entity =>
@@ -121,9 +121,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_AssociateLocation_Associate")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<AssociateAppointment>(entity =>
@@ -138,9 +138,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_AssociateAppointment_All")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<AssociateDetail>(entity =>
@@ -155,9 +155,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_AssociateDetail_All")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<AssociateLocation>(entity =>
@@ -168,9 +168,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_AssociateLocation_All")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<AssociateOption>(entity =>
@@ -181,9 +181,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_AssociateOption_All")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<AssociateTimeRecurring>(entity =>
@@ -198,13 +198,13 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_AssociateTimeRecurring_All")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.DayName)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.TimeName)
                     .IsRequired()
@@ -227,7 +227,7 @@ namespace GoodToCode.Subjects.Models
 
                 entity.Property(e => e.GenderCode).ValueGeneratedNever();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.GenderCode)
                     .IsRequired()
@@ -237,7 +237,7 @@ namespace GoodToCode.Subjects.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<Government>(entity =>
@@ -248,13 +248,13 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_Government_Associate")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.GovernmentName)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<Item>(entity =>
@@ -264,7 +264,7 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => e.ItemKey)
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.ItemDescription)
                     .IsRequired()
@@ -274,7 +274,7 @@ namespace GoodToCode.Subjects.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<ItemGroup>(entity =>
@@ -285,7 +285,7 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_ItemGroup_Key")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.ItemGroupDescription)
                     .IsRequired()
@@ -295,7 +295,7 @@ namespace GoodToCode.Subjects.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<ItemType>(entity =>
@@ -306,7 +306,7 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_ItemType_Key")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.ItemTypeDescription)
                     .IsRequired()
@@ -316,7 +316,7 @@ namespace GoodToCode.Subjects.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<Option>(entity =>
@@ -330,9 +330,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_Option_OptionCode")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.OptionCode)
                     .IsRequired()
@@ -359,9 +359,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_Option_OptionGroupKey")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.OptionGroupCode)
                     .IsRequired()
@@ -389,7 +389,7 @@ namespace GoodToCode.Subjects.Models
 
                 entity.Property(e => e.BirthDate).HasColumnType("datetime");
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.FirstName)
                     .IsRequired()
@@ -403,7 +403,7 @@ namespace GoodToCode.Subjects.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.GenderCode).HasMaxLength(3);
                 entity.HasCheckConstraint("CC_Person_GenderCode", "GenderCode in ('M', 'F', 'N/A', 'U/K')");
@@ -416,9 +416,9 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => e.ResourceKey)
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.ResourceDescription)
                     .IsRequired()
@@ -447,9 +447,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_ResourceItem_All")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<ResourcePerson>(entity =>
@@ -470,9 +470,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_ResourcePerson_All")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<ResourceTimeRecurring>(entity =>
@@ -487,13 +487,13 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_ResourceTimeRecurring_All")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.DayName)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.TimeName)
                     .IsRequired()
@@ -508,9 +508,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_ResourceType_Key")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.ResourceTypeDescription)
                     .IsRequired()
@@ -528,9 +528,9 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => e.VentureKey)
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.VentureDescription)
                     .IsRequired()
@@ -557,9 +557,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_VentureAppointment_All")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<VentureDetail>(entity =>
@@ -574,9 +574,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_VentureDetail_All")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<VentureAssociateOption>(entity =>
@@ -587,9 +587,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_VentureAssociateOption_Key")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<VentureLocation>(entity =>
@@ -604,9 +604,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_VentureLocation_All")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<VentureOption>(entity =>
@@ -617,9 +617,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_VentureOption_All")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<VentureResource>(entity =>
@@ -634,9 +634,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_VentureResource_All")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             modelBuilder.Entity<VentureSchedule>(entity =>
@@ -651,9 +651,9 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_VentureSchedule_All")
                     .IsUnique();
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                
 
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                
             });
 
             OnModelCreatingPartial(modelBuilder);

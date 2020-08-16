@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public class SlotTimeRecurring
+    public class SlotTimeRecurring : DomainModel<ISlotTimeRecurring>, ISlotTimeRecurring
     {
         public int SlotTimeRecurringId { get; set; }
         public Guid SlotTimeRecurringKey { get; set; }

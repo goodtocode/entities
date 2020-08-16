@@ -13,9 +13,9 @@
 //    [ApiController]
 //    public class TimeRecurringsController : ControllerBase
 //    {
-//        private readonly ChronoloyDbContext _context;
+//        private readonly ChronologyDbContext _context;
 
-//        public TimeRecurringsController(ChronoloyDbContext context)
+//        public TimeRecurringsController(ChronologyDbContext context)
 //        {
 //            _context = context;
 //        }

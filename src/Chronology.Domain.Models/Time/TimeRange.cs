@@ -1,9 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 using System.Collections.Generic;
 
 namespace GoodToCode.Chronology.Models
 {
-    public class TimeRange
+    public class TimeRange : DomainModel<ITimeRange>, ITimeRange
     {
         public Guid TimeRangeKey { get; set; }
         public DateTime BeginDate { get; set; }

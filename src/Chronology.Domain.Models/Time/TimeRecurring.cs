@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public class TimeRecurring
+    public class TimeRecurring : DomainModel<ITimeRecurring>, ITimeRecurring
     {
         public Guid TimeRecurringKey { get; set; }
         public int BeginDay { get; set; }

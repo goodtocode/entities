@@ -1,8 +1,9 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public class TimeType
+    public class TimeType : DomainModel<ITimeType>, ITimeType
     {
         public Guid TimeTypeKey { get; set; }
         public string TimeTypeName { get; set; }

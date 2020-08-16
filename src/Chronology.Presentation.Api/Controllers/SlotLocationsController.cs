@@ -13,9 +13,9 @@
 //    [ApiController]
 //    public class SlotLocationsController : ControllerBase
 //    {
-//        private readonly ChronoloyDbContext _context;
+//        private readonly ChronologyDbContext _context;
 
-//        public SlotLocationsController(ChronoloyDbContext context)
+//        public SlotLocationsController(ChronologyDbContext context)
 //        {
 //            _context = context;
 //        }

@@ -36,8 +36,8 @@ namespace GoodToCode.Subjects.Specs
                 BusinessKey = SutKey,
                 BusinessName = "BusinessCreateSteps.cs Test",
                 TaxNumber = string.Empty,
-                CreatedDate = DateTime.UtcNow,
-                ModifiedDate = DateTime.UtcNow
+                
+                
             };
         }
 
