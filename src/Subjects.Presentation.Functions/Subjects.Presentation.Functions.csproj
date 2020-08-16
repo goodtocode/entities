@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
-    <AssemblyName>GoodToCode.Subjects.Application.Functions</AssemblyName>
-    <RootNamespace>GoodToCode.Subjects</RootNamespace>
+    <AssemblyName>GoodToCode.Subjects.Presentation.Functions</AssemblyName>
+    <RootNamespace>GoodToCode.Subjects.Presentation.Functions</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Person\**" />

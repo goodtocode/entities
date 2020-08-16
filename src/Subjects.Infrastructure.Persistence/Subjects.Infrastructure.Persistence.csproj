@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <OutputType>Library</OutputType>
     <AssemblyName>GoodToCode.Shared.Infrastructure.Persistence</AssemblyName>
-    <RootNamespace>GoodToCode.Shared</RootNamespace>
+    <RootNamespace>GoodToCode.Shared.Infrastructure.Persistence</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

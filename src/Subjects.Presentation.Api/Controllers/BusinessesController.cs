@@ -33,7 +33,7 @@ namespace GoodToCode.Subjects.Application
             return await _context.Business.ToListAsync();
         }
 
-        // GET: api/Businesses/5
+        // GET: api/Businesses/376B76B4-1EA8-4B31-9238-41E59784B5DD
         [HttpGet("{key}")]
         public async Task<ActionResult<Business>> GetBusiness(Guid key)
         {
@@ -47,7 +47,7 @@ namespace GoodToCode.Subjects.Application
             return business;
         }
 
-        [Authorize]
+        // PUT: api/Businesses/376B76B4-1EA8-4B31-9238-41E59784B5DD
         [HttpPut("{key}")]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 202)]
@@ -55,7 +55,7 @@ namespace GoodToCode.Subjects.Application
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 401)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 406)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 500)]
-        public async Task<ActionResult<CommandResponseWrapper<bool>>> BusinessPut(Guid key, [FromBody] BusinessSaveCommand command)
+        public async Task<ActionResult<CommandResponseWrapper<bool>>> PutBusiness(Guid key, [FromBody] BusinessSaveCommand command)
         {
             var cmdResponse = await Mediator.Send(command);
 
@@ -71,7 +71,7 @@ namespace GoodToCode.Subjects.Application
             return Accepted(cmdResponse);
         }
 
-        [Authorize]
+        // POST: api/Businesses/376B76B4-1EA8-4B31-9238-41E59784B5DD
         [HttpPost()]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 202)]
@@ -79,7 +79,7 @@ namespace GoodToCode.Subjects.Application
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 401)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 406)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 500)]
-        public async Task<ActionResult<CommandResponseWrapper<bool>>> BusinessPost([FromBody] BusinessSaveCommand command)
+        public async Task<ActionResult<CommandResponseWrapper<bool>>> PostBusiness([FromBody] BusinessSaveCommand command)
         {
             var cmdResponse = await Mediator.Send(command);
 
@@ -92,7 +92,7 @@ namespace GoodToCode.Subjects.Application
             return Accepted(cmdResponse);
         }
 
-        // DELETE: api/Businesses/5
+        // DELETE: api/Businesses/376B76B4-1EA8-4B31-9238-41E59784B5DD
         [HttpDelete("{key}")]
         public async Task<ActionResult<Business>> DeleteBusiness(Guid key)
         {
