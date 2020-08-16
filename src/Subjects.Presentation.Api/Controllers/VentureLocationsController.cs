@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class VentureLocationsController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public VentureLocationsController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/VentureLocations
         [HttpGet]
         public async Task<ActionResult<IEnumerable<VentureLocation>>> GetVentureLocation()
         {
-            return await _context.VentureLocation.ToListAsync();
+            return await _dbContext.VentureLocation.ToListAsync();
         }
 
         // GET: api/VentureLocations/5
         [HttpGet("{key}")]
         public async Task<ActionResult<VentureLocation>> GetVentureLocation(Guid key)
         {
-            var ventureLocation = await _context.VentureLocation.FindAsync(key);
+            var ventureLocation = await _dbContext.VentureLocation.FindAsync(key);
 
             if (ventureLocation == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(ventureLocation).State = EntityState.Modified;
+            _dbContext.Entry(ventureLocation).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<VentureLocation>> PostVentureLocation(VentureLocation ventureLocation)
         {
-            _context.VentureLocation.Add(ventureLocation);
-            await _context.SaveChangesAsync();
+            _dbContext.VentureLocation.Add(ventureLocation);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetVentureLocation", new { key = ventureLocation.VentureLocationKey }, ventureLocation);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<VentureLocation>> DeleteVentureLocation(Guid key)
         {
-            var ventureLocation = await _context.VentureLocation.FindAsync(key);
+            var ventureLocation = await _dbContext.VentureLocation.FindAsync(key);
             if (ventureLocation == null)
             {
                 return NotFound();
             }
 
-            _context.VentureLocation.Remove(ventureLocation);
-            await _context.SaveChangesAsync();
+            _dbContext.VentureLocation.Remove(ventureLocation);
+            await _dbContext.SaveChangesAsync();
 
             return ventureLocation;
         }
 
         private bool VentureLocationExists(Guid key)
         {
-            return _context.VentureLocation.Any(e => e.VentureLocationKey == key);
+            return _dbContext.VentureLocation.Any(e => e.VentureLocationKey == key);
         }
     }
 }

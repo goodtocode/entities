@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class VentureAssociateOptionsController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public VentureAssociateOptionsController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/VentureAssociateOptions
         [HttpGet]
         public async Task<ActionResult<IEnumerable<VentureAssociateOption>>> GetVentureAssociateOption()
         {
-            return await _context.VentureAssociateOption.ToListAsync();
+            return await _dbContext.VentureAssociateOption.ToListAsync();
         }
 
         // GET: api/VentureAssociateOptions/5
         [HttpGet("{key}")]
         public async Task<ActionResult<VentureAssociateOption>> GetVentureAssociateOption(Guid key)
         {
-            var ventureAssociateOption = await _context.VentureAssociateOption.FindAsync(key);
+            var ventureAssociateOption = await _dbContext.VentureAssociateOption.FindAsync(key);
 
             if (ventureAssociateOption == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(ventureAssociateOption).State = EntityState.Modified;
+            _dbContext.Entry(ventureAssociateOption).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<VentureAssociateOption>> PostVentureAssociateOption(VentureAssociateOption ventureAssociateOption)
         {
-            _context.VentureAssociateOption.Add(ventureAssociateOption);
-            await _context.SaveChangesAsync();
+            _dbContext.VentureAssociateOption.Add(ventureAssociateOption);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetVentureAssociateOption", new { key = ventureAssociateOption.VentureAssociateOptionKey }, ventureAssociateOption);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<VentureAssociateOption>> DeleteVentureAssociateOption(Guid key)
         {
-            var ventureAssociateOption = await _context.VentureAssociateOption.FindAsync(key);
+            var ventureAssociateOption = await _dbContext.VentureAssociateOption.FindAsync(key);
             if (ventureAssociateOption == null)
             {
                 return NotFound();
             }
 
-            _context.VentureAssociateOption.Remove(ventureAssociateOption);
-            await _context.SaveChangesAsync();
+            _dbContext.VentureAssociateOption.Remove(ventureAssociateOption);
+            await _dbContext.SaveChangesAsync();
 
             return ventureAssociateOption;
         }
 
         private bool VentureAssociateOptionExists(Guid key)
         {
-            return _context.VentureAssociateOption.Any(e => e.VentureAssociateOptionKey == key);
+            return _dbContext.VentureAssociateOption.Any(e => e.VentureAssociateOptionKey == key);
         }
     }
 }

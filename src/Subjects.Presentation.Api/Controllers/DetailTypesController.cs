@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class DetailTypesController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public DetailTypesController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/DetailTypes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DetailType>>> GetDetailType()
         {
-            return await _context.DetailType.ToListAsync();
+            return await _dbContext.DetailType.ToListAsync();
         }
 
         // GET: api/DetailTypes/5
         [HttpGet("{key}")]
         public async Task<ActionResult<DetailType>> GetDetailType(Guid key)
         {
-            var detailType = await _context.DetailType.FindAsync(key);
+            var detailType = await _dbContext.DetailType.FindAsync(key);
 
             if (detailType == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(detailType).State = EntityState.Modified;
+            _dbContext.Entry(detailType).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<DetailType>> PostDetailType(DetailType detailType)
         {   
-            _context.DetailType.Add(detailType);
-            await _context.SaveChangesAsync();
+            _dbContext.DetailType.Add(detailType);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetDetailType", new { key = detailType.DetailTypeKey }, detailType);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<DetailType>> DeleteDetailType(Guid key)
         {
-            var detailType = await _context.DetailType.FindAsync(key);
+            var detailType = await _dbContext.DetailType.FindAsync(key);
             if (detailType == null)
             {
                 return NotFound();
             }
 
-            _context.DetailType.Remove(detailType);
-            await _context.SaveChangesAsync();
+            _dbContext.DetailType.Remove(detailType);
+            await _dbContext.SaveChangesAsync();
 
             return detailType;
         }
 
         private bool DetailTypeExists(Guid key)
         {
-            return _context.DetailType.Any(e => e.DetailTypeKey == key);
+            return _dbContext.DetailType.Any(e => e.DetailTypeKey == key);
         }
     }
 }

@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class OptionGroupsController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public OptionGroupsController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/OptionGroups
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OptionGroup>>> GetOptionGroup()
         {
-            return await _context.OptionGroup.ToListAsync();
+            return await _dbContext.OptionGroup.ToListAsync();
         }
 
         // GET: api/OptionGroups/5
         [HttpGet("{key}")]
         public async Task<ActionResult<OptionGroup>> GetOptionGroup(Guid key)
         {
-            var optionGroup = await _context.OptionGroup.FindAsync(key);
+            var optionGroup = await _dbContext.OptionGroup.FindAsync(key);
 
             if (optionGroup == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(optionGroup).State = EntityState.Modified;
+            _dbContext.Entry(optionGroup).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<OptionGroup>> PostOptionGroup(OptionGroup optionGroup)
         {
-            _context.OptionGroup.Add(optionGroup);
-            await _context.SaveChangesAsync();
+            _dbContext.OptionGroup.Add(optionGroup);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetOptionGroup", new { key = optionGroup.OptionGroupKey }, optionGroup);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<OptionGroup>> DeleteOptionGroup(Guid key)
         {
-            var optionGroup = await _context.OptionGroup.FindAsync(key);
+            var optionGroup = await _dbContext.OptionGroup.FindAsync(key);
             if (optionGroup == null)
             {
                 return NotFound();
             }
 
-            _context.OptionGroup.Remove(optionGroup);
-            await _context.SaveChangesAsync();
+            _dbContext.OptionGroup.Remove(optionGroup);
+            await _dbContext.SaveChangesAsync();
 
             return optionGroup;
         }
 
         private bool OptionGroupExists(Guid key)
         {
-            return _context.OptionGroup.Any(e => e.OptionGroupKey == key);
+            return _dbContext.OptionGroup.Any(e => e.OptionGroupKey == key);
         }
     }
 }

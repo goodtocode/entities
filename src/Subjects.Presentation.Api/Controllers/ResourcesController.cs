@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class ResourcesController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public ResourcesController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/Resources
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Resource>>> GetResource()
         {
-            return await _context.Resource.ToListAsync();
+            return await _dbContext.Resource.ToListAsync();
         }
 
         // GET: api/Resources/5
         [HttpGet("{key}")]
         public async Task<ActionResult<Resource>> GetResource(Guid key)
         {
-            var resource = await _context.Resource.FindAsync(key);
+            var resource = await _dbContext.Resource.FindAsync(key);
 
             if (resource == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(resource).State = EntityState.Modified;
+            _dbContext.Entry(resource).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<Resource>> PostResource(Resource resource)
         {
-            _context.Resource.Add(resource);
-            await _context.SaveChangesAsync();
+            _dbContext.Resource.Add(resource);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetResource", new { key = resource.ResourceKey }, resource);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<Resource>> DeleteResource(Guid key)
         {
-            var resource = await _context.Resource.FindAsync(key);
+            var resource = await _dbContext.Resource.FindAsync(key);
             if (resource == null)
             {
                 return NotFound();
             }
 
-            _context.Resource.Remove(resource);
-            await _context.SaveChangesAsync();
+            _dbContext.Resource.Remove(resource);
+            await _dbContext.SaveChangesAsync();
 
             return resource;
         }
 
         private bool ResourceExists(Guid key)
         {
-            return _context.Resource.Any(e => e.ResourceKey == key);
+            return _dbContext.Resource.Any(e => e.ResourceKey == key);
         }
     }
 }

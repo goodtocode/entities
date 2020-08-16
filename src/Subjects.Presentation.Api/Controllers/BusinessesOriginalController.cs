@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class BusinessesOriginalController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public BusinessesOriginalController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/Businesses
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
         {
-            return await _context.Business.ToListAsync();
+            return await _dbContext.Business.ToListAsync();
         }
 
         // GET: api/Businesses/5
         [HttpGet("{key}")]
         public async Task<ActionResult<Business>> GetBusiness(Guid key)
         {
-            var business = await _context.Business.FindAsync(key);
+            var business = await _dbContext.Business.FindAsync(key);
 
             if (business == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(business).State = EntityState.Modified;
+            _dbContext.Entry(business).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<Business>> PostBusiness(Business business)
         {
-            _context.Business.Add(business);
-            await _context.SaveChangesAsync();
+            _dbContext.Business.Add(business);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetBusiness", new { key = business.BusinessKey }, business);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<Business>> DeleteBusiness(Guid key)
         {
-            var business = await _context.Business.FindAsync(key);
+            var business = await _dbContext.Business.FindAsync(key);
             if (business == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
-            await _context.SaveChangesAsync();
+            _dbContext.Business.Remove(business);
+            await _dbContext.SaveChangesAsync();
 
             return business;
         }
 
         private bool BusinessExists(Guid key)
         {
-            return _context.Business.Any(e => e.BusinessKey == key);
+            return _dbContext.Business.Any(e => e.BusinessKey == key);
         }
     }
 }

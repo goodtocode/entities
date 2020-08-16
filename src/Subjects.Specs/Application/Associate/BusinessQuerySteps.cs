@@ -16,7 +16,7 @@ namespace GoodToCode.Subjects.Specs
     [Binding]
     public class BusinessQuerySteps
     {        
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
 
@@ -27,13 +27,13 @@ namespace GoodToCode.Subjects.Specs
         {
             _config = new ConfigurationFactory("Subjects.Specs").Create();
             _connectionString = new ConnectionStringFactory(_config).Create();
-            _context = new DbContextFactory(_connectionString).Create();
+            _dbContext = new DbContextFactory(_connectionString).Create();
         }
 
         [Given(@"I have a business key that can be Queried")]
         public async Task GivenIHaveABusinessKeyThatCanBeQueried()
         {
-            var item = await _context.Business.FirstAsync();
+            var item = await _dbContext.Business.FirstAsync();
             SutKey = item.BusinessKey;
             Assert.IsTrue(SutKey != Guid.Empty);
         }
@@ -42,7 +42,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessIsReadByKeyViaQueryAsync()
         {
             var query = new BusinessGetQuery(SutKey);
-            var handle = new BusinessGetHandler(_context);
+            var handle = new BusinessGetHandler(_dbContext);
             var response = await handle.Handle(query, new System.Threading.CancellationToken());
             Sut = response.Result;
         }

@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class DetailsController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public DetailsController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/Details
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Detail>>> GetDetail()
         {
-            return await _context.Detail.ToListAsync();
+            return await _dbContext.Detail.ToListAsync();
         }
 
         // GET: api/Details/5
         [HttpGet("{key}")]
         public async Task<ActionResult<Detail>> GetDetail(Guid key)
         {
-            var detail = await _context.Detail.FindAsync(key);
+            var detail = await _dbContext.Detail.FindAsync(key);
 
             if (detail == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(detail).State = EntityState.Modified;
+            _dbContext.Entry(detail).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<Detail>> PostDetail(Detail detail)
         {
-            _context.Detail.Add(detail);
-            await _context.SaveChangesAsync();
+            _dbContext.Detail.Add(detail);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetDetail", new { key = detail.DetailKey }, detail);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<Detail>> DeleteDetail(Guid key)
         {
-            var detail = await _context.Detail.FindAsync(key);
+            var detail = await _dbContext.Detail.FindAsync(key);
             if (detail == null)
             {
                 return NotFound();
             }
 
-            _context.Detail.Remove(detail);
-            await _context.SaveChangesAsync();
+            _dbContext.Detail.Remove(detail);
+            await _dbContext.SaveChangesAsync();
 
             return detail;
         }
 
         private bool DetailExists(Guid key)
         {
-            return _context.Detail.Any(e => e.DetailKey == key);
+            return _dbContext.Detail.Any(e => e.DetailKey == key);
         }
     }
 }

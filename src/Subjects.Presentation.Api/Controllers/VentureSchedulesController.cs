@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class VentureSchedulesController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public VentureSchedulesController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/VentureSchedules
         [HttpGet]
         public async Task<ActionResult<IEnumerable<VentureSchedule>>> GetVentureSchedule()
         {
-            return await _context.VentureSchedule.ToListAsync();
+            return await _dbContext.VentureSchedule.ToListAsync();
         }
 
         // GET: api/VentureSchedules/5
         [HttpGet("{key}")]
         public async Task<ActionResult<VentureSchedule>> GetVentureSchedule(Guid key)
         {
-            var ventureSchedule = await _context.VentureSchedule.FindAsync(key);
+            var ventureSchedule = await _dbContext.VentureSchedule.FindAsync(key);
 
             if (ventureSchedule == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(ventureSchedule).State = EntityState.Modified;
+            _dbContext.Entry(ventureSchedule).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<VentureSchedule>> PostVentureSchedule(VentureSchedule ventureSchedule)
         {
-            _context.VentureSchedule.Add(ventureSchedule);
-            await _context.SaveChangesAsync();
+            _dbContext.VentureSchedule.Add(ventureSchedule);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetVentureSchedule", new { key = ventureSchedule.VentureScheduleKey }, ventureSchedule);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<VentureSchedule>> DeleteVentureSchedule(Guid key)
         {
-            var ventureSchedule = await _context.VentureSchedule.FindAsync(key);
+            var ventureSchedule = await _dbContext.VentureSchedule.FindAsync(key);
             if (ventureSchedule == null)
             {
                 return NotFound();
             }
 
-            _context.VentureSchedule.Remove(ventureSchedule);
-            await _context.SaveChangesAsync();
+            _dbContext.VentureSchedule.Remove(ventureSchedule);
+            await _dbContext.SaveChangesAsync();
 
             return ventureSchedule;
         }
 
         private bool VentureScheduleExists(Guid key)
         {
-            return _context.VentureSchedule.Any(e => e.VentureScheduleKey == key);
+            return _dbContext.VentureSchedule.Any(e => e.VentureScheduleKey == key);
         }
     }
 }

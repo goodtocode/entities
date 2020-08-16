@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class ItemTypesController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public ItemTypesController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/ItemTypes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ItemType>>> GetItemType()
         {
-            return await _context.ItemType.ToListAsync();
+            return await _dbContext.ItemType.ToListAsync();
         }
 
         // GET: api/ItemTypes/5
         [HttpGet("{key}")]
         public async Task<ActionResult<ItemType>> GetItemType(Guid key)
         {
-            var itemType = await _context.ItemType.FindAsync(key);
+            var itemType = await _dbContext.ItemType.FindAsync(key);
 
             if (itemType == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(itemType).State = EntityState.Modified;
+            _dbContext.Entry(itemType).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<ItemType>> PostItemType(ItemType itemType)
         {
-            _context.ItemType.Add(itemType);
-            await _context.SaveChangesAsync();
+            _dbContext.ItemType.Add(itemType);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetItemType", new { key = itemType.ItemTypeKey }, itemType);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<ItemType>> DeleteItemType(Guid key)
         {
-            var itemType = await _context.ItemType.FindAsync(key);
+            var itemType = await _dbContext.ItemType.FindAsync(key);
             if (itemType == null)
             {
                 return NotFound();
             }
 
-            _context.ItemType.Remove(itemType);
-            await _context.SaveChangesAsync();
+            _dbContext.ItemType.Remove(itemType);
+            await _dbContext.SaveChangesAsync();
 
             return itemType;
         }
 
         private bool ItemTypeExists(Guid key)
         {
-            return _context.ItemType.Any(e => e.ItemTypeKey == key);
+            return _dbContext.ItemType.Any(e => e.ItemTypeKey == key);
         }
     }
 }

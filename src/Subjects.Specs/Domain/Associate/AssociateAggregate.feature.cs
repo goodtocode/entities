@@ -19,7 +19,7 @@ namespace GoodToCode.Subjects.Domain.Associate
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.3.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("AssociateAggregate", Description="\tRecommended method of changing any Assiciate namespaced data", SourceFile="Domain\\Associate\\AssociateAggregate.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("Associate Aggregate", Description="\tRecommended method of changing any Assiciate namespaced data", SourceFile="Domain\\Associate\\AssociateAggregate.feature", SourceLine=0)]
     public partial class AssociateAggregateFeature
     {
         
@@ -34,7 +34,7 @@ namespace GoodToCode.Subjects.Domain.Associate
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "AssociateAggregate", "\tRecommended method of changing any Assiciate namespaced data", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Associate Aggregate", "\tRecommended method of changing any Assiciate namespaced data", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         

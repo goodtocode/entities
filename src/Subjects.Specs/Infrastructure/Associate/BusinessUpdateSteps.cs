@@ -13,7 +13,7 @@ namespace GoodToCode.Subjects.Specs
     [Binding]
     public class BusinessUpdateSteps
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
 
@@ -26,13 +26,13 @@ namespace GoodToCode.Subjects.Specs
         {
             _config = new ConfigurationFactory("Subjects.Specs").Create();
             _connectionString = new ConnectionStringFactory(_config).Create();
-            _context = new DbContextFactory(_connectionString).Create();
+            _dbContext = new DbContextFactory(_connectionString).Create();
         }
 
         [Given(@"An existing Business has been queried")]
         public async Task GivenAnExistingBusinessHasBeenQueried()
         {
-            Sut = await _context.Business.Take(1).FirstOrDefaultAsync();
+            Sut = await _dbContext.Business.Take(1).FirstOrDefaultAsync();
         }
 
         [Given(@"a business was found in persistence")]
@@ -53,15 +53,15 @@ namespace GoodToCode.Subjects.Specs
         [When(@"Business is Updated via Entity Framework")]
         public async Task WhenBusinessIsUpdatedViaEntityFramework()
         {
-            _context.Entry(Sut).State = EntityState.Modified;
-            var result = await _context.SaveChangesAsync();
+            _dbContext.Entry(Sut).State = EntityState.Modified;
+            var result = await _dbContext.SaveChangesAsync();
             Assert.IsTrue(result > 0);
         }
 
         [Then(@"the existing business can be queried by key")]
         public async Task ThenTheExistingBusinessCanBeQueriedByKey()
         {
-            Sut = await _context.Business.FirstOrDefaultAsync(x => x.BusinessKey == SutKey);
+            Sut = await _dbContext.Business.FirstOrDefaultAsync(x => x.BusinessKey == SutKey);
         }
 
         [Then(@"the Business name matches the new name")]

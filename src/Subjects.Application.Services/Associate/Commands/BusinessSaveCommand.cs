@@ -29,11 +29,11 @@ namespace GoodToCode.Subjects.Application
     {
         private readonly BusinessSaveValidator _validator;
         private readonly List<KeyValuePair<string, string>> _errors;
-        private readonly ISubjectsDbContext _context;
+        private readonly ISubjectsDbContext _dbContext;
 
         public BusinessSaveHandler(ISubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
             _validator = new BusinessSaveValidator();
             _errors = new List<KeyValuePair<string, string>>();
         }
@@ -46,7 +46,7 @@ namespace GoodToCode.Subjects.Application
             {
                 try
                 {
-                    var aggregate = new AssociateAggregate(_context);
+                    var aggregate = new AssociateAggregate(_dbContext);
                     await aggregate.BusinessSaveAsync(request.Item);
                     result.Result = true;
                 }

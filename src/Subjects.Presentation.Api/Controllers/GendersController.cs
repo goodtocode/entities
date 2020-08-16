@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class GendersController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public GendersController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/Genders
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Gender>>> GetGender()
         {
-            return await _context.Gender.ToListAsync();
+            return await _dbContext.Gender.ToListAsync();
         }
 
         // GET: api/Genders/5
         [HttpGet("{key}")]
         public async Task<ActionResult<Gender>> GetGender(Guid key)
         {
-            var gender = await _context.Gender.FindAsync(key);
+            var gender = await _dbContext.Gender.FindAsync(key);
 
             if (gender == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(gender).State = EntityState.Modified;
+            _dbContext.Entry(gender).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,10 +78,10 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<Gender>> PostGender(Gender gender)
         {
-            _context.Gender.Add(gender);
+            _dbContext.Gender.Add(gender);
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
@@ -102,21 +102,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<Gender>> DeleteGender(Guid key)
         {
-            var gender = await _context.Gender.FindAsync(key);
+            var gender = await _dbContext.Gender.FindAsync(key);
             if (gender == null)
             {
                 return NotFound();
             }
 
-            _context.Gender.Remove(gender);
-            await _context.SaveChangesAsync();
+            _dbContext.Gender.Remove(gender);
+            await _dbContext.SaveChangesAsync();
 
             return gender;
         }
 
         private bool GenderExists(Guid key)
         {
-            return _context.Gender.Any(e => e.GenderKey == key);
+            return _dbContext.Gender.Any(e => e.GenderKey == key);
         }
     }
 }

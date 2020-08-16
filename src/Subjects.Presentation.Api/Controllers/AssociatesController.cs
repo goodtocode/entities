@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class AssociatesController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public AssociatesController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/Entities
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Associate>>> GetEntity()
         {
-            return await _context.Associate.ToListAsync();
+            return await _dbContext.Associate.ToListAsync();
         }
 
         // GET: api/Entities/5
         [HttpGet("{key}")]
         public async Task<ActionResult<Associate>> GetEntity(Guid key)
         {
-            var entity = await _context.Associate.FindAsync(key);
+            var entity = await _dbContext.Associate.FindAsync(key);
 
             if (entity == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(entity).State = EntityState.Modified;
+            _dbContext.Entry(entity).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<Associate>> PostEntity(Associate entity)
         {
-            _context.Associate.Add(entity);
-            await _context.SaveChangesAsync();
+            _dbContext.Associate.Add(entity);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetEntity", new { key = entity.AssociateKey }, entity);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<Associate>> DeleteEntity(Guid key)
         {
-            var entity = await _context.Associate.FindAsync(key);
+            var entity = await _dbContext.Associate.FindAsync(key);
             if (entity == null)
             {
                 return NotFound();
             }
 
-            _context.Associate.Remove(entity);
-            await _context.SaveChangesAsync();
+            _dbContext.Associate.Remove(entity);
+            await _dbContext.SaveChangesAsync();
 
             return entity;
         }
 
         private bool EntityExists(Guid key)
         {
-            return _context.Associate.Any(e => e.AssociateKey == key);
+            return _dbContext.Associate.Any(e => e.AssociateKey == key);
         }
     }
 }

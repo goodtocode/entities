@@ -12,7 +12,7 @@ namespace GoodToCode.Subjects.Specs
     [Binding]
     public class BusinessGetByKeySteps
     {        
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
 
@@ -23,13 +23,13 @@ namespace GoodToCode.Subjects.Specs
         {
             _config = new ConfigurationFactory("Subjects.Specs").Create();
             _connectionString = new ConnectionStringFactory(_config).Create();
-            _context = new DbContextFactory(_connectionString).Create();
+            _dbContext = new DbContextFactory(_connectionString).Create();
         }
 
         [Given(@"I have a business key")]
         public async Task GivenIHaveABusinessKey()
         {
-            var item = await _context.Business.FirstAsync();
+            var item = await _dbContext.Business.FirstAsync();
             SutKey = item.BusinessKey;
         }
         
@@ -48,7 +48,7 @@ namespace GoodToCode.Subjects.Specs
         [When(@"Business is queried by key via Entity framework")]
         public async Task WhenBusinessIsQueriedByKeyViaEntityFramework()
         {
-            Sut = await _context.Business.FirstAsync(x => x.BusinessKey == SutKey);
+            Sut = await _dbContext.Business.FirstAsync(x => x.BusinessKey == SutKey);
             Assert.IsTrue(Sut.BusinessKey != Guid.Empty);
         }
         

@@ -13,7 +13,7 @@ namespace GoodToCode.Subjects.Specs
     [Binding]
     public class BusinessesGetSteps
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
         private List<Business> Sut { get; set; }
@@ -22,7 +22,7 @@ namespace GoodToCode.Subjects.Specs
         {
             _config = new ConfigurationFactory("Subjects.Specs").Create();
             _connectionString = new ConnectionStringFactory(_config).Create();
-            _context = new DbContextFactory(_connectionString).Create();
+            _dbContext = new DbContextFactory(_connectionString).Create();
         }
 
         [Given(@"I request the list of businesses")]
@@ -34,7 +34,7 @@ namespace GoodToCode.Subjects.Specs
         [When(@"Businesses are queried via Entity framework")]
         public async Task WhenBusinessesAreQueriedViaEntityFrameworkAsync()
         {
-            Sut = await _context.Business.Take(10).ToListAsync();
+            Sut = await _dbContext.Business.Take(10).ToListAsync();
         }
 
         [Then(@"All persisted businesses are returned")]

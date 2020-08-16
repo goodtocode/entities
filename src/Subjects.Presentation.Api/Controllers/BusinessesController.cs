@@ -19,25 +19,25 @@ namespace GoodToCode.Subjects.Application
     [ApiVersion("1.0")]
     public class BusinessesController : ControllerMediator
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public BusinessesController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/Businesses
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Business>>> GetBusiness()
         {
-            return await _context.Business.ToListAsync();
+            return await _dbContext.Business.ToListAsync();
         }
 
         // GET: api/Businesses/376B76B4-1EA8-4B31-9238-41E59784B5DD
         [HttpGet("{key}")]
         public async Task<ActionResult<Business>> GetBusiness(Guid key)
         {
-            var business = await _context.Business.FindAsync(key);
+            var business = await _dbContext.Business.FindAsync(key);
 
             if (business == null)
             {
@@ -96,14 +96,14 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<Business>> DeleteBusiness(Guid key)
         {
-            var business = await _context.Business.FindAsync(key);
+            var business = await _dbContext.Business.FindAsync(key);
             if (business == null)
             {
                 return NotFound();
             }
 
-            _context.Business.Remove(business);
-            await _context.SaveChangesAsync();
+            _dbContext.Business.Remove(business);
+            await _dbContext.SaveChangesAsync();
 
             return business;
         }

@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class AssociateTimeRecurringsController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public AssociateTimeRecurringsController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/AssociateTimeRecurrings
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AssociateTimeRecurring>>> GetAssociateTimeRecurring()
         {
-            return await _context.AssociateTimeRecurring.ToListAsync();
+            return await _dbContext.AssociateTimeRecurring.ToListAsync();
         }
 
         // GET: api/AssociateTimeRecurrings/5
         [HttpGet("{key}")]
         public async Task<ActionResult<AssociateTimeRecurring>> GetAssociateTimeRecurring(Guid key)
         {
-            var AssociateTimeRecurring = await _context.AssociateTimeRecurring.FindAsync(key);
+            var AssociateTimeRecurring = await _dbContext.AssociateTimeRecurring.FindAsync(key);
 
             if (AssociateTimeRecurring == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(AssociateTimeRecurring).State = EntityState.Modified;
+            _dbContext.Entry(AssociateTimeRecurring).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<AssociateTimeRecurring>> PostAssociateTimeRecurring(AssociateTimeRecurring AssociateTimeRecurring)
         {
-            _context.AssociateTimeRecurring.Add(AssociateTimeRecurring);
-            await _context.SaveChangesAsync();
+            _dbContext.AssociateTimeRecurring.Add(AssociateTimeRecurring);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetAssociateTimeRecurring", new { key = AssociateTimeRecurring.AssociateTimeRecurringKey }, AssociateTimeRecurring);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<AssociateTimeRecurring>> DeleteAssociateTimeRecurring(Guid key)
         {
-            var AssociateTimeRecurring = await _context.AssociateTimeRecurring.FindAsync(key);
+            var AssociateTimeRecurring = await _dbContext.AssociateTimeRecurring.FindAsync(key);
             if (AssociateTimeRecurring == null)
             {
                 return NotFound();
             }
 
-            _context.AssociateTimeRecurring.Remove(AssociateTimeRecurring);
-            await _context.SaveChangesAsync();
+            _dbContext.AssociateTimeRecurring.Remove(AssociateTimeRecurring);
+            await _dbContext.SaveChangesAsync();
 
             return AssociateTimeRecurring;
         }
 
         private bool AssociateTimeRecurringExists(Guid key)
         {
-            return _context.AssociateTimeRecurring.Any(e => e.AssociateTimeRecurringKey == key);
+            return _dbContext.AssociateTimeRecurring.Any(e => e.AssociateTimeRecurringKey == key);
         }
     }
 }

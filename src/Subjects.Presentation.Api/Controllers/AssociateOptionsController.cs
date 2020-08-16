@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class AssociateOptionsController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public AssociateOptionsController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/AssociateOptions
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AssociateOption>>> GetAssociateOption()
         {
-            return await _context.AssociateOption.ToListAsync();
+            return await _dbContext.AssociateOption.ToListAsync();
         }
 
         // GET: api/AssociateOptions/5
         [HttpGet("{key}")]
         public async Task<ActionResult<AssociateOption>> GetAssociateOption(Guid key)
         {
-            var AssociateOption = await _context.AssociateOption.FindAsync(key);
+            var AssociateOption = await _dbContext.AssociateOption.FindAsync(key);
 
             if (AssociateOption == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(AssociateOption).State = EntityState.Modified;
+            _dbContext.Entry(AssociateOption).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<AssociateOption>> PostAssociateOption(AssociateOption AssociateOption)
         {
-            _context.AssociateOption.Add(AssociateOption);
-            await _context.SaveChangesAsync();
+            _dbContext.AssociateOption.Add(AssociateOption);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetAssociateOption", new { key = AssociateOption.AssociateOptionKey }, AssociateOption);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<AssociateOption>> DeleteAssociateOption(Guid key)
         {
-            var AssociateOption = await _context.AssociateOption.FindAsync(key);
+            var AssociateOption = await _dbContext.AssociateOption.FindAsync(key);
             if (AssociateOption == null)
             {
                 return NotFound();
             }
 
-            _context.AssociateOption.Remove(AssociateOption);
-            await _context.SaveChangesAsync();
+            _dbContext.AssociateOption.Remove(AssociateOption);
+            await _dbContext.SaveChangesAsync();
 
             return AssociateOption;
         }
 
         private bool AssociateOptionExists(Guid key)
         {
-            return _context.AssociateOption.Any(e => e.AssociateOptionKey == key);
+            return _dbContext.AssociateOption.Any(e => e.AssociateOptionKey == key);
         }
     }
 }

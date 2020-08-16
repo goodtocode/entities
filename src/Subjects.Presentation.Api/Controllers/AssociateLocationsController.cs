@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class AssociateLocationsController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public AssociateLocationsController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/AssociateLocations
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AssociateLocation>>> GetAssociateLocation()
         {
-            return await _context.AssociateLocation.ToListAsync();
+            return await _dbContext.AssociateLocation.ToListAsync();
         }
 
         // GET: api/AssociateLocations/5
         [HttpGet("{key}")]
         public async Task<ActionResult<AssociateLocation>> GetAssociateLocation(Guid key)
         {
-            var AssociateLocation = await _context.AssociateLocation.FindAsync(key);
+            var AssociateLocation = await _dbContext.AssociateLocation.FindAsync(key);
 
             if (AssociateLocation == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(AssociateLocation).State = EntityState.Modified;
+            _dbContext.Entry(AssociateLocation).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<AssociateLocation>> PostAssociateLocation(AssociateLocation AssociateLocation)
         {
-            _context.AssociateLocation.Add(AssociateLocation);
-            await _context.SaveChangesAsync();
+            _dbContext.AssociateLocation.Add(AssociateLocation);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetAssociateLocation", new { key = AssociateLocation.AssociateLocationKey }, AssociateLocation);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<AssociateLocation>> DeleteAssociateLocation(Guid key)
         {
-            var AssociateLocation = await _context.AssociateLocation.FindAsync(key);
+            var AssociateLocation = await _dbContext.AssociateLocation.FindAsync(key);
             if (AssociateLocation == null)
             {
                 return NotFound();
             }
 
-            _context.AssociateLocation.Remove(AssociateLocation);
-            await _context.SaveChangesAsync();
+            _dbContext.AssociateLocation.Remove(AssociateLocation);
+            await _dbContext.SaveChangesAsync();
 
             return AssociateLocation;
         }
 
         private bool AssociateLocationExists(Guid key)
         {
-            return _context.AssociateLocation.Any(e => e.AssociateLocationKey == key);
+            return _dbContext.AssociateLocation.Any(e => e.AssociateLocationKey == key);
         }
     }
 }

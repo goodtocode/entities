@@ -15,7 +15,7 @@ namespace GoodToCode.Subjects.Specs
     [Binding]
     public class BusinessSaveCommandSteps
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
 
@@ -26,7 +26,7 @@ namespace GoodToCode.Subjects.Specs
         {
             _config = new ConfigurationFactory("Subjects.Specs").Create();
             _connectionString = new ConnectionStringFactory(_config).Create();
-            _context = new DbContextFactory(_connectionString).Create();
+            _dbContext = new DbContextFactory(_connectionString).Create();
         }
 
         [Given(@"A new Business Save Command has been created")]
@@ -54,7 +54,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenTheBusinessIsInsertedViaCQRSCommand()
         {
             var query = new BusinessSaveCommand(Sut);
-            var handle = new BusinessSaveHandler(_context);
+            var handle = new BusinessSaveHandler(_dbContext);
             var response = await handle.Handle(query, new System.Threading.CancellationToken());
             Assert.IsTrue(response.Result);
         }
@@ -62,7 +62,7 @@ namespace GoodToCode.Subjects.Specs
         [Then(@"the CQRS inserted business can be queried by key")]
         public async Task ThenTheCQRSInsertedBusinessCanBeQueriedByKey()
         {
-            var found = await _context.Business.Where(x => x.BusinessKey == SutKey).AnyAsync();
+            var found = await _dbContext.Business.Where(x => x.BusinessKey == SutKey).AnyAsync();
             Assert.IsTrue(found);
         }
     }

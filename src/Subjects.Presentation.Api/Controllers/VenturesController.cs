@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class VenturesController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public VenturesController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/Ventures
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Venture>>> GetVenture()
         {
-            return await _context.Venture.ToListAsync();
+            return await _dbContext.Venture.ToListAsync();
         }
 
         // GET: api/Ventures/5
         [HttpGet("{key}")]
         public async Task<ActionResult<Venture>> GetVenture(Guid key)
         {
-            var venture = await _context.Venture.FindAsync(key);
+            var venture = await _dbContext.Venture.FindAsync(key);
 
             if (venture == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(venture).State = EntityState.Modified;
+            _dbContext.Entry(venture).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<Venture>> PostVenture(Venture venture)
         {
-            _context.Venture.Add(venture);
-            await _context.SaveChangesAsync();
+            _dbContext.Venture.Add(venture);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetVenture", new { key = venture.VentureKey }, venture);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<Venture>> DeleteVenture(Guid key)
         {
-            var venture = await _context.Venture.FindAsync(key);
+            var venture = await _dbContext.Venture.FindAsync(key);
             if (venture == null)
             {
                 return NotFound();
             }
 
-            _context.Venture.Remove(venture);
-            await _context.SaveChangesAsync();
+            _dbContext.Venture.Remove(venture);
+            await _dbContext.SaveChangesAsync();
 
             return venture;
         }
 
         private bool VentureExists(Guid key)
         {
-            return _context.Venture.Any(e => e.VentureKey == key);
+            return _dbContext.Venture.Any(e => e.VentureKey == key);
         }
     }
 }

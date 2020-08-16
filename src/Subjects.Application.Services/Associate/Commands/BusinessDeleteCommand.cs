@@ -1,11 +1,8 @@
 ﻿using GoodToCode.Shared.Cqrs;
-using GoodToCode.Shared.Extensions;
 using GoodToCode.Shared.Validation;
 using GoodToCode.Subjects.Aggregates;
 using GoodToCode.Subjects.Models;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -28,11 +25,11 @@ namespace GoodToCode.Subjects.Application
         {
             private readonly BusinessDeleteValidator _validator;
             private readonly List<KeyValuePair<string, string>> _errors;
-            private readonly ISubjectsDbContext _context;
+            private readonly ISubjectsDbContext _dbContext;
 
             public Handler(ISubjectsDbContext context)
             {
-                _context = context;
+                _dbContext = context;
                 _validator = new BusinessDeleteValidator();
                 _errors = new List<KeyValuePair<string, string>>();
             }
@@ -45,7 +42,7 @@ namespace GoodToCode.Subjects.Application
                 {
                     try
                     {
-                        var aggregate = new AssociateAggregate(_context);
+                        var aggregate = new AssociateAggregate(_dbContext);
                         await aggregate.BusinessDeleteAsync(request.Item);
                         result.Result = true;
                     }

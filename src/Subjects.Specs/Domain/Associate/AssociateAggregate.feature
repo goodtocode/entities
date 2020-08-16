@@ -1,4 +1,4 @@
-﻿Feature: AssociateAggregate
+﻿Feature: Associate Aggregate
 	Recommended method of changing any Assiciate namespaced data
 
 @aggregate

@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class PeopleController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public PeopleController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/People
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Person>>> GetPerson()
         {
-            return await _context.Person.ToListAsync();
+            return await _dbContext.Person.ToListAsync();
         }
 
         // GET: api/People/5
         [HttpGet("{key}")]
         public async Task<ActionResult<Person>> GetPerson(Guid key)
         {
-            var person = await _context.Person.FindAsync(key);
+            var person = await _dbContext.Person.FindAsync(key);
 
             if (person == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(person).State = EntityState.Modified;
+            _dbContext.Entry(person).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<Person>> PostPerson(Person person)
         {
-            _context.Person.Add(person);
-            await _context.SaveChangesAsync();
+            _dbContext.Person.Add(person);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetPerson", new { key = person.PersonKey }, person);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<Person>> DeletePerson(Guid key)
         {
-            var person = await _context.Person.FindAsync(key);
+            var person = await _dbContext.Person.FindAsync(key);
             if (person == null)
             {
                 return NotFound();
             }
 
-            _context.Person.Remove(person);
-            await _context.SaveChangesAsync();
+            _dbContext.Person.Remove(person);
+            await _dbContext.SaveChangesAsync();
 
             return person;
         }
 
         private bool PersonExists(Guid key)
         {
-            return _context.Person.Any(e => e.PersonKey == key);
+            return _dbContext.Person.Any(e => e.PersonKey == key);
         }
     }
 }

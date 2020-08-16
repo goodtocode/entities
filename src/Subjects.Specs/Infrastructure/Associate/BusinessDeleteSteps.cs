@@ -13,7 +13,7 @@ namespace GoodToCode.Subjects.Specs
     [Binding]
     public class BusinessDeleteSteps
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
 
@@ -24,13 +24,13 @@ namespace GoodToCode.Subjects.Specs
         {
             _config = new ConfigurationFactory("Subjects.Specs").Create();
             _connectionString = new ConnectionStringFactory(_config).Create();
-            _context = new DbContextFactory(_connectionString).Create();
+            _dbContext = new DbContextFactory(_connectionString).Create();
         }
 
         [Given(@"An Business has been queried to be deleted")]
         public async Task GivenAnBusinessHasBeenQueriedToBeDeleted()
         {
-            Sut = await _context.Business.Take(1).FirstOrDefaultAsync();
+            Sut = await _dbContext.Business.Take(1).FirstOrDefaultAsync();
             SutKey = Sut.BusinessKey;
         }
 
@@ -43,15 +43,15 @@ namespace GoodToCode.Subjects.Specs
         [When(@"the Business is Deleted via Entity Framework")]
         public async Task WhenTheBusinessIsDeletedViaEntityFramework()
         {
-            _context.Entry(Sut).State = EntityState.Deleted;
-            var result = await _context.SaveChangesAsync();
+            _dbContext.Entry(Sut).State = EntityState.Deleted;
+            var result = await _dbContext.SaveChangesAsync();
             Assert.IsTrue(result > 0);
         }
 
         [Then(@"the deleted business is queried by key")]
         public async Task ThenTheDeletedBusinessIsQueriedByKey()
         {
-            Sut = await _context.Business.FirstOrDefaultAsync(x => x.BusinessKey == SutKey);
+            Sut = await _dbContext.Business.FirstOrDefaultAsync(x => x.BusinessKey == SutKey);
         }
 
         [Then(@"the Business is not found")]

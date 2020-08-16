@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class GovernmentsController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public GovernmentsController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/Governments
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Government>>> GetGovernment()
         {
-            return await _context.Government.ToListAsync();
+            return await _dbContext.Government.ToListAsync();
         }
 
         // GET: api/Governments/5
         [HttpGet("{key}")]
         public async Task<ActionResult<Government>> GetGovernment(Guid key)
         {
-            var government = await _context.Government.FindAsync(key);
+            var government = await _dbContext.Government.FindAsync(key);
 
             if (government == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(government).State = EntityState.Modified;
+            _dbContext.Entry(government).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<Government>> PostGovernment(Government government)
         {
-            _context.Government.Add(government);
-            await _context.SaveChangesAsync();
+            _dbContext.Government.Add(government);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetGovernment", new { key = government.GovernmentKey }, government);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<Government>> DeleteGovernment(Guid key)
         {
-            var government = await _context.Government.FindAsync(key);
+            var government = await _dbContext.Government.FindAsync(key);
             if (government == null)
             {
                 return NotFound();
             }
 
-            _context.Government.Remove(government);
-            await _context.SaveChangesAsync();
+            _dbContext.Government.Remove(government);
+            await _dbContext.SaveChangesAsync();
 
             return government;
         }
 
         private bool GovernmentExists(Guid key)
         {
-            return _context.Government.Any(e => e.GovernmentKey == key);
+            return _dbContext.Government.Any(e => e.GovernmentKey == key);
         }
     }
 }

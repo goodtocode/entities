@@ -12,25 +12,25 @@ namespace GoodToCode.Subjects.Application
     [ApiController]
     public class ItemGroupsController : ControllerBase
     {
-        private readonly SubjectsDbContext _context;
+        private readonly SubjectsDbContext _dbContext;
 
         public ItemGroupsController(SubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // GET: api/ItemGroups
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ItemGroup>>> GetItemGroup()
         {
-            return await _context.ItemGroup.ToListAsync();
+            return await _dbContext.ItemGroup.ToListAsync();
         }
 
         // GET: api/ItemGroups/5
         [HttpGet("{key}")]
         public async Task<ActionResult<ItemGroup>> GetItemGroup(Guid key)
         {
-            var itemGroup = await _context.ItemGroup.FindAsync(key);
+            var itemGroup = await _dbContext.ItemGroup.FindAsync(key);
 
             if (itemGroup == null)
             {
@@ -51,11 +51,11 @@ namespace GoodToCode.Subjects.Application
                 return BadRequest();
             }
 
-            _context.Entry(itemGroup).State = EntityState.Modified;
+            _dbContext.Entry(itemGroup).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +78,8 @@ namespace GoodToCode.Subjects.Application
         [HttpPost]
         public async Task<ActionResult<ItemGroup>> PostItemGroup(ItemGroup itemGroup)
         {
-            _context.ItemGroup.Add(itemGroup);
-            await _context.SaveChangesAsync();
+            _dbContext.ItemGroup.Add(itemGroup);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction("GetItemGroup", new { key = itemGroup.ItemGroupKey }, itemGroup);
         }
@@ -88,21 +88,21 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult<ItemGroup>> DeleteItemGroup(Guid key)
         {
-            var itemGroup = await _context.ItemGroup.FindAsync(key);
+            var itemGroup = await _dbContext.ItemGroup.FindAsync(key);
             if (itemGroup == null)
             {
                 return NotFound();
             }
 
-            _context.ItemGroup.Remove(itemGroup);
-            await _context.SaveChangesAsync();
+            _dbContext.ItemGroup.Remove(itemGroup);
+            await _dbContext.SaveChangesAsync();
 
             return itemGroup;
         }
 
         private bool ItemGroupExists(Guid key)
         {
-            return _context.ItemGroup.Any(e => e.ItemGroupKey == key);
+            return _dbContext.ItemGroup.Any(e => e.ItemGroupKey == key);
         }
     }
 }

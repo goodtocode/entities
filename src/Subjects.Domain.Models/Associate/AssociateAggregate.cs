@@ -9,7 +9,7 @@ namespace GoodToCode.Subjects.Aggregates
 {
     public class AssociateAggregate : DomainAggregate<AssociateAggregate>
     {
-        private readonly ISubjectsDbContext _context;
+        private readonly ISubjectsDbContext _dbContext;
         private int _recordsAffected;
 
         public AssociateAggregate(int recordsAffected)
@@ -19,7 +19,7 @@ namespace GoodToCode.Subjects.Aggregates
 
         public AssociateAggregate(ISubjectsDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         // Business
@@ -31,15 +31,15 @@ namespace GoodToCode.Subjects.Aggregates
 
             if (business.BusinessKey == Guid.Empty)
             {
-                _context.Entry((Business)business).State = EntityState.Modified;
+                _dbContext.Entry((Business)business).State = EntityState.Modified;
                 eventRaise = new BusinessUpdatedEvent(business);
             }
             else
             {
-                _context.Business.Add((Business)business);
+                _dbContext.Business.Add((Business)business);
                 eventRaise = new BusinessCreatedEvent(business);
             }
-            _recordsAffected = await _context.SaveChangesAsync();            
+            _recordsAffected = await _dbContext.SaveChangesAsync();            
             business.RaiseDomainEvent(eventRaise);
 
             return _recordsAffected;
@@ -52,15 +52,15 @@ namespace GoodToCode.Subjects.Aggregates
 
             if (business.BusinessKey == Guid.Empty)
             {
-                _context.Entry((Business)business).State = EntityState.Deleted;
+                _dbContext.Entry((Business)business).State = EntityState.Deleted;
                 eventRaise = new BusinessUpdatedEvent(business);
             }
             else
             {
-                _context.Business.Add((Business)business);
+                _dbContext.Business.Add((Business)business);
                 eventRaise = new BusinessCreatedEvent(business);
             }
-            _recordsAffected = await _context.SaveChangesAsync();
+            _recordsAffected = await _dbContext.SaveChangesAsync();
             business.RaiseDomainEvent(eventRaise);
 
             return (Business)business;
@@ -73,10 +73,10 @@ namespace GoodToCode.Subjects.Aggregates
             // raise event with data to persistence
 
             if (person.PersonKey == Guid.Empty)
-                _context.Entry(person).State = EntityState.Modified;
+                _dbContext.Entry(person).State = EntityState.Modified;
             else
-                _context.Person.Add((Person)person);
-            _recordsAffected = await _context.SaveChangesAsync();
+                _dbContext.Person.Add((Person)person);
+            _recordsAffected = await _dbContext.SaveChangesAsync();
 
             return _recordsAffected;
         }
@@ -88,10 +88,10 @@ namespace GoodToCode.Subjects.Aggregates
             // raise event with data to persistence
 
             if (government.GovernmentKey == Guid.Empty)
-                _context.Entry(government).State = EntityState.Modified;
+                _dbContext.Entry(government).State = EntityState.Modified;
             else
-                _context.Government.Add((Government)government);
-            _recordsAffected = await _context.SaveChangesAsync();
+                _dbContext.Government.Add((Government)government);
+            _recordsAffected = await _dbContext.SaveChangesAsync();
 
             return _recordsAffected;
         }
