@@ -1,9 +1,9 @@
-﻿using GoodToCode.Subjects.Models;
+﻿using GoodToCode.Shared.Specs;
+using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
@@ -22,14 +22,9 @@ namespace GoodToCode.Subjects.Specs
 
         public BusinessDeleteSteps()
         {
-            _config = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs"))
-              .AddJsonFile($"appsettings.{(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT ") ?? "Development")}.json")
-              .AddJsonFile("appsettings.json")
-              .Build();
-            _connectionString = _config.GetConnectionString("DefaultConnection");
-            var options = new DbContextOptionsBuilder<SubjectsDbContext>();
-            options.UseSqlServer(_connectionString);
-            _context = new SubjectsDbContext(options.Options);
+            _config = new ConfigurationFactory("Subjects.Specs").Create();
+            _connectionString = new ConnectionStringFactory(_config).Create();
+            _context = new DbContextFactory(_connectionString).Create();
         }
 
         [Given(@"An Business has been queried to be deleted")]

@@ -1,15 +1,16 @@
-﻿using GoodToCode.Subjects.Models;
+﻿using GoodToCode.Shared.Specs;
+using GoodToCode.Subjects.Application;
+using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using TechTalk.SpecRun.Common.Helper;
 
-namespace GoodToCode.Subjects.Application
+namespace GoodToCode.Subjects.Specs
 {
     [Binding]
     public class BusinessSaveCommandSteps
@@ -23,15 +24,9 @@ namespace GoodToCode.Subjects.Application
 
         public BusinessSaveCommandSteps()
         {
-            _config = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs"))
-              .AddJsonFile($"appsettings.{(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT ") ?? "Development")}.json")
-              .AddJsonFile("appsettings.json")
-              .Build();
-            _connectionString = _config.GetConnectionString("DefaultConnection");
-            //_connectionString = "Server=tcp:goodtocodestack.database.windows.net,1433;Initial Catalog=StackData;Persist Security Info=False;User ID=LocalAdmin;Password=1202cc89-cb6f-453a-ac7e-550b3b5d2d0c;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            var options = new DbContextOptionsBuilder<SubjectsDbContext>();
-            options.UseSqlServer(_connectionString);
-            _context = new SubjectsDbContext(options.Options);
+            _config = new ConfigurationFactory("Subjects.Specs").Create();
+            _connectionString = new ConnectionStringFactory(_config).Create();
+            _context = new DbContextFactory(_connectionString).Create();
         }
 
         [Given(@"A new Business Save Command has been created")]
@@ -59,7 +54,7 @@ namespace GoodToCode.Subjects.Application
         public async Task WhenTheBusinessIsInsertedViaCQRSCommand()
         {
             var query = new BusinessSaveCommand(Sut);
-            var handle = new BusinessSaveHandler(_context, _config);
+            var handle = new BusinessSaveHandler(_context);
             var response = await handle.Handle(query, new System.Threading.CancellationToken());
             Assert.IsTrue(response.Result);
         }

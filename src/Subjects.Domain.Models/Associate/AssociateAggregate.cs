@@ -10,7 +10,6 @@ namespace GoodToCode.Subjects.Aggregates
     public class AssociateAggregate : DomainAggregate<AssociateAggregate>
     {
         private readonly ISubjectsDbContext _context;
-        private readonly IConfiguration _configuration;
         private int _recordsAffected;
 
         public AssociateAggregate(int recordsAffected)
@@ -21,11 +20,6 @@ namespace GoodToCode.Subjects.Aggregates
         public AssociateAggregate(ISubjectsDbContext context)
         {
             _context = context;
-        }
-
-        public AssociateAggregate(ISubjectsDbContext context, IConfiguration configuration) : this(context)
-        {
-            _configuration = configuration;
         }
 
         // Business
