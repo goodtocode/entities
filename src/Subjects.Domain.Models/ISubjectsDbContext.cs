@@ -1,10 +1,5 @@
 ﻿using GoodToCode.Shared.Data;
-using GoodToCode.Shared.Extensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System.Diagnostics.CodeAnalysis;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace GoodToCode.Subjects.Models
 {

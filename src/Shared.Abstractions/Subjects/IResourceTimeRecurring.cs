@@ -1,13 +1,11 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface IResourceTimeRecurring
+    public interface IResourceTimeRecurring : IDomainModel<IResourceTimeRecurring>
     {
-        DateTime CreatedDate { get; set; }
         string DayName { get; set; }
-        DateTime ModifiedDate { get; set; }
-        
         Guid ResourceKey { get; set; }
         Guid ResourceTimeRecurringKey { get; set; }
         string TimeName { get; set; }

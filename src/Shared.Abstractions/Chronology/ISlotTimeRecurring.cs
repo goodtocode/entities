@@ -1,11 +1,12 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public interface ISlotTimeRecurring
+    public interface ISlotTimeRecurring : IDomainModel<ISlotTimeRecurring>
     {
-        DateTime CreatedDate { get; set; }
-        DateTime ModifiedDate { get; set; }
+        
+        
         
         Guid SlotKey { get; set; }
         Guid SlotTimeRecurringKey { get; set; }

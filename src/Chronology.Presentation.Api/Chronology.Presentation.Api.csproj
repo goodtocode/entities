@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>GoodToCode.Chronology</RootNamespace>
-    <AssemblyName>GoodToCode.Chronology.Application.WebApi</AssemblyName>
+    <AssemblyName>GoodToCode.Chronology.Presentation.Api</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public interface ITimeRecurring
+    public interface ITimeRecurring : IDomainModel<ITimeRecurring>
     {
         int BeginDay { get; set; }
         DateTime BeginTime { get; set; }
-        DateTime CreatedDate { get; set; }
+        
         int EndDay { get; set; }
         DateTime EndTime { get; set; }
         int Interval { get; set; }

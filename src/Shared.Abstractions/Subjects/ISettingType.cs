@@ -1,10 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface ISettingType
+    public interface ISettingType : IDomainModel<ISettingType>
     {
-        DateTime CreatedDate { get; set; }
         Guid SettingTypeKey { get; set; }
         string SettingTypeName { get; set; }
     }

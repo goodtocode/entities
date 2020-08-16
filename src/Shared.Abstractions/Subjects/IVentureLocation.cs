@@ -1,14 +1,12 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface IVentureLocation
+    public interface IVentureLocation : IDomainModel<IVentureLocation>
     {
-        DateTime CreatedDate { get; set; }
         Guid LocationKey { get; set; }
         Guid? LocationTypeKey { get; set; }
-        DateTime ModifiedDate { get; set; }
-        
         Guid VentureKey { get; set; }
         Guid VentureLocationKey { get; set; }
     }

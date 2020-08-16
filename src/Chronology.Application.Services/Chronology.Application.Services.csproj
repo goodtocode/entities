@@ -3,14 +3,23 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>GoodToCode.Chronology.Application.Services</AssemblyName>
-    <RootNamespace>GoodToCode.Chronology</RootNamespace>
+    <RootNamespace>GoodToCode.Chronology.Application.Services</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Schedule\Commands\" />
-    <Folder Include="Schedule\Queries\" />
     <Folder Include="Time\Commands\" />
     <Folder Include="Time\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="9.1.2" />
+    <PackageReference Include="MediatR" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Chronology.Domain.Models\Chronology.Domain.Models.csproj" />
+    <ProjectReference Include="..\Chronology.Infrastructure.Persistence\Chronology.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

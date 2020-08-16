@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
-    <AssemblyName>GoodToCode.Occurrences.Application.Functions</AssemblyName>
+    <AssemblyName>GoodToCode.Occurrences.Presentation.Functions</AssemblyName>
     <RootNamespace>GoodToCode.Occurrences</RootNamespace>
   </PropertyGroup>
   <ItemGroup>

@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
     <AssemblyName>GoodToCode.Locality.Specs</AssemblyName>
-    <RootNamespace>GoodToCode.Locality</RootNamespace>
+    <RootNamespace>GoodToCode.Locality.Specs</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

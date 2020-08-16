@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
-    <AssemblyName>GoodToCode.Locality.Application.Functions</AssemblyName>
-    <RootNamespace>GoodToCode.Locality</RootNamespace>
+    <AssemblyName>GoodToCode.Locality.Presentation.Functions</AssemblyName>
+    <RootNamespace>GoodToCode.Locality.Presentation.Functions</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.9" />

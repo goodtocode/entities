@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface IDetail
+    public interface IDetail : IDomainModel<IDetail>
     {
-        DateTime CreatedDate { get; set; }
         string DetailData { get; set; }
         Guid DetailKey { get; set; }
         Guid DetailTypeKey { get; set; }
-        DateTime ModifiedDate { get; set; }
+        
     }
 }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Locality.Models
 {
-    public interface IArea
+    public interface IArea : IDomainModel<IArea>
     {
         Guid AreaKey { get; set; }
-        DateTime CreatedDate { get; set; }
+        
     }
 }

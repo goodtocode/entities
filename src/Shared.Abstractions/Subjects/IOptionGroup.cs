@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface IOptionGroup
+    public interface IOptionGroup : IDomainModel<IOptionGroup>
     {
-        DateTime CreatedDate { get; set; }
-        DateTime ModifiedDate { get; set; }
         string OptionGroupCode { get; set; }
         string OptionGroupDescription { get; set; }
         Guid OptionGroupKey { get; set; }

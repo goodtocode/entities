@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>GoodToCode.Locality.Application.Services</AssemblyName>
-    <RootNamespace>GoodToCode.Locality</RootNamespace>
+    <RootNamespace>GoodToCode.Locality.Application.Services</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

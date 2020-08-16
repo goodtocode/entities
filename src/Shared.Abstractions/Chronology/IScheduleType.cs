@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public interface IScheduleType
+    public interface IScheduleType : IDomainModel<IScheduleType>
     {
-        DateTime CreatedDate { get; set; }
-        DateTime ModifiedDate { get; set; }
         string ScheduleTypeDescription { get; set; }
         Guid ScheduleTypeKey { get; set; }
         string ScheduleTypeName { get; set; }

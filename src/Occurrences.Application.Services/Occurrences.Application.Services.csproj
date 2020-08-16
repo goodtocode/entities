@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>GoodToCode.Occurrences.Application.Services</AssemblyName>
-    <RootNamespace>GoodToCode.Occurrences</RootNamespace>
+    <RootNamespace>GoodToCode.Occurrences.Application.Services</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

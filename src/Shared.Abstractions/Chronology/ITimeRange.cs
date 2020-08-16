@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public interface ITimeRange
+    public interface ITimeRange : IDomainModel<ITimeRange>
     {
         DateTime BeginDate { get; set; }
-        DateTime CreatedDate { get; set; }
+        
         DateTime EndDate { get; set; }
         Guid TimeRangeKey { get; set; }
     }

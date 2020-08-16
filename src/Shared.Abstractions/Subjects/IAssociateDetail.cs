@@ -1,13 +1,12 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface IAssociateDetail
+    public interface IAssociateDetail : IDomainModel<IAssociateDetail>
     {
-        DateTime CreatedDate { get; set; }
         Guid DetailKey { get; set; }
         Guid AssociateDetailKey { get; set; }
         Guid AssociateKey { get; set; }
-        DateTime ModifiedDate { get; set; }
     }
 }

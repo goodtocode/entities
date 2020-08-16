@@ -1,14 +1,12 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Occurrences.Models
 {
-    public interface IEventAppointment
+    public interface IEventAppointment : IDomainModel<IEventAppointment>
     {
         Guid AppointmentKey { get; set; }
-        DateTime CreatedDate { get; set; }
         Guid EventAppointmentKey { get; set; }
         Guid EventKey { get; set; }
-        DateTime ModifiedDate { get; set; }
-        
     }
 }

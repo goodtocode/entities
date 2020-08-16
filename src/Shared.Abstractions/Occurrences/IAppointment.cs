@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Occurrences.Models
 {
-    public interface IAppointment
+    public interface IAppointment : IDomainModel<IAppointment>
     {
         string AppointmentDescription { get; set; }
         Guid AppointmentKey { get; set; }
         string AppointmentName { get; set; }
-        DateTime CreatedDate { get; set; }
-        DateTime ModifiedDate { get; set; }
-        
         Guid? SlotLocationKey { get; set; }
         Guid? SlotResourceKey { get; set; }
         Guid TimeRangeKey { get; set; }

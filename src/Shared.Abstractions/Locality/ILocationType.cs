@@ -1,14 +1,14 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 using System.Collections.Generic;
 
 namespace GoodToCode.Locality.Models
 {
-    public interface ILocationType
-    {
-        DateTime CreatedDate { get; set; }
+    public interface ILocationType : IDomainModel<ILocationType>
+    {        
         string LocationTypeDescription { get; set; }
         Guid LocationTypeKey { get; set; }
         string LocationTypeName { get; set; }
-        DateTime ModifiedDate { get; set; }
+        
     }
 }

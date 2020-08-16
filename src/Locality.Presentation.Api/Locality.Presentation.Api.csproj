@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>GoodToCode.Locality</RootNamespace>
-    <AssemblyName>GoodToCode.Locality.Application.WebApi</AssemblyName>
+    <RootNamespace>GoodToCode.Locality.Presentation.WebApi</RootNamespace>
+    <AssemblyName>GoodToCode.Locality.Presentation.WebApi</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

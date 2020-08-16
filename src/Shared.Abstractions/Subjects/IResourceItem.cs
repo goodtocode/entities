@@ -1,13 +1,11 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface IResourceItem
+    public interface IResourceItem : IDomainModel<IResourceItem>
     {
-        DateTime CreatedDate { get; set; }
         Guid ItemKey { get; set; }
-        DateTime ModifiedDate { get; set; }
-        
         Guid ResourceItemKey { get; set; }
         Guid ResourceKey { get; set; }
     }

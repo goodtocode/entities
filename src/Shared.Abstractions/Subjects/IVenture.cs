@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface IVenture
+    public interface IVenture : IDomainModel<IVenture>
     {
-        DateTime CreatedDate { get; set; }
-        DateTime ModifiedDate { get; set; }
-        
         string VentureDescription { get; set; }
         Guid? VentureGroupKey { get; set; }
         Guid VentureKey { get; set; }

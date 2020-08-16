@@ -1,13 +1,11 @@
-﻿using System;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface IGovernment
+    public interface IGovernment : IDomainModel<IGovernment>
     {
-        DateTime CreatedDate { get; set; }
         Guid GovernmentKey { get; set; }
         string GovernmentName { get; set; }
-        DateTime ModifiedDate { get; set; }
-        
     }
 }

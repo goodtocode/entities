@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GoodToCode.Shared.Domain;
+using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public interface ISlot
+    public interface ISlot : IDomainModel<ISlot>
     {
-        DateTime CreatedDate { get; set; }
-        DateTime ModifiedDate { get; set; }
-        
         string SlotDescription { get; set; }
         Guid SlotKey { get; set; }
         string SlotName { get; set; }

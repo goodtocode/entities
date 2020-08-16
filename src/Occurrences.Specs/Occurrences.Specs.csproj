@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
     <AssemblyName>GoodToCode.Occurrences.Specs</AssemblyName>
-    <RootNamespace>GoodToCode.Occurrences</RootNamespace>
+    <RootNamespace>GoodToCode.Occurrences.Specs</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

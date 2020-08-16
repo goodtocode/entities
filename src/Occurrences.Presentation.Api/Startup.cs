@@ -22,7 +22,7 @@ namespace GoodToCode.Occurrences.Application
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<EntityDataContext>(options =>
+            services.AddDbContext<OccurrencesDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSwaggerGen(swagger =>
             {

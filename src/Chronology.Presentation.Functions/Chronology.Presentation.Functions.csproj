@@ -2,9 +2,23 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
-    <AssemblyName>GoodToCode.Subjects.Application.Functions</AssemblyName>
-    <RootNamespace>GoodToCode.Subjects</RootNamespace>
+    <AssemblyName>GoodToCode.Chronology.Presentation.Functions</AssemblyName>
+    <RootNamespace>GoodToCode.Chronology.Presentation.Functions</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Entity\**" />
+    <Compile Remove="Item\**" />
+    <Compile Remove="Person\**" />
+    <Compile Remove="Resource\**" />
+    <EmbeddedResource Remove="Entity\**" />
+    <EmbeddedResource Remove="Item\**" />
+    <EmbeddedResource Remove="Person\**" />
+    <EmbeddedResource Remove="Resource\**" />
+    <None Remove="Entity\**" />
+    <None Remove="Item\**" />
+    <None Remove="Person\**" />
+    <None Remove="Resource\**" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.9" />
   </ItemGroup>
@@ -16,11 +30,5 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entity\" />
-    <Folder Include="Item\" />
-    <Folder Include="Resource\" />
-    <Folder Include="Person\" />
   </ItemGroup>
 </Project>

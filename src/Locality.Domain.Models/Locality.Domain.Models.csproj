@@ -2,14 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>GoodToCode.Locality.Domain.Aggregates</AssemblyName>
-    <RootNamespace>GoodToCode.Locality</RootNamespace>
+    <AssemblyName>GoodToCode.Locality.Domain.Models</AssemblyName>
+    <RootNamespace>GoodToCode.Locality.Domain.Models</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Location\" />
-    <Folder Include="Geometry\" />
-    <Folder Include="Geography\" />
+    <PackageReference Include="System.Spatial" Version="5.8.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
   </ItemGroup>
 
 </Project>
