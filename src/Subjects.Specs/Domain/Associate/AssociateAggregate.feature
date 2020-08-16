@@ -1,11 +1,9 @@
 ﻿Feature: AssociateAggregate
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
+	Recommended method of changing any Assiciate namespaced data
 
-@mytag
-Scenario: Add two numbers
-	Given the first number is 50
-	And the second number is 70
-	When the two numbers are added
-	Then the result should be 120
+@aggregate
+Scenario: Save a new business via Aggregate
+	Given A new Business is created for the aggregate
+	When the business does not exist in persistence 
+		And the business is saved via the aggregate
+	Then the aggregate inserted business can be queried by key

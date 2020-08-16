@@ -1,4 +1,5 @@
-﻿using GoodToCode.Subjects.Models;
+﻿using GoodToCode.Subjects.Aggregates;
+using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,7 +12,7 @@ using TechTalk.SpecFlow;
 namespace GoodToCode.Subjects.Specs
 {
     [Binding]
-    public class BusinessCreateSteps
+    public class AssociateAggregateSteps
     {
         private readonly SubjectsDbContext _context;
         private readonly string _connectionString;
@@ -20,7 +21,7 @@ namespace GoodToCode.Subjects.Specs
         private Guid SutKey { get; set; }
         private Business Sut { get; set; }
 
-        public BusinessCreateSteps()
+        public AssociateAggregateSteps()
         {
             _config = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs"))
               .AddJsonFile($"appsettings.{(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT ") ?? "Development")}.json")
@@ -33,38 +34,38 @@ namespace GoodToCode.Subjects.Specs
             _context = new SubjectsDbContext(options.Options);
         }
 
-        [Given(@"A new Business has been created")]
-        public void GivenANewBusinessHasBeenCreated()
+        [Given(@"A new Business is created for the aggregate")]
+        public void GivenANewBusinessIsCreatedForTheAggregate()
         {
             SutKey = Guid.NewGuid();
             Sut = new Business()
             {
                 BusinessKey = SutKey,
-                BusinessName = "BusinessCreateSteps.cs Test",
+                BusinessName = "AssociateAggregateSteps.cs Test",
                 TaxNumber = string.Empty,
                 CreatedDate = DateTime.UtcNow,
                 ModifiedDate = DateTime.UtcNow
             };
         }
 
-        [When(@"the Business does not exist in persistence by key")]
-        public async Task WhenTheBusinessDoesNotExistInPersistenceByKey()
+        [When(@"the business does not exist in persistence")]
+        public async Task WhenTheBusinessDoesNotExistInPersistence()
         {
             var found = await _context.Business.Where(x => x.BusinessKey == SutKey).AnyAsync();
             Assert.IsFalse(found);
         }
 
-        [When(@"Business is inserted via Entity Framework")]
-        public async Task WhenBusinessIsInsertedViaEntityFramework()
+        [When(@"the business is saved via the aggregate")]
+        public async Task WhenTheBusinessIsSavedViaTheAggregate()
         {
-            _context.Business.Add(Sut);
-            _rowsAffected = await _context.SaveChangesAsync();
+            var aggregate = new AssociateAggregate(_context, _config);
+            _rowsAffected = await aggregate.BusinessSaveAsync(Sut);
             SutKey = Sut.BusinessKey;
             Assert.IsTrue(_rowsAffected > 0);
         }
 
-        [Then(@"the new business can be queried by key")]
-        public async Task ThenTheNewBusinessCanBeQueriedByKey()
+        [Then(@"the aggregate inserted business can be queried by key")]
+        public async Task ThenTheAggregateInsertedBusinessCanBeQueriedByKey()
         {
             var found = await _context.Business.Where(x => x.BusinessKey == SutKey).AnyAsync();
             Assert.IsTrue(found);
