@@ -7,10 +7,6 @@ namespace GoodToCode.Subjects.Models
 {
     public partial class SubjectsDbContext : DbContext, ISubjectsDbContext
     {
-        public SubjectsDbContext()
-        {
-        }
-
         public SubjectsDbContext(DbContextOptions<SubjectsDbContext> options)
             : base(options)
         {

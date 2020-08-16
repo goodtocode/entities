@@ -15,7 +15,7 @@ namespace GoodToCode.Subjects.Application
 {
     [Produces("application/json", "application/xml")]
     [ApiExplorerSettings(GroupName = "BusinessSpecification")]
-    [Route("/v{version:apiVersion}/BusinessSave/{key}")]
+    [Route("/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
     public class BusinessesController : ControllerMediator
     {
@@ -48,19 +48,40 @@ namespace GoodToCode.Subjects.Application
         }
 
         [Authorize]
-        [HttpPost("{key}"), HttpPut("{key}")]
+        [HttpPut("{key}")]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 202)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 400)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 401)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 406)]
         [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 500)]
-        public async Task<ActionResult<CommandResponseWrapper<bool>>> BusinessSave([FromBody] BusinessSaveCommand command, Guid key)
+        public async Task<ActionResult<CommandResponseWrapper<bool>>> BusinessPut(Guid key, [FromBody] BusinessSaveCommand command)
         {
             var cmdResponse = await Mediator.Send(command);
 
             if (key != command.Item.BusinessKey)
                 return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest, cmdResponse);
+
+            if (cmdResponse.Errors.Any())
+                return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest, cmdResponse);
+
+            if (cmdResponse.ErrorInfo.HasException)
+                return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError, cmdResponse);
+
+            return Accepted(cmdResponse);
+        }
+
+        [Authorize]
+        [HttpPost()]
+        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 202)]
+        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 400)]
+        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 401)]
+        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 406)]
+        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 500)]
+        public async Task<ActionResult<CommandResponseWrapper<bool>>> BusinessPost([FromBody] BusinessSaveCommand command)
+        {
+            var cmdResponse = await Mediator.Send(command);
 
             if (cmdResponse.Errors.Any())
                 return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest, cmdResponse);
