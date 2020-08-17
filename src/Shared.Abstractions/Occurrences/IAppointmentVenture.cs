@@ -3,10 +3,10 @@ using System;
 
 namespace GoodToCode.Occurrences.Models
 {
-    public interface IAppointmentVenture : IDomainModel<IAppointmentVenture>
+    public interface IVentureAppointment : IDomainModel<IVentureAppointment>
     {
         Guid AppointmentKey { get; set; }
-        Guid AppointmentVentureKey { get; set; }
+        Guid VentureAppointmentKey { get; set; }
         Guid VentureKey { get; set; }
     }
 }

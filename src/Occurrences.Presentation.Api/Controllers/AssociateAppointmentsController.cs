@@ -1,4 +1,5 @@
-﻿using GoodToCode.Subjects.Models;
+﻿using GoodToCode.Occurrences.Infrastructure;
+using GoodToCode.Occurrences.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,52 +7,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Subjects.Application
+namespace GoodToCode.Occurrences.Application
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AppointmentAssociatesController : ControllerBase
+    public class AssociateAppointmentsController : ControllerBase
     {
-        private readonly SubjectsDbContext _dbContext;
+        private readonly OccurrencesDbContext _dbContext;
 
-        public AppointmentAssociatesController(SubjectsDbContext context)
+        public AssociateAppointmentsController(OccurrencesDbContext context)
         {
             _dbContext = context;
         }
 
-        // GET: api/AppointmentAssociates
+        // GET: api/AssociateAppointments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppointmentAssociate>>> GetAppointmentAssociate()
+        public async Task<ActionResult<IEnumerable<AssociateAppointment>>> GetAssociateAppointment()
         {
-            return await _dbContext.AppointmentAssociate.ToListAsync();
+            return await _dbContext.AssociateAppointment.ToListAsync();
         }
 
-        // GET: api/AppointmentAssociates/5
+        // GET: api/AssociateAppointments/5
         [HttpGet("{key}")]
-        public async Task<ActionResult<AppointmentAssociate>> GetAppointmentAssociate(Guid key)
+        public async Task<ActionResult<AssociateAppointment>> GetAssociateAppointment(Guid key)
         {
-            var AppointmentAssociate = await _dbContext.AppointmentAssociate.FindAsync(key);
+            var AssociateAppointment = await _dbContext.AssociateAppointment.FindAsync(key);
 
-            if (AppointmentAssociate == null)
+            if (AssociateAppointment == null)
             {
                 return NotFound();
             }
 
-            return AppointmentAssociate;
+            return AssociateAppointment;
         }
 
-        // PUT: api/AppointmentAssociates/5
+        // PUT: api/AssociateAppointments/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{key}")]
-        public async Task<IActionResult> PutAppointmentAssociate(Guid key, AppointmentAssociate AppointmentAssociate)
+        public async Task<IActionResult> PutAssociateAppointment(Guid key, AssociateAppointment AssociateAppointment)
         {
-            if (key != AppointmentAssociate.AppointmentAssociateKey)
+            if (key != AssociateAppointment.AssociateAppointmentKey)
             {
                 return BadRequest();
             }
 
-            _dbContext.Entry(AppointmentAssociate).State = EntityState.Modified;
+            _dbContext.Entry(AssociateAppointment).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +60,7 @@ namespace GoodToCode.Subjects.Application
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AppointmentAssociateExists(key))
+                if (!AssociateAppointmentExists(key))
                 {
                     return NotFound();
                 }
@@ -72,37 +73,37 @@ namespace GoodToCode.Subjects.Application
             return NoContent();
         }
 
-        // POST: api/AppointmentAssociates
+        // POST: api/AssociateAppointments
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<AppointmentAssociate>> PostAppointmentAssociate(AppointmentAssociate AppointmentAssociate)
+        public async Task<ActionResult<AssociateAppointment>> PostAssociateAppointment(AssociateAppointment AssociateAppointment)
         {
-            _dbContext.AppointmentAssociate.Add(AppointmentAssociate);
+            _dbContext.AssociateAppointment.Add(AssociateAppointment);
             await _dbContext.SaveChangesAsync();
 
-            return CreatedAtAction("GetAppointmentAssociate", new { key = AppointmentAssociate.AppointmentAssociateKey }, AppointmentAssociate);
+            return CreatedAtAction("GetAssociateAppointment", new { key = AssociateAppointment.AssociateAppointmentKey }, AssociateAppointment);
         }
 
-        // DELETE: api/AppointmentAssociates/5
+        // DELETE: api/AssociateAppointments/5
         [HttpDelete("{key}")]
-        public async Task<ActionResult<AppointmentAssociate>> DeleteAppointmentAssociate(Guid key)
+        public async Task<ActionResult<AssociateAppointment>> DeleteAssociateAppointment(Guid key)
         {
-            var AppointmentAssociate = await _dbContext.AppointmentAssociate.FindAsync(key);
-            if (AppointmentAssociate == null)
+            var AssociateAppointment = await _dbContext.AssociateAppointment.FindAsync(key);
+            if (AssociateAppointment == null)
             {
                 return NotFound();
             }
 
-            _dbContext.AppointmentAssociate.Remove(AppointmentAssociate);
+            _dbContext.AssociateAppointment.Remove(AssociateAppointment);
             await _dbContext.SaveChangesAsync();
 
-            return AppointmentAssociate;
+            return AssociateAppointment;
         }
 
-        private bool AppointmentAssociateExists(Guid key)
+        private bool AssociateAppointmentExists(Guid key)
         {
-            return _dbContext.AppointmentAssociate.Any(e => e.AppointmentAssociateKey == key);
+            return _dbContext.AssociateAppointment.Any(e => e.AssociateAppointmentKey == key);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace GoodToCode.Occurrences.Models
     {
         DbSet<Appointment> Appointment { get; set; }
         DbSet<EventAppointment> AppointmentEvent { get; set; }
-        DbSet<VentureAppointment> AppointmentVenture { get; set; }
+        DbSet<VentureAppointment> VentureAppointment { get; set; }
         DbSet<Event> Event { get; set; }        
         DbSet<EventDetail> EventDetail { get; set; }
         DbSet<EventAssociateOption> EventAssociateOption { get; set; }

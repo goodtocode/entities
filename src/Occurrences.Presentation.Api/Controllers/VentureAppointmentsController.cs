@@ -1,4 +1,5 @@
-﻿using GoodToCode.Subjects.Models;
+﻿using GoodToCode.Occurrences.Infrastructure;
+using GoodToCode.Occurrences.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,52 +7,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Subjects.Application
+namespace GoodToCode.Occurrences.Application
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AppointmentVenturesController : ControllerBase
+    public class VentureAppointmentsController : ControllerBase
     {
-        private readonly SubjectsDbContext _dbContext;
+        private readonly OccurrencesDbContext _dbContext;
 
-        public AppointmentVenturesController(SubjectsDbContext context)
+        public VentureAppointmentsController(OccurrencesDbContext context)
         {
             _dbContext = context;
         }
 
-        // GET: api/AppointmentVentures
+        // GET: api/VentureAppointments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppointmentVenture>>> GetAppointmentVenture()
+        public async Task<ActionResult<IEnumerable<VentureAppointment>>> GetVentureAppointment()
         {
-            return await _dbContext.AppointmentVenture.ToListAsync();
+            return await _dbContext.VentureAppointment.ToListAsync();
         }
 
-        // GET: api/AppointmentVentures/5
+        // GET: api/VentureAppointments/5
         [HttpGet("{key}")]
-        public async Task<ActionResult<AppointmentVenture>> GetAppointmentVenture(Guid key)
+        public async Task<ActionResult<VentureAppointment>> GetVentureAppointment(Guid key)
         {
-            var AppointmentVenture = await _dbContext.AppointmentVenture.FindAsync(key);
+            var VentureAppointment = await _dbContext.VentureAppointment.FindAsync(key);
 
-            if (AppointmentVenture == null)
+            if (VentureAppointment == null)
             {
                 return NotFound();
             }
 
-            return AppointmentVenture;
+            return VentureAppointment;
         }
 
-        // PUT: api/AppointmentVentures/5
+        // PUT: api/VentureAppointments/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{key}")]
-        public async Task<IActionResult> PutAppointmentVenture(Guid key, AppointmentVenture AppointmentVenture)
+        public async Task<IActionResult> PutVentureAppointment(Guid key, VentureAppointment VentureAppointment)
         {
-            if (key != AppointmentVenture.AppointmentVentureKey)
+            if (key != VentureAppointment.VentureAppointmentKey)
             {
                 return BadRequest();
             }
 
-            _dbContext.Entry(AppointmentVenture).State = EntityState.Modified;
+            _dbContext.Entry(VentureAppointment).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +60,7 @@ namespace GoodToCode.Subjects.Application
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AppointmentVentureExists(key))
+                if (!VentureAppointmentExists(key))
                 {
                     return NotFound();
                 }
@@ -72,37 +73,37 @@ namespace GoodToCode.Subjects.Application
             return NoContent();
         }
 
-        // POST: api/AppointmentVentures
+        // POST: api/VentureAppointments
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<AppointmentVenture>> PostAppointmentVenture(AppointmentVenture AppointmentVenture)
+        public async Task<ActionResult<VentureAppointment>> PostVentureAppointment(VentureAppointment VentureAppointment)
         {
-            _dbContext.AppointmentVenture.Add(AppointmentVenture);
+            _dbContext.VentureAppointment.Add(VentureAppointment);
             await _dbContext.SaveChangesAsync();
 
-            return CreatedAtAction("GetAppointmentVenture", new { key = AppointmentVenture.AppointmentVentureKey }, AppointmentVenture);
+            return CreatedAtAction("GetVentureAppointment", new { key = VentureAppointment.VentureAppointmentKey }, VentureAppointment);
         }
 
-        // DELETE: api/AppointmentVentures/5
+        // DELETE: api/VentureAppointments/5
         [HttpDelete("{key}")]
-        public async Task<ActionResult<AppointmentVenture>> DeleteAppointmentVenture(Guid key)
+        public async Task<ActionResult<VentureAppointment>> DeleteVentureAppointment(Guid key)
         {
-            var AppointmentVenture = await _dbContext.AppointmentVenture.FindAsync(key);
-            if (AppointmentVenture == null)
+            var VentureAppointment = await _dbContext.VentureAppointment.FindAsync(key);
+            if (VentureAppointment == null)
             {
                 return NotFound();
             }
 
-            _dbContext.AppointmentVenture.Remove(AppointmentVenture);
+            _dbContext.VentureAppointment.Remove(VentureAppointment);
             await _dbContext.SaveChangesAsync();
 
-            return AppointmentVenture;
+            return VentureAppointment;
         }
 
-        private bool AppointmentVentureExists(Guid key)
+        private bool VentureAppointmentExists(Guid key)
         {
-            return _dbContext.AppointmentVenture.Any(e => e.AppointmentVentureKey == key);
+            return _dbContext.VentureAppointment.Any(e => e.VentureAppointmentKey == key);
         }
     }
 }
