@@ -1,10 +1,12 @@
 ﻿using GoodToCode.Shared.Models;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Chronology.Models
 {
     public class TimeRecurring : DomainModel<ITimeRecurring>, ITimeRecurring
     {
+        [Key]
         public Guid TimeRecurringKey { get; set; }
         public int BeginDay { get; set; }
         public int EndDay { get; set; }

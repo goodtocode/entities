@@ -1,11 +1,13 @@
 ﻿using GoodToCode.Shared.Models;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Spatial;
 
 namespace GoodToCode.Locality.Models
 {
     public class GeoDistance : DomainModel<IGeoDistance>, IGeoDistance
     {
+        [Key]
         public Guid GeoDistanceKey { get; set; }
         public PointCoordinate StartPoint { get; set; }
         public PointCoordinate EndPoint { get; set; }

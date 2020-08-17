@@ -1,11 +1,12 @@
 ﻿using GoodToCode.Shared.Models;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Chronology.Models
 {
     public class SlotTimeRecurring : DomainModel<ISlotTimeRecurring>, ISlotTimeRecurring
     {
-        public int SlotTimeRecurringId { get; set; }
+        [Key]
         public Guid SlotTimeRecurringKey { get; set; }
         public Guid SlotKey { get; set; }
         public Guid TimeRecurringKey { get; set; }
