@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace GoodToCode.Locality.Models
+namespace GoodToCode.Chronology.Models
 {
     public class LocationTimeRecurring : DomainModel<ILocationTimeRecurring>, ILocationTimeRecurring
     {

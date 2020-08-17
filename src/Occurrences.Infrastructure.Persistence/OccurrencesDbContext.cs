@@ -38,7 +38,7 @@ namespace GoodToCode.Occurrences.Infrastructure
             
             modelBuilder.Entity<Appointment>(entity =>
             {
-                entity.ToTable("Appointment", "Entity");
+                entity.ToTable("Appointment", "Occurrences");
 
                 entity.HasIndex(e => e.AppointmentKey)
                     .HasName("IX_Appointment_Key")
@@ -59,7 +59,7 @@ namespace GoodToCode.Occurrences.Infrastructure
 
             modelBuilder.Entity<AssociateAppointment>(entity =>
             {
-                entity.ToTable("AssociateAppointment", "Entity");
+                entity.ToTable("AssociateAppointment", "Occurrences");
 
                 entity.HasIndex(e => e.AssociateAppointmentKey)
                     .HasName("IX_AssociateAppointment_Key")
@@ -72,7 +72,7 @@ namespace GoodToCode.Occurrences.Infrastructure
 
             modelBuilder.Entity<Event>(entity =>
             {
-                entity.ToTable("Event", "Entity");
+                entity.ToTable("Event", "Occurrences");
 
                 entity.HasIndex(e => e.EventKey)
                     .IsUnique();
@@ -95,7 +95,7 @@ namespace GoodToCode.Occurrences.Infrastructure
 
             modelBuilder.Entity<EventAppointment>(entity =>
             {
-                entity.ToTable("AppointmentEvent", "Entity");
+                entity.ToTable("AppointmentEvent", "Occurrences");
 
                 entity.HasIndex(e => e.AppointmentEventKey)
                     .HasName("IX_AppointmentEvent_Key")
@@ -108,7 +108,7 @@ namespace GoodToCode.Occurrences.Infrastructure
 
             modelBuilder.Entity<EventDetail>(entity =>
             {
-                entity.ToTable("EventDetail", "Entity");
+                entity.ToTable("EventDetail", "Occurrences");
 
                 entity.HasIndex(e => e.EventDetailKey)
                     .HasName("IX_EventDetail_Key")
@@ -121,7 +121,7 @@ namespace GoodToCode.Occurrences.Infrastructure
 
             modelBuilder.Entity<EventAssociateOption>(entity =>
             {
-                entity.ToTable("EventAssociateOption", "Entity");
+                entity.ToTable("EventAssociateOption", "Occurrences");
 
                 entity.HasIndex(e => e.EventAssociateOptionKey)
                     .HasName("IX_EventAssociateOption_Key")
@@ -130,7 +130,7 @@ namespace GoodToCode.Occurrences.Infrastructure
 
             modelBuilder.Entity<EventGroup>(entity =>
             {
-                entity.ToTable("EventGroup", "Entity");
+                entity.ToTable("EventGroup", "Occurrences");
 
                 entity.HasIndex(e => e.EventGroupKey)
                     .HasName("IX_EventGroup_Key")
@@ -147,7 +147,7 @@ namespace GoodToCode.Occurrences.Infrastructure
 
             modelBuilder.Entity<EventLocation>(entity =>
             {
-                entity.ToTable("EventLocation", "Entity");
+                entity.ToTable("EventLocation", "Occurrences");
 
                 entity.HasIndex(e => e.EventLocationKey)
                     .HasName("IX_EventLocation_Key")
@@ -160,7 +160,7 @@ namespace GoodToCode.Occurrences.Infrastructure
 
             modelBuilder.Entity<EventOption>(entity =>
             {
-                entity.ToTable("EventOption", "Entity");
+                entity.ToTable("EventOption", "Occurrences");
 
                 entity.HasIndex(e => new { e.EventKey, e.OptionKey })
                     .HasName("IX_EventOption_All")
@@ -169,7 +169,7 @@ namespace GoodToCode.Occurrences.Infrastructure
 
             modelBuilder.Entity<EventResource>(entity =>
             {
-                entity.ToTable("EventResource", "Entity");
+                entity.ToTable("EventResource", "Occurrences");
 
                 entity.HasIndex(e => e.EventResourceKey)
                     .HasName("IX_EventResource_Key")
@@ -183,7 +183,7 @@ namespace GoodToCode.Occurrences.Infrastructure
 
             modelBuilder.Entity<EventSchedule>(entity =>
             {
-                entity.ToTable("EventSchedule", "Entity");
+                entity.ToTable("EventSchedule", "Occurrences");
 
                 entity.HasIndex(e => e.EventScheduleKey)
                     .HasName("IX_EventSchedule_Key")
@@ -196,7 +196,7 @@ namespace GoodToCode.Occurrences.Infrastructure
 
             modelBuilder.Entity<EventType>(entity =>
             {
-                entity.ToTable("EventType", "Entity");
+                entity.ToTable("EventType", "Occurrences");
 
                 entity.HasIndex(e => e.EventTypeKey)
                     .HasName("IX_EventType_Key")
@@ -213,7 +213,7 @@ namespace GoodToCode.Occurrences.Infrastructure
 
             modelBuilder.Entity<VentureAppointment>(entity =>
             {
-                entity.ToTable("VentureAppointment", "Entity");
+                entity.ToTable("VentureAppointment", "Occurrences");
 
                 entity.HasIndex(e => e.VentureAppointmentKey)
                     .HasName("IX_VentureAppointment_Key")

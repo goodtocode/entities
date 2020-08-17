@@ -11,12 +11,18 @@ namespace GoodToCode.Locality.Infrastructure
         }
 
         public virtual DbSet<Location> Location { get; set; }
-        public virtual DbSet<LocationArea> LocationArea { get; set; }
-        public virtual DbSet<LocationTimeRecurring> LocationTimeRecurring { get; set; }
+        public virtual DbSet<LocationArea> LocationArea { get; set; }        
         public virtual DbSet<LocationType> LocationType { get; set; }
         public virtual DbSet<AssociateLocation> AssociateLocation { get; set; }
         public virtual DbSet<ResourceLocation> ResourceLocation { get; set; }
         public virtual DbSet<VentureLocation> VentureLocation { get; set; }
+        public DbSet<GeoArea> GeoArea { get; set; }
+        public DbSet<GeoDistance> GeoDistance { get; set; }
+        public DbSet<GeoLocation> GeoLocation { get; set; }
+        public DbSet<LatLong> LatLong { get; set; }
+        public DbSet<Line> Line { get; set; }
+        public DbSet<PointCoordinate> PointCoordinate { get; set; }
+        public DbSet<Polygon> Polygon { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -31,7 +37,7 @@ namespace GoodToCode.Locality.Infrastructure
         {
             modelBuilder.Entity<Location>(entity =>
             {
-                entity.ToTable("Location", "Entity");
+                entity.ToTable("Location", "Locality");
 
                 entity.HasIndex(e => e.LocationKey)
                     .IsUnique();
@@ -47,7 +53,7 @@ namespace GoodToCode.Locality.Infrastructure
 
             modelBuilder.Entity<LocationArea>(entity =>
             {
-                entity.ToTable("LocationArea", "Entity");
+                entity.ToTable("LocationArea", "Locality");
 
                 entity.HasIndex(e => e.LocationAreaKey)
                     .HasName("IX_LocationArea_Key")
@@ -56,35 +62,14 @@ namespace GoodToCode.Locality.Infrastructure
                 entity.HasIndex(e => e.LocationKey)
                     .HasName("IX_LocationArea_LocationId");
 
-                entity.HasIndex(e => new { e.LocationKey, e.AreaKey })
+                entity.HasIndex(e => new { e.LocationKey, e.PolygonKey })
                     .HasName("IX_LocationArea_All")
                     .IsUnique();
             });
 
-            modelBuilder.Entity<LocationTimeRecurring>(entity =>
-            {
-                entity.ToTable("LocationTimeRecurring", "Entity");
-
-                entity.HasIndex(e => e.LocationTimeRecurringKey)
-                    .HasName("IX_LocationTimeRecurring_Key")
-                    .IsUnique();
-
-                entity.HasIndex(e => new { e.LocationKey, e.TimeRecurringKey })
-                    .HasName("IX_LocationTimeRecurring_All")
-                    .IsUnique();
-
-                entity.Property(e => e.DayName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.TimeName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
             modelBuilder.Entity<LocationType>(entity =>
             {
-                entity.ToTable("LocationType", "Entity");
+                entity.ToTable("LocationType", "Locality");
 
                 entity.HasIndex(e => e.LocationTypeKey)
                     .HasName("IX_LocationType_Key")

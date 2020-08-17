@@ -14,6 +14,7 @@ namespace GoodToCode.Chronology.Models
         DbSet<SlotTimeRange> SlotTimeRange { get; set; }
         DbSet<SlotTimeRecurring> SlotTimeRecurring { get; set; }
         DbSet<AssociateTimeRecurring> AssociateTimeRecurring { get; set; }
+        DbSet<LocationTimeRecurring> LocationTimeRecurring { get; set; }
         DbSet<ResourceTimeRecurring> ResourceTimeRecurring { get; set; }
         DbSet<VentureTimeRecurring> VentureTimeRecurring { get; set; }
         DbSet<AssociateSchedule> AssociateSchedule { get; set; }

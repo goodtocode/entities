@@ -19,6 +19,7 @@ namespace GoodToCode.Chronology.Infrastructure
         public virtual DbSet<SlotTimeRange> SlotTimeRange { get; set; }
         public virtual DbSet<SlotTimeRecurring> SlotTimeRecurring { get; set; }
         public virtual DbSet<AssociateTimeRecurring> AssociateTimeRecurring { get; set; }
+        public virtual DbSet<LocationTimeRecurring> LocationTimeRecurring { get; set; }
         public virtual DbSet<ResourceTimeRecurring> ResourceTimeRecurring { get; set; }
         public virtual DbSet<VentureTimeRecurring> VentureTimeRecurring { get; set; }
         public virtual DbSet<AssociateSchedule> AssociateSchedule { get; set; }
@@ -168,7 +169,7 @@ namespace GoodToCode.Chronology.Infrastructure
 
             modelBuilder.Entity<AssociateTimeRecurring>(entity =>
             {
-                entity.ToTable("AssociateTimeRecurring", "Subjects");
+                entity.ToTable("AssociateTimeRecurring", "Chronology");
 
                 entity.HasIndex(e => e.AssociateTimeRecurringKey)
                     .HasName("IX_AssociateTimeRecurring_Key")
@@ -188,9 +189,30 @@ namespace GoodToCode.Chronology.Infrastructure
                     .HasMaxLength(50);
             });
 
+            modelBuilder.Entity<LocationTimeRecurring>(entity =>
+            {
+                entity.ToTable("LocationTimeRecurring", "Chronology");
+
+                entity.HasIndex(e => e.LocationTimeRecurringKey)
+                    .HasName("IX_LocationTimeRecurring_Location")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.LocationKey, e.TimeRecurringKey })
+                    .HasName("IX_LocationTimeRecurring_All")
+                    .IsUnique();
+
+                entity.Property(e => e.DayName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.TimeName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
+
             modelBuilder.Entity<ResourceTimeRecurring>(entity =>
             {
-                entity.ToTable("ResourceTimeRecurring", "Subjects");
+                entity.ToTable("ResourceTimeRecurring", "Chronology");
 
                 entity.HasIndex(e => e.ResourceTimeRecurringKey)
                     .HasName("IX_ResourceTimeRecurring_Resource")
@@ -211,7 +233,7 @@ namespace GoodToCode.Chronology.Infrastructure
 
             modelBuilder.Entity<VentureTimeRecurring>(entity =>
             {
-                entity.ToTable("VentureTimeRecurring", "Subjects");
+                entity.ToTable("VentureTimeRecurring", "Chronology");
 
                 entity.HasIndex(e => e.VentureTimeRecurringKey)
                     .HasName("IX_VentureTimeRecurring_Venture")
@@ -232,7 +254,7 @@ namespace GoodToCode.Chronology.Infrastructure
 
             modelBuilder.Entity<AssociateSchedule>(entity =>
             {
-                entity.ToTable("AssociateSchedule", "Subjects");
+                entity.ToTable("AssociateSchedule", "Chronology");
 
                 entity.HasIndex(e => e.AssociateScheduleKey)
                     .HasName("IX_AssociateSchedule_Key")
@@ -246,7 +268,7 @@ namespace GoodToCode.Chronology.Infrastructure
 
             modelBuilder.Entity<ResourceSchedule>(entity =>
             {
-                entity.ToTable("ResourceSchedule", "Subjects");
+                entity.ToTable("ResourceSchedule", "Chronology");
 
                 entity.HasIndex(e => e.ResourceScheduleKey)
                     .HasName("IX_ResourceSchedule_Key")
@@ -259,7 +281,7 @@ namespace GoodToCode.Chronology.Infrastructure
 
             modelBuilder.Entity<VentureSchedule>(entity =>
             {
-                entity.ToTable("VentureSchedule", "Subjects");
+                entity.ToTable("VentureSchedule", "Chronology");
 
                 entity.HasIndex(e => e.VentureScheduleKey)
                     .HasName("IX_VentureSchedule_Key")

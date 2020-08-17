@@ -1,7 +1,7 @@
 ﻿using GoodToCode.Shared.Models;
 using System;
 
-namespace GoodToCode.Locality.Models
+namespace GoodToCode.Chronology.Models
 {
     public interface ILocationTimeRecurring : IDomainModel<ILocationTimeRecurring>
     {        
