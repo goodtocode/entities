@@ -1,7 +1,7 @@
 ﻿using GoodToCode.Shared.Models;
 using System;
 
-namespace GoodToCode.Subjects.Models
+namespace GoodToCode.Locality.Models
 {
     public interface IAssociateLocation : IDomainModel<IAssociateLocation>
     {

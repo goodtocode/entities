@@ -9,5 +9,9 @@ namespace GoodToCode.Locality.Models
         DbSet<LocationArea> LocationArea { get; set; }
         DbSet<LocationTimeRecurring> LocationTimeRecurring { get; set; }
         DbSet<LocationType> LocationType { get; set; }
+        DbSet<AssociateLocation> AssociateLocation { get; set; }
+        DbSet<ResourceLocation> ResourceLocation { get; set; }
+        DbSet<VentureLocation> VentureLocation { get; set; }
+
     }
 }

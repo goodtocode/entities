@@ -1,5 +1,5 @@
-﻿using GoodToCode.Subjects.Infrastructure;
-using GoodToCode.Subjects.Models;
+﻿using GoodToCode.Locality.Infrastructure;
+using GoodToCode.Locality.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,15 +7,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Subjects.Application
+namespace GoodToCode.Locality.Application
 {
     [Route("api/[controller]")]
     [ApiController]
     public class VentureLocationsController : ControllerBase
     {
-        private readonly SubjectsDbContext _dbContext;
+        private readonly LocalityDbContext _dbContext;
 
-        public VentureLocationsController(SubjectsDbContext context)
+        public VentureLocationsController(LocalityDbContext context)
         {
             _dbContext = context;
         }

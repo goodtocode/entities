@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace GoodToCode.Subjects.Models
+namespace GoodToCode.Locality.Models
 {
     public class VentureLocation : DomainModel<IVentureLocation>, IVentureLocation
     {

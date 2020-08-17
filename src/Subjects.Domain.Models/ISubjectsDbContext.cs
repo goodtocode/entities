@@ -10,8 +10,7 @@ namespace GoodToCode.Subjects.Infrastructure
         DbSet<Detail> Detail { get; set; }
         DbSet<DetailType> DetailType { get; set; }
         DbSet<Associate> Associate { get; set; }
-        DbSet<AssociateDetail> AssociateDetail { get; set; }
-        DbSet<AssociateLocation> AssociateLocation { get; set; }
+        DbSet<AssociateDetail> AssociateDetail { get; set; }        
         DbSet<AssociateOption> AssociateOption { get; set; }        
         DbSet<Gender> Gender { get; set; }
         DbSet<Government> Government { get; set; }
@@ -28,7 +27,6 @@ namespace GoodToCode.Subjects.Infrastructure
         DbSet<Venture> Venture { get; set; }
         DbSet<VentureDetail> VentureDetail { get; set; }
         DbSet<VentureAssociateOption> VentureAssociateOption { get; set; }
-        DbSet<VentureLocation> VentureLocation { get; set; }
         DbSet<VentureOption> VentureOption { get; set; }
         DbSet<VentureResource> VentureResource { get; set; }        
     }

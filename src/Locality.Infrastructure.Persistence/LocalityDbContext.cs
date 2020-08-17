@@ -14,6 +14,9 @@ namespace GoodToCode.Locality.Infrastructure
         public virtual DbSet<LocationArea> LocationArea { get; set; }
         public virtual DbSet<LocationTimeRecurring> LocationTimeRecurring { get; set; }
         public virtual DbSet<LocationType> LocationType { get; set; }
+        public virtual DbSet<AssociateLocation> AssociateLocation { get; set; }
+        public virtual DbSet<ResourceLocation> ResourceLocation { get; set; }
+        public virtual DbSet<VentureLocation> VentureLocation { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -94,6 +97,39 @@ namespace GoodToCode.Locality.Infrastructure
                 entity.Property(e => e.LocationTypeName)
                     .IsRequired()
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<AssociateLocation>(entity =>
+            {
+                entity.ToTable("AssociateLocation", "Subjects");
+
+                entity.HasIndex(e => new { e.AssociateKey, e.LocationKey })
+                    .HasName("IX_AssociateLocation_All")
+                    .IsUnique();
+
+            });
+
+            modelBuilder.Entity<ResourceLocation>(entity =>
+            {
+                entity.ToTable("ResourceLocation", "Subjects");
+
+                entity.HasIndex(e => new { e.ResourceKey, e.LocationKey })
+                    .HasName("IX_ResourceLocation_All")
+                    .IsUnique();
+
+            });
+
+            modelBuilder.Entity<VentureLocation>(entity =>
+            {
+                entity.ToTable("VentureLocation", "Subjects");
+
+                entity.HasIndex(e => e.VentureLocationKey)
+                    .HasName("IX_VentureLocation_Key")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.VentureKey, e.LocationKey })
+                    .HasName("IX_VentureLocation_All")
+                    .IsUnique();
             });
 
             OnModelCreatingPartial(modelBuilder);

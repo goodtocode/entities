@@ -18,7 +18,6 @@ namespace GoodToCode.Subjects.Infrastructure
         public virtual DbSet<DetailType> DetailType { get; set; }
         public virtual DbSet<Associate> Associate { get; set; }        
         public virtual DbSet<AssociateDetail> AssociateDetail { get; set; }
-        public virtual DbSet<AssociateLocation> AssociateLocation { get; set; }
         public virtual DbSet<AssociateOption> AssociateOption { get; set; }        
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<Government> Government { get; set; }
@@ -35,7 +34,6 @@ namespace GoodToCode.Subjects.Infrastructure
         public virtual DbSet<Venture> Venture { get; set; }
         public virtual DbSet<VentureDetail> VentureDetail { get; set; }
         public virtual DbSet<VentureAssociateOption> VentureAssociateOption { get; set; }
-        public virtual DbSet<VentureLocation> VentureLocation { get; set; }
         public virtual DbSet<VentureOption> VentureOption { get; set; }
         public virtual DbSet<VentureResource> VentureResource { get; set; }
 
@@ -123,16 +121,6 @@ namespace GoodToCode.Subjects.Infrastructure
                     .IsUnique();
             });
 
-            modelBuilder.Entity<AssociateLocation>(entity =>
-            {
-                entity.ToTable("AssociateLocation", "Subjects");
-
-                entity.HasIndex(e => new { e.AssociateKey, e.LocationKey })
-                    .HasName("IX_AssociateLocation_All")
-                    .IsUnique();
-
-            });
-
             modelBuilder.Entity<AssociateOption>(entity =>
             {
                 entity.ToTable("AssociateOption", "Subjects");
@@ -195,7 +183,6 @@ namespace GoodToCode.Subjects.Infrastructure
                 entity.HasIndex(e => e.ItemKey)
                     .IsUnique();
 
-                
 
                 entity.Property(e => e.ItemDescription)
                     .IsRequired()
@@ -215,8 +202,6 @@ namespace GoodToCode.Subjects.Infrastructure
                 entity.HasIndex(e => e.ItemGroupKey)
                     .HasName("IX_ItemGroup_Key")
                     .IsUnique();
-
-                
 
                 entity.Property(e => e.ItemGroupDescription)
                     .IsRequired()
@@ -437,19 +422,6 @@ namespace GoodToCode.Subjects.Infrastructure
 
                 entity.HasIndex(e => e.VentureAssociateOptionKey)
                     .HasName("IX_VentureAssociateOption_Key")
-                    .IsUnique();
-            });
-
-            modelBuilder.Entity<VentureLocation>(entity =>
-            {
-                entity.ToTable("VentureLocation", "Subjects");
-
-                entity.HasIndex(e => e.VentureLocationKey)
-                    .HasName("IX_VentureLocation_Key")
-                    .IsUnique();
-
-                entity.HasIndex(e => new { e.VentureKey, e.LocationKey })
-                    .HasName("IX_VentureLocation_All")
                     .IsUnique();
             });
 
