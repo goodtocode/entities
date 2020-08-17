@@ -31,7 +31,7 @@ namespace GoodToCode.Subjects.Application
     public class BusinessGetHandler : IRequestHandler<BusinessGetQuery, QueryResponseWrapper<List<Business>>>
     {
 
-        private readonly GetLatestExamResultQueryValidator _validator;
+        private readonly BusinessGetValidator _validator;
         private readonly List<KeyValuePair<string, string>> _errors;
         private readonly ILogger<BusinessGetHandler> _logger;
         private readonly SubjectsDbContext _dbContext;
@@ -40,7 +40,7 @@ namespace GoodToCode.Subjects.Application
         {
 
             _dbContext = dbContext;
-            _validator = new GetLatestExamResultQueryValidator();
+            _validator = new BusinessGetValidator();
             _errors = new List<KeyValuePair<string, string>>();
         }
 

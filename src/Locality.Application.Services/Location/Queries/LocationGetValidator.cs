@@ -2,9 +2,9 @@
 
 namespace GoodToCode.Locality.Application
 {
-    public class GetLatestExamResultQueryValidator : AbstractValidator<LocationGetQuery>
+    public class LocationGetValidator : AbstractValidator<LocationGetQuery>
     {
-        public GetLatestExamResultQueryValidator()
+        public LocationGetValidator()
         {
             RuleFor(v => v.QueryPredicate).NotEmpty().NotNull();
         }

@@ -19,8 +19,8 @@ namespace GoodToCode.Chronology.Specs.Domain.Schedule
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.3.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Associate Aggregate", Description="\tRecommended method of changing any Assiciate namespaced data", SourceFile="Domain\\Schedule\\ScheduleAggregate.feature", SourceLine=0)]
-    public partial class AssociateAggregateFeature
+    [TechTalk.SpecRun.FeatureAttribute("Schedule Aggregate", Description="\tRecommended method of changing any Assiciate namespaced data", SourceFile="Domain\\Schedule\\ScheduleAggregate.feature", SourceLine=0)]
+    public partial class ScheduleAggregateFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -34,7 +34,7 @@ namespace GoodToCode.Chronology.Specs.Domain.Schedule
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Associate Aggregate", "\tRecommended method of changing any Assiciate namespaced data", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Schedule Aggregate", "\tRecommended method of changing any Assiciate namespaced data", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         

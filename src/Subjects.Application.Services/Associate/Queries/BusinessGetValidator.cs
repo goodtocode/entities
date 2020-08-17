@@ -2,9 +2,9 @@
 
 namespace GoodToCode.Subjects.Application
 {
-    public class GetLatestExamResultQueryValidator : AbstractValidator<BusinessGetQuery>
+    public class BusinessGetValidator : AbstractValidator<BusinessGetQuery>
     {
-        public GetLatestExamResultQueryValidator()
+        public BusinessGetValidator()
         {
             RuleFor(v => v.QueryPredicate).NotEmpty().NotNull();
         }

@@ -32,7 +32,7 @@ namespace GoodToCode.Locality.Application
     public class LocationGetHandler : IRequestHandler<LocationGetQuery, QueryResponseWrapper<List<Location>>>
     {
 
-        private readonly GetLatestExamResultQueryValidator _validator;
+        private readonly LocationGetValidator _validator;
         private readonly List<KeyValuePair<string, string>> _errors;
         private readonly ILogger<LocationGetHandler> _logger;
         private readonly LocalityDbContext _dbContext;
@@ -41,7 +41,7 @@ namespace GoodToCode.Locality.Application
         {
 
             _dbContext = dbContext;
-            _validator = new GetLatestExamResultQueryValidator();
+            _validator = new LocationGetValidator();
             _errors = new List<KeyValuePair<string, string>>();
         }
 

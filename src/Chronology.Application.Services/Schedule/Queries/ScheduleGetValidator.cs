@@ -2,9 +2,9 @@
 
 namespace GoodToCode.Chronology.Application
 {
-    public class GetLatestExamResultQueryValidator : AbstractValidator<ScheduleGetQuery>
+    public class ScheduleGetValidator : AbstractValidator<ScheduleGetQuery>
     {
-        public GetLatestExamResultQueryValidator()
+        public ScheduleGetValidator()
         {
             RuleFor(v => v.QueryPredicate).NotEmpty().NotNull();
         }

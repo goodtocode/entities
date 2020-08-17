@@ -32,7 +32,7 @@ namespace GoodToCode.Chronology.Application
     public class ScheduleGetHandler : IRequestHandler<ScheduleGetQuery, QueryResponseWrapper<List<Schedule>>>
     {
 
-        private readonly GetLatestExamResultQueryValidator _validator;
+        private readonly ScheduleGetValidator _validator;
         private readonly List<KeyValuePair<string, string>> _errors;
         private readonly ILogger<ScheduleGetHandler> _logger;
         private readonly ChronologyDbContext _dbContext;
@@ -41,7 +41,7 @@ namespace GoodToCode.Chronology.Application
         {
 
             _dbContext = dbContext;
-            _validator = new GetLatestExamResultQueryValidator();
+            _validator = new ScheduleGetValidator();
             _errors = new List<KeyValuePair<string, string>>();
         }
 
