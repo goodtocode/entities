@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Domain;
+﻿using GoodToCode.Shared.Models;
 using System;
 
 namespace GoodToCode.Subjects.Models

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoodToCode.Subjects.Aggregates
+namespace GoodToCode.Subjects.Models
 {
     public class ResourceAggregate
     {

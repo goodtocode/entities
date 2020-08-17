@@ -1,9 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Shared.Models;
+using System;
 using System.Spatial;
 
-namespace GoodToCode.Locality.Domain.Models
+namespace GoodToCode.Locality.Models
 {
-    public class Polygon
+    public class Polygon : DomainModel<IPolygon>, IPolygon
     {
         public Guid PolygonKey { get; set; }
         public Geometry Area { get; set; }

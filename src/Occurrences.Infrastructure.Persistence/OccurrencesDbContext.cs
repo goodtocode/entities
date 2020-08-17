@@ -11,18 +11,18 @@ namespace GoodToCode.Occurrences.Infrastructure
         }
 
         public virtual DbSet<Appointment> Appointment { get; set; }
-        public virtual DbSet<EntityAppointment> EntityAppointment { get; set; }
+        public virtual DbSet<AssociateAppointment> AppointmentAssociate { get; set; }
+        public virtual DbSet<VentureAppointment> AppointmentVenture { get; set; }
         public virtual DbSet<Event> Event { get; set; }
-        public virtual DbSet<EventAppointment> EventAppointment { get; set; }
+        public virtual DbSet<EventAppointment> AppointmentEvent { get; set; }
         public virtual DbSet<EventDetail> EventDetail { get; set; }
-        public virtual DbSet<EventEntityOption> EventEntityOption { get; set; }
+        public virtual DbSet<EventAssociateOption> EventAssociateOption { get; set; }
         public virtual DbSet<EventGroup> EventGroup { get; set; }
         public virtual DbSet<EventLocation> EventLocation { get; set; }
         public virtual DbSet<EventOption> EventOption { get; set; }
         public virtual DbSet<EventResource> EventResource { get; set; }
         public virtual DbSet<EventSchedule> EventSchedule { get; set; }
         public virtual DbSet<EventType> EventType { get; set; }
-        public virtual DbSet<VentureAppointment> VentureAppointment { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -57,16 +57,16 @@ namespace GoodToCode.Occurrences.Infrastructure
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<EntityAppointment>(entity =>
+            modelBuilder.Entity<AssociateAppointment>(entity =>
             {
-                entity.ToTable("EntityAppointment", "Entity");
+                entity.ToTable("AppointmentAssociate", "Entity");
 
-                entity.HasIndex(e => e.EntityAppointmentKey)
-                    .HasName("IX_EntityAppointment_Key")
+                entity.HasIndex(e => e.AppointmentAssociateKey)
+                    .HasName("IX_AppointmentAssociate_Key")
                     .IsUnique();
 
-                entity.HasIndex(e => new { e.EntityKey, e.AppointmentKey })
-                    .HasName("IX_EntityAppointment_All")
+                entity.HasIndex(e => new { e.AssociateKey, e.AppointmentKey })
+                    .HasName("IX_AppointmentAssociate_All")
                     .IsUnique();
             });
 
@@ -95,14 +95,14 @@ namespace GoodToCode.Occurrences.Infrastructure
 
             modelBuilder.Entity<EventAppointment>(entity =>
             {
-                entity.ToTable("EventAppointment", "Entity");
+                entity.ToTable("AppointmentEvent", "Entity");
 
-                entity.HasIndex(e => e.EventAppointmentKey)
-                    .HasName("IX_EventAppointment_Key")
+                entity.HasIndex(e => e.AppointmentEventKey)
+                    .HasName("IX_AppointmentEvent_Key")
                     .IsUnique();
 
                 entity.HasIndex(e => new { e.EventKey, e.AppointmentKey })
-                    .HasName("IX_EventAppointment_All")
+                    .HasName("IX_AppointmentEvent_All")
                     .IsUnique();
             });
 
@@ -119,12 +119,12 @@ namespace GoodToCode.Occurrences.Infrastructure
                     .IsUnique();
             });
 
-            modelBuilder.Entity<EventEntityOption>(entity =>
+            modelBuilder.Entity<EventAssociateOption>(entity =>
             {
-                entity.ToTable("EventEntityOption", "Entity");
+                entity.ToTable("EventAssociateOption", "Entity");
 
-                entity.HasIndex(e => e.EventEntityOptionKey)
-                    .HasName("IX_EventEntityOption_Key")
+                entity.HasIndex(e => e.EventAssociateOptionKey)
+                    .HasName("IX_EventAssociateOption_Key")
                     .IsUnique();
             });
 
@@ -213,14 +213,40 @@ namespace GoodToCode.Occurrences.Infrastructure
 
             modelBuilder.Entity<VentureAppointment>(entity =>
             {
-                entity.ToTable("VentureAppointment", "Entity");
+                entity.ToTable("AppointmentVenture", "Entity");
 
-                entity.HasIndex(e => e.VentureAppointmentKey)
-                    .HasName("IX_VentureAppointment_Key")
+                entity.HasIndex(e => e.AppointmentVentureKey)
+                    .HasName("IX_AppointmentVenture_Key")
                     .IsUnique();
 
                 entity.HasIndex(e => new { e.VentureKey, e.AppointmentKey })
-                    .HasName("IX_VentureAppointment_All")
+                    .HasName("IX_AppointmentVenture_All")
+                    .IsUnique();
+            });
+
+            modelBuilder.Entity<AssociateAppointment>(entity =>
+            {
+                entity.ToTable("AppointmentAssociate", "Subjects");
+
+                entity.HasIndex(e => e.AppointmentAssociateKey)
+                    .HasName("IX_AppointmentAssociate_Key")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.AssociateKey, e.AppointmentKey })
+                    .HasName("IX_AppointmentAssociate_All")
+                    .IsUnique();
+            });
+
+            modelBuilder.Entity<VentureAppointment>(entity =>
+            {
+                entity.ToTable("AppointmentVenture", "Subjects");
+
+                entity.HasIndex(e => e.AppointmentVentureKey)
+                    .HasName("IX_AppointmentVenture_Key")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.VentureKey, e.AppointmentKey })
+                    .HasName("IX_AppointmentVenture_All")
                     .IsUnique();
             });
 

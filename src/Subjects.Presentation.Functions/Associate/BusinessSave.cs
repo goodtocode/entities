@@ -1,5 +1,4 @@
 using GoodToCode.Shared.Extensions;
-using GoodToCode.Subjects.Aggregates;
 using GoodToCode.Subjects.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

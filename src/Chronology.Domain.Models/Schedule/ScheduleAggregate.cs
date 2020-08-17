@@ -1,11 +1,10 @@
 ﻿using GoodToCode.Chronology.Domain;
-using GoodToCode.Chronology.Models;
-using GoodToCode.Shared.Domain;
+using GoodToCode.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Chronology.Aggregates
+namespace GoodToCode.Chronology.Models
 {
     public class ScheduleAggregate : DomainAggregate<ScheduleAggregate>
     {

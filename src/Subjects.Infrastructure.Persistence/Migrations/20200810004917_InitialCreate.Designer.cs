@@ -133,9 +133,9 @@ namespace GoodToCode.Shared.Migrations
                     b.ToTable("Associate","Subjects");
                 });
 
-            modelBuilder.Entity("GoodToCode.Subjects.Models.AssociateAppointment", b =>
+            modelBuilder.Entity("GoodToCode.Subjects.Models.AppointmentAssociate", b =>
                 {
-                    b.Property<Guid>("AssociateAppointmentKey")
+                    b.Property<Guid>("AppointmentAssociateKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -151,17 +151,17 @@ namespace GoodToCode.Shared.Migrations
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.HasKey("AssociateAppointmentKey");
+                    b.HasKey("AppointmentAssociateKey");
 
-                    b.HasIndex("AssociateAppointmentKey")
+                    b.HasIndex("AppointmentAssociateKey")
                         .IsUnique()
-                        .HasName("IX_AssociateAppointment_Key");
+                        .HasName("IX_AppointmentAssociate_Key");
 
                     b.HasIndex("AssociateKey", "AppointmentKey")
                         .IsUnique()
-                        .HasName("IX_AssociateAppointment_All");
+                        .HasName("IX_AppointmentAssociate_All");
 
-                    b.ToTable("AssociateAppointment","Subjects");
+                    b.ToTable("AppointmentAssociate","Subjects");
                 });
 
             modelBuilder.Entity("GoodToCode.Subjects.Models.AssociateDetail", b =>
@@ -810,9 +810,9 @@ namespace GoodToCode.Shared.Migrations
                     b.ToTable("Venture","Subjects");
                 });
 
-            modelBuilder.Entity("GoodToCode.Subjects.Models.VentureAppointment", b =>
+            modelBuilder.Entity("GoodToCode.Subjects.Models.AppointmentVenture", b =>
                 {
-                    b.Property<Guid>("VentureAppointmentKey")
+                    b.Property<Guid>("AppointmentVentureKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -828,17 +828,17 @@ namespace GoodToCode.Shared.Migrations
                     b.Property<Guid>("VentureKey")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("VentureAppointmentKey");
+                    b.HasKey("AppointmentVentureKey");
 
-                    b.HasIndex("VentureAppointmentKey")
+                    b.HasIndex("AppointmentVentureKey")
                         .IsUnique()
-                        .HasName("IX_VentureAppointment_Key");
+                        .HasName("IX_AppointmentVenture_Key");
 
                     b.HasIndex("VentureKey", "AppointmentKey")
                         .IsUnique()
-                        .HasName("IX_VentureAppointment_All");
+                        .HasName("IX_AppointmentVenture_All");
 
-                    b.ToTable("VentureAppointment","Subjects");
+                    b.ToTable("AppointmentVenture","Subjects");
                 });
 
             modelBuilder.Entity("GoodToCode.Subjects.Models.VentureDetail", b =>

@@ -9,7 +9,6 @@ namespace GoodToCode.Subjects.Models
         DbSet<Detail> Detail { get; set; }
         DbSet<DetailType> DetailType { get; set; }
         DbSet<Associate> Associate { get; set; }
-        DbSet<AssociateAppointment> AssociateAppointment { get; set; }
         DbSet<AssociateDetail> AssociateDetail { get; set; }
         DbSet<AssociateLocation> AssociateLocation { get; set; }
         DbSet<AssociateOption> AssociateOption { get; set; }
@@ -28,7 +27,6 @@ namespace GoodToCode.Subjects.Models
         DbSet<ResourceTimeRecurring> ResourceTimeRecurring { get; set; }
         DbSet<ResourceType> ResourceType { get; set; }
         DbSet<Venture> Venture { get; set; }
-        DbSet<VentureAppointment> VentureAppointment { get; set; }
         DbSet<VentureDetail> VentureDetail { get; set; }
         DbSet<VentureAssociateOption> VentureAssociateOption { get; set; }
         DbSet<VentureLocation> VentureLocation { get; set; }

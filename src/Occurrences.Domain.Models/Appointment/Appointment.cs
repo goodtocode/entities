@@ -1,8 +1,9 @@
-﻿using System;
+﻿using GoodToCode.Shared.Models;
+using System;
 
 namespace GoodToCode.Occurrences.Models
 {
-    public class Appointment
+    public class Appointment : DomainModel<IAppointment>, IAppointment
     {
         public Guid AppointmentKey { get; set; }
         public string AppointmentName { get; set; }

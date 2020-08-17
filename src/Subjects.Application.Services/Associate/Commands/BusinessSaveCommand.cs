@@ -1,11 +1,7 @@
 ﻿using GoodToCode.Shared.Cqrs;
-using GoodToCode.Shared.Extensions;
 using GoodToCode.Shared.Validation;
-using GoodToCode.Subjects.Aggregates;
 using GoodToCode.Subjects.Models;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Threading;

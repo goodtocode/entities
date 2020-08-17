@@ -9,8 +9,18 @@
   <ItemGroup>
     <Folder Include="Appointment\Commands\" />
     <Folder Include="Appointment\Queries\" />
-    <Folder Include="Event\Commands\" />
-    <Folder Include="Event\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="9.1.2" />
+    <PackageReference Include="MediatR" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Occurrences.Domain.Models\Occurrences.Domain.Models.csproj" />
+    <ProjectReference Include="..\Occurrences.Infrastructure.Persistence\Occurrences.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

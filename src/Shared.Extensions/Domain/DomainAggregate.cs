@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GoodToCode.Shared.Domain
+namespace GoodToCode.Shared.Models
 {
     public abstract class DomainAggregate<TAggregate> : IDomainAggregate<TAggregate> where TAggregate : IDomainAggregate<TAggregate>
     {

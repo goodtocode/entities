@@ -1,9 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Shared.Models;
+using System;
 using System.Collections.Generic;
 
 namespace GoodToCode.Occurrences.Models
 {
-    public class EventLocation
+    public class EventLocation : DomainModel<IEventLocation>, IEventLocation
     {
         public Guid EventLocationKey { get; set; }
         public Guid EventKey { get; set; }

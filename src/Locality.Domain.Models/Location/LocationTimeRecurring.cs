@@ -1,9 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Shared.Models;
+using System;
 using System.Collections.Generic;
 
-namespace GoodToCode.Locality.Domain.Models
+namespace GoodToCode.Locality.Models
 {
-    public class LocationTimeRecurring
+    public class LocationTimeRecurring : DomainModel<ILocationTimeRecurring>, ILocationTimeRecurring
     {
         public int LocationTimeRecurringId { get; set; }
         public Guid LocationTimeRecurringKey { get; set; }

@@ -1,6 +1,6 @@
 ﻿using GoodToCode.Subjects.Models;
 
-namespace GoodToCode.Shared.Domain
+namespace GoodToCode.Shared.Models
 {
     public sealed class BusinessCreatedEvent : IDomainEvent<IBusiness>
     {

@@ -1,5 +1,4 @@
-﻿using GoodToCode.Locality.Domain.Models;
-using GoodToCode.Locality.Models;
+﻿using GoodToCode.Locality.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoodToCode.Locality.Infrastructure

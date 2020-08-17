@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Domain;
+﻿using GoodToCode.Shared.Models;
 using GoodToCode.Shared.Extensions;
 using System;
 using System.ComponentModel.DataAnnotations;

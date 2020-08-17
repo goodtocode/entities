@@ -1,8 +1,9 @@
-﻿using System;
+﻿using GoodToCode.Shared.Models;
+using System;
 
-namespace GoodToCode.Locality.Domain.Models
+namespace GoodToCode.Locality.Models
 {
-    public class Location
+    public class Location : DomainModel<ILocation>, ILocation
     {
         public Guid LocationKey { get; set; }
         public string LocationName { get; set; }

@@ -1,5 +1,5 @@
 ﻿using GoodToCode.Chronology.Models;
-using GoodToCode.Shared.Domain;
+using GoodToCode.Shared.Models;
 
 namespace GoodToCode.Chronology.Domain
 {

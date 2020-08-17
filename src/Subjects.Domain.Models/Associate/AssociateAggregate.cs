@@ -1,11 +1,9 @@
-﻿using GoodToCode.Shared.Domain;
-using GoodToCode.Subjects.Models;
+﻿using GoodToCode.Shared.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Subjects.Aggregates
+namespace GoodToCode.Subjects.Models
 {
     public class AssociateAggregate : DomainAggregate<AssociateAggregate>
     {

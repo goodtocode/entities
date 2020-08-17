@@ -8,8 +8,38 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Aggregate\**" />
+    <EmbeddedResource Remove="Aggregate\**" />
+    <None Remove="Aggregate\**" />
+    <SpecFlowFeatureFiles Remove="Aggregate\**" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Aggregate\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <CustomAdditionalCompileInputs Remove="Application\Schedule\BusinessQuery.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Application\Schedule\BusinessSaveCommand.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Domain\Schedule\ScheduleAggregate.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\BusinessCreate.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\BusinessDelete.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\BusinessesGet.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\BusinessGetByKey.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\BusinessUpdate.feature.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckBuild Remove="Application\Schedule\BusinessQuery.feature.cs" />
+    <UpToDateCheckBuild Remove="Application\Schedule\BusinessSaveCommand.feature.cs" />
+    <UpToDateCheckBuild Remove="Domain\Schedule\ScheduleAggregate.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Schedule\BusinessCreate.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Schedule\BusinessDelete.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Schedule\BusinessesGet.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Schedule\BusinessGetByKey.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Schedule\BusinessUpdate.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,8 +69,71 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Aggregate\" />
-    <Folder Include="Application\" />
+    <ProjectReference Include="..\Chronology.Application.Services\Chronology.Application.Services.csproj" />
+    <ProjectReference Include="..\Chronology.Infrastructure.Persistence\Chronology.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\Shared.Specs\Shared.Specs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Application\Schedule\ScheduleQuery.feature.cs">
+      <DependentUpon>ScheduleQuery.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Application\Schedule\ScheduleSaveCommand.feature.cs">
+      <DependentUpon>ScheduleSaveCommand.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Schedule\ScheduleAggregate.feature.cs">
+      <DependentUpon>ScheduleAggregate.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Infrastructure\Schedule\ScheduleCreate.feature.cs">
+      <DependentUpon>ScheduleCreate.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Infrastructure\Schedule\ScheduleDelete.feature.cs">
+      <DependentUpon>ScheduleDelete.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Infrastructure\Schedule\SchedulesGet.feature.cs">
+      <DependentUpon>SchedulesGet.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Infrastructure\Schedule\ScheduleGetByKey.feature.cs">
+      <DependentUpon>ScheduleGetByKey.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Infrastructure\Schedule\ScheduleUpdate.feature.cs">
+      <DependentUpon>ScheduleUpdate.feature</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="Application\Schedule\ScheduleQuery.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Application\Schedule\ScheduleSaveCommand.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Domain\Schedule\ScheduleAggregate.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Infrastructure\Schedule\ScheduleCreate.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Infrastructure\Schedule\ScheduleDelete.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Infrastructure\Schedule\SchedulesGet.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Infrastructure\Schedule\ScheduleGetByKey.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Infrastructure\Schedule\ScheduleUpdate.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
   </ItemGroup>
 
 </Project>

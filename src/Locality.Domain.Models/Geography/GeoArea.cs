@@ -1,9 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Shared.Models;
+using System;
 using System.Spatial;
 
-namespace GoodToCode.Locality.Domain.Models
+namespace GoodToCode.Locality.Models
 {
-    public class GeoArea
+    public class GeoArea : DomainModel<IGeoArea>, IGeoArea
     {
         public Guid GeoAreaKey { get; set; }
         public Geography Area { get; set; }

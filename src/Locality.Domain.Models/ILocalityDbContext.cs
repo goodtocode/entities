@@ -1,5 +1,4 @@
-﻿using GoodToCode.Locality.Domain.Models;
-using GoodToCode.Shared.Data;
+﻿using GoodToCode.Shared.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoodToCode.Locality.Models

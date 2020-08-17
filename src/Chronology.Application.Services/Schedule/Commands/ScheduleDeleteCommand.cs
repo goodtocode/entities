@@ -1,5 +1,4 @@
-﻿using GoodToCode.Chronology.Aggregates;
-using GoodToCode.Chronology.Models;
+﻿using GoodToCode.Chronology.Models;
 using GoodToCode.Shared.Cqrs;
 using GoodToCode.Shared.Validation;
 using MediatR;

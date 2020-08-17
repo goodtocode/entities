@@ -1,8 +1,10 @@
-﻿using System;
+﻿using GoodToCode.Shared.Models;
+using System;
+using System.Drawing;
 
-namespace GoodToCode.Locality.Domain.Models
+namespace GoodToCode.Locality.Models
 {
-    public class Line
+    public class Line : DomainModel<ILine>, ILine
     {
         public Guid LineKey { get; set; }
         public Point StartPoint { get; set; }

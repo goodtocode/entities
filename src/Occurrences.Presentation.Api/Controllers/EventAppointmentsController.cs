@@ -9,48 +9,48 @@
 //{
 //    [Route("api/[controller]")]
 //    [ApiController]
-//    public class EventAppointmentsController : ControllerBase
+//    public class AppointmentEventsController : ControllerBase
 //    {
 //        private readonly OccurrencesDbContext _context;
 
-//        public EventAppointmentsController(OccurrencesDbContext context)
+//        public AppointmentEventsController(OccurrencesDbContext context)
 //        {
 //            _context = context;
 //        }
 
-//        // GET: api/EventAppointments
+//        // GET: api/AppointmentEvents
 //        [HttpGet]
-//        public async Task<ActionResult<IEnumerable<EventAppointment>>> GetEventAppointment()
+//        public async Task<ActionResult<IEnumerable<AppointmentEvent>>> GetAppointmentEvent()
 //        {
-//            return await _context.EventAppointment.ToListAsync();
+//            return await _context.AppointmentEvent.ToListAsync();
 //        }
 
-//        // GET: api/EventAppointments/5
+//        // GET: api/AppointmentEvents/5
 //        [HttpGet("{id}")]
-//        public async Task<ActionResult<EventAppointment>> GetEventAppointment(int id)
+//        public async Task<ActionResult<AppointmentEvent>> GetAppointmentEvent(int id)
 //        {
-//            var eventAppointment = await _context.EventAppointment.FindAsync(id);
+//            var AppointmentEvent = await _context.AppointmentEvent.FindAsync(id);
 
-//            if (eventAppointment == null)
+//            if (AppointmentEvent == null)
 //            {
 //                return NotFound();
 //            }
 
-//            return eventAppointment;
+//            return AppointmentEvent;
 //        }
 
-//        // PUT: api/EventAppointments/5
+//        // PUT: api/AppointmentEvents/5
 //        // To protect from overposting attacks, enable the specific properties you want to bind to, for
 //        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
 //        [HttpPut("{id}")]
-//        public async Task<IActionResult> PutEventAppointment(int id, EventAppointment eventAppointment)
+//        public async Task<IActionResult> PutAppointmentEvent(int id, AppointmentEvent AppointmentEvent)
 //        {
-//            if (id != eventAppointment.EventAppointmentId)
+//            if (id != AppointmentEvent.AppointmentEventId)
 //            {
 //                return BadRequest();
 //            }
 
-//            _context.Entry(eventAppointment).State = EntityState.Modified;
+//            _context.Entry(AppointmentEvent).State = EntityState.Modified;
 
 //            try
 //            {
@@ -58,7 +58,7 @@
 //            }
 //            catch (DbUpdateConcurrencyException)
 //            {
-//                if (!EventAppointmentExists(id))
+//                if (!AppointmentEventExists(id))
 //                {
 //                    return NotFound();
 //                }
@@ -71,37 +71,37 @@
 //            return NoContent();
 //        }
 
-//        // POST: api/EventAppointments
+//        // POST: api/AppointmentEvents
 //        // To protect from overposting attacks, enable the specific properties you want to bind to, for
 //        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
 //        [HttpPost]
-//        public async Task<ActionResult<EventAppointment>> PostEventAppointment(EventAppointment eventAppointment)
+//        public async Task<ActionResult<AppointmentEvent>> PostAppointmentEvent(AppointmentEvent AppointmentEvent)
 //        {
-//            _context.EventAppointment.Add(eventAppointment);
+//            _context.AppointmentEvent.Add(AppointmentEvent);
 //            await _context.SaveChangesAsync();
 
-//            return CreatedAtAction("GetEventAppointment", new { id = eventAppointment.EventAppointmentId }, eventAppointment);
+//            return CreatedAtAction("GetAppointmentEvent", new { id = AppointmentEvent.AppointmentEventId }, AppointmentEvent);
 //        }
 
-//        // DELETE: api/EventAppointments/5
+//        // DELETE: api/AppointmentEvents/5
 //        [HttpDelete("{id}")]
-//        public async Task<ActionResult<EventAppointment>> DeleteEventAppointment(int id)
+//        public async Task<ActionResult<AppointmentEvent>> DeleteAppointmentEvent(int id)
 //        {
-//            var eventAppointment = await _context.EventAppointment.FindAsync(id);
-//            if (eventAppointment == null)
+//            var AppointmentEvent = await _context.AppointmentEvent.FindAsync(id);
+//            if (AppointmentEvent == null)
 //            {
 //                return NotFound();
 //            }
 
-//            _context.EventAppointment.Remove(eventAppointment);
+//            _context.AppointmentEvent.Remove(AppointmentEvent);
 //            await _context.SaveChangesAsync();
 
-//            return eventAppointment;
+//            return AppointmentEvent;
 //        }
 
-//        private bool EventAppointmentExists(int id)
+//        private bool AppointmentEventExists(int id)
 //        {
-//            return _context.EventAppointment.Any(e => e.EventAppointmentId == id);
+//            return _context.AppointmentEvent.Any(e => e.AppointmentEventId == id);
 //        }
 //    }
 //}

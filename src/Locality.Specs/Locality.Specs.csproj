@@ -8,8 +8,48 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Geography\**" />
+    <Compile Remove="Geometry\**" />
+    <Compile Remove="Location\**" />
+    <EmbeddedResource Remove="Geography\**" />
+    <EmbeddedResource Remove="Geometry\**" />
+    <EmbeddedResource Remove="Location\**" />
+    <None Remove="Geography\**" />
+    <None Remove="Geometry\**" />
+    <None Remove="Location\**" />
+    <SpecFlowFeatureFiles Remove="Geography\**" />
+    <SpecFlowFeatureFiles Remove="Geometry\**" />
+    <SpecFlowFeatureFiles Remove="Location\**" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Geography\**" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Geometry\**" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Location\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <CustomAdditionalCompileInputs Remove="Application\Location\BusinessQuery.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Application\Location\BusinessSaveCommand.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Domain\Location\LocationAggregate.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\BusinessCreate.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\BusinessDelete.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\BusinessesGet.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\BusinessGetByKey.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\BusinessUpdate.feature.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckBuild Remove="Application\Location\BusinessQuery.feature.cs" />
+    <UpToDateCheckBuild Remove="Application\Location\BusinessSaveCommand.feature.cs" />
+    <UpToDateCheckBuild Remove="Domain\Location\LocationAggregate.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Location\BusinessCreate.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Location\BusinessDelete.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Location\BusinessesGet.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Location\BusinessGetByKey.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Location\BusinessUpdate.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +66,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
@@ -39,9 +80,72 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Geography\" />
-    <Folder Include="Geometry\" />
-    <Folder Include="Location\" />
+    <ProjectReference Include="..\Locality.Application.Services\Locality.Application.Services.csproj" />
+    <ProjectReference Include="..\Locality.Domain.Models\Locality.Domain.Models.csproj" />
+    <ProjectReference Include="..\Locality.Infrastructure.Persistence\Locality.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\Shared.Specs\Shared.Specs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Application\Location\LocationQuery.feature.cs">
+      <DependentUpon>LocationQuery.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Application\Location\LocationSaveCommand.feature.cs">
+      <DependentUpon>LocationSaveCommand.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Location\LocationAggregate.feature.cs">
+      <DependentUpon>LocationAggregate.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Infrastructure\Location\LocationCreate.feature.cs">
+      <DependentUpon>LocationCreate.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Infrastructure\Location\LocationDelete.feature.cs">
+      <DependentUpon>LocationDelete.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Infrastructure\Location\LocationsGet.feature.cs">
+      <DependentUpon>LocationsGet.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Infrastructure\Location\LocationGetByKey.feature.cs">
+      <DependentUpon>LocationGetByKey.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Infrastructure\Location\LocationUpdate.feature.cs">
+      <DependentUpon>LocationUpdate.feature</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="Application\Location\LocationQuery.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Application\Location\LocationSaveCommand.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Domain\Location\LocationAggregate.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Infrastructure\Location\LocationCreate.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Infrastructure\Location\LocationDelete.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Infrastructure\Location\LocationsGet.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Infrastructure\Location\LocationGetByKey.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Infrastructure\Location\LocationUpdate.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
   </ItemGroup>
 
 </Project>

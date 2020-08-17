@@ -15,8 +15,7 @@ namespace GoodToCode.Subjects.Models
         public virtual DbSet<Business> Business { get; set; }
         public virtual DbSet<Detail> Detail { get; set; }
         public virtual DbSet<DetailType> DetailType { get; set; }
-        public virtual DbSet<Associate> Associate { get; set; }
-        public virtual DbSet<AssociateAppointment> AssociateAppointment { get; set; }
+        public virtual DbSet<Associate> Associate { get; set; }        
         public virtual DbSet<AssociateDetail> AssociateDetail { get; set; }
         public virtual DbSet<AssociateLocation> AssociateLocation { get; set; }
         public virtual DbSet<AssociateOption> AssociateOption { get; set; }
@@ -35,7 +34,6 @@ namespace GoodToCode.Subjects.Models
         public virtual DbSet<ResourceTimeRecurring> ResourceTimeRecurring { get; set; }
         public virtual DbSet<ResourceType> ResourceType { get; set; }
         public virtual DbSet<Venture> Venture { get; set; }
-        public virtual DbSet<VentureAppointment> VentureAppointment { get; set; }
         public virtual DbSet<VentureDetail> VentureDetail { get; set; }
         public virtual DbSet<VentureAssociateOption> VentureAssociateOption { get; set; }
         public virtual DbSet<VentureLocation> VentureLocation { get; set; }
@@ -119,23 +117,6 @@ namespace GoodToCode.Subjects.Models
 
                 entity.HasIndex(e => e.AssociateKey)
                     .HasName("IX_AssociateLocation_Associate")
-                    .IsUnique();
-
-                
-
-                
-            });
-
-            modelBuilder.Entity<AssociateAppointment>(entity =>
-            {
-                entity.ToTable("AssociateAppointment", "Subjects");
-
-                entity.HasIndex(e => e.AssociateAppointmentKey)
-                    .HasName("IX_AssociateAppointment_Key")
-                    .IsUnique();
-
-                entity.HasIndex(e => new { e.AssociateKey, e.AppointmentKey })
-                    .HasName("IX_AssociateAppointment_All")
                     .IsUnique();
 
                 
@@ -545,23 +526,6 @@ namespace GoodToCode.Subjects.Models
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<VentureAppointment>(entity =>
-            {
-                entity.ToTable("VentureAppointment", "Subjects");
-
-                entity.HasIndex(e => e.VentureAppointmentKey)
-                    .HasName("IX_VentureAppointment_Key")
-                    .IsUnique();
-
-                entity.HasIndex(e => new { e.VentureKey, e.AppointmentKey })
-                    .HasName("IX_VentureAppointment_All")
-                    .IsUnique();
-
-                
-
-                
-            });
-
             modelBuilder.Entity<VentureDetail>(entity =>
             {
                 entity.ToTable("VentureDetail", "Subjects");
@@ -573,10 +537,6 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => new { e.VentureKey, e.VentureDetailKey })
                     .HasName("IX_VentureDetail_All")
                     .IsUnique();
-
-                
-
-                
             });
 
             modelBuilder.Entity<VentureAssociateOption>(entity =>
@@ -586,10 +546,6 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => e.VentureAssociateOptionKey)
                     .HasName("IX_VentureAssociateOption_Key")
                     .IsUnique();
-
-                
-
-                
             });
 
             modelBuilder.Entity<VentureLocation>(entity =>
@@ -603,10 +559,6 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => new { e.VentureKey, e.LocationKey })
                     .HasName("IX_VentureLocation_All")
                     .IsUnique();
-
-                
-
-                
             });
 
             modelBuilder.Entity<VentureOption>(entity =>
@@ -616,10 +568,6 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => new { e.VentureKey, e.OptionKey })
                     .HasName("IX_VentureOption_All")
                     .IsUnique();
-
-                
-
-                
             });
 
             modelBuilder.Entity<VentureResource>(entity =>
@@ -633,10 +581,6 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => new { e.VentureKey, e.ResourceKey })
                     .HasName("IX_VentureResource_All")
                     .IsUnique();
-
-                
-
-                
             });
 
             modelBuilder.Entity<VentureSchedule>(entity =>
@@ -650,10 +594,6 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => new { e.VentureKey, e.ScheduleKey })
                     .HasName("IX_VentureSchedule_All")
                     .IsUnique();
-
-                
-
-                
             });
 
             OnModelCreatingPartial(modelBuilder);

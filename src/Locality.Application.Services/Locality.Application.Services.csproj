@@ -11,8 +11,17 @@
     <Folder Include="Geography\Queries\" />
     <Folder Include="Geometry\Commands\" />
     <Folder Include="Geometry\Queries\" />
-    <Folder Include="Location\Commands\" />
-    <Folder Include="Location\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="9.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Locality.Domain.Models\Locality.Domain.Models.csproj" />
+    <ProjectReference Include="..\Locality.Infrastructure.Persistence\Locality.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

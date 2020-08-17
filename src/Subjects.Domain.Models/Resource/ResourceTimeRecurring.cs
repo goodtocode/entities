@@ -1,5 +1,5 @@
 ﻿
-using GoodToCode.Shared.Domain;
+using GoodToCode.Shared.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 

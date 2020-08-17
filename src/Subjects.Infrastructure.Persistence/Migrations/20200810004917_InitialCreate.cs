@@ -73,11 +73,11 @@ namespace GoodToCode.Shared.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AssociateAppointment",
+                name: "AppointmentAssociate",
                 schema: "Subjects",
                 columns: table => new
                 {
-                    AssociateAppointmentKey = table.Column<Guid>(nullable: false),
+                    AppointmentAssociateKey = table.Column<Guid>(nullable: false),
                     AssociateKey = table.Column<Guid>(nullable: false),
                     AppointmentKey = table.Column<Guid>(nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
@@ -85,7 +85,7 @@ namespace GoodToCode.Shared.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AssociateAppointment", x => x.AssociateAppointmentKey);
+                    table.PrimaryKey("PK_AppointmentAssociate", x => x.AppointmentAssociateKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -397,11 +397,11 @@ namespace GoodToCode.Shared.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "VentureAppointment",
+                name: "AppointmentVenture",
                 schema: "Subjects",
                 columns: table => new
                 {
-                    VentureAppointmentKey = table.Column<Guid>(nullable: false),
+                    AppointmentVentureKey = table.Column<Guid>(nullable: false),
                     VentureKey = table.Column<Guid>(nullable: false),
                     AppointmentKey = table.Column<Guid>(nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
@@ -409,7 +409,7 @@ namespace GoodToCode.Shared.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VentureAppointment", x => x.VentureAppointmentKey);
+                    table.PrimaryKey("PK_AppointmentVenture", x => x.AppointmentVentureKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -541,16 +541,16 @@ namespace GoodToCode.Shared.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_AssociateAppointment_Key",
+                name: "IX_AppointmentAssociate_Key",
                 schema: "Subjects",
-                table: "AssociateAppointment",
-                column: "AssociateAppointmentKey",
+                table: "AppointmentAssociate",
+                column: "AppointmentAssociateKey",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_AssociateAppointment_All",
+                name: "IX_AppointmentAssociate_All",
                 schema: "Subjects",
-                table: "AssociateAppointment",
+                table: "AppointmentAssociate",
                 columns: new[] { "AssociateKey", "AppointmentKey" },
                 unique: true);
 
@@ -767,16 +767,16 @@ namespace GoodToCode.Shared.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_VentureAppointment_Key",
+                name: "IX_AppointmentVenture_Key",
                 schema: "Subjects",
-                table: "VentureAppointment",
-                column: "VentureAppointmentKey",
+                table: "AppointmentVenture",
+                column: "AppointmentVentureKey",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_VentureAppointment_All",
+                name: "IX_AppointmentVenture_All",
                 schema: "Subjects",
-                table: "VentureAppointment",
+                table: "AppointmentVenture",
                 columns: new[] { "VentureKey", "AppointmentKey" },
                 unique: true);
 
@@ -870,7 +870,7 @@ namespace GoodToCode.Shared.Migrations
                 schema: "Subjects");
 
             migrationBuilder.DropTable(
-                name: "AssociateAppointment",
+                name: "AppointmentAssociate",
                 schema: "Subjects");
 
             migrationBuilder.DropTable(
@@ -946,7 +946,7 @@ namespace GoodToCode.Shared.Migrations
                 schema: "Subjects");
 
             migrationBuilder.DropTable(
-                name: "VentureAppointment",
+                name: "AppointmentVenture",
                 schema: "Subjects");
 
             migrationBuilder.DropTable(
