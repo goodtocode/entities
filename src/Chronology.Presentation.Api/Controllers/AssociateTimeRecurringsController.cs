@@ -1,4 +1,5 @@
-﻿using GoodToCode.Subjects.Models;
+﻿using GoodToCode.Chronology.Infrastructure;
+using GoodToCode.Chronology.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,15 +7,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Subjects.Application
+namespace GoodToCode.Chronology.Application
 {
     [Route("api/[controller]")]
     [ApiController]
     public class AssociateTimeRecurringsController : ControllerBase
     {
-        private readonly SubjectsDbContext _dbContext;
+        private readonly ChronologyDbContext _dbContext;
 
-        public AssociateTimeRecurringsController(SubjectsDbContext context)
+        public AssociateTimeRecurringsController(ChronologyDbContext context)
         {
             _dbContext = context;
         }

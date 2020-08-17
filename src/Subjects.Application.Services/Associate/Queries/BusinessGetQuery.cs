@@ -1,4 +1,5 @@
 ﻿using GoodToCode.Shared.Cqrs;
+using GoodToCode.Subjects.Infrastructure;
 using GoodToCode.Subjects.Models;
 using MediatR;
 using Microsoft.Extensions.Logging;

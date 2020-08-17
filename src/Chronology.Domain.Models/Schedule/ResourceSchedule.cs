@@ -2,13 +2,13 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace GoodToCode.Subjects.Models
+namespace GoodToCode.Chronology.Models
 {
-    public class VentureSchedule : DomainModel<IVentureSchedule>, IVentureSchedule
+    public class ResourceSchedule : DomainModel<IResourceSchedule>, IResourceSchedule
     {
         [Key]
-        public Guid VentureScheduleKey { get; set; }
-        public Guid VentureKey { get; set; }
+        public Guid ResourceScheduleKey { get; set; }
+        public Guid ResourceKey { get; set; }
         public Guid ScheduleKey { get; set; }
         public Guid? ScheduleTypeKey { get; set; }
         

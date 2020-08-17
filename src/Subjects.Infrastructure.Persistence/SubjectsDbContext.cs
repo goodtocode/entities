@@ -1,9 +1,10 @@
 ﻿//https://www.syncfusion.com/blogs/post/build-crud-application-with-asp-net-core-entity-framework-visual-studio-2019.aspx
+using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Diagnostics.CodeAnalysis;
 
-namespace GoodToCode.Subjects.Models
+namespace GoodToCode.Subjects.Infrastructure
 {
     public partial class SubjectsDbContext : DbContext, ISubjectsDbContext
     {
@@ -18,8 +19,7 @@ namespace GoodToCode.Subjects.Models
         public virtual DbSet<Associate> Associate { get; set; }        
         public virtual DbSet<AssociateDetail> AssociateDetail { get; set; }
         public virtual DbSet<AssociateLocation> AssociateLocation { get; set; }
-        public virtual DbSet<AssociateOption> AssociateOption { get; set; }
-        public virtual DbSet<AssociateTimeRecurring> AssociateTimeRecurring { get; set; }
+        public virtual DbSet<AssociateOption> AssociateOption { get; set; }        
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<Government> Government { get; set; }
         public virtual DbSet<Item> Item { get; set; }
@@ -31,7 +31,6 @@ namespace GoodToCode.Subjects.Models
         public virtual DbSet<Resource> Resource { get; set; }
         public virtual DbSet<ResourceItem> ResourceItem { get; set; }
         public virtual DbSet<ResourcePerson> ResourcePerson { get; set; }
-        public virtual DbSet<ResourceTimeRecurring> ResourceTimeRecurring { get; set; }
         public virtual DbSet<ResourceType> ResourceType { get; set; }
         public virtual DbSet<Venture> Venture { get; set; }
         public virtual DbSet<VentureDetail> VentureDetail { get; set; }
@@ -39,7 +38,6 @@ namespace GoodToCode.Subjects.Models
         public virtual DbSet<VentureLocation> VentureLocation { get; set; }
         public virtual DbSet<VentureOption> VentureOption { get; set; }
         public virtual DbSet<VentureResource> VentureResource { get; set; }
-        public virtual DbSet<VentureSchedule> VentureSchedule { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -63,10 +61,6 @@ namespace GoodToCode.Subjects.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                
-
-                
-
                 entity.Property(e => e.TaxNumber)
                     .IsRequired()
                     .HasMaxLength(20);
@@ -81,13 +75,10 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_Detail_Key")
                     .IsUnique();
 
-                
-
                 entity.Property(e => e.DetailData)
                     .IsRequired()
                     .HasMaxLength(2000);
 
-                
             });
 
             modelBuilder.Entity<DetailType>(entity =>
@@ -97,8 +88,6 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => e.DetailTypeKey)
                     .HasName("IX_DetailType_Key")
                     .IsUnique();
-
-                
 
                 entity.Property(e => e.DetailTypeDescription)
                     .IsRequired()
@@ -119,9 +108,6 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_AssociateLocation_Associate")
                     .IsUnique();
 
-                
-
-                
             });
 
             modelBuilder.Entity<AssociateDetail>(entity =>
@@ -135,10 +121,6 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => new { e.AssociateKey, e.AssociateDetailKey })
                     .HasName("IX_AssociateDetail_All")
                     .IsUnique();
-
-                
-
-                
             });
 
             modelBuilder.Entity<AssociateLocation>(entity =>
@@ -149,9 +131,6 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_AssociateLocation_All")
                     .IsUnique();
 
-                
-
-                
             });
 
             modelBuilder.Entity<AssociateOption>(entity =>
@@ -161,35 +140,6 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => new { e.AssociateKey, e.OptionKey })
                     .HasName("IX_AssociateOption_All")
                     .IsUnique();
-
-                
-
-                
-            });
-
-            modelBuilder.Entity<AssociateTimeRecurring>(entity =>
-            {
-                entity.ToTable("AssociateTimeRecurring", "Subjects");
-
-                entity.HasIndex(e => e.AssociateTimeRecurringKey)
-                    .HasName("IX_AssociateTimeRecurring_Key")
-                    .IsUnique();
-
-                entity.HasIndex(e => new { e.AssociateKey, e.TimeRecurringKey })
-                    .HasName("IX_AssociateTimeRecurring_All")
-                    .IsUnique();
-
-                
-
-                entity.Property(e => e.DayName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                
-
-                entity.Property(e => e.TimeName)
-                    .IsRequired()
-                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<Gender>(entity =>
@@ -287,8 +237,6 @@ namespace GoodToCode.Subjects.Models
                     .HasName("IX_ItemType_Key")
                     .IsUnique();
 
-                
-
                 entity.Property(e => e.ItemTypeDescription)
                     .IsRequired()
                     .HasMaxLength(250);
@@ -297,7 +245,6 @@ namespace GoodToCode.Subjects.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                
             });
 
             modelBuilder.Entity<Option>(entity =>
@@ -310,10 +257,6 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => new { e.OptionGroupKey, e.OptionCode })
                     .HasName("IX_Option_OptionCode")
                     .IsUnique();
-
-                
-
-                
 
                 entity.Property(e => e.OptionCode)
                     .IsRequired()
@@ -339,10 +282,6 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => e.OptionGroupKey)
                     .HasName("IX_Option_OptionGroupKey")
                     .IsUnique();
-
-                
-
-                
 
                 entity.Property(e => e.OptionGroupCode)
                     .IsRequired()
@@ -370,8 +309,6 @@ namespace GoodToCode.Subjects.Models
 
                 entity.Property(e => e.BirthDate).HasColumnType("datetime");
 
-                
-
                 entity.Property(e => e.FirstName)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -396,10 +333,6 @@ namespace GoodToCode.Subjects.Models
 
                 entity.HasIndex(e => e.ResourceKey)
                     .IsUnique();
-
-                
-
-                
 
                 entity.Property(e => e.ResourceDescription)
                     .IsRequired()
@@ -427,10 +360,6 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => new { e.ResourceKey, e.ItemKey })
                     .HasName("IX_ResourceItem_All")
                     .IsUnique();
-
-                
-
-                
             });
 
             modelBuilder.Entity<ResourcePerson>(entity =>
@@ -450,35 +379,6 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => new { e.ResourceKey, e.PersonKey })
                     .HasName("IX_ResourcePerson_All")
                     .IsUnique();
-
-                
-
-                
-            });
-
-            modelBuilder.Entity<ResourceTimeRecurring>(entity =>
-            {
-                entity.ToTable("ResourceTimeRecurring", "Subjects");
-
-                entity.HasIndex(e => e.ResourceTimeRecurringKey)
-                    .HasName("IX_ResourceTimeRecurring_Resource")
-                    .IsUnique();
-
-                entity.HasIndex(e => new { e.ResourceKey, e.TimeRecurringKey })
-                    .HasName("IX_ResourceTimeRecurring_All")
-                    .IsUnique();
-
-                
-
-                entity.Property(e => e.DayName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                
-
-                entity.Property(e => e.TimeName)
-                    .IsRequired()
-                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<ResourceType>(entity =>
@@ -488,10 +388,6 @@ namespace GoodToCode.Subjects.Models
                 entity.HasIndex(e => e.ResourceTypeKey)
                     .HasName("IX_ResourceType_Key")
                     .IsUnique();
-
-                
-
-                
 
                 entity.Property(e => e.ResourceTypeDescription)
                     .IsRequired()
@@ -508,10 +404,6 @@ namespace GoodToCode.Subjects.Models
 
                 entity.HasIndex(e => e.VentureKey)
                     .IsUnique();
-
-                
-
-                
 
                 entity.Property(e => e.VentureDescription)
                     .IsRequired()
@@ -580,19 +472,6 @@ namespace GoodToCode.Subjects.Models
 
                 entity.HasIndex(e => new { e.VentureKey, e.ResourceKey })
                     .HasName("IX_VentureResource_All")
-                    .IsUnique();
-            });
-
-            modelBuilder.Entity<VentureSchedule>(entity =>
-            {
-                entity.ToTable("VentureSchedule", "Subjects");
-
-                entity.HasIndex(e => e.VentureScheduleKey)
-                    .HasName("IX_VentureSchedule_Key")
-                    .IsUnique();
-
-                entity.HasIndex(e => new { e.VentureKey, e.ScheduleKey })
-                    .HasName("IX_VentureSchedule_All")
                     .IsUnique();
             });
 

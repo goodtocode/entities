@@ -1,4 +1,5 @@
 ﻿using GoodToCode.Shared.Models;
+using GoodToCode.Subjects.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;

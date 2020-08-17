@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Data;
+﻿using GoodToCode.Shared.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoodToCode.Chronology.Models
@@ -13,6 +13,12 @@ namespace GoodToCode.Chronology.Models
         DbSet<SlotResource> SlotResource { get; set; }
         DbSet<SlotTimeRange> SlotTimeRange { get; set; }
         DbSet<SlotTimeRecurring> SlotTimeRecurring { get; set; }
+        DbSet<AssociateTimeRecurring> AssociateTimeRecurring { get; set; }
+        DbSet<ResourceTimeRecurring> ResourceTimeRecurring { get; set; }
+        DbSet<VentureTimeRecurring> VentureTimeRecurring { get; set; }
+        DbSet<AssociateSchedule> AssociateSchedule { get; set; }
+        DbSet<ResourceSchedule> ResourceSchedule { get; set; }
+        DbSet<VentureSchedule> VentureSchedule { get; set; }
         DbSet<TimeCycle> TimeCycle { get; set; }
         DbSet<TimeRange> TimeRange { get; set; }
         DbSet<TimeRecurring> TimeRecurring { get; set; }

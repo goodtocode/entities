@@ -1,7 +1,8 @@
-﻿using GoodToCode.Shared.Data;
+﻿using GoodToCode.Shared.Persistence;
+using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GoodToCode.Subjects.Models
+namespace GoodToCode.Subjects.Infrastructure
 {
     public interface ISubjectsDbContext : IDbContext
     {
@@ -11,8 +12,7 @@ namespace GoodToCode.Subjects.Models
         DbSet<Associate> Associate { get; set; }
         DbSet<AssociateDetail> AssociateDetail { get; set; }
         DbSet<AssociateLocation> AssociateLocation { get; set; }
-        DbSet<AssociateOption> AssociateOption { get; set; }
-        DbSet<AssociateTimeRecurring> AssociateTimeRecurring { get; set; }
+        DbSet<AssociateOption> AssociateOption { get; set; }        
         DbSet<Gender> Gender { get; set; }
         DbSet<Government> Government { get; set; }
         DbSet<Item> Item { get; set; }
@@ -24,14 +24,12 @@ namespace GoodToCode.Subjects.Models
         DbSet<Resource> Resource { get; set; }
         DbSet<ResourceItem> ResourceItem { get; set; }
         DbSet<ResourcePerson> ResourcePerson { get; set; }
-        DbSet<ResourceTimeRecurring> ResourceTimeRecurring { get; set; }
         DbSet<ResourceType> ResourceType { get; set; }
         DbSet<Venture> Venture { get; set; }
         DbSet<VentureDetail> VentureDetail { get; set; }
         DbSet<VentureAssociateOption> VentureAssociateOption { get; set; }
         DbSet<VentureLocation> VentureLocation { get; set; }
         DbSet<VentureOption> VentureOption { get; set; }
-        DbSet<VentureResource> VentureResource { get; set; }
-        DbSet<VentureSchedule> VentureSchedule { get; set; }        
+        DbSet<VentureResource> VentureResource { get; set; }        
     }
 }

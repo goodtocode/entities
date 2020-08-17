@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Data
+namespace GoodToCode.Shared.Persistence
 {
     public interface IDbContext
     {

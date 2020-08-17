@@ -2,13 +2,13 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace GoodToCode.Subjects.Models
+namespace GoodToCode.Chronology.Models
 {
-    public class AssociateTimeRecurring : DomainModel<IAssociateTimeRecurring>, IAssociateTimeRecurring
+    public class VentureTimeRecurring : DomainModel<IVentureTimeRecurring>, IVentureTimeRecurring
     {
         [Key]
-        public Guid AssociateTimeRecurringKey { get; set; }
-        public Guid AssociateKey { get; set; }
+        public Guid VentureTimeRecurringKey { get; set; }
+        public Guid VentureKey { get; set; }
         public Guid TimeRecurringKey { get; set; }
         public string DayName { get; set; }
         public string TimeName { get; set; }

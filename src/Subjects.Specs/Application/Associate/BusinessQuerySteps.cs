@@ -1,5 +1,6 @@
 ﻿using GoodToCode.Shared.Specs;
 using GoodToCode.Subjects.Application;
+using GoodToCode.Subjects.Infrastructure;
 using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;

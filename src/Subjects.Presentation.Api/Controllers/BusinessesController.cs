@@ -1,5 +1,6 @@
 ﻿using GoodToCode.Extensions.Mvc;
 using GoodToCode.Shared.Cqrs;
+using GoodToCode.Subjects.Infrastructure;
 using GoodToCode.Subjects.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

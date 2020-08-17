@@ -1,4 +1,5 @@
-﻿using GoodToCode.Subjects.Models;
+﻿using GoodToCode.Subjects.Infrastructure;
+using GoodToCode.Subjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;

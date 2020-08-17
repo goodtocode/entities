@@ -1,5 +1,6 @@
 ﻿using GoodToCode.Shared.Cqrs;
 using GoodToCode.Shared.Validation;
+using GoodToCode.Subjects.Infrastructure;
 using GoodToCode.Subjects.Models;
 using MediatR;
 using System;

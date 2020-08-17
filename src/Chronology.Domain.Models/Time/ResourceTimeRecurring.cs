@@ -3,7 +3,7 @@ using GoodToCode.Shared.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace GoodToCode.Subjects.Models
+namespace GoodToCode.Chronology.Models
 {
     public class ResourceTimeRecurring : DomainModel<IResourceTimeRecurring>, IResourceTimeRecurring
     {

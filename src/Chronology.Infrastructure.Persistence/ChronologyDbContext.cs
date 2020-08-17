@@ -18,6 +18,12 @@ namespace GoodToCode.Chronology.Infrastructure
         public virtual DbSet<SlotResource> SlotResource { get; set; }
         public virtual DbSet<SlotTimeRange> SlotTimeRange { get; set; }
         public virtual DbSet<SlotTimeRecurring> SlotTimeRecurring { get; set; }
+        public virtual DbSet<AssociateTimeRecurring> AssociateTimeRecurring { get; set; }
+        public virtual DbSet<ResourceTimeRecurring> ResourceTimeRecurring { get; set; }
+        public virtual DbSet<VentureTimeRecurring> VentureTimeRecurring { get; set; }
+        public virtual DbSet<AssociateSchedule> AssociateSchedule { get; set; }
+        public virtual DbSet<ResourceSchedule> ResourceSchedule { get; set; }
+        public virtual DbSet<VentureSchedule> VentureSchedule { get; set; }
         public virtual DbSet<TimeCycle> TimeCycle { get; set; }
         public virtual DbSet<TimeRange> TimeRange { get; set; }
         public virtual DbSet<TimeRecurring> TimeRecurring { get; set; }
@@ -157,6 +163,110 @@ namespace GoodToCode.Chronology.Infrastructure
 
                 entity.HasIndex(e => new { e.SlotKey, e.TimeRecurringKey })
                     .HasName("IX_SlotTime_All")
+                    .IsUnique();
+            });
+
+            modelBuilder.Entity<AssociateTimeRecurring>(entity =>
+            {
+                entity.ToTable("AssociateTimeRecurring", "Subjects");
+
+                entity.HasIndex(e => e.AssociateTimeRecurringKey)
+                    .HasName("IX_AssociateTimeRecurring_Key")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.AssociateKey, e.TimeRecurringKey })
+                    .HasName("IX_AssociateTimeRecurring_All")
+                    .IsUnique();
+
+                entity.Property(e => e.DayName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+
+                entity.Property(e => e.TimeName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<ResourceTimeRecurring>(entity =>
+            {
+                entity.ToTable("ResourceTimeRecurring", "Subjects");
+
+                entity.HasIndex(e => e.ResourceTimeRecurringKey)
+                    .HasName("IX_ResourceTimeRecurring_Resource")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.ResourceKey, e.TimeRecurringKey })
+                    .HasName("IX_ResourceTimeRecurring_All")
+                    .IsUnique();
+
+                entity.Property(e => e.DayName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.TimeName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<VentureTimeRecurring>(entity =>
+            {
+                entity.ToTable("VentureTimeRecurring", "Subjects");
+
+                entity.HasIndex(e => e.VentureTimeRecurringKey)
+                    .HasName("IX_VentureTimeRecurring_Venture")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.VentureKey, e.TimeRecurringKey })
+                    .HasName("IX_VentureTimeRecurring_All")
+                    .IsUnique();
+
+                entity.Property(e => e.DayName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.TimeName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<AssociateSchedule>(entity =>
+            {
+                entity.ToTable("AssociateSchedule", "Subjects");
+
+                entity.HasIndex(e => e.AssociateScheduleKey)
+                    .HasName("IX_AssociateSchedule_Key")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.AssociateKey, e.ScheduleKey })
+                    .HasName("IX_AssociateSchedule_All")
+                    .IsUnique();
+            });
+
+
+            modelBuilder.Entity<ResourceSchedule>(entity =>
+            {
+                entity.ToTable("ResourceSchedule", "Subjects");
+
+                entity.HasIndex(e => e.ResourceScheduleKey)
+                    .HasName("IX_ResourceSchedule_Key")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.ResourceKey, e.ScheduleKey })
+                    .HasName("IX_ResourceSchedule_All")
+                    .IsUnique();
+            });
+
+            modelBuilder.Entity<VentureSchedule>(entity =>
+            {
+                entity.ToTable("VentureSchedule", "Subjects");
+
+                entity.HasIndex(e => e.VentureScheduleKey)
+                    .HasName("IX_VentureSchedule_Key")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.VentureKey, e.ScheduleKey })
+                    .HasName("IX_VentureSchedule_All")
                     .IsUnique();
             });
 
