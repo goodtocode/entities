@@ -1,6 +1,5 @@
 ﻿using GoodToCode.Shared.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Locality.Models

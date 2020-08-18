@@ -5,7 +5,7 @@ namespace GoodToCode.Locality.Models
 {
     public interface IPointCoordinate
     {
-        Guid PointKey { get; set; }
+        Guid PointCoordinateKey { get; set; }
         Point Coordinate { get; set; }
     }
 }

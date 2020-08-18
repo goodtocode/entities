@@ -5,7 +5,7 @@ namespace GoodToCode.Locality.Models
 {
     public interface IGeoArea
     {
-        Geography Area { get; set; }
+        Guid PolygonKey { get; set; }
         Guid GeoAreaKey { get; set; }
     }
 }

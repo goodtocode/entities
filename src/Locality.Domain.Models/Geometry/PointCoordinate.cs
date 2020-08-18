@@ -8,7 +8,7 @@ namespace GoodToCode.Locality.Models
     public class PointCoordinate : DomainModel<IPointCoordinate>, IPointCoordinate
     {
         [Key]
-        public Guid PointKey { get; set; }
+        public Guid PointCoordinateKey { get; set; }
         public Point Coordinate { get; set; }
     }
 }

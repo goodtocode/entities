@@ -5,14 +5,13 @@ namespace GoodToCode.Locality.Models
 {
     public interface ILocalityDbContext : IDbContext
     {
-
-        DbSet<GeoArea> GeoArea { get; set; }
-        DbSet<GeoDistance> GeoDistance { get; set; }
-        DbSet<GeoLocation> GeoLocation { get; set; }
-        DbSet<LatLong> LatLong { get; set; }
-        DbSet<Line> Line { get; set; }
-        DbSet<PointCoordinate> PointCoordinate { get; set; }
-        DbSet<Polygon> Polygon { get; set; }
+        //DbSet<GeoArea> GeoArea { get; set; }
+        //DbSet<GeoDistance> GeoDistance { get; set; }
+        //DbSet<GeoLocation> GeoLocation { get; set; }
+        //DbSet<LatLong> LatLong { get; set; }
+        //DbSet<Line> Line { get; set; }
+        //DbSet<PointCoordinate> PointCoordinate { get; set; }
+        //DbSet<Polygon> Polygon { get; set; }
         DbSet<Location> Location { get; set; }
         DbSet<LocationArea> LocationArea { get; set; }        
         DbSet<LocationType> LocationType { get; set; }

@@ -1,7 +1,7 @@
 ﻿using GoodToCode.Shared.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Spatial;
+using System.Drawing;
 
 namespace GoodToCode.Locality.Models
 {
@@ -9,9 +9,7 @@ namespace GoodToCode.Locality.Models
     {
         [Key]
         public Guid GeoDistanceKey { get; set; }
-        public PointCoordinate StartPoint { get; set; }
-        public PointCoordinate EndPoint { get; set; }
-        System.Drawing.Point IGeoDistance.EndPoint { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        System.Drawing.Point IGeoDistance.StartPoint { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Point StartPoint { get; set; }
+        public Point EndPoint { get; set; }
     }
 }

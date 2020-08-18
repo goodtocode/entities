@@ -10,8 +10,6 @@ namespace GoodToCode.Locality.Models
         public Guid AssociateLocationKey { get; set; }
         public Guid AssociateKey { get; set; }
         public Guid LocationKey { get; set; }
-        public Guid? LocationTypeKey { get; set; }        
-        
-        
+        public Guid? LocationTypeKey { get; set; }
     }
 }

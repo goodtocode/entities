@@ -9,6 +9,6 @@ namespace GoodToCode.Locality.Models
     {
         [Key]
         public Guid GeoAreaKey { get; set; }
-        public Geography Area { get; set; }
+        public Guid PolygonKey { get; set; }
     }
 }

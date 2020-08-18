@@ -5,6 +5,7 @@ namespace GoodToCode.Locality.Infrastructure
 {
     public partial class LocalityDbContext : DbContext, ILocalityDbContext
     {
+        public LocalityDbContext() : base() { }
         public LocalityDbContext(DbContextOptions<LocalityDbContext> options)
             : base(options)
         {
@@ -16,13 +17,13 @@ namespace GoodToCode.Locality.Infrastructure
         public virtual DbSet<AssociateLocation> AssociateLocation { get; set; }
         public virtual DbSet<ResourceLocation> ResourceLocation { get; set; }
         public virtual DbSet<VentureLocation> VentureLocation { get; set; }
-        public DbSet<GeoArea> GeoArea { get; set; }
-        public DbSet<GeoDistance> GeoDistance { get; set; }
-        public DbSet<GeoLocation> GeoLocation { get; set; }
-        public DbSet<LatLong> LatLong { get; set; }
-        public DbSet<Line> Line { get; set; }
-        public DbSet<PointCoordinate> PointCoordinate { get; set; }
-        public DbSet<Polygon> Polygon { get; set; }
+        //public DbSet<GeoArea> GeoArea { get; set; }
+        //public DbSet<GeoDistance> GeoDistance { get; set; }
+        //public DbSet<GeoLocation> GeoLocation { get; set; }
+        //public DbSet<LatLong> LatLong { get; set; }
+        //public DbSet<Line> Line { get; set; }
+        //public DbSet<PointCoordinate> PointCoordinate { get; set; }
+        //public DbSet<Polygon> Polygon { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -86,7 +87,7 @@ namespace GoodToCode.Locality.Infrastructure
 
             modelBuilder.Entity<AssociateLocation>(entity =>
             {
-                entity.ToTable("AssociateLocation", "Subjects");
+                entity.ToTable("AssociateLocation", "Locality");
 
                 entity.HasIndex(e => new { e.AssociateKey, e.LocationKey })
                     .HasName("IX_AssociateLocation_All")
@@ -96,7 +97,7 @@ namespace GoodToCode.Locality.Infrastructure
 
             modelBuilder.Entity<ResourceLocation>(entity =>
             {
-                entity.ToTable("ResourceLocation", "Subjects");
+                entity.ToTable("ResourceLocation", "Locality");
 
                 entity.HasIndex(e => new { e.ResourceKey, e.LocationKey })
                     .HasName("IX_ResourceLocation_All")
@@ -106,7 +107,7 @@ namespace GoodToCode.Locality.Infrastructure
 
             modelBuilder.Entity<VentureLocation>(entity =>
             {
-                entity.ToTable("VentureLocation", "Subjects");
+                entity.ToTable("VentureLocation", "Locality");
 
                 entity.HasIndex(e => e.VentureLocationKey)
                     .HasName("IX_VentureLocation_Key")
@@ -116,6 +117,69 @@ namespace GoodToCode.Locality.Infrastructure
                     .HasName("IX_VentureLocation_All")
                     .IsUnique();
             });
+
+            //modelBuilder.Entity<GeoArea>(entity =>
+            //{
+            //    entity.ToTable("GeoArea", "Locality");
+
+            //    entity.HasIndex(e => e.GeoAreaKey)
+            //        .HasName("IX_GeoArea_Key")
+            //        .IsUnique();
+            //});
+
+            //modelBuilder.Entity<GeoDistance>(entity =>
+            //{
+            //    entity.ToTable("GeoDistance", "Locality");
+
+            //    entity.HasIndex(e => e.GeoDistanceKey)
+            //        .HasName("IX_GeoDistance_Key")
+            //        .IsUnique();
+            //});
+
+            //modelBuilder.Entity<GeoLocation>(entity =>
+            //{
+            //    entity.ToTable("GeoLocation", "Locality");
+
+            //    entity.HasIndex(e => e.GeoLocationKey)
+            //        .HasName("IX_GeoLocation_Key")
+            //        .IsUnique();
+            //});
+
+            //modelBuilder.Entity<LatLong>(entity =>
+            //{
+            //    entity.ToTable("LatLong", "Locality");
+
+            //    entity.HasIndex(e => e.LatLongKey)
+            //        .HasName("IX_LatLong_Key")
+            //        .IsUnique();
+            //});
+
+            //modelBuilder.Entity<Line>(entity =>
+            //{
+            //    entity.ToTable("Line", "Locality");
+
+            //    entity.HasIndex(e => e.LineKey)
+            //        .HasName("IX_Line_Key")
+            //        .IsUnique();
+            //});
+
+            //modelBuilder.Entity<PointCoordinate>(entity =>
+            //{
+            //    entity.ToTable("PointCoordinate", "Locality");
+
+            //    entity.HasIndex(e => e.PointCoordinateKey)
+            //        .HasName("IX_PointCoordinate_Key")
+            //        .IsUnique();
+            //});
+
+            //modelBuilder.Entity<Polygon>(entity =>
+            //{
+            //    entity.ToTable("Polygon", "Locality");
+
+            //    entity.HasIndex(e => e.PolygonKey)
+            //        .HasName("IX_Polygon_Key")
+            //        .IsUnique();
+            //});
 
             OnModelCreatingPartial(modelBuilder);
         }

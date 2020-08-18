@@ -1,6 +1,4 @@
 ﻿using GoodToCode.Shared.Models;
-using GoodToCode.Shared.Messaging;
-using GoodToCode.Subjects.Models;
 
 namespace GoodToCode.Locality.Models
 {

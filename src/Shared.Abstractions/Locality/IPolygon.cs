@@ -5,7 +5,7 @@ namespace GoodToCode.Locality.Models
 {
     public interface IPolygon
     {
-        Geometry Area { get; set; }
+        Geometry Sequence { get; set; }
         Guid PolygonKey { get; set; }
     }
 }
