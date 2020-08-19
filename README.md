@@ -1,5 +1,5 @@
 # GoodToCode Service Stack
-DDD, onion-architecture, vertical slice, CQRS stack in .NET Core and .NET Framework ) with the following technologies:
+DDD, onion-architecture, vertical slice, CQRS stack in .NET Core and .NET Framework, with the following technologies:
 
 ## Presentation: Azure Functions, ASP.NET Web API, ASP.NET MVC samples
 ## Domain Services: CQRS Commands and Queries
