@@ -1,7 +1,8 @@
 ﻿using GoodToCode.Shared.Models;
+using NetTopologySuite.Geometries;
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Spatial;
+
 
 namespace GoodToCode.Locality.Models
 {
@@ -9,6 +10,6 @@ namespace GoodToCode.Locality.Models
     {
         [Key]
         public Guid PolygonKey { get; set; }
-        public Geometry Sequence { get; set; }
+        public Geometry PolygonSequence { get; set; }
     }
 }

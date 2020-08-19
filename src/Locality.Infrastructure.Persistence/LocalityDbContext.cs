@@ -5,7 +5,6 @@ namespace GoodToCode.Locality.Infrastructure
 {
     public partial class LocalityDbContext : DbContext, ILocalityDbContext
     {
-        public LocalityDbContext() : base() { }
         public LocalityDbContext(DbContextOptions<LocalityDbContext> options)
             : base(options)
         {
@@ -17,20 +16,21 @@ namespace GoodToCode.Locality.Infrastructure
         public virtual DbSet<AssociateLocation> AssociateLocation { get; set; }
         public virtual DbSet<ResourceLocation> ResourceLocation { get; set; }
         public virtual DbSet<VentureLocation> VentureLocation { get; set; }
-        //public DbSet<GeoArea> GeoArea { get; set; }
-        //public DbSet<GeoDistance> GeoDistance { get; set; }
-        //public DbSet<GeoLocation> GeoLocation { get; set; }
-        //public DbSet<LatLong> LatLong { get; set; }
-        //public DbSet<Line> Line { get; set; }
-        //public DbSet<PointCoordinate> PointCoordinate { get; set; }
-        //public DbSet<Polygon> Polygon { get; set; }
+        public DbSet<GeoArea> GeoArea { get; set; }
+        public DbSet<GeoDistance> GeoDistance { get; set; }
+        public DbSet<GeoLocation> GeoLocation { get; set; }
+        public DbSet<LatLong> LatLong { get; set; }
+        public DbSet<Line> Line { get; set; }
+        public DbSet<Coordinate> Coordinate { get; set; }
+        public DbSet<Polygon> Polygon { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var connectionString = "Server=tcp:goodtocodestack.database.windows.net,1433;Initial Catalog=StackData;Persist Security Info=False;User ID=LocalAdmin;Password=1202cc89-cb6f-453a-ac7e-550b3b5d2d0c;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-                optionsBuilder.UseSqlServer(connectionString);
+                var connectionString = @"Server=tcp:goodtocodestack.database.windows.net,1433;Initial Catalog=StackData;Persist Security Info=False;User ID=LocalAdmin;Password=1202cc89-cb6f-453a-ac7e-550b3b5d2d0c;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                optionsBuilder.UseSqlServer(connectionString, 
+                    x => x.UseNetTopologySuite());
             }
         }
 
@@ -118,68 +118,68 @@ namespace GoodToCode.Locality.Infrastructure
                     .IsUnique();
             });
 
-            //modelBuilder.Entity<GeoArea>(entity =>
-            //{
-            //    entity.ToTable("GeoArea", "Locality");
+            modelBuilder.Entity<GeoArea>(entity =>
+            {
+                entity.ToTable("GeoArea", "Locality");
 
-            //    entity.HasIndex(e => e.GeoAreaKey)
-            //        .HasName("IX_GeoArea_Key")
-            //        .IsUnique();
-            //});
+                entity.HasIndex(e => e.GeoAreaKey)
+                    .HasName("IX_GeoArea_Key")
+                    .IsUnique();
+            });
 
-            //modelBuilder.Entity<GeoDistance>(entity =>
-            //{
-            //    entity.ToTable("GeoDistance", "Locality");
+            modelBuilder.Entity<GeoDistance>(entity =>
+            {
+                entity.ToTable("GeoDistance", "Locality");
 
-            //    entity.HasIndex(e => e.GeoDistanceKey)
-            //        .HasName("IX_GeoDistance_Key")
-            //        .IsUnique();
-            //});
+                entity.HasIndex(e => e.GeoDistanceKey)
+                    .HasName("IX_GeoDistance_Key")
+                    .IsUnique();
+            });
 
-            //modelBuilder.Entity<GeoLocation>(entity =>
-            //{
-            //    entity.ToTable("GeoLocation", "Locality");
+            modelBuilder.Entity<GeoLocation>(entity =>
+            {
+                entity.ToTable("GeoLocation", "Locality");
 
-            //    entity.HasIndex(e => e.GeoLocationKey)
-            //        .HasName("IX_GeoLocation_Key")
-            //        .IsUnique();
-            //});
+                entity.HasIndex(e => e.GeoLocationKey)
+                    .HasName("IX_GeoLocation_Key")
+                    .IsUnique();
+            });
 
-            //modelBuilder.Entity<LatLong>(entity =>
-            //{
-            //    entity.ToTable("LatLong", "Locality");
+            modelBuilder.Entity<LatLong>(entity =>
+            {
+                entity.ToTable("LatLong", "Locality");
 
-            //    entity.HasIndex(e => e.LatLongKey)
-            //        .HasName("IX_LatLong_Key")
-            //        .IsUnique();
-            //});
+                entity.HasIndex(e => e.LatLongKey)
+                    .HasName("IX_LatLong_Key")
+                    .IsUnique();
+            });
 
-            //modelBuilder.Entity<Line>(entity =>
-            //{
-            //    entity.ToTable("Line", "Locality");
+            modelBuilder.Entity<Line>(entity =>
+            {
+                entity.ToTable("Line", "Locality");
 
-            //    entity.HasIndex(e => e.LineKey)
-            //        .HasName("IX_Line_Key")
-            //        .IsUnique();
-            //});
+                entity.HasIndex(e => e.LineKey)
+                    .HasName("IX_Line_Key")
+                    .IsUnique();
+            });
 
-            //modelBuilder.Entity<PointCoordinate>(entity =>
-            //{
-            //    entity.ToTable("PointCoordinate", "Locality");
+            modelBuilder.Entity<Coordinate>(entity =>
+            {
+                entity.ToTable("Coordinate", "Locality");
 
-            //    entity.HasIndex(e => e.PointCoordinateKey)
-            //        .HasName("IX_PointCoordinate_Key")
-            //        .IsUnique();
-            //});
+                entity.HasIndex(e => e.CoordinateKey)
+                    .HasName("IX_Coordinate_Key")
+                    .IsUnique();
+            });
 
-            //modelBuilder.Entity<Polygon>(entity =>
-            //{
-            //    entity.ToTable("Polygon", "Locality");
+            modelBuilder.Entity<Polygon>(entity =>
+            {
+                entity.ToTable("Polygon", "Locality");
 
-            //    entity.HasIndex(e => e.PolygonKey)
-            //        .HasName("IX_Polygon_Key")
-            //        .IsUnique();
-            //});
+                entity.HasIndex(e => e.PolygonKey)
+                    .HasName("IX_Polygon_Key")
+                    .IsUnique();
+            });
 
             OnModelCreatingPartial(modelBuilder);
         }

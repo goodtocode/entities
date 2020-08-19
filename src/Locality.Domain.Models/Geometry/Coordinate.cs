@@ -5,11 +5,10 @@ using NetTopologySuite.Geometries;
 
 namespace GoodToCode.Locality.Models
 {
-    public class LatLong : DomainModel<ILatLong>, ILatLong
+    public class Coordinate : DomainModel<ICoordinate>, ICoordinate
     {
         [Key]
-        public Guid LatLongKey { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public Guid CoordinateKey { get; set; }
+        public Point CoordinatePoint { get; set; }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using GoodToCode.Shared.Models;
+using NetTopologySuite.Geometries;
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Spatial;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GoodToCode.Locality.Models
 {
@@ -9,6 +10,7 @@ namespace GoodToCode.Locality.Models
     {
         [Key]
         public Guid GeoAreaKey { get; set; }
-        public Guid PolygonKey { get; set; }
+        [Column(TypeName = "geography")]
+        public Geometry GeodeticArea { get; set; }
     }
 }

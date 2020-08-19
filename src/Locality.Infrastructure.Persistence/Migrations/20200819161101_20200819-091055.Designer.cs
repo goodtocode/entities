@@ -4,15 +4,17 @@ using GoodToCode.Locality.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 
 namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(LocalityDbContext))]
-    partial class LocalityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200819161101_20200819-091055")]
+    partial class _20200819091055
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,24 +46,6 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations
                     b.ToTable("AssociateLocation","Locality");
                 });
 
-            modelBuilder.Entity("GoodToCode.Locality.Models.Coordinate", b =>
-                {
-                    b.Property<Guid>("CoordinateKey")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Point>("CoordinatePoint")
-                        .HasColumnType("geography");
-
-                    b.HasKey("CoordinateKey");
-
-                    b.HasIndex("CoordinateKey")
-                        .IsUnique()
-                        .HasName("IX_Coordinate_Key");
-
-                    b.ToTable("Coordinate","Locality");
-                });
-
             modelBuilder.Entity("GoodToCode.Locality.Models.GeoArea", b =>
                 {
                     b.Property<Guid>("GeoAreaKey")
@@ -78,90 +62,6 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations
                         .HasName("IX_GeoArea_Key");
 
                     b.ToTable("GeoArea","Locality");
-                });
-
-            modelBuilder.Entity("GoodToCode.Locality.Models.GeoDistance", b =>
-                {
-                    b.Property<Guid>("GeoDistanceKey")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EndLatLongKey")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("StartLatLongKey")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("GeoDistanceKey");
-
-                    b.HasIndex("GeoDistanceKey")
-                        .IsUnique()
-                        .HasName("IX_GeoDistance_Key");
-
-                    b.ToTable("GeoDistance","Locality");
-                });
-
-            modelBuilder.Entity("GoodToCode.Locality.Models.GeoLocation", b =>
-                {
-                    b.Property<Guid>("GeoLocationKey")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Point>("Elevation")
-                        .HasColumnType("geography");
-
-                    b.Property<Guid>("LatLongKey")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("GeoLocationKey");
-
-                    b.HasIndex("GeoLocationKey")
-                        .IsUnique()
-                        .HasName("IX_GeoLocation_Key");
-
-                    b.ToTable("GeoLocation","Locality");
-                });
-
-            modelBuilder.Entity("GoodToCode.Locality.Models.LatLong", b =>
-                {
-                    b.Property<Guid>("LatLongKey")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
-
-                    b.HasKey("LatLongKey");
-
-                    b.HasIndex("LatLongKey")
-                        .IsUnique()
-                        .HasName("IX_LatLong_Key");
-
-                    b.ToTable("LatLong","Locality");
-                });
-
-            modelBuilder.Entity("GoodToCode.Locality.Models.Line", b =>
-                {
-                    b.Property<Guid>("LineKey")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Point>("EndPoint")
-                        .HasColumnType("geography");
-
-                    b.Property<Point>("StartPoint")
-                        .HasColumnType("geography");
-
-                    b.HasKey("LineKey");
-
-                    b.HasIndex("LineKey")
-                        .IsUnique()
-                        .HasName("IX_Line_Key");
-
-                    b.ToTable("Line","Locality");
                 });
 
             modelBuilder.Entity("GoodToCode.Locality.Models.Location", b =>
@@ -239,24 +139,6 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations
                         .HasName("IX_LocationType_Key");
 
                     b.ToTable("LocationType","Locality");
-                });
-
-            modelBuilder.Entity("GoodToCode.Locality.Models.Polygon", b =>
-                {
-                    b.Property<Guid>("PolygonKey")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Geometry>("PolygonSequence")
-                        .HasColumnType("geography");
-
-                    b.HasKey("PolygonKey");
-
-                    b.HasIndex("PolygonKey")
-                        .IsUnique()
-                        .HasName("IX_Polygon_Key");
-
-                    b.ToTable("Polygon","Locality");
                 });
 
             modelBuilder.Entity("GoodToCode.Locality.Models.ResourceLocation", b =>

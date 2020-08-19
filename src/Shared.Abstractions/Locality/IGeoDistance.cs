@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Drawing;
+using NetTopologySuite.Geometries;
 
 namespace GoodToCode.Locality.Models
 {
     public interface IGeoDistance
     {
-        Point EndPoint { get; set; }
         Guid GeoDistanceKey { get; set; }
-        Point StartPoint { get; set; }
+        Guid StartLatLongKey { get; set; }
+        Guid EndLatLongKey { get; set; }
     }
 }

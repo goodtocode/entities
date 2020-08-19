@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Drawing;
+using NetTopologySuite.Geometries;
 
 namespace GoodToCode.Locality.Models
 {
-    public interface IPointCoordinate
+    public interface ICoordinate
     {
-        Guid PointCoordinateKey { get; set; }
-        Point Coordinate { get; set; }
+        Guid CoordinateKey { get; set; }
+        Point CoordinatePoint { get; set; }
     }
 }

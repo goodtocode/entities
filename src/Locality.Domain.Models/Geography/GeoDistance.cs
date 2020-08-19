@@ -1,7 +1,7 @@
 ﻿using GoodToCode.Shared.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Drawing;
+using NetTopologySuite.Geometries;
 
 namespace GoodToCode.Locality.Models
 {
@@ -9,7 +9,7 @@ namespace GoodToCode.Locality.Models
     {
         [Key]
         public Guid GeoDistanceKey { get; set; }
-        public Point StartPoint { get; set; }
-        public Point EndPoint { get; set; }
+        public Guid StartLatLongKey { get; set; }
+        public Guid EndLatLongKey { get; set; }
     }
 }

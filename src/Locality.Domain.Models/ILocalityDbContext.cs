@@ -10,7 +10,7 @@ namespace GoodToCode.Locality.Models
         //DbSet<GeoLocation> GeoLocation { get; set; }
         //DbSet<LatLong> LatLong { get; set; }
         //DbSet<Line> Line { get; set; }
-        //DbSet<PointCoordinate> PointCoordinate { get; set; }
+        //DbSet<Coordinate> Coordinate { get; set; }
         //DbSet<Polygon> Polygon { get; set; }
         DbSet<Location> Location { get; set; }
         DbSet<LocationArea> LocationArea { get; set; }        

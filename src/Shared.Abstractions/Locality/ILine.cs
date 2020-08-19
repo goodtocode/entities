@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Drawing;
+using NetTopologySuite.Geometries;
 
 namespace GoodToCode.Locality.Models
 {
     public interface ILine
     {
-        Point EndPoint { get; set; }
         Guid LineKey { get; set; }
         Point StartPoint { get; set; }
+        Point EndPoint { get; set; }        
     }
 }

@@ -1,6 +1,6 @@
 ﻿using GoodToCode.Shared.Models;
 using System;
-using System.Drawing;
+using NetTopologySuite.Geometries;
 
 namespace GoodToCode.Locality.Models
 {

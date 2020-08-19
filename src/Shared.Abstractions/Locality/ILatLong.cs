@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Drawing;
+using NetTopologySuite.Geometries;
 
 namespace GoodToCode.Locality.Models
 {
     public interface ILatLong
     {
-        Point Latitude { get; set; }
+        double Latitude { get; set; }
         Guid LatLongKey { get; set; }
-        Point Longitude { get; set; }
+        double Longitude { get; set; }
     }
 }
