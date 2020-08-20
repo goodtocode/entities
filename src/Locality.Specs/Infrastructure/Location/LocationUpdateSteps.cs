@@ -8,20 +8,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using GoodToCode.Locality.Infrastructure;
+using System.Collections.Generic;
 
 namespace GoodToCode.Locality.Specs
 {
     [Binding]
-    public class LocationUpdateSteps
+    public class LocationUpdateSteps : ICrudSteps<Location>
     {
         private readonly LocalityDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
-
-        private Guid SutKey { get; set; }
+        private readonly LocationCreateSteps createSteps = new LocationCreateSteps();
+        
         private string SutName { get; set; }
         private string SutNameNew { get; set; }
-        private Location Sut { get; set; }
+
+        public Location Sut { get; set; }
+        public Guid SutKey { get; set; }
+        public IList<Location> RecycleBin { get; set; } = new List<Location>();
 
         public LocationUpdateSteps()
         {
@@ -33,7 +37,10 @@ namespace GoodToCode.Locality.Specs
         [Given(@"An existing Location has been queried")]
         public async Task GivenAnExistingLocationHasBeenQueried()
         {
-            Sut = await _dbContext.Location.Take(1).FirstOrDefaultAsync();
+            createSteps.GivenANewLocationHasBeenCreated();
+            await createSteps.WhenLocationIsInsertedViaEntityFramework();
+            Sut = await _dbContext.Location.FirstAsync();
+            SutKey = Sut.LocationKey;
         }
 
         [Given(@"a Location was found in persistence")]
@@ -72,5 +79,15 @@ namespace GoodToCode.Locality.Specs
             Assert.IsFalse(SutNameNew == SutName);
         }
 
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            foreach (var item in RecycleBin)
+            {
+                _dbContext.Entry(item).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
+            await createSteps.Cleanup();
+        }
     }
 }

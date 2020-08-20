@@ -1,7 +1,7 @@
 ﻿Feature: Business Delete
 	Delete a business from persistence
 
-@command @entityFramework
+@crud @entityFramework
 Scenario: Delete an existing business via Entity Framework
 	Given An Business has been queried to be deleted
 		And a business to be deleted was found in persistence

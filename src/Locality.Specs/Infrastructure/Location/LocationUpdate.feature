@@ -1,7 +1,7 @@
 ﻿Feature: Location Update
 	Update a new Location into persistence
 
-@command @entityFramework
+@crud @entityFramework
 Scenario: Update a new Location via Entity Framework
 	Given An existing Location has been queried
 		And a Location was found in persistence

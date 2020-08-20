@@ -21,14 +21,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <CustomAdditionalCompileInputs Remove="Application\Event\BusinessQuery.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Application\Event\BusinessSaveCommand.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Application\Event\EventQuery.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Application\Event\EventSaveCommand.feature.cs" />
     <CustomAdditionalCompileInputs Remove="Domain\Event\AssociateAggregate.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\BusinessCreate.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\BusinessDelete.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\BusinessesGet.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\BusinessGetByKey.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\BusinessUpdate.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventCreate.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventDelete.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventesGet.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventGetByKey.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventUpdate.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,14 +37,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckBuild Remove="Application\Event\BusinessQuery.feature.cs" />
-    <UpToDateCheckBuild Remove="Application\Event\BusinessSaveCommand.feature.cs" />
+    <UpToDateCheckBuild Remove="Application\Event\EventQuery.feature.cs" />
+    <UpToDateCheckBuild Remove="Application\Event\EventSaveCommand.feature.cs" />
     <UpToDateCheckBuild Remove="Domain\Event\AssociateAggregate.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Associate\BusinessCreate.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Associate\BusinessDelete.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Associate\BusinessesGet.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Associate\BusinessGetByKey.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Associate\BusinessUpdate.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Associate\EventCreate.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Associate\EventDelete.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Associate\EventesGet.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Associate\EventGetByKey.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Associate\EventUpdate.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>

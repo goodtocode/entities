@@ -19,8 +19,8 @@ namespace GoodToCode.Chronology.Specs.Infrastructure.Schedule
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.3.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Schedulees Get", Description="\tGet all Schedulees from persistence", SourceFile="Infrastructure\\Schedule\\SchedulesGet.feature", SourceLine=0)]
-    public partial class ScheduleesGetFeature
+    [TechTalk.SpecRun.FeatureAttribute("Schedules Get", Description="\tGet all Schedules from persistence", SourceFile="Infrastructure\\Schedule\\SchedulesGet.feature", SourceLine=0)]
+    public partial class SchedulesGetFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -34,7 +34,7 @@ namespace GoodToCode.Chronology.Specs.Infrastructure.Schedule
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Schedulees Get", "\tGet all Schedulees from persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Schedules Get", "\tGet all Schedules from persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -70,16 +70,16 @@ namespace GoodToCode.Chronology.Specs.Infrastructure.Schedule
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Get all Schedulees via Entity framework", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("Get all Schedules via Entity framework", new string[] {
                 "query",
                 "entityFramework"}, SourceLine=4)]
-        public virtual void GetAllScheduleesViaEntityFramework()
+        public virtual void GetAllSchedulesViaEntityFramework()
         {
             string[] tagsOfScenario = new string[] {
                     "query",
                     "entityFramework"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all Schedulees via Entity framework", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all Schedules via Entity framework", null, tagsOfScenario, argumentsOfScenario);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -101,13 +101,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 6
- testRunner.Given("I request the list of Schedulees", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I request the list of Schedules", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- testRunner.When("Schedulees are queried via Entity framework", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("Schedules are queried via Entity framework", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
- testRunner.Then("All persisted Schedulees are returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("All persisted Schedules are returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

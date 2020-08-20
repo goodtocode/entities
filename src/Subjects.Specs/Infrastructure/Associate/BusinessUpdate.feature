@@ -1,7 +1,7 @@
 ﻿Feature: Business Update
 	Update a new business into persistence
 
-@command @entityFramework
+@crud @entityFramework
 Scenario: Update a new business via Entity Framework
 	Given An existing Business has been queried
 		And a business was found in persistence

@@ -71,12 +71,12 @@ namespace GoodToCode.Occurrences.Specs.Infrastructure.Associate
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("Delete an existing Event via Entity Framework", new string[] {
-                "command",
+                "crud",
                 "entityFramework"}, SourceLine=4)]
         public virtual void DeleteAnExistingEventViaEntityFramework()
         {
             string[] tagsOfScenario = new string[] {
-                    "command",
+                    "crud",
                     "entityFramework"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete an existing Event via Entity Framework", null, tagsOfScenario, argumentsOfScenario);

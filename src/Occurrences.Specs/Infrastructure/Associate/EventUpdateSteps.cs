@@ -1,27 +1,29 @@
-﻿using GoodToCode.Shared.Specs;
+﻿using GoodToCode.Occurrences.Infrastructure;
 using GoodToCode.Occurrences.Models;
+using GoodToCode.Shared.Specs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
-using GoodToCode.Occurrences.Infrastructure;
 
 namespace GoodToCode.Occurrences.Specs
 {
     [Binding]
-    public class EventUpdateSteps
+    public class EventUpdateSteps : ICrudSteps<Event>
     {
         private readonly OccurrencesDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
-
-        private Guid SutKey { get; set; }
+        private readonly EventCreateSteps createSteps = new EventCreateSteps();
         private string SutName { get; set; }
         private string SutNameNew { get; set; }
-        private Event Sut { get; set; }
+
+        public Event Sut { get; set; }
+        public Guid SutKey { get; set; }
+        public IList<Event> RecycleBin { get; set; } = new List<Event>();
 
         public EventUpdateSteps()
         {
@@ -33,7 +35,10 @@ namespace GoodToCode.Occurrences.Specs
         [Given(@"An existing Event has been queried")]
         public async Task GivenAnExistingEventHasBeenQueried()
         {
-            Sut = await _dbContext.Event.Take(1).FirstOrDefaultAsync();
+            createSteps.GivenANewEventHasBeenCreated();
+            await createSteps.WhenEventIsInsertedViaEntityFramework();
+            Sut = await _dbContext.Event.FirstAsync();
+            SutKey = Sut.EventKey;
         }
 
         [Given(@"a Event was found in persistence")]
@@ -72,5 +77,15 @@ namespace GoodToCode.Occurrences.Specs
             Assert.IsFalse(SutNameNew == SutName);
         }
 
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            foreach (var item in RecycleBin)
+            {
+                _dbContext.Entry(item).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
+            await createSteps.Cleanup();
+        }
     }
 }

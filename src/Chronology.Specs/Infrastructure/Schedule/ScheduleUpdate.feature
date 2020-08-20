@@ -1,7 +1,7 @@
 ﻿Feature: Schedule Update
 	Update a new Schedule into persistence
 
-@command @entityFramework
+@crud @entityFramework
 Scenario: Update a new Schedule via Entity Framework
 	Given An existing Schedule has been queried
 		And a Schedule was found in persistence

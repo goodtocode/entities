@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
@@ -14,14 +15,15 @@ using TechTalk.SpecRun.Common.Helper;
 namespace GoodToCode.Occurrences.Specs
 {
     [Binding]
-    public class EventSaveCommandSteps
+    public class EventSaveCommandSteps : ICommandSteps<Event>
     {
         private readonly OccurrencesDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
 
-        private Guid SutKey { get; set; }
-        private Event Sut { get; set; }
+        public Guid SutKey { get; private set; }
+        public Event Sut { get; private set; }
+        public IList<Event> RecycleBin { get; private set; }
 
         public EventSaveCommandSteps()
         {
@@ -62,6 +64,16 @@ namespace GoodToCode.Occurrences.Specs
         {
             var found = await _dbContext.Event.Where(x => x.EventKey == SutKey).AnyAsync();
             Assert.IsTrue(found);
+        }
+
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            foreach (var item in RecycleBin)
+            {
+                _dbContext.Entry(item).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
         }
     }
 }

@@ -7,18 +7,21 @@ using System;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using GoodToCode.Chronology.Infrastructure;
+using System.Collections.Generic;
 
 namespace GoodToCode.Chronology.Specs
 {
     [Binding]
-    public class ScheduleGetByKeySteps
+    public class ScheduleGetByKeySteps : ICrudSteps<Schedule>
     {        
         private readonly ChronologyDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
+        private readonly ScheduleCreateSteps createSteps = new ScheduleCreateSteps();
 
-        private Guid SutKey { get; set; }
-        private Schedule Sut { get; set; }
+        public Guid SutKey { get; private set; }
+        public Schedule Sut { get; private set; }
+        public IList<Schedule> RecycleBin { get; private set; } = new List<Schedule>();
 
         public ScheduleGetByKeySteps()
         {
@@ -30,8 +33,10 @@ namespace GoodToCode.Chronology.Specs
         [Given(@"I have a Schedule key")]
         public async Task GivenIHaveAScheduleKey()
         {
-            var item = await _dbContext.Schedule.FirstAsync();
-            SutKey = item.ScheduleKey;
+            createSteps.GivenANewScheduleHasBeenCreated();
+            await createSteps.WhenScheduleIsInsertedViaEntityFramework();
+            Sut = await _dbContext.Schedule.FirstAsync();
+            SutKey = Sut.ScheduleKey;
         }
         
         [Given(@"the key is type Guid")]
@@ -57,6 +62,17 @@ namespace GoodToCode.Chronology.Specs
         public void ThenTheMatchingScheduleIsReturned()
         {
             Assert.IsTrue(Sut.ScheduleKey == SutKey);
+        }
+
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            foreach (var item in RecycleBin)
+            {
+                _dbContext.Entry(item).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
+            await createSteps.Cleanup();
         }
     }
 }

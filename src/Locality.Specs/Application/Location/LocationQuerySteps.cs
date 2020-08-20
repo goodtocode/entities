@@ -15,14 +15,16 @@ using GoodToCode.Locality.Infrastructure;
 namespace GoodToCode.Locality.Specs
 {
     [Binding]
-    public class LocationQuerySteps
+    public class LocationQuerySteps : IQuerySteps<Location>
     {        
         private readonly LocalityDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
+        private readonly LocationSaveCommandSteps commandSteps = new LocationSaveCommandSteps();
 
-        private Guid SutKey { get; set; }
-        private List<Location> Sut { get; set; }
+        public Guid SutKey { get; private set; }
+        public IList<Location> Sut { get; private set; }
+        public IList<Location> RecycleBin { get; private set; } = new List<Location>();
 
         public LocationQuerySteps()
         {
@@ -34,8 +36,10 @@ namespace GoodToCode.Locality.Specs
         [Given(@"I have a Location key that can be Queried")]
         public async Task GivenIHaveALocationKeyThatCanBeQueried()
         {
-            var item = await _dbContext.Location.FirstAsync();
-            SutKey = item.LocationKey;
+            commandSteps.GivenANewLocationSaveCommandHasBeenCreated();
+            await commandSteps.WhenTheLocationIsInsertedViaCQRSCommand();
+            Sut = await _dbContext.Location.Take(10).ToListAsync();
+            SutKey = Sut.FirstOrDefault().LocationKey;
             Assert.IsTrue(SutKey != Guid.Empty);
         }
 
@@ -58,6 +62,16 @@ namespace GoodToCode.Locality.Specs
         public void ThenTheMatchingLocationIsReturnedFromTheQuery()
         {
             Assert.IsTrue(Sut.Any(x => x.LocationKey == SutKey));
+        }
+
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            foreach (var item in RecycleBin)
+            {
+                _dbContext.Entry(item).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
         }
     }
 }

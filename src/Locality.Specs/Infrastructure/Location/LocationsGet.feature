@@ -1,8 +1,8 @@
-﻿Feature: Locationes Get
-	Get all Locationes from persistence
+﻿Feature: Location Get
+	Get all Location from persistence
 
 @query @entityFramework
-Scenario: Get all Locationes via Entity framework
-	Given I request the list of Locationes
-	When Locationes are queried via Entity framework
-	Then All persisted Locationes are returned
+Scenario: Get all Location via Entity framework
+	Given I request the list of Location
+	When Location are queried via Entity framework
+	Then All persisted Location are returned

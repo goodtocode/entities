@@ -8,18 +8,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using GoodToCode.Chronology.Infrastructure;
+using System.Collections.Generic;
 
 namespace GoodToCode.Chronology.Specs
 {
     [Binding]
-    public class ScheduleDeleteSteps
+    public class ScheduleDeleteSteps : ICrudSteps<Schedule>
     {
         private readonly ChronologyDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
+        private readonly ScheduleCreateSteps createSteps = new ScheduleCreateSteps();
 
-        private Guid SutKey { get; set; }
-        private Schedule Sut { get; set; }
+        public Guid SutKey { get; private set; }
+        public Schedule Sut { get; private set; }
+        public IList<Schedule> RecycleBin { get; private set; } = new List<Schedule>();
 
         public ScheduleDeleteSteps()
         {
@@ -31,7 +34,9 @@ namespace GoodToCode.Chronology.Specs
         [Given(@"An Schedule has been queried to be deleted")]
         public async Task GivenAnScheduleHasBeenQueriedToBeDeleted()
         {
-            Sut = await _dbContext.Schedule.Take(1).FirstOrDefaultAsync();
+            createSteps.GivenANewScheduleHasBeenCreated();
+            await createSteps.WhenScheduleIsInsertedViaEntityFramework();
+            Sut = await _dbContext.Schedule.FirstAsync();
             SutKey = Sut.ScheduleKey;
         }
 
@@ -61,6 +66,15 @@ namespace GoodToCode.Chronology.Specs
             Assert.IsTrue(Sut?.ScheduleKey != SutKey);
         }
 
-
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            foreach (var item in RecycleBin)
+            {
+                _dbContext.Entry(item).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
+            await createSteps.Cleanup();
+        }
     }
 }

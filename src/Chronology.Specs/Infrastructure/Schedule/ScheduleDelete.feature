@@ -1,7 +1,7 @@
 ﻿Feature: Schedule Delete
 	Delete a Schedule from persistence
 
-@command @entityFramework
+@crud @entityFramework
 Scenario: Delete an existing Schedule via Entity Framework
 	Given An Schedule has been queried to be deleted
 		And a Schedule to be deleted was found in persistence

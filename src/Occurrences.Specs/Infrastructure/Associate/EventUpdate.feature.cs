@@ -71,12 +71,12 @@ namespace GoodToCode.Occurrences.Specs.Infrastructure.Associate
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("Update a new Event via Entity Framework", new string[] {
-                "command",
+                "crud",
                 "entityFramework"}, SourceLine=4)]
         public virtual void UpdateANewEventViaEntityFramework()
         {
             string[] tagsOfScenario = new string[] {
-                    "command",
+                    "crud",
                     "entityFramework"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update a new Event via Entity Framework", null, tagsOfScenario, argumentsOfScenario);

@@ -1,8 +1,8 @@
-﻿Feature: Eventes Get
-	Get all Eventes from persistence
+﻿Feature: Events Get
+	Get all Events from persistence
 
 @query @entityFramework
-Scenario: Get all Eventes via Entity framework
-	Given I request the list of Eventes
-	When Eventes are queried via Entity framework
-	Then All persisted Eventes are returned
+Scenario: Get all Events via Entity framework
+	Given I request the list of Events
+	When Events are queried via Entity framework
+	Then All persisted Events are returned

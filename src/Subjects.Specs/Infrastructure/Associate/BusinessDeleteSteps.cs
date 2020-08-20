@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
@@ -12,14 +13,16 @@ using TechTalk.SpecFlow;
 namespace GoodToCode.Subjects.Specs
 {
     [Binding]
-    public class BusinessDeleteSteps
+    public class BusinessDeleteSteps : ICrudSteps<Business>
     {
         private readonly SubjectsDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
+        private readonly BusinessCreateSteps createSteps = new BusinessCreateSteps();
 
-        private Guid SutKey { get; set; }
-        private Business Sut { get; set; }
+        public Guid SutKey { get; private set; }
+        public Business Sut { get; private set; }
+        public IList<Business> RecycleBin { get; set; } = new List<Business>();
 
         public BusinessDeleteSteps()
         {
@@ -31,7 +34,9 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"An Business has been queried to be deleted")]
         public async Task GivenAnBusinessHasBeenQueriedToBeDeleted()
         {
-            Sut = await _dbContext.Business.Take(1).FirstOrDefaultAsync();
+            createSteps.GivenANewBusinessHasBeenCreated();
+            await createSteps.WhenBusinessIsInsertedViaEntityFramework();
+            Sut = await _dbContext.Business.FirstAsync();
             SutKey = Sut.BusinessKey;
         }
 
@@ -61,6 +66,14 @@ namespace GoodToCode.Subjects.Specs
             Assert.IsTrue(Sut?.BusinessKey != SutKey);
         }
 
-
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            foreach (var item in RecycleBin)
+            {
+                _dbContext.Entry(item).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
+        }
     }
 }

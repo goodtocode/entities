@@ -15,14 +15,16 @@ using GoodToCode.Chronology.Infrastructure;
 namespace GoodToCode.Chronology.Specs
 {
     [Binding]
-    public class ScheduleQuerySteps
+    public class ScheduleQuerySteps : IQuerySteps<Schedule>
     {        
         private readonly ChronologyDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
+        private readonly ScheduleSaveCommandSteps commandSteps = new ScheduleSaveCommandSteps();
 
-        private Guid SutKey { get; set; }
-        private List<Schedule> Sut { get; set; }
+        public Guid SutKey { get; private set; }
+        public IList<Schedule> Sut { get; private set; }
+        public IList<Schedule> RecycleBin { get; private set; } = new List<Schedule>();
 
         public ScheduleQuerySteps()
         {
@@ -34,8 +36,10 @@ namespace GoodToCode.Chronology.Specs
         [Given(@"I have a Schedule key that can be Queried")]
         public async Task GivenIHaveAScheduleKeyThatCanBeQueried()
         {
-            var item = await _dbContext.Schedule.FirstAsync();
-            SutKey = item.ScheduleKey;
+            commandSteps.GivenANewScheduleSaveCommandHasBeenCreated();
+            await commandSteps.WhenTheScheduleIsInsertedViaCQRSCommand();
+            Sut = await _dbContext.Schedule.Take(10).ToListAsync();
+            SutKey = Sut.FirstOrDefault().ScheduleKey;
             Assert.IsTrue(SutKey != Guid.Empty);
         }
 
@@ -58,6 +62,16 @@ namespace GoodToCode.Chronology.Specs
         public void ThenTheMatchingScheduleIsReturnedFromTheQuery()
         {
             Assert.IsTrue(Sut.Any(x => x.ScheduleKey == SutKey));
+        }
+
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            foreach (var item in RecycleBin)
+            {
+                _dbContext.Entry(item).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
         }
     }
 }

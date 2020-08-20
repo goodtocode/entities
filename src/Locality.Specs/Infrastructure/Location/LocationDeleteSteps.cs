@@ -8,18 +8,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using GoodToCode.Locality.Infrastructure;
+using System.Collections.Generic;
 
 namespace GoodToCode.Locality.Specs
 {
     [Binding]
-    public class LocationDeleteSteps
+    public class LocationDeleteSteps : ICrudSteps<Location>
     {
         private readonly LocalityDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
+        private readonly LocationCreateSteps createSteps = new LocationCreateSteps();
 
-        private Guid SutKey { get; set; }
-        private Location Sut { get; set; }
+        public Guid SutKey { get; private set; }
+        public Location Sut { get; private set; }
+        public IList<Location> RecycleBin { get; private set; } = new List<Location>();
 
         public LocationDeleteSteps()
         {
@@ -31,7 +34,9 @@ namespace GoodToCode.Locality.Specs
         [Given(@"An Location has been queried to be deleted")]
         public async Task GivenAnLocationHasBeenQueriedToBeDeleted()
         {
-            Sut = await _dbContext.Location.Take(1).FirstOrDefaultAsync();
+            createSteps.GivenANewLocationHasBeenCreated();
+            await createSteps.WhenLocationIsInsertedViaEntityFramework();
+            Sut = await _dbContext.Location.FirstAsync();
             SutKey = Sut.LocationKey;
         }
 
@@ -61,6 +66,15 @@ namespace GoodToCode.Locality.Specs
             Assert.IsTrue(Sut?.LocationKey != SutKey);
         }
 
-
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            foreach (var item in RecycleBin)
+            {
+                _dbContext.Entry(item).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
+            await createSteps.Cleanup();
+        }
     }
 }

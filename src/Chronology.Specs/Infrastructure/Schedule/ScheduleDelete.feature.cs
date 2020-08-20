@@ -71,12 +71,12 @@ namespace GoodToCode.Chronology.Specs.Infrastructure.Schedule
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("Delete an existing Schedule via Entity Framework", new string[] {
-                "command",
+                "crud",
                 "entityFramework"}, SourceLine=4)]
         public virtual void DeleteAnExistingScheduleViaEntityFramework()
         {
             string[] tagsOfScenario = new string[] {
-                    "command",
+                    "crud",
                     "entityFramework"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete an existing Schedule via Entity Framework", null, tagsOfScenario, argumentsOfScenario);

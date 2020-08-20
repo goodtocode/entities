@@ -71,12 +71,12 @@ namespace GoodToCode.Locality.Specs.Infrastructure.Location
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("Update a new Location via Entity Framework", new string[] {
-                "command",
+                "crud",
                 "entityFramework"}, SourceLine=4)]
         public virtual void UpdateANewLocationViaEntityFramework()
         {
             string[] tagsOfScenario = new string[] {
-                    "command",
+                    "crud",
                     "entityFramework"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update a new Location via Entity Framework", null, tagsOfScenario, argumentsOfScenario);

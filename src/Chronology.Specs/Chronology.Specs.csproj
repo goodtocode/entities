@@ -16,14 +16,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <CustomAdditionalCompileInputs Remove="Application\Schedule\BusinessQuery.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Application\Schedule\BusinessSaveCommand.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Application\Schedule\ScheduleQuery.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Application\Schedule\ScheduleSaveCommand.feature.cs" />
     <CustomAdditionalCompileInputs Remove="Domain\Schedule\ScheduleAggregate.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\BusinessCreate.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\BusinessDelete.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\BusinessesGet.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\BusinessGetByKey.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\BusinessUpdate.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\ScheduleCreate.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\ScheduleDelete.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\SchedulesGet.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\ScheduleGetByKey.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\ScheduleUpdate.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,14 +32,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckBuild Remove="Application\Schedule\BusinessQuery.feature.cs" />
-    <UpToDateCheckBuild Remove="Application\Schedule\BusinessSaveCommand.feature.cs" />
+    <UpToDateCheckBuild Remove="Application\Schedule\ScheduleQuery.feature.cs" />
+    <UpToDateCheckBuild Remove="Application\Schedule\ScheduleSaveCommand.feature.cs" />
     <UpToDateCheckBuild Remove="Domain\Schedule\ScheduleAggregate.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Schedule\BusinessCreate.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Schedule\BusinessDelete.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Schedule\BusinessesGet.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Schedule\BusinessGetByKey.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Schedule\BusinessUpdate.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Schedule\ScheduleCreate.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Schedule\ScheduleDelete.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Schedule\SchedulesGet.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Schedule\ScheduleGetByKey.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Schedule\ScheduleUpdate.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
@@ -12,27 +13,32 @@ using TechTalk.SpecFlow;
 namespace GoodToCode.Occurrences.Specs
 {
     [Binding]
-    public class EventAggregateSteps
+    public class EventAggregateSteps : IAggregateSteps<EventAggregate>
     {
         private readonly OccurrencesDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
         private int _rowsAffected;
-        private Guid SutKey { get; set; }
-        private Event Sut { get; set; }
+
+        public Guid SutKey { get; private set; }
+        public EventAggregate Aggregate { get; private set; }
+        public IList<EventAggregate> RecycleBin { get; private set; }
+
+        public Event SutEvent { get; private set; }
 
         public EventAggregateSteps()
         {
             _config = new ConfigurationFactory("Occurrences.Specs").Create();
             _connectionString = new ConnectionStringFactory(_config).Create();
             _dbContext = new DbContextFactory(_connectionString).Create();
+            Aggregate = new EventAggregate(_dbContext);
         }
 
         [Given(@"A new Event is created for the aggregate")]
         public void GivenANewEventIsCreatedForTheAggregate()
         {
             SutKey = Guid.NewGuid();
-            Sut = new Event()
+            SutEvent = new Event()
             {
                 EventKey = SutKey,
                 EventName = "EventAggregateSteps.cs Test"
@@ -49,9 +55,8 @@ namespace GoodToCode.Occurrences.Specs
         [When(@"the Event is saved via the aggregate")]
         public async Task WhenTheEventIsSavedViaTheAggregate()
         {
-            var aggregate = new EventAggregate(_dbContext);
-            _rowsAffected = await aggregate.EventSaveAsync(Sut);
-            SutKey = Sut.EventKey;
+            _rowsAffected = await Aggregate.EventSaveAsync(SutEvent);
+            SutKey = SutEvent.EventKey;
             Assert.IsTrue(_rowsAffected > 0);
         }
 
@@ -60,6 +65,12 @@ namespace GoodToCode.Occurrences.Specs
         {
             var found = await _dbContext.Event.Where(x => x.EventKey == SutKey).AnyAsync();
             Assert.IsTrue(found);
+        }
+
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            await Aggregate.EventDeleteAsync(SutEvent);
         }
     }
 }

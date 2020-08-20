@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
@@ -12,16 +13,20 @@ using TechTalk.SpecFlow;
 namespace GoodToCode.Subjects.Specs
 {
     [Binding]
-    public class BusinessUpdateSteps
+    public class BusinessUpdateSteps : ICrudSteps<Business>
     {
         private readonly SubjectsDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
-
-        private Guid SutKey { get; set; }
+        private readonly BusinessCreateSteps createSteps = new BusinessCreateSteps();
+        
         private string SutName { get; set; }
         private string SutNameNew { get; set; }
-        private Business Sut { get; set; }
+
+        public Guid SutKey { get; private set; }
+        public Business Sut { get; private set; }
+
+        public IList<Business> RecycleBin { get; private set; } = new List<Business>();
 
         public BusinessUpdateSteps()
         {
@@ -33,7 +38,10 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"An existing Business has been queried")]
         public async Task GivenAnExistingBusinessHasBeenQueried()
         {
-            Sut = await _dbContext.Business.Take(1).FirstOrDefaultAsync();
+            createSteps.GivenANewBusinessHasBeenCreated();
+            await createSteps.WhenBusinessIsInsertedViaEntityFramework();
+            Sut = await _dbContext.Business.FirstAsync();
+            SutKey = Sut.BusinessKey;
         }
 
         [Given(@"a business was found in persistence")]
@@ -72,5 +80,14 @@ namespace GoodToCode.Subjects.Specs
             Assert.IsFalse(SutNameNew == SutName);
         }
 
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            foreach (var item in RecycleBin)
+            {
+                _dbContext.Entry(item).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
+        }
     }
 }

@@ -8,20 +8,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using GoodToCode.Chronology.Infrastructure;
+using System.Collections.Generic;
 
 namespace GoodToCode.Chronology.Specs
 {
     [Binding]
-    public class ScheduleUpdateSteps
+    public class ScheduleUpdateSteps : ICrudSteps<Schedule>
     {
         private readonly ChronologyDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
-
-        private Guid SutKey { get; set; }
+        private readonly ScheduleCreateSteps createSteps = new ScheduleCreateSteps();
         private string SutName { get; set; }
         private string SutNameNew { get; set; }
-        private Schedule Sut { get; set; }
+        
+        public Guid SutKey { get; private set; }
+        public Schedule Sut { get; private set; }
+        public IList<Schedule> RecycleBin { get; private set; } = new List<Schedule>();
 
         public ScheduleUpdateSteps()
         {
@@ -33,7 +36,10 @@ namespace GoodToCode.Chronology.Specs
         [Given(@"An existing Schedule has been queried")]
         public async Task GivenAnExistingScheduleHasBeenQueried()
         {
-            Sut = await _dbContext.Schedule.Take(1).FirstOrDefaultAsync();
+            createSteps.GivenANewScheduleHasBeenCreated();
+            await createSteps.WhenScheduleIsInsertedViaEntityFramework();
+            Sut = await _dbContext.Schedule.FirstAsync();
+            SutKey = Sut.ScheduleKey;
         }
 
         [Given(@"a Schedule was found in persistence")]
@@ -72,5 +78,15 @@ namespace GoodToCode.Chronology.Specs
             Assert.IsFalse(SutNameNew == SutName);
         }
 
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            foreach (var item in RecycleBin)
+            {
+                _dbContext.Entry(item).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
+            await createSteps.Cleanup();
+        }
     }
 }

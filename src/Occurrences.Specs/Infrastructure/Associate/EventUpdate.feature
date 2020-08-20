@@ -1,7 +1,7 @@
 ﻿Feature: Event Update
 	Update a new Event into persistence
 
-@command @entityFramework
+@crud @entityFramework
 Scenario: Update a new Event via Entity Framework
 	Given An existing Event has been queried
 		And a Event was found in persistence

@@ -1,7 +1,7 @@
 ﻿Feature: Event Delete
 	Delete a Event from persistence
 
-@command @entityFramework
+@crud @entityFramework
 Scenario: Delete an existing Event via Entity Framework
 	Given An Event has been queried to be deleted
 		And a Event to be deleted was found in persistence

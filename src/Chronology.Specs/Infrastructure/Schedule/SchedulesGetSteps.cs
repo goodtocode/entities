@@ -8,40 +8,62 @@ using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using GoodToCode.Chronology.Infrastructure;
+using System;
+using System.Net.Http.Headers;
 
 namespace GoodToCode.Chronology.Specs
 {
     [Binding]
-    public class ScheduleesGetSteps
+    public class SchedulesGetSteps : ICrudSteps<Schedule>
     {
         private readonly ChronologyDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
-        private List<Schedule> Sut { get; set; }
+        private readonly ScheduleCreateSteps createSteps = new ScheduleCreateSteps();
 
-        public ScheduleesGetSteps()
+        public Schedule Sut { get; private set; }
+
+        public Guid SutKey { get; private set; }
+
+        public IList<Schedule> RecycleBin { get; private set; } = new List<Schedule>();
+
+        public SchedulesGetSteps()
         {
             _config = new ConfigurationFactory("Chronology.Specs").Create();
             _connectionString = new ConnectionStringFactory(_config).Create();
             _dbContext = new DbContextFactory(_connectionString).Create();
         }
 
-        [Given(@"I request the list of Schedulees")]
-        public void GivenIRequestTheListOfSchedulees()
+        [Given(@"I request the list of Schedules")]
+        public async Task GivenIRequestTheListOfSchedules()
         {
-            Sut = new List<Schedule>();
+            createSteps.GivenANewScheduleHasBeenCreated();
+            await createSteps.WhenScheduleIsInsertedViaEntityFramework();
+            Sut = await _dbContext.Schedule.FirstOrDefaultAsync();
+            SutKey = Sut.ScheduleKey;
         }
 
-        [When(@"Schedulees are queried via Entity framework")]
-        public async Task WhenScheduleesAreQueriedViaEntityFrameworkAsync()
+        [When(@"Schedules are queried via Entity framework")]
+        public async Task WhenSchedulesAreQueriedViaEntityFrameworkAsync()
         {
-            Sut = await _dbContext.Schedule.Take(10).ToListAsync();
+            Sut = await _dbContext.Schedule.FirstOrDefaultAsync();
         }
 
-        [Then(@"All persisted Schedulees are returned")]
-        public void ThenAllPersistedScheduleesAreReturned()
+        [Then(@"All persisted Schedules are returned")]
+        public void ThenAllPersistedSchedulesAreReturned()
         {
-            Assert.IsTrue(Sut.Any());
+            Assert.IsTrue(Sut.ScheduleKey != Guid.Empty);
+        }
+
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            foreach (var item in RecycleBin)
+            {
+                _dbContext.Entry(item).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
+            await createSteps.Cleanup();
         }
     }
 }

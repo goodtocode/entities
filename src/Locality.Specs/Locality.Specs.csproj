@@ -26,14 +26,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <CustomAdditionalCompileInputs Remove="Application\Location\BusinessQuery.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Application\Location\BusinessSaveCommand.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Application\Location\LocationQuery.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Application\Location\LocationSaveCommand.feature.cs" />
     <CustomAdditionalCompileInputs Remove="Domain\Location\LocationAggregate.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\BusinessCreate.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\BusinessDelete.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\BusinessesGet.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\BusinessGetByKey.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\BusinessUpdate.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\LocationCreate.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\LocationDelete.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\LocationesGet.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\LocationGetByKey.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\LocationUpdate.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,14 +42,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckBuild Remove="Application\Location\BusinessQuery.feature.cs" />
-    <UpToDateCheckBuild Remove="Application\Location\BusinessSaveCommand.feature.cs" />
+    <UpToDateCheckBuild Remove="Application\Location\LocationQuery.feature.cs" />
+    <UpToDateCheckBuild Remove="Application\Location\LocationSaveCommand.feature.cs" />
     <UpToDateCheckBuild Remove="Domain\Location\LocationAggregate.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Location\BusinessCreate.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Location\BusinessDelete.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Location\BusinessesGet.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Location\BusinessGetByKey.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Location\BusinessUpdate.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Location\LocationCreate.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Location\LocationDelete.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Location\LocationesGet.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Location\LocationGetByKey.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Location\LocationUpdate.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>

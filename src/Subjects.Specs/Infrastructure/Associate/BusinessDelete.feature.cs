@@ -71,12 +71,12 @@ namespace GoodToCode.Subjects.Infrastructure.Associate
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("Delete an existing business via Entity Framework", new string[] {
-                "command",
+                "crud",
                 "entityFramework"}, SourceLine=4)]
         public virtual void DeleteAnExistingBusinessViaEntityFramework()
         {
             string[] tagsOfScenario = new string[] {
-                    "command",
+                    "crud",
                     "entityFramework"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete an existing business via Entity Framework", null, tagsOfScenario, argumentsOfScenario);

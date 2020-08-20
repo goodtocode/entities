@@ -15,14 +15,16 @@ using TechTalk.SpecFlow;
 namespace GoodToCode.Subjects.Specs
 {
     [Binding]
-    public class BusinessQuerySteps
+    public class BusinessQuerySteps : IQuerySteps<Business>
     {        
         private readonly SubjectsDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
+        private readonly BusinessSaveCommandSteps commandSteps = new BusinessSaveCommandSteps();
 
-        private Guid SutKey { get; set; }
-        private List<Business> Sut { get; set; }
+        public Guid SutKey { get; private set; }
+        public IList<Business> Sut { get; private set; }
+        public IList<Business> RecycleBin { get; private set; } = new List<Business>();
 
         public BusinessQuerySteps()
         {
@@ -34,8 +36,10 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"I have a business key that can be Queried")]
         public async Task GivenIHaveABusinessKeyThatCanBeQueried()
         {
-            var item = await _dbContext.Business.FirstAsync();
-            SutKey = item.BusinessKey;
+            commandSteps.GivenANewBusinessSaveCommandHasBeenCreated();
+            await commandSteps.WhenTheBusinessIsInsertedViaCQRSCommand();
+            Sut = await _dbContext.Business.Take(10).ToListAsync();
+            SutKey = Sut.FirstOrDefault().BusinessKey;
             Assert.IsTrue(SutKey != Guid.Empty);
         }
 
@@ -58,6 +62,16 @@ namespace GoodToCode.Subjects.Specs
         public void ThenTheMatchingBusinessIsReturnedFromTheQuery()
         {
             Assert.IsTrue(Sut.Any(x => x.BusinessKey == SutKey));
+        }
+
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            foreach (var item in RecycleBin)
+            {
+                _dbContext.Entry(item).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
         }
     }
 }

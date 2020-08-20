@@ -8,18 +8,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using GoodToCode.Locality.Infrastructure;
+using System.Collections.Generic;
 
 namespace GoodToCode.Locality.Specs
 {
     [Binding]
-    public class LocationCreateSteps
+    public class LocationCreateSteps : ICrudSteps<Location>
     {
         private readonly LocalityDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
         private int _rowsAffected;
-        private Guid SutKey { get; set; }
-        private Location Sut { get; set; }
+        public Guid SutKey { get; private set; }
+        public Location Sut { get; private set; }
+        public IList<Location> RecycleBin { get; private set; } = new List<Location>();
 
         public LocationCreateSteps()
         {
@@ -60,6 +62,16 @@ namespace GoodToCode.Locality.Specs
         {
             var found = await _dbContext.Location.Where(x => x.LocationKey == SutKey).AnyAsync();
             Assert.IsTrue(found);
+        }
+
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            foreach (var item in RecycleBin)
+            {
+                _dbContext.Entry(item).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
         }
     }
 }

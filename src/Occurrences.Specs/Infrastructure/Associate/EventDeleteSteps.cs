@@ -8,18 +8,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using GoodToCode.Occurrences.Infrastructure;
+using System.Collections.Generic;
 
 namespace GoodToCode.Occurrences.Specs
 {
     [Binding]
-    public class EventDeleteSteps
+    public class EventDeleteSteps : ICrudSteps<Event>
     {
         private readonly OccurrencesDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
+        private readonly EventCreateSteps createSteps = new EventCreateSteps();
 
-        private Guid SutKey { get; set; }
-        private Event Sut { get; set; }
+        public Event Sut { get; set; }
+
+        public Guid SutKey { get; set; }
+
+        public IList<Event> RecycleBin { get; set; } = new List<Event>();
 
         public EventDeleteSteps()
         {
@@ -31,7 +36,9 @@ namespace GoodToCode.Occurrences.Specs
         [Given(@"An Event has been queried to be deleted")]
         public async Task GivenAnEventHasBeenQueriedToBeDeleted()
         {
-            Sut = await _dbContext.Event.Take(1).FirstOrDefaultAsync();
+            createSteps.GivenANewEventHasBeenCreated();
+            await createSteps.WhenEventIsInsertedViaEntityFramework();
+            Sut = await _dbContext.Event.FirstAsync();
             SutKey = Sut.EventKey;
         }
 
@@ -61,6 +68,15 @@ namespace GoodToCode.Occurrences.Specs
             Assert.IsTrue(Sut?.EventKey != SutKey);
         }
 
-
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            foreach (var item in RecycleBin)
+            {
+                _dbContext.Entry(item).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
+            await createSteps.Cleanup();
+        }
     }
 }

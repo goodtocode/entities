@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
@@ -12,14 +13,18 @@ using TechTalk.SpecFlow;
 namespace GoodToCode.Chronology.Specs
 {
     [Binding]
-    public class ScheduleCreateSteps
+    public class ScheduleCreateSteps : ICrudSteps<Schedule>
     {
         private readonly ChronologyDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
         private int _rowsAffected;
-        private Guid SutKey { get; set; }
-        private Schedule Sut { get; set; }
+
+        public Schedule Sut { get; set; }
+
+        public Guid SutKey { get; set; }
+
+        public IList<Schedule> RecycleBin { get; set; } = new List<Schedule>();
 
         public ScheduleCreateSteps()
         {
@@ -60,6 +65,16 @@ namespace GoodToCode.Chronology.Specs
         {
             var found = await _dbContext.Schedule.Where(x => x.ScheduleKey == SutKey).AnyAsync();
             Assert.IsTrue(found);
+        }
+
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            foreach (var item in RecycleBin)
+            {
+                _dbContext.Entry(item).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
         }
     }
 }
