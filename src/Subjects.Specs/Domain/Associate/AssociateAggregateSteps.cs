@@ -45,14 +45,14 @@ namespace GoodToCode.Subjects.Specs
             };
         }
 
-        [When(@"the Business does not exist in persistence")]
+        [When(@"the business does not exist in persistence")]
         public async Task WhenTheBusinessDoesNotExistInPersistence()
         {
             var found = await _dbContext.Business.Where(x => x.BusinessKey == SutKey).AnyAsync();
             Assert.IsFalse(found);
         }
 
-        [When(@"the Business is saved via the aggregate")]
+        [When(@"the business is saved via the aggregate")]
         public async Task WhenTheBusinessIsSavedViaTheAggregate()
         {
             _rowsAffected = await Aggregate.BusinessSaveAsync(SutBusiness);
@@ -60,7 +60,7 @@ namespace GoodToCode.Subjects.Specs
             Assert.IsTrue(_rowsAffected > 0);
         }
 
-        [Then(@"the aggregate inserted Business can be queried by key")]
+        [Then(@"the aggregate inserted business can be queried by key")]
         public async Task ThenTheAggregateInsertedBusinessCanBeQueriedByKey()
         {
             var found = await _dbContext.Business.Where(x => x.BusinessKey == SutKey).AnyAsync();

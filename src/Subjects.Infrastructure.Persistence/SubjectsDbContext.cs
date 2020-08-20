@@ -60,7 +60,6 @@ namespace GoodToCode.Subjects.Infrastructure
                     .HasMaxLength(50);
 
                 entity.Property(e => e.TaxNumber)
-                    .IsRequired()
                     .HasMaxLength(20);
 
             });
@@ -88,7 +87,6 @@ namespace GoodToCode.Subjects.Infrastructure
                     .IsUnique();
 
                 entity.Property(e => e.DetailTypeDescription)
-                    .IsRequired()
                     .HasMaxLength(250);
 
                 entity.Property(e => e.DetailTypeName)
@@ -204,7 +202,6 @@ namespace GoodToCode.Subjects.Infrastructure
                     .IsUnique();
 
                 entity.Property(e => e.ItemGroupDescription)
-                    .IsRequired()
                     .HasMaxLength(250);
 
                 entity.Property(e => e.ItemGroupName)
@@ -223,7 +220,6 @@ namespace GoodToCode.Subjects.Infrastructure
                     .IsUnique();
 
                 entity.Property(e => e.ItemTypeDescription)
-                    .IsRequired()
                     .HasMaxLength(250);
 
                 entity.Property(e => e.ItemTypeName)
@@ -248,7 +244,6 @@ namespace GoodToCode.Subjects.Infrastructure
                     .HasMaxLength(10);
 
                 entity.Property(e => e.OptionDescription)
-                    .IsRequired()
                     .HasMaxLength(250);
 
                 entity.Property(e => e.OptionName)
@@ -273,7 +268,6 @@ namespace GoodToCode.Subjects.Infrastructure
                     .HasMaxLength(10);
 
                 entity.Property(e => e.OptionGroupDescription)
-                    .IsRequired()
                     .HasMaxLength(250);
 
                 entity.Property(e => e.OptionGroupName)
@@ -320,7 +314,6 @@ namespace GoodToCode.Subjects.Infrastructure
                     .IsUnique();
 
                 entity.Property(e => e.ResourceDescription)
-                    .IsRequired()
                     .HasMaxLength(250);
 
                 entity.Property(e => e.ResourceName)
@@ -375,7 +368,6 @@ namespace GoodToCode.Subjects.Infrastructure
                     .IsUnique();
 
                 entity.Property(e => e.ResourceTypeDescription)
-                    .IsRequired()
                     .HasMaxLength(250);
 
                 entity.Property(e => e.ResourceTypeName)
@@ -391,7 +383,6 @@ namespace GoodToCode.Subjects.Infrastructure
                     .IsUnique();
 
                 entity.Property(e => e.VentureDescription)
-                    .IsRequired()
                     .HasMaxLength(250);
 
                 entity.Property(e => e.VentureName)

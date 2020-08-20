@@ -44,7 +44,6 @@ namespace GoodToCode.Locality.Infrastructure
                     .IsUnique();
 
                 entity.Property(e => e.LocationDescription)
-                    .IsRequired()
                     .HasMaxLength(2000);
 
                 entity.Property(e => e.LocationName)
@@ -77,7 +76,6 @@ namespace GoodToCode.Locality.Infrastructure
                     .IsUnique();
 
                 entity.Property(e => e.LocationTypeDescription)
-                    .IsRequired()
                     .HasMaxLength(250);
 
                 entity.Property(e => e.LocationTypeName)

@@ -43,13 +43,12 @@ namespace GoodToCode.Chronology.Infrastructure
         {
             modelBuilder.Entity<Schedule>(entity =>
             {
-                entity.ToTable("Schedule", "Entity");
+                entity.ToTable("Schedule", "Chronology");
 
                 entity.HasIndex(e => e.ScheduleKey)
                     .IsUnique();
 
                 entity.Property(e => e.ScheduleDescription)
-                    .IsRequired()
                     .HasMaxLength(2000);
 
                 entity.Property(e => e.ScheduleName)
@@ -59,7 +58,7 @@ namespace GoodToCode.Chronology.Infrastructure
 
             modelBuilder.Entity<ScheduleSlot>(entity =>
             {
-                entity.ToTable("ScheduleSlot", "Entity");
+                entity.ToTable("ScheduleSlot", "Chronology");
 
                 entity.HasIndex(e => e.ScheduleKey)
                     .HasName("IX_ScheduleSlot_Schedule");
@@ -78,14 +77,13 @@ namespace GoodToCode.Chronology.Infrastructure
 
             modelBuilder.Entity<ScheduleType>(entity =>
             {
-                entity.ToTable("ScheduleType", "Entity");
+                entity.ToTable("ScheduleType", "Chronology");
 
                 entity.HasIndex(e => e.ScheduleTypeKey)
                     .HasName("IX_ScheduleType_Key")
                     .IsUnique();
 
                 entity.Property(e => e.ScheduleTypeDescription)
-                    .IsRequired()
                     .HasMaxLength(250);
 
                 entity.Property(e => e.ScheduleTypeName)
@@ -95,13 +93,12 @@ namespace GoodToCode.Chronology.Infrastructure
 
             modelBuilder.Entity<Slot>(entity =>
             {
-                entity.ToTable("Slot", "Entity");
+                entity.ToTable("Slot", "Chronology");
 
                 entity.HasIndex(e => e.SlotKey)
                     .IsUnique();
 
                 entity.Property(e => e.SlotDescription)
-                    .IsRequired()
                     .HasMaxLength(2000);
 
                 entity.Property(e => e.SlotName)
@@ -111,7 +108,7 @@ namespace GoodToCode.Chronology.Infrastructure
 
             modelBuilder.Entity<SlotLocation>(entity =>
             {
-                entity.ToTable("SlotLocation", "Entity");
+                entity.ToTable("SlotLocation", "Chronology");
 
                 entity.HasIndex(e => e.SlotKey)
                     .HasName("IX_SlotLocation_Slot");
@@ -127,7 +124,7 @@ namespace GoodToCode.Chronology.Infrastructure
 
             modelBuilder.Entity<SlotResource>(entity =>
             {
-                entity.ToTable("SlotResource", "Entity");
+                entity.ToTable("SlotResource", "Chronology");
 
                 entity.HasIndex(e => e.ResourceKey)
                     .HasName("IX_SlotResource_Resource");
@@ -145,7 +142,7 @@ namespace GoodToCode.Chronology.Infrastructure
 
             modelBuilder.Entity<SlotTimeRange>(entity =>
             {
-                entity.ToTable("SlotTimeRange", "Entity");
+                entity.ToTable("SlotTimeRange", "Chronology");
 
                 entity.HasIndex(e => e.SlotKey)
                     .HasName("IX_SlotTimeRange_Slot");
@@ -157,7 +154,7 @@ namespace GoodToCode.Chronology.Infrastructure
 
             modelBuilder.Entity<SlotTimeRecurring>(entity =>
             {
-                entity.ToTable("SlotTimeRecurring", "Entity");
+                entity.ToTable("SlotTimeRecurring", "Chronology");
 
                 entity.HasIndex(e => e.SlotKey)
                     .HasName("IX_SlotTimeRecurring_Slot");
@@ -294,14 +291,13 @@ namespace GoodToCode.Chronology.Infrastructure
 
             modelBuilder.Entity<TimeCycle>(entity =>
             {
-                entity.ToTable("TimeCycle", "Entity");
+                entity.ToTable("TimeCycle", "Chronology");
 
                 entity.HasIndex(e => e.TimeCycleKey)
                     .HasName("IX_TimeCycle_Key")
                     .IsUnique();
 
                 entity.Property(e => e.TimeCycleDescription)
-                    .IsRequired()
                     .HasMaxLength(250);
 
                 entity.Property(e => e.TimeCycleName)
@@ -311,7 +307,7 @@ namespace GoodToCode.Chronology.Infrastructure
 
             modelBuilder.Entity<TimeRange>(entity =>
             {
-                entity.ToTable("TimeRange", "Entity");
+                entity.ToTable("TimeRange", "Chronology");
 
                 entity.HasIndex(e => e.TimeRangeKey)
                     .IsUnique();
@@ -327,7 +323,7 @@ namespace GoodToCode.Chronology.Infrastructure
 
             modelBuilder.Entity<TimeRecurring>(entity =>
             {
-                entity.ToTable("TimeRecurring", "Entity");
+                entity.ToTable("TimeRecurring", "Chronology");
 
                 entity.HasIndex(e => e.TimeRecurringKey)
                     .IsUnique();
@@ -343,14 +339,13 @@ namespace GoodToCode.Chronology.Infrastructure
 
             modelBuilder.Entity<TimeType>(entity =>
             {
-                entity.ToTable("TimeType", "Entity");
+                entity.ToTable("TimeType", "Chronology");
 
                 entity.HasIndex(e => e.TimeTypeKey)
                     .HasName("IX_TimeType_Key")
                     .IsUnique();
 
                 entity.Property(e => e.TimeTypeDescription)
-                    .IsRequired()
                     .HasMaxLength(250);
 
                 entity.Property(e => e.TimeTypeName)

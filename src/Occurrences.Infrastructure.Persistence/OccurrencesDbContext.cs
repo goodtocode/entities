@@ -49,7 +49,6 @@ namespace GoodToCode.Occurrences.Infrastructure
                     .IsUnique();
 
                 entity.Property(e => e.AppointmentDescription)
-                    .IsRequired()
                     .HasMaxLength(2000);
 
                 entity.Property(e => e.AppointmentName)
@@ -81,7 +80,6 @@ namespace GoodToCode.Occurrences.Infrastructure
                     .HasName("IX_Event_All");
 
                 entity.Property(e => e.EventDescription)
-                    .IsRequired()
                     .HasMaxLength(250);
 
                 entity.Property(e => e.EventName)
@@ -137,7 +135,6 @@ namespace GoodToCode.Occurrences.Infrastructure
                     .IsUnique();
 
                 entity.Property(e => e.EventGroupDescription)
-                    .IsRequired()
                     .HasMaxLength(250);
 
                 entity.Property(e => e.EventGroupName)
@@ -203,7 +200,6 @@ namespace GoodToCode.Occurrences.Infrastructure
                     .IsUnique();
 
                 entity.Property(e => e.EventTypeDescription)
-                    .IsRequired()
                     .HasMaxLength(250);
 
                 entity.Property(e => e.EventTypeName)
