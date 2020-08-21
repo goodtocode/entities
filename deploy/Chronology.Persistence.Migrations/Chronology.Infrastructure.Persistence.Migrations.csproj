@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Library</OutputType>
+    <AssemblyName>GoodToCode.Chronology.Infrastructure.Persistence.Migrations</AssemblyName>
+    <RootNamespace>GoodToCode.Chronology.Infrastructure.Persistence.Migrations</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Chronology.Domain.Models\Chronology.Domain.Models.csproj" />
+    <ProjectReference Include="..\..\src\Chronology.Infrastructure.Persistence\Chronology.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\..\src\Shared.Abstractions\Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\Shared.Extensions\Shared.Extensions.csproj" />
+    <ProjectReference Include="..\..\src\Chronology.Domain.Models\Chronology.Domain.Models.csproj" />
+  </ItemGroup>
+
+</Project>
