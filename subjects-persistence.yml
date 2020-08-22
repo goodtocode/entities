@@ -11,7 +11,7 @@ trigger:
 
 variables:
   sourceDirectory: '$(System.DefaultWorkingDirectory)/deploy/Subjects.Infrastructure.Persistence.Migrations'
-  artifactDirectory: '$(Build.ArtifactStagingDirectory)/drop/Subjects.Infrastructure.Persistence.Migrations'
+  artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop/Subjects.Infrastructure.Persistence.Migrations'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
@@ -83,4 +83,4 @@ stages:
             inputs:
               workingFolder: $(artifactDirectory)
               filename: '$(artifactDirectory)/EF-Database-Update.cmd'
-              arguments: '--connectionString $(ConnectionString)'
+              arguments: '$(ConnectionString)'
