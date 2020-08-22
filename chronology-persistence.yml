@@ -78,5 +78,6 @@ stages:
           steps:
           - task: BatchScript@1
             inputs:
+              workingFolder: $(System.DefaultWorkingDirectory)
               filename: '$(System.DefaultWorkingDirectory)/EF-Database-Update.cmd'
               arguments: '--connectionString $(ConnectionString)'
