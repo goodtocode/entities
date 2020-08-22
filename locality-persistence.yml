@@ -83,4 +83,4 @@ stages:
             inputs:
               workingFolder: $(artifactDirectory)
               filename: '$(artifactDirectory)/EF-Database-Update.cmd'
-              arguments: '--connectionString $(ConnectionString)'
+              arguments: '$(ConnectionString)'
