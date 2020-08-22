@@ -1,3 +1,4 @@
+
 trigger:
   batch: true
   branches:
@@ -5,10 +6,12 @@ trigger:
     - master
   paths:
     include:
+    - deploy/Locality.Infrastructure.Persistence/*
     - deploy/Locality.Infrastructure.Persistence.Migrations/*
 
 variables:
-  workingDirectory: '$(System.DefaultWorkingDirectory)/deploy/Locality.Infrastructure.Persistence.Migrations'
+  sourceDirectory: '$(System.DefaultWorkingDirectory)/deploy/Locality.Infrastructure.Persistence.Migrations'
+  artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop/Locality.Infrastructure.Persistence.Migrations'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
@@ -30,7 +33,7 @@ stages:
       inputs:
         command: 'restore'
         projects: |
-          $(workingDirectory)/*.csproj
+          $(sourceDirectory)/*.csproj
         feedsToUse: config
         nugetConfigPath: .nuget/NuGet.config
 
@@ -39,7 +42,7 @@ stages:
       inputs:
         command: 'build'
         projects: |
-          $(workingDirectory)/*.csproj
+          $(sourceDirectory)/*.csproj
         arguments: '--configuration $(BuildConfiguration)'
 
     - task: DotNetCoreCLI@2
@@ -47,15 +50,14 @@ stages:
       inputs:
         command: test
         projects: |
-          $(workingDirectory)/*.csproj
-
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet publish'
+          $(sourceDirectory)/*.csproj
+          
+    - task: CopyFiles@2
       inputs:
-        command: publish
-        projects: |
-          $(workingDirectory)/*.csproj
-        arguments: '--output $(Build.ArtifactStagingDirectory)'
+        SourceFolder: '$(System.DefaultWorkingDirectory)/deploy'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        OverWrite: true
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
@@ -79,5 +81,6 @@ stages:
           steps:
           - task: BatchScript@1
             inputs:
-              filename: '$(workingDirectory)/EF-Database-Update.cmd'
-              arguments: '--connectionString $(ConnectionString)'
+              workingFolder: $(artifactDirectory)
+              filename: '$(artifactDirectory)/EF-Database-Update.cmd'
+              arguments: '$(ConnectionString)'
