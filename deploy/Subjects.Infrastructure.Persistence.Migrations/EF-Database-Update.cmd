@@ -30,7 +30,8 @@ set CUR_MS=%time:~9,2%
 set TimeDate=%CUR_YYYY%%CUR_MM%%CUR_DD%-%CUR_HH%%CUR_NN%%CUR_SS%
 ECHO ON
 
-dotnet ef migrations add %TimeDate%
-dotnet ef database update %TimeDate%
+dotnet ef migrations add %TimeDate% --context SubjectsDbContextDeploy --verbose
+dotnet ef database update %TimeDate% --context SubjectsDbContextDeploy --verbose
+
 
 pause
