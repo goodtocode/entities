@@ -119,3 +119,4 @@ stages:
           - task: BatchScript@1
             inputs:
               filename: '$(workingDirectory)/EF-Database-Update.cmd'
+              arguments: '--connectionString $(ConnectionString)'
