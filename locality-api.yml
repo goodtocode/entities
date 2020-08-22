@@ -32,7 +32,7 @@ stages:
         projects: |
           $(workingDirectory)/*.csproj
         feedsToUse: config
-        nugetConfigPath: Build/.nuget/NuGet.config
+        nugetConfigPath: .nuget/NuGet.config
 
     - task: DotNetCoreCLI@2
       displayName: Build
