@@ -5,10 +5,10 @@ trigger:
     - master
   paths:
     include:
-    - src/Subjects.Occurrences.Api/*
+    - src/Occurrences.Presentation.Api/*
 
 variables:
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Subjects.Occurrences.Api'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Occurrences.Presentation.Api'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
