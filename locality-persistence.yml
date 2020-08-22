@@ -79,13 +79,5 @@ stages:
           steps:
           - task: PowerShell@2
             inputs:
-              filePath: '$(workingDirectory)/*.csproj'
+              filePath: '$(workingDirectory)/EF-Database-Update.cmd'
               arguments: '--asdf asdf'
-
-          - task: AzureFunctionApp@1
-            displayName: 'Azure functions app deploy'
-            inputs:
-              azureSubscription: '$(azureSubscription)'
-              appType: functionApp
-              appName: $(functionAppName)
-              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
