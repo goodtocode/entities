@@ -8,10 +8,10 @@ trigger:
     - src/Subjects.Presentation.Api/*
 
 variables:
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src/$(projectFolder)/*.csproj'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Subjects.Presentation.Api'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'  
+  buildConfiguration: 'Release'
 
 stages:
 - stage: Build
@@ -26,13 +26,13 @@ stages:
 
     steps:
     - task: DotNetCoreCLI@2
+      displayName: Restore
       inputs:
-	displayName: Restore
         command: 'restore'
         projects: |
           $(workingDirectory)/*.csproj
         feedsToUse: config
-        nugetConfigPath: Build/.nuget/NuGet.config
+        nugetConfigPath: .nuget/NuGet.config
 
     - task: DotNetCoreCLI@2
       displayName: Build

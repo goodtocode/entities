@@ -5,10 +5,10 @@ trigger:
     - master
   paths:
     include:
-    - src/Chronology.Infrastructure.Persistence/*
+    - deploy/Occurrences.Infrastructure.Persistence.Migrations/*
 
 variables:
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src/$(projectFolder)/*.csproj'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/deploy/Occurrences.Infrastructure.Persistence.Migrations'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
@@ -26,13 +26,13 @@ stages:
 
     steps:
     - task: DotNetCoreCLI@2
+      displayName: Restore
       inputs:
-	displayName: Restore
         command: 'restore'
         projects: |
           $(workingDirectory)/*.csproj
         feedsToUse: config
-        nugetConfigPath: Build/.nuget/NuGet.config
+        nugetConfigPath: .nuget/NuGet.config
 
     - task: DotNetCoreCLI@2
       displayName: Build
@@ -76,12 +76,8 @@ stages:
     strategy:
       runOnce:
         deploy:
-
           steps:
-          - task: AzureFunctionApp@1
-            displayName: 'Azure functions app deploy'
+          - task: BatchScript@1
             inputs:
-              azureSubscription: '$(azureSubscription)'
-              appType: functionApp
-              appName: $(functionAppName)
-              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+              filename: '$(workingDirectory)/EF-Database-Update.cmd'
+              arguments: '--connectionString $(ConnectionString)'
