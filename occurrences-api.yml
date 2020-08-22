@@ -8,7 +8,7 @@ trigger:
     - src/Subjects.Occurrences.Api/*
 
 variables:
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Subjects.Occurrences.Api/*.csproj'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Subjects.Occurrences.Api'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
