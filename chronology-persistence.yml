@@ -48,6 +48,16 @@ stages:
         command: test
         projects: |
           $(workingDirectory)/*.csproj
+          
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)/deploy'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        OverWrite: true
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
 
 - stage: Deploy
   displayName: Deploy stage
