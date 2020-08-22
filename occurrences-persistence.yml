@@ -53,8 +53,17 @@ stages:
           $(sourceDirectory)/*.csproj
           
     - task: CopyFiles@2
+      displayName: 'Copy deploy'
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)/deploy'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        OverWrite: true
+
+    - task: CopyFiles@2
+      displayName: 'Copy src'
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)/src'
         Contents: '**'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
         OverWrite: true
