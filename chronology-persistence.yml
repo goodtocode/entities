@@ -1,3 +1,4 @@
+
 trigger:
   batch: true
   branches:
@@ -5,10 +6,12 @@ trigger:
     - master
   paths:
     include:
+    - deploy/Chronology.Infrastructure.Persistence/*
     - deploy/Chronology.Infrastructure.Persistence.Migrations/*
 
 variables:
-  workingDirectory: '$(System.DefaultWorkingDirectory)/deploy/Chronology.Infrastructure.Persistence.Migrations'
+  sourceDirectory: '$(System.DefaultWorkingDirectory)/deploy/Chronology.Infrastructure.Persistence.Migrations'
+  artifactDirectory: '$(Build.ArtifactStagingDirectory)/drop/Chronology.Infrastructure.Persistence.Migrations'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
@@ -30,7 +33,7 @@ stages:
       inputs:
         command: 'restore'
         projects: |
-          $(workingDirectory)/*.csproj
+          $(sourceDirectory)/*.csproj
         feedsToUse: config
         nugetConfigPath: .nuget/NuGet.config
 
@@ -39,7 +42,7 @@ stages:
       inputs:
         command: 'build'
         projects: |
-          $(workingDirectory)/*.csproj
+          $(sourceDirectory)/*.csproj
         arguments: '--configuration $(BuildConfiguration)'
 
     - task: DotNetCoreCLI@2
@@ -47,7 +50,7 @@ stages:
       inputs:
         command: test
         projects: |
-          $(workingDirectory)/*.csproj
+          $(sourceDirectory)/*.csproj
           
     - task: CopyFiles@2
       inputs:
@@ -78,6 +81,6 @@ stages:
           steps:
           - task: BatchScript@1
             inputs:
-              workingFolder: $(Build.ArtifactStagingDirectory)
-              filename: '$(Build.ArtifactStagingDirectory)/drop/EF-Database-Update.cmd'
+              workingFolder: $(artifactDirectory)
+              filename: '$(artifactDirectory)/EF-Database-Update.cmd'
               arguments: '--connectionString $(ConnectionString)'
