@@ -24,4 +24,8 @@
     <ProjectReference Include="..\..\src\Chronology.Domain.Models\Chronology.Domain.Models.csproj" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="EF-Migration-SQL.cmd" />
+  </Target>
+
 </Project>

@@ -21,4 +21,3 @@ rd Migrations /s/q
 dotnet ef migrations add InitialCreate --context ChronologyDbContextDeploy
 dotnet ef database update InitialCreate --context ChronologyDbContextDeploy
 
-pause

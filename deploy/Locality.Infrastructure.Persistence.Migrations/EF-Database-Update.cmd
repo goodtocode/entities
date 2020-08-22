@@ -34,4 +34,3 @@ dotnet ef migrations add %TimeDate% --context LocalityDbContextDeploy --verbose
 dotnet ef database update %TimeDate% --context LocalityDbContextDeploy --verbose
 
 
-pause

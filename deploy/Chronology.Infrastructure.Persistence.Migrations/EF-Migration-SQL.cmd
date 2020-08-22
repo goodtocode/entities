@@ -30,6 +30,9 @@ set CUR_MS=%time:~9,2%
 set TimeDate=%CUR_YYYY%%CUR_MM%%CUR_DD%-%CUR_HH%%CUR_NN%%CUR_SS%
 ECHO ON
 
-dotnet ef migrations add %TimeDate% --context ChronologyDbContextDeploy --verbose
-dotnet ef database update %TimeDate% --context ChronologyDbContextDeploy --verbose
+dotnet ef migrations script --no-build --idempotent --output migration.sql --context ChronologyDbContextDeploy --verbose
 
+REM SET XACT ABORT ON
+REM BEGIN TRANSACTION
+REM :r $(System.DefaultWorkingDirectory)\drop\migration.sql
+REM IF @@TRANCOUNT > 0 COMMIT
