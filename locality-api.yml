@@ -11,7 +11,7 @@ variables:
   workingDirectory: '$(System.DefaultWorkingDirectory)/src/Locality.Presentation.Api/*.csproj'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'  
+  buildConfiguration: 'Release'
 
 stages:
 - stage: Build
@@ -25,7 +25,7 @@ stages:
         demands: msbuild
 
     steps:
-    - task: DotNetCoreCLI@2      
+    - task: DotNetCoreCLI@2
       displayName: Restore
       inputs:
         command: 'restore'
