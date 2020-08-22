@@ -5,10 +5,10 @@ trigger:
     - master
   paths:
     include:
-    - src/Occurrences.Presentation.Api/*
+    - src/Subjects.Occurrences.Api/*
 
 variables:
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src/$(projectFolder)/*.csproj'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Subjects.Occurrences.Api/*.csproj'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
@@ -26,8 +26,8 @@ stages:
 
     steps:
     - task: DotNetCoreCLI@2
+      displayName: Restore
       inputs:
-	displayName: Restore
         command: 'restore'
         projects: |
           $(workingDirectory)/*.csproj
