@@ -1,3 +1,4 @@
+
 trigger:
   batch: true
   branches:
@@ -80,6 +81,7 @@ stages:
           steps:
           - task: CmdLine@2
             inputs:
+              workingDirectory: $(workingDirectory)
               script: |                
                 ECHO OFF
                 set connectionString=%1
