@@ -10,7 +10,7 @@ namespace GoodToCode.Locality.Models
     {
         [Key]
         public Guid GeoAreaKey { get; set; }
-        [Column(TypeName = "geography")]
+        [Column(TypeName = "geometry")]
         public Geometry GeodeticArea { get; set; }
     }
 }

@@ -123,6 +123,8 @@ namespace GoodToCode.Locality.Infrastructure
                 entity.HasIndex(e => e.GeoAreaKey)
                     .HasName("IX_GeoArea_Key")
                     .IsUnique();
+
+                entity.Property(e => e.GeodeticArea).HasColumnType("geometry");
             });
 
             modelBuilder.Entity<GeoDistance>(entity =>
@@ -177,6 +179,8 @@ namespace GoodToCode.Locality.Infrastructure
                 entity.HasIndex(e => e.PolygonKey)
                     .HasName("IX_Polygon_Key")
                     .IsUnique();
+
+                entity.Property(e => e.PolygonSequence).HasColumnType("geometry");
             });
 
             OnModelCreatingPartial(modelBuilder);

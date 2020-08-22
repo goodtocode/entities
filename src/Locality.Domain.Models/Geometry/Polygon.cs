@@ -10,6 +10,7 @@ namespace GoodToCode.Locality.Models
     {
         [Key]
         public Guid PolygonKey { get; set; }
+
         public Geometry PolygonSequence { get; set; }
     }
 }

@@ -10,7 +10,7 @@ trigger:
     - master
   paths:
     include:
-    - src/Subjects.Application.Functions/*
+    - src/Subjects.Presentation.Functions/*
 
 variables:
   # Azure Resource Manager connection created during pipeline creation
@@ -23,7 +23,7 @@ variables:
   vmImageName: 'vs2017-win2016'
 
   # Working Directory
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Subjects.Application.Functions'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Subjects.Presentation.Functions'
 
 stages:
 - stage: Build

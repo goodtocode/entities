@@ -87,7 +87,6 @@ namespace GoodToCode.Occurrences.Infrastructure
                     .HasMaxLength(50);
 
                 entity.Property(e => e.EventSlogan)
-                    .IsRequired()
                     .HasMaxLength(50);
             });
 

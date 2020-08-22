@@ -5,7 +5,7 @@ trigger:
     - master
   paths:
     include:
-    - src/Locality.Presentation.Api/*
+    - src/Chronology.Infrastructure.Persistence/*
 
 variables:
   workingDirectory: '$(System.DefaultWorkingDirectory)/src/$(projectFolder)/*.csproj'
@@ -59,3 +59,29 @@ stages:
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
+
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: Build
+  condition: succeeded()
+
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy
+    environment: 'development'
+    pool:
+        name: Hosted Windows 2019 with VS2019
+        demands: msbuild
+
+    strategy:
+      runOnce:
+        deploy:
+
+          steps:
+          - task: AzureFunctionApp@1
+            displayName: 'Azure functions app deploy'
+            inputs:
+              azureSubscription: '$(azureSubscription)'
+              appType: functionApp
+              appName: $(functionAppName)
+              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'

@@ -1,8 +1,3 @@
-# .NET Core Function App to Windows on Azure
-# Build a .NET Core function app and deploy it to Azure as a Windows function App.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/en-us/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
   batch: true
   branches:
@@ -10,20 +5,13 @@ trigger:
     - master
   paths:
     include:
-    - src/Subjects.Application.Functions/*
+    - src/Subjects.Presentation.Api/*
 
 variables:
-  # Azure Resource Manager connection created during pipeline creation
-  azureSubscription: '7fd0d3c5-89c8-450d-8f4a-e3ff842104cc'
-
-  # Function app name
-  functionAppName: 'subject-functions'
-
-  # Agent VM image name
-  vmImageName: 'vs2017-win2016'
-
-  # Working Directory
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Subjects.Application.Functions'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/src/$(projectFolder)/*.csproj'
+  name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'  
 
 stages:
 - stage: Build
@@ -33,14 +21,18 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: $(vmImageName)
+        name: Hosted Windows 2019 with VS2019
+        demands: msbuild
 
     steps:
     - task: DotNetCoreCLI@2
       inputs:
+	displayName: Restore
         command: 'restore'
-        projects: '$(workingDirectory)/*.csproj'
-        feedsToUse: 'select'
+        projects: |
+          $(workingDirectory)/*.csproj
+        feedsToUse: config
+        nugetConfigPath: Build/.nuget/NuGet.config
 
     - task: DotNetCoreCLI@2
       displayName: Build
@@ -48,41 +40,22 @@ stages:
         command: 'build'
         projects: |
           $(workingDirectory)/*.csproj
-        arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
+        arguments: '--configuration $(BuildConfiguration)'
 
-    - task: ArchiveFiles@2
-      displayName: 'Archive files'
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet test'
       inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/publish_output'
-        includeRootFolder: false
-        archiveType: zip
-        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-        replaceExistingArchive: true
+        command: test
+        projects: |
+          $(workingDirectory)/*.csproj
 
-    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-      artifact: drop
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet publish'
+      inputs:
+        command: publish
+        projects: |
+          $(workingDirectory)/*.csproj
+        arguments: '--output $(Build.ArtifactStagingDirectory)'
 
-- stage: Deploy
-  displayName: Deploy stage
-  dependsOn: Build
-  condition: succeeded()
-
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy
-    environment: 'development'
-    pool:
-      vmImage: $(vmImageName)
-
-    strategy:
-      runOnce:
-        deploy:
-
-          steps:
-          - task: AzureFunctionApp@1
-            displayName: 'Azure functions app deploy'
-            inputs:
-              azureSubscription: '$(azureSubscription)'
-              appType: functionApp
-              appName: $(functionAppName)
-              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'

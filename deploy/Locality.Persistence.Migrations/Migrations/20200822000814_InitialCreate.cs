@@ -4,7 +4,7 @@ using NetTopologySuite.Geometries;
 
 namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
 {
-    public partial class _20200820213452 : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,7 +45,7 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 columns: table => new
                 {
                     GeoAreaKey = table.Column<Guid>(nullable: false),
-                    GeodeticArea = table.Column<Geometry>(type: "geography", nullable: true)
+                    GeodeticArea = table.Column<Geometry>(type: "geometry", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -156,7 +156,7 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 columns: table => new
                 {
                     PolygonKey = table.Column<Guid>(nullable: false),
-                    PolygonSequence = table.Column<Geometry>(nullable: true)
+                    PolygonSequence = table.Column<Geometry>(type: "geometry", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -69,7 +69,7 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Geometry>("GeodeticArea")
-                        .HasColumnType("geography");
+                        .HasColumnType("geometry");
 
                     b.HasKey("GeoAreaKey");
 
@@ -246,7 +246,7 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Geometry>("PolygonSequence")
-                        .HasColumnType("geography");
+                        .HasColumnType("geometry");
 
                     b.HasKey("PolygonKey");
 

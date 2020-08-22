@@ -11,8 +11,8 @@ using NetTopologySuite.Geometries;
 namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
 {
     [DbContext(typeof(LocalityDbContextDeploy))]
-    [Migration("20200821043500_20200820-213452")]
-    partial class _20200820213452
+    [Migration("20200822000814_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,7 +71,7 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Geometry>("GeodeticArea")
-                        .HasColumnType("geography");
+                        .HasColumnType("geometry");
 
                     b.HasKey("GeoAreaKey");
 
@@ -248,7 +248,7 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Geometry>("PolygonSequence")
-                        .HasColumnType("geography");
+                        .HasColumnType("geometry");
 
                     b.HasKey("PolygonKey");
 
