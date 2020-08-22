@@ -80,4 +80,4 @@ stages:
           - task: PowerShell@2
             inputs:
               filePath: '$(workingDirectory)/EF-Database-Update.cmd'
-              arguments: '--connectionString $(connectionString)'
+              arguments: '--connectionString $(ConnectionString)'
