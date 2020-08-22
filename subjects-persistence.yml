@@ -66,7 +66,7 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: PowerShell@2
+          - task: BatchScript@1
             inputs:
-              filePath: '$(workingDirectory)/EF-Database-Update.cmd'
-              arguments: '--connectionString $(connectionString)'
+              filename: '$(workingDirectory)/EF-Database-Update.cmd'
+              arguments: '--connectionString $(ConnectionString)'
