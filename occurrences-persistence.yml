@@ -8,7 +8,7 @@ trigger:
     - deploy/Occurrences.Infrastructure.Persistence.Migrations/*
 
 variables:
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Occurrences.Infrastructure.Persistence'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/deploy/Occurrences.Infrastructure.Persistence.Migrations'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
