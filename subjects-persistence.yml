@@ -8,7 +8,7 @@ trigger:
     - deploy/Subjects.Infrastructure.Persistence.Migrations/*
 
 variables:
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Subjects.Infrastructure.Persistence'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/deploy/Subjects.Infrastructure.Persistence'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
