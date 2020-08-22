@@ -8,7 +8,7 @@ trigger:
     - src/Chronology.Presentation.Api/*
 
 variables:
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src/$(projectFolder)/*.csproj'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Chronology.Presentation.Api/*.csproj'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
