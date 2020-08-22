@@ -8,10 +8,10 @@ trigger:
     - src/Subjects.Presentation.Api/*
 
 variables:
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src/$(projectFolder)/*.csproj'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Subjects.Presentation.Api/*.csproj'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'  
+  buildConfiguration: 'Release'
 
 stages:
 - stage: Build
