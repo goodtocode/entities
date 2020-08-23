@@ -6,8 +6,10 @@ trigger:
     - master
   paths:
     include:
-    - deploy/Chronology.Infrastructure.Persistence/*
-    - deploy/Chronology.Infrastructure.Persistence.Migrations/*
+    - src/Shared.Abstractions/*
+    - src/Shared.Extensions/*
+    - src/Shared.Extensions.Mvc/*
+    - src/Shared.Specs/*
 
 variables:
   sourceDirectory: '$(System.DefaultWorkingDirectory)/deploy/Chronology.Infrastructure.Persistence.Migrations'
