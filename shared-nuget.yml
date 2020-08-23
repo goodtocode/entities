@@ -58,7 +58,10 @@ stages:
       inputs:
         command: pack
         projects: |
-          $(sourceDirectory)/*.csproj
+          $(sourceDirectory)/Shared.Abstractions.csproj
+          $(sourceDirectory)/Shared.Extensions.csproj
+          $(sourceDirectory)/Shared.Extensions.Mvc.csproj
+          $(sourceDirectory)/Shared.Specs.csproj
         arguments: '--output $(Build.ArtifactStagingDirectory)'
 
     - task: PublishBuildArtifacts@1
