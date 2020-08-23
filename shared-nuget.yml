@@ -12,8 +12,7 @@ trigger:
     - src/Shared.Specs/*
 
 variables:
-  sourceDirectory: '$(System.DefaultWorkingDirectory)/deploy/Chronology.Infrastructure.Persistence.Migrations'
-  artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop/deploy/Chronology.Infrastructure.Persistence.Migrations'
+  sourceDirectory: '$(System.DefaultWorkingDirectory)/src/Shared.*'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
@@ -53,22 +52,14 @@ stages:
         command: test
         projects: |
           $(sourceDirectory)/*.csproj
-          
-    - task: CopyFiles@2
-      displayName: 'Copy deploy'
-      inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)/deploy'
-        Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)/deploy'
-        OverWrite: true
 
-    - task: CopyFiles@2
-      displayName: 'Copy src'
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet pack'
       inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)/src'
-        Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)/src'
-        OverWrite: true
+        command: pack
+        projects: |
+          $(sourceDirectory)/*.csproj
+        arguments: '--output $(Build.ArtifactStagingDirectory)'
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
@@ -89,9 +80,11 @@ stages:
     strategy:
       runOnce:
         deploy:
-          steps:
-          - task: BatchScript@1
+          steps:          
+          - task: NuGetCommand@2
             inputs:
-              workingFolder: $(artifactDirectory)
-              filename: '$(artifactDirectory)/EF-Database-Update.cmd'
-              arguments: '$(ConnectionString)'
+              command: 'push'
+              packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+              nuGetFeedType: 'internal'
+              publishVstsFeed: '525a0dbd-3d6d-4f62-aba4-f4d004295d7d'
+              allowPackageConflicts: true
