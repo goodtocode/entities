@@ -1,0 +1,95 @@
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - deploy/Chronology.Infrastructure.Persistence/*
+    - deploy/Chronology.Infrastructure.Persistence.Migrations/*
+
+variables:
+  sourceDirectory: '$(System.DefaultWorkingDirectory)/deploy/Chronology.Infrastructure.Persistence.Migrations'
+  artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop/deploy/Chronology.Infrastructure.Persistence.Migrations'
+  name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'  
+
+stages:
+- stage: Build
+  displayName: Build stage
+
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+        name: Hosted Windows 2019 with VS2019
+        demands: msbuild
+
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: Restore
+      inputs:
+        command: 'restore'
+        projects: |
+          $(sourceDirectory)/*.csproj
+        feedsToUse: config
+        nugetConfigPath: .nuget/NuGet.config
+
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        command: 'build'
+        projects: |
+          $(sourceDirectory)/*.csproj
+        arguments: '--configuration $(BuildConfiguration)'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet test'
+      inputs:
+        command: test
+        projects: |
+          $(sourceDirectory)/*.csproj
+          
+    - task: CopyFiles@2
+      displayName: 'Copy deploy'
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)/deploy'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/deploy'
+        OverWrite: true
+
+    - task: CopyFiles@2
+      displayName: 'Copy src'
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)/src'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/src'
+        OverWrite: true
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
+
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: Build
+  condition: succeeded()
+
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy
+    environment: 'development'
+    pool:
+        name: Hosted Windows 2019 with VS2019
+        demands: msbuild
+
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: BatchScript@1
+            inputs:
+              workingFolder: $(artifactDirectory)
+              filename: '$(artifactDirectory)/EF-Database-Update.cmd'
+              arguments: '$(ConnectionString)'
