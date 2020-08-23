@@ -16,13 +16,13 @@ namespace GoodToCode.Locality.Infrastructure
         public virtual DbSet<AssociateLocation> AssociateLocation { get; set; }
         public virtual DbSet<ResourceLocation> ResourceLocation { get; set; }
         public virtual DbSet<VentureLocation> VentureLocation { get; set; }
-        public DbSet<GeoArea> GeoArea { get; set; }
+        //public DbSet<GeoArea> GeoArea { get; set; }
         public DbSet<GeoDistance> GeoDistance { get; set; }
         public DbSet<GeoLocation> GeoLocation { get; set; }
         public DbSet<LatLong> LatLong { get; set; }
         public DbSet<Line> Line { get; set; }
         public DbSet<Coordinate> Coordinate { get; set; }
-        public DbSet<Polygon> Polygon { get; set; }
+        //public DbSet<Polygon> Polygon { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -116,16 +116,16 @@ namespace GoodToCode.Locality.Infrastructure
                     .IsUnique();
             });
 
-            modelBuilder.Entity<GeoArea>(entity =>
-            {
-                entity.ToTable("GeoArea", "Locality");
+            //modelBuilder.Entity<GeoArea>(entity =>
+            //{
+            //    entity.ToTable("GeoArea", "Locality");
 
-                entity.HasIndex(e => e.GeoAreaKey)
-                    .HasName("IX_GeoArea_Key")
-                    .IsUnique();
+            //    entity.HasIndex(e => e.GeoAreaKey)
+            //        .HasName("IX_GeoArea_Key")
+            //        .IsUnique();
 
-                entity.Property(e => e.GeodeticArea).HasColumnType("geometry");
-            });
+            //    entity.Property(e => e.GeodeticArea).HasColumnType("geometry");
+            //});
 
             modelBuilder.Entity<GeoDistance>(entity =>
             {
@@ -172,16 +172,16 @@ namespace GoodToCode.Locality.Infrastructure
                     .IsUnique();
             });
 
-            modelBuilder.Entity<Polygon>(entity =>
-            {
-                entity.ToTable("Polygon", "Locality");
+            //modelBuilder.Entity<Polygon>(entity =>
+            //{
+            //    entity.ToTable("Polygon", "Locality");
 
-                entity.HasIndex(e => e.PolygonKey)
-                    .HasName("IX_Polygon_Key")
-                    .IsUnique();
+            //    entity.HasIndex(e => e.PolygonKey)
+            //        .HasName("IX_Polygon_Key")
+            //        .IsUnique();
 
-                entity.Property(e => e.PolygonSequence).HasColumnType("geometry");
-            });
+            //    entity.Property(e => e.PolygonSequence).HasColumnType("geometry");
+            //});
 
             OnModelCreatingPartial(modelBuilder);
         }
