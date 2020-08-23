@@ -31,8 +31,8 @@ namespace GoodToCode.Locality.Specs
             _dbContext = new DbContextFactory(_connectionString).Create();
         }
 
-        [Given(@"I request the list of Locationes")]
-        public async Task GivenIRequestTheListOfLocationes()
+        [Given(@"I request the list of Location")]
+        public async Task GivenIRequestTheListOfLocation()
         {
             createSteps.GivenANewLocationHasBeenCreated();
             await createSteps.WhenLocationIsInsertedViaEntityFramework();
@@ -40,14 +40,14 @@ namespace GoodToCode.Locality.Specs
             SutKey = Sut.LocationKey;
         }
 
-        [When(@"Locationes are queried via Entity framework")]
-        public async Task WhenLocationesAreQueriedViaEntityFrameworkAsync()
+        [When(@"Location are queried via Entity framework")]
+        public async Task WhenLocationAreQueriedViaEntityFramework()
         {
             Sut = await _dbContext.Location.FirstOrDefaultAsync();
         }
 
-        [Then(@"All persisted Locationes are returned")]
-        public void ThenAllPersistedLocationesAreReturned()
+        [Then(@"All persisted Locations are returned")]
+        public void ThenAllPersistedLocationsAreReturned()
         {
             Assert.IsTrue(Sut.LocationKey != Guid.Empty);
         }

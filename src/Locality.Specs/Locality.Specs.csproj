@@ -31,7 +31,7 @@
     <CustomAdditionalCompileInputs Remove="Domain\Location\LocationAggregate.feature.cs" />
     <CustomAdditionalCompileInputs Remove="Infrastructure\Location\LocationCreate.feature.cs" />
     <CustomAdditionalCompileInputs Remove="Infrastructure\Location\LocationDelete.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\LocationesGet.feature.cs" />
+    <CustomAdditionalCompileInputs Remove="Infrastructure\Location\LocationsGet.feature.cs" />
     <CustomAdditionalCompileInputs Remove="Infrastructure\Location\LocationGetByKey.feature.cs" />
     <CustomAdditionalCompileInputs Remove="Infrastructure\Location\LocationUpdate.feature.cs" />
   </ItemGroup>
@@ -47,7 +47,7 @@
     <UpToDateCheckBuild Remove="Domain\Location\LocationAggregate.feature.cs" />
     <UpToDateCheckBuild Remove="Infrastructure\Location\LocationCreate.feature.cs" />
     <UpToDateCheckBuild Remove="Infrastructure\Location\LocationDelete.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Location\LocationesGet.feature.cs" />
+    <UpToDateCheckBuild Remove="Infrastructure\Location\LocationsGet.feature.cs" />
     <UpToDateCheckBuild Remove="Infrastructure\Location\LocationGetByKey.feature.cs" />
     <UpToDateCheckBuild Remove="Infrastructure\Location\LocationUpdate.feature.cs" />
   </ItemGroup>

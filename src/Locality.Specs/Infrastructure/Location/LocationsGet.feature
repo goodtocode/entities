@@ -5,4 +5,4 @@
 Scenario: Get all Location via Entity framework
 	Given I request the list of Location
 	When Location are queried via Entity framework
-	Then All persisted Location are returned
+	Then All persisted Locations are returned
