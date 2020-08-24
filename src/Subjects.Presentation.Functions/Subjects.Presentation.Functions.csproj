@@ -4,15 +4,31 @@
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
     <AssemblyName>GoodToCode.Subjects.Presentation.Functions</AssemblyName>
     <RootNamespace>GoodToCode.Subjects.Presentation.Functions</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>5.20.1</Version>
+    <Company>GoodToCode</Company>
+    <Product>GoodToCode.Subjects.Presentation.Functions</Product>
+    <Authors>Robert J. Good</Authors>
+    <PackageTags>.NET C# EF Core DDD Web API Azure Functions</PackageTags>
+    <Description>GoodToCode.Subjects.Presentation.Functions</Description>
+    <Copyright>Copyright (c) GoodToCode. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/goodtocode/stack</PackageProjectUrl>
+    <PackageIcon>storeicon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/goodtocode/stack</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageReleaseNotes>https://github.com/goodtocode/Stack/projects/1</PackageReleaseNotes>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
+
   <ItemGroup>
-    <Compile Remove="Person\**" />
-    <Compile Remove="Resource\**" />
-    <EmbeddedResource Remove="Person\**" />
-    <EmbeddedResource Remove="Resource\**" />
-    <None Remove="Person\**" />
-    <None Remove="Resource\**" />
+    <None Include="storeicon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.9" />

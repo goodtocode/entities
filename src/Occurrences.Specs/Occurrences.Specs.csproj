@@ -5,8 +5,32 @@
     <IsPackable>false</IsPackable>
     <AssemblyName>GoodToCode.Occurrences.Specs</AssemblyName>
     <RootNamespace>GoodToCode.Occurrences.Specs</RootNamespace>
+    <IsPackable>true</IsPackable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>5.20.1</Version>
+    <Company>GoodToCode</Company>
+    <Product>GoodToCode.Occurrences.Specs</Product>
+    <Authors>Robert J. Good</Authors>
+    <PackageTags>.NET C# EF Core DDD Web API Azure Functions</PackageTags>
+    <Description>GoodToCode.Occurrences.Specs</Description>
+    <Copyright>Copyright (c) GoodToCode. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/goodtocode/stack</PackageProjectUrl>
+    <PackageIcon>storeicon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/goodtocode/stack</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageReleaseNotes>https://github.com/goodtocode/Stack/projects/1</PackageReleaseNotes>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="storeicon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+  
   <ItemGroup>
     <Compile Remove="Appointment\**" />
     <Compile Remove="Event\**" />

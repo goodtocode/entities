@@ -1,27 +1,39 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
     <AssemblyName>GoodToCode.Chronology.Presentation.Functions</AssemblyName>
     <RootNamespace>GoodToCode.Chronology.Presentation.Functions</RootNamespace>
+    <IsPackable>true</IsPackable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>5.20.1</Version>
+    <Company>GoodToCode</Company>
+    <Product>GoodToCode.Chronology.Presentation.Functions</Product>
+    <Authors>Robert J. Good</Authors>
+    <PackageTags>.NET C# EF Core DDD Web API Azure Functions</PackageTags>
+    <Description>GoodToCode.Chronology.Presentation.Functions</Description>
+    <Copyright>Copyright (c) GoodToCode. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/goodtocode/stack</PackageProjectUrl>
+    <PackageIcon>storeicon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/goodtocode/stack</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageReleaseNotes>https://github.com/goodtocode/Stack/projects/1</PackageReleaseNotes>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
+
   <ItemGroup>
-    <Compile Remove="Entity\**" />
-    <Compile Remove="Item\**" />
-    <Compile Remove="Person\**" />
-    <Compile Remove="Resource\**" />
-    <EmbeddedResource Remove="Entity\**" />
-    <EmbeddedResource Remove="Item\**" />
-    <EmbeddedResource Remove="Person\**" />
-    <EmbeddedResource Remove="Resource\**" />
-    <None Remove="Entity\**" />
-    <None Remove="Item\**" />
-    <None Remove="Person\**" />
-    <None Remove="Resource\**" />
+    <None Include="storeicon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.9" />
   </ItemGroup>
+  
   <ItemGroup>
     <None Update="host.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
