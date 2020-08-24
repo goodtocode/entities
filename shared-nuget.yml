@@ -12,7 +12,8 @@ trigger:
     - src/Shared.Specs/*
 
 variables:
-  sourceDirectory: '$(System.DefaultWorkingDirectory)/src/Shared.*'
+  sourceDirectory: '$(System.DefaultWorkingDirectory)/src'
+  artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
@@ -87,7 +88,7 @@ stages:
           - task: NuGetCommand@2
             inputs:
               command: 'push'
-              packagesToPush: '**/*.nupkg;!**/*.symbols.nupkg'
+              packagesToPush: '$(artifactDirectory)/**/*.nupkg'
               nuGetFeedType: 'internal'
               publishVstsFeed: '525a0dbd-3d6d-4f62-aba4-f4d004295d7d'
               allowPackageConflicts: true
