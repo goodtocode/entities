@@ -12,7 +12,7 @@ trigger:
     - src/Shared.Specs/*
 
 variables:
-  sourceDirectory: '$(System.DefaultWorkingDirectory)/src'
+  sourceDirectory: '$(System.DefaultWorkingDirectory)/src/Shared.*'
   artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
