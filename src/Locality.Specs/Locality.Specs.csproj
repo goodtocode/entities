@@ -61,11 +61,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="appsettings.Development.json" />
-    <None Remove="appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <UpToDateCheckBuild Remove="Application\Location\LocationQuery.feature.cs" />
     <UpToDateCheckBuild Remove="Application\Location\LocationSaveCommand.feature.cs" />
     <UpToDateCheckBuild Remove="Domain\Location\LocationAggregate.feature.cs" />

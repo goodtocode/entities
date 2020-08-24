@@ -40,11 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="appsettings.Development.json" />
-    <None Remove="appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <SpecFlowObsoleteCodeBehindFiles Remove="Application\Associate\BusinessCreate.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Application\BusinessCreate.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Application\BusinessGetByKey.feature.cs" />

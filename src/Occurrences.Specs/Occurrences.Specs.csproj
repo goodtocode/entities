@@ -56,11 +56,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="appsettings.Development.json" />
-    <None Remove="appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <UpToDateCheckBuild Remove="Application\Event\EventQuery.feature.cs" />
     <UpToDateCheckBuild Remove="Application\Event\EventSaveCommand.feature.cs" />
     <UpToDateCheckBuild Remove="Domain\Event\AssociateAggregate.feature.cs" />

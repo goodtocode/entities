@@ -51,11 +51,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="appsettings.Development.json" />
-    <None Remove="appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <UpToDateCheckBuild Remove="Application\Schedule\ScheduleQuery.feature.cs" />
     <UpToDateCheckBuild Remove="Application\Schedule\ScheduleSaveCommand.feature.cs" />
     <UpToDateCheckBuild Remove="Domain\Schedule\ScheduleAggregate.feature.cs" />
