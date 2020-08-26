@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using System.IO;
 
 namespace GoodToCode.Subjects.Specs
 {
@@ -28,7 +29,7 @@ namespace GoodToCode.Subjects.Specs
 
         public BusinessAggregateSteps()
         {
-            _config = new ConfigurationFactory("Subjects.Specs").Create();
+            _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs")).Create();
             _connectionString = new ConnectionStringFactory(_config).Create();
             _dbContext = new DbContextFactory(_connectionString).Create();
             Aggregate = new AssociateAggregate(_dbContext);

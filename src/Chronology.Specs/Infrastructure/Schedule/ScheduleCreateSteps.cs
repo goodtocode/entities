@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
@@ -28,7 +29,7 @@ namespace GoodToCode.Chronology.Specs
 
         public ScheduleCreateSteps()
         {
-            _config = new ConfigurationFactory("Chronology.Specs").Create();
+            _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Chronology.Specs")).Create();
             _connectionString = new ConnectionStringFactory(_config).Create();
             _dbContext = new DbContextFactory(_connectionString).Create();
         }

@@ -10,6 +10,7 @@ using TechTalk.SpecFlow;
 using GoodToCode.Chronology.Infrastructure;
 using System;
 using System.Net.Http.Headers;
+using System.IO;
 
 namespace GoodToCode.Chronology.Specs
 {
@@ -29,7 +30,7 @@ namespace GoodToCode.Chronology.Specs
 
         public SchedulesGetSteps()
         {
-            _config = new ConfigurationFactory("Chronology.Specs").Create();
+            _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Chronology.Specs")).Create();
             _connectionString = new ConnectionStringFactory(_config).Create();
             _dbContext = new DbContextFactory(_connectionString).Create();
         }

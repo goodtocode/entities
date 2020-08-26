@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using GoodToCode.Locality.Infrastructure;
 using System.Collections.Generic;
+using System.IO;
 
 namespace GoodToCode.Locality.Specs
 {
@@ -25,7 +26,7 @@ namespace GoodToCode.Locality.Specs
 
         public LocationCreateSteps()
         {
-            _config = new ConfigurationFactory("Locality.Specs").Create();
+            _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Locality.Specs")).Create();
             _connectionString = new ConnectionStringFactory(_config).Create();
             _dbContext = new DbContextFactory(_connectionString).Create();
         }

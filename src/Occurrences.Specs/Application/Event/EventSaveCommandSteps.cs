@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
@@ -27,7 +28,7 @@ namespace GoodToCode.Occurrences.Specs
 
         public EventSaveCommandSteps()
         {
-            _config = new ConfigurationFactory("Occurrences.Specs").Create();
+            _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Occurrences.Specs")).Create();
             _connectionString = new ConnectionStringFactory(_config).Create();
             _dbContext = new DbContextFactory(_connectionString).Create();
         }

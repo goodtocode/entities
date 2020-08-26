@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using GoodToCode.Occurrences.Infrastructure;
 using System.Collections.Generic;
+using System.IO;
 
 namespace GoodToCode.Occurrences.Specs
 {
@@ -28,7 +29,7 @@ namespace GoodToCode.Occurrences.Specs
 
         public EventCreateSteps()
         {
-            _config = new ConfigurationFactory("Occurrences.Specs").Create();
+            _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Occurrences.Specs")).Create();
             _connectionString = new ConnectionStringFactory(_config).Create();
             _dbContext = new DbContextFactory(_connectionString).Create();
         }
