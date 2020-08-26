@@ -11,7 +11,7 @@ trigger:
 variables:
   sourceDirectory: '$(System.DefaultWorkingDirectory)/src/*'
   artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop'
-  name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
+  version: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
 
@@ -43,6 +43,9 @@ stages:
         projects: |
           $(sourceDirectory)/*.csproj
         arguments: '--configuration $(BuildConfiguration)'
+        majorVersion: 5        
+        minorVersion: 20
+        patchVersion: 2
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet test'
@@ -59,7 +62,7 @@ stages:
         command: pack
         projects: |
           $(sourceDirectory)/*.csproj
-        arguments: '--output $(Build.ArtifactStagingDirectory)'
+        arguments: '--output $(Build.ArtifactStagingDirectory) --version $(version)'
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
