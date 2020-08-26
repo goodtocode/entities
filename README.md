@@ -1,8 +1,30 @@
-# GoodToCode Service Stack
-DDD, onion-architecture, vertical slice, CQRS stack in .NET Core and .NET Framework, with the following technologies:
+# GoodToCode Stack
 
-## Presentation: Azure Functions, ASP.NET Web API, ASP.NET MVC samples
-## Domain Services: CQRS Commands and Queries
-## Domain Models: Core aggregate roots and domain objects
-## Infrastructure Persistence: EF Core, code first
-## Infrastructure Database: Monolith database, to be decoupled into vertical slices
+GoodToCode Stack is a Microservice/Serverless centric collection of common Domain Entities that you often include in software applications. These Entities, like Person and Location, can be assembled and used in your business apps and APIs.
+The goal of the GoodToCode Stack is to quick-start custom software applications by providing easy-to-extend Domain Entities and the APIs/Azure Functions that exposes these entities.
+
+GoodToCode Stack is based on DDD, onion-architecture, vertical slice and CQRS in .NET Core and EF Core code-first.
+
+##Namespaces
+### GoodToCode.Chronology
+Includes all Domain Models for any chronological entity such as: Schedules (Schedule entity) and Hours of Operations (TimeRecurring entity)
+### GoodToCode.Locality
+Includes all Domain Models for any locale-centric entity such as: Locations (Location entity) and LatLongs (LatLong entity)
+### GoodToCode.Subjects
+Includes all Domain Models for any subject entity such as: People (Person entity) and Businesses (Business entity)
+
+### GoodToCode.Occurrences
+Includes all Domain Models for any occurnce of one or more Chronology + Locality + Subject entities such as: Events (Event entity) and Appointments (Appointment entity)
+
+### GoodToCode.Shared
+Shared kernel on which all projects depend. Primary aspect is GoodToCode.Stack.Abstractions, which allows external applications to code to abstractions of the stack.
+
+##Projects
+### GoodToCode.Presentation.Api: ASP.NET Web API endpoints exposing that vertical's Application Service
+### GoodToCode.Presentation.Functions: Azure Functions HTTP endpoints exposing that vertical's Application Service
+### GoodToCode.Application.Services: CQRS Commands and Queries that call aggregate roots.
+### GoodToCode.Domain.Models: Domain aggregate roots and domain objects
+### GoodToCode.Infrastructure.Persistence: EF Core code first persistence layer for SQL Server, CosmosDb, Azure Storage Tables and PosgreSQL
+
+Disclaimer: This work is under development mostly for internal projects, and is still highly volatile. Watch for any Releases, which will include tested and hardened versions.
+
