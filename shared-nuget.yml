@@ -50,6 +50,8 @@ stages:
         command: test
         projects: |
           $(sourceDirectory)/*.csproj
+        workingDirectory: $(sourceDirectory)
+      continueOnError: true
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet pack'
