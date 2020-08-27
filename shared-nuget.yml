@@ -11,7 +11,8 @@ trigger:
 variables:
   sourceDirectory: '$(System.DefaultWorkingDirectory)/src/*'
   artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop'
-  buildVersion: $[replace(Build.BuildNumber, '2020', '20.')]
+  buildNumber: $(Build.BuildNumber)
+  buildVersion: $[ replace(buildNumber, '2020', '20.') ]
   version: '5.$(buildVersion)'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
