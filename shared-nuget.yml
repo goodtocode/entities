@@ -11,9 +11,9 @@ trigger:
 variables:
   sourceDirectory: '$(System.DefaultWorkingDirectory)/src/*'
   artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop'
-  version: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
+  version: '5.20.$(Build.BuildNumber)'
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'  
+  buildConfiguration: 'Release'
 
 stages:
 - stage: Build
