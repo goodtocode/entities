@@ -5,7 +5,7 @@ The goal of the GoodToCode Stack is to quick-start custom software applications 
 
 GoodToCode Stack is based on DDD, onion-architecture, vertical slice and CQRS in .NET Core and EF Core code-first.
 
-##Namespaces
+## Namespaces
 ### GoodToCode.Chronology
 Includes all Domain Models for any chronological entity such as: Schedules (Schedule entity) and Hours of Operations (TimeRecurring entity)
 ### GoodToCode.Locality
@@ -19,7 +19,7 @@ Includes all Domain Models for any occurnce of one or more Chronology + Locality
 ### GoodToCode.Shared
 Shared kernel on which all projects depend. Primary aspect is GoodToCode.Stack.Abstractions, which allows external applications to code to abstractions of the stack.
 
-##Projects
+## Projects
 ### GoodToCode.Presentation.Api: ASP.NET Web API endpoints exposing that vertical's Application Service
 ### GoodToCode.Presentation.Functions: Azure Functions HTTP endpoints exposing that vertical's Application Service
 ### GoodToCode.Application.Services: CQRS Commands and Queries that call aggregate roots.
