@@ -29,10 +29,10 @@ ASP.NET Web API endpoints exposing that vertical's Application Service
 Azure Functions HTTP endpoints exposing that vertical's Application Service
 
 ### GoodToCode.Application.Services: 
-QRS Commands and Queries that call aggregate roots.
+CQRS Commands and Queries that call aggregate roots.
 
 ### GoodToCode.Domain.Models: 
-Domain aggregate roots and domain models
+Domain aggregates and domain models
 
 ### GoodToCode.Infrastructure.Persistence: 
 EF Core code first persistence layer for SQL Server, CosmosDb, Azure Storage Tables and PosgreSQL
