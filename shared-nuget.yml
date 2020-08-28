@@ -64,6 +64,9 @@ stages:
         projects: |
           $(sourceDirectory)/*.csproj
         arguments: '--output $(Build.ArtifactStagingDirectory) --version $(version)'
+        majorVersion: 5        
+        minorVersion: 20
+        patchVersion: 2
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
