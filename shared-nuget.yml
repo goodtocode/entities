@@ -49,15 +49,6 @@ stages:
         patchVersion: 2
 
     - task: DotNetCoreCLI@2
-      displayName: 'dotnet test'
-      inputs:
-        command: test
-        projects: |
-          $(sourceDirectory)/*.csproj
-        workingDirectory: $(sourceDirectory)
-      continueOnError: true
-
-    - task: DotNetCoreCLI@2
       displayName: 'dotnet pack'
       inputs:
         command: pack
