@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace GoodToCode.Shared.Infrastructure.Persistence.Migrations.Migrations
+namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
 {
     public partial class _20200820213636 : Migration
     {

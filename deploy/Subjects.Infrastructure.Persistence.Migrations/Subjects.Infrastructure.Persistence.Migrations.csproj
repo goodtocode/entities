@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Library</OutputType>
-    <AssemblyName>GoodToCode.Shared.Infrastructure.Persistence.Migrations</AssemblyName>
-    <RootNamespace>GoodToCode.Shared.Infrastructure.Persistence.Migrations</RootNamespace>
+    <AssemblyName>GoodToCode.Subjects.Infrastructure.Persistence.Migrations</AssemblyName>
+    <RootNamespace>GoodToCode.Subjects.Infrastructure.Persistence.Migrations</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

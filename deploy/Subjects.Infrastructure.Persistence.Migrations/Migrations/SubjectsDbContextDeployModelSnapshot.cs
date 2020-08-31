@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace GoodToCode.Shared.Infrastructure.Persistence.Migrations.Migrations
+namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
 {
     [DbContext(typeof(SubjectsDbContextDeploy))]
     partial class SubjectsDbContextDeployModelSnapshot : ModelSnapshot

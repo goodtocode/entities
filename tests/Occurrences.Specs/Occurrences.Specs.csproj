@@ -21,30 +21,33 @@
   </ItemGroup>
 
   <ItemGroup>
-    <CustomAdditionalCompileInputs Remove="Application\Event\EventQuery.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Application\Event\EventSaveCommand.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Domain\Event\AssociateAggregate.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventCreate.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventDelete.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventesGet.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventGetByKey.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventUpdate.feature.cs" />
+    <Content Remove="C:\Users\rojgo\.nuget\packages\microsoft.testplatform.testhost\16.7.1\build\netcoreapp2.1\x64\testhost.dll" />
+    <Content Remove="C:\Users\rojgo\.nuget\packages\microsoft.testplatform.testhost\16.7.1\build\netcoreapp2.1\x64\testhost.exe" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckBuild Remove="Application\Event\EventQuery.feature.cs" />
-    <UpToDateCheckBuild Remove="Application\Event\EventSaveCommand.feature.cs" />
-    <UpToDateCheckBuild Remove="Domain\Event\AssociateAggregate.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Associate\EventCreate.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Associate\EventDelete.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Associate\EventesGet.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Associate\EventGetByKey.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Associate\EventUpdate.feature.cs" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\mstest.testadapter\2.1.2\build\netcoreapp1.0\..\_common\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\mstest.testadapter\2.1.2\build\netcoreapp1.0\..\_common\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\mstest.testadapter\2.1.2\build\netcoreapp1.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\BoDi.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\FSharp.Core.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\SpecFlow.Plus.Shared.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\StreamJsonRpc.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecFlow.Plus.RPC.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.Framework.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.Framework.Interfaces.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.Framework.Interfaces.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.Framework.Utils.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.Framework.Utils.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.VisualStudio.TestAdapter.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.VisualStudio.TestAdapter.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.VisualStudio.TestAdapter.dll.config" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.VisualStudio.TestAdapter.dll.config" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.specflow.3-4-0\3.4.5\build\\..\lib\netstandard2.0\SpecRun.Runtime.SpecFlowPlugin.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.specflow.3-4-0\3.4.5\build\\..\lib\netstandard2.0\TechTalk.SpecRun.Common.dll" />
+    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.specflow.3-4-0\3.4.5\build\\..\lib\netstandard2.0\TechTalk.SpecRun.dll" />
   </ItemGroup>
 
   <ItemGroup>
@@ -71,74 +74,6 @@
     <PackageReference Include="SpecFlow" Version="3.4.3" />
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.4.3" />
     <PackageReference Include="SpecRun.SpecFlow" Version="3.4.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Occurrences.Application.Services\Occurrences.Application.Services.csproj" />
-    <ProjectReference Include="..\Occurrences.Infrastructure.Persistence\Occurrences.Infrastructure.Persistence.csproj" />
-    <ProjectReference Include="..\Shared.Specs\Shared.Specs.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Application\Event\EventQuery.feature.cs">
-      <DependentUpon>EventQuery.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Application\Event\EventSaveCommand.feature.cs">
-      <DependentUpon>EventSaveCommand.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Domain\Event\EventAggregate.feature.cs">
-      <DependentUpon>EventAggregate.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Associate\EventCreate.feature.cs">
-      <DependentUpon>EventCreate.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Associate\EventDelete.feature.cs">
-      <DependentUpon>EventDelete.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Associate\EventsGet.feature.cs">
-      <DependentUpon>EventsGet.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Associate\EventGetByKey.feature.cs">
-      <DependentUpon>EventGetByKey.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Associate\EventUpdate.feature.cs">
-      <DependentUpon>EventUpdate.feature</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <SpecFlowFeatureFiles Update="Application\Event\EventQuery.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Application\Event\EventSaveCommand.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Domain\Event\EventAggregate.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Infrastructure\Associate\EventCreate.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Infrastructure\Associate\EventDelete.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Infrastructure\Associate\EventsGet.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Infrastructure\Associate\EventGetByKey.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Infrastructure\Associate\EventUpdate.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
   </ItemGroup>
 
 </Project>

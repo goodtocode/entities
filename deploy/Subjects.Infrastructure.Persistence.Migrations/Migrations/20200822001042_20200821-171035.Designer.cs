@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace GoodToCode.Shared.Infrastructure.Persistence.Migrations.Migrations
+namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
 {
     [DbContext(typeof(SubjectsDbContextDeploy))]
     [Migration("20200822001042_20200821-171035")]
