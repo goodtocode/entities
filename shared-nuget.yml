@@ -30,7 +30,7 @@ stages:
     steps:
     - task: PowerShell@2
       inputs:
-        filePath: 'deploy/Assembly/Set-Version.ps1'
+        filePath: 'deploy/Shared.Deploy/Assembly/Set-Version.ps1'
         arguments: '-Path $(sourceDirectory) -VersionToReplace 5.20.1'
         workingDirectory: '$(sourceDirectory)'
 
