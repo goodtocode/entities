@@ -53,7 +53,8 @@ Write-Host "Set-Version -Path $Path -Version $VersionToReplace"
 $LongVersion = Get-Version -Major $Major -Minor $Minor -Revision $Revision -Build $Build
 $ShortVersion = Get-Version -Major $Major -Minor $Minor -Revision $Revision -Format $Format
 Write-Host 
-Update-ContentsByTag -Path $Path -Value $LongVersion -Open '<version>' -Close '</version>' -Include *.*
+Update-ContentsByTag -Path $Path -Value $LongVersion -Open '<Version>' -Close '</Version>' -Include *.csproj
+Update-ContentsByTag -Path $Path -Value $LongVersion -Open '<version>' -Close '</version>' -Include *.nuspec
 Update-LineByContains -Path $Path -Contains "AssemblyVersion(" -Line "[assembly: AssemblyVersion(""$LongVersion"")]" -Include AssemblyInfo.cs
 # Vsix Templates
 Update-TextByContains -Path $Path -Contains "<Identity Id" -Old $VersionToReplace -New $ShortVersion -Include *.vsixmanifest
