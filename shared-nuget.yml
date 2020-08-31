@@ -11,9 +11,10 @@ trigger:
 variables:
   sourceDirectory: '$(System.DefaultWorkingDirectory)/src/*'
   artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop'
-  name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
+  buildVersion: $[ replace(variables['Build.BuildNumber'], '2020', '20.') ]
+  version: '5.$(buildVersion)'
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'  
+  buildConfiguration: 'Release'
 
 stages:
 - stage: Build
@@ -27,6 +28,12 @@ stages:
         demands: msbuild
 
     steps:
+    - task: PowerShell@2
+      inputs:
+        filePath: 'deploy/Assembly/Set-Version.ps1'
+        arguments: '-Path $(sourceDirectory) -VersionToReplace 5.20.1'
+        workingDirectory: '$(sourceDirectory)'
+
     - task: DotNetCoreCLI@2
       displayName: Restore
       inputs:
@@ -43,15 +50,9 @@ stages:
         projects: |
           $(sourceDirectory)/*.csproj
         arguments: '--configuration $(BuildConfiguration)'
-
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet test'
-      inputs:
-        command: test
-        projects: |
-          $(sourceDirectory)/*.csproj
-        workingDirectory: $(sourceDirectory)
-      continueOnError: true
+        majorVersion: 5        
+        minorVersion: 20
+        patchVersion: 2
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet pack'
@@ -59,7 +60,10 @@ stages:
         command: pack
         projects: |
           $(sourceDirectory)/*.csproj
-        arguments: '--output $(Build.ArtifactStagingDirectory)'
+        arguments: '--output $(Build.ArtifactStagingDirectory) --version $(version)'
+        majorVersion: 5        
+        minorVersion: 20
+        patchVersion: 2
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
