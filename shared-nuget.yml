@@ -9,7 +9,7 @@ trigger:
     - src/*
 
 variables:
-  sourceDirectory: '$(System.DefaultWorkingDirectory)/src/*'
+  sourceDirectory: '$(System.DefaultWorkingDirectory)/src'
   artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop'
   buildVersion: $[ replace(variables['Build.BuildNumber'], '2020', '20.') ]
   version: '5.$(buildVersion)'
@@ -30,7 +30,7 @@ stages:
     steps:
     - task: PowerShell@2
       inputs:
-        filePath: 'deploy/Assembly/Set-Version.ps1'
+        filePath: 'deploy/Shared.Deploy/Assembly/Set-Version.ps1'
         arguments: '-Path $(sourceDirectory) -VersionToReplace 5.20.1'
         workingDirectory: '$(sourceDirectory)'
 
@@ -39,7 +39,7 @@ stages:
       inputs:
         command: 'restore'
         projects: |
-          $(sourceDirectory)/*.csproj
+          $(sourceDirectory)/**/*.csproj
         feedsToUse: config
         nugetConfigPath: .nuget/NuGet.config
 
@@ -48,7 +48,7 @@ stages:
       inputs:
         command: 'build'
         projects: |
-          $(sourceDirectory)/*.csproj
+          $(sourceDirectory)/**/*.csproj
         arguments: '--configuration $(BuildConfiguration)'
         majorVersion: 5        
         minorVersion: 20
@@ -59,7 +59,7 @@ stages:
       inputs:
         command: pack
         projects: |
-          $(sourceDirectory)/*.csproj
+          $(sourceDirectory)/**/*.csproj
         arguments: '--output $(Build.ArtifactStagingDirectory) --version $(version)'
         majorVersion: 5        
         minorVersion: 20
