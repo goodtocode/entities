@@ -5,7 +5,7 @@ param
 (
 	[Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
     [string] $Path= $(throw '-Path is a required parameter. $(Build.SourcesDirectory)'),
-	[Version] $VersionToReplace = "5.20.1"
+	[Version] $VersionToReplace = "5.20.1",
 	[string] $Format = 'M.YY.MM'	
 )
 
