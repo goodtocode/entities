@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Locality.Application
 {
-    public class LocationDeleteCommand : IRequest<CommandResponseWrapper<bool>>
+    public class LocationDeleteCommand : IRequest<CommandResponse<Location>>
     {
         public ILocation Item { get; set; }
 
@@ -20,7 +20,7 @@ namespace GoodToCode.Locality.Application
             Item = item;
         }
 
-        public class Handler : IRequestHandler<LocationDeleteCommand, CommandResponseWrapper<bool>>
+        public class Handler : IRequestHandler<LocationDeleteCommand, CommandResponse<Location>>
         {
             private readonly LocationDeleteValidator _validator;
             private readonly List<KeyValuePair<string, string>> _errors;
@@ -33,9 +33,9 @@ namespace GoodToCode.Locality.Application
                 _errors = new List<KeyValuePair<string, string>>();
             }
 
-            public async Task<CommandResponseWrapper<bool>> Handle(LocationDeleteCommand request, CancellationToken cancellationToken)
+            public async Task<CommandResponse<Location>> Handle(LocationDeleteCommand request, CancellationToken cancellationToken)
             {
-                var result = new CommandResponseWrapper<bool>() { Errors = GetRequestErrors(request) };
+                var result = new CommandResponse<Location>() { Errors = GetRequestErrors(request) };
 
                 if (result.Errors.Count == 0)
                 {
@@ -43,7 +43,7 @@ namespace GoodToCode.Locality.Application
                     {
                         var aggregate = new LocationAggregate(_dbContext);
                         await aggregate.LocationDeleteAsync(request.Item);
-                        result.Result = true;
+                        result.Result = (Location)request.Item;
                     }
                     catch (Exception e)
                     {

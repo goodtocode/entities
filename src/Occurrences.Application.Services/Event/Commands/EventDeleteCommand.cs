@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Occurrences.Application
 {
-    public class EventDeleteCommand : IRequest<CommandResponseWrapper<bool>>
+    public class EventDeleteCommand : IRequest<CommandResponse<Event>>
     {
         public IEvent Item { get; set; }
 
@@ -20,7 +20,7 @@ namespace GoodToCode.Occurrences.Application
             Item = item;
         }
 
-        public class Handler : IRequestHandler<EventDeleteCommand, CommandResponseWrapper<bool>>
+        public class Handler : IRequestHandler<EventDeleteCommand, CommandResponse<Event>>
         {
             private readonly EventDeleteValidator _validator;
             private readonly List<KeyValuePair<string, string>> _errors;
@@ -33,9 +33,9 @@ namespace GoodToCode.Occurrences.Application
                 _errors = new List<KeyValuePair<string, string>>();
             }
 
-            public async Task<CommandResponseWrapper<bool>> Handle(EventDeleteCommand request, CancellationToken cancellationToken)
+            public async Task<CommandResponse<Event>> Handle(EventDeleteCommand request, CancellationToken cancellationToken)
             {
-                var result = new CommandResponseWrapper<bool>() { Errors = GetRequestErrors(request) };
+                var result = new CommandResponse<Event>() { Errors = GetRequestErrors(request) };
 
                 if (result.Errors.Count == 0)
                 {
@@ -43,7 +43,7 @@ namespace GoodToCode.Occurrences.Application
                     {
                         var aggregate = new EventAggregate(_dbContext);
                         await aggregate.EventDeleteAsync(request.Item);
-                        result.Result = true;
+                        result.Result = (Event)request.Item;
                     }
                     catch (Exception e)
                     {

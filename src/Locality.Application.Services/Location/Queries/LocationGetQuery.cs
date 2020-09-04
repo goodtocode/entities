@@ -11,7 +11,7 @@ using GoodToCode.Locality.Infrastructure;
 
 namespace GoodToCode.Locality.Application
 {
-    public class LocationGetQuery : IRequest<QueryResponseWrapper<List<Location>>>
+    public class LocationGetQuery : IRequest<QueryResponse<List<Location>>>
     {
         public Func<Location, bool> QueryPredicate { get; }
 
@@ -29,7 +29,7 @@ namespace GoodToCode.Locality.Application
         public Guid LocationKey { get; set; }
     }
 
-    public class LocationGetHandler : IRequestHandler<LocationGetQuery, QueryResponseWrapper<List<Location>>>
+    public class LocationGetHandler : IRequestHandler<LocationGetQuery, QueryResponse<List<Location>>>
     {
 
         private readonly LocationGetValidator _validator;
@@ -45,9 +45,9 @@ namespace GoodToCode.Locality.Application
             _errors = new List<KeyValuePair<string, string>>();
         }
 
-        public async Task<QueryResponseWrapper<List<Location>>> Handle(LocationGetQuery request, CancellationToken cancellationToken)
+        public async Task<QueryResponse<List<Location>>> Handle(LocationGetQuery request, CancellationToken cancellationToken)
         {
-            var response = new QueryResponseWrapper<List<Location>>() { Errors = ValidateRequest(request) };
+            var response = new QueryResponse<List<Location>>() { Errors = ValidateRequest(request) };
 
             if (!response.Errors.Any())
             {

@@ -50,13 +50,13 @@ namespace GoodToCode.Subjects.Application
 
         // PUT: api/Businesses/376B76B4-1EA8-4B31-9238-41E59784B5DD
         [HttpPut("{key}")]
-        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 202)]
-        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 400)]
-        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 401)]
-        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 406)]
-        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 500)]
-        public async Task<ActionResult<CommandResponseWrapper<bool>>> PutBusiness(Guid key, [FromBody] BusinessSaveCommand command)
+        [ProducesResponseType(typeof(CommandResponse<Business>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(CommandResponse<Business>), 202)]
+        [ProducesResponseType(typeof(CommandResponse<Business>), 400)]
+        [ProducesResponseType(typeof(CommandResponse<Business>), 401)]
+        [ProducesResponseType(typeof(CommandResponse<Business>), 406)]
+        [ProducesResponseType(typeof(CommandResponse<Business>), 500)]
+        public async Task<ActionResult<CommandResponse<Business>>> PutBusiness(Guid key, [FromBody] BusinessSaveCommand command)
         {
             var cmdResponse = await Mediator.Send(command);
 
@@ -74,13 +74,13 @@ namespace GoodToCode.Subjects.Application
 
         // POST: api/Businesses/376B76B4-1EA8-4B31-9238-41E59784B5DD
         [HttpPost()]
-        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 202)]
-        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 400)]
-        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 401)]
-        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 406)]
-        [ProducesResponseType(typeof(CommandResponseWrapper<bool>), 500)]
-        public async Task<ActionResult<CommandResponseWrapper<bool>>> PostBusiness([FromBody] BusinessSaveCommand command)
+        [ProducesResponseType(typeof(CommandResponse<Business>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(CommandResponse<Business>), 202)]
+        [ProducesResponseType(typeof(CommandResponse<Business>), 400)]
+        [ProducesResponseType(typeof(CommandResponse<Business>), 401)]
+        [ProducesResponseType(typeof(CommandResponse<Business>), 406)]
+        [ProducesResponseType(typeof(CommandResponse<Business>), 500)]
+        public async Task<ActionResult<CommandResponse<Business>>> PostBusiness([FromBody] BusinessSaveCommand command)
         {
             var cmdResponse = await Mediator.Send(command);
 

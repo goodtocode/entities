@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Subjects.Application
 {
-    public class BusinessDeleteCommand : IRequest<CommandResponseWrapper<bool>>
+    public class BusinessDeleteCommand : IRequest<CommandResponse<Business>>
     {
         public IBusiness Item { get; set; }
 
@@ -21,7 +21,7 @@ namespace GoodToCode.Subjects.Application
             Item = item;
         }
 
-        public class Handler : IRequestHandler<BusinessDeleteCommand, CommandResponseWrapper<bool>>
+        public class Handler : IRequestHandler<BusinessDeleteCommand, CommandResponse<Business>>
         {
             private readonly BusinessDeleteValidator _validator;
             private readonly List<KeyValuePair<string, string>> _errors;
@@ -34,9 +34,9 @@ namespace GoodToCode.Subjects.Application
                 _errors = new List<KeyValuePair<string, string>>();
             }
 
-            public async Task<CommandResponseWrapper<bool>> Handle(BusinessDeleteCommand request, CancellationToken cancellationToken)
+            public async Task<CommandResponse<Business>> Handle(BusinessDeleteCommand request, CancellationToken cancellationToken)
             {
-                var result = new CommandResponseWrapper<bool>() { Errors = GetRequestErrors(request) };
+                var result = new CommandResponse<Business>() { Errors = GetRequestErrors(request) };
 
                 if (result.Errors.Count == 0)
                 {
@@ -44,7 +44,7 @@ namespace GoodToCode.Subjects.Application
                     {
                         var aggregate = new AssociateAggregate(_dbContext);
                         await aggregate.BusinessDeleteAsync(request.Item);
-                        result.Result = true;
+                        result.Result = (Business)request.Item;
                     }
                     catch (Exception e)
                     {

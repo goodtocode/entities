@@ -57,7 +57,8 @@ namespace GoodToCode.Subjects.Specs
             var query = new BusinessSaveCommand(Sut);
             var handle = new BusinessSaveHandler(_dbContext);
             var response = await handle.Handle(query, new System.Threading.CancellationToken());
-            Assert.IsTrue(response.Result);
+            SutKey = response.Result.BusinessKey;
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
 
         [Then(@"the CQRS inserted business can be queried by key")]

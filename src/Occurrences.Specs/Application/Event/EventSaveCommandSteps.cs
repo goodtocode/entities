@@ -57,7 +57,8 @@ namespace GoodToCode.Occurrences.Specs
             var query = new EventSaveCommand(Sut);
             var handle = new EventSaveHandler(_dbContext);
             var response = await handle.Handle(query, new System.Threading.CancellationToken());
-            Assert.IsTrue(response.Result);
+            SutKey = response.Result.EventKey;
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
 
         [Then(@"the CQRS inserted Event can be queried by key")]

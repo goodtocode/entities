@@ -57,7 +57,8 @@ namespace GoodToCode.Locality.Specs
             var query = new LocationSaveCommand(Sut);
             var handle = new LocationSaveHandler(_dbContext);
             var response = await handle.Handle(query, new System.Threading.CancellationToken());
-            Assert.IsTrue(response.Result);
+            SutKey = response.Result.LocationKey;
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
 
         [Then(@"the CQRS inserted Location can be queried by key")]

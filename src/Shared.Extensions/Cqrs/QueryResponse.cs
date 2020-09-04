@@ -6,9 +6,9 @@ using MediatR;
 namespace GoodToCode.Shared.Cqrs
 {
     [Serializable]
-    public class QueryResponseWrapper<T> : IRequest<T>
+    public class QueryResponse<T> : IRequest<T>
     {
-        public QueryResponseWrapper()
+        public QueryResponse()
         {
             Errors = new List<KeyValuePair<string, string>>();
             ErrorInfo = new ErrorInfo();
@@ -19,6 +19,5 @@ namespace GoodToCode.Shared.Cqrs
         public ErrorInfo ErrorInfo { get; set; }
 
         public ICollection<KeyValuePair<string, string>> Errors { get; set; } = new List<KeyValuePair<string, string>>();
-
     }
 }

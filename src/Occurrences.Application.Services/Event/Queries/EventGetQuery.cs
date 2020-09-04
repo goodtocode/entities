@@ -11,7 +11,7 @@ using GoodToCode.Occurrences.Infrastructure;
 
 namespace GoodToCode.Occurrences.Application
 {
-    public class EventGetQuery : IRequest<QueryResponseWrapper<List<Event>>>
+    public class EventGetQuery : IRequest<QueryResponse<List<Event>>>
     {
         public Func<Event, bool> QueryPredicate { get; }
 
@@ -29,7 +29,7 @@ namespace GoodToCode.Occurrences.Application
         public Guid EventKey { get; set; }
     }
 
-    public class EventGetHandler : IRequestHandler<EventGetQuery, QueryResponseWrapper<List<Event>>>
+    public class EventGetHandler : IRequestHandler<EventGetQuery, QueryResponse<List<Event>>>
     {
 
         private readonly EventGetQueryValidator _validator;
@@ -45,9 +45,9 @@ namespace GoodToCode.Occurrences.Application
             _errors = new List<KeyValuePair<string, string>>();
         }
 
-        public async Task<QueryResponseWrapper<List<Event>>> Handle(EventGetQuery request, CancellationToken cancellationToken)
+        public async Task<QueryResponse<List<Event>>> Handle(EventGetQuery request, CancellationToken cancellationToken)
         {
-            var response = new QueryResponseWrapper<List<Event>>() { Errors = ValidateRequest(request) };
+            var response = new QueryResponse<List<Event>>() { Errors = ValidateRequest(request) };
 
             if (!response.Errors.Any())
             {

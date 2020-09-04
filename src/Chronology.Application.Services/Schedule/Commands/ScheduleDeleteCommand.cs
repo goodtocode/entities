@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Chronology.Application
 {
-    public class ScheduleDeleteCommand : IRequest<CommandResponseWrapper<bool>>
+    public class ScheduleDeleteCommand : IRequest<CommandResponse<Schedule>>
     {
         public ISchedule Item { get; set; }
 
@@ -20,7 +20,7 @@ namespace GoodToCode.Chronology.Application
             Item = item;
         }
 
-        public class Handler : IRequestHandler<ScheduleDeleteCommand, CommandResponseWrapper<bool>>
+        public class Handler : IRequestHandler<ScheduleDeleteCommand, CommandResponse<Schedule>>
         {
             private readonly ScheduleDeleteValidator _validator;
             private readonly List<KeyValuePair<string, string>> _errors;
@@ -33,9 +33,9 @@ namespace GoodToCode.Chronology.Application
                 _errors = new List<KeyValuePair<string, string>>();
             }
 
-            public async Task<CommandResponseWrapper<bool>> Handle(ScheduleDeleteCommand request, CancellationToken cancellationToken)
+            public async Task<CommandResponse<Schedule>> Handle(ScheduleDeleteCommand request, CancellationToken cancellationToken)
             {
-                var result = new CommandResponseWrapper<bool>() { Errors = GetRequestErrors(request) };
+                var result = new CommandResponse<Schedule>() { Errors = GetRequestErrors(request) };
 
                 if (result.Errors.Count == 0)
                 {
@@ -43,7 +43,7 @@ namespace GoodToCode.Chronology.Application
                     {
                         var aggregate = new ScheduleAggregate(_dbContext);
                         await aggregate.ScheduleDeleteAsync(request.Item);
-                        result.Result = true;
+                        result.Result = (Schedule)request.Item;
                     }
                     catch (Exception e)
                     {

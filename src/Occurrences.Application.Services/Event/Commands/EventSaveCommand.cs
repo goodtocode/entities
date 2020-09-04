@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Occurrences.Application
 {
-    public class EventSaveCommand : IRequest<CommandResponseWrapper<bool>>
+    public class EventSaveCommand : IRequest<CommandResponse<Event>>
     {
         public IEvent Item { get; set; }
 
@@ -21,7 +21,7 @@ namespace GoodToCode.Occurrences.Application
         }
     }
 
-    public class EventSaveHandler : IRequestHandler<EventSaveCommand, CommandResponseWrapper<bool>>
+    public class EventSaveHandler : IRequestHandler<EventSaveCommand, CommandResponse<Event>>
     {
         private readonly EventSaveValidator _validator;
         private readonly List<KeyValuePair<string, string>> _errors;
@@ -34,9 +34,9 @@ namespace GoodToCode.Occurrences.Application
             _errors = new List<KeyValuePair<string, string>>();
         }
 
-        public async Task<CommandResponseWrapper<bool>> Handle(EventSaveCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<Event>> Handle(EventSaveCommand request, CancellationToken cancellationToken)
         {
-            var result = new CommandResponseWrapper<bool>() { Errors = GetRequestErrors(request) };
+            var result = new CommandResponse<Event>() { Errors = GetRequestErrors(request) };
 
             if (result.Errors.Count == 0)
             {
@@ -44,7 +44,7 @@ namespace GoodToCode.Occurrences.Application
                 {
                     var aggregate = new EventAggregate(_dbContext);
                     await aggregate.EventSaveAsync(request.Item);
-                    result.Result = true;
+                    result.Result = (Event)request.Item;
                 }
                 catch (Exception e)
                 {

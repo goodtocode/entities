@@ -57,7 +57,8 @@ namespace GoodToCode.Chronology.Specs
             var query = new ScheduleSaveCommand(Sut);
             var handle = new ScheduleSaveHandler(_dbContext);
             var response = await handle.Handle(query, new System.Threading.CancellationToken());
-            Assert.IsTrue(response.Result);
+            SutKey = response.Result.ScheduleKey;
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
 
         [Then(@"the CQRS inserted Schedule can be queried by key")]

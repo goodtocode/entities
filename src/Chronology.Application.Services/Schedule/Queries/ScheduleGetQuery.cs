@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Chronology.Application
 {
-    public class ScheduleGetQuery : IRequest<QueryResponseWrapper<List<Schedule>>>
+    public class ScheduleGetQuery : IRequest<QueryResponse<List<Schedule>>>
     {
         public Func<Schedule, bool> QueryPredicate { get; }
 
@@ -29,7 +29,7 @@ namespace GoodToCode.Chronology.Application
         public Guid ScheduleKey { get; set; }
     }
 
-    public class ScheduleGetHandler : IRequestHandler<ScheduleGetQuery, QueryResponseWrapper<List<Schedule>>>
+    public class ScheduleGetHandler : IRequestHandler<ScheduleGetQuery, QueryResponse<List<Schedule>>>
     {
 
         private readonly ScheduleGetValidator _validator;
@@ -45,9 +45,9 @@ namespace GoodToCode.Chronology.Application
             _errors = new List<KeyValuePair<string, string>>();
         }
 
-        public async Task<QueryResponseWrapper<List<Schedule>>> Handle(ScheduleGetQuery request, CancellationToken cancellationToken)
+        public async Task<QueryResponse<List<Schedule>>> Handle(ScheduleGetQuery request, CancellationToken cancellationToken)
         {
-            var response = new QueryResponseWrapper<List<Schedule>>() { Errors = ValidateRequest(request) };
+            var response = new QueryResponse<List<Schedule>>() { Errors = ValidateRequest(request) };
 
             if (!response.Errors.Any())
             {

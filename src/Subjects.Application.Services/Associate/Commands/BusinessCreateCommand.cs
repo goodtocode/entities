@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Subjects.Application
 {
-    public class BusinessCreateCommand : IRequest<CommandResponseWrapper<bool>>
+    public class BusinessCreateCommand : IRequest<CommandResponse<Business>>
     {
         public IBusiness Item { get; set; }
 
@@ -22,7 +22,7 @@ namespace GoodToCode.Subjects.Application
         }
     }
 
-    public class BusinessCreateHandler : IRequestHandler<BusinessCreateCommand, CommandResponseWrapper<bool>>
+    public class BusinessCreateHandler : IRequestHandler<BusinessCreateCommand, CommandResponse<Business>>
     {
         private readonly BusinessCreateValidator _validator;
         private readonly List<KeyValuePair<string, string>> _errors;
@@ -35,9 +35,9 @@ namespace GoodToCode.Subjects.Application
             _errors = new List<KeyValuePair<string, string>>();
         }
 
-        public async Task<CommandResponseWrapper<bool>> Handle(BusinessCreateCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<Business>> Handle(BusinessCreateCommand request, CancellationToken cancellationToken)
         {
-            var result = new CommandResponseWrapper<bool>() { Errors = GetRequestErrors(request) };
+            var result = new CommandResponse<Business>() { Errors = GetRequestErrors(request) };
 
             if (result.Errors.Count == 0)
             {
@@ -45,7 +45,7 @@ namespace GoodToCode.Subjects.Application
                 {
                     var aggregate = new AssociateAggregate(_dbContext);
                     await aggregate.BusinessCreateAsync(request.Item);
-                    result.Result = true;
+                    result.Result = (Business)request.Item;
                 }
                 catch (Exception e)
                 {

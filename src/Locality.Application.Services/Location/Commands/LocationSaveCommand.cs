@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Locality.Application
 {
-    public class LocationSaveCommand : IRequest<CommandResponseWrapper<bool>>
+    public class LocationSaveCommand : IRequest<CommandResponse<Location>>
     {
         public ILocation Item { get; set; }
 
@@ -21,7 +21,7 @@ namespace GoodToCode.Locality.Application
         }
     }
 
-    public class LocationSaveHandler : IRequestHandler<LocationSaveCommand, CommandResponseWrapper<bool>>
+    public class LocationSaveHandler : IRequestHandler<LocationSaveCommand, CommandResponse<Location>>
     {
         private readonly LocationSaveValidator _validator;
         private readonly List<KeyValuePair<string, string>> _errors;
@@ -34,9 +34,9 @@ namespace GoodToCode.Locality.Application
             _errors = new List<KeyValuePair<string, string>>();
         }
 
-        public async Task<CommandResponseWrapper<bool>> Handle(LocationSaveCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<Location>> Handle(LocationSaveCommand request, CancellationToken cancellationToken)
         {
-            var result = new CommandResponseWrapper<bool>() { Errors = GetRequestErrors(request) };
+            var result = new CommandResponse<Location>() { Errors = GetRequestErrors(request) };
 
             if (result.Errors.Count == 0)
             {
@@ -44,7 +44,7 @@ namespace GoodToCode.Locality.Application
                 {
                     var aggregate = new LocationAggregate(_dbContext);
                     await aggregate.LocationSaveAsync(request.Item);
-                    result.Result = true;
+                    result.Result = (Location)request.Item;
                 }
                 catch (Exception e)
                 {

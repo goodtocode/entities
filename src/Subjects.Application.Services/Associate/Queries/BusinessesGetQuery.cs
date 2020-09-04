@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Subjects.Application
 {
-    public class BusinessesGetQuery : IRequest<QueryResponseWrapper<List<Business>>>
+    public class BusinessesGetQuery : IRequest<QueryResponse<List<Business>>>
     {
         public Func<Business, bool> QueryPredicate { get; }
 
@@ -29,7 +29,7 @@ namespace GoodToCode.Subjects.Application
         public Guid BusinessKey { get; set; }
     }
 
-    public class BusinessesGetHandler : IRequestHandler<BusinessGetQuery, QueryResponseWrapper<List<Business>>>
+    public class BusinessesGetHandler : IRequestHandler<BusinessGetQuery, QueryResponse<List<Business>>>
     {
 
         private readonly BusinessGetValidator _validator;
@@ -45,9 +45,9 @@ namespace GoodToCode.Subjects.Application
             _errors = new List<KeyValuePair<string, string>>();
         }
 
-        public async Task<QueryResponseWrapper<List<Business>>> Handle(BusinessGetQuery request, CancellationToken cancellationToken)
+        public async Task<QueryResponse<List<Business>>> Handle(BusinessGetQuery request, CancellationToken cancellationToken)
         {
-            var response = new QueryResponseWrapper<List<Business>>() { Errors = ValidateRequest(request) };
+            var response = new QueryResponse<List<Business>>() { Errors = ValidateRequest(request) };
 
             if (!response.Errors.Any())
             {

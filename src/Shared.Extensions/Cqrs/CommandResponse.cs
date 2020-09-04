@@ -4,13 +4,12 @@ using MediatR;
 
 namespace GoodToCode.Shared.Cqrs
 {
-    public class CommandResponseWrapper<T> : IRequest<Unit>
+    public class CommandResponse<T> : IRequest<Unit>
     {
-        public CommandResponseWrapper()
+        public CommandResponse()
         {
             Errors = new List<KeyValuePair<string, string>>(); 
             Warnings = new List<KeyValuePair<string, string>>();
-            ErrorInfo = new ErrorInfo();
         }
 
         public T Result { get; set; }
