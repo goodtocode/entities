@@ -3,13 +3,21 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "hostingPlanName": {
-      "value": null
+      "value": "AppServicePlan-F1"
     },
     "administratorLogin": {
-      "value": null
+      "value": "LocalAdmin"
     },
     "databaseName": {
-      "value": null
+      "value": "StackData"
+    },
+    "administratorLoginPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/8475cb81-d1d1-4a39-81f0-384227a6f979/resourceGroups/GoodToCode/providers/Microsoft.KeyVault/vaults/GoodToCodeVault"
+        },
+        "secretName": "LocalAdminPW"
+      }
     }
   }
 }

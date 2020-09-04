@@ -79,8 +79,8 @@
     }
   },
   "variables": {
-    "webSiteName": "[concat('webSite', uniqueString(resourceGroup().id))]",
-    "sqlserverName": "[concat('sqlserver', uniqueString(resourceGroup().id))]"
+    "webSiteName": "goodtocodestack",
+    "sqlserverName": "goodtocodestack"
   },
   "resources": [
     {

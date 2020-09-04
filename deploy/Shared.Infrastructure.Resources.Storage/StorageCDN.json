@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "variables": {
     "storageAccountName": "goodtocodestack",
-    "endpointName": "[concat('endpoint-', uniqueString(resourceGroup().id))]",
+    "endpointName": "goodtocodestackcdn",
     "profileName": "goodtocodestack"
   },
   "resources": [
