@@ -2,9 +2,9 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "variables": {
-    "storageAccountName": "[concat('storage', uniqueString(resourceGroup().id))]",
+    "storageAccountName": "goodtocodestack",
     "endpointName": "[concat('endpoint-', uniqueString(resourceGroup().id))]",
-    "profileName": "CdnProfile1"
+    "profileName": "goodtocodestack"
   },
   "resources": [
     {

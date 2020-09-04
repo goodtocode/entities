@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>2bd55fd8-d440-45bc-a5a0-f12d40191ee6</ProjectGuid>
+    <ProjectGuid>a8de7718-d339-4873-97eb-79c5470e57de</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup>
     <PrepareForBuildDependsOn>
@@ -27,8 +27,8 @@
       <Visible>False</Visible>
     </None>
     <Content Include="Deploy-AzureResourceGroup.ps1" />
-    <Content Include="DocumentDB.json" />
-    <Content Include="DocumentDB.parameters.json" />
+    <Content Include="StorageCDN.json" />
+    <Content Include="StorageCDN.parameters.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>

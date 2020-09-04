@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>9a02f7f5-9ba5-4b25-830a-48ba2d2d5571</ProjectGuid>
+    <ProjectGuid>ed2d9b65-3156-411a-bd07-41948b27f25c</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup>
     <PrepareForBuildDependsOn>
@@ -27,8 +27,8 @@
       <Visible>False</Visible>
     </None>
     <Content Include="Deploy-AzureResourceGroup.ps1" />
-    <Content Include="DocumentDB.json" />
-    <Content Include="DocumentDB.parameters.json" />
+    <Content Include="WebSiteSQLDatabase.json" />
+    <Content Include="WebSiteSQLDatabase.parameters.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>
