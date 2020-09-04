@@ -23,9 +23,8 @@ namespace GoodToCode.Chronology.Specs
         private readonly ScheduleCreateSteps createSteps = new ScheduleCreateSteps();
 
         public Schedule Sut { get; private set; }
-
+        public IList<Schedule> Suts { get; private set; }
         public Guid SutKey { get; private set; }
-
         public IList<Schedule> RecycleBin { get; private set; } = new List<Schedule>();
 
         public SchedulesGetSteps()
@@ -47,7 +46,8 @@ namespace GoodToCode.Chronology.Specs
         [When(@"Schedules are queried via Entity framework")]
         public async Task WhenSchedulesAreQueriedViaEntityFrameworkAsync()
         {
-            Sut = await _dbContext.Schedule.FirstOrDefaultAsync();
+            Suts = await _dbContext.Schedule.Take(10).ToListAsync();
+            Sut = Suts.FirstOrDefault();
         }
 
         [Then(@"All persisted Schedules are returned")]

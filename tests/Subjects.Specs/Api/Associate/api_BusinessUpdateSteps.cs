@@ -1,9 +1,11 @@
-﻿using GoodToCode.Subjects.Models;
+﻿using GoodToCode.Shared.Specs;
+using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -13,7 +15,7 @@ using TechTalk.SpecFlow;
 namespace GoodToCode.Subjects.Specs
 {
     [Binding]
-    public class BusinessInsertSteps
+    public class api_BusinessUpdateSteps : ICrudSteps<Business>
     {
         private readonly IConfiguration _config;
 
@@ -22,7 +24,13 @@ namespace GoodToCode.Subjects.Specs
         private Uri BusinessGetFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessGet?code=9AVbUx74MCU6k4wAXyO6NxEJy3SdWJMXAMwHQzm99LWB7RcVAF/1HQ==&key={SutKey}"); } }        
         private Uri BusinessSaveFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessSave?code=T3KPnhwNI1Ca67SbbXSvdHUIX3PhXc5uxjbFC0nKBGcahBfyEziHvQ==&key={SutKey}"); } }
 
-        public BusinessInsertSteps()
+        Business ICrudSteps<Business>.Sut => throw new NotImplementedException();
+
+        Guid ICrudSteps<Business>.SutKey => throw new NotImplementedException();
+
+        public IList<Business> RecycleBin => throw new NotImplementedException();
+
+        public api_BusinessUpdateSteps()
         {
             _config = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs"))
               .AddJsonFile($"appsettings.{(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT ") ?? "Development")}.json")
@@ -30,8 +38,8 @@ namespace GoodToCode.Subjects.Specs
               .Build();
         }
 
-        [Given(@"I have an empty business key")]
-        public void GivenIHaveAnEmptyBusinessKey()
+        [Given(@"I have an non empty business key")]
+        public void GivenIHaveAnNonEmptyBusinessKey()
         {
             SutKey = Guid.Empty;
         }
@@ -39,7 +47,7 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"the business name is provided")]
         public void GivenTheBusinessNameIsProvided()
         {
-            Sut = new Business() { BusinessName = "BusinessInsertSteps Test" };
+            Sut = new Business() { BusinessName = "BusinessUpdateSteps Test" };
         }
         
         [When(@"Business is posted via Azure Function")]
@@ -57,12 +65,17 @@ namespace GoodToCode.Subjects.Specs
             var found = await _context.Business.Where(x => x.BusinessKey == SutKey).AnyAsync();
             Assert.IsFalse(found);
         }
-                
-        [Then(@"the business is inserted to persistence")]
-        public async Task ThenTheBusinessIsInsertedToPersistence()
+        
+        [Then(@"the business is Updateed to persistence")]
+        public async Task ThenTheBusinessIsUpdateedToPersistence()
         {
             Sut = await _context.Business.FirstAsync(x => x.BusinessKey == SutKey);
             Assert.IsTrue(Sut.BusinessKey != Guid.Empty);
+        }
+
+        public Task Cleanup()
+        {
+            throw new NotImplementedException();
         }
     }
 }

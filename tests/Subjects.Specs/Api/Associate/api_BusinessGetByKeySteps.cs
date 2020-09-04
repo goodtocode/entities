@@ -1,9 +1,11 @@
-﻿using GoodToCode.Subjects.Models;
+﻿using GoodToCode.Shared.Specs;
+using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -12,7 +14,7 @@ using TechTalk.SpecFlow;
 namespace GoodToCode.Subjects.Specs
 {
     [Binding]
-    public class BusinessGetByKeySteps
+    public class api_BusinessGetByKeySteps : ICrudSteps<Business>
     {        
         private readonly SubjectsDbContext _context;
         private readonly string _connectionString;
@@ -22,7 +24,13 @@ namespace GoodToCode.Subjects.Specs
         private Business Sut { get; set; }
         private Uri BusinessGetFunctionsUrl { get { return new Uri($"https://subject-functions.azurewebsites.net/api/BusinessGet?code=9AVbUx74MCU6k4wAXyO6NxEJy3SdWJMXAMwHQzm99LWB7RcVAF/1HQ==&key={SutKey}"); } }
 
-        public BusinessGetByKeySteps()
+        Business ICrudSteps<Business>.Sut => throw new NotImplementedException();
+
+        Guid ICrudSteps<Business>.SutKey => throw new NotImplementedException();
+
+        public IList<Business> RecycleBin => throw new NotImplementedException();
+
+        public api_BusinessGetByKeySteps()
         {
             _config = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs"))
               .AddJsonFile($"appsettings.{(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT ") ?? "Development")}.json")
@@ -62,6 +70,11 @@ namespace GoodToCode.Subjects.Specs
         public void ThenTheMatchingBusinessIsReturned()
         {
             Assert.IsTrue(Sut.BusinessKey == SutKey);
+        }
+
+        public Task Cleanup()
+        {
+            throw new NotImplementedException();
         }
     }
 }

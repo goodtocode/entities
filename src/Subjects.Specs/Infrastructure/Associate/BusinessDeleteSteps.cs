@@ -23,6 +23,7 @@ namespace GoodToCode.Subjects.Specs
 
         public Guid SutKey { get; private set; }
         public Business Sut { get; private set; }
+        public IList<Business> Suts { get; private set; }
         public IList<Business> RecycleBin { get; set; } = new List<Business>();
 
         public BusinessDeleteSteps()

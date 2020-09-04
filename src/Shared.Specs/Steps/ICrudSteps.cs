@@ -6,6 +6,7 @@ namespace GoodToCode.Shared.Specs
 {
     public interface ICrudSteps<T>
     {
+        IList<T> Suts { get; }
         T Sut { get; }
         Guid SutKey { get; }
         IList<T> RecycleBin { get; }

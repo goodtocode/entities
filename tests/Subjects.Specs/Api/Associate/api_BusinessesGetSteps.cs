@@ -1,4 +1,5 @@
-﻿using GoodToCode.Subjects.Models;
+﻿using GoodToCode.Shared.Specs;
+using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -14,9 +15,8 @@ using TechTalk.SpecFlow;
 namespace GoodToCode.Subjects.Specs
 {
     [Binding]
-    public class BusinessCreateSteps : ICrudSteps<Business>
+    public class api_BusinessCreateSteps : ICrudSteps<Business>
     {
-        private readonly SubjectsDbContext _dbContext;
         private readonly string _connectionString;
         private readonly IConfiguration _config;
         private int _rowsAffected;
@@ -25,12 +25,12 @@ namespace GoodToCode.Subjects.Specs
         public Business Sut { get; private set; }
         public IList<Business> RecycleBin { get; private set; } = new List<Business>();
 
-        public BusinessCreateSteps()
+        public api_BusinessCreateSteps()
         {
             _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs")).Create();
             _connectionString = new ConnectionStringFactory(_config).Create();
-            _dbContext = new DbContextFactory(_connectionString).Create();
         }
+
         private Uri BusinessesGetFunctionsUrl { get { return new Uri("https://subject-functions.azurewebsites.net/api/BusinessesGet?code=Vi0CYsNfYvLrDMy6D0hiX9ZqpO5ORX/wsN5uqK2qzgjzORaSNTEfGQ=="); } }
 
 
@@ -73,6 +73,11 @@ namespace GoodToCode.Subjects.Specs
         public void ThenAllPersistedBusinessesAreReturned()
         {
             Assert.IsTrue(Sut.Any());
+        }
+
+        public Task Cleanup()
+        {
+            throw new NotImplementedException();
         }
     }
 }

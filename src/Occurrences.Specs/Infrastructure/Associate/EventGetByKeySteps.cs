@@ -21,6 +21,7 @@ namespace GoodToCode.Occurrences.Specs
         private readonly EventCreateSteps createSteps = new EventCreateSteps();
 
         public Event Sut { get; set; }
+        public IList<Event> Suts { get; set; }
         public Guid SutKey { get; set; }
         public IList<Event> RecycleBin { get; set; } = new List<Event>();
 

@@ -14,14 +14,14 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Subjects.Functions
 {
-    public static class BusinessSave
+    public static class BusinessPost
     {
-        [FunctionName("BusinessSave")]
+        [FunctionName("BusinessPost")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "put", "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation($"Subjects.BusinessSave({req.Query["key"]})");
+            log.LogInformation($"Subjects.BusinessPost({req.Query["key"]})");
             string defaultConnection = Environment.GetEnvironmentVariable("DefaultConnection") ?? "Server=tcp:goodtocodestack.database.windows.net,1433;Initial Catalog=StackData;Persist Security Info=False;User ID=LocalAdmin;Password=1202cc89-cb6f-453a-ac7e-550b3b5d2d0c;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             
             var options = new DbContextOptionsBuilder<SubjectsDbContext>();

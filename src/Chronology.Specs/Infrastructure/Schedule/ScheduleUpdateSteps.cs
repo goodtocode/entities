@@ -25,6 +25,7 @@ namespace GoodToCode.Chronology.Specs
         
         public Guid SutKey { get; private set; }
         public Schedule Sut { get; private set; }
+        public IList<Schedule> Suts { get; private set; }
         public IList<Schedule> RecycleBin { get; private set; } = new List<Schedule>();
 
         public ScheduleUpdateSteps()

@@ -16,26 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Api\Associate\BusinessesGet.feature.cs" />
-    <Compile Remove="Api\Associate\BusinessesGetSteps.cs" />
-    <Compile Remove="Api\Associate\BusinessGetByKey.feature.cs" />
-    <Compile Remove="Api\Associate\BusinessGetByKeySteps.cs" />
-    <Compile Remove="Api\Associate\BusinessInsert.feature.cs" />
-    <Compile Remove="Api\Associate\BusinessInsertSteps.cs" />
-    <Compile Remove="Api\Associate\BusinessUpdate.feature.cs" />
-    <Compile Remove="Api\Associate\BusinessUpdateSteps.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <SpecFlowFeatureFiles Remove="Api\Associate\BusinessesGet.feature" />
-    <SpecFlowFeatureFiles Remove="Api\Associate\BusinessGetByKey.feature" />
-    <SpecFlowFeatureFiles Remove="Api\Associate\BusinessInsert.feature" />
-    <SpecFlowFeatureFiles Remove="Api\Associate\BusinessUpdate.feature" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,6 +45,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="GoodToCode.Shared.Specs" Version="5.20.2008.1" />
+    <PackageReference Include="GoodToCode.Subjects.Domain.Models" Version="5.20.2008.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.7" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
@@ -77,15 +61,30 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Api\Associate\" />
     <Folder Include="Api\Detail\" />
     <Folder Include="Api\Option\" />
     <Folder Include="Api\Venture\" />
     <Folder Include="Api\Resource\" />
+    <Folder Include="Factories\" />
     <Folder Include="Functions\Detail\" />
     <Folder Include="Functions\Option\" />
     <Folder Include="Functions\Resource\" />
     <Folder Include="Functions\Venture\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Api\Associate\Api_BusinessesGet.feature.cs">
+      <DependentUpon>api_BusinessesGet.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Api\Associate\Api_BusinessGetByKey.feature.cs">
+      <DependentUpon>api_BusinessGetByKey.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Api\Associate\Api_BusinessInsert.feature.cs">
+      <DependentUpon>api_BusinessInsert.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Api\Associate\Api_BusinessUpdate.feature.cs">
+      <DependentUpon>api_BusinessUpdate.feature</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

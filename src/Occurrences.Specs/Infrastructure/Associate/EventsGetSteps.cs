@@ -20,9 +20,9 @@ namespace GoodToCode.Occurrences.Specs
         private readonly string _connectionString;
         private readonly IConfiguration _config;
         private readonly EventCreateSteps createSteps = new EventCreateSteps();
-
+        public Guid SutKey { get; set; }
         public Event Sut { get; private set; }
-        public Guid SutKey { get; private set; }
+        public IList<Event> Suts { get; private set; }
         public IList<Event> RecycleBin { get; set; } = new List<Event>();
 
         public EventsGetSteps()

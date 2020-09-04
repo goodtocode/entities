@@ -21,8 +21,9 @@ namespace GoodToCode.Locality.Specs
         private readonly IConfiguration _config;
         private readonly LocationCreateSteps createSteps = new LocationCreateSteps();
 
-        public Location Sut { get; set; }
-        public Guid SutKey { get; set; }
+        public Location Sut { get; private set; }
+        public IList<Location> Suts { get; private set; }
+        public Guid SutKey { get; private set; }
         public IList<Location> RecycleBin { get; set; } = new List<Location>();
 
         public LocationsGetSteps()

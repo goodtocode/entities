@@ -25,7 +25,6 @@ namespace GoodToCode.Shared.Specs
         public string BaseConfigFile { get; set; } = "appsettings.json";
         public string EnvironmentConfigFile { get { return $"appsettings.{CurrentEnvironment}.json"; } }
 
-
         public ConfigurationFactory(string configDirectory)
         {
 

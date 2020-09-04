@@ -22,9 +22,8 @@ namespace GoodToCode.Chronology.Specs
         private int _rowsAffected;
 
         public Schedule Sut { get; set; }
-
+        public IList<Schedule> Suts { get; set; }
         public Guid SutKey { get; set; }
-
         public IList<Schedule> RecycleBin { get; set; } = new List<Schedule>();
 
         public ScheduleCreateSteps()

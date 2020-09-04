@@ -19,22 +19,22 @@ namespace GoodToCode.Subjects.Api.Associate
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Business Get by Key from Web API", Description="\tGet a Business from Web API", SourceFile="Api\\Associate\\BusinessGetByKey.feature", SourceLine=0)]
-    public partial class BusinessGetByKeyFromWebAPIFeature
+    [TechTalk.SpecRun.FeatureAttribute("Businesses Get from Web API", Description="\tGet all Businesses from Web API", SourceFile="Api\\Associate\\Api_BusinessesGet.feature", SourceLine=0)]
+    public partial class BusinessesGetFromWebAPIFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "BusinessGetByKey.feature"
+#line 1 "Api_BusinessesGet.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Api/Associate", "Business Get by Key from Web API", "\tGet a Business from Web API", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Api/Associate", "Businesses Get from Web API", "\tGet all Businesses from Web API", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -70,16 +70,16 @@ namespace GoodToCode.Subjects.Api.Associate
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Get a business by key via Web API", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("Get all businesses via Web API", new string[] {
                 "query",
-                "azureFunction"}, SourceLine=4)]
-        public virtual void GetABusinessByKeyViaWebAPI()
+                "WebAPI"}, SourceLine=4)]
+        public virtual void GetAllBusinessesViaWebAPI()
         {
             string[] tagsOfScenario = new string[] {
                     "query",
-                    "azureFunction"};
+                    "WebAPI"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get a business by key via Web API", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all businesses via Web API", null, tagsOfScenario, argumentsOfScenario);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -101,16 +101,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 6
- testRunner.Given("I have a business key from Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I request the list of businesses from Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- testRunner.When("Business is Get by key via Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("Businesses are Get via Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
-  testRunner.And("the business exists in Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 9
- testRunner.Then("the matching business is returned from Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("All persisted businesses are returned from Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

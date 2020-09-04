@@ -22,13 +22,31 @@ namespace GoodToCode.Subjects.Models
         }
 
         // Business
+        public async Task<int> BusinessUpdateAsync(IBusiness business)
+        {
+            IDomainEvent<IBusiness> eventRaise;
+            _dbContext.Entry((Business)business).State = EntityState.Modified;
+            eventRaise = new BusinessUpdatedEvent(business);
+            _recordsAffected = await _dbContext.SaveChangesAsync();            
+            business.RaiseDomainEvent(eventRaise);
+            return _recordsAffected;
+        }
+        public async Task<int> BusinessCreateAsync(IBusiness business)
+        {
+            IDomainEvent<IBusiness> eventRaise;
+            _dbContext.Business.Add((Business)business);
+            eventRaise = new BusinessCreatedEvent(business);
+            _recordsAffected = await _dbContext.SaveChangesAsync();
+            business.RaiseDomainEvent(eventRaise);
+            return _recordsAffected;
+        }
         public async Task<int> BusinessSaveAsync(IBusiness business)
         {
             // Record in local storage
 
             IDomainEvent<IBusiness> eventRaise;
 
-            if (business.BusinessKey == Guid.Empty)
+            if (business.BusinessKey != Guid.Empty)
             {
                 _dbContext.Entry((Business)business).State = EntityState.Modified;
                 eventRaise = new BusinessUpdatedEvent(business);
@@ -38,7 +56,7 @@ namespace GoodToCode.Subjects.Models
                 _dbContext.Business.Add((Business)business);
                 eventRaise = new BusinessCreatedEvent(business);
             }
-            _recordsAffected = await _dbContext.SaveChangesAsync();            
+            _recordsAffected = await _dbContext.SaveChangesAsync();
             business.RaiseDomainEvent(eventRaise);
 
             return _recordsAffected;

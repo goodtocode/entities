@@ -1,5 +1,4 @@
 ﻿using GoodToCode.Shared.Specs;
-using GoodToCode.Subjects.Infrastructure;
 using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,53 +7,54 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace GoodToCode.Subjects.Specs
 {
     [Binding]
-    public class BusinessesGetSteps : ICrudSteps<Business>
+    public class api_BusinessesGetSteps : ICrudSteps<Business>
     {
-        private readonly SubjectsDbContext _dbContext;
-        private readonly string _connectionString;
         private readonly IConfiguration _config;
-        private readonly BusinessCreateSteps createSteps = new BusinessCreateSteps();
+        private readonly api_BusinessCreateSteps createSteps = new api_BusinessCreateSteps();
 
+        public List<Business> Suts { get; private set; }
         public Business Sut { get; private set; }
-        public IList<Business> Suts { get; private set; }
         public Guid SutKey { get; private set; }
         public IList<Business> RecycleBin { get; set; }
+        public Uri Url { get; }
 
-        public BusinessesGetSteps()
+        public api_BusinessesGetSteps()
         {
             _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs")).Create();
-            _connectionString = new ConnectionStringFactory(_config).Create();
-            _dbContext = new DbContextFactory(_connectionString).Create();
-        }
+            Url = new Uri($"{_config.GetValue<string>("Functions:Subjects")}/api/BusinessesGet?code=Vi0CYsNfYvLrDMy6D0hiX9ZqpO5ORX/wsN5uqK2qzgjzORaSNTEfGQ=");
+        }        
 
         [Given(@"I request the list of businesses")]
-        public async Task GivenIRequestTheListOfBusinesses()
+        public void GivenIRequestTheListOfBusinesses()
         {
             createSteps.GivenANewBusinessHasBeenCreated();
             await createSteps.WhenBusinessIsInsertedViaEntityFramework();
+            var client = new HttpClientFactory().Create();
+            client.GetAsync()
             Sut = await _dbContext.Business.FirstAsync();
             SutKey = Sut.BusinessKey;
         }
 
-        [When(@"Businesses are queried via Entity framework")]
-        public async Task WhenBusinessesAreQueriedViaEntityFrameworkAsync()
+        [When(@"Businesses are queried via Azure Function")]
+        public async Task WhenBusinessesAreQueriedViaAzureFunction()
         {
-            Suts = await _dbContext.Business.Take(10).ToListAsync();
-            Sut = Suts.FirstOrDefault();
-            SutKey = Sut.BusinessKey;
-
+            var client = new HttpClientFactory().Create();
+            var response = await client.GetAsync(Url);
+            var result = await response.Content.ReadAsStringAsync();
+            Suts = JsonSerializer.Deserialize<List<Business>>(result).FirstOrDefault();
         }
 
         [Then(@"All persisted businesses are returned")]
         public void ThenAllPersistedBusinessesAreReturned()
         {
-            Assert.IsTrue(Sut.BusinessKey != Guid.Empty);
+            Assert.IsTrue(Suts.Any());
         }
 
         [TestCleanup]
@@ -62,9 +62,9 @@ namespace GoodToCode.Subjects.Specs
         {
             foreach (var item in RecycleBin)
             {
-                _dbContext.Entry(item).State = EntityState.Deleted;
-                await _dbContext.SaveChangesAsync();
+                
             }
+            await createSteps.Cleanup();
         }
     }
 }

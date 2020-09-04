@@ -36,7 +36,7 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"A new Business Save Command has been created")]
         public void GivenANewBusinessSaveCommandHasBeenCreated()
         {
-            SutKey = Guid.NewGuid();
+            SutKey = Guid.Empty;
             Sut = new Business()
             {
                 BusinessKey = SutKey,
@@ -48,7 +48,6 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"the Business Save Command validates")]
         public void GivenTheBusinessSaveCommandValidates()
         {
-            Assert.IsTrue(Sut.BusinessKey != Guid.Empty);
             Assert.IsFalse(Sut.BusinessName.IsNullOrWhiteSpace());
         }
 

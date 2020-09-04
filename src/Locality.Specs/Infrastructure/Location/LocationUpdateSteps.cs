@@ -24,7 +24,8 @@ namespace GoodToCode.Locality.Specs
         private string SutName { get; set; }
         private string SutNameNew { get; set; }
 
-        public Location Sut { get; set; }
+        public Location Sut { get; private set; }
+        public IList<Location> Suts { get; private set; }
         public Guid SutKey { get; set; }
         public IList<Location> RecycleBin { get; set; } = new List<Location>();
 
