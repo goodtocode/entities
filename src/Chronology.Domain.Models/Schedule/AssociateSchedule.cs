@@ -6,10 +6,11 @@ namespace GoodToCode.Chronology.Models
 {
     public class AssociateSchedule : DomainModel<IAssociateSchedule>, IAssociateSchedule
     {
-        [Key]
+        
         public Guid AssociateScheduleKey { get; set; }
         public Guid AssociateKey { get; set; }
         public Guid ScheduleKey { get; set; }
+        public override Guid RowKey { get { return ScheduleKey; } protected set { ScheduleKey = value; } }
         public Guid? ScheduleTypeKey { get; set; }
         
         

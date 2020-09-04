@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Shared.Models
 {
     public abstract class DomainModel<TModel> : IDomainModel<TModel>
     {
         private readonly List<IDomainEvent<TModel>> _domainEvents = new List<IDomainEvent<TModel>>();
-        public IReadOnlyList<IDomainEvent<TModel>> DomainEvents => _domainEvents;
 
-        public Guid Key { get; }
+        [Key]
+        public abstract Guid RowKey { get; protected set; }
+        public string PartitionKey { get; } = "Common";        
+        public IReadOnlyList<IDomainEvent<TModel>> DomainEvents => _domainEvents;        
 
         protected DomainModel()
         {
-        }
-
-        protected DomainModel(Guid key)
-            : this()
-        {
-            Key = key;
         }
 
         public void RaiseDomainEvent(IDomainEvent<TModel> domainEvent)
@@ -41,10 +38,10 @@ namespace GoodToCode.Shared.Models
             if (GetType() != other.GetType())
                 return false;
 
-            if (Key == Guid.Empty || other.Key == Guid.Empty)
+            if (RowKey == Guid.Empty || other.RowKey == Guid.Empty)
                 return false;
 
-            return Key == other.Key;
+            return RowKey == other.RowKey;
         }
 
         public static bool operator ==(DomainModel<TModel> a, DomainModel<TModel> b)
@@ -65,7 +62,7 @@ namespace GoodToCode.Shared.Models
 
         public override int GetHashCode()
         {
-            return (GetType().ToString() + Key).GetHashCode();
+            return (GetType().ToString() + RowKey).GetHashCode();
         }
     }
 }

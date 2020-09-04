@@ -7,7 +7,7 @@ namespace GoodToCode.Locality.Models
 {
     public class LocationArea : DomainModel<ILocationArea>, ILocationArea
     {
-        [Key]
+        public override Guid RowKey { get { return LocationAreaKey; } protected set { LocationAreaKey = value; } }
         public Guid LocationAreaKey { get; set; }
         public Guid LocationKey { get; set; }
         public Guid PolygonKey { get; set; }

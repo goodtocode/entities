@@ -5,7 +5,7 @@ namespace GoodToCode.Shared.Models
 {
     public interface IDomainModel<TModel>
     {
-        Guid Key { get; }
+        Guid RowKey { get; }
         bool Equals(object obj);
         int GetHashCode();
         void RaiseDomainEvent(IDomainEvent<TModel> domainEvent);

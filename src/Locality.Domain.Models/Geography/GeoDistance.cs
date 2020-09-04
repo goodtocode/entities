@@ -7,7 +7,7 @@ namespace GoodToCode.Locality.Models
 {
     public class GeoDistance : DomainModel<IGeoDistance>, IGeoDistance
     {
-        [Key]
+        public override Guid RowKey { get { return GeoDistanceKey; } protected set { GeoDistanceKey = value; } }
         public Guid GeoDistanceKey { get; set; }
         public Guid StartLatLongKey { get; set; }
         public Guid EndLatLongKey { get; set; }

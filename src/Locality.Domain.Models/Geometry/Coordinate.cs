@@ -7,7 +7,7 @@ namespace GoodToCode.Locality.Models
 {
     public class Coordinate : DomainModel<ICoordinate>, ICoordinate
     {
-        [Key]
+        public override Guid RowKey { get { return CoordinateKey; } protected set { CoordinateKey = value; } }
         public Guid CoordinateKey { get; set; }
         public Point CoordinatePoint { get; set; }
     }

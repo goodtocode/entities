@@ -35,7 +35,7 @@ namespace GoodToCode.Locality.Specs
         [Given(@"A new Location has been created")]
         public void GivenANewLocationHasBeenCreated()
         {
-            SutKey = Guid.NewGuid();
+            SutKey = Guid.Empty;
             Sut = new Location()
             {
                 LocationKey = SutKey,

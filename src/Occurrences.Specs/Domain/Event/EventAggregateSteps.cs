@@ -38,7 +38,7 @@ namespace GoodToCode.Occurrences.Specs
         [Given(@"A new Event is created for the aggregate")]
         public void GivenANewEventIsCreatedForTheAggregate()
         {
-            SutKey = Guid.NewGuid();
+            SutKey = Guid.Empty;
             SutEvent = new Event()
             {
                 EventKey = SutKey,

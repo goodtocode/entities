@@ -8,14 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GoodToCode.Chronology.Domain.Models" Version="5.20.2008.1" />
-    <PackageReference Include="GoodToCode.Chronology.Infrastructure.Persistence" Version="5.20.2008.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Chronology.Domain.Models\Chronology.Domain.Models.csproj" />
+    <ProjectReference Include="..\..\src\Chronology.Infrastructure.Persistence\Chronology.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

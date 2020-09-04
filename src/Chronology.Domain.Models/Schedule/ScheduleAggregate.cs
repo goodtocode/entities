@@ -28,7 +28,7 @@ namespace GoodToCode.Chronology.Models
 
             IDomainEvent<ISchedule> eventRaise;
 
-            if (schedule.ScheduleKey == Guid.Empty)
+            if (schedule.ScheduleKey != Guid.Empty)
             {
                 _dbContext.Entry((Schedule)schedule).State = EntityState.Modified;
                 eventRaise = new ScheduleUpdatedEvent(schedule);
@@ -49,7 +49,7 @@ namespace GoodToCode.Chronology.Models
 
             IDomainEvent<ISchedule> eventRaise;
 
-            if (schedule.ScheduleKey == Guid.Empty)
+            if (schedule.ScheduleKey != Guid.Empty)
             {
                 _dbContext.Entry((Schedule)schedule).State = EntityState.Deleted;
                 eventRaise = new ScheduleUpdatedEvent(schedule);

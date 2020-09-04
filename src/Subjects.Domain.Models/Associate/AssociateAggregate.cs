@@ -67,7 +67,7 @@ namespace GoodToCode.Subjects.Models
 
             IDomainEvent<IBusiness> eventRaise;
 
-            if (business.BusinessKey == Guid.Empty)
+            if (business.BusinessKey != Guid.Empty)
             {
                 _dbContext.Entry((Business)business).State = EntityState.Deleted;
                 eventRaise = new BusinessUpdatedEvent(business);
@@ -89,7 +89,7 @@ namespace GoodToCode.Subjects.Models
             // Record locally
             // raise event with data to persistence
 
-            if (person.PersonKey == Guid.Empty)
+            if (person.PersonKey != Guid.Empty)
                 _dbContext.Entry(person).State = EntityState.Modified;
             else
                 _dbContext.Person.Add((Person)person);
@@ -104,7 +104,7 @@ namespace GoodToCode.Subjects.Models
             // Record locally
             // raise event with data to persistence
 
-            if (government.GovernmentKey == Guid.Empty)
+            if (government.GovernmentKey != Guid.Empty)
                 _dbContext.Entry(government).State = EntityState.Modified;
             else
                 _dbContext.Government.Add((Government)government);

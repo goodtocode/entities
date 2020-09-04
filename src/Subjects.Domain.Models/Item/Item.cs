@@ -7,7 +7,7 @@ namespace GoodToCode.Subjects.Models
 {
     public class Item : DomainModel<IItem>, IItem
     {
-        [Key]
+        public override Guid RowKey { get { return ItemKey; } protected set { ItemKey = value; } }
         public Guid ItemKey { get; set; }
         public string ItemName { get; set; }
         public string ItemDescription { get; set; }

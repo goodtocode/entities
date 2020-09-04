@@ -12,6 +12,10 @@ Echo   2. DbContext.cs parameterless constructor
 Echo   3. .NET Core only, csproj must be TargetFramework-netcoreapp3.1
 
 cd %~dp0
+
+dotnet ef database drop --force
+REM Create new Azure DB
+
 dotnet tool install --global dotnet-ef
 dotnet tool update --global dotnet-ef
 

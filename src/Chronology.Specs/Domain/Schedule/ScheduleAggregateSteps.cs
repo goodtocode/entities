@@ -38,7 +38,7 @@ namespace GoodToCode.Chronology.Specs
         [Given(@"A new Schedule is created for the aggregate")]
         public void GivenANewScheduleIsCreatedForTheAggregate()
         {
-            SutKey = Guid.NewGuid();
+            SutKey = Guid.Empty;
             SutSchedule = new Schedule()
             {
                 ScheduleKey = SutKey,

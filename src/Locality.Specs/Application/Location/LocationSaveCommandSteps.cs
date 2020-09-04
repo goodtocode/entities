@@ -36,7 +36,7 @@ namespace GoodToCode.Locality.Specs
         [Given(@"A new Location Save Command has been created")]
         public void GivenANewLocationSaveCommandHasBeenCreated()
         {
-            SutKey = Guid.NewGuid();
+            SutKey = Guid.Empty;
             Sut = new Location()
             {
                 LocationKey = SutKey,

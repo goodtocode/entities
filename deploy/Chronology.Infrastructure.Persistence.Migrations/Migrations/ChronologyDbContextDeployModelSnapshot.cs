@@ -21,11 +21,14 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.AssociateSchedule", b =>
                 {
-                    b.Property<Guid>("AssociateScheduleKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AssociateKey")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AssociateScheduleKey")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ScheduleKey")
@@ -34,7 +37,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid?>("ScheduleTypeKey")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("AssociateScheduleKey");
+                    b.HasKey("RowKey");
 
                     b.HasIndex("AssociateScheduleKey")
                         .IsUnique()
@@ -49,11 +52,14 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.AssociateTimeRecurring", b =>
                 {
-                    b.Property<Guid>("AssociateTimeRecurringKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AssociateKey")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AssociateTimeRecurringKey")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("DayName")
@@ -72,7 +78,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid?>("TimeTypeKey")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("AssociateTimeRecurringKey");
+                    b.HasKey("RowKey");
 
                     b.HasIndex("AssociateTimeRecurringKey")
                         .IsUnique()
@@ -87,7 +93,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.LocationTimeRecurring", b =>
                 {
-                    b.Property<Guid>("LocationTimeRecurringKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -97,6 +103,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                         .HasMaxLength(50);
 
                     b.Property<Guid>("LocationKey")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("LocationTimeRecurringKey")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TimeName")
@@ -110,7 +119,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid?>("TimeTypeKey")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("LocationTimeRecurringKey");
+                    b.HasKey("RowKey");
 
                     b.HasIndex("LocationTimeRecurringKey")
                         .IsUnique()
@@ -125,11 +134,14 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.ResourceSchedule", b =>
                 {
-                    b.Property<Guid>("ResourceScheduleKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ResourceKey")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ResourceScheduleKey")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ScheduleKey")
@@ -138,7 +150,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid?>("ScheduleTypeKey")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("ResourceScheduleKey");
+                    b.HasKey("RowKey");
 
                     b.HasIndex("ResourceScheduleKey")
                         .IsUnique()
@@ -153,7 +165,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.ResourceTimeRecurring", b =>
                 {
-                    b.Property<Guid>("ResourceTimeRecurringKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -163,6 +175,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                         .HasMaxLength(50);
 
                     b.Property<Guid>("ResourceKey")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ResourceTimeRecurringKey")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TimeName")
@@ -176,7 +191,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid?>("TimeTypeKey")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("ResourceTimeRecurringKey");
+                    b.HasKey("RowKey");
 
                     b.HasIndex("ResourceTimeRecurringKey")
                         .IsUnique()
@@ -191,7 +206,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.Schedule", b =>
                 {
-                    b.Property<Guid>("ScheduleKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -199,12 +214,15 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                         .HasColumnType("nvarchar(2000)")
                         .HasMaxLength(2000);
 
+                    b.Property<Guid>("ScheduleKey")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ScheduleName")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.HasKey("ScheduleKey");
+                    b.HasKey("RowKey");
 
                     b.HasIndex("ScheduleKey")
                         .IsUnique();
@@ -214,17 +232,20 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.ScheduleSlot", b =>
                 {
-                    b.Property<Guid>("ScheduleSlotKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ScheduleKey")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ScheduleSlotKey")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("SlotKey")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("ScheduleSlotKey");
+                    b.HasKey("RowKey");
 
                     b.HasIndex("ScheduleKey")
                         .HasName("IX_ScheduleSlot_Schedule");
@@ -245,7 +266,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.ScheduleType", b =>
                 {
-                    b.Property<Guid>("ScheduleTypeKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -253,12 +274,15 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
+                    b.Property<Guid>("ScheduleTypeKey")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ScheduleTypeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.HasKey("ScheduleTypeKey");
+                    b.HasKey("RowKey");
 
                     b.HasIndex("ScheduleTypeKey")
                         .IsUnique()
@@ -269,7 +293,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.Slot", b =>
                 {
-                    b.Property<Guid>("SlotKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -277,12 +301,15 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                         .HasColumnType("nvarchar(2000)")
                         .HasMaxLength(2000);
 
+                    b.Property<Guid>("SlotKey")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("SlotName")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.HasKey("SlotKey");
+                    b.HasKey("RowKey");
 
                     b.HasIndex("SlotKey")
                         .IsUnique();
@@ -292,7 +319,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.SlotLocation", b =>
                 {
-                    b.Property<Guid>("SlotLocationKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -305,7 +332,10 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("SlotKey")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("SlotLocationKey");
+                    b.Property<Guid>("SlotLocationKey")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("RowKey");
 
                     b.HasIndex("SlotKey")
                         .HasName("IX_SlotLocation_Slot");
@@ -323,7 +353,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.SlotResource", b =>
                 {
-                    b.Property<Guid>("SlotResourceKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -336,7 +366,10 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("SlotKey")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("SlotResourceKey");
+                    b.Property<Guid>("SlotResourceKey")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("RowKey");
 
                     b.HasIndex("ResourceKey")
                         .HasName("IX_SlotResource_Resource");
@@ -356,11 +389,14 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.SlotTimeRange", b =>
                 {
-                    b.Property<Guid>("SlotTimeRangeKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("SlotKey")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SlotTimeRangeKey")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("TimeRangeKey")
@@ -369,7 +405,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid?>("TimeTypeKey")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("SlotTimeRangeKey");
+                    b.HasKey("RowKey");
 
                     b.HasIndex("SlotKey")
                         .HasName("IX_SlotTimeRange_Slot");
@@ -383,11 +419,14 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.SlotTimeRecurring", b =>
                 {
-                    b.Property<Guid>("SlotTimeRecurringKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("SlotKey")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SlotTimeRecurringKey")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("TimeRecurringKey")
@@ -396,7 +435,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid?>("TimeTypeKey")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("SlotTimeRecurringKey");
+                    b.HasKey("RowKey");
 
                     b.HasIndex("SlotKey")
                         .HasName("IX_SlotTimeRecurring_Slot");
@@ -410,7 +449,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.TimeCycle", b =>
                 {
-                    b.Property<Guid>("TimeCycleKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -424,12 +463,15 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
+                    b.Property<Guid>("TimeCycleKey")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("TimeCycleName")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.HasKey("TimeCycleKey");
+                    b.HasKey("RowKey");
 
                     b.HasIndex("TimeCycleKey")
                         .IsUnique()
@@ -440,7 +482,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.TimeRange", b =>
                 {
-                    b.Property<Guid>("TimeRangeKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -450,7 +492,10 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime");
 
-                    b.HasKey("TimeRangeKey");
+                    b.Property<Guid>("TimeRangeKey")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("RowKey");
 
                     b.HasIndex("TimeRangeKey")
                         .IsUnique();
@@ -464,7 +509,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.TimeRecurring", b =>
                 {
-                    b.Property<Guid>("TimeRecurringKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -486,7 +531,10 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("TimeCycleKey")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("TimeRecurringKey");
+                    b.Property<Guid>("TimeRecurringKey")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("RowKey");
 
                     b.HasIndex("TimeRecurringKey")
                         .IsUnique();
@@ -500,7 +548,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.TimeType", b =>
                 {
-                    b.Property<Guid>("TimeTypeKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -511,12 +559,15 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
+                    b.Property<Guid>("TimeTypeKey")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("TimeTypeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.HasKey("TimeTypeKey");
+                    b.HasKey("RowKey");
 
                     b.HasIndex("TimeTypeKey")
                         .IsUnique()
@@ -527,7 +578,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.VentureSchedule", b =>
                 {
-                    b.Property<Guid>("VentureScheduleKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -540,7 +591,10 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("VentureKey")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("VentureScheduleKey");
+                    b.Property<Guid>("VentureScheduleKey")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("RowKey");
 
                     b.HasIndex("VentureScheduleKey")
                         .IsUnique()
@@ -555,7 +609,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
             modelBuilder.Entity("GoodToCode.Chronology.Models.VentureTimeRecurring", b =>
                 {
-                    b.Property<Guid>("VentureTimeRecurringKey")
+                    b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -578,7 +632,10 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("VentureKey")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("VentureTimeRecurringKey");
+                    b.Property<Guid>("VentureTimeRecurringKey")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("RowKey");
 
                     b.HasIndex("VentureTimeRecurringKey")
                         .IsUnique()

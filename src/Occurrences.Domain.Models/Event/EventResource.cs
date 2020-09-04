@@ -7,7 +7,7 @@ namespace GoodToCode.Occurrences.Models
 {
     public class EventResource : DomainModel<IEventResource>, IEventResource
     {
-        [Key]
+        public override Guid RowKey { get { return EventResourceKey; } protected set { EventResourceKey = value; } }
         public Guid EventResourceKey { get; set; }
         public Guid EventKey { get; set; }
         public Guid ResourceKey { get; set; }

@@ -27,7 +27,7 @@ namespace GoodToCode.Occurrences.Models
 
             IDomainEvent<IEvent> eventRaise;
 
-            if (eventItem.EventKey == Guid.Empty)
+            if (eventItem.EventKey != Guid.Empty)
             {
                 _dbContext.Entry((Event)eventItem).State = EntityState.Modified;
                 eventRaise = new EventUpdatedEvent(eventItem);
@@ -48,7 +48,7 @@ namespace GoodToCode.Occurrences.Models
 
             IDomainEvent<IEvent> eventRaise;
 
-            if (eventItem.EventKey == Guid.Empty)
+            if (eventItem.EventKey != Guid.Empty)
             {
                 _dbContext.Entry((Event)eventItem).State = EntityState.Deleted;
                 eventRaise = new EventUpdatedEvent(eventItem);

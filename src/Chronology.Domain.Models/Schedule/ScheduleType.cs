@@ -6,8 +6,9 @@ namespace GoodToCode.Chronology.Models
 {
     public class ScheduleType : DomainModel<IScheduleType>, IScheduleType
     {
-        [Key]
+        
         public Guid ScheduleTypeKey { get; set; }
+        public override Guid RowKey { get { return ScheduleTypeKey; } protected set { ScheduleTypeKey = value; } }
         public string ScheduleTypeName { get; set; }
         public string ScheduleTypeDescription { get; set; }
     }

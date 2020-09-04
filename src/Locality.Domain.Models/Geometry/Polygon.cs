@@ -8,9 +8,8 @@ namespace GoodToCode.Locality.Models
 {
     public class Polygon : DomainModel<IPolygon>, IPolygon
     {
-        [Key]
+        public override Guid RowKey { get { return PolygonKey; } protected set { PolygonKey = value; } }
         public Guid PolygonKey { get; set; }
-
         public Geometry PolygonSequence { get; set; }
     }
 }

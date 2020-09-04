@@ -38,7 +38,7 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"A new Business is created for the aggregate")]
         public void GivenANewBusinessIsCreatedForTheAggregate()
         {
-            SutKey = Guid.NewGuid();
+            SutKey = Guid.Empty;
             SutBusiness = new Business()
             {
                 BusinessKey = SutKey,

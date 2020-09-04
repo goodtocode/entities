@@ -6,7 +6,7 @@ namespace GoodToCode.Subjects.Models
 {
     public class VentureResource : DomainModel<IVentureResource>, IVentureResource
     {
-        [Key]
+        public override Guid RowKey { get { return VentureResourceKey; } protected set { VentureResourceKey = value; } }
         public Guid VentureResourceKey { get; set; }
         public Guid VentureKey { get; set; }
         public Guid ResourceKey { get; set; }

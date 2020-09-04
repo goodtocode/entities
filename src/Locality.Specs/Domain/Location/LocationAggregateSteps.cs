@@ -38,7 +38,7 @@ namespace GoodToCode.Locality.Specs
         [Given(@"A new Location is created for the aggregate")]
         public void GivenANewLocationIsCreatedForTheAggregate()
         {
-            SutKey = Guid.NewGuid();
+            SutKey = Guid.Empty;
             SutLocation = new Location()
             {
                 LocationKey = SutKey,

@@ -7,9 +7,7 @@ namespace GoodToCode.Subjects.Models
 {
     public class Associate : DomainModel<IAssociate>, IAssociate
     {
-        [Key]
-        public Guid AssociateKey { get; set; }
-        
-        
+        public override Guid RowKey { get { return AssociateKey; } protected set { AssociateKey = value; } }
+        public Guid AssociateKey { get; set; }                
     }
 }

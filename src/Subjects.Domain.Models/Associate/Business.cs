@@ -6,7 +6,7 @@ namespace GoodToCode.Subjects.Models
 {
     public class Business : DomainModel<IBusiness>, IBusiness
     {
-        [Key]
+        public override Guid RowKey { get { return BusinessKey; } protected set { BusinessKey = value; } }
         public Guid BusinessKey { get; set; }
         public string BusinessName { get; set; }
         public string TaxNumber { get; set; }

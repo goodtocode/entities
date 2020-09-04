@@ -36,7 +36,7 @@ namespace GoodToCode.Chronology.Specs
         [Given(@"A new Schedule has been created")]
         public void GivenANewScheduleHasBeenCreated()
         {
-            SutKey = Guid.NewGuid();
+            SutKey = Guid.Empty;
             Sut = new Schedule()
             {
                 ScheduleKey = SutKey,

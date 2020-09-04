@@ -7,7 +7,7 @@ namespace GoodToCode.Locality.Models
 {
     public class Line : DomainModel<ILine>, ILine
     {
-        [Key]
+        public override Guid RowKey { get { return LineKey; } protected set { LineKey = value; } }
         public Guid LineKey { get; set; }
         public Point StartPoint { get; set; }
         public Point EndPoint { get; set; }

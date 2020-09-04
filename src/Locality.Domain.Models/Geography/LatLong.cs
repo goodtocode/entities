@@ -7,7 +7,7 @@ namespace GoodToCode.Locality.Models
 {
     public class LatLong : DomainModel<ILatLong>, ILatLong
     {
-        [Key]
+        public override Guid RowKey { get { return LatLongKey; } protected set { LatLongKey = value; } }
         public Guid LatLongKey { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }

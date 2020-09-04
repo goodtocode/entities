@@ -7,7 +7,7 @@ namespace GoodToCode.Occurrences.Models
 {
     public class AssociateAppointment : DomainModel<IAssociateAppointment>, IAssociateAppointment
     {
-        [Key]
+        public override Guid RowKey { get { return AssociateAppointmentKey; } protected set { AssociateAppointmentKey = value; } }
         public Guid AssociateAppointmentKey { get; set; }
         public Guid AssociateKey { get; set; }
         public Guid AppointmentKey { get; set; }

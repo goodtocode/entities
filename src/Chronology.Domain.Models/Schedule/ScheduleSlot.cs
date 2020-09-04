@@ -6,7 +6,7 @@ namespace GoodToCode.Chronology.Models
 {
     public class ScheduleSlot : DomainModel<IScheduleSlot>, IScheduleSlot
     {
-        [Key]
+        public override Guid RowKey { get { return ScheduleKey; } protected set { ScheduleKey = value; } }        
         public Guid ScheduleSlotKey { get; set; }
         public Guid ScheduleKey { get; set; }
         public Guid SlotKey { get; set; }

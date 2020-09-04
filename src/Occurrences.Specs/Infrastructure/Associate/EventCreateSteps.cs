@@ -37,7 +37,7 @@ namespace GoodToCode.Occurrences.Specs
         [Given(@"A new Event has been created")]
         public void GivenANewEventHasBeenCreated()
         {
-            SutKey = Guid.NewGuid();
+            SutKey = Guid.Empty;
             Sut = new Event()
             {
                 EventKey = SutKey,

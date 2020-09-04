@@ -552,3 +552,410 @@ END;
 
 GO
 
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[VentureTimeRecurring] DROP CONSTRAINT [PK_VentureTimeRecurring];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[VentureSchedule] DROP CONSTRAINT [PK_VentureSchedule];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[TimeType] DROP CONSTRAINT [PK_TimeType];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[TimeRecurring] DROP CONSTRAINT [PK_TimeRecurring];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[TimeRange] DROP CONSTRAINT [PK_TimeRange];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[TimeCycle] DROP CONSTRAINT [PK_TimeCycle];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[SlotTimeRecurring] DROP CONSTRAINT [PK_SlotTimeRecurring];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[SlotTimeRange] DROP CONSTRAINT [PK_SlotTimeRange];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[SlotResource] DROP CONSTRAINT [PK_SlotResource];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[SlotLocation] DROP CONSTRAINT [PK_SlotLocation];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[Slot] DROP CONSTRAINT [PK_Slot];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[ScheduleType] DROP CONSTRAINT [PK_ScheduleType];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[ScheduleSlot] DROP CONSTRAINT [PK_ScheduleSlot];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[Schedule] DROP CONSTRAINT [PK_Schedule];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[ResourceTimeRecurring] DROP CONSTRAINT [PK_ResourceTimeRecurring];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[ResourceSchedule] DROP CONSTRAINT [PK_ResourceSchedule];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[LocationTimeRecurring] DROP CONSTRAINT [PK_LocationTimeRecurring];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[AssociateTimeRecurring] DROP CONSTRAINT [PK_AssociateTimeRecurring];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[AssociateSchedule] DROP CONSTRAINT [PK_AssociateSchedule];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[VentureTimeRecurring] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[VentureSchedule] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[TimeType] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[TimeRecurring] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[TimeRange] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[TimeCycle] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[SlotTimeRecurring] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[SlotTimeRange] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[SlotResource] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[SlotLocation] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[Slot] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[ScheduleType] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[ScheduleSlot] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[Schedule] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[ResourceTimeRecurring] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[ResourceSchedule] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[LocationTimeRecurring] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[AssociateTimeRecurring] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[AssociateSchedule] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[VentureTimeRecurring] ADD CONSTRAINT [PK_VentureTimeRecurring] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[VentureSchedule] ADD CONSTRAINT [PK_VentureSchedule] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[TimeType] ADD CONSTRAINT [PK_TimeType] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[TimeRecurring] ADD CONSTRAINT [PK_TimeRecurring] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[TimeRange] ADD CONSTRAINT [PK_TimeRange] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[TimeCycle] ADD CONSTRAINT [PK_TimeCycle] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[SlotTimeRecurring] ADD CONSTRAINT [PK_SlotTimeRecurring] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[SlotTimeRange] ADD CONSTRAINT [PK_SlotTimeRange] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[SlotResource] ADD CONSTRAINT [PK_SlotResource] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[SlotLocation] ADD CONSTRAINT [PK_SlotLocation] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[Slot] ADD CONSTRAINT [PK_Slot] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[ScheduleType] ADD CONSTRAINT [PK_ScheduleType] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[ScheduleSlot] ADD CONSTRAINT [PK_ScheduleSlot] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[Schedule] ADD CONSTRAINT [PK_Schedule] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[ResourceTimeRecurring] ADD CONSTRAINT [PK_ResourceTimeRecurring] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[ResourceSchedule] ADD CONSTRAINT [PK_ResourceSchedule] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[LocationTimeRecurring] ADD CONSTRAINT [PK_LocationTimeRecurring] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[AssociateTimeRecurring] ADD CONSTRAINT [PK_AssociateTimeRecurring] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    ALTER TABLE [Chronology].[AssociateSchedule] ADD CONSTRAINT [PK_AssociateSchedule] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904190307_20200904-120238')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20200904190307_20200904-120238', N'3.1.7');
+END;
+
+GO
+

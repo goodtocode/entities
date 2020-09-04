@@ -36,7 +36,7 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"A new Business has been created")]
         public void GivenANewBusinessHasBeenCreated()
         {
-            SutKey = Guid.NewGuid();
+            SutKey = Guid.Empty;
             Sut = new Business()
             {
                 BusinessKey = SutKey,

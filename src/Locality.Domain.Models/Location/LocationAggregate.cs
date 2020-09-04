@@ -27,7 +27,7 @@ namespace GoodToCode.Locality.Models
 
             IDomainEvent<ILocation> eventRaise;
 
-            if (location.LocationKey == Guid.Empty)
+            if (location.LocationKey != Guid.Empty)
             {
                 _dbContext.Entry((Location)location).State = EntityState.Modified;
                 eventRaise = new LocationUpdatedEvent(location);
@@ -48,7 +48,7 @@ namespace GoodToCode.Locality.Models
 
             IDomainEvent<ILocation> eventRaise;
 
-            if (location.LocationKey == Guid.Empty)
+            if (location.LocationKey != Guid.Empty)
             {
                 _dbContext.Entry((Location)location).State = EntityState.Deleted;
                 eventRaise = new LocationUpdatedEvent(location);

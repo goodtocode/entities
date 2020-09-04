@@ -36,7 +36,7 @@ namespace GoodToCode.Occurrences.Specs
         [Given(@"A new Event Save Command has been created")]
         public void GivenANewEventSaveCommandHasBeenCreated()
         {
-            SutKey = Guid.NewGuid();
+            SutKey = Guid.Empty;
             Sut = new Event()
             {
                 EventKey = SutKey,

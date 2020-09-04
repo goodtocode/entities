@@ -6,7 +6,7 @@ namespace GoodToCode.Locality.Models
 {
     public class LocationType : DomainModel<ILocationType>, ILocationType
     {
-        [Key]
+        public override Guid RowKey { get { return LocationTypeKey; } protected set { LocationTypeKey = value; } }
         public Guid LocationTypeKey { get; set; }
         public string LocationTypeName { get; set; }
         public string LocationTypeDescription { get; set; }
