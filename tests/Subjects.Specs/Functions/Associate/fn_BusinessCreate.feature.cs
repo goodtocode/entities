@@ -19,22 +19,22 @@ namespace GoodToCode.Subjects.Functions.Associate
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Business Insert", Description="\tInsert a new business into persistence", SourceFile="Functions\\Associate\\fn_BusinessInsert.feature", SourceLine=0)]
-    public partial class BusinessInsertFeature
+    [TechTalk.SpecRun.FeatureAttribute("Fn Business Insert", Description="\tInsert a new business into persistence", SourceFile="Functions\\Associate\\fn_BusinessCreate.feature", SourceLine=0)]
+    public partial class FnBusinessInsertFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "fn_BusinessInsert.feature"
+#line 1 "fn_BusinessCreate.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Functions/Associate", "Business Insert", "\tInsert a new business into persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Functions/Associate", "Fn Business Insert", "\tInsert a new business into persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         

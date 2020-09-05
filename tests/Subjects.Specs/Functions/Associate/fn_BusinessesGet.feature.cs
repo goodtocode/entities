@@ -19,8 +19,8 @@ namespace GoodToCode.Subjects.Functions.Associate
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Businesses Get", Description="\tGet all Businesses from persistence", SourceFile="Functions\\Associate\\fn_BusinessesGet.feature", SourceLine=0)]
-    public partial class BusinessesGetFeature
+    [TechTalk.SpecRun.FeatureAttribute("Fn Businesses Get", Description="\tGet all Businesses from persistence", SourceFile="Functions\\Associate\\fn_BusinessesGet.feature", SourceLine=0)]
+    public partial class FnBusinessesGetFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -34,7 +34,7 @@ namespace GoodToCode.Subjects.Functions.Associate
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Functions/Associate", "Businesses Get", "\tGet all Businesses from persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Functions/Associate", "Fn Businesses Get", "\tGet all Businesses from persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         

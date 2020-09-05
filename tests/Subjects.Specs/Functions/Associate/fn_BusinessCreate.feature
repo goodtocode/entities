@@ -1,4 +1,4 @@
-﻿Feature: Business Insert
+﻿Feature: Fn Business Insert
 	Insert a new business into persistence
 
 @command @azureFunction

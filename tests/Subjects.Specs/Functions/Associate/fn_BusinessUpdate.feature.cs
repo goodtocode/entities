@@ -19,8 +19,8 @@ namespace GoodToCode.Subjects.Functions.Associate
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Business Update", Description="\tUpdate a new business into persistence", SourceFile="Functions\\Associate\\fn_BusinessUpdate.feature", SourceLine=0)]
-    public partial class BusinessUpdateFeature
+    [TechTalk.SpecRun.FeatureAttribute("Fn Business Update", Description="\tUpdate a new business into persistence", SourceFile="Functions\\Associate\\fn_BusinessUpdate.feature", SourceLine=0)]
+    public partial class FnBusinessUpdateFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -34,7 +34,7 @@ namespace GoodToCode.Subjects.Functions.Associate
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Functions/Associate", "Business Update", "\tUpdate a new business into persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Functions/Associate", "Fn Business Update", "\tUpdate a new business into persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -110,9 +110,6 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("Business is posted via Azure Function", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 9
-  testRunner.And("the business does not exist in persistence", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 10
  testRunner.Then("the business is updated in persistence", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

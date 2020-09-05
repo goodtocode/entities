@@ -1,4 +1,4 @@
-﻿Feature: Businesses Get
+﻿Feature: Fn Businesses Get
 	Get all Businesses from persistence
 
 @query @azureFunction

@@ -19,22 +19,22 @@ namespace GoodToCode.Subjects.Api.Associate
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Business Update", Description="\tUpdate a new business into persistence", SourceFile="Api\\Associate\\Api_BusinessUpdate.feature", SourceLine=0)]
-    public partial class BusinessUpdateFeature
+    [TechTalk.SpecRun.FeatureAttribute("Api Business Update", Description="\tUpdate a new business into persistence", SourceFile="Api\\Associate\\api_BusinessUpdate.feature", SourceLine=0)]
+    public partial class ApiBusinessUpdateFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "Api_BusinessUpdate.feature"
+#line 1 "api_BusinessUpdate.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Api/Associate", "Business Update", "\tUpdate a new business into persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Api/Associate", "Api Business Update", "\tUpdate a new business into persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -70,16 +70,16 @@ namespace GoodToCode.Subjects.Api.Associate
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Update a new business via Web API", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("Update a new business via Azure Function", new string[] {
                 "command",
                 "azureFunction"}, SourceLine=4)]
-        public virtual void UpdateANewBusinessViaWebAPI()
+        public virtual void UpdateANewBusinessViaAzureFunction()
         {
             string[] tagsOfScenario = new string[] {
                     "command",
                     "azureFunction"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update a new business via Web API", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update a new business via Azure Function", null, tagsOfScenario, argumentsOfScenario);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -101,13 +101,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 6
- testRunner.Given("I have an non empty business key for Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have an non empty business key", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- testRunner.When("Business is Put via Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+  testRunner.And("the business name is provided", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 8
-  testRunner.And("the business does not exist in persistence", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("Business is posted via Azure Function", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 9
  testRunner.Then("the business is updated in persistence", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
