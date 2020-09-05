@@ -47,7 +47,6 @@ namespace GoodToCode.Occurrences.Specs
         [Given(@"the Event Save Command validates")]
         public void GivenTheEventSaveCommandValidates()
         {
-            Assert.IsTrue(Sut.EventKey != Guid.Empty);
             Assert.IsFalse(Sut.EventName.IsNullOrWhiteSpace());
         }
 

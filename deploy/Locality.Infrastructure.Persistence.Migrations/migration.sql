@@ -292,3 +292,214 @@ END;
 
 GO
 
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    DROP TABLE [Locality].[Coordinate];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    DROP TABLE [Locality].[GeoArea];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    DROP TABLE [Locality].[GeoLocation];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    DROP TABLE [Locality].[Line];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    DROP TABLE [Locality].[Polygon];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[VentureLocation] DROP CONSTRAINT [PK_VentureLocation];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[ResourceLocation] DROP CONSTRAINT [PK_ResourceLocation];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[LocationType] DROP CONSTRAINT [PK_LocationType];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[LocationArea] DROP CONSTRAINT [PK_LocationArea];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[Location] DROP CONSTRAINT [PK_Location];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[LatLong] DROP CONSTRAINT [PK_LatLong];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[GeoDistance] DROP CONSTRAINT [PK_GeoDistance];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[AssociateLocation] DROP CONSTRAINT [PK_AssociateLocation];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[VentureLocation] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[ResourceLocation] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[LocationType] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[LocationArea] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[Location] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[LatLong] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[GeoDistance] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[AssociateLocation] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[VentureLocation] ADD CONSTRAINT [PK_VentureLocation] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[ResourceLocation] ADD CONSTRAINT [PK_ResourceLocation] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[LocationType] ADD CONSTRAINT [PK_LocationType] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[LocationArea] ADD CONSTRAINT [PK_LocationArea] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[Location] ADD CONSTRAINT [PK_Location] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[LatLong] ADD CONSTRAINT [PK_LatLong] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[GeoDistance] ADD CONSTRAINT [PK_GeoDistance] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    ALTER TABLE [Locality].[AssociateLocation] ADD CONSTRAINT [PK_AssociateLocation] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233451_20200904-163427')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20200904233451_20200904-163427', N'3.1.7');
+END;
+
+GO
+

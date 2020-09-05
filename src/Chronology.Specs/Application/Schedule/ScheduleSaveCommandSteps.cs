@@ -47,7 +47,6 @@ namespace GoodToCode.Chronology.Specs
         [Given(@"the Schedule Save Command validates")]
         public void GivenTheScheduleSaveCommandValidates()
         {
-            Assert.IsTrue(Sut.ScheduleKey != Guid.Empty);
             Assert.IsFalse(Sut.ScheduleName.IsNullOrWhiteSpace());
         }
 

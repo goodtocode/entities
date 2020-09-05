@@ -361,3 +361,297 @@ END;
 
 GO
 
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Subjects].[VentureAppointment] DROP CONSTRAINT [PK_VentureAppointment];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Subjects].[AssociateAppointment] DROP CONSTRAINT [PK_AssociateAppointment];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventType] DROP CONSTRAINT [PK_EventType];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventSchedule] DROP CONSTRAINT [PK_EventSchedule];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventResource] DROP CONSTRAINT [PK_EventResource];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventOption] DROP CONSTRAINT [PK_EventOption];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventLocation] DROP CONSTRAINT [PK_EventLocation];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventGroup] DROP CONSTRAINT [PK_EventGroup];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventDetail] DROP CONSTRAINT [PK_EventDetail];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventAssociateOption] DROP CONSTRAINT [PK_EventAssociateOption];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[Event] DROP CONSTRAINT [PK_Event];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[AppointmentEvent] DROP CONSTRAINT [PK_AppointmentEvent];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[Appointment] DROP CONSTRAINT [PK_Appointment];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Subjects].[VentureAppointment] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Subjects].[AssociateAppointment] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventType] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventSchedule] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventResource] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventOption] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventLocation] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventGroup] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventDetail] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventAssociateOption] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    DECLARE @var0 sysname;
+    SELECT @var0 = [d].[name]
+    FROM [sys].[default_constraints] [d]
+    INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+    WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Occurrences].[Event]') AND [c].[name] = N'EventSlogan');
+    IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Occurrences].[Event] DROP CONSTRAINT [' + @var0 + '];');
+    ALTER TABLE [Occurrences].[Event] ALTER COLUMN [EventSlogan] nvarchar(50) NULL;
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[Event] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[AppointmentEvent] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[Appointment] ADD [RowKey] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Subjects].[VentureAppointment] ADD CONSTRAINT [PK_VentureAppointment] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Subjects].[AssociateAppointment] ADD CONSTRAINT [PK_AssociateAppointment] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventType] ADD CONSTRAINT [PK_EventType] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventSchedule] ADD CONSTRAINT [PK_EventSchedule] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventResource] ADD CONSTRAINT [PK_EventResource] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventOption] ADD CONSTRAINT [PK_EventOption] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventLocation] ADD CONSTRAINT [PK_EventLocation] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventGroup] ADD CONSTRAINT [PK_EventGroup] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventDetail] ADD CONSTRAINT [PK_EventDetail] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[EventAssociateOption] ADD CONSTRAINT [PK_EventAssociateOption] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[Event] ADD CONSTRAINT [PK_Event] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[AppointmentEvent] ADD CONSTRAINT [PK_AppointmentEvent] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    ALTER TABLE [Occurrences].[Appointment] ADD CONSTRAINT [PK_Appointment] PRIMARY KEY ([RowKey]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200904233348_20200904-163323')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20200904233348_20200904-163323', N'3.1.7');
+END;
+
+GO
+

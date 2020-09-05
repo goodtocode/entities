@@ -47,7 +47,6 @@ namespace GoodToCode.Locality.Specs
         [Given(@"the Location Save Command validates")]
         public void GivenTheLocationSaveCommandValidates()
         {
-            Assert.IsTrue(Sut.LocationKey != Guid.Empty);
             Assert.IsFalse(Sut.LocationName.IsNullOrWhiteSpace());
         }
 
