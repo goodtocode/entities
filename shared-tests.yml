@@ -1,0 +1,76 @@
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - src/*
+
+variables:
+  sourceDirectory: '$(System.DefaultWorkingDirectory)/src'
+  artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop'
+  buildVersion: $[ replace(variables['Build.BuildNumber'], '2020', '20.') ]
+  version: '5.$(buildVersion)'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+stages:
+- stage: Build
+  displayName: Build stage
+
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+        name: Hosted Windows 2019 with VS2019
+        demands: msbuild
+
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: Restore
+      inputs:
+        command: 'restore'
+        projects: |
+          $(sourceDirectory)/**/*.csproj
+        feedsToUse: config
+        nugetConfigPath: .nuget/NuGet.config
+
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        command: 'build'
+        projects: |
+          $(sourceDirectory)/**/*.csproj
+        arguments: '--configuration $(BuildConfiguration)'
+
+    - task: DotNetCoreCLI@2
+      displayName: Test
+      inputs:
+        command: 'test'
+        projects: |
+          $(sourceDirectory)/**/*.csproj
+        arguments: '--configuration $(BuildConfiguration)'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
+
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: Build
+  condition: succeeded()
+
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy
+    environment: 'development'
+    pool:
+        name: Hosted Windows 2019 with VS2019
+        demands: msbuild
+
+    strategy:
+      runOnce:
+        deploy:
+          steps:          
+
