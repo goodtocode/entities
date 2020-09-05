@@ -72,5 +72,11 @@ stages:
     strategy:
       runOnce:
         deploy:
-          steps:          
+          steps:
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: '$(artifactDirectory)'
+              Contents: '**'
+              TargetFolder: '$(artifactDirectory)'
+              OverWrite: true
 
