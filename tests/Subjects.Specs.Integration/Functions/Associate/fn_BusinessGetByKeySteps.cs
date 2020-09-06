@@ -25,7 +25,7 @@ namespace GoodToCode.Subjects.Specs
 
         public fn_BusinessGetByKeySteps()
         {
-            _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs")).Create();
+            _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs.Integration")).Create();
         }
 
         [Given(@"I have a business key to get from the Azure Function")]

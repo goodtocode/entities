@@ -26,7 +26,7 @@ namespace GoodToCode.Subjects.Specs
 
         public fn_BusinessUpdateSteps()
         {
-            _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs")).Create();
+            _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs.Integration")).Create();
         }
 
         [Given(@"I have an non empty business key for the Azure Function")]

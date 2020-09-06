@@ -24,13 +24,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="storeicon.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
-  
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.7" />
@@ -42,7 +35,4 @@
     <PackageReference Include="SpecRun.SpecFlow" Version="3.4.5" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
-  </ItemGroup>
 </Project>

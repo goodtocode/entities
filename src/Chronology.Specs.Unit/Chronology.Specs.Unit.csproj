@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
-    <AssemblyName>GoodToCode.Chronology.Specs</AssemblyName>
+    <AssemblyName>GoodToCode.Chronology.Specs.Unit</AssemblyName>
     <RootNamespace>GoodToCode.Chronology.Specs</RootNamespace>
     <IsPackable>true</IsPackable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

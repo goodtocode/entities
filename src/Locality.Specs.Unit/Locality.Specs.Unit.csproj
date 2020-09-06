@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
-    <AssemblyName>GoodToCode.Locality.Specs</AssemblyName>
+    <AssemblyName>GoodToCode.Locality.Specs.Unit</AssemblyName>
     <RootNamespace>GoodToCode.Locality.Specs</RootNamespace>
     <IsPackable>true</IsPackable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
