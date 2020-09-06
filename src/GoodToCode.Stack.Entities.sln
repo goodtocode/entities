@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chronology", "Chronology", "{E43207AA-75AE-47C3-BCD0-DAF3DFA9045E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chronology.Specs", "Chronology.Specs\Chronology.Specs.csproj", "{402E67D2-5BCE-4587-92E2-A0FD05C0935C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chronology.Specs.Unit", "Chronology.Specs.Unit\Chronology.Specs.Unit.csproj", "{402E67D2-5BCE-4587-92E2-A0FD05C0935C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Locality", "Locality", "{5FB3392F-1C61-4384-BEF3-08A929442E4E}"
 EndProject
@@ -13,17 +13,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Subjects", "Subjects", "{08
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Occurrences", "Occurrences", "{4E21887E-D9F4-4456-BDF1-27F59696713B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Locality.Specs", "Locality.Specs\Locality.Specs.csproj", "{E2B25C05-2A9C-4091-9A9F-4DE6D022C24C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Locality.Specs.Unit", "Locality.Specs.Unit\Locality.Specs.Unit.csproj", "{E2B25C05-2A9C-4091-9A9F-4DE6D022C24C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Occurrences.Specs", "Occurrences.Specs\Occurrences.Specs.csproj", "{ED79CEC9-36A4-4847-BAA3-9DF6F643E87B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Occurrences.Specs.Unit", "Occurrences.Specs.Unit\Occurrences.Specs.Unit.csproj", "{ED79CEC9-36A4-4847-BAA3-9DF6F643E87B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subjects.Specs", "Subjects.Specs\Subjects.Specs.csproj", "{93B77BD5-1ACB-477F-B859-5376DF1D6F6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subjects.Specs.Unit", "Subjects.Specs.Unit\Subjects.Specs.Unit.csproj", "{93B77BD5-1ACB-477F-B859-5376DF1D6F6E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Abstractions", "Shared.Abstractions\Shared.Abstractions.csproj", "{62C75D09-E979-49F8-A967-9607F5EE8A42}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Extensions", "Shared.Extensions\Shared.Extensions.csproj", "{1B401068-3FC0-4F3C-B033-1886CE4E9AA2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Specs", "Shared.Specs\Shared.Specs.csproj", "{5D7507A1-54D0-4964-8556-9FC9221622D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Specs.Unit", "Shared.Specs.Unit\Shared.Specs.Unit.csproj", "{5D7507A1-54D0-4964-8556-9FC9221622D9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chronology.Presentation.Functions", "Chronology.Presentation.Functions\Chronology.Presentation.Functions.csproj", "{A6C74480-868E-4711-A79E-87883DB25CC1}"
 EndProject
