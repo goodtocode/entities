@@ -11,8 +11,6 @@ trigger:
 variables:
   sourceDirectory: '$(System.DefaultWorkingDirectory)/src'
   artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop'
-  buildVersion: $[ replace(variables['Build.BuildNumber'], '2020', '20.') ]
-  version: '5.$(buildVersion)'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -57,9 +55,6 @@ stages:
         projects: |
           $(sourceDirectory)/**/*.csproj
         arguments: '--configuration $(BuildConfiguration)'
-        majorVersion: 5        
-        minorVersion: 20
-        patchVersion: 2
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet pack'
@@ -67,10 +62,7 @@ stages:
         command: pack
         projects: |
           $(sourceDirectory)/**/*.csproj
-        arguments: '--output $(Build.ArtifactStagingDirectory) --version $(version)'
-        majorVersion: 5        
-        minorVersion: 20
-        patchVersion: 2
+        arguments: '--output $(Build.ArtifactStagingDirectory)'
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
@@ -91,7 +83,7 @@ stages:
     strategy:
       runOnce:
         deploy:
-          steps:          
+          steps:
           - task: NuGetCommand@2
             inputs:
               command: 'push'
