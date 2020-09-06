@@ -6,7 +6,7 @@ trigger:
     - master
   paths:
     include:
-    - src/*
+    - tests/*
 
 variables:
   sourceDirectory: '$(System.DefaultWorkingDirectory)/src'
