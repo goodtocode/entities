@@ -70,16 +70,16 @@ namespace GoodToCode.Subjects.Api.Associate
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Get a business by key via Azure Function", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("Get a business by key via Web API", new string[] {
                 "query",
-                "azureFunction"}, SourceLine=4)]
-        public virtual void GetABusinessByKeyViaAzureFunction()
+                "webapi"}, SourceLine=4)]
+        public virtual void GetABusinessByKeyViaWebAPI()
         {
             string[] tagsOfScenario = new string[] {
                     "query",
-                    "azureFunction"};
+                    "webapi"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get a business by key via Azure Function", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get a business by key via Web API", null, tagsOfScenario, argumentsOfScenario);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -101,13 +101,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 6
- testRunner.Given("I have a business key", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have a business key to get from the Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- testRunner.When("Business is queried by key via Azure Function", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("Business is queried by key via Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
- testRunner.Then("the matching business is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the matching business is returned from the Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

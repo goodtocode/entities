@@ -28,46 +28,34 @@ namespace GoodToCode.Subjects.Specs
             _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs")).Create();
         }
 
-        [Given(@"I have an empty business key")]
-        public void GivenIHaveAnEmptyBusinessKey()
-        {
-            SutKey = Guid.Empty;
-        }
-        
-        [Given(@"the business name is provided")]
-        public void GivenTheBusinessNameIsProvided()
+        [Given(@"I have a new business for the Web API")]
+        public void GivenIHaveANewBusinessForTheWebAPI()
         {
             Sut = new Business() { BusinessName = "BusinessInsertSteps Test" };
         }
-        
-        [When(@"Business is posted via Azure Function")]
-        public async Task WhenBusinessIsPostedViaAzureFunction()
+
+        [When(@"Business is created via Web API")]
+        public async Task WhenBusinessIsCreatedViaWebAPI()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.PutAsync(new AzureFunctionUrlFactory("Subjects", "Business").CreateCreateUrl(), new StringContent(JsonConvert.SerializeObject(Sut)));
+            var response = await client.PutAsync(new WebApiUrlFactory("Subjects", "Business").CreateCreateUrl(), new StringContent(JsonConvert.SerializeObject(Sut)));
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();
             SutKey = Sut.BusinessKey;
             RecycleBin.Add(Sut);
         }
-        
-        [When(@"the business does not exist in persistence")]
-        public async Task WhenTheBusinessDoesNotExistInPersistence()
+
+        [Then(@"the business is inserted to persistence from the Web API")]
+        public async Task ThenTheBusinessIsInsertedToPersistenceFromTheWebAPI()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.GetAsync(new AzureFunctionUrlFactory("Subjects", "Business").CreateGetByKeyUrl(SutKey));
+            var response = await client.GetAsync(new WebApiUrlFactory("Subjects", "Business").CreateGetByKeyUrl(SutKey));
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();
             SutKey = Sut.BusinessKey;
             Assert.IsFalse(SutKey != Guid.Empty);
-        }
-                
-        [Then(@"the business is inserted to persistence")]
-        public void ThenTheBusinessIsInsertedToPersistence()
-        {
-            Assert.IsTrue(Sut.BusinessKey != Guid.Empty);
         }
 
         [TestCleanup]
@@ -77,7 +65,7 @@ namespace GoodToCode.Subjects.Specs
             
             foreach (var item in RecycleBin)
             {
-                await client.DeleteAsync(new AzureFunctionUrlFactory("Subjects", "Business").CreateDeleteUrl(item.RowKey));
+                await client.DeleteAsync(new WebApiUrlFactory("Subjects", "Business").CreateDeleteUrl(item.RowKey));
             }
         }
     }

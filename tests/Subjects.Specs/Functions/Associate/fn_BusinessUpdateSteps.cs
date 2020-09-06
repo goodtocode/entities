@@ -29,19 +29,18 @@ namespace GoodToCode.Subjects.Specs
             _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs")).Create();
         }
 
-        [Given(@"I have an non empty business key")]
-        public async Task GivenIHaveAnNonEmptyBusinessKey()
+        [Given(@"I have an non empty business key for the Azure Function")]
+        public async Task GivenIHaveAnNonEmptyBusinessKeyForTheAzureFunction()
         {
-            await createSteps.WhenBusinessIsPostedViaAzureFunction();
-
+            await createSteps.WhenBusinessIsCreatedViaAzureFunction();
         }
-        
-        [Given(@"the business name is provided")]
-        public void GivenTheBusinessNameIsProvided()
+
+        [Given(@"the business name is provided for the Azure Function")]
+        public void GivenTheBusinessNameIsProvidedForTheAzureFunction()
         {
             Sut = new Business() { BusinessName = "BusinessUpdateSteps Test" };
         }
-        
+
         [When(@"Business is posted via Azure Function")]
         public async Task WhenBusinessIsPostedViaAzureFunction()
         {
@@ -53,9 +52,9 @@ namespace GoodToCode.Subjects.Specs
             SutKey = Sut.BusinessKey;
             RecycleBin.Add(Sut);
         }
-        
-        [Then(@"the business is Updateed to persistence")]
-        public async Task ThenTheBusinessIsUpdateedToPersistence()
+
+        [Then(@"the business is updated in persistence when queried from Azure Function")]
+        public async Task ThenTheBusinessIsUpdatedInPersistenceWhenQueriedFromAzureFunction()
         {
             var client = new HttpClientFactory().Create();
             var response = await client.GetAsync(new AzureFunctionUrlFactory("Subjects", "Business").CreateGetByKeyUrl(SutKey));

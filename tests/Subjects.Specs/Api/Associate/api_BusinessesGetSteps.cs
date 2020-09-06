@@ -26,27 +26,27 @@ namespace GoodToCode.Subjects.Specs
         public api_BusinessesGetSteps()
         {
             _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs")).Create();
-        }        
-
-        [Given(@"I request the list of businesses")]
-        public async Task GivenIRequestTheListOfBusinesses()
-        {
-            await createSteps.WhenBusinessIsPostedViaAzureFunction();
         }
 
-        [When(@"Businesses are queried via Azure Function")]
-        public async Task WhenBusinessesAreQueriedViaAzureFunction()
+        [Given(@"I request the list of businesses from the Web API")]
+        public async Task GivenIRequestTheListOfBusinessesFromTheWebAPI()
+        {
+            await createSteps.WhenBusinessIsCreatedViaWebAPI();
+        }
+
+        [When(@"Businesses are queried via Web API")]
+        public async Task WhenBusinessesAreQueriedViaWebAPI()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.GetAsync(new AzureFunctionUrlFactory("Subjects", "Business").CreateGetAllUrl());
+            var response = await client.GetAsync(new WebApiUrlFactory("Subjects", "Business").CreateGetAllUrl());
             var result = await response.Content.ReadAsStringAsync();
             Suts = JsonConvert.DeserializeObject<List<Business>>(result).Take(5).ToList();
             Sut = Suts.FirstOrDefault();
             SutKey = Sut.BusinessKey;
         }
 
-        [Then(@"All persisted businesses are returned")]
-        public void ThenAllPersistedBusinessesAreReturned()
+        [Then(@"All persisted businesses are returned from the Web API")]
+        public void ThenAllPersistedBusinessesAreReturnedFromTheWebAPI()
         {
             Assert.IsTrue(Suts.Any());
         }

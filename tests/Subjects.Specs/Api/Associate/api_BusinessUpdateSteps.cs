@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using TechTalk.SpecRun.Common.Helper;
 
 namespace GoodToCode.Subjects.Specs
 {
@@ -29,41 +30,47 @@ namespace GoodToCode.Subjects.Specs
             _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs")).Create();
         }
 
-        [Given(@"I have an non empty business key")]
-        public async Task GivenIHaveAnNonEmptyBusinessKey()
+        [Given(@"I have an non empty business key for the Web API")]
+        public async Task GivenIHaveAnNonEmptyBusinessKeyForTheWebAPI()
         {
-            await createSteps.WhenBusinessIsPostedViaAzureFunction();
-
+            var client = new HttpClientFactory().Create();
+            var response = await client.GetAsync(new WebApiUrlFactory("Subjects", "Business").CreateGetByKeyUrl(SutKey));
+            var result = await response.Content.ReadAsStringAsync();
+            Suts.Add(JsonConvert.DeserializeObject<Business>(result));
+            Sut = Suts.FirstOrDefault();
+            SutKey = Sut.BusinessKey;
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
-        
-        [Given(@"the business name is provided")]
-        public void GivenTheBusinessNameIsProvided()
+
+        [Given(@"the business name is provided for the Web API")]
+        public void GivenTheBusinessNameIsProvidedForTheWebAPI()
         {
             Sut = new Business() { BusinessName = "BusinessUpdateSteps Test" };
+            Assert.IsFalse(Sut.BusinessName.IsNotNullOrWhiteSpace());
         }
-        
-        [When(@"Business is posted via Azure Function")]
-        public async Task WhenBusinessIsPostedViaAzureFunction()
+
+        [When(@"Business is posted via Web API")]
+        public async Task WhenBusinessIsPostedViaWebAPI()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.PostAsync(new AzureFunctionUrlFactory("Subjects", "Business").CreateUpdateUrl(SutKey), new StringContent(JsonConvert.SerializeObject(Sut)));
+            var response = await client.PostAsync(new WebApiUrlFactory("Subjects", "Business").CreateUpdateUrl(SutKey), new StringContent(JsonConvert.SerializeObject(Sut)));
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();
             SutKey = Sut.BusinessKey;
-            RecycleBin.Add(Sut);
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
-        
-        [Then(@"the business is Updateed to persistence")]
-        public async Task ThenTheBusinessIsUpdateedToPersistence()
+
+        [Then(@"the business is updated in persistence when queried from Web API")]
+        public async Task ThenTheBusinessIsUpdatedInPersistenceWhenQueriedFromWebAPI()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.GetAsync(new AzureFunctionUrlFactory("Subjects", "Business").CreateGetByKeyUrl(SutKey));
+            var response = await client.GetAsync(new WebApiUrlFactory("Subjects", "Business").CreateGetByKeyUrl(SutKey));
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();
             SutKey = Sut.BusinessKey;
-            Assert.IsFalse(SutKey != Guid.Empty);
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
 
         [TestCleanup]

@@ -70,16 +70,16 @@ namespace GoodToCode.Subjects.Api.Associate
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Update a new business via Azure Function", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("Update an existing business via Web API", new string[] {
                 "command",
-                "azureFunction"}, SourceLine=4)]
-        public virtual void UpdateANewBusinessViaAzureFunction()
+                "webapi"}, SourceLine=4)]
+        public virtual void UpdateAnExistingBusinessViaWebAPI()
         {
             string[] tagsOfScenario = new string[] {
                     "command",
-                    "azureFunction"};
+                    "webapi"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update a new business via Azure Function", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update an existing business via Web API", null, tagsOfScenario, argumentsOfScenario);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -101,16 +101,16 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 6
- testRunner.Given("I have an non empty business key", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have an non empty business key for the Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
-  testRunner.And("the business name is provided", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("the business name is provided for the Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 8
- testRunner.When("Business is posted via Azure Function", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("Business is posted via Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 9
- testRunner.Then("the business is updated in persistence", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the business is updated in persistence when queried from Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

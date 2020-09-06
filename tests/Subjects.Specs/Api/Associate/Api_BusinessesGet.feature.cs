@@ -70,16 +70,16 @@ namespace GoodToCode.Subjects.Api.Associate
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Get all businesses via Azure Function", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("Get all businesses via Web API", new string[] {
                 "query",
-                "azureFunction"}, SourceLine=4)]
-        public virtual void GetAllBusinessesViaAzureFunction()
+                "webapi"}, SourceLine=4)]
+        public virtual void GetAllBusinessesViaWebAPI()
         {
             string[] tagsOfScenario = new string[] {
                     "query",
-                    "azureFunction"};
+                    "webapi"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all businesses via Azure Function", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all businesses via Web API", null, tagsOfScenario, argumentsOfScenario);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -101,13 +101,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 6
- testRunner.Given("I request the list of businesses", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I request the list of businesses from the Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- testRunner.When("Businesses are queried via Azure Function", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("Businesses are queried via Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
- testRunner.Then("All persisted businesses are returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("All persisted businesses are returned from the Web API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -3,8 +3,6 @@
 
 @command @azureFunction
 Scenario: Insert a new business via Azure Function
-	Given I have an empty business key
-		And the business name is provided
-	When Business is posted via Azure Function
-		And the business does not exist in persistence
-	Then the business is inserted to persistence
+	Given I have a new business for the Azure Function
+	When Business is created via Azure Function
+	Then the business is inserted to persistence from the Azure Function

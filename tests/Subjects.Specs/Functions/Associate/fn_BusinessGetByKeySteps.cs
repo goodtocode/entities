@@ -28,8 +28,8 @@ namespace GoodToCode.Subjects.Specs
             _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs")).Create();
         }
 
-        [Given(@"I have a business key")]
-        public async Task GivenIHaveABusinessKey()
+        [Given(@"I have a business key to get from the Azure Function")]
+        public async Task GivenIHaveABusinessKeyToGetFromTheAzureFunction()
         {
             var client = new HttpClientFactory().Create();
             var response = await client.GetAsync(new AzureFunctionUrlFactory("Subjects", "Business").CreateGetAllUrl());
@@ -38,7 +38,7 @@ namespace GoodToCode.Subjects.Specs
             Sut = Suts.FirstOrDefault();
             SutKey = Sut.BusinessKey;
         }
-        
+
         [When(@"Business is queried by key via Azure Function")]
         public async Task WhenBusinessIsQueriedByKeyViaAzureFunction()
         {
@@ -49,9 +49,9 @@ namespace GoodToCode.Subjects.Specs
             Sut = Suts.FirstOrDefault();
             SutKey = Sut.BusinessKey;
         }
-        
-        [Then(@"the matching business is returned")]
-        public void ThenTheMatchingBusinessIsReturned()
+
+        [Then(@"the matching business is returned from the Azure Function")]
+        public void ThenTheMatchingBusinessIsReturnedFromTheAzureFunction()
         {
             Assert.IsTrue(Sut.BusinessKey == SutKey);
         }

@@ -1,8 +1,8 @@
 ﻿Feature: Api Businesses Get
 	Get all Businesses from persistence
 
-@query @azureFunction
-Scenario: Get all businesses via Azure Function
-	Given I request the list of businesses
-	When Businesses are queried via Azure Function
-	Then All persisted businesses are returned
+@query @webapi
+Scenario: Get all businesses via Web API
+	Given I request the list of businesses from the Web API
+	When Businesses are queried via Web API
+	Then All persisted businesses are returned from the Web API

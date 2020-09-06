@@ -27,30 +27,30 @@ namespace GoodToCode.Subjects.Specs
             _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs")).Create();
         }
 
-        [Given(@"I have a business key")]
-        public async Task GivenIHaveABusinessKey()
+        [Given(@"I have a business key to get from the Web API")]
+        public async Task GivenIHaveABusinessKeyToGetFromTheWebAPI()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.GetAsync(new AzureFunctionUrlFactory("Subjects", "Business").CreateGetAllUrl());
+            var response = await client.GetAsync(new WebApiUrlFactory("Subjects", "Business").CreateGetAllUrl());
             var result = await response.Content.ReadAsStringAsync();
             Suts = JsonConvert.DeserializeObject<List<Business>>(result).Take(1).ToList();
             Sut = Suts.FirstOrDefault();
             SutKey = Sut.BusinessKey;
         }
-        
-        [When(@"Business is queried by key via Azure Function")]
-        public async Task WhenBusinessIsQueriedByKeyViaAzureFunction()
+
+        [When(@"Business is queried by key via Web API")]
+        public async Task WhenBusinessIsQueriedByKeyViaWebAPI()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.GetAsync(new AzureFunctionUrlFactory("Subjects", "Business").CreateGetByKeyUrl(SutKey));
+            var response = await client.GetAsync(new WebApiUrlFactory("Subjects", "Business").CreateGetByKeyUrl(SutKey));
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();
             SutKey = Sut.BusinessKey;
         }
-        
-        [Then(@"the matching business is returned")]
-        public void ThenTheMatchingBusinessIsReturned()
+
+        [Then(@"the matching business is returned from the Web API")]
+        public void ThenTheMatchingBusinessIsReturnedFromTheWebAPI()
         {
             Assert.IsTrue(Sut.BusinessKey == SutKey);
         }

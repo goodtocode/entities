@@ -28,20 +28,14 @@ namespace GoodToCode.Subjects.Specs
             _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs")).Create();
         }
 
-        [Given(@"I have an empty business key")]
-        public void GivenIHaveAnEmptyBusinessKey()
-        {
-            SutKey = Guid.Empty;
-        }
-        
-        [Given(@"the business name is provided")]
-        public void GivenTheBusinessNameIsProvided()
+        [Given(@"I have a new business for the Azure Function")]
+        public void GivenIHaveANewBusinessForTheAzureFunction()
         {
             Sut = new Business() { BusinessName = "BusinessInsertSteps Test" };
         }
-        
-        [When(@"Business is posted via Azure Function")]
-        public async Task WhenBusinessIsPostedViaAzureFunction()
+
+        [When(@"Business is created via Azure Function")]
+        public async Task WhenBusinessIsCreatedViaAzureFunction()
         {
             var client = new HttpClientFactory().Create();
             var response = await client.PutAsync(new AzureFunctionUrlFactory("Subjects", "Business").CreateCreateUrl(), new StringContent(JsonConvert.SerializeObject(Sut)));
@@ -51,9 +45,9 @@ namespace GoodToCode.Subjects.Specs
             SutKey = Sut.BusinessKey;
             RecycleBin.Add(Sut);
         }
-        
-        [When(@"the business does not exist in persistence")]
-        public async Task WhenTheBusinessDoesNotExistInPersistence()
+
+        [Then(@"the business is inserted to persistence from the Azure Function")]
+        public async Task ThenTheBusinessIsInsertedToPersistenceFromTheAzureFunction()
         {
             var client = new HttpClientFactory().Create();
             var response = await client.GetAsync(new AzureFunctionUrlFactory("Subjects", "Business").CreateGetByKeyUrl(SutKey));
@@ -62,12 +56,6 @@ namespace GoodToCode.Subjects.Specs
             Sut = Suts.FirstOrDefault();
             SutKey = Sut.BusinessKey;
             Assert.IsFalse(SutKey != Guid.Empty);
-        }
-                
-        [Then(@"the business is inserted to persistence")]
-        public void ThenTheBusinessIsInsertedToPersistence()
-        {
-            Assert.IsTrue(Sut.BusinessKey != Guid.Empty);
         }
 
         [TestCleanup]

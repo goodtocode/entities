@@ -26,12 +26,12 @@ namespace GoodToCode.Subjects.Specs
         public fn_BusinessesGetSteps()
         {
             _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs")).Create();
-        }        
+        }
 
-        [Given(@"I request the list of businesses")]
-        public async Task GivenIRequestTheListOfBusinesses()
+        [Given(@"I request the list of businesses from the Azure Function")]
+        public async Task GivenIRequestTheListOfBusinessesFromTheAzureFunction()
         {
-            await createSteps.WhenBusinessIsPostedViaAzureFunction();
+            await createSteps.WhenBusinessIsCreatedViaAzureFunction();
         }
 
         [When(@"Businesses are queried via Azure Function")]
@@ -45,8 +45,8 @@ namespace GoodToCode.Subjects.Specs
             SutKey = Sut.BusinessKey;
         }
 
-        [Then(@"All persisted businesses are returned")]
-        public void ThenAllPersistedBusinessesAreReturned()
+        [Then(@"All persisted businesses are returned from the Azure Function")]
+        public void ThenAllPersistedBusinessesAreReturnedFromTheAzureFunction()
         {
             Assert.IsTrue(Suts.Any());
         }
