@@ -4,10 +4,10 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>GoodToCode.Occurrences.Domain.Models</AssemblyName>
     <RootNamespace>GoodToCode.Occurrences.Domain.Models</RootNamespace>
+    <Version>5.20.1</Version>
     <IsPackable>true</IsPackable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>5.20.1</Version>
     <Company>GoodToCode</Company>
     <Product>GoodToCode.Occurrences.Domain.Models</Product>
     <Authors>Robert J. Good</Authors>

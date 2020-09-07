@@ -4,10 +4,10 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>GoodToCode.Locality.Application.Services</AssemblyName>
     <RootNamespace>GoodToCode.Locality.Application.Services</RootNamespace>
+    <Version>5.20.1</Version>
     <IsPackable>true</IsPackable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>5.20.1</Version>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>    
     <Company>GoodToCode</Company>
     <Product>GoodToCode.Locality.Application.Services</Product>
     <Authors>Robert J. Good</Authors>

@@ -5,10 +5,10 @@
     <OutputType>Library</OutputType>
     <AssemblyName>GoodToCode.Occurrences.Infrastructure.Persistence</AssemblyName>
     <RootNamespace>GoodToCode.Occurrences.Infrastructure.Persistence</RootNamespace>
+    <Version>5.20.1</Version>
     <IsPackable>true</IsPackable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>5.20.1</Version>
     <Company>GoodToCode</Company>
     <Product>GoodToCode.Occurrences.Infrastructure.Persistence</Product>
     <Authors>Robert J. Good</Authors>
