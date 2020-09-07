@@ -5,25 +5,9 @@
     <IsPackable>false</IsPackable>
     <AssemblyName>GoodToCode.Locality.Specs.Integration</AssemblyName>
     <RootNamespace>GoodToCode.Locality.Specs</RootNamespace>
+    <Version>5.20.1</Version>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Geography\**" />
-    <Compile Remove="Geometry\**" />
-    <Compile Remove="Location\**" />
-    <EmbeddedResource Remove="Geography\**" />
-    <EmbeddedResource Remove="Geometry\**" />
-    <EmbeddedResource Remove="Location\**" />
-    <None Remove="Geography\**" />
-    <None Remove="Geometry\**" />
-    <None Remove="Location\**" />
-    <SpecFlowFeatureFiles Remove="Geography\**" />
-    <SpecFlowFeatureFiles Remove="Geometry\**" />
-    <SpecFlowFeatureFiles Remove="Location\**" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Geography\**" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Geometry\**" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Location\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Remove="appsettings.Development.json" />

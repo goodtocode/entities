@@ -5,50 +5,9 @@
     <IsPackable>false</IsPackable>
     <AssemblyName>GoodToCode.Occurrences.Specs.Integration</AssemblyName>
     <RootNamespace>GoodToCode.Occurrences.Specs</RootNamespace>
+    <Version>5.20.1</Version>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Appointment\**" />
-    <Compile Remove="Event\**" />
-    <EmbeddedResource Remove="Appointment\**" />
-    <EmbeddedResource Remove="Event\**" />
-    <None Remove="Appointment\**" />
-    <None Remove="Event\**" />
-    <SpecFlowFeatureFiles Remove="Appointment\**" />
-    <SpecFlowFeatureFiles Remove="Event\**" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Appointment\**" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Event\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="C:\Users\rojgo\.nuget\packages\microsoft.testplatform.testhost\16.7.1\build\netcoreapp2.1\x64\testhost.dll" />
-    <Content Remove="C:\Users\rojgo\.nuget\packages\microsoft.testplatform.testhost\16.7.1\build\netcoreapp2.1\x64\testhost.exe" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="appsettings.Development.json" />
-    <None Remove="appsettings.json" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\mstest.testadapter\2.1.2\build\netcoreapp1.0\..\_common\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\mstest.testadapter\2.1.2\build\netcoreapp1.0\..\_common\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\mstest.testadapter\2.1.2\build\netcoreapp1.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\BoDi.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\FSharp.Core.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\SpecFlow.Plus.Shared.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\StreamJsonRpc.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecFlow.Plus.RPC.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.Framework.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.Framework.Interfaces.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.Framework.Interfaces.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.Framework.Utils.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.Framework.Utils.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.VisualStudio.TestAdapter.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.VisualStudio.TestAdapter.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.VisualStudio.TestAdapter.dll.config" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.runner\3.4.5\build\..\tools\netcoreapp3.1\TechTalk.SpecRun.VisualStudio.TestAdapter.dll.config" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.specflow.3-4-0\3.4.5\build\\..\lib\netstandard2.0\SpecRun.Runtime.SpecFlowPlugin.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.specflow.3-4-0\3.4.5\build\\..\lib\netstandard2.0\TechTalk.SpecRun.Common.dll" />
-    <None Remove="C:\Users\rojgo\.nuget\packages\specrun.specflow.3-4-0\3.4.5\build\\..\lib\netstandard2.0\TechTalk.SpecRun.dll" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Include="appsettings.Development.json">

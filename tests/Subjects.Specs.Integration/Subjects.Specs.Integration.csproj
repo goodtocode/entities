@@ -5,15 +5,9 @@
     <IsPackable>false</IsPackable>
     <AssemblyName>GoodToCode.Subjects.Specs.Integration</AssemblyName>
     <RootNamespace>GoodToCode.Subjects</RootNamespace>
+    <Version>5.20.1</Version>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Aggregate\**" />
-    <EmbeddedResource Remove="Aggregate\**" />
-    <None Remove="Aggregate\**" />
-    <SpecFlowFeatureFiles Remove="Aggregate\**" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Aggregate\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Remove="appsettings.Development.json" />

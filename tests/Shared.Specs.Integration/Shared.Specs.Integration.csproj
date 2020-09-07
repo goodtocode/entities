@@ -4,23 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>GoodToCode.Shared.Specs.Unit</AssemblyName>
     <RootNamespace>GoodToCode.Shared.Specs</RootNamespace>
-    <IsPackable>true</IsPackable>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Version>5.20.1</Version>
-    <Company>GoodToCode</Company>
-    <Product>GoodToCode.Shared.Specs.Unit</Product>
-    <Authors>Robert J. Good</Authors>
-    <PackageTags>.NET C# EF Core DDD Web API Azure Functions</PackageTags>
-    <Description>GoodToCode.Shared.Specs.Unit</Description>
-    <Copyright>Copyright (c) GoodToCode. All rights reserved.</Copyright>
-    <PackageProjectUrl>https://github.com/goodtocode/stack</PackageProjectUrl>
-    <PackageIcon>storeicon.png</PackageIcon>
-    <RepositoryUrl>https://github.com/goodtocode/stack</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <PackageReleaseNotes>https://github.com/goodtocode/Stack/projects/1</PackageReleaseNotes>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

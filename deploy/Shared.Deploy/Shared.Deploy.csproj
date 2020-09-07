@@ -5,6 +5,8 @@
     <AssemblyName>GoodToCode.Shared.Deploy</AssemblyName>
     <RootNamespace>GoodToCode.Shared.Deploy</RootNamespace>
     <OutputType>Library</OutputType>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Version>5.20.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -5,6 +5,8 @@
     <OutputType>Library</OutputType>
     <AssemblyName>GoodToCode.Locality.Infrastructure.Persistence.Migrations</AssemblyName>
     <RootNamespace>GoodToCode.Locality.Infrastructure.Persistence.Migrations</RootNamespace>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Version>5.20.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

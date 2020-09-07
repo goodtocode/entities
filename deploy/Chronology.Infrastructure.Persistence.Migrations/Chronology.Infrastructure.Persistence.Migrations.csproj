@@ -5,6 +5,8 @@
     <OutputType>Library</OutputType>
     <AssemblyName>GoodToCode.Chronology.Infrastructure.Persistence.Migrations</AssemblyName>
     <RootNamespace>GoodToCode.Chronology.Infrastructure.Persistence.Migrations</RootNamespace>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Version>5.20.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
