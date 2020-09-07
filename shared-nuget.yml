@@ -11,8 +11,6 @@ trigger:
 variables:
   sourceDirectory: '$(System.DefaultWorkingDirectory)/src'
   artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop'
-  buildVersion: $[ replace(variables['Build.BuildNumber'], '2020', '20.') ]
-  version: '5.$(buildVersion)'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -38,7 +36,7 @@ stages:
       displayName: Set-Version
       inputs:
         filePath: 'deploy/Shared.Deploy/Assembly/Set-Version.ps1'
-        arguments: '-Path $(sourceDirectory) -VersionToReplace 5.20.1'
+        arguments: '-Path $(sourceDirectory) -VersionToReplace 5.20.1 -Major 05'
         workingDirectory: '$(sourceDirectory)'
 
     - task: DotNetCoreCLI@2

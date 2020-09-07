@@ -5,8 +5,11 @@ param
 (
 	[Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
     [string] $Path= $(throw '-Path is a required parameter. $(Build.SourcesDirectory)'),
-	[Version] $VersionToReplace = "5.20.1",
-	[string] $Format = 'M.YY.MM'	
+	[Version] $VersionToReplace = '5.20.1',
+	[String] $Major = '-1',
+	[String] $Minor = '-1',
+	[String] $Revision = '-1',
+	[String] $Build = '-1'
 )
 
 # ***
@@ -37,24 +40,21 @@ $Path = Set-Unc -Path $Path
 # ***
 # *** Execute
 # ***
-$Year = get-date –format yy
-[String]$Major = $VersionToReplace.Major.ToString()
-[String]$Minor = $VersionToReplace.Minor.ToString()
-[String]$Revision = $VersionToReplace.Revision.ToString()
-[String]$Build = $VersionToReplace.Build.ToString()
+$Major = $Major.Replace('-1', '1')
+$Minor = $Minor.Replace('-1', (Get-Date -UFormat '%m').ToString()) # MM
+$Revision = $Revision.Replace('-1', (Get-Date -UFormat '%j').ToString()) # DayOfYear
+$Build = $Build.Replace('-1', (Get-Date -UFormat '%H%M%S').ToString()) # HrMinSec
 
-$Major = $Major.ToString().Replace('-1', '1')
-$Minor = $Minor.ToString().Replace('-1', $Year)
-$Revision = $Revision.ToString().Replace('-1', '')
-$Build = $Build.ToString().Replace('-1', '')
-
-Write-Host "Set-Version -Path $Path -Version $VersionToReplace"
 # .Net Projects
-$LongVersion = Get-Version -Major $Major -Minor $Minor -Revision $Revision -Build $Build
-$ShortVersion = Get-Version -Major $Major -Minor $Minor -Revision $Revision -Format $Format
-Write-Host 
+$LongVersion = "$Major.$Minor.$Revision.$Build"
+$ShortVersion = "$Major.$Minor.$Revision"
+Write-Host "LongVersion: $LongVersion ShortVersion: $ShortVersion"
+
+# *.csproj C# Project files
 Update-ContentsByTag -Path $Path -Value $LongVersion -Open '<Version>' -Close '</Version>' -Include *.csproj
+# *.nuspec NuGet packages
 Update-ContentsByTag -Path $Path -Value $LongVersion -Open '<version>' -Close '</version>' -Include *.nuspec
+# Assembly.cs C# assembly manifest
 Update-LineByContains -Path $Path -Contains "AssemblyVersion(" -Line "[assembly: AssemblyVersion(""$LongVersion"")]" -Include AssemblyInfo.cs
-# Vsix Templates
+# *.vsixmanifest VSIX Visual Studio Templates
 Update-TextByContains -Path $Path -Contains "<Identity Id" -Old $VersionToReplace -New $ShortVersion -Include *.vsixmanifest

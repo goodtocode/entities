@@ -5,6 +5,7 @@
     <OutputType>Library</OutputType>
     <AssemblyName>GoodToCode.Occurrences.Infrastructure.Persistence.Migrations</AssemblyName>
     <RootNamespace>GoodToCode.Occurrences.Infrastructure.Persistence.Migrations</RootNamespace>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
