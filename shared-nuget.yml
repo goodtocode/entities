@@ -33,7 +33,7 @@ stages:
         RemoveSourceFolder: true
 
     - task: PowerShell@2
-      displayName: Set-Version
+      displayName: 'Set-Version'
       inputs:
         filePath: 'deploy/Shared.Deploy/Assembly/Set-Version.ps1'
         arguments: '-Path $(sourceDirectory) -VersionToReplace 5.20.1 -Major 05'
