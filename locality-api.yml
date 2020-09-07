@@ -30,7 +30,7 @@ stages:
       inputs:
         filePath: 'deploy/Shared.Deploy/Assembly/Set-Version.ps1'
         arguments: '-Path $(System.DefaultWorkingDirectory) -VersionToReplace 5.20.1 -Major 05'
-        workingDirectory: '$(sourceDirectory)'
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
 
     - task: DotNetCoreCLI@2
       displayName: Restore
