@@ -43,7 +43,7 @@ $Path = Set-Unc -Path $Path
 $Major = $Major.Replace('-1', '1')
 $Minor = $Minor.Replace('-1', (Get-Date -UFormat '%m').ToString()) # MM
 $Revision = $Revision.Replace('-1', (Get-Date -UFormat '%j').ToString()) # DayOfYear
-$Build = $Build.Replace('-1', (Get-Date -UFormat '%H%M%S').ToString()) # HrMinSec
+$Build = $Build.Replace('-1', (Get-Date -UFormat '%H%M').ToString()) # HrMinSec
 
 # .Net Projects
 $LongVersion = "$Major.$Minor.$Revision.$Build"
