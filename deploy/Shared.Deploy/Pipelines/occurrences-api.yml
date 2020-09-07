@@ -5,10 +5,10 @@ trigger:
     - master
   paths:
     include:
-    - src/Chronology.Presentation.Api/*
+    - src/Occurrences.Presentation.Api/*
 
 variables:
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Chronology.Presentation.Api'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Occurrences.Presentation.Api'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
@@ -54,7 +54,7 @@ stages:
       inputs:
         command: test
         projects: |
-          $(workingDirectory)/*.csproj
+          $(System.DefaultWorkingDirectory)/**/*.Specs.Unit.csproj
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet publish'

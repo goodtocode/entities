@@ -6,12 +6,12 @@ trigger:
     - master
   paths:
     include:
-    - deploy/Chronology.Infrastructure.Persistence/*
-    - deploy/Chronology.Infrastructure.Persistence.Migrations/*
+    - deploy/Subjects.Infrastructure.Persistence/*
+    - deploy/Subjects.Infrastructure.Persistence.Migrations/*
 
 variables:
-  sourceDirectory: '$(System.DefaultWorkingDirectory)/deploy/Chronology.Infrastructure.Persistence.Migrations'
-  artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop/deploy/Chronology.Infrastructure.Persistence.Migrations'
+  sourceDirectory: '$(System.DefaultWorkingDirectory)/deploy/Subjects.Infrastructure.Persistence.Migrations'
+  artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop/deploy/Subjects.Infrastructure.Persistence.Migrations'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
@@ -57,7 +57,7 @@ stages:
       inputs:
         command: test
         projects: |
-          $(sourceDirectory)/*.csproj
+          $(System.DefaultWorkingDirectory)/**/*.Specs.Unit.csproj
           
     - task: CopyFiles@2
       displayName: 'Copy deploy'
@@ -99,4 +99,3 @@ stages:
             inputs:
               workingFolder: $(artifactDirectory)
               filename: '$(artifactDirectory)/EF-Database-Update.cmd'
-              arguments: '$(ConnectionString)'
