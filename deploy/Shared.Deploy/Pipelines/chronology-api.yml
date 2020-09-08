@@ -67,11 +67,11 @@ stages:
 
     - task: CmdLine@2
       inputs:
-        script: 'dir $(Build.DefaultWorkingDirectory) /s'
+        script: 'dir $(Build.DefaultWorkingDirectory)\*.* /s'
 
     - task: CmdLine@2
       inputs:
-        script: 'dir $(Build.ArtifactStagingDirectory) /s'
+        script: 'dir $(Build.ArtifactStagingDirectory)\*.* /s'
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
