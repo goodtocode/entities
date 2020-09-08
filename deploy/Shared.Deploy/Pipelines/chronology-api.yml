@@ -51,12 +51,11 @@ stages:
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet test'
+      continueOnError: true
       inputs:
         command: test
         projects: |
           $(System.DefaultWorkingDirectory)/**/*.Specs.Unit.csproj
-
-
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet publish'
@@ -65,6 +64,14 @@ stages:
         projects: |
           $(workingDirectory)/*.csproj
         arguments: '--output $(Build.ArtifactStagingDirectory)'
+
+    - task: CmdLine@2
+      inputs:
+        script: 'dir $(Build.DefaultWorkingDirectory) /s'
+
+    - task: CmdLine@2
+      inputs:
+        script: 'dir $(Build.ArtifactStagingDirectory) /s'
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
