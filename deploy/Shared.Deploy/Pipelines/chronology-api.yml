@@ -64,16 +64,9 @@ stages:
         projects: |
           $(workingDirectory)/*.csproj
         arguments: '--output $(Build.ArtifactStagingDirectory)'
-
-    - task: CmdLine@2      
-      inputs:
-        script: 'dir *.* /s'
-        workingDirectory: $(Build.DefaultWorkingDirectory)
-
     - task: CmdLine@2
       inputs:
-        script: 'dir *.* /s'
-        workingDirectory: $(Build.ArtifactStagingDirectory)
+        script: 'dir d:\a\*.* /s'
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
