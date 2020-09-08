@@ -60,7 +60,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Chronology.Application.Services\Chronology.Application.Services.csproj" />
     <ProjectReference Include="..\Chronology.Infrastructure.Persistence\Chronology.Infrastructure.Persistence.csproj" />
-    <ProjectReference Include="..\Shared.Specs.Unit\Shared.Specs.Unit.csproj" />
+    <ProjectReference Include="..\Shared.Specs.Unit\Shared.Specs.csproj" />
   </ItemGroup>
 
   <ItemGroup>

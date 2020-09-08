@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyName>GoodToCode.Shared.Specs.Unit</AssemblyName>
+    <AssemblyName>GoodToCode.Shared.Specs</AssemblyName>
     <RootNamespace>GoodToCode.Shared.Specs</RootNamespace>
     <Version>5.20.1</Version>
     <IsPackable>true</IsPackable>
@@ -21,6 +21,7 @@
     <PackageReleaseNotes>https://github.com/goodtocode/Stack/projects/1</PackageReleaseNotes>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <PackageId>GoodToCode.Shared.Specs</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

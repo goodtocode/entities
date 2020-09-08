@@ -29,7 +29,7 @@ namespace GoodToCode.Chronology.Specs
 
         public ScheduleAggregateSteps()
         {
-            _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Chronology.Specs.Unit")).Create();
+            _config = new ConfigurationFactory().Create();
             _connectionString = new ConnectionStringFactory(_config).Create();
             _dbContext = new DbContextFactory(_connectionString).Create();
             Aggregate = new ScheduleAggregate(_dbContext);

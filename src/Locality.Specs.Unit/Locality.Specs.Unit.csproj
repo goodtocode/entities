@@ -62,7 +62,7 @@
     <ProjectReference Include="..\Locality.Application.Services\Locality.Application.Services.csproj" />
     <ProjectReference Include="..\Locality.Domain.Models\Locality.Domain.Models.csproj" />
     <ProjectReference Include="..\Locality.Infrastructure.Persistence\Locality.Infrastructure.Persistence.csproj" />
-    <ProjectReference Include="..\Shared.Specs.Unit\Shared.Specs.Unit.csproj" />
+    <ProjectReference Include="..\Shared.Specs.Unit\Shared.Specs.csproj" />
   </ItemGroup>
 
   <ItemGroup>
