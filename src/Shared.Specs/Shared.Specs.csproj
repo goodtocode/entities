@@ -9,10 +9,10 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Company>GoodToCode</Company>
-    <Product>GoodToCode.Shared.Specs.Unit</Product>
+    <Product>GoodToCode.Shared.Specs</Product>
     <Authors>Robert J. Good</Authors>
     <PackageTags>.NET C# EF Core DDD Web API Azure Functions</PackageTags>
-    <Description>GoodToCode.Shared.Specs.Unit</Description>
+    <Description>GoodToCode.Shared.Specs</Description>
     <Copyright>Copyright (c) GoodToCode. All rights reserved.</Copyright>
     <PackageProjectUrl>https://github.com/goodtocode/stack</PackageProjectUrl>
     <PackageIcon>storeicon.png</PackageIcon>

@@ -60,7 +60,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Occurrences.Application.Services\Occurrences.Application.Services.csproj" />
     <ProjectReference Include="..\Occurrences.Infrastructure.Persistence\Occurrences.Infrastructure.Persistence.csproj" />
-    <ProjectReference Include="..\Shared.Specs.Unit\Shared.Specs.csproj" />
+    <ProjectReference Include="..\Shared.Specs\Shared.Specs.csproj" />
   </ItemGroup>
 
   <ItemGroup>

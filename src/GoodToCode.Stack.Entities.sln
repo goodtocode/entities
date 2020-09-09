@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Abstractions", "Shar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Extensions", "Shared.Extensions\Shared.Extensions.csproj", "{1B401068-3FC0-4F3C-B033-1886CE4E9AA2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Specs", "Shared.Specs.Unit\Shared.Specs.csproj", "{5D7507A1-54D0-4964-8556-9FC9221622D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Specs", "Shared.Specs\Shared.Specs.csproj", "{5D7507A1-54D0-4964-8556-9FC9221622D9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chronology.Presentation.Functions", "Chronology.Presentation.Functions\Chronology.Presentation.Functions.csproj", "{A6C74480-868E-4711-A79E-87883DB25CC1}"
 EndProject
