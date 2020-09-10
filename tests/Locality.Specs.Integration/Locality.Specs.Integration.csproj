@@ -30,7 +30,7 @@
   <ItemGroup>
     <PackageReference Include="GoodToCode.Locality.Domain.Models" Version="5.20.2009.1" />
     <PackageReference Include="GoodToCode.Shared.Specs.Unit" Version="5.20.2009.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
