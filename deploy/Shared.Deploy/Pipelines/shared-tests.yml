@@ -81,7 +81,7 @@ stages:
         deploy:
           steps:
           - task: CopyFiles@2
-            enabled: false,
+            enabled: False,
             inputs:
               SourceFolder: '$(artifactDirectory)'
               Contents: '**'
