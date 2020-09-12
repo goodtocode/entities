@@ -80,11 +80,6 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: CopyFiles@2
-            enabled: False,
+          - task: CmdLine@2
             inputs:
-              SourceFolder: '$(artifactDirectory)'
-              Contents: '**'
-              TargetFolder: '$(artifactDirectory)'
-              OverWrite: true
-
+              script: 'echo Publish report to Dev build report location. Releases will publish to production release folder.'
