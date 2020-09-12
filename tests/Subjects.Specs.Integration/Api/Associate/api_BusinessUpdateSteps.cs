@@ -16,16 +16,16 @@ using TechTalk.SpecRun.Common.Helper;
 namespace GoodToCode.Subjects.Specs
 {
     [Binding]
-    public class api_BusinessUpdateSteps : ICrudSteps<Business>
+    public class Api_BusinessUpdateSteps : ICrudSteps<Business>
     {
         private readonly IConfiguration _config;
-        private readonly api_BusinessCreateSteps createSteps = new api_BusinessCreateSteps();
+        private readonly Api_BusinessCreateSteps createSteps = new Api_BusinessCreateSteps();
         public Guid SutKey { get; private set; }
         public Business Sut { get; private set; }
         public IList<Business> Suts { get; private set; }
         public IList<Business> RecycleBin { get; private set; }
 
-        public api_BusinessUpdateSteps()
+        public Api_BusinessUpdateSteps()
         {
             _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs.Integration")).Create();
         }

@@ -13,17 +13,17 @@ using TechTalk.SpecFlow;
 namespace GoodToCode.Subjects.Specs
 {
     [Binding]
-    public class fn_BusinessesGetSteps : ICrudSteps<Business>
+    public class Fn_BusinessesGetSteps : ICrudSteps<Business>
     {
         private readonly IConfiguration _config;
-        private readonly fn_BusinessCreateSteps createSteps = new fn_BusinessCreateSteps();
+        private readonly Fn_BusinessCreateSteps createSteps = new Fn_BusinessCreateSteps();
 
         public IList<Business> Suts { get; private set; }
         public Business Sut { get; private set; }
         public Guid SutKey { get; private set; }
         public IList<Business> RecycleBin { get; set; }
 
-        public fn_BusinessesGetSteps()
+        public Fn_BusinessesGetSteps()
         {
             _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs.Integration")).Create();
         }

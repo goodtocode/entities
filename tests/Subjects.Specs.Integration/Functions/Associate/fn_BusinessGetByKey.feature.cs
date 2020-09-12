@@ -19,7 +19,7 @@ namespace GoodToCode.Subjects.Functions.Associate
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Fn Business Get by Key", Description="\tGet a Business from persistence", SourceFile="Functions\\Associate\\fn_BusinessGetByKey.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("Fn Business Get by Key", Description="\tGet a Business from persistence", SourceFile="Functions\\Associate\\Fn_BusinessGetByKey.feature", SourceLine=0)]
     public partial class FnBusinessGetByKeyFeature
     {
         
@@ -27,7 +27,7 @@ namespace GoodToCode.Subjects.Functions.Associate
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "fn_BusinessGetByKey.feature"
+#line 1 "Fn_BusinessGetByKey.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]

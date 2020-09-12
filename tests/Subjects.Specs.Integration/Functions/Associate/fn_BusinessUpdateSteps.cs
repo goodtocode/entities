@@ -15,16 +15,16 @@ using TechTalk.SpecFlow;
 namespace GoodToCode.Subjects.Specs
 {
     [Binding]
-    public class fn_BusinessUpdateSteps : ICrudSteps<Business>
+    public class Fn_BusinessUpdateSteps : ICrudSteps<Business>
     {
         private readonly IConfiguration _config;
-        private readonly fn_BusinessCreateSteps createSteps = new fn_BusinessCreateSteps();
+        private readonly Fn_BusinessCreateSteps createSteps = new Fn_BusinessCreateSteps();
         public Guid SutKey { get; private set; }
         public Business Sut { get; private set; }
         public IList<Business> Suts { get; private set; }
         public IList<Business> RecycleBin { get; private set; }
 
-        public fn_BusinessUpdateSteps()
+        public Fn_BusinessUpdateSteps()
         {
             _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs.Integration")).Create();
         }

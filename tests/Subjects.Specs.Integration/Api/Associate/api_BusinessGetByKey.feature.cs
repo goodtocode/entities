@@ -19,7 +19,7 @@ namespace GoodToCode.Subjects.Api.Associate
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Api Business Get by Key", Description="\tGet a Business from persistence", SourceFile="Api\\Associate\\api_BusinessGetByKey.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("Api Business Get by Key", Description="\tGet a Business from persistence", SourceFile="Api\\Associate\\Api_BusinessGetByKey.feature", SourceLine=0)]
     public partial class ApiBusinessGetByKeyFeature
     {
         
@@ -27,7 +27,7 @@ namespace GoodToCode.Subjects.Api.Associate
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "api_BusinessGetByKey.feature"
+#line 1 "Api_BusinessGetByKey.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]

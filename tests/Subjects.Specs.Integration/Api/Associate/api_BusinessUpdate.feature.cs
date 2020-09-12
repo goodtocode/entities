@@ -19,7 +19,7 @@ namespace GoodToCode.Subjects.Api.Associate
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Api Business Update", Description="\tUpdate a new business into persistence", SourceFile="Api\\Associate\\api_BusinessUpdate.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("Api Business Update", Description="\tUpdate a new business into persistence", SourceFile="Api\\Associate\\Api_BusinessUpdate.feature", SourceLine=0)]
     public partial class ApiBusinessUpdateFeature
     {
         
@@ -27,7 +27,7 @@ namespace GoodToCode.Subjects.Api.Associate
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "api_BusinessUpdate.feature"
+#line 1 "Api_BusinessUpdate.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]

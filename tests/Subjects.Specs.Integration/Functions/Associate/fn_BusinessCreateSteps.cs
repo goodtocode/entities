@@ -14,7 +14,7 @@ using TechTalk.SpecFlow;
 namespace GoodToCode.Subjects.Specs
 {
     [Binding]
-    public class fn_BusinessCreateSteps : ICrudSteps<Business>
+    public class Fn_BusinessCreateSteps : ICrudSteps<Business>
     {
         private readonly IConfiguration _config;
 
@@ -23,7 +23,7 @@ namespace GoodToCode.Subjects.Specs
         public IList<Business> Suts { get; private set; }
         public IList<Business> RecycleBin { get; private set; }
 
-        public fn_BusinessCreateSteps()
+        public Fn_BusinessCreateSteps()
         {
             _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs.Integration")).Create();
         }

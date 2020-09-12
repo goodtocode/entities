@@ -49,7 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GoodToCode.Shared.Specs.Unit" Version="5.20.2009.1" />
+    <PackageReference Include="GoodToCode.Shared.Specs" Version="5.9.253.243" />
     <PackageReference Include="GoodToCode.Subjects.Domain.Models" Version="5.20.2009.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.8" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
@@ -81,33 +81,42 @@
 
   <ItemGroup>
     <Compile Update="Api\Associate\api_BusinessCreate.feature.cs">
-      <DependentUpon>api_BusinessCreate.feature</DependentUpon>
+      <DependentUpon>Api_BusinessCreate.feature</DependentUpon>
     </Compile>
     <Compile Update="Api\Associate\api_BusinessesGet.feature.cs">
-      <DependentUpon>api_BusinessesGet.feature</DependentUpon>
+      <DependentUpon>Api_BusinessesGet.feature</DependentUpon>
     </Compile>
     <Compile Update="Api\Associate\api_BusinessGetByKey.feature.cs">
-      <DependentUpon>api_BusinessGetByKey.feature</DependentUpon>
+      <DependentUpon>Api_BusinessGetByKey.feature</DependentUpon>
     </Compile>
     <Compile Update="Api\Associate\api_BusinessUpdate.feature.cs">
-      <DependentUpon>api_BusinessUpdate.feature</DependentUpon>
+      <DependentUpon>Api_BusinessUpdate.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Functions\Associate\fn_BusinessCreate.feature.cs">
+      <DependentUpon>Fn_BusinessCreate.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Functions\Associate\fn_BusinessesGet.feature.cs">
+      <DependentUpon>Fn_BusinessesGet.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Functions\Associate\fn_BusinessUpdate.feature.cs">
+      <DependentUpon>Fn_BusinessUpdate.feature</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <SpecFlowFeatureFiles Update="Api\Associate\api_BusinessCreate.feature">
+    <SpecFlowFeatureFiles Update="Api\Associate\Api_BusinessCreate.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Api\Associate\api_BusinessesGet.feature">
+    <SpecFlowFeatureFiles Update="Api\Associate\Api_BusinessesGet.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Api\Associate\api_BusinessGetByKey.feature">
+    <SpecFlowFeatureFiles Update="Api\Associate\Api_BusinessGetByKey.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Api\Associate\api_BusinessUpdate.feature">
+    <SpecFlowFeatureFiles Update="Api\Associate\Api_BusinessUpdate.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>

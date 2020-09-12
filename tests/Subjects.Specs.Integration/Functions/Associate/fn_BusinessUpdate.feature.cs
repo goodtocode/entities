@@ -19,7 +19,7 @@ namespace GoodToCode.Subjects.Functions.Associate
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Fn Business Update", Description="\tUpdate a new business into persistence", SourceFile="Functions\\Associate\\fn_BusinessUpdate.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("Fn Business Update", Description="\tUpdate a new business into persistence", SourceFile="Functions\\Associate\\Fn_BusinessUpdate.feature", SourceLine=0)]
     public partial class FnBusinessUpdateFeature
     {
         
@@ -27,7 +27,7 @@ namespace GoodToCode.Subjects.Functions.Associate
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "fn_BusinessUpdate.feature"
+#line 1 "Fn_BusinessUpdate.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]
