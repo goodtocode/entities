@@ -4,15 +4,15 @@ namespace GoodToCode.Subjects.Specs
 {
     public interface ICrudUrlFactory
     {
-        Uri CreateUrl { get; }
-        Uri DeleteUrl { get; }
         string DomainModel { get; }
         string DomainNamespace { get; }
-        Uri GetAllUrl { get; }
-        Uri GetByKeyUrl { get; }
         Guid RowKey { get; }
-        Uri SaveUrl { get; }
-        Uri UpdateUrl { get; }
+        string CreateUrl { get; }
+        string DeleteUrl { get; }
+        string GetAllUrl { get; }
+        string GetByKeyUrl { get; }        
+        string SaveUrl { get; }
+        string UpdateUrl { get; }
 
         Uri CreateCreateUrl();
         Uri CreateDeleteUrl(Guid rowKey);

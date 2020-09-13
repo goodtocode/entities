@@ -38,7 +38,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessesAreQueriedViaWebAPI()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.GetAsync(new WebApiUrlFactory("Subjects", "Business").CreateGetAllUrl());
+            var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetAllUrl());
             var result = await response.Content.ReadAsStringAsync();
             Suts = JsonConvert.DeserializeObject<List<Business>>(result).Take(5).ToList();
             Sut = Suts.FirstOrDefault();

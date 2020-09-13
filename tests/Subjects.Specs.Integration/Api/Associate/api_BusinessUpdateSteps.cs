@@ -34,7 +34,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task GivenIHaveAnNonEmptyBusinessKeyForTheWebAPI()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.GetAsync(new WebApiUrlFactory("Subjects", "Business").CreateGetByKeyUrl(SutKey));
+            var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetByKeyUrl(SutKey));
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();
@@ -53,7 +53,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessIsPostedViaWebAPI()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.PostAsync(new WebApiUrlFactory("Subjects", "Business").CreateUpdateUrl(SutKey), new StringContent(JsonConvert.SerializeObject(Sut)));
+            var response = await client.PostAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateUpdateUrl(SutKey), new StringContent(JsonConvert.SerializeObject(Sut)));
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();
@@ -65,7 +65,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task ThenTheBusinessIsUpdatedInPersistenceWhenQueriedFromWebAPI()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.GetAsync(new WebApiUrlFactory("Subjects", "Business").CreateGetByKeyUrl(SutKey));
+            var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetByKeyUrl(SutKey));
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();

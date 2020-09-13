@@ -19,8 +19,8 @@ namespace GoodToCode.Subjects.Api.Associate
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Api Business Insert", Description="\tInsert a new business into persistence", SourceFile="Api\\Associate\\Api_BusinessCreate.feature", SourceLine=0)]
-    public partial class ApiBusinessInsertFeature
+    [TechTalk.SpecRun.FeatureAttribute("Api Business Create", Description="\tCreate a new business in persistence", SourceFile="Api\\Associate\\Api_BusinessCreate.feature", SourceLine=0)]
+    public partial class ApiBusinessCreateFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -34,7 +34,7 @@ namespace GoodToCode.Subjects.Api.Associate
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Api/Associate", "Api Business Insert", "\tInsert a new business into persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Api/Associate", "Api Business Create", "\tCreate a new business in persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -70,16 +70,16 @@ namespace GoodToCode.Subjects.Api.Associate
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Insert a new business via Web API", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("Create a new business via Web API", new string[] {
                 "command",
                 "webapi"}, SourceLine=4)]
-        public virtual void InsertANewBusinessViaWebAPI()
+        public virtual void CreateANewBusinessViaWebAPI()
         {
             string[] tagsOfScenario = new string[] {
                     "command",
                     "webapi"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Insert a new business via Web API", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new business via Web API", null, tagsOfScenario, argumentsOfScenario);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

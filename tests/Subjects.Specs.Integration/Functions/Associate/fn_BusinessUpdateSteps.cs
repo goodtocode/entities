@@ -45,7 +45,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessIsPostedViaAzureFunction()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.PostAsync(new AzureFunctionUrlFactory("Subjects", "Business").CreateUpdateUrl(SutKey), new StringContent(JsonConvert.SerializeObject(Sut)));
+            var response = await client.PostAsync(new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateUpdateUrl(SutKey), new StringContent(JsonConvert.SerializeObject(Sut)));
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();
@@ -57,7 +57,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task ThenTheBusinessIsUpdatedInPersistenceWhenQueriedFromAzureFunction()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.GetAsync(new AzureFunctionUrlFactory("Subjects", "Business").CreateGetByKeyUrl(SutKey));
+            var response = await client.GetAsync(new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateGetByKeyUrl(SutKey));
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();

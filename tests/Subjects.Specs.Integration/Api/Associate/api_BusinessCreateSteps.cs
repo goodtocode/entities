@@ -38,7 +38,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessIsCreatedViaWebAPI()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.PutAsync(new WebApiUrlFactory("Subjects", "Business").CreateCreateUrl(), new StringContent(JsonConvert.SerializeObject(Sut)));
+            var response = await client.PutAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateCreateUrl(), new StringContent(JsonConvert.SerializeObject(Sut)));
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();
@@ -50,7 +50,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task ThenTheBusinessIsInsertedToPersistenceFromTheWebAPI()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.GetAsync(new WebApiUrlFactory("Subjects", "Business").CreateGetByKeyUrl(SutKey));
+            var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetByKeyUrl(SutKey));
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();
@@ -65,7 +65,7 @@ namespace GoodToCode.Subjects.Specs
             
             foreach (var item in RecycleBin)
             {
-                await client.DeleteAsync(new WebApiUrlFactory("Subjects", "Business").CreateDeleteUrl(item.RowKey));
+                await client.DeleteAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateDeleteUrl(item.RowKey));
             }
         }
     }

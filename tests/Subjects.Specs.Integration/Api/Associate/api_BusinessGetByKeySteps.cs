@@ -31,7 +31,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task GivenIHaveABusinessKeyToGetFromTheWebAPI()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.GetAsync(new WebApiUrlFactory("Subjects", "Business").CreateGetAllUrl());
+            var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetAllUrl());
             var result = await response.Content.ReadAsStringAsync();
             Suts = JsonConvert.DeserializeObject<List<Business>>(result).Take(1).ToList();
             Sut = Suts.FirstOrDefault();
@@ -42,7 +42,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessIsQueriedByKeyViaWebAPI()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.GetAsync(new WebApiUrlFactory("Subjects", "Business").CreateGetByKeyUrl(SutKey));
+            var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetByKeyUrl(SutKey));
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();

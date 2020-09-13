@@ -1,27 +1,29 @@
-﻿using System;
-using System.Globalization;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using TechTalk.SpecRun.Common.Helper;
 
 namespace GoodToCode.Subjects.Specs
 {
     public class AzureFunctionUrlFactory : ICrudUrlFactory
     {
+        private IConfiguration _config;
         private string _urlBase;
-        public string UrlBase { get { _urlBase = _urlBase.IsNullOrWhiteSpace() ? $@"https://{DomainNamespace}-functions.azurewebsites.net" : _urlBase; return _urlBase; } private set { _urlBase = value; } }
+        public string UrlBase { get { _urlBase = _urlBase.IsNullOrWhiteSpace() ? _config["Functions:UrlBase"] : _urlBase; return _urlBase; } private set { _urlBase = value; } }
 
         public Guid RowKey { get; private set; } = Guid.Empty;
-        public Uri GetAllUrl { get { return new Uri($@"{UrlBase}/api/{DomainModel}Get?code=9AVbUx74MCU6k4wAXyO6NxEJy3SdWJMXAMwHQzm99LWB7RcVAF/1HQ=="); } }
-        public Uri GetByKeyUrl { get { return new Uri($@"{UrlBase}/api/{DomainModel}Get?code=9AVbUx74MCU6k4wAXyO6NxEJy3SdWJMXAMwHQzm99LWB7RcVAF/1HQ==&key={RowKey}"); } }
-        public Uri CreateUrl { get { return new Uri($@"{UrlBase}/api/{DomainModel}Create?code=T3KPnhwNI1Ca67SbbXSvdHUIX3PhXc5uxjbFC0nKBGcahBfyEziHvQ=="); } }
-        public Uri UpdateUrl { get { return new Uri($@"{UrlBase}/api/{DomainModel}Update?code=T3KPnhwNI1Ca67SbbXSvdHUIX3PhXc5uxjbFC0nKBGcahBfyEziHvQ==&key={RowKey}"); } }
-        public Uri SaveUrl { get { return new Uri($@"{UrlBase}/api/{DomainModel}Save?code=T3KPnhwNI1Ca67SbbXSvdHUIX3PhXc5uxjbFC0nKBGcahBfyEziHvQ==&key={RowKey}"); } }
-        public Uri DeleteUrl { get { return new Uri($@"{UrlBase}/api/{DomainModel}Delete?code=T3KPnhwNI1Ca67SbbXSvdHUIX3PhXc5uxjbFC0nKBGcahBfyEziHvQ==&key={RowKey}"); } }
+        public string GetAllUrl { get { return _config["Apis:GetAllUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel); } }
+        public string GetByKeyUrl { get { return _config["Apis:GetByKeyUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{RowKey}", RowKey.ToString()); } }
+        public string CreateUrl { get { return _config["Apis:GetAllUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel); } }
+        public string UpdateUrl { get { return _config["Apis:GetAllUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{RowKey}", RowKey.ToString()); } }
+        public string SaveUrl { get { return _config["Apis:GetAllUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{RowKey}", RowKey.ToString()); } }
+        public string DeleteUrl { get { return _config["Apis:GetAllUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{RowKey}", RowKey.ToString()); } }
 
         public string DomainNamespace { get; private set; }
         public string DomainModel { get; private set; }
 
-        public AzureFunctionUrlFactory(string domainNamespace, string domainModel)
+        public AzureFunctionUrlFactory(IConfiguration config, string domainNamespace, string domainModel)
         {
+            _config = config;
             DomainModel = domainModel;
             DomainNamespace = domainNamespace;
         }
@@ -29,40 +31,33 @@ namespace GoodToCode.Subjects.Specs
         public Uri CreateCreateUrl()
         {
             RowKey = Guid.Empty;
-            return CreateUrl;
+            return new Uri(CreateUrl);
         }
 
         public Uri CreateUpdateUrl(Guid rowKey)
         {
             RowKey = rowKey;
-            return CreateUrl;
+            return new Uri(UpdateUrl);
         }
         public Uri CreateDeleteUrl(Guid rowKey)
         {
             RowKey = rowKey;
-            return DeleteUrl;
+            return new Uri(DeleteUrl);
         }
         public Uri CreateSaveUrl(Guid rowKey)
         {
             RowKey = rowKey;
-            return SaveUrl;
+            return new Uri(SaveUrl);
         }
         public Uri CreateGetByKeyUrl(Guid rowKey)
         {
             RowKey = rowKey;
-            return GetByKeyUrl;
+            return new Uri(GetByKeyUrl);
         }
         public Uri CreateGetAllUrl()
         {
             RowKey = Guid.Empty;
-            return GetAllUrl;
+            return new Uri(GetAllUrl);
         }
-
-        //private string Pluralize(string singular)
-        //{
-        //    var pluralizer = new System.Data.Entity.Design.PluralizationServices.PluralizationService.CreateService(CultureInfo.GetCultureInfo("en-us"));
-
-
-        //}
     }
 }

@@ -19,8 +19,8 @@ namespace GoodToCode.Subjects.Functions.Associate
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Fn Business Insert", Description="\tInsert a new business into persistence", SourceFile="Functions\\Associate\\Fn_BusinessCreate.feature", SourceLine=0)]
-    public partial class FnBusinessInsertFeature
+    [TechTalk.SpecRun.FeatureAttribute("Fn Business Create", Description="\tCreate a new business in persistence", SourceFile="Functions\\Associate\\Fn_BusinessCreate.feature", SourceLine=0)]
+    public partial class FnBusinessCreateFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -34,7 +34,7 @@ namespace GoodToCode.Subjects.Functions.Associate
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Functions/Associate", "Fn Business Insert", "\tInsert a new business into persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Functions/Associate", "Fn Business Create", "\tCreate a new business in persistence", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -70,16 +70,16 @@ namespace GoodToCode.Subjects.Functions.Associate
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Insert a new business via Azure Function", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("Create a new business via Azure Function", new string[] {
                 "command",
                 "azureFunction"}, SourceLine=4)]
-        public virtual void InsertANewBusinessViaAzureFunction()
+        public virtual void CreateANewBusinessViaAzureFunction()
         {
             string[] tagsOfScenario = new string[] {
                     "command",
                     "azureFunction"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Insert a new business via Azure Function", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new business via Azure Function", null, tagsOfScenario, argumentsOfScenario);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
