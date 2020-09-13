@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using TechTalk.SpecRun.Common.Helper;
 
@@ -18,27 +19,12 @@ namespace GoodToCode.Shared.Specs
             public static string Production = "Production";
         }
 
-        private string _environment = string.Empty;
-        private List<string> _configFiles = new List<string>();
-
         public string CurrentEnvironment { get { return new EnvironmentVariableFactory().CreateASPNETCORE_ENVIRONMENT(); } }
         public IConfiguration Configuration { get; }
-        public string ConfigDirectory { get; set; }
+        public string DefaultPath { get; set; }
         public string BaseConfigFile { get { return "appsettings.json"; } }
         public string EnvironmentConfigFile { get { return $"appsettings.{CurrentEnvironment}.json"; } }
-        public List<string> ConfigFiles
-        {
-            get
-            {
-                if (_configFiles?.Count == 0)
-                {
-                    _configFiles.Add(BaseConfigFile);
-                    _configFiles.Add(EnvironmentConfigFile);
-                }
-                return _configFiles;
-            }
-            set { _configFiles = value; }
-        }        
+        public List<string> ConfigFiles { get; } = new List<string>();
 
         public string AssemblyDirectory
         {
@@ -53,27 +39,38 @@ namespace GoodToCode.Shared.Specs
 
         public ConfigurationFactory()
         {
-            ConfigDirectory = FindConfiguration(AssemblyDirectory);
+            DefaultPath = AssemblyDirectory;
         }
 
-        public ConfigurationFactory(List<string> configFiles)
+        public ConfigurationFactory(List<string> configFiles) : this()
         {
-            _configFiles = configFiles;
-            ConfigDirectory = FindConfiguration(AssemblyDirectory);
+            ConfigFiles = configFiles;
         }
 
-        public ConfigurationFactory(string configDirectory)
+        public ConfigurationFactory(string defaultPath) : this()
         {
-            ConfigDirectory = FindConfiguration(configDirectory);
+            DefaultPath = defaultPath;
         }
 
-        public ConfigurationFactory(string configDirectory, List<string> configFiles)
+        public ConfigurationFactory(string defaultPath, List<string> configFiles) : this(defaultPath)
         {
-            _configFiles = configFiles;
-            ConfigDirectory = FindConfiguration(configDirectory);
+            ConfigFiles = configFiles;
         }
 
-        public string FindConfiguration(string configDirectory)
+        public IConfiguration Create()
+        {            
+            DefaultPath = FindConfiguration(DefaultPath);
+            if (!ConfigFiles.Any()) ConfigFiles.AddRange(new string[] { BaseConfigFile, EnvironmentConfigFile });
+            var returnValue = new ConfigurationBuilder().SetBasePath(DefaultPath);            
+            foreach (var item in ConfigFiles)
+            {
+                returnValue.AddJsonFile(item);
+            }
+
+            return returnValue.Build();
+        }
+
+        private string FindConfiguration(string configDirectory)
         {
             var returnValue = configDirectory;
             if (SearchDirectoryAndParent(configDirectory).Length > 0)
@@ -86,7 +83,7 @@ namespace GoodToCode.Shared.Specs
             return returnValue;
         }
 
-        public string SearchDirectoryAndParent(string configDirectory)
+        private string SearchDirectoryAndParent(string configDirectory)
         {
             var returnValue = string.Empty;
             if (Directory.GetFiles(configDirectory, BaseConfigFile).Length > 0)
@@ -95,17 +92,6 @@ namespace GoodToCode.Shared.Specs
                 returnValue = Directory.GetParent(configDirectory).FullName;
 
             return returnValue;
-        }
-
-        public IConfiguration Create()
-        {
-            var returnValue = new ConfigurationBuilder().SetBasePath(ConfigDirectory);
-            foreach (var item in ConfigFiles)
-            {
-                returnValue.AddJsonFile(item);
-            }
-
-            return returnValue.Build();
         }
     }
 }
