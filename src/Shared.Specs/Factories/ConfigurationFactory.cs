@@ -21,6 +21,7 @@ namespace GoodToCode.Shared.Specs
         private string _environment = string.Empty;
         private List<string> _configFiles = new List<string>();
 
+        public string CurrentEnvironment { get { return new EnvironmentVariableFactory().CreateASPNETCORE_ENVIRONMENT(); } }
         public IConfiguration Configuration { get; }
         public string ConfigDirectory { get; set; }
         public string BaseConfigFile { get { return "appsettings.json"; } }
@@ -37,17 +38,7 @@ namespace GoodToCode.Shared.Specs
                 return _configFiles;
             }
             set { _configFiles = value; }
-        }
-
-        public string CurrentEnvironment
-        {
-            get
-            {
-                if (_environment.IsNullOrWhiteSpace()) _environment = new EnvironmentVariableFactory().CreateASPNETCORE_ENVIRONMENT();
-                return _environment;
-            }
-            set { _environment = value; }
-        }
+        }        
 
         public string AssemblyDirectory
         {

@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.Local.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <UpToDateCheckBuild Remove="Application\Schedule\ScheduleQuery.feature.cs" />
     <UpToDateCheckBuild Remove="Application\Schedule\ScheduleSaveCommand.feature.cs" />
     <UpToDateCheckBuild Remove="Domain\Schedule\ScheduleAggregate.feature.cs" />
@@ -32,6 +36,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="appsettings.Local.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="appsettings.Development.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>

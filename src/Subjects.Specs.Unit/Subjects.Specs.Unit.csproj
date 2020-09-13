@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.Local.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <SpecFlowObsoleteCodeBehindFiles Remove="Application\Associate\BusinessCreate.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Application\BusinessCreate.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Application\BusinessGetByKey.feature.cs" />
@@ -20,6 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="appsettings.Local.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="appsettings.Development.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>

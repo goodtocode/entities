@@ -19,6 +19,10 @@
     <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventGetByKey.feature.cs" />
     <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventUpdate.feature.cs" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="appsettings.Local.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <UpToDateCheckBuild Remove="Application\Event\EventQuery.feature.cs" />
@@ -32,6 +36,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="appsettings.Local.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="appsettings.Development.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
