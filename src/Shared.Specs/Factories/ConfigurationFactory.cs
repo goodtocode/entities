@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using GoodToCode.Shared.Specs.Factories;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,11 +38,12 @@ namespace GoodToCode.Shared.Specs
             }
             set { _configFiles = value; }
         }
+
         public string CurrentEnvironment
         {
             get
             {
-                if (_environment.IsNullOrWhiteSpace()) _environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT ") ?? "Development";
+                if (_environment.IsNullOrWhiteSpace()) _environment = new EnvironmentVariableFactory().CreateASPNETCORE_ENVIRONMENT();
                 return _environment;
             }
             set { _environment = value; }

@@ -4,7 +4,7 @@
 param
 (
 	[Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
-    [string] $Environment= $(throw '-Environment is a required parameter. Default is Production')
+    [string] $Environment=$(throw '-Environment is a required parameter. Default is Production')
 )
 
 # ***
@@ -23,5 +23,15 @@ Write-Host "*****************************"
 # ***
 # *** Execute
 # ***
+
+# Set Machine - Requires Admin
+#[Environment]::SetEnvironmentVariable($Environment, $env:ASPNETCORE_ENVIRONMENT, [System.EnvironmentVariableTarget]::Machine)
+
+# Set User
+# [Environment]::SetEnvironmentVariable($Environment, $env:ASPNETCORE_ENVIRONMENT, [System.EnvironmentVariableTarget]::User)
+
+# Shortcut method
 $env:ASPNETCORE_ENVIRONMENT = $Environment
+
+# Verify
 gci env:ASPNETCORE_ENVIRONMENT
