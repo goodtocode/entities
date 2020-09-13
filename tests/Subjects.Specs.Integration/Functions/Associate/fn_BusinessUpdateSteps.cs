@@ -46,6 +46,7 @@ namespace GoodToCode.Subjects.Specs
         {
             var client = new HttpClientFactory().Create();
             var response = await client.PostAsync(new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateUpdateUrl(SutKey), new StringContent(JsonConvert.SerializeObject(Sut)));
+            Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();
@@ -58,6 +59,7 @@ namespace GoodToCode.Subjects.Specs
         {
             var client = new HttpClientFactory().Create();
             var response = await client.GetAsync(new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateGetByKeyUrl(SutKey));
+            Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();

@@ -32,6 +32,7 @@ namespace GoodToCode.Subjects.Specs
         {
             var client = new HttpClientFactory().Create();
             var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetAllUrl());
+            Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts = JsonConvert.DeserializeObject<List<Business>>(result).Take(1).ToList();
             Sut = Suts.FirstOrDefault();
@@ -43,6 +44,7 @@ namespace GoodToCode.Subjects.Specs
         {
             var client = new HttpClientFactory().Create();
             var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetByKeyUrl(SutKey));
+            Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();
