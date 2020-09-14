@@ -13,17 +13,12 @@ trigger:
     - src/Subjects.Presentation.Functions/*
 
 variables:
-  # Azure Resource Manager connection created during pipeline creation
   azureSubscription: '7fd0d3c5-89c8-450d-8f4a-e3ff842104cc'
-
-  # Function app name
   functionAppName: 'subject-functions'
-
-  # Agent VM image name
   vmImageName: 'vs2017-win2016'
-
-  # Working Directory
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Subjects.Presentation.Functions'
+  sourceDirectory: '$(System.DefaultWorkingDirectory)/src/Subjects.Presentation.Functions'
+  testDirectory: '$(System.DefaultWorkingDirectory)/src/Subjects.Specs.Unit'
+  MSBUILDSINGLELOADCONTEXT: 1
 
 stages:
 - stage: Build
@@ -46,16 +41,22 @@ stages:
     - task: DotNetCoreCLI@2
       inputs:
         command: 'restore'
-        projects: '$(workingDirectory)/*.csproj'
+        projects: '$(sourceDirectory)/*.csproj'
         feedsToUse: 'select'
 
     - task: DotNetCoreCLI@2
       displayName: Build
       inputs:
         command: 'build'
-        projects: |
-          $(workingDirectory)/*.csproj
+        projects: $(sourceDirectory)/*.csproj
         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Test'
+      continueOnError: true
+      inputs:
+        command: test
+        projects: '$(testDirectory)/*.csproj'
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'

@@ -15,6 +15,7 @@ variables:
   version: '5.$(buildVersion)'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  MSBUILDSINGLELOADCONTEXT: 1
 
 stages:
 - stage: Build

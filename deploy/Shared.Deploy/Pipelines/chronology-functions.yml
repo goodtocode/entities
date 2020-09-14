@@ -13,17 +13,12 @@ trigger:
     - src/Chronology.Presentation.Functions/*
 
 variables:
-  # Azure Resource Manager connection created during pipeline creation
   azureSubscription: '8dbc1bf9-126e-4c82-ab32-bb86e39b6634'
-
-  # Function app name
   functionAppName: 'chronology-functions'
-
-  # Agent VM image name
   vmImageName: 'vs2017-win2016'
-
-  # Working Directory
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Chronology.Presentation.Functions'
+  sourceDirectory: '$(System.DefaultWorkingDirectory)/src/Chronology.Presentation.Functions'
+  testDirectory: '$(System.DefaultWorkingDirectory)/src/Chronology.Specs.Unit'
+  MSBUILDSINGLELOADCONTEXT: 1
 
 stages:
 - stage: Build
@@ -44,18 +39,25 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)'
 
     - task: DotNetCoreCLI@2
+      displayName: 'Restore'
       inputs:
         command: 'restore'
-        projects: '$(workingDirectory)/*.csproj'
+        projects: $(sourceDirectory)/*.csproj
         feedsToUse: 'select'
 
     - task: DotNetCoreCLI@2
-      displayName: Build
+      displayName: 'Build'
       inputs:
         command: 'build'
-        projects: |
-          $(workingDirectory)/*.csproj
+        projects: $(sourceDirectory)/*.csproj
         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Test'
+      continueOnError: true
+      inputs:
+        command: test
+        projects: '$(testDirectory)/*.csproj'
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'

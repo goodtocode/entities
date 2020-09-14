@@ -13,6 +13,7 @@ variables:
   artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  MSBUILDSINGLELOADCONTEXT: 1
 
 stages:
 - stage: Build

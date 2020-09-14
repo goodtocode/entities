@@ -12,6 +12,7 @@ variables:
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
+  MSBUILDSINGLELOADCONTEXT: 1
 
 stages:
 - stage: Build

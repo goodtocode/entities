@@ -14,7 +14,8 @@ variables:
   artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop/deploy/Chronology.Infrastructure.Persistence.Migrations'
   name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'  
+  buildConfiguration: 'Release'
+  MSBUILDSINGLELOADCONTEXT: 1
 
 stages:
 - stage: Build
