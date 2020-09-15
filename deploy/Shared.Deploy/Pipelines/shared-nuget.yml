@@ -30,13 +30,13 @@ stages:
     - task: DeleteFiles@1
       displayName: 'Delete unwanted projects'
       inputs:
-        SourceFolder: 'deploy'
+        SourceFolder: $(System.DefaultWorkingDirectory)
         RemoveSourceFolder: true
         contents: |
-          **/docs/*
-          **/deploy/*
-          **/samples/*
-          **/tests/*
+          /docs/*
+          /deploy/*
+          /samples/*
+          /tests/*
 
     - task: PowerShell@2
       displayName: 'Set-Version'
