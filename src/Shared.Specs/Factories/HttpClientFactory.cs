@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace GoodToCode.Shared.Specs
 {
@@ -11,8 +12,11 @@ namespace GoodToCode.Shared.Specs
             Client = new HttpClient();
         }
 
-        public HttpClient Create()
+        public HttpClient CreateJsonClient()
         {
+            Client.DefaultRequestHeaders
+                .Accept
+                .Add(new MediaTypeWithQualityHeaderValue("application/json"));
             return Client;
         }
     }

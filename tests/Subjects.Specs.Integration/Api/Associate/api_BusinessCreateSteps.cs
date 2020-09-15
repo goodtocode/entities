@@ -38,7 +38,8 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessIsCreatedViaWebAPI()
         {
             var client = new HttpClientFactory().Create();
-            var response = await client.PutAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateCreateUrl(), new StringContent(JsonConvert.SerializeObject(Sut)));
+            var url = new WebApiUrlFactory(_config, "Subjects", "Business").CreateCreateUrl();
+            var response = await client.PutAsync(url, new StringContent(JsonConvert.SerializeObject(Sut)));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();            
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));

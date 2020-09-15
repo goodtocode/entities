@@ -11,7 +11,7 @@
   "profiles": {
     "dotnet-Development": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "v1/Businesses",
       "applicationUrl": "https://localhost:30052;http://localhost:30051",
       "environmentVariables": {
@@ -19,7 +19,7 @@
       },
       "dotnet-Local": {
         "commandName": "Project",
-        "launchBrowser": true,
+        "launchBrowser": false,
         "launchUrl": "v1/Businesses",
         "applicationUrl": "https://localhost:30052;http://localhost:30051",
         "environmentVariables": {

@@ -48,19 +48,17 @@ namespace GoodToCode.Subjects.Application
         }
 
         // PUT: api/Businesses/376B76B4-1EA8-4B31-9238-41E59784B5DD
-        [HttpPut("{key}")]
+        [HttpPut()]
         [ProducesResponseType(typeof(CommandResponse<Business>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 202)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 400)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 401)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 406)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 500)]
-        public async Task<ActionResult<CommandResponse<Business>>> PutBusiness(Guid key, [FromBody] BusinessSaveCommand command)
+        public async Task<ActionResult<CommandResponse<Business>>> PutBusiness([FromBody] Business item)
         {
+            var command = new BusinessCreateCommand(item);
             var cmdResponse = await Mediator.Send(command);
-
-            if (key != command.Item.BusinessKey)
-                return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest, cmdResponse);
 
             if (cmdResponse.Errors.Any())
                 return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest, cmdResponse);
@@ -72,16 +70,19 @@ namespace GoodToCode.Subjects.Application
         }
 
         // POST: api/Businesses/376B76B4-1EA8-4B31-9238-41E59784B5DD
-        [HttpPost()]
+        [HttpPost("{key}")]
         [ProducesResponseType(typeof(CommandResponse<Business>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 202)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 400)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 401)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 406)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 500)]
-        public async Task<ActionResult<CommandResponse<Business>>> PostBusiness([FromBody] BusinessSaveCommand command)
+        public async Task<ActionResult<CommandResponse<Business>>> PostBusiness(Guid key, [FromBody] BusinessUpdateCommand command)
         {
             var cmdResponse = await Mediator.Send(command);
+
+            if (key != command.Item.BusinessKey)
+                return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest, cmdResponse);
 
             if (cmdResponse.Errors.Any())
                 return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest, cmdResponse);

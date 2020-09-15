@@ -14,12 +14,12 @@ namespace GoodToCode.Subjects.Specs
         public string UrlBase { get { _urlBase = _urlBase.IsNullOrWhiteSpace() ? _config["Functions:UrlBase"] : _urlBase; return _urlBase; } private set { _urlBase = value; } }        
         public string Code { get { _code = _code.IsNullOrWhiteSpace() ? _config["Functions:Code"] : _code; return _code; } private set { _code = value; } }
         public Guid RowKey { get; private set; } = Guid.Empty;
-        public string GetAllUrl { get { return _config["Apis:GetAllUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModelPlural}", DomainModelPlural).Replace("{Code}", Code); } }
-        public string GetByKeyUrl { get { return _config["Apis:GetByKeyUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{Code}", Code).Replace("{RowKey}", RowKey.ToString()); } }
-        public string CreateUrl { get { return _config["Apis:CreateUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{Code}", Code); } }
-        public string UpdateUrl { get { return _config["Apis:UpdateUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{Code}", Code).Replace("{RowKey}", RowKey.ToString()); } }
-        public string SaveUrl { get { return _config["Apis:SaveUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{Code}", Code).Replace("{RowKey}", RowKey.ToString()); } }
-        public string DeleteUrl { get { return _config["Apis:DeleteUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{Code}", Code).Replace("{RowKey}", RowKey.ToString()); } }
+        public string GetAllUrl { get { return ReplaceMasks(_config["Functions:GetAllUrlMask"]); } }
+        public string GetByKeyUrl { get { return ReplaceMasks(_config["Functions:GetByKeyUrlMask"]); } }
+        public string CreateUrl { get { return ReplaceMasks(_config["Functions:CreateUrlMask"]); } }
+        public string UpdateUrl { get { return ReplaceMasks(_config["Functions:UpdateUrlMask"]); } }
+        public string SaveUrl { get { return ReplaceMasks(_config["Functions:SaveUrlMask"]); } }
+        public string DeleteUrl { get { return ReplaceMasks(_config["Functions:DeleteUrlMask"]); } }
 
         public string DomainNamespace { get; private set; }        
         public string DomainModel { get; private set; }
@@ -62,6 +62,11 @@ namespace GoodToCode.Subjects.Specs
         {
             RowKey = Guid.Empty;
             return new Uri(GetAllUrl);
+        }
+
+        private string ReplaceMasks(string raw)
+        {
+            return raw.Replace("{UrlBase}", UrlBase).Replace("{DomainModel}", DomainModel).Replace("{DomainModelPlural}", DomainModelPlural).Replace("{RowKey}", RowKey.ToString()).Replace("{Code}", Code);
         }
     }
 }
