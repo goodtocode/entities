@@ -31,6 +31,7 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"I request the list of businesses from the Web API")]
         public async Task GivenIRequestTheListOfBusinessesFromTheWebAPI()
         {
+            createSteps.GivenIHaveANewBusinessForTheWebAPI();
             await createSteps.WhenBusinessIsCreatedViaWebAPI();
         }
 

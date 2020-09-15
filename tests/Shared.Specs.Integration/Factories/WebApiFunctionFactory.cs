@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using DoctorCode.Pluralization;
+using Microsoft.Extensions.Configuration;
 using System;
 using TechTalk.SpecRun.Common.Helper;
 
@@ -8,10 +9,10 @@ namespace GoodToCode.Subjects.Specs
     {
         private IConfiguration _config;
         private string _urlBase;
-        public string UrlBase { get { _urlBase = _urlBase.IsNullOrWhiteSpace() ? _config["Apis:UrlBase"] : _urlBase; return _urlBase; } private set { _urlBase = value; } }
 
+        public string UrlBase { get { _urlBase = _urlBase.IsNullOrWhiteSpace() ? _config["Apis:UrlBase"] : _urlBase; return _urlBase; } private set { _urlBase = value; } }
         public Guid RowKey { get; private set; } = Guid.Empty;
-        public string GetAllUrl { get { return _config["Apis:GetAllUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel); } }
+        public string GetAllUrl { get { return _config["Apis:GetAllUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModelPlural}", DomainModelPlural); } }
         public string GetByKeyUrl { get { return _config["Apis:GetByKeyUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{RowKey}", RowKey.ToString()); } }
         public string CreateUrl { get { return _config["Apis:GetAllUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel); } }
         public string UpdateUrl { get { return _config["Apis:GetAllUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{RowKey}", RowKey.ToString()); } }
@@ -20,6 +21,7 @@ namespace GoodToCode.Subjects.Specs
 
         public string DomainNamespace { get; private set; }
         public string DomainModel { get; private set; }
+        public string DomainModelPlural { get { return new EnglishPluralizationService().Pluralize(DomainModel); } }
 
         public WebApiUrlFactory(IConfiguration config, string domainNamespace, string domainModel)
         {

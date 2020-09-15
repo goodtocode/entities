@@ -32,6 +32,7 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"I have an non empty business key for the Azure Function")]
         public async Task GivenIHaveAnNonEmptyBusinessKeyForTheAzureFunction()
         {
+            createSteps.GivenIHaveANewBusinessForTheAzureFunction();
             await createSteps.WhenBusinessIsCreatedViaAzureFunction();
         }
 
@@ -64,7 +65,7 @@ namespace GoodToCode.Subjects.Specs
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();
             SutKey = Sut.BusinessKey;
-            Assert.IsFalse(SutKey != Guid.Empty);
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
 
         [TestCleanup]

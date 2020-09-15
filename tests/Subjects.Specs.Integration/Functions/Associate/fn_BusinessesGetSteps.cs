@@ -31,6 +31,7 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"I request the list of businesses from the Azure Function")]
         public async Task GivenIRequestTheListOfBusinessesFromTheAzureFunction()
         {
+            createSteps.GivenIHaveANewBusinessForTheAzureFunction();
             await createSteps.WhenBusinessIsCreatedViaAzureFunction();
         }
 

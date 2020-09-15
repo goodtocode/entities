@@ -5,6 +5,7 @@ namespace GoodToCode.Subjects.Specs
     public interface ICrudUrlFactory
     {
         string DomainModel { get; }
+        string DomainModelPlural { get; }
         string DomainNamespace { get; }
         Guid RowKey { get; }
         string CreateUrl { get; }
