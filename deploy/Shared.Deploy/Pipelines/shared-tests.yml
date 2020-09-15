@@ -36,6 +36,17 @@ stages:
         arguments: '-Path $(System.DefaultWorkingDirectory) -VersionToReplace 5.20.1 -Major 05'
         workingDirectory: '$(sourceDirectory)'
 
+    - task: DeleteFiles@1
+      displayName: 'Delete unwanted projects'
+      inputs:
+        SourceFolder: $(System.DefaultWorkingDirectory)
+        RemoveSourceFolder: true
+        contents: |
+          /docs/*
+          /deploy/*
+          /samples/*
+          /src/*
+
     - task: DotNetCoreCLI@2
       displayName: Restore
       inputs:
