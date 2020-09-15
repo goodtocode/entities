@@ -69,7 +69,7 @@ stages:
       displayName: 'Delete unwanted NuGet packages'
       inputs:
         SourceFolder: '$(Build.ArtifactStagingDirectory)'
-        Contents: '*.migrations.nupkg'
+        Contents: '*.migrations.*.nupkg'
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
