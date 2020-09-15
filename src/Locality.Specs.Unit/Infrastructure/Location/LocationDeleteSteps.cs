@@ -1,15 +1,14 @@
-﻿using GoodToCode.Shared.Specs;
+﻿using GoodToCode.Locality.Infrastructure;
 using GoodToCode.Locality.Models;
+using GoodToCode.Shared.Specs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
-using TechTalk.SpecFlow;
-using GoodToCode.Locality.Infrastructure;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
+using TechTalk.SpecFlow;
 
 namespace GoodToCode.Locality.Specs
 {
