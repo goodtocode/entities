@@ -29,9 +29,13 @@ stages:
     steps:
     - task: DeleteFiles@1
       inputs:
-        SourceFolder: 'tests'
-        Contents: '*'
+        SourceFolder: 'deploy'
         RemoveSourceFolder: true
+        contents: |
+          **/docs/*
+          **/deploy/*
+          **/samples/*
+          **/tests/*
 
     - task: PowerShell@2
       displayName: 'Set-Version'
@@ -64,12 +68,6 @@ stages:
         projects: |
           $(sourceDirectory)/**/*.csproj
         arguments: '--output $(Build.ArtifactStagingDirectory)'
-
-    - task: DeleteFiles@1
-      displayName: 'Delete unwanted NuGet packages'
-      inputs:
-        SourceFolder: '$(Build.ArtifactStagingDirectory)'
-        Contents: '*.migrations.*.nupkg'
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
