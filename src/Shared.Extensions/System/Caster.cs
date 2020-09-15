@@ -3,9 +3,9 @@ using System.Reflection;
 
 namespace GoodToCode.Shared.Extensions
 {
-    public class Caster
+    public class Caster<T> where T : new()
     {
-        public T Cast<T>(object sourceItem) where T : new()
+        public T Cast(object sourceItem)
         {
             var item = new T();
             var sourceType = sourceItem.GetType();

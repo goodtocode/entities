@@ -18,7 +18,7 @@ namespace GoodToCode.Subjects.Specs
         private readonly IConfiguration _config;
         private readonly Api_BusinessCreateSteps createSteps = new Api_BusinessCreateSteps();
 
-        public IList<Business> Suts { get; private set; }
+        public IList<Business> Suts { get; private set; } = new List<Business>();
         public Business Sut { get; private set; }
         public Guid SutKey { get; private set; }
         public IList<Business> RecycleBin { get; set; }

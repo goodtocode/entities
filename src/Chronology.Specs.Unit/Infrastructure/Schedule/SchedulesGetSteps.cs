@@ -23,7 +23,7 @@ namespace GoodToCode.Chronology.Specs
         private readonly ScheduleCreateSteps createSteps = new ScheduleCreateSteps();
 
         public Schedule Sut { get; private set; }
-        public IList<Schedule> Suts { get; private set; }
+        public IList<Schedule> Suts { get; private set; } = new List<Schedule>();
         public Guid SutKey { get; private set; }
         public IList<Schedule> RecycleBin { get; private set; } = new List<Schedule>();
 

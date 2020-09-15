@@ -1,4 +1,3 @@
-using GoodToCode.Shared.Extensions;
 using GoodToCode.Subjects.Infrastructure;
 using GoodToCode.Subjects.Models;
 using Microsoft.AspNetCore.Http;
@@ -25,14 +24,13 @@ namespace GoodToCode.Subjects.Functions
             string defaultConnection = Environment.GetEnvironmentVariable("DefaultConnection") ?? "Server=tcp:goodtocodestack.database.windows.net,1433;Initial Catalog=StackData;Persist Security Info=False;User ID=LocalAdmin;Password=1202cc89-cb6f-453a-ac7e-550b3b5d2d0c;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             
             var options = new DbContextOptionsBuilder<SubjectsDbContext>();
-                options.UseSqlServer(defaultConnection);            
+                options.UseSqlServer(defaultConnection);
             var context = new SubjectsDbContext(options.Options);
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic itemToSave = JsonConvert.DeserializeObject(requestBody);
-            Business business = new Caster().Cast<Business>(itemToSave);           
-            var recordsAffected = await new AssociateAggregate(context).BusinessSaveAsync(business);
-            return recordsAffected == 0 ? new NotFoundResult() : (IActionResult)new OkObjectResult(JsonConvert.SerializeObject(business));
+            var itemToSave = JsonConvert.DeserializeObject<Business>(requestBody);
+            var recordsAffected = await new AssociateAggregate(context).BusinessSaveAsync(itemToSave);
+            return recordsAffected == 0 ? new NotFoundResult() : (IActionResult)new OkObjectResult(JsonConvert.SerializeObject(itemToSave));
         }
     }
 }

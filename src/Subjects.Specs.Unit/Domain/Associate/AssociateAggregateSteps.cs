@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace GoodToCode.Subjects.Specs
 {
@@ -44,6 +45,14 @@ namespace GoodToCode.Subjects.Specs
                 BusinessKey = SutKey,
                 BusinessName = "BusinessAggregateSteps.cs Test"
             };
+        }
+
+        [Given(@"the new business for the Aggregate is Serializable")]
+        public void GivenTheNewBusinessForTheAggregateIsSerializable()
+        {
+            var serialized = JsonConvert.SerializeObject(SutBusiness);
+            var deserialized = JsonConvert.DeserializeObject<Business>(serialized);
+            Assert.IsTrue(deserialized.BusinessName.Length > 0);
         }
 
         [When(@"the business does not exist in persistence")]

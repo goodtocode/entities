@@ -10,9 +10,11 @@ namespace GoodToCode.Shared.Specs.Factories
         public EnvironmentVariableFactory()
         {
             ASPNETCORE_ENVIRONMENT = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? DefaultASPNETCORE_ENVIRONMENT;
-#if DEBUG
-            ASPNETCORE_ENVIRONMENT = "Local";
-#endif
+        }
+
+        public EnvironmentVariableFactory(string environment)
+        {
+            ASPNETCORE_ENVIRONMENT = environment;
         }
 
         public string CreateASPNETCORE_ENVIRONMENT()

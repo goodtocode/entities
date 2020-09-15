@@ -20,8 +20,8 @@ namespace GoodToCode.Subjects.Specs
 
         public Guid SutKey { get; private set; }
         public Business Sut { get; private set; }
-        public IList<Business> Suts { get; private set; }
-        public IList<Business> RecycleBin { get; private set; }
+        public IList<Business> Suts { get; private set; } = new List<Business>();
+        public IList<Business> RecycleBin { get; private set; } = new List<Business>();
 
         public Api_BusinessCreateSteps()
         {

@@ -5,20 +5,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using TechTalk.SpecRun.Common.Helper;
 
 namespace GoodToCode.Shared.Specs
 {
+    public struct ConfigurationEnvironments
+    {
+        public static string Local = "Local";
+        public static string Development = "Development";
+        public static string Staging = "Staging";
+        public static string Production = "Production";
+    }
+
     public class ConfigurationFactory
     {
-        public struct Environments
-        {
-            public static string Local = "Local";
-            public static string Development = "Development";
-            public static string Staging = "Staging";
-            public static string Production = "Production";
-        }
-
         public string CurrentEnvironment { get { return new EnvironmentVariableFactory().CreateASPNETCORE_ENVIRONMENT(); } }
         public IConfiguration Configuration { get; }
         public string DefaultPath { get; set; }

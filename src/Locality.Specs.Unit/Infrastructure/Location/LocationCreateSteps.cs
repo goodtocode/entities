@@ -22,7 +22,7 @@ namespace GoodToCode.Locality.Specs
         private int _rowsAffected;
         public Guid SutKey { get; private set; }
         public Location Sut { get; private set; }
-        public IList<Location> Suts { get; private set; }
+        public IList<Location> Suts { get; private set; } = new List<Location>();
         public IList<Location> RecycleBin { get; private set; } = new List<Location>();
 
         public LocationCreateSteps()

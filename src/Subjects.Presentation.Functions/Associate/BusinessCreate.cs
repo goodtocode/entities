@@ -29,10 +29,9 @@ namespace GoodToCode.Subjects.Functions
             var context = new SubjectsDbContext(options.Options);
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic itemToSave = JsonConvert.DeserializeObject(requestBody);
-            Business business = new Caster().Cast<Business>(itemToSave);           
-            var recordsAffected = await new AssociateAggregate(context).BusinessSaveAsync(business);
-            return recordsAffected == 0 ? new NotFoundResult() : (IActionResult)new OkObjectResult(JsonConvert.SerializeObject(business));
+            var itemToSave = JsonConvert.DeserializeObject<Business>(requestBody);
+            var recordsAffected = await new AssociateAggregate(context).BusinessCreateAsync(itemToSave);
+            return recordsAffected == 0 ? new NotFoundResult() : (IActionResult)new OkObjectResult(JsonConvert.SerializeObject(itemToSave));
         }
     }
 }

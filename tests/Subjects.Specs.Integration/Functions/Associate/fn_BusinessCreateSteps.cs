@@ -20,8 +20,8 @@ namespace GoodToCode.Subjects.Specs
 
         public Guid SutKey { get; private set; }
         public Business Sut { get; private set; }
-        public IList<Business> Suts { get; private set; }
-        public IList<Business> RecycleBin { get; private set; }
+        public IList<Business> Suts { get; private set; } = new List<Business>();
+        public IList<Business> RecycleBin { get; private set; } = new List<Business>();
 
         public Fn_BusinessCreateSteps()
         {
@@ -58,7 +58,7 @@ namespace GoodToCode.Subjects.Specs
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();
             SutKey = Sut.BusinessKey;
-            Assert.IsFalse(SutKey != Guid.Empty);
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
 
         [TestCleanup]

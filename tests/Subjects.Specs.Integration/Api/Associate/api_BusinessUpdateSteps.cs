@@ -22,8 +22,8 @@ namespace GoodToCode.Subjects.Specs
         private readonly Api_BusinessCreateSteps createSteps = new Api_BusinessCreateSteps();
         public Guid SutKey { get; private set; }
         public Business Sut { get; private set; }
-        public IList<Business> Suts { get; private set; }
-        public IList<Business> RecycleBin { get; private set; }
+        public IList<Business> Suts { get; private set; } = new List<Business>();
+        public IList<Business> RecycleBin { get; private set; } = new List<Business>();
 
         public Api_BusinessUpdateSteps()
         {

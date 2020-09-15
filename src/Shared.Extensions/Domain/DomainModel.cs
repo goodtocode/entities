@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace GoodToCode.Shared.Models
 {
@@ -10,7 +11,9 @@ namespace GoodToCode.Shared.Models
 
         [Key]
         public abstract Guid RowKey { get; protected set; }
-        public string PartitionKey { get; } = "Common";        
+        public string PartitionKey { get; } = "Common";
+        
+        [IgnoreDataMember]
         public IReadOnlyList<IDomainEvent<TModel>> DomainEvents => _domainEvents;        
 
         protected DomainModel()
