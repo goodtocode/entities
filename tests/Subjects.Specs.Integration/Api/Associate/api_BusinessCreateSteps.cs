@@ -57,7 +57,7 @@ namespace GoodToCode.Subjects.Specs
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
             Sut = Suts.FirstOrDefault();
             SutKey = Sut.BusinessKey;
-            Assert.IsFalse(SutKey != Guid.Empty);
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
 
         [TestCleanup]

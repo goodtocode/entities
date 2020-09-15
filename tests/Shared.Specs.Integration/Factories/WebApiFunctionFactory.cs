@@ -12,12 +12,12 @@ namespace GoodToCode.Subjects.Specs
 
         public string UrlBase { get { _urlBase = _urlBase.IsNullOrWhiteSpace() ? _config["Apis:UrlBase"] : _urlBase; return _urlBase; } private set { _urlBase = value; } }
         public Guid RowKey { get; private set; } = Guid.Empty;
-        public string GetAllUrl { get { return _config["Apis:GetAllUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModelPlural}", DomainModelPlural); } }
-        public string GetByKeyUrl { get { return _config["Apis:GetByKeyUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{RowKey}", RowKey.ToString()); } }
-        public string CreateUrl { get { return _config["Apis:GetAllUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel); } }
-        public string UpdateUrl { get { return _config["Apis:GetAllUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{RowKey}", RowKey.ToString()); } }
-        public string SaveUrl { get { return _config["Apis:GetAllUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{RowKey}", RowKey.ToString()); } }
-        public string DeleteUrl { get { return _config["Apis:GetAllUrlMask"].Replace("{UrlBase}", _config["Functions:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{RowKey}", RowKey.ToString()); } }
+        public string GetAllUrl { get { return _config["Apis:GetAllUrlMask"].Replace("{UrlBase}", _config["Apis:UrlBase"]).Replace("{DomainModelPlural}", DomainModelPlural); } }
+        public string GetByKeyUrl { get { return _config["Apis:GetByKeyUrlMask"].Replace("{UrlBase}", _config["Apis:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{RowKey}", RowKey.ToString()); } }
+        public string CreateUrl { get { return _config["Apis:CreateUrlMask"].Replace("{UrlBase}", _config["Apis:UrlBase"]).Replace("{DomainModel}", DomainModel); } }
+        public string UpdateUrl { get { return _config["Apis:UpdateUrlMask"].Replace("{UrlBase}", _config["Apis:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{RowKey}", RowKey.ToString()); } }
+        public string SaveUrl { get { return _config["Apis:SaveUrlMask"].Replace("{UrlBase}", _config["Apis:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{RowKey}", RowKey.ToString()); } }
+        public string DeleteUrl { get { return _config["Apis:DeleteUrlMask"].Replace("{UrlBase}", _config["Apis:UrlBase"]).Replace("{DomainModel}", DomainModel).Replace("{RowKey}", RowKey.ToString()); } }
 
         public string DomainNamespace { get; private set; }
         public string DomainModel { get; private set; }

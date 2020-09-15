@@ -2,7 +2,6 @@
 using GoodToCode.Shared.Cqrs;
 using GoodToCode.Subjects.Infrastructure;
 using GoodToCode.Subjects.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -17,7 +16,7 @@ namespace GoodToCode.Subjects.Application
     [Produces("application/json", "application/xml")]
     [ApiExplorerSettings(GroupName = "BusinessSpecification")]
     [Route("/v{version:apiVersion}/[controller]")]
-    [ApiVersion("1.0")]
+    [ApiVersion("1")]
     public class BusinessesController : ControllerMediator
     {
         private readonly SubjectsDbContext _dbContext;
