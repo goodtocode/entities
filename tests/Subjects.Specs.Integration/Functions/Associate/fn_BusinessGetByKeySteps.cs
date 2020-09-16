@@ -31,7 +31,7 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"I have a business key to get from the Azure Function")]
         public async Task GivenIHaveABusinessKeyToGetFromTheAzureFunction()
         {
-            var client = new HttpClientFactory().Create();
+            var client = new HttpClientFactory().CreateJsonClient<Business>();
             var response = await client.GetAsync(new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateGetAllUrl());
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
@@ -43,7 +43,7 @@ namespace GoodToCode.Subjects.Specs
         [When(@"Business is queried by key via Azure Function")]
         public async Task WhenBusinessIsQueriedByKeyViaAzureFunction()
         {
-            var client = new HttpClientFactory().Create();
+            var client = new HttpClientFactory().CreateJsonClient<Business>();
             var response = await client.GetAsync(new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateGetByKeyUrl(SutKey));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();

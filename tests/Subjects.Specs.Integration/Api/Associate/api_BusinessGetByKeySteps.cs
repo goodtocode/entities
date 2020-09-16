@@ -30,7 +30,7 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"I have a business key to get from the Web API")]
         public async Task GivenIHaveABusinessKeyToGetFromTheWebAPI()
         {
-            var client = new HttpClientFactory().Create();
+            var client = new HttpClientFactory().CreateJsonClient<Business>();
             var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetAllUrl());
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
@@ -42,7 +42,7 @@ namespace GoodToCode.Subjects.Specs
         [When(@"Business is queried by key via Web API")]
         public async Task WhenBusinessIsQueriedByKeyViaWebAPI()
         {
-            var client = new HttpClientFactory().Create();
+            var client = new HttpClientFactory().CreateJsonClient<Business>();
             var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetByKeyUrl(SutKey));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();

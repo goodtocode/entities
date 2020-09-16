@@ -38,7 +38,7 @@ namespace GoodToCode.Subjects.Specs
         [When(@"Businesses are queried via Azure Function")]
         public async Task WhenBusinessesAreQueriedViaAzureFunction()
         {
-            var client = new HttpClientFactory().Create();
+            var client = new HttpClientFactory().CreateJsonClient<Business>();
             var response = await client.GetAsync(new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateGetAllUrl());
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();

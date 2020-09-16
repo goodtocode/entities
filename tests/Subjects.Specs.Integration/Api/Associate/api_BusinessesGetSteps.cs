@@ -38,7 +38,7 @@ namespace GoodToCode.Subjects.Specs
         [When(@"Businesses are queried via Web API")]
         public async Task WhenBusinessesAreQueriedViaWebAPI()
         {
-            var client = new HttpClientFactory().Create();
+            var client = new HttpClientFactory().CreateJsonClient<Business>();
             var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetAllUrl());
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();

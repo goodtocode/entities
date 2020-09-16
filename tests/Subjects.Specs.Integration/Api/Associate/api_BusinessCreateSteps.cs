@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
@@ -37,9 +38,9 @@ namespace GoodToCode.Subjects.Specs
         [When(@"Business is created via Web API")]
         public async Task WhenBusinessIsCreatedViaWebAPI()
         {
-            var client = new HttpClientFactory().Create();
+            var client = new HttpClientFactory().CreateJsonClient<Business>();
             var url = new WebApiUrlFactory(_config, "Subjects", "Business").CreateCreateUrl();
-            var response = await client.PutAsync(url, new StringContent(JsonConvert.SerializeObject(Sut)));
+            var response = await client.PutAsync(url, new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();            
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
@@ -51,7 +52,7 @@ namespace GoodToCode.Subjects.Specs
         [Then(@"the business is inserted to persistence from the Web API")]
         public async Task ThenTheBusinessIsInsertedToPersistenceFromTheWebAPI()
         {
-            var client = new HttpClientFactory().Create();
+            var client = new HttpClientFactory().CreateJsonClient<Business>();
             var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetByKeyUrl(SutKey));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
@@ -64,7 +65,7 @@ namespace GoodToCode.Subjects.Specs
         [TestCleanup]
         public async Task Cleanup()
         {
-            var client = new HttpClientFactory().Create();
+            var client = new HttpClientFactory().CreateJsonClient<Business>();
             
             foreach (var item in RecycleBin)
             {

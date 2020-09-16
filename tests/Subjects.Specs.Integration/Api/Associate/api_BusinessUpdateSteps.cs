@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using TechTalk.SpecRun.Common.Helper;
@@ -33,7 +34,7 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"I have an non empty business key for the Web API")]
         public async Task GivenIHaveAnNonEmptyBusinessKeyForTheWebAPI()
         {
-            var client = new HttpClientFactory().Create();
+            var client = new HttpClientFactory().CreateJsonClient<Business>();
             var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetByKeyUrl(SutKey));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
@@ -53,8 +54,8 @@ namespace GoodToCode.Subjects.Specs
         [When(@"Business is posted via Web API")]
         public async Task WhenBusinessIsPostedViaWebAPI()
         {
-            var client = new HttpClientFactory().Create();
-            var response = await client.PostAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateUpdateUrl(SutKey), new StringContent(JsonConvert.SerializeObject(Sut)));
+            var client = new HttpClientFactory().CreateJsonClient<Business>();
+            var response = await client.PostAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateUpdateUrl(SutKey), new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
@@ -66,7 +67,7 @@ namespace GoodToCode.Subjects.Specs
         [Then(@"the business is updated in persistence when queried from Web API")]
         public async Task ThenTheBusinessIsUpdatedInPersistenceWhenQueriedFromWebAPI()
         {
-            var client = new HttpClientFactory().Create();
+            var client = new HttpClientFactory().CreateJsonClient<Business>();
             var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetByKeyUrl(SutKey));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
