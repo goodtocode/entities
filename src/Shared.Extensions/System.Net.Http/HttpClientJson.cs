@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Specs
+namespace GoodToCode.Shared.Extensions
 {
     public class HttpClientJson<T> : HttpClient where T : class, new()
     {
@@ -26,5 +26,4 @@ namespace GoodToCode.Shared.Specs
             return PostAsync(url, new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, "application/json"));
         }
     }
-
 }
