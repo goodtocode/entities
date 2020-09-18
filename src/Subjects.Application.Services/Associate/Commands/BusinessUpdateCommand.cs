@@ -14,7 +14,7 @@ namespace GoodToCode.Subjects.Application
     {
         public IBusiness Item { get; set; }
 
-        public BusinessUpdateCommand() { }
+        public BusinessUpdateCommand() { string Test = string.Empty; }
 
         public BusinessUpdateCommand(IBusiness item)
         {

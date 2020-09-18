@@ -73,17 +73,18 @@ namespace GoodToCode.Subjects.Application
         // POST: api/Businesses/376B76B4-1EA8-4B31-9238-41E59784B5DD
         [HttpPost("{key}")]
         [ProducesResponseType(typeof(CommandResponse<Business>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(CommandResponse<Business>), 202)]
+        [ProducesResponseType(typeof(CommandResponse<Business>), 202)] 
         [ProducesResponseType(typeof(CommandResponse<Business>), 400)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 401)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 406)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 500)]
-        public async Task<ActionResult<Business>> PostBusiness(Guid key, [FromBody] BusinessUpdateCommand command)
+        public async Task<ActionResult<Business>> PostBusiness(Guid key, [FromBody] Business item)
         {
-            var cmdResponse = await Mediator.Send(command);
-
+            var command = new BusinessUpdateCommand(item);
             if (key != command.Item.BusinessKey)
-                return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest, cmdResponse);
+                return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest);
+
+            var cmdResponse = await Mediator.Send(command);
 
             if (cmdResponse.Errors.Any())
                 return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest, cmdResponse);

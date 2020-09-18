@@ -21,6 +21,7 @@ namespace GoodToCode.Subjects.Specs
     {
         private readonly IConfiguration _config;
         private readonly Api_BusinessCreateSteps createSteps = new Api_BusinessCreateSteps();
+        private string _originalValue = string.Empty;
         public Guid SutKey { get; private set; }
         public Business Sut { get; private set; }
         public IList<Business> Suts { get; private set; } = new List<Business>();
@@ -35,27 +36,30 @@ namespace GoodToCode.Subjects.Specs
         public async Task GivenIHaveAnNonEmptyBusinessKeyForTheWebAPI()
         {
             var client = new HttpClientFactory().CreateJsonClient<Business>();
-            var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetByKeyUrl(SutKey));
+            var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetAllUrl());
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
-            Suts.Add(JsonConvert.DeserializeObject<Business>(result));
+            Suts.Add(JsonConvert.DeserializeObject<List<Business>>(result).FirstOrDefault());
             Sut = Suts.FirstOrDefault();
             SutKey = Sut.BusinessKey;
+            _originalValue = Sut.BusinessName;
             Assert.IsTrue(SutKey != Guid.Empty);
         }
 
         [Given(@"the business name is provided for the Web API")]
         public void GivenTheBusinessNameIsProvidedForTheWebAPI()
         {
-            Sut = new Business() { BusinessName = "BusinessUpdateSteps Test" };
-            Assert.IsFalse(Sut.BusinessName.IsNotNullOrWhiteSpace());
+            Sut.BusinessName = $"BusinessUpdateSteps Test {Guid.NewGuid()}";
+            Assert.IsTrue(Sut.BusinessName.IsNotNullOrWhiteSpace());
+            Assert.IsTrue(Sut.BusinessName != _originalValue);
         }
 
         [When(@"Business is posted via Web API")]
         public async Task WhenBusinessIsPostedViaWebAPI()
         {
             var client = new HttpClientFactory().CreateJsonClient<Business>();
-            var response = await client.PostAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateUpdateUrl(SutKey), new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
+            var url = new WebApiUrlFactory(_config, "Subjects", "Business").CreateUpdateUrl(SutKey);
+            var response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
@@ -75,6 +79,7 @@ namespace GoodToCode.Subjects.Specs
             Sut = Suts.FirstOrDefault();
             SutKey = Sut.BusinessKey;
             Assert.IsTrue(SutKey != Guid.Empty);
+            Assert.IsTrue(Sut.BusinessName != _originalValue);
         }
 
         [TestCleanup]
