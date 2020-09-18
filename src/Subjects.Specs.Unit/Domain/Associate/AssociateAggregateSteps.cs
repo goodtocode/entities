@@ -80,7 +80,7 @@ namespace GoodToCode.Subjects.Specs
         [TestCleanup]
         public async Task Cleanup()
         {
-            await Aggregate.BusinessDeleteAsync(SutBusiness);
+            await Aggregate.BusinessDeleteAsync(SutBusiness.RowKey);
         }
     }
 }

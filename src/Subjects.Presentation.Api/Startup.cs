@@ -1,4 +1,5 @@
 using GoodToCode.Subjects.Infrastructure;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -47,6 +48,8 @@ namespace GoodToCode.Subjects.Application
                     },
                 });
             });
+
+            services.AddMediatR(typeof(BusinessCreateHandler).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

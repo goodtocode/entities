@@ -2,6 +2,7 @@
 using GoodToCode.Shared.Cqrs;
 using GoodToCode.Subjects.Infrastructure;
 using GoodToCode.Subjects.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -21,7 +22,7 @@ namespace GoodToCode.Subjects.Application
     {
         private readonly SubjectsDbContext _dbContext;
 
-        public BusinessesController(SubjectsDbContext context)
+        public BusinessesController(SubjectsDbContext context, IMediator mediator) : base(mediator)
         {
             _dbContext = context;
         }
@@ -55,7 +56,7 @@ namespace GoodToCode.Subjects.Application
         [ProducesResponseType(typeof(CommandResponse<Business>), 401)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 406)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 500)]
-        public async Task<ActionResult<CommandResponse<Business>>> PutBusiness([FromBody] Business item)
+        public async Task<ActionResult<Business>> PutBusiness([FromBody] Business item)
         {
             var command = new BusinessCreateCommand(item);
             var cmdResponse = await Mediator.Send(command);
@@ -66,7 +67,7 @@ namespace GoodToCode.Subjects.Application
             if (cmdResponse.ErrorInfo.HasException)
                 return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError, cmdResponse);
 
-            return Accepted(cmdResponse);
+            return Accepted(cmdResponse.Result);
         }
 
         // POST: api/Businesses/376B76B4-1EA8-4B31-9238-41E59784B5DD
@@ -77,7 +78,7 @@ namespace GoodToCode.Subjects.Application
         [ProducesResponseType(typeof(CommandResponse<Business>), 401)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 406)]
         [ProducesResponseType(typeof(CommandResponse<Business>), 500)]
-        public async Task<ActionResult<CommandResponse<Business>>> PostBusiness(Guid key, [FromBody] BusinessUpdateCommand command)
+        public async Task<ActionResult<Business>> PostBusiness(Guid key, [FromBody] BusinessUpdateCommand command)
         {
             var cmdResponse = await Mediator.Send(command);
 
@@ -90,23 +91,23 @@ namespace GoodToCode.Subjects.Application
             if (cmdResponse.ErrorInfo.HasException)
                 return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError, cmdResponse);
 
-            return Accepted(cmdResponse);
+            return Accepted(cmdResponse.Result);
         }
 
         // DELETE: api/Businesses/376B76B4-1EA8-4B31-9238-41E59784B5DD
         [HttpDelete("{key}")]
         public async Task<ActionResult<Business>> DeleteBusiness(Guid key)
         {
-            var business = await _dbContext.Business.FindAsync(key);
-            if (business == null)
-            {
-                return NotFound();
-            }
+            var command = new BusinessDeleteCommand();
+            var cmdResponse = await Mediator.Send(command);
 
-            _dbContext.Business.Remove(business);
-            await _dbContext.SaveChangesAsync();
+            if (cmdResponse.Errors.Any())
+                return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest, cmdResponse);
 
-            return business;
+            if (cmdResponse.ErrorInfo.HasException)
+                return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError, cmdResponse);
+
+            return Accepted(cmdResponse.Result);
         }
     }
 }

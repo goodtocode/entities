@@ -43,7 +43,7 @@ namespace GoodToCode.Subjects.Application
                     try
                     {
                         var aggregate = new AssociateAggregate(_dbContext);
-                        await aggregate.BusinessDeleteAsync(request.Item);
+                        await aggregate.BusinessDeleteAsync(request.Item.RowKey);
                         result.Result = (Business)request.Item;
                     }
                     catch (Exception e)
