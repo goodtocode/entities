@@ -5,8 +5,11 @@ trigger:
     - master
   paths:
     include:
-    - src/Locality.*/*
-    - src/Shared.*/*
+    - src/Locality.Presentation.Api/*
+    - src/Shared.Abstractions/*    
+    - src/Shared.Extensions/*
+    - src/Shared.Extensions.Mvc*/*
+    - src/Shared.Specs/*
 
 variables:
   workingDirectory: '$(System.DefaultWorkingDirectory)/src/Locality.Presentation.Api'
