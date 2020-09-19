@@ -6,9 +6,9 @@ trigger:
   paths:
     include:
     - src/Locality.Presentation.Api/*
-    - src/Shared.Abstractions/*    
+    - src/Shared.Abstractions/*
     - src/Shared.Extensions/*
-    - src/Shared.Extensions.Mvc*/*
+    - src/Shared.Extensions.Mvc/*
     - src/Shared.Specs/*
 
 variables:
