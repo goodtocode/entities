@@ -6,6 +6,10 @@ trigger:
   paths:
     include:
     - src/Occurrences.Presentation.Api/*
+    - src/Shared.Abstractions/*
+    - src/Shared.Extensions/*
+    - src/Shared.Extensions.Mvc/*
+    - src/Shared.Specs/*
 
 variables:
   workingDirectory: '$(System.DefaultWorkingDirectory)/src/Occurrences.Presentation.Api'
