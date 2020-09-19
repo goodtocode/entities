@@ -10,7 +10,12 @@ trigger:
     - master
   paths:
     include:
+    - src/Subjects.Domain.Models/*
     - src/Subjects.Presentation.Functions/*
+    - src/Shared.Abstractions/*
+    - src/Shared.Extensions/*
+    - src/Shared.Extensions.Mvc/*
+    - src/Shared.Specs/*
 
 variables:
   azureSubscription: '7fd0d3c5-89c8-450d-8f4a-e3ff842104cc'

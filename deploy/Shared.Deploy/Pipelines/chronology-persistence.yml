@@ -6,7 +6,8 @@ trigger:
     - master
   paths:
     include:
-    - deploy/Chronology.Infrastructure.Persistence/*
+    - src/Chronology.Domain.Models/*
+    - src/Chronology.Infrastructure.Persistence/*
     - deploy/Chronology.Infrastructure.Persistence.Migrations/*
 
 variables:

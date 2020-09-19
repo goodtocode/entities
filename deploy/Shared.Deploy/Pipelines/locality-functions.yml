@@ -6,6 +6,12 @@ trigger:
   paths:
     include:
     - src/Locality.Presentation.Functions/*
+    - src/Locality.Domain.Models/*
+    - src/Locality.Presentation.Functions/*
+    - src/Shared.Abstractions/*
+    - src/Shared.Extensions/*
+    - src/Shared.Extensions.Mvc/*
+    - src/Shared.Specs/*
 
 variables:
   azureSubscription: 'a9edfe99-d829-4bd0-8df8-9d954e5476d4'

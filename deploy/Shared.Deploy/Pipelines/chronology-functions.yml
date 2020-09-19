@@ -6,6 +6,12 @@ trigger:
   paths:
     include:
     - src/Chronology.Presentation.Functions/*
+    - src/Chronology.Domain.Models/*
+    - src/Chronology.Presentation.Functions/*
+    - src/Shared.Abstractions/*
+    - src/Shared.Extensions/*
+    - src/Shared.Extensions.Mvc/*
+    - src/Shared.Specs/*
 
 variables:
   azureSubscription: '8dbc1bf9-126e-4c82-ab32-bb86e39b6634'

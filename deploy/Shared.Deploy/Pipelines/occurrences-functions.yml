@@ -10,7 +10,13 @@ trigger:
     - master
   paths:
     include:
+    - src/Occurrences.Domain.Models/*
     - src/Occurrences.Presentation.Functions/*
+    - src/Shared.Abstractions/*
+    - src/Shared.Extensions/*
+    - src/Shared.Extensions.Mvc/*
+    - src/Shared.Specs/*
+
 
 variables:
   azureSubscription: 'c8c6f509-037d-409e-89a6-62762aadac61'

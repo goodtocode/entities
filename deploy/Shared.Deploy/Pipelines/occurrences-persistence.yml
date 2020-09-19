@@ -6,7 +6,8 @@ trigger:
     - master
   paths:
     include:
-    - deploy/Occurrences.Infrastructure.Persistence/*
+    - src/Occurrences.Domain.Models/*
+    - src/Occurrences.Infrastructure.Persistence/*
     - deploy/Occurrences.Infrastructure.Persistence.Migrations/*
 
 variables:
