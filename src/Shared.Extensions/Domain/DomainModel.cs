@@ -10,8 +10,8 @@ namespace GoodToCode.Shared.Models
         private readonly List<IDomainEvent<TModel>> _domainEvents = new List<IDomainEvent<TModel>>();
 
         [Key]
-        public abstract Guid RowKey { get; protected set; }
-        public string PartitionKey { get; } = "Common";
+        public abstract Guid RowKey { get; set; }
+        public string PartitionKey { get; set; } = "Default";
         
         [IgnoreDataMember]
         public IReadOnlyList<IDomainEvent<TModel>> DomainEvents => _domainEvents;        

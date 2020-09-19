@@ -6,7 +6,7 @@ namespace GoodToCode.Chronology.Models
 {
     public class TimeRecurring : DomainModel<ITimeRecurring>, ITimeRecurring
     {
-        public override Guid RowKey { get { return TimeRecurringKey; } protected set { TimeRecurringKey = value; } }
+        public override Guid RowKey { get { return TimeRecurringKey; } set { TimeRecurringKey = value; } }
         public Guid TimeRecurringKey { get; set; }
         public int BeginDay { get; set; }
         public int EndDay { get; set; }

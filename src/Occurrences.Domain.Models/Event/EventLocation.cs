@@ -7,7 +7,7 @@ namespace GoodToCode.Occurrences.Models
 {
     public class EventLocation : DomainModel<IEventLocation>, IEventLocation
     {
-        public override Guid RowKey { get { return EventLocationKey; } protected set { EventLocationKey = value; } }
+        public override Guid RowKey { get { return EventLocationKey; } set { EventLocationKey = value; } }
         public Guid EventLocationKey { get; set; }
         public Guid EventKey { get; set; }
         public Guid LocationKey { get; set; }

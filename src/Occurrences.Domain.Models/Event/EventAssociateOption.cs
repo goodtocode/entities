@@ -7,7 +7,7 @@ namespace GoodToCode.Occurrences.Models
 {
     public class EventAssociateOption : DomainModel<IEventAssociateOption>, IEventAssociateOption
     {
-        public override Guid RowKey { get { return EventAssociateOptionKey; } protected set { EventAssociateOptionKey = value; } }
+        public override Guid RowKey { get { return EventAssociateOptionKey; } set { EventAssociateOptionKey = value; } }
         public Guid EventAssociateOptionKey { get; set; }
         public Guid OptionKey { get; set; }
         public Guid AssociateKey { get; set; }

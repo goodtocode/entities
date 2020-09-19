@@ -7,7 +7,7 @@ namespace GoodToCode.Chronology.Models
 {
     public class SlotLocation : DomainModel<ISlotLocation>, ISlotLocation
     {
-        public override Guid RowKey { get { return SlotLocationKey; } protected set { SlotLocationKey = value; } }
+        public override Guid RowKey { get { return SlotLocationKey; } set { SlotLocationKey = value; } }
         public Guid SlotLocationKey { get; set; }
         public Guid SlotKey { get; set; }
         public Guid LocationKey { get; set; }

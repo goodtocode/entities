@@ -8,7 +8,7 @@ namespace GoodToCode.Chronology.Models
     {
         
         public Guid ScheduleKey { get; set; }
-        public override Guid RowKey { get { return ScheduleKey; } protected set { ScheduleKey = value; } }
+        public override Guid RowKey { get { return ScheduleKey; } set { ScheduleKey = value; } }
         public string ScheduleName { get; set; }
         public string ScheduleDescription { get; set; }
     }

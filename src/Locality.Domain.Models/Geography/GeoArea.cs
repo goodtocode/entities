@@ -8,7 +8,7 @@ namespace GoodToCode.Locality.Models
 {
     public class GeoArea : DomainModel<IGeoArea>, IGeoArea
     {
-        public override Guid RowKey { get { return GeoAreaKey; } protected set { GeoAreaKey = value; } }
+        public override Guid RowKey { get { return GeoAreaKey; } set { GeoAreaKey = value; } }
         public Guid GeoAreaKey { get; set; }
         [Column(TypeName = "geometry")]
         public Geometry GeodeticArea { get; set; }

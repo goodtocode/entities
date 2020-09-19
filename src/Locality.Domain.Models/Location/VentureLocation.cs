@@ -6,7 +6,7 @@ namespace GoodToCode.Locality.Models
 {
     public class VentureLocation : DomainModel<IVentureLocation>, IVentureLocation
     {
-        public override Guid RowKey { get { return VentureLocationKey; } protected set { VentureLocationKey = value; } }
+        public override Guid RowKey { get { return VentureLocationKey; } set { VentureLocationKey = value; } }
         public Guid VentureLocationKey { get; set; }
         public Guid VentureKey { get; set; }
         public Guid LocationKey { get; set; }

@@ -8,7 +8,7 @@ namespace GoodToCode.Locality.Models
 {
     public class GeoLocation : DomainModel<IGeoLocation>, IGeoLocation
     {
-        public override Guid RowKey { get { return GeoLocationKey; } protected set { GeoLocationKey = value; } }
+        public override Guid RowKey { get { return GeoLocationKey; } set { GeoLocationKey = value; } }
         public Guid GeoLocationKey { get; set; }
         public Guid LatLongKey { get; set; }
         public Point Elevation { get; set; }

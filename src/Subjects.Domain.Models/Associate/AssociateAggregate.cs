@@ -27,15 +27,7 @@ namespace GoodToCode.Subjects.Models
             IDomainEvent<IBusiness> eventRaise;
             _dbContext.Entry((Business)business).State = EntityState.Modified;
             eventRaise = new BusinessUpdatedEvent(business);
-            try
-            {
-                _recordsAffected = await _dbContext.SaveChangesAsync();
-            }
-            catch(Exception ex)
-            {
-                var test = ex.Message;
-            }
-            
+            _recordsAffected = await _dbContext.SaveChangesAsync();            
             business.RaiseDomainEvent(eventRaise);
             return _recordsAffected;
         }
@@ -45,6 +37,7 @@ namespace GoodToCode.Subjects.Models
             _dbContext.Business.Add((Business)business);
             eventRaise = new BusinessCreatedEvent(business);
             _recordsAffected = await _dbContext.SaveChangesAsync();
+
             business.RaiseDomainEvent(eventRaise);
             return _recordsAffected;
         }

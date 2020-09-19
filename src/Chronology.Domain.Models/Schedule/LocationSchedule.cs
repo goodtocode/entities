@@ -10,7 +10,7 @@ namespace GoodToCode.Chronology.Models
         public Guid LocationScheduleKey { get; set; }
         public Guid LocationKey { get; set; }
         public Guid ScheduleKey { get; set; }
-        public override Guid RowKey { get { return ScheduleKey; } protected set { ScheduleKey = value; } }
+        public override Guid RowKey { get { return ScheduleKey; } set { ScheduleKey = value; } }
         public Guid? ScheduleTypeKey { get; set; }
         
         

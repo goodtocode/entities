@@ -6,7 +6,7 @@ namespace GoodToCode.Subjects.Models
 {
     public class Option : DomainModel<IOption>, IOption
     {
-        public override Guid RowKey { get { return OptionKey; } protected set { OptionKey = value; } }
+        public override Guid RowKey { get { return OptionKey; } set { OptionKey = value; } }
         public Guid OptionKey { get; set; }
         public Guid OptionGroupKey { get; set; }
         public string OptionName { get; set; }
