@@ -5,7 +5,8 @@ trigger:
     - master
   paths:
     include:
-    - src/Locality.Presentation.Api/*
+    - src/Locality.*/*
+    - src/Shared.*/*
 
 variables:
   workingDirectory: '$(System.DefaultWorkingDirectory)/src/Locality.Presentation.Api'
