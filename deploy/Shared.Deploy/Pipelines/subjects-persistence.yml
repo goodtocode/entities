@@ -64,13 +64,6 @@ stages:
           $(sourceDirectory)/*.csproj
         arguments: '--configuration $(BuildConfiguration)'
 
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet test'
-      inputs:
-        command: test
-        projects: |
-          $(System.DefaultWorkingDirectory)/**/*.Specs.Unit.csproj
-          
     - task: CopyFiles@2
       displayName: 'Copy deploy'
       inputs:
