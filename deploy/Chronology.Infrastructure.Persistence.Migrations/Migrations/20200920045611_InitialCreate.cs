@@ -15,6 +15,8 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     AssociateScheduleKey = table.Column<Guid>(nullable: false),
                     AssociateKey = table.Column<Guid>(nullable: false),
                     ScheduleKey = table.Column<Guid>(nullable: false),
@@ -22,7 +24,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AssociateSchedule", x => x.AssociateScheduleKey);
+                    table.PrimaryKey("PK_AssociateSchedule", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -30,6 +32,8 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     AssociateTimeRecurringKey = table.Column<Guid>(nullable: false),
                     AssociateKey = table.Column<Guid>(nullable: false),
                     TimeRecurringKey = table.Column<Guid>(nullable: false),
@@ -39,7 +43,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AssociateTimeRecurring", x => x.AssociateTimeRecurringKey);
+                    table.PrimaryKey("PK_AssociateTimeRecurring", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,6 +51,8 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     LocationTimeRecurringKey = table.Column<Guid>(nullable: false),
                     LocationKey = table.Column<Guid>(nullable: false),
                     TimeRecurringKey = table.Column<Guid>(nullable: false),
@@ -56,7 +62,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LocationTimeRecurring", x => x.LocationTimeRecurringKey);
+                    table.PrimaryKey("PK_LocationTimeRecurring", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,6 +70,8 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     ResourceScheduleKey = table.Column<Guid>(nullable: false),
                     ResourceKey = table.Column<Guid>(nullable: false),
                     ScheduleKey = table.Column<Guid>(nullable: false),
@@ -71,7 +79,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ResourceSchedule", x => x.ResourceScheduleKey);
+                    table.PrimaryKey("PK_ResourceSchedule", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,6 +87,8 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     ResourceTimeRecurringKey = table.Column<Guid>(nullable: false),
                     ResourceKey = table.Column<Guid>(nullable: false),
                     TimeRecurringKey = table.Column<Guid>(nullable: false),
@@ -88,7 +98,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ResourceTimeRecurring", x => x.ResourceTimeRecurringKey);
+                    table.PrimaryKey("PK_ResourceTimeRecurring", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,13 +106,15 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     ScheduleKey = table.Column<Guid>(nullable: false),
                     ScheduleName = table.Column<string>(maxLength: 50, nullable: false),
                     ScheduleDescription = table.Column<string>(maxLength: 2000, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Schedule", x => x.ScheduleKey);
+                    table.PrimaryKey("PK_Schedule", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,13 +122,15 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     ScheduleSlotKey = table.Column<Guid>(nullable: false),
                     ScheduleKey = table.Column<Guid>(nullable: false),
                     SlotKey = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ScheduleSlot", x => x.ScheduleSlotKey);
+                    table.PrimaryKey("PK_ScheduleSlot", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -124,13 +138,15 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     ScheduleTypeKey = table.Column<Guid>(nullable: false),
                     ScheduleTypeName = table.Column<string>(maxLength: 50, nullable: false),
                     ScheduleTypeDescription = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ScheduleType", x => x.ScheduleTypeKey);
+                    table.PrimaryKey("PK_ScheduleType", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -138,13 +154,15 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     SlotKey = table.Column<Guid>(nullable: false),
                     SlotName = table.Column<string>(maxLength: 50, nullable: false),
                     SlotDescription = table.Column<string>(maxLength: 2000, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Slot", x => x.SlotKey);
+                    table.PrimaryKey("PK_Slot", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,6 +170,8 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     SlotLocationKey = table.Column<Guid>(nullable: false),
                     SlotKey = table.Column<Guid>(nullable: false),
                     LocationKey = table.Column<Guid>(nullable: false),
@@ -159,7 +179,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SlotLocation", x => x.SlotLocationKey);
+                    table.PrimaryKey("PK_SlotLocation", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,6 +187,8 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     SlotResourceKey = table.Column<Guid>(nullable: false),
                     SlotKey = table.Column<Guid>(nullable: false),
                     ResourceKey = table.Column<Guid>(nullable: false),
@@ -174,7 +196,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SlotResource", x => x.SlotResourceKey);
+                    table.PrimaryKey("PK_SlotResource", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -182,6 +204,8 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     SlotTimeRangeKey = table.Column<Guid>(nullable: false),
                     SlotKey = table.Column<Guid>(nullable: false),
                     TimeRangeKey = table.Column<Guid>(nullable: false),
@@ -189,7 +213,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SlotTimeRange", x => x.SlotTimeRangeKey);
+                    table.PrimaryKey("PK_SlotTimeRange", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -197,6 +221,8 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     SlotTimeRecurringKey = table.Column<Guid>(nullable: false),
                     SlotKey = table.Column<Guid>(nullable: false),
                     TimeRecurringKey = table.Column<Guid>(nullable: false),
@@ -204,7 +230,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SlotTimeRecurring", x => x.SlotTimeRecurringKey);
+                    table.PrimaryKey("PK_SlotTimeRecurring", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,6 +238,8 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     TimeCycleKey = table.Column<Guid>(nullable: false),
                     TimeCycleName = table.Column<string>(maxLength: 50, nullable: false),
                     TimeCycleDescription = table.Column<string>(maxLength: 250, nullable: true),
@@ -220,7 +248,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TimeCycle", x => x.TimeCycleKey);
+                    table.PrimaryKey("PK_TimeCycle", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -228,13 +256,15 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     TimeRangeKey = table.Column<Guid>(nullable: false),
                     BeginDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TimeRange", x => x.TimeRangeKey);
+                    table.PrimaryKey("PK_TimeRange", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -242,6 +272,8 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     TimeRecurringKey = table.Column<Guid>(nullable: false),
                     BeginDay = table.Column<int>(nullable: false),
                     EndDay = table.Column<int>(nullable: false),
@@ -252,7 +284,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TimeRecurring", x => x.TimeRecurringKey);
+                    table.PrimaryKey("PK_TimeRecurring", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -260,6 +292,8 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     TimeTypeKey = table.Column<Guid>(nullable: false),
                     TimeTypeName = table.Column<string>(maxLength: 50, nullable: false),
                     TimeTypeDescription = table.Column<string>(maxLength: 250, nullable: true),
@@ -267,7 +301,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TimeType", x => x.TimeTypeKey);
+                    table.PrimaryKey("PK_TimeType", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -275,6 +309,8 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     VentureScheduleKey = table.Column<Guid>(nullable: false),
                     VentureKey = table.Column<Guid>(nullable: false),
                     ScheduleKey = table.Column<Guid>(nullable: false),
@@ -282,7 +318,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VentureSchedule", x => x.VentureScheduleKey);
+                    table.PrimaryKey("PK_VentureSchedule", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -290,6 +326,8 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Chronology",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     VentureTimeRecurringKey = table.Column<Guid>(nullable: false),
                     VentureKey = table.Column<Guid>(nullable: false),
                     TimeRecurringKey = table.Column<Guid>(nullable: false),
@@ -299,7 +337,7 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VentureTimeRecurring", x => x.VentureTimeRecurringKey);
+                    table.PrimaryKey("PK_VentureTimeRecurring", x => x.RowKey);
                 });
 
             migrationBuilder.CreateIndex(

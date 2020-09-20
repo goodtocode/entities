@@ -11,7 +11,5 @@ namespace GoodToCode.Subjects.Models
         public Guid VentureKey { get; set; }
         public Guid ResourceKey { get; set; }
         public Guid? ResourceTypeKey { get; set; }
-        
-        
     }
 }

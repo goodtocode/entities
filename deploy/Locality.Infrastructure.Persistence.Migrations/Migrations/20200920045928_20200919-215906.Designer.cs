@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
 {
     [DbContext(typeof(LocalityDbContextDeploy))]
-    [Migration("20200904233451_20200904-163427")]
-    partial class _20200904163427
+    [Migration("20200920045928_20200919-215906")]
+    partial class _20200919215906
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.7")
+                .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -39,6 +39,9 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid?>("LocationTypeKey")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("RowKey");
 
                     b.HasIndex("AssociateKey", "LocationKey")
@@ -59,6 +62,9 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
 
                     b.Property<Guid>("GeoDistanceKey")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("StartLatLongKey")
                         .HasColumnType("uniqueidentifier");
@@ -87,6 +93,9 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<double>("Longitude")
                         .HasColumnType("float");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("RowKey");
 
                     b.HasIndex("LatLongKey")
@@ -114,6 +123,9 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("RowKey");
 
                     b.HasIndex("LocationKey")
@@ -133,6 +145,9 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
 
                     b.Property<Guid>("LocationKey")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("PolygonKey")
                         .HasColumnType("uniqueidentifier");
@@ -171,6 +186,9 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("RowKey");
 
                     b.HasIndex("LocationTypeKey")
@@ -191,6 +209,9 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
 
                     b.Property<Guid?>("LocationTypeKey")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ResourceKey")
                         .HasColumnType("uniqueidentifier");
@@ -218,6 +239,9 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
 
                     b.Property<Guid?>("LocationTypeKey")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("VentureKey")
                         .HasColumnType("uniqueidentifier");

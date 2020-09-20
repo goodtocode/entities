@@ -1,10 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using NetTopologySuite.Geometries;
 
 namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class _20200919215906 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,6 +15,8 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Locality",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     AssociateLocationKey = table.Column<Guid>(nullable: false),
                     AssociateKey = table.Column<Guid>(nullable: false),
                     LocationKey = table.Column<Guid>(nullable: false),
@@ -23,33 +24,7 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AssociateLocation", x => x.AssociateLocationKey);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Coordinate",
-                schema: "Locality",
-                columns: table => new
-                {
-                    CoordinateKey = table.Column<Guid>(nullable: false),
-                    CoordinatePoint = table.Column<Point>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Coordinate", x => x.CoordinateKey);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GeoArea",
-                schema: "Locality",
-                columns: table => new
-                {
-                    GeoAreaKey = table.Column<Guid>(nullable: false),
-                    GeodeticArea = table.Column<Geometry>(type: "geometry", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GeoArea", x => x.GeoAreaKey);
+                    table.PrimaryKey("PK_AssociateLocation", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -57,27 +32,15 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Locality",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     GeoDistanceKey = table.Column<Guid>(nullable: false),
                     StartLatLongKey = table.Column<Guid>(nullable: false),
                     EndLatLongKey = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GeoDistance", x => x.GeoDistanceKey);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GeoLocation",
-                schema: "Locality",
-                columns: table => new
-                {
-                    GeoLocationKey = table.Column<Guid>(nullable: false),
-                    LatLongKey = table.Column<Guid>(nullable: false),
-                    Elevation = table.Column<Point>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GeoLocation", x => x.GeoLocationKey);
+                    table.PrimaryKey("PK_GeoDistance", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,27 +48,15 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Locality",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     LatLongKey = table.Column<Guid>(nullable: false),
                     Latitude = table.Column<double>(nullable: false),
                     Longitude = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LatLong", x => x.LatLongKey);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Line",
-                schema: "Locality",
-                columns: table => new
-                {
-                    LineKey = table.Column<Guid>(nullable: false),
-                    StartPoint = table.Column<Point>(nullable: true),
-                    EndPoint = table.Column<Point>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Line", x => x.LineKey);
+                    table.PrimaryKey("PK_LatLong", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -113,13 +64,15 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Locality",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     LocationKey = table.Column<Guid>(nullable: false),
                     LocationName = table.Column<string>(maxLength: 50, nullable: false),
                     LocationDescription = table.Column<string>(maxLength: 2000, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Location", x => x.LocationKey);
+                    table.PrimaryKey("PK_Location", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -127,13 +80,15 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Locality",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     LocationAreaKey = table.Column<Guid>(nullable: false),
                     LocationKey = table.Column<Guid>(nullable: false),
                     PolygonKey = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LocationArea", x => x.LocationAreaKey);
+                    table.PrimaryKey("PK_LocationArea", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -141,26 +96,15 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Locality",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     LocationTypeKey = table.Column<Guid>(nullable: false),
                     LocationTypeName = table.Column<string>(maxLength: 50, nullable: false),
                     LocationTypeDescription = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LocationType", x => x.LocationTypeKey);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Polygon",
-                schema: "Locality",
-                columns: table => new
-                {
-                    PolygonKey = table.Column<Guid>(nullable: false),
-                    PolygonSequence = table.Column<Geometry>(type: "geometry", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Polygon", x => x.PolygonKey);
+                    table.PrimaryKey("PK_LocationType", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -168,6 +112,8 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Locality",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     ResourceLocationKey = table.Column<Guid>(nullable: false),
                     ResourceKey = table.Column<Guid>(nullable: false),
                     LocationKey = table.Column<Guid>(nullable: false),
@@ -175,7 +121,7 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ResourceLocation", x => x.ResourceLocationKey);
+                    table.PrimaryKey("PK_ResourceLocation", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -183,6 +129,8 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Locality",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     VentureLocationKey = table.Column<Guid>(nullable: false),
                     VentureKey = table.Column<Guid>(nullable: false),
                     LocationKey = table.Column<Guid>(nullable: false),
@@ -190,7 +138,7 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VentureLocation", x => x.VentureLocationKey);
+                    table.PrimaryKey("PK_VentureLocation", x => x.RowKey);
                 });
 
             migrationBuilder.CreateIndex(
@@ -201,20 +149,6 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Coordinate_Key",
-                schema: "Locality",
-                table: "Coordinate",
-                column: "CoordinateKey",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GeoArea_Key",
-                schema: "Locality",
-                table: "GeoArea",
-                column: "GeoAreaKey",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_GeoDistance_Key",
                 schema: "Locality",
                 table: "GeoDistance",
@@ -222,24 +156,10 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_GeoLocation_Key",
-                schema: "Locality",
-                table: "GeoLocation",
-                column: "GeoLocationKey",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_LatLong_Key",
                 schema: "Locality",
                 table: "LatLong",
                 column: "LatLongKey",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Line_Key",
-                schema: "Locality",
-                table: "Line",
-                column: "LineKey",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -277,13 +197,6 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Polygon_Key",
-                schema: "Locality",
-                table: "Polygon",
-                column: "PolygonKey",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ResourceLocation_All",
                 schema: "Locality",
                 table: "ResourceLocation",
@@ -312,27 +225,11 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Locality");
 
             migrationBuilder.DropTable(
-                name: "Coordinate",
-                schema: "Locality");
-
-            migrationBuilder.DropTable(
-                name: "GeoArea",
-                schema: "Locality");
-
-            migrationBuilder.DropTable(
                 name: "GeoDistance",
                 schema: "Locality");
 
             migrationBuilder.DropTable(
-                name: "GeoLocation",
-                schema: "Locality");
-
-            migrationBuilder.DropTable(
                 name: "LatLong",
-                schema: "Locality");
-
-            migrationBuilder.DropTable(
-                name: "Line",
                 schema: "Locality");
 
             migrationBuilder.DropTable(
@@ -345,10 +242,6 @@ namespace GoodToCode.Locality.Infrastructure.Persistence.Migrations.Migrations
 
             migrationBuilder.DropTable(
                 name: "LocationType",
-                schema: "Locality");
-
-            migrationBuilder.DropTable(
-                name: "Polygon",
                 schema: "Locality");
 
             migrationBuilder.DropTable(

@@ -15,7 +15,7 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.7")
+                .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -27,6 +27,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
 
                     b.Property<Guid>("AssociateKey")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RowKey");
 
@@ -51,6 +54,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
 
                     b.Property<Guid>("DetailKey")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RowKey");
 
@@ -80,6 +86,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("OptionKey")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("RowKey");
 
                     b.HasIndex("AssociateKey", "OptionKey")
@@ -102,6 +111,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TaxNumber")
                         .HasColumnType("nvarchar(20)")
@@ -133,6 +145,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("DetailTypeKey")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("RowKey");
 
                     b.HasIndex("DetailKey")
@@ -159,6 +174,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RowKey");
 
@@ -188,6 +206,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("RowKey");
 
                     b.HasIndex("GenderCode")
@@ -216,6 +237,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RowKey");
 
@@ -248,6 +272,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("ItemTypeKey")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("RowKey");
 
                     b.HasIndex("ItemKey")
@@ -273,6 +300,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RowKey");
 
@@ -303,6 +333,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RowKey");
 
@@ -338,6 +371,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SortOrder")
                         .HasColumnType("int");
@@ -376,6 +412,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RowKey");
 
@@ -418,6 +457,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("PersonKey")
                         .HasColumnType("uniqueidentifier");
 
@@ -440,6 +482,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ResourceDescription")
                         .HasColumnType("nvarchar(250)")
@@ -469,6 +514,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
 
                     b.Property<Guid>("ItemKey")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ResourceItemKey")
                         .HasColumnType("uniqueidentifier");
@@ -500,6 +548,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("PersonKey")
                         .HasColumnType("uniqueidentifier");
@@ -535,6 +586,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ResourceTypeDescription")
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
@@ -561,6 +615,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VentureDescription")
                         .HasColumnType("nvarchar(250)")
@@ -605,6 +662,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("OptionKey")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("VentureAssociateOptionKey")
                         .HasColumnType("uniqueidentifier");
 
@@ -628,6 +688,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
 
                     b.Property<Guid>("DetailKey")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("VentureDetailKey")
                         .HasColumnType("uniqueidentifier");
@@ -657,6 +720,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("OptionKey")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("VentureKey")
                         .HasColumnType("uniqueidentifier");
 
@@ -677,6 +743,9 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ResourceKey")
                         .HasColumnType("uniqueidentifier");

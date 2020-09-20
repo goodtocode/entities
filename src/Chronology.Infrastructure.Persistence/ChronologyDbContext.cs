@@ -34,8 +34,10 @@ namespace GoodToCode.Chronology.Infrastructure
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var connectionString = @"Server=tcp:goodtocodestack.database.windows.net,1433;Initial Catalog=StackData;Persist Security Info=False;User ID=LocalAdmin;Password=1202cc89-cb6f-453a-ac7e-550b3b5d2d0c;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-                optionsBuilder.UseSqlServer(connectionString);
+                var connectionStringSql = @"Server=tcp:goodtocodestack.database.windows.net,1433;Initial Catalog=StackData;Persist Security Info=False;User ID=LocalAdmin;Password=1202cc89-cb6f-453a-ac7e-550b3b5d2d0c;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                optionsBuilder.UseSqlServer(connectionStringSql);
+                //var connectionStringCosmos = "AccountEndpoint=https://goodtocodestack.documents.azure.com:443/;AccountKey=xa4T6WDwECFtH4Hny6qejheoFrNgrOhoSeXUjHB8FaNpTrLhMCtjv03k39jGf1lMA6cRPFnrsDEIxRmd3AjGJQ==;";
+                //optionsBuilder.UseCosmos(connectionStringCosmos);
             }
         }
 

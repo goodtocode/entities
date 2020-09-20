@@ -15,7 +15,7 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.7")
+                .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -36,6 +36,9 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("SlotLocationKey")
                         .HasColumnType("uniqueidentifier");
@@ -74,6 +77,9 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
 
                     b.Property<Guid>("AssociateKey")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RowKey");
 
@@ -119,6 +125,9 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                     b.Property<Guid>("EventTypeKey")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("RowKey");
 
                     b.HasIndex("EventKey")
@@ -144,6 +153,9 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
 
                     b.Property<Guid>("EventKey")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RowKey");
 
@@ -176,6 +188,9 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                     b.Property<Guid>("OptionKey")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("RowKey");
 
                     b.HasIndex("EventAssociateOptionKey")
@@ -199,6 +214,9 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
 
                     b.Property<Guid>("EventKey")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RowKey");
 
@@ -231,6 +249,9 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("RowKey");
 
                     b.HasIndex("EventGroupKey")
@@ -257,6 +278,9 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
 
                     b.Property<Guid?>("LocationTypeKey")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RowKey");
 
@@ -286,6 +310,9 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                     b.Property<Guid>("OptionKey")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("RowKey");
 
                     b.HasIndex("EventKey", "OptionKey")
@@ -306,6 +333,9 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
 
                     b.Property<Guid>("EventResourceKey")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ResourceKey")
                         .HasColumnType("uniqueidentifier");
@@ -337,6 +367,9 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
 
                     b.Property<Guid>("EventScheduleKey")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ScheduleKey")
                         .HasColumnType("uniqueidentifier");
@@ -378,6 +411,9 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("RowKey");
 
                     b.HasIndex("EventTypeKey")
@@ -395,6 +431,9 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
 
                     b.Property<Guid>("AppointmentKey")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("VentureAppointmentKey")
                         .HasColumnType("uniqueidentifier");

@@ -34,8 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GoodToCode.Chronology.Domain.Models" Version="5.9.260.115" />
-    <PackageReference Include="GoodToCode.Shared.Specs" Version="5.9.260.115" />
+    <PackageReference Include="GoodToCode.Chronology.Domain.Models" Version="5.9.263.501" />
+    <PackageReference Include="GoodToCode.Shared.Specs" Version="5.9.263.501" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />

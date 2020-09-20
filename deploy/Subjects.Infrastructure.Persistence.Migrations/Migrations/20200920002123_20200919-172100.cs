@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
 {
-    public partial class _20200820213636 : Migration
+    public partial class _20200919172100 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,11 +15,13 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     AssociateKey = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Associate", x => x.AssociateKey);
+                    table.PrimaryKey("PK_Associate", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -27,13 +29,15 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     AssociateDetailKey = table.Column<Guid>(nullable: false),
                     AssociateKey = table.Column<Guid>(nullable: false),
                     DetailKey = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AssociateDetail", x => x.AssociateDetailKey);
+                    table.PrimaryKey("PK_AssociateDetail", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -41,13 +45,15 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     AssociateOptionKey = table.Column<Guid>(nullable: false),
                     AssociateKey = table.Column<Guid>(nullable: false),
                     OptionKey = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AssociateOption", x => x.AssociateOptionKey);
+                    table.PrimaryKey("PK_AssociateOption", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,13 +61,15 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     BusinessKey = table.Column<Guid>(nullable: false),
                     BusinessName = table.Column<string>(maxLength: 50, nullable: false),
                     TaxNumber = table.Column<string>(maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Business", x => x.BusinessKey);
+                    table.PrimaryKey("PK_Business", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,13 +77,15 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     DetailKey = table.Column<Guid>(nullable: false),
                     DetailTypeKey = table.Column<Guid>(nullable: false),
                     DetailData = table.Column<string>(maxLength: 2000, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Detail", x => x.DetailKey);
+                    table.PrimaryKey("PK_Detail", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -83,13 +93,15 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     DetailTypeKey = table.Column<Guid>(nullable: false),
                     DetailTypeName = table.Column<string>(maxLength: 50, nullable: false),
                     DetailTypeDescription = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DetailType", x => x.DetailTypeKey);
+                    table.PrimaryKey("PK_DetailType", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -97,13 +109,15 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     GenderKey = table.Column<Guid>(nullable: false),
                     GenderName = table.Column<string>(maxLength: 50, nullable: false),
                     GenderCode = table.Column<string>(maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Gender", x => x.GenderKey);
+                    table.PrimaryKey("PK_Gender", x => x.RowKey);
                     table.CheckConstraint("CC_Gender_GenderCode", "GenderCode in ('M', 'F', 'N/A', 'U/K')");
                 });
 
@@ -112,12 +126,14 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     GovernmentKey = table.Column<Guid>(nullable: false),
                     GovernmentName = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Government", x => x.GovernmentKey);
+                    table.PrimaryKey("PK_Government", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,6 +141,8 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     ItemKey = table.Column<Guid>(nullable: false),
                     ItemName = table.Column<string>(maxLength: 50, nullable: false),
                     ItemDescription = table.Column<string>(maxLength: 2000, nullable: false),
@@ -132,7 +150,7 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Item", x => x.ItemKey);
+                    table.PrimaryKey("PK_Item", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -140,13 +158,15 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     ItemGroupKey = table.Column<Guid>(nullable: false),
                     ItemGroupName = table.Column<string>(maxLength: 50, nullable: false),
                     ItemGroupDescription = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ItemGroup", x => x.ItemGroupKey);
+                    table.PrimaryKey("PK_ItemGroup", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -154,6 +174,8 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     ItemTypeKey = table.Column<Guid>(nullable: false),
                     ItemGroupKey = table.Column<Guid>(nullable: false),
                     ItemTypeName = table.Column<string>(maxLength: 50, nullable: false),
@@ -161,7 +183,7 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ItemType", x => x.ItemTypeKey);
+                    table.PrimaryKey("PK_ItemType", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,6 +191,8 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     OptionKey = table.Column<Guid>(nullable: false),
                     OptionGroupKey = table.Column<Guid>(nullable: false),
                     OptionName = table.Column<string>(maxLength: 50, nullable: false),
@@ -178,7 +202,7 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Option", x => x.OptionKey);
+                    table.PrimaryKey("PK_Option", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -186,6 +210,8 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     OptionGroupKey = table.Column<Guid>(nullable: false),
                     OptionGroupName = table.Column<string>(maxLength: 50, nullable: false),
                     OptionGroupDescription = table.Column<string>(maxLength: 250, nullable: true),
@@ -193,7 +219,7 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OptionGroup", x => x.OptionGroupKey);
+                    table.PrimaryKey("PK_OptionGroup", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -201,6 +227,8 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     PersonKey = table.Column<Guid>(nullable: false),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
                     MiddleName = table.Column<string>(maxLength: 50, nullable: false),
@@ -210,7 +238,7 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Person", x => x.PersonKey);
+                    table.PrimaryKey("PK_Person", x => x.RowKey);
                     table.CheckConstraint("CC_Person_GenderCode", "GenderCode in ('M', 'F', 'N/A', 'U/K')");
                 });
 
@@ -219,13 +247,15 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     ResourceKey = table.Column<Guid>(nullable: false),
                     ResourceName = table.Column<string>(maxLength: 50, nullable: false),
                     ResourceDescription = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Resource", x => x.ResourceKey);
+                    table.PrimaryKey("PK_Resource", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -233,13 +263,15 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     ResourceItemKey = table.Column<Guid>(nullable: false),
                     ResourceKey = table.Column<Guid>(nullable: false),
                     ItemKey = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ResourceItem", x => x.ResourceItemKey);
+                    table.PrimaryKey("PK_ResourceItem", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -247,13 +279,15 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     ResourcePersonKey = table.Column<Guid>(nullable: false),
                     ResourceKey = table.Column<Guid>(nullable: false),
                     PersonKey = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ResourcePerson", x => x.ResourcePersonKey);
+                    table.PrimaryKey("PK_ResourcePerson", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -261,13 +295,15 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     ResourceTypeKey = table.Column<Guid>(nullable: false),
                     ResourceTypeName = table.Column<string>(maxLength: 50, nullable: false),
                     ResourceTypeDescription = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ResourceType", x => x.ResourceTypeKey);
+                    table.PrimaryKey("PK_ResourceType", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -275,6 +311,8 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     VentureKey = table.Column<Guid>(nullable: false),
                     VentureGroupKey = table.Column<Guid>(nullable: true),
                     VentureTypeKey = table.Column<Guid>(nullable: true),
@@ -284,7 +322,7 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Venture", x => x.VentureKey);
+                    table.PrimaryKey("PK_Venture", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -292,6 +330,8 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     VentureAssociateOptionKey = table.Column<Guid>(nullable: false),
                     OptionKey = table.Column<Guid>(nullable: false),
                     VentureKey = table.Column<Guid>(nullable: false),
@@ -299,7 +339,7 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VentureAssociateOption", x => x.VentureAssociateOptionKey);
+                    table.PrimaryKey("PK_VentureAssociateOption", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -307,13 +347,15 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     VentureDetailKey = table.Column<Guid>(nullable: false),
                     VentureKey = table.Column<Guid>(nullable: false),
                     DetailKey = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VentureDetail", x => x.VentureDetailKey);
+                    table.PrimaryKey("PK_VentureDetail", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -321,13 +363,15 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     VentureOptionKey = table.Column<Guid>(nullable: false),
                     VentureKey = table.Column<Guid>(nullable: false),
                     OptionKey = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VentureOption", x => x.VentureOptionKey);
+                    table.PrimaryKey("PK_VentureOption", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -335,6 +379,8 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     VentureResourceKey = table.Column<Guid>(nullable: false),
                     VentureKey = table.Column<Guid>(nullable: false),
                     ResourceKey = table.Column<Guid>(nullable: false),
@@ -342,7 +388,7 @@ namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VentureResource", x => x.VentureResourceKey);
+                    table.PrimaryKey("PK_VentureResource", x => x.RowKey);
                 });
 
             migrationBuilder.CreateIndex(

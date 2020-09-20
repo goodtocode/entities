@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migrations
 {
-    public partial class _20200820213614 : Migration
+    public partial class _20200919220010 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,6 +18,8 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 schema: "Occurrences",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     AppointmentKey = table.Column<Guid>(nullable: false),
                     AppointmentName = table.Column<string>(maxLength: 50, nullable: false),
                     AppointmentDescription = table.Column<string>(maxLength: 2000, nullable: true),
@@ -27,7 +29,7 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Appointment", x => x.AppointmentKey);
+                    table.PrimaryKey("PK_Appointment", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -35,13 +37,15 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 schema: "Occurrences",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     AppointmentEventKey = table.Column<Guid>(nullable: false),
                     EventKey = table.Column<Guid>(nullable: false),
                     AppointmentKey = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppointmentEvent", x => x.AppointmentEventKey);
+                    table.PrimaryKey("PK_AppointmentEvent", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,17 +53,19 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 schema: "Occurrences",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     EventKey = table.Column<Guid>(nullable: false),
                     EventGroupKey = table.Column<Guid>(nullable: false),
                     EventTypeKey = table.Column<Guid>(nullable: false),
                     EventCreatorKey = table.Column<Guid>(nullable: false),
                     EventName = table.Column<string>(maxLength: 50, nullable: false),
                     EventDescription = table.Column<string>(maxLength: 250, nullable: true),
-                    EventSlogan = table.Column<string>(maxLength: 50, nullable: false)
+                    EventSlogan = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Event", x => x.EventKey);
+                    table.PrimaryKey("PK_Event", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -67,6 +73,8 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 schema: "Occurrences",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     EventAssociateOptionKey = table.Column<Guid>(nullable: false),
                     OptionKey = table.Column<Guid>(nullable: false),
                     AssociateKey = table.Column<Guid>(nullable: false),
@@ -74,7 +82,7 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventAssociateOption", x => x.EventAssociateOptionKey);
+                    table.PrimaryKey("PK_EventAssociateOption", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,13 +90,15 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 schema: "Occurrences",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     EventDetailKey = table.Column<Guid>(nullable: false),
                     EventKey = table.Column<Guid>(nullable: false),
                     DetailKey = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventDetail", x => x.EventDetailKey);
+                    table.PrimaryKey("PK_EventDetail", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,13 +106,15 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 schema: "Occurrences",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     EventGroupKey = table.Column<Guid>(nullable: false),
                     EventGroupName = table.Column<string>(maxLength: 50, nullable: false),
                     EventGroupDescription = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventGroup", x => x.EventGroupKey);
+                    table.PrimaryKey("PK_EventGroup", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,6 +122,8 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 schema: "Occurrences",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     EventLocationKey = table.Column<Guid>(nullable: false),
                     EventKey = table.Column<Guid>(nullable: false),
                     LocationKey = table.Column<Guid>(nullable: false),
@@ -117,7 +131,7 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventLocation", x => x.EventLocationKey);
+                    table.PrimaryKey("PK_EventLocation", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,13 +139,15 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 schema: "Occurrences",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     EventOptionKey = table.Column<Guid>(nullable: false),
                     EventKey = table.Column<Guid>(nullable: false),
                     OptionKey = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventOption", x => x.EventOptionKey);
+                    table.PrimaryKey("PK_EventOption", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -139,6 +155,8 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 schema: "Occurrences",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     EventResourceKey = table.Column<Guid>(nullable: false),
                     EventKey = table.Column<Guid>(nullable: false),
                     ResourceKey = table.Column<Guid>(nullable: false),
@@ -146,7 +164,7 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventResource", x => x.EventResourceKey);
+                    table.PrimaryKey("PK_EventResource", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -154,6 +172,8 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 schema: "Occurrences",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     EventScheduleKey = table.Column<Guid>(nullable: false),
                     EventKey = table.Column<Guid>(nullable: false),
                     ScheduleKey = table.Column<Guid>(nullable: false),
@@ -161,7 +181,7 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventSchedule", x => x.EventScheduleKey);
+                    table.PrimaryKey("PK_EventSchedule", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,6 +189,8 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 schema: "Occurrences",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     EventTypeKey = table.Column<Guid>(nullable: false),
                     EventGroupKey = table.Column<Guid>(nullable: false),
                     EventTypeName = table.Column<string>(maxLength: 50, nullable: false),
@@ -176,7 +198,7 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventType", x => x.EventTypeKey);
+                    table.PrimaryKey("PK_EventType", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -184,13 +206,15 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     AssociateAppointmentKey = table.Column<Guid>(nullable: false),
                     AssociateKey = table.Column<Guid>(nullable: false),
                     AppointmentKey = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AssociateAppointment", x => x.AssociateAppointmentKey);
+                    table.PrimaryKey("PK_AssociateAppointment", x => x.RowKey);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,13 +222,15 @@ namespace GoodToCode.Occurrences.Infrastructure.Persistence.Migrations.Migration
                 schema: "Subjects",
                 columns: table => new
                 {
+                    RowKey = table.Column<Guid>(nullable: false),
+                    PartitionKey = table.Column<string>(nullable: true),
                     VentureAppointmentKey = table.Column<Guid>(nullable: false),
                     VentureKey = table.Column<Guid>(nullable: false),
                     AppointmentKey = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VentureAppointment", x => x.VentureAppointmentKey);
+                    table.PrimaryKey("PK_VentureAppointment", x => x.RowKey);
                 });
 
             migrationBuilder.CreateIndex(

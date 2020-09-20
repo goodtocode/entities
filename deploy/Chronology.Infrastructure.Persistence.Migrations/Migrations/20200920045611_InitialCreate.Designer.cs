@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 {
     [DbContext(typeof(ChronologyDbContextDeploy))]
-    [Migration("20200904190307_20200904-120238")]
-    partial class _20200904120238
+    [Migration("20200920045611_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.7")
+                .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -32,6 +32,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
                     b.Property<Guid>("AssociateScheduleKey")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ScheduleKey")
                         .HasColumnType("uniqueidentifier");
@@ -68,6 +71,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TimeName")
                         .IsRequired()
@@ -110,6 +116,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("LocationTimeRecurringKey")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("TimeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
@@ -139,6 +148,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ResourceKey")
                         .HasColumnType("uniqueidentifier");
@@ -176,6 +188,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("ResourceKey")
                         .HasColumnType("uniqueidentifier");
 
@@ -212,6 +227,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ScheduleDescription")
                         .HasColumnType("nvarchar(2000)")
                         .HasMaxLength(2000);
@@ -237,6 +255,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ScheduleKey")
                         .HasColumnType("uniqueidentifier");
@@ -272,6 +293,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ScheduleTypeDescription")
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
@@ -298,6 +322,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SlotDescription")
                         .HasColumnType("nvarchar(2000)")
@@ -331,6 +358,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid?>("LocationTypeKey")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("SlotKey")
                         .HasColumnType("uniqueidentifier");
 
@@ -358,6 +388,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ResourceKey")
                         .HasColumnType("uniqueidentifier");
@@ -395,6 +428,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("SlotKey")
                         .HasColumnType("uniqueidentifier");
 
@@ -424,6 +460,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("SlotKey")
                         .HasColumnType("uniqueidentifier");
@@ -461,6 +500,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<int>("Interval")
                         .HasColumnType("int");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("TimeCycleDescription")
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
@@ -493,6 +535,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("TimeRangeKey")
                         .HasColumnType("uniqueidentifier");
@@ -530,6 +575,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<int>("Interval")
                         .HasColumnType("int");
 
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("TimeCycleKey")
                         .HasColumnType("uniqueidentifier");
 
@@ -553,6 +601,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TimeBehavior")
                         .HasColumnType("int");
@@ -583,6 +634,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                     b.Property<Guid>("RowKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ScheduleKey")
                         .HasColumnType("uniqueidentifier");
@@ -619,6 +673,9 @@ namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("PartitionKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TimeName")
                         .IsRequired()
