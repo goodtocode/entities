@@ -6,6 +6,7 @@ namespace GoodToCode.Chronology.Models
 {
     public class VentureTimeRecurring : DomainModel<IVentureTimeRecurring>, IVentureTimeRecurring
     {
+        public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return VentureTimeRecurringKey; } set { VentureTimeRecurringKey = value; } }
         public Guid VentureTimeRecurringKey { get; set; }
         public Guid VentureKey { get; set; }

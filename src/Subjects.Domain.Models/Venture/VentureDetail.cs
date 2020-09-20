@@ -6,6 +6,7 @@ namespace GoodToCode.Subjects.Models
 {
     public class VentureDetail : DomainModel<IVentureDetail>, IVentureDetail
     {
+        public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return VentureDetailKey; } set { VentureDetailKey = value; } }
         public Guid VentureDetailKey { get; set; }
         public Guid VentureKey { get; set; }

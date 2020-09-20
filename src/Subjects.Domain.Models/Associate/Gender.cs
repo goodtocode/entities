@@ -6,6 +6,7 @@ namespace GoodToCode.Subjects.Models
 {
     public class Gender : DomainModel<IGender>, IGender
     {
+        public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return GenderKey; } set { GenderKey = value; } }
         public Guid GenderKey { get; set; }
         public string GenderName { get; set; }

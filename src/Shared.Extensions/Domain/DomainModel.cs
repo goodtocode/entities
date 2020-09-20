@@ -11,8 +11,8 @@ namespace GoodToCode.Shared.Models
 
         [Key]
         public abstract Guid RowKey { get; set; }
-        public string PartitionKey { get; set; } = "Default";
-        
+        [IgnoreDataMember]
+        public abstract string PartitionKey { get; set; }        
         [IgnoreDataMember]
         public IReadOnlyList<IDomainEvent<TModel>> DomainEvents => _domainEvents;        
 

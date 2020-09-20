@@ -7,6 +7,7 @@ namespace GoodToCode.Chronology.Models
 {
     public class LocationTimeRecurring : DomainModel<ILocationTimeRecurring>, ILocationTimeRecurring
     {
+        public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return LocationTimeRecurringKey; } set { LocationTimeRecurringKey = value; } }
         public Guid LocationTimeRecurringKey { get; set; }
         public Guid LocationKey { get; set; }

@@ -6,6 +6,7 @@ namespace GoodToCode.Chronology.Models
 {
     public class TimeRecurring : DomainModel<ITimeRecurring>, ITimeRecurring
     {
+        public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return TimeRecurringKey; } set { TimeRecurringKey = value; } }
         public Guid TimeRecurringKey { get; set; }
         public int BeginDay { get; set; }

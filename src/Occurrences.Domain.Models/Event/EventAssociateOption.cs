@@ -7,6 +7,7 @@ namespace GoodToCode.Occurrences.Models
 {
     public class EventAssociateOption : DomainModel<IEventAssociateOption>, IEventAssociateOption
     {
+        public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return EventAssociateOptionKey; } set { EventAssociateOptionKey = value; } }
         public Guid EventAssociateOptionKey { get; set; }
         public Guid OptionKey { get; set; }

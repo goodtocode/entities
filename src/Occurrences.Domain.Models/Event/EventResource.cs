@@ -7,6 +7,7 @@ namespace GoodToCode.Occurrences.Models
 {
     public class EventResource : DomainModel<IEventResource>, IEventResource
     {
+        public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return EventResourceKey; } set { EventResourceKey = value; } }
         public Guid EventResourceKey { get; set; }
         public Guid EventKey { get; set; }

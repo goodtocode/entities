@@ -7,6 +7,7 @@ namespace GoodToCode.Locality.Models
 {
     public class LatLong : DomainModel<ILatLong>, ILatLong
     {
+        public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return LatLongKey; } set { LatLongKey = value; } }
         public Guid LatLongKey { get; set; }
         public double Latitude { get; set; }

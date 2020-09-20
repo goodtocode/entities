@@ -6,6 +6,7 @@ namespace GoodToCode.Subjects.Models
 {
     public class Person : DomainModel<IPerson>, IPerson
     {
+        public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return PersonKey; } set { PersonKey = value; } }
         public Guid PersonKey { get; set; }
         public string FirstName { get; set; }

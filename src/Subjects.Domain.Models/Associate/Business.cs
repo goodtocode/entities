@@ -6,6 +6,7 @@ namespace GoodToCode.Subjects.Models
 {
     public class Business : DomainModel<IBusiness>, IBusiness
     {
+        public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return BusinessKey; } set { BusinessKey = value; } }
         public Guid BusinessKey { get; set; }
         public string BusinessName { get; set; }

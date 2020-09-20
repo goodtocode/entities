@@ -6,6 +6,7 @@ namespace GoodToCode.Subjects.Models
 {
     public class ItemGroup : DomainModel<IItemGroup>, IItemGroup
     {
+        public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return ItemGroupKey; } set { ItemGroupKey = value; } }
         public Guid ItemGroupKey { get; set; }
         public string ItemGroupName { get; set; }

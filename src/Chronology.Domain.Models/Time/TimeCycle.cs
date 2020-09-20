@@ -7,6 +7,7 @@ namespace GoodToCode.Chronology.Models
 {
     public class TimeCycle : DomainModel<ITimeCycle>, ITimeCycle
     {
+        public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return TimeCycleKey; } set { TimeCycleKey = value; } }
         public Guid TimeCycleKey { get; set; }
         public string TimeCycleName { get; set; }

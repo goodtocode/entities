@@ -6,6 +6,7 @@ namespace GoodToCode.Chronology.Models
 {
     public class VentureSchedule : DomainModel<IVentureSchedule>, IVentureSchedule
     {
+        public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return VentureScheduleKey; } set { VentureScheduleKey = value; } }
         public Guid VentureScheduleKey { get; set; }
         public Guid VentureKey { get; set; }

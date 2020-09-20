@@ -6,6 +6,7 @@ namespace GoodToCode.Chronology.Models
 {
     public class SlotTimeRange : DomainModel<ISlotTimeRange>, ISlotTimeRange
     {
+        public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return SlotTimeRangeKey; } set { SlotTimeRangeKey = value; } }
         public Guid SlotTimeRangeKey { get; set; }
         public Guid SlotKey { get; set; }

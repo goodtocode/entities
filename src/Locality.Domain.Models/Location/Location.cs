@@ -6,6 +6,7 @@ namespace GoodToCode.Locality.Models
 {
     public class Location : DomainModel<ILocation>, ILocation
     {
+        public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return LocationKey; } set { LocationKey = value; } }
         public Guid LocationKey { get; set; }
         public string LocationName { get; set; }

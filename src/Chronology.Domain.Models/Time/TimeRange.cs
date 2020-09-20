@@ -7,6 +7,7 @@ namespace GoodToCode.Chronology.Models
 {
     public class TimeRange : DomainModel<ITimeRange>, ITimeRange
     {
+        public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return TimeRangeKey; } set { TimeRangeKey = value; } }
         public Guid TimeRangeKey { get; set; }
         public DateTime BeginDate { get; set; }
