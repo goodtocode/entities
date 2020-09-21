@@ -13,39 +13,36 @@ namespace GoodToCode.Subjects.Application
 {
     public class BusinessesGetQuery : IRequest<QueryResponse<List<Business>>>
     {
-        public Func<Business, bool> QueryPredicate { get; }
+        public Func<Business, bool> QueryPredicate { get; } = x => x.RowKey != Guid.Empty;
 
 
-        public BusinessesGetQuery(Guid businessKey)
+        public BusinessesGetQuery()
         {
-            QueryPredicate = (x => x.BusinessKey == businessKey);
         }
 
         public BusinessesGetQuery(Func<Business, bool> predicateExpression)
         {
             QueryPredicate = predicateExpression;
         }
-
-        public Guid BusinessKey { get; set; }
     }
 
-    public class BusinessesGetHandler : IRequestHandler<BusinessGetQuery, QueryResponse<List<Business>>>
+    public class BusinessesGetHandler : IRequestHandler<BusinessesGetQuery, QueryResponse<List<Business>>>
     {
 
-        private readonly BusinessGetValidator _validator;
+        private readonly BusinessesGetValidator _validator;
         private readonly List<KeyValuePair<string, string>> _errors;
-        private readonly ILogger<BusinessGetHandler> _logger;
+        private readonly ILogger<BusinessesGetHandler> _logger;
         private readonly SubjectsDbContext _dbContext;
 
         public BusinessesGetHandler(SubjectsDbContext dbContext)
         {
 
             _dbContext = dbContext;
-            _validator = new BusinessGetValidator();
+            _validator = new BusinessesGetValidator();
             _errors = new List<KeyValuePair<string, string>>();
         }
 
-        public async Task<QueryResponse<List<Business>>> Handle(BusinessGetQuery request, CancellationToken cancellationToken)
+        public async Task<QueryResponse<List<Business>>> Handle(BusinessesGetQuery request, CancellationToken cancellationToken)
         {
             var response = new QueryResponse<List<Business>>() { Errors = ValidateRequest(request) };
 
@@ -59,7 +56,7 @@ namespace GoodToCode.Subjects.Application
                 catch (Exception e)
                 {
                     _logger.LogCritical(e.ToString());
-                    response.ErrorInfo.UserErrorMessage = "Some Error Has Occured";
+                    response.ErrorInfo.UserErrorMessage = "An unknown error has occurred.";
                     response.ErrorInfo.HasException = true;
                 }
             }
@@ -67,7 +64,7 @@ namespace GoodToCode.Subjects.Application
             return response;
         }
 
-        private List<KeyValuePair<string, string>> ValidateRequest(BusinessGetQuery request)
+        private List<KeyValuePair<string, string>> ValidateRequest(BusinessesGetQuery request)
         {
             var issues = _validator.Validate(request).Errors;
 

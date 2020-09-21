@@ -11,25 +11,17 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Subjects.Application
 {
-    public class BusinessGetQuery : IRequest<QueryResponse<List<Business>>>
+    public class BusinessGetQuery : IRequest<QueryResponse<Business>>
     {
-        public Func<Business, bool> QueryPredicate { get; }
-
-
         public BusinessGetQuery(Guid businessKey)
         {
-            QueryPredicate = (x => x.BusinessKey == businessKey);
-        }
-
-        public BusinessGetQuery(Func<Business, bool> predicateExpression)
-        {
-            QueryPredicate = predicateExpression;
+            BusinessKey = businessKey;
         }
 
         public Guid BusinessKey { get; set; }
     }
 
-    public class BusinessGetHandler : IRequestHandler<BusinessGetQuery, QueryResponse<List<Business>>>
+    public class BusinessGetHandler : IRequestHandler<BusinessGetQuery, QueryResponse<Business>>
     {
 
         private readonly BusinessGetValidator _validator;
@@ -45,21 +37,20 @@ namespace GoodToCode.Subjects.Application
             _errors = new List<KeyValuePair<string, string>>();
         }
 
-        public async Task<QueryResponse<List<Business>>> Handle(BusinessGetQuery request, CancellationToken cancellationToken)
+        public async Task<QueryResponse<Business>> Handle(BusinessGetQuery request, CancellationToken cancellationToken)
         {
-            var response = new QueryResponse<List<Business>>() { Errors = ValidateRequest(request) };
+            var response = new QueryResponse<Business>() { Errors = ValidateRequest(request) };
 
             if (!response.Errors.Any())
             {
                 try
                 {
-                    response.Result = _dbContext.Business.Where(request.QueryPredicate).ToList();
-
+                    response.Result = await _dbContext.Business.FindAsync(request.BusinessKey);
                 }
                 catch (Exception e)
                 {
                     _logger.LogCritical(e.ToString());
-                    response.ErrorInfo.UserErrorMessage = "Some Error Has Occured";
+                    response.ErrorInfo.UserErrorMessage = "An unknown error has occurred.";
                     response.ErrorInfo.HasException = true;
                 }
             }

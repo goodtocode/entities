@@ -4,10 +4,12 @@ using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
@@ -42,9 +44,16 @@ namespace GoodToCode.Subjects.Specs
                 BusinessKey = SutKey,
                 BusinessName = "BusinessCreateSteps.cs Test",
                 TaxNumber = string.Empty,
-                
-                
             };
+        }
+
+        [Given(@"the business to be created via Entity Framework is serializable")]
+        public void GivenTheBusinessToBeCreatedViaEntityFrameworkIsSerializable()
+        {
+            var comparison = Sut.BusinessName;
+            var serialized = JsonConvert.SerializeObject(Sut);
+            var deserialized = JsonConvert.DeserializeObject<Business>(serialized);
+            Assert.IsTrue(deserialized.BusinessName == comparison);
         }
 
         [When(@"the Business does not exist in persistence by key")]

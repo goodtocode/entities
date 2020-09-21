@@ -1,6 +1,5 @@
-using GoodToCode.Shared.Extensions;
+using GoodToCode.Extensions;
 using GoodToCode.Subjects.Infrastructure;
-using GoodToCode.Subjects.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -9,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Subjects.Functions
@@ -29,8 +30,9 @@ namespace GoodToCode.Subjects.Functions
             var dbContextOptionsBuilder = options.UseSqlServer(defaultConnection);            
             var context = new SubjectsDbContext(options.Options);
             var business = await context.Business.FirstAsync(x => x.BusinessKey == businessKey);
+            var returnData = JsonConvert.SerializeObject(business);
 
-            return business == null ? new NotFoundResult() : (IActionResult)new OkObjectResult(JsonConvert.SerializeObject(business));
+            return business == null ? new NotFoundResult() : (IActionResult)new OkObjectResult(new StringContent(returnData, Encoding.UTF8, "application/json"));
         }
     }
 }

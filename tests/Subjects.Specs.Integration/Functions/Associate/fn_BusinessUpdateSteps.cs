@@ -47,7 +47,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessIsPostedViaAzureFunction()
         {
             var client = new HttpClientFactory().CreateJsonClient<Business>();
-            var response = await client.PostAsync(new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateUpdateUrl(SutKey), new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
+            var response = await client.PutAsync(new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateUpdateUrl(SutKey), new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));

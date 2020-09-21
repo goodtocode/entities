@@ -40,7 +40,7 @@ namespace GoodToCode.Subjects.Specs
         {
             var client = new HttpClientFactory().CreateJsonClient<Business>();
             var url = new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateCreateUrl();
-            var response = await client.PutAsync(url, new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));

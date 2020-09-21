@@ -59,7 +59,7 @@ namespace GoodToCode.Locality.Application
                 catch (Exception e)
                 {
                     _logger.LogCritical(e.ToString());
-                    response.ErrorInfo.UserErrorMessage = "Some Error Has Occured";
+                    response.ErrorInfo.UserErrorMessage = "An unknown error has occurred.";
                     response.ErrorInfo.HasException = true;
                 }
             }

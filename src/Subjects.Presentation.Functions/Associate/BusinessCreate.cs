@@ -1,4 +1,3 @@
-using GoodToCode.Shared.Extensions;
 using GoodToCode.Subjects.Infrastructure;
 using GoodToCode.Subjects.Models;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +9,8 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Subjects.Functions
@@ -18,10 +19,10 @@ namespace GoodToCode.Subjects.Functions
     {
         [FunctionName("BusinessCreate")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "put", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation($"Subjects.BusinessPut()");
+            log.LogInformation($"Subjects.BusinessCreate()");
             string defaultConnection = Environment.GetEnvironmentVariable("DefaultConnection") ?? "Server=tcp:goodtocodestack.database.windows.net,1433;Initial Catalog=StackData;Persist Security Info=False;User ID=LocalAdmin;Password=1202cc89-cb6f-453a-ac7e-550b3b5d2d0c;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             
             var options = new DbContextOptionsBuilder<SubjectsDbContext>();
@@ -29,9 +30,10 @@ namespace GoodToCode.Subjects.Functions
             var context = new SubjectsDbContext(options.Options);
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var itemToSave = JsonConvert.DeserializeObject<Business>(requestBody);
-            var recordsAffected = await new AssociateAggregate(context).BusinessCreateAsync(itemToSave);
-            return recordsAffected == 0 ? new NotFoundResult() : (IActionResult)new OkObjectResult(JsonConvert.SerializeObject(itemToSave));
+            var deserializedBody = JsonConvert.DeserializeObject<Business>(requestBody);
+            var recordsAffected = await new AssociateAggregate(context).BusinessCreateAsync(deserializedBody);
+            var returnData = JsonConvert.SerializeObject(deserializedBody);
+            return recordsAffected == 0 ? new NotFoundResult() : (IActionResult)new OkObjectResult(new StringContent(returnData, Encoding.UTF8, "application/json"));
         }
     }
 }

@@ -24,7 +24,7 @@ namespace GoodToCode.Subjects.Specs
         private readonly BusinessSaveCommandSteps commandSteps = new BusinessSaveCommandSteps();
 
         public Guid SutKey { get; private set; }
-        public IList<Business> Sut { get; private set; }
+        public IList<Business> Sut { get; private set; } = new List<Business>();
         public IList<Business> RecycleBin { get; private set; } = new List<Business>();
 
         public BusinessQuerySteps()
@@ -39,7 +39,7 @@ namespace GoodToCode.Subjects.Specs
         {
             commandSteps.GivenANewBusinessSaveCommandHasBeenCreated();
             await commandSteps.WhenTheBusinessIsInsertedViaCQRSCommand();
-            Sut = await _dbContext.Business.Take(10).ToListAsync();
+            Sut.Add(await _dbContext.Business.FirstOrDefaultAsync());
             SutKey = Sut.FirstOrDefault().BusinessKey;
             Assert.IsTrue(SutKey != Guid.Empty);
         }
@@ -50,7 +50,7 @@ namespace GoodToCode.Subjects.Specs
             var query = new BusinessGetQuery(SutKey);
             var handle = new BusinessGetHandler(_dbContext);
             var response = await handle.Handle(query, new System.Threading.CancellationToken());
-            Sut = response.Result;
+            Sut.Add(response.Result);
         }
 
         [When(@"the business exists in Query")]

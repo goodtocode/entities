@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Subjects.Functions
@@ -18,7 +20,7 @@ namespace GoodToCode.Subjects.Functions
     {
         [FunctionName("BusinessUpdate")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "put", Route = null)] HttpRequest req,
             ILogger log)
         {
             log.LogInformation($"Subjects.BusinessPost({req.Query["key"]})");
@@ -29,9 +31,10 @@ namespace GoodToCode.Subjects.Functions
             var context = new SubjectsDbContext(options.Options);
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var itemToSave = JsonConvert.DeserializeObject<Business>(requestBody);
-            var recordsAffected = await new AssociateAggregate(context).BusinessSaveAsync(itemToSave);
-            return recordsAffected == 0 ? new NotFoundResult() : (IActionResult)new OkObjectResult(JsonConvert.SerializeObject(itemToSave));
+            var deserializedBody = JsonConvert.DeserializeObject<Business>(requestBody);
+            var recordsAffected = await new AssociateAggregate(context).BusinessUpdateAsync(deserializedBody);
+            var returnData = JsonConvert.SerializeObject(deserializedBody);
+            return recordsAffected == 0 ? new NotFoundResult() : (IActionResult)new OkObjectResult(new StringContent(returnData, Encoding.UTF8, "application/json"));
         }
     }
 }

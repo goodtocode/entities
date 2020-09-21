@@ -6,7 +6,7 @@ namespace GoodToCode.Subjects.Application
     {
         public BusinessGetValidator()
         {
-            RuleFor(v => v.QueryPredicate).NotEmpty().NotNull();
+            RuleFor(v => v.BusinessKey).NotEmpty().NotNull();
         }
     }
 }
