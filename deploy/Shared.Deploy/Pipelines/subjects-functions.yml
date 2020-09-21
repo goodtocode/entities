@@ -113,7 +113,7 @@ stages:
 
           - task: oneluckidevWebSmokeTest@1
             inputs:
-              url: 'https://subject-functions.azurewebsites.net/api/BusinessesGet'
+              url: 'https://subject-functions.azurewebsites.net'
               expectedReturnCode: '200'
               retryAttemptCount: '3'
               strictSSL: true
