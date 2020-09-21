@@ -63,6 +63,13 @@ stages:
         arguments: '--configuration $(BuildConfiguration)'
 
     - task: DotNetCoreCLI@2
+      displayName: 'Unit Test'
+      inputs:
+        command: test
+        projects: |
+          $(System.DefaultWorkingDirectory)/**/*.Specs.Unit.csproj
+
+    - task: DotNetCoreCLI@2
       displayName: 'dotnet pack'
       inputs:
         command: pack
