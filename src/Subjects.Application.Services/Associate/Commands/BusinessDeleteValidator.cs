@@ -1,13 +1,13 @@
 ﻿using FluentValidation;
-using GoodToCode.Subjects.Models;
+using System;
 
 namespace GoodToCode.Subjects.Application
 {
-    public class BusinessDeleteValidator : AbstractValidator<Business>
+    public class BusinessDeleteValidator : AbstractValidator<Guid>
     {
         public BusinessDeleteValidator()
-        {            
-            //RuleFor(v => v.Vendor).NotEmpty().NotNull().Equal("testrun").MaximumLength(25);
+        {
+            RuleFor(v => v).NotEqual(Guid.Empty);
             //RuleFor(v => v.ExamType).NotEmpty().NotNull().Equal("microcredential").MaximumLength(25);
             //RuleFor(v => v.CustomerKey).NotEmpty().GreaterThanOrEqualTo(1);
             //RuleFor(v => v.ProgramKey).NotEmpty().GreaterThanOrEqualTo(1);
@@ -16,7 +16,6 @@ namespace GoodToCode.Subjects.Application
             //RuleFor(v => v.QuestionsCorrect).GreaterThanOrEqualTo(1);
             //RuleFor(v => v.QuestionsCount).NotEmpty().GreaterThanOrEqualTo(1);
             //RuleFor(v => v.ExamTakenDateTime).NotEmpty().GreaterThanOrEqualTo(1);
-
             //RuleFor(v => v.Status).NotNull().NotEmpty().MaximumLength(15)
             //    .When(v => v.Status != "Pass" || v.Status != "Fail")
             //    .WithMessage($"Status should be either 'Pass' or 'Fail'");

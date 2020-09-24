@@ -31,10 +31,10 @@ namespace GoodToCode.Subjects.Functions
             var context = new SubjectsDbContext(options.Options);
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var deserializedBody = JsonConvert.DeserializeObject<Business>(requestBody);
-            var recordsAffected = await new AssociateAggregate(context).BusinessUpdateAsync(deserializedBody);
-            var returnData = JsonConvert.SerializeObject(deserializedBody);
-            return recordsAffected == 0 ? new NotFoundResult() : (IActionResult)new OkObjectResult(new StringContent(returnData, Encoding.UTF8, "application/json"));
+            var entity = JsonConvert.DeserializeObject<Business>(requestBody);
+            var recordsAffected = await new AssociateAggregate(context).BusinessUpdateAsync(entity);            
+
+            return recordsAffected == 0 ? new NotFoundResult() : (IActionResult)new JsonResult(entity);
         }
     }
 }

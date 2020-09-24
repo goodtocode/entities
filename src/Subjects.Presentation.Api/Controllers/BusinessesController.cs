@@ -120,7 +120,7 @@ namespace GoodToCode.Subjects.Application
         [HttpDelete("{key}")]
         public async Task<ActionResult> DeleteBusiness(Guid key)
         {
-            var command = new BusinessDeleteCommand();
+            var command = new BusinessDeleteCommand(key);
             var cmdResponse = await Mediator.Send(command);
 
             if (cmdResponse.Errors.Any())

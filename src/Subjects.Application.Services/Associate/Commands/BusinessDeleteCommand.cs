@@ -10,18 +10,18 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Subjects.Application
 {
-    public class BusinessDeleteCommand : IRequest<CommandResponse<Business>>
+    public class BusinessDeleteCommand : IRequest<CommandResponse<Guid>>
     {
-        public IBusiness Item { get; set; }
+        public Guid Key { get; set; }
 
         public BusinessDeleteCommand() { }
 
-        public BusinessDeleteCommand(IBusiness item)
+        public BusinessDeleteCommand(Guid key)
         {
-            Item = item;
+            Key = key;
         }
 
-        public class Handler : IRequestHandler<BusinessDeleteCommand, CommandResponse<Business>>
+        public class Handler : IRequestHandler<BusinessDeleteCommand, CommandResponse<Guid>>
         {
             private readonly BusinessDeleteValidator _validator;
             private readonly List<KeyValuePair<string, string>> _errors;
@@ -34,17 +34,17 @@ namespace GoodToCode.Subjects.Application
                 _errors = new List<KeyValuePair<string, string>>();
             }
 
-            public async Task<CommandResponse<Business>> Handle(BusinessDeleteCommand request, CancellationToken cancellationToken)
+            public async Task<CommandResponse<Guid>> Handle(BusinessDeleteCommand request, CancellationToken cancellationToken)
             {
-                var result = new CommandResponse<Business>() { Errors = GetRequestErrors(request) };
+                var result = new CommandResponse<Guid>() { Errors = GetRequestErrors(request) };
 
                 if (result.Errors.Count == 0)
                 {
                     try
                     {
                         var aggregate = new AssociateAggregate(_dbContext);
-                        await aggregate.BusinessDeleteAsync(request.Item.RowKey);
-                        result.Result = (Business)request.Item;
+                        await aggregate.BusinessDeleteAsync(request.Key);
+                        result.Result = request.Key;
                     }
                     catch (Exception e)
                     {
@@ -62,7 +62,7 @@ namespace GoodToCode.Subjects.Application
 
             private List<KeyValuePair<string, string>> GetRequestErrors(BusinessDeleteCommand request)
             {
-                var issues = _validator.Validate((Business)request.Item).Errors;
+                var issues = _validator.Validate(request.Key).Errors;
 
                 foreach (var issue in issues)
                     _errors.Add(new KeyValuePair<string, string>(issue.PropertyName, issue.ErrorMessage));

@@ -38,9 +38,13 @@ namespace GoodToCode.Subjects.Specs
         }
 
         [Given(@"the business name is provided for the Azure Function")]
-        public void GivenTheBusinessNameIsProvidedForTheAzureFunction()
+        public async Task GivenTheBusinessNameIsProvidedForTheAzureFunction()
         {
-            Sut = new Business() { BusinessName = "BusinessUpdateSteps Test" };
+            var createSteps = new Fn_BusinessCreateSteps();
+            createSteps.GivenIHaveANewBusinessForTheAzureFunction();
+            await createSteps.WhenBusinessIsCreatedViaAzureFunction();
+            Sut = createSteps.Sut;
+            SutKey = createSteps.SutKey;
         }
 
         [When(@"Business is posted via Azure Function")]

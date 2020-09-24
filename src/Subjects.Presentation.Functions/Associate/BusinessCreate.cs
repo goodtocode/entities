@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,11 +30,11 @@ namespace GoodToCode.Subjects.Functions
                 options.UseSqlServer(defaultConnection);            
             var context = new SubjectsDbContext(options.Options);
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var deserializedBody = JsonConvert.DeserializeObject<Business>(requestBody);
-            var recordsAffected = await new AssociateAggregate(context).BusinessCreateAsync(deserializedBody);
-            var returnData = JsonConvert.SerializeObject(deserializedBody);
-            return recordsAffected == 0 ? new NotFoundResult() : (IActionResult)new OkObjectResult(new StringContent(returnData, Encoding.UTF8, "application/json"));
+            string entityJson = await new StreamReader(req.Body).ReadToEndAsync();
+            var entity = JsonConvert.DeserializeObject<Business>(entityJson); 
+            var recordsAffected = await new AssociateAggregate(context).BusinessCreateAsync(entity);
+
+            return recordsAffected == 0 ? new NotFoundResult() : (IActionResult)new JsonResult(entity);
         }
     }
 }

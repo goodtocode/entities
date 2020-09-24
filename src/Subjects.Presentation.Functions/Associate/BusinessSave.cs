@@ -26,11 +26,11 @@ namespace GoodToCode.Subjects.Functions
             var options = new DbContextOptionsBuilder<SubjectsDbContext>();
                 options.UseSqlServer(defaultConnection);
             var context = new SubjectsDbContext(options.Options);
-
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var itemToSave = JsonConvert.DeserializeObject<Business>(requestBody);
-            var recordsAffected = await new AssociateAggregate(context).BusinessSaveAsync(itemToSave);
-            return recordsAffected == 0 ? new NotFoundResult() : (IActionResult)new OkObjectResult(JsonConvert.SerializeObject(itemToSave));
+            var entity = JsonConvert.DeserializeObject<Business>(requestBody);
+            var recordsAffected = await new AssociateAggregate(context).BusinessSaveAsync(entity);
+
+            return recordsAffected == 0 ? new NotFoundResult() : (IActionResult)new JsonResult(entity);
         }
     }
 }

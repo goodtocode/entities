@@ -25,10 +25,9 @@ namespace GoodToCode.Application.Functions.Functions
             var options = new DbContextOptionsBuilder<SubjectsDbContext>();
                 options.UseSqlServer(defaultConnection);
             var context = new SubjectsDbContext(options.Options);
-            var businesses = await context.Business.ToListAsync();
-            var returnData = JsonConvert.SerializeObject(businesses);
-            
-            return businesses?.Count == 0 ? new NotFoundResult() : (IActionResult)new OkObjectResult(new StringContent(returnData, Encoding.UTF8, "application/json"));            
+            var entities = await context.Business.ToListAsync();
+
+            return entities?.Count == 0 ? new NotFoundResult() : (IActionResult)new JsonResult(entities);
         }
     }
 }
