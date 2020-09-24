@@ -110,3 +110,11 @@ stages:
               appType: functionApp
               appName: $(functionAppName)
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+
+          - task: oneluckidevWebSmokeTest@1
+            inputs:
+              url: 'https://subject-functions.azurewebsites.net'
+              expectedReturnCode: '200'
+              retryAttemptCount: '3'
+              strictSSL: true
+              retryDelay: '1000'
