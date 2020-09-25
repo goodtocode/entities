@@ -33,6 +33,10 @@ namespace GoodToCode.Subjects.Specs
         {
             createSteps.GivenIHaveANewBusinessForTheWebAPI();
             await createSteps.WhenBusinessIsCreatedViaWebAPI();
+            Suts = createSteps.Suts;
+            Sut = createSteps.Sut;
+            SutKey = createSteps.SutKey;
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
 
         [When(@"Businesses are queried via Web API")]

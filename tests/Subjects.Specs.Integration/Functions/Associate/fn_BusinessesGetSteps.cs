@@ -33,6 +33,10 @@ namespace GoodToCode.Subjects.Specs
         {
             createSteps.GivenIHaveANewBusinessForTheAzureFunction();
             await createSteps.WhenBusinessIsCreatedViaAzureFunction();
+            Suts = createSteps.Suts;
+            Sut = createSteps.Sut;
+            SutKey = createSteps.SutKey;
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
 
         [When(@"Businesses are queried via Azure Function")]

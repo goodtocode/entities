@@ -30,13 +30,12 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"I have a business key to get from the Web API")]
         public async Task GivenIHaveABusinessKeyToGetFromTheWebAPI()
         {
-            var client = new HttpClientFactory().CreateJsonClient<Business>();
-            var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetAllUrl());
-            Assert.IsTrue(response.IsSuccessStatusCode);
-            var result = await response.Content.ReadAsStringAsync();
-            Suts = JsonConvert.DeserializeObject<List<Business>>(result).Take(1).ToList();
-            Sut = Suts.FirstOrDefault();
-            SutKey = Sut.BusinessKey;
+            createSteps.GivenIHaveANewBusinessForTheWebAPI();
+            await createSteps.WhenBusinessIsCreatedViaWebAPI();
+            Suts = createSteps.Suts;
+            Sut = createSteps.Sut;
+            SutKey = createSteps.SutKey;
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
 
         [When(@"Business is queried by key via Web API")]

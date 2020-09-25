@@ -1,6 +1,5 @@
 ﻿using GoodToCode.Shared.Specs;
 using GoodToCode.Subjects.Models;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
@@ -35,13 +34,11 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"I have an non empty business key for the Web API")]
         public async Task GivenIHaveAnNonEmptyBusinessKeyForTheWebAPI()
         {
-            var client = new HttpClientFactory().CreateJsonClient<Business>();
-            var response = await client.GetAsync(new WebApiUrlFactory(_config, "Subjects", "Business").CreateGetAllUrl());
-            Assert.IsTrue(response.IsSuccessStatusCode);
-            var result = await response.Content.ReadAsStringAsync();
-            Suts.Add(JsonConvert.DeserializeObject<List<Business>>(result).FirstOrDefault());
-            Sut = Suts.FirstOrDefault();
-            SutKey = Sut.BusinessKey;
+            createSteps.GivenIHaveANewBusinessForTheWebAPI();
+            await createSteps.WhenBusinessIsCreatedViaWebAPI();
+            Suts = createSteps.Suts;
+            Sut = createSteps.Sut;
+            SutKey = createSteps.SutKey;
             _originalValue = Sut.BusinessName;
             Assert.IsTrue(SutKey != Guid.Empty);
         }
@@ -59,7 +56,7 @@ namespace GoodToCode.Subjects.Specs
         {
             var client = new HttpClientFactory().CreateJsonClient<Business>();
             var url = new WebApiUrlFactory(_config, "Subjects", "Business").CreateUpdateUrl(SutKey);
-            var response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
+            var response = await client.PutAsync(url, new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));

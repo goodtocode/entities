@@ -18,7 +18,6 @@ namespace GoodToCode.Subjects.Specs
     public class Api_BusinessCreateSteps : ICrudSteps<Business>
     {
         private readonly IConfiguration _config;
-
         public Guid SutKey { get; private set; }
         public Business Sut { get; private set; }
         public IList<Business> Suts { get; private set; } = new List<Business>();
@@ -40,13 +39,14 @@ namespace GoodToCode.Subjects.Specs
         {
             var client = new HttpClientFactory().CreateJsonClient<Business>();
             var url = new WebApiUrlFactory(_config, "Subjects", "Business").CreateCreateUrl();
-            var response = await client.PutAsync(url, new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();            
-            Suts.Add(JsonConvert.DeserializeObject<Business>(result));
-            Sut = Suts.FirstOrDefault();
+            Sut = JsonConvert.DeserializeObject<Business>(result);
+            Suts.Add(Sut);
             SutKey = Sut.BusinessKey;
             RecycleBin.Add(Sut);
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
 
         [Then(@"the business is inserted to persistence from the Web API")]

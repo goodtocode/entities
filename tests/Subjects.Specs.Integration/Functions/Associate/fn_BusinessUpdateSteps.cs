@@ -20,6 +20,7 @@ namespace GoodToCode.Subjects.Specs
     {
         private readonly IConfiguration _config;
         private readonly Fn_BusinessCreateSteps createSteps = new Fn_BusinessCreateSteps();
+        private string _originalValue = string.Empty;
         public Guid SutKey { get; private set; }
         public Business Sut { get; private set; }
         public IList<Business> Suts { get; private set; } = new List<Business>();
@@ -35,16 +36,17 @@ namespace GoodToCode.Subjects.Specs
         {
             createSteps.GivenIHaveANewBusinessForTheAzureFunction();
             await createSteps.WhenBusinessIsCreatedViaAzureFunction();
+            Suts = createSteps.Suts;
+            Sut = createSteps.Sut;
+            SutKey = createSteps.SutKey;
+            _originalValue = Sut.BusinessName;
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
 
         [Given(@"the business name is provided for the Azure Function")]
-        public async Task GivenTheBusinessNameIsProvidedForTheAzureFunction()
+        public void GivenTheBusinessNameIsProvidedForTheAzureFunction()
         {
-            var createSteps = new Fn_BusinessCreateSteps();
-            createSteps.GivenIHaveANewBusinessForTheAzureFunction();
-            await createSteps.WhenBusinessIsCreatedViaAzureFunction();
-            Sut = createSteps.Sut;
-            SutKey = createSteps.SutKey;
+            Assert.IsTrue(_originalValue.Length > 0);
         }
 
         [When(@"Business is posted via Azure Function")]

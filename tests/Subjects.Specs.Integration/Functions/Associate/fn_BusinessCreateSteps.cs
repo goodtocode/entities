@@ -43,10 +43,11 @@ namespace GoodToCode.Subjects.Specs
             var response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
-            Suts.Add(JsonConvert.DeserializeObject<Business>(result));
-            Sut = Suts.FirstOrDefault();
+            Sut = JsonConvert.DeserializeObject<Business>(result);
+            Suts.Add(Sut);
             SutKey = Sut.BusinessKey;
             RecycleBin.Add(Sut);
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
 
         [Then(@"the business is inserted to persistence from the Azure Function")]

@@ -31,13 +31,12 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"I have a business key to get from the Azure Function")]
         public async Task GivenIHaveABusinessKeyToGetFromTheAzureFunction()
         {
-            var client = new HttpClientFactory().CreateJsonClient<Business>();
-            var response = await client.GetAsync(new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateGetAllUrl());
-            Assert.IsTrue(response.IsSuccessStatusCode);
-            var result = await response.Content.ReadAsStringAsync();
-            Suts = JsonConvert.DeserializeObject<List<Business>>(result).Take(1).ToList();
-            Sut = Suts.FirstOrDefault();
-            SutKey = Sut.BusinessKey;
+            createSteps.GivenIHaveANewBusinessForTheAzureFunction();
+            await createSteps.WhenBusinessIsCreatedViaAzureFunction();
+            Suts = createSteps.Suts;
+            Sut = createSteps.Sut;
+            SutKey = createSteps.SutKey;
+            Assert.IsTrue(SutKey != Guid.Empty);
         }
 
         [When(@"Business is queried by key via Azure Function")]
