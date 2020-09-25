@@ -9,7 +9,7 @@ trigger:
     - tests/*
 
 variables:
-  sourceDirectory: '$(System.DefaultWorkingDirectory)/src'
+  sourceDirectory: '$(System.DefaultWorkingDirectory)/tests'
   artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop'
   buildVersion: $[ replace(variables['Build.BuildNumber'], '2020', '20.') ]
   version: '5.$(buildVersion)'
