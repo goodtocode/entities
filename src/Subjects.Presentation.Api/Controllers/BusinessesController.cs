@@ -86,7 +86,7 @@ namespace GoodToCode.Subjects.Application
             if (cmdResponse.Errors.Any())
                 return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest);
             
-            var getUrl = new Uri(Request.Path.ToString().AddLast("/").AddLast(cmdResponse.Result.BusinessKey.ToString()));
+            var getUrl = new Uri($"{Request.Host}{Request.Path.ToString().AddLast("/").AddLast(cmdResponse.Result.BusinessKey.ToString())}");
 
             return Created(getUrl, cmdResponse.Result);
         }

@@ -59,7 +59,7 @@ namespace GoodToCode.Subjects.Infrastructure
 
                 entity.Property(e => e.BusinessName)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(200);
 
                 entity.Property(e => e.TaxNumber)
                     .HasMaxLength(20);
