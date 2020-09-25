@@ -64,13 +64,12 @@ stages:
           $(sourceDirectory)/**/*.csproj
         arguments: '--configuration $(BuildConfiguration)'
 
-    - task: DotNetCoreCLI@2
-      displayName: Test
+    - task: CmdLine@2
       inputs:
-        command: 'test'
-        projects: |
-          $(sourceDirectory)/**/*.csproj
-        arguments: '--configuration $(BuildConfiguration)'
+        script: |
+          cd /
+          cd $(sourceDirectory)
+          dotnet test
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
