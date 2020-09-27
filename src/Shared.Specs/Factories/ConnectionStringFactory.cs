@@ -6,9 +6,14 @@ namespace GoodToCode.Shared.Specs
     {
         public IConfiguration Configuration { get; }
 
+        public ConnectionStringFactory()
+        {
+            Configuration = new ConfigurationFactory().CreateFromAzureSettings();
+        }
+
         public ConnectionStringFactory(string projectFolder)
         {
-            Configuration = new ConfigurationFactory(projectFolder).Create();
+            Configuration = new ConfigurationFactory(projectFolder).CreateFromJsonSettings();
         }
 
         public ConnectionStringFactory(IConfiguration config)
@@ -16,7 +21,12 @@ namespace GoodToCode.Shared.Specs
             Configuration = config;
         }
 
-        public string Create(string connectionName = "DefaultConnection")
+        public string CreateFromAzureSettings(string key = "Stack:Shared:SqlConnection")
+        {   
+            return Configuration[key];
+        }
+
+        public string CreateFromConnectionString(string connectionName = "DefaultConnection")
         {
             return Configuration.GetConnectionString(connectionName);
         }

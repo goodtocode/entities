@@ -11,7 +11,7 @@ namespace GoodToCode.Chronology.Infrastructure
         {
             services.AddDbContextPool<ChronologyDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(configuration["Stack:Shared:SqlConnection"]);
             });
 
             services.AddScoped<IChronologyDbContext, ChronologyDbContext>();

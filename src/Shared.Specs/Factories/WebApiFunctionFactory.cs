@@ -10,14 +10,14 @@ namespace GoodToCode.Subjects.Specs
         private readonly IConfiguration _config;
         private string _urlBase;
 
-        public string UrlBase { get { _urlBase = _urlBase.IsNullOrWhiteSpace() ? _config["Apis:UrlBase"] : _urlBase; return _urlBase; } private set { _urlBase = value; } }
+        public string UrlBase { get { _urlBase = _urlBase.IsNullOrWhiteSpace() ? _config[$"Stack:{DomainNamespace}:ApiUrl"] : _urlBase; return _urlBase; } private set { _urlBase = value; } }
         public Guid RowKey { get; private set; } = Guid.Empty;
-        public string GetAllUrl { get { return ReplaceMasks(_config["Apis:GetAllUrlMask"]); } }
-        public string GetByKeyUrl { get { return ReplaceMasks(_config["Apis:GetByKeyUrlMask"]); } }
-        public string CreateUrl { get { return ReplaceMasks(_config["Apis:CreateUrlMask"]); } }
-        public string UpdateUrl { get { return ReplaceMasks(_config["Apis:UpdateUrlMask"]); } }
-        public string SaveUrl { get { return ReplaceMasks(_config["Apis:SaveUrlMask"]); } }
-        public string DeleteUrl { get { return ReplaceMasks(_config["Apis:DeleteUrlMask"]); } }
+        public string GetAllUrl { get { return $"{UrlBase}/v1/{DomainModelPlural}"; } }
+        public string GetByKeyUrl { get { return $"{UrlBase}/v1/{DomainModelPlural}/{RowKey}"; } }
+        public string CreateUrl { get { return $"{UrlBase}/v1/{DomainModelPlural}"; } }
+        public string UpdateUrl { get { return $"{UrlBase}/v1/{DomainModelPlural}/{RowKey}"; } }
+        public string SaveUrl { get { return $"{UrlBase}/v1/{DomainModelPlural}/{RowKey}"; } }
+        public string DeleteUrl { get { return $"{UrlBase}/v1/{DomainModelPlural}/{RowKey}"; } }
 
         public string DomainNamespace { get; private set; }
         public string DomainModel { get; private set; }

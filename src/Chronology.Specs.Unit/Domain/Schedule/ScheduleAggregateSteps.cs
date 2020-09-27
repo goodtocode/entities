@@ -28,8 +28,8 @@ namespace GoodToCode.Chronology.Specs
 
         public ScheduleAggregateSteps()
         {
-            _config = new ConfigurationFactory().Create();
-            _connectionString = new ConnectionStringFactory(_config).Create();
+            _config = new ConfigurationFactory().CreateFromAzureSettings();
+            _connectionString = new ConnectionStringFactory(_config).CreateFromAzureSettings();
             _dbContext = new DbContextFactory(_connectionString).Create();
             Aggregate = new ScheduleAggregate(_dbContext);
         }

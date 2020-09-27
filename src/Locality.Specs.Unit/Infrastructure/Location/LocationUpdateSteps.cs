@@ -31,8 +31,8 @@ namespace GoodToCode.Locality.Specs
 
         public LocationUpdateSteps()
         {
-            _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Locality.Specs.Unit")).Create();
-            _connectionString = new ConnectionStringFactory(_config).Create();
+            _config = new ConfigurationFactory().CreateFromAzureSettings();
+            _connectionString = new ConnectionStringFactory(_config).CreateFromAzureSettings();
             _dbContext = new DbContextFactory(_connectionString).Create();
         }
 

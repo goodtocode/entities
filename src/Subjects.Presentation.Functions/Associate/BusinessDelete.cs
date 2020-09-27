@@ -1,4 +1,3 @@
-using GoodToCode.Shared.Extensions;
 using GoodToCode.Subjects.Infrastructure;
 using GoodToCode.Subjects.Models;
 using Microsoft.AspNetCore.Http;
@@ -6,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -16,13 +16,22 @@ namespace GoodToCode.Subjects.Functions
 {
     public static class BusinessDelete
     {
+        private static IConfiguration Configuration { set; get; }
+
+        static BusinessDelete()
+        {
+            var builder = new ConfigurationBuilder();
+            builder.AddAzureAppConfiguration(Environment.GetEnvironmentVariable("AzureSettingsConnection"));
+            Configuration = builder.Build();
+        }
+
         [FunctionName("BusinessDelete")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "delete", Route = null)] HttpRequest req,
             ILogger log)
         {
             log.LogInformation($"Subjects.BusinessDelete({req.Query["key"]})");
-            string defaultConnection = Environment.GetEnvironmentVariable("DefaultConnection") ?? "Server=tcp:goodtocodestack.database.windows.net,1433;Initial Catalog=StackData;Persist Security Info=False;User ID=LocalAdmin;Password=1202cc89-cb6f-453a-ac7e-550b3b5d2d0c;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string defaultConnection = Configuration["Stack:Shared:SqlConnection"];
             
             var options = new DbContextOptionsBuilder<SubjectsDbContext>();
                 options.UseSqlServer(defaultConnection);            

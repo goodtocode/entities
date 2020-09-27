@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using System;
 
 namespace GoodToCode.Occurrences.Application
 {
@@ -16,11 +13,22 @@ namespace GoodToCode.Occurrences.Application
             CreateHostBuilder(args).Build().Run();
         }
 
+        // dotnet user-secrets init; dotnet user-secrets set ConnectionStrings:AppConfig "<your_connection_string>"
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                    webBuilder.ConfigureAppConfiguration(config =>
+                    {
+                        var settings = config.Build();
+                        var connection = settings.GetConnectionString("AppConfig") ?? Environment.GetEnvironmentVariable("AzureSettingsConnection");
+                        config.AddAzureAppConfiguration(options =>
+                            options
+                                .Connect(connection)
+                                // Load configuration values with no label
+                                .Select(KeyFilter.Any, LabelFilter.Null)
+                                // Override with any configuration values specific to current hosting env
+                                .Select(KeyFilter.Any, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"))
+                        );
+                    }).UseStartup<Startup>());
     }
 }

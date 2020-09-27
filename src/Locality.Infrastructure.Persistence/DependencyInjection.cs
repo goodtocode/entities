@@ -11,7 +11,7 @@ namespace GoodToCode.Locality.Infrastructure
         {
             services.AddDbContextPool<LocalityDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                options.UseSqlServer(configuration["Stack:Shared:SqlConnection"],
                     x => x.UseNetTopologySuite());
             });
 

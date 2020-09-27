@@ -11,7 +11,7 @@ namespace GoodToCode.Occurrences.Infrastructure
         {
             services.AddDbContextPool<OccurrencesDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(configuration["Stack:Shared:SqlConnection"]);
             });
 
             services.AddScoped<IOccurrencesDbContext, OccurrencesDbContext>();

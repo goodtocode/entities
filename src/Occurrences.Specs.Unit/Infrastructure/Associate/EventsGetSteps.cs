@@ -27,8 +27,8 @@ namespace GoodToCode.Occurrences.Specs
 
         public EventsGetSteps()
         {
-            _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Occurrences.Specs.Unit")).Create();
-            _connectionString = new ConnectionStringFactory(_config).Create();
+            _config = new ConfigurationFactory().CreateFromAzureSettings();
+            _connectionString = new ConnectionStringFactory(_config).CreateFromAzureSettings();
             _dbContext = new DbContextFactory(_connectionString).Create();
         }
 

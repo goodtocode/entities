@@ -1,5 +1,6 @@
 ﻿using GoodToCode.Shared.Specs.Factories;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,10 +21,10 @@ namespace GoodToCode.Shared.Specs
     {
         public string CurrentEnvironment { get { return new EnvironmentVariableFactory().CreateASPNETCORE_ENVIRONMENT(); } }
         public IConfiguration Configuration { get; }
-        public string DefaultPath { get; set; }
+        public string JsonPathOrAzureConnection { get; set; }
         public string BaseConfigFile { get { return "appsettings.json"; } }
         public string EnvironmentConfigFile { get { return $"appsettings.{CurrentEnvironment}.json"; } }
-        public List<string> ConfigFiles { get; } = new List<string>();
+        public List<string> ConfigFiles { get; set; } = new List<string>();
 
         public string AssemblyDirectory
         {
@@ -38,17 +39,12 @@ namespace GoodToCode.Shared.Specs
 
         public ConfigurationFactory()
         {
-            DefaultPath = AssemblyDirectory;
+            JsonPathOrAzureConnection = Environment.GetEnvironmentVariable("AzureSettingsConnection");
         }
 
-        public ConfigurationFactory(List<string> configFiles) : this()
+        public ConfigurationFactory(string jsonPathOrAzureConnection) : this()
         {
-            ConfigFiles = configFiles;
-        }
-
-        public ConfigurationFactory(string defaultPath) : this()
-        {
-            DefaultPath = defaultPath;
+            JsonPathOrAzureConnection = jsonPathOrAzureConnection;
         }
 
         public ConfigurationFactory(string defaultPath, List<string> configFiles) : this(defaultPath)
@@ -56,11 +52,25 @@ namespace GoodToCode.Shared.Specs
             ConfigFiles = configFiles;
         }
 
-        public IConfiguration Create()
-        {            
-            DefaultPath = FindConfiguration(DefaultPath);
+        public IConfiguration CreateFromAzureSettings()
+        {
+            var builder = new ConfigurationBuilder();
+            builder.AddAzureAppConfiguration(options =>
+                options
+                    .Connect(JsonPathOrAzureConnection)
+                    // Load configuration values with no label
+                    .Select(KeyFilter.Any, LabelFilter.Null)
+                    // Override with any configuration values specific to current hosting env
+                    .Select(KeyFilter.Any, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"))
+            );
+            return builder.Build();
+        }
+
+        public IConfiguration CreateFromJsonSettings()
+        {
+            JsonPathOrAzureConnection = FindConfiguration(JsonPathOrAzureConnection);
             if (!ConfigFiles.Any()) ConfigFiles.AddRange(new string[] { BaseConfigFile, EnvironmentConfigFile });
-            var returnValue = new ConfigurationBuilder().SetBasePath(DefaultPath);            
+            var returnValue = new ConfigurationBuilder().SetBasePath(JsonPathOrAzureConnection);
             foreach (var item in ConfigFiles)
             {
                 returnValue.AddJsonFile(item);
@@ -71,7 +81,8 @@ namespace GoodToCode.Shared.Specs
 
         private string FindConfiguration(string configDirectory)
         {
-            var returnValue = configDirectory;
+            var returnValue = string.Empty;
+
             if (SearchDirectoryAndParent(configDirectory).Length > 0)
                 returnValue = configDirectory;
             else if (SearchDirectoryAndParent(AssemblyDirectory).Length > 0)

@@ -30,8 +30,8 @@ namespace GoodToCode.Subjects.Specs
 
         public BusinessAggregateSteps()
         {
-            _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs.Unit")).Create();
-            _connectionString = new ConnectionStringFactory(_config).Create();
+            _config = new ConfigurationFactory().CreateFromAzureSettings();
+            _connectionString = new ConnectionStringFactory(_config).CreateFromAzureSettings();
             _dbContext = new DbContextFactory(_connectionString).Create();
             Aggregate = new AssociateAggregate(_dbContext);
         }

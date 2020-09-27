@@ -5,17 +5,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Subjects.Functions
 {
     public static class BusinessGet
     {
+        private static IConfiguration Configuration { set; get; }
+
+        static BusinessGet()
+        {
+            var builder = new ConfigurationBuilder();
+            builder.AddAzureAppConfiguration(Environment.GetEnvironmentVariable("AzureSettingsConnection"));
+            Configuration = builder.Build();
+        }
+
         [FunctionName("BusinessGet")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
@@ -25,7 +32,7 @@ namespace GoodToCode.Subjects.Functions
             var businessKey = req.Query["key"].ToString().ToGuid();
             if (businessKey == Guid.Empty)
                 return new BadRequestResult();
-            var defaultConnection = Environment.GetEnvironmentVariable("DefaultConnection") ?? "Server=tcp:goodtocodestack.database.windows.net,1433;Initial Catalog=StackData;Persist Security Info=False;User ID=LocalAdmin;Password=1202cc89-cb6f-453a-ac7e-550b3b5d2d0c;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";            
+            var defaultConnection = Configuration["Stack:Shared:SqlConnection"];            
             var options = new DbContextOptionsBuilder<SubjectsDbContext>();
             var dbContextOptionsBuilder = options.UseSqlServer(defaultConnection);            
             var context = new SubjectsDbContext(options.Options);
