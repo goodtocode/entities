@@ -33,12 +33,6 @@ stages:
 
     steps:
     - task: PowerShell@2
-      displayName: 'Environment Variable: ASPNETCORE_ENVIRONMENT'
-      inputs:
-        targetType: 'inline'
-        script: '$env:ASPNETCORE_ENVIRONMENT="Development"'
-
-    - task: PowerShell@2
       displayName: 'Environment Variable: AzureSettingsConnection'
       inputs:
         targetType: 'inline'
