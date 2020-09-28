@@ -35,7 +35,7 @@ stages:
     - task: PowerShell@2
       inputs:
         targetType: 'inline'
-        script: '$env:AzureSettingsConnection=$(AzureSettingsConnection)'
+        script: '$env:AzureSettingsConnection="$(AzureSettingsConnection)"'
 
     - task: PowerShell@2
       displayName: 'Set-Version'
