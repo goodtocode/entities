@@ -24,7 +24,7 @@ namespace GoodToCode.Subjects.Specs
 
         public Api_BusinessGetByKeySteps()
         {
-            _config = new ConfigurationFactory(Directory.GetCurrentDirectory().Replace("TestResults", "Subjects.Specs.Integration")).Create();
+            _config = new ConfigurationFactory().CreateAzureSettings();
         }
 
         [Given(@"I have a business key to get from the Web API")]
