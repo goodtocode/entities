@@ -1,7 +1,7 @@
 ﻿REM Ignore the junk char, darn bugs
 ECHO OFF
 set connectionString=%1
-IF %connectionString%.==. set connectionString="Server=tcp:goodtocodestack.database.windows.net,1433;Initial Catalog=StackData;Persist Security Info=False;User ID=LocalAdmin;Password=1202cc89-cb6f-453a-ac7e-550b3b5d2d0c;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+IF %connectionString%.==. set connectionString=%StackSqlConnection%
 ECHO ON
 
 Echo ***

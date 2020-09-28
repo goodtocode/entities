@@ -114,5 +114,5 @@ stages:
           - task: BatchScript@1
             inputs:
               workingFolder: $(artifactDirectory)
-              filename: '$(artifactDirectory)/EF-Database-Update.cmd'
+              filename: '$(artifactDirectory)/EF-Database-Update.cmd $(StackSqlConnection)'
               arguments: '$(ConnectionString)'
