@@ -33,11 +33,6 @@ stages:
 
     steps:
     - task: PowerShell@2
-      inputs:
-        targetType: 'inline'
-        script: '$env:AzureSettingsConnection=$(AzureAppSettingConnection)'
-
-    - task: PowerShell@2
       displayName: 'Set-Version'
       inputs:
         filePath: 'deploy/Shared.Deploy/Assembly/Set-Version.ps1'
