@@ -38,6 +38,11 @@ stages:
         script: '$env:AzureSettingsConnection="$(AzureSettingsConnection)"; $env:ASPNETCORE_ENVIRONMENT="Development";'
 
     - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: 'gci env:'
+
+    - task: PowerShell@2
       displayName: 'Set-Version'
       inputs:
         filePath: 'deploy/Shared.Deploy/Assembly/Set-Version.ps1'
