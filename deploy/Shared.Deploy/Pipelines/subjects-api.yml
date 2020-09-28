@@ -33,12 +33,6 @@ stages:
 
     steps:
     - task: PowerShell@2
-      displayName: 'Environment Variable: AzureSettingsConnection'
-      inputs:
-        targetType: 'inline'
-        script: '$env:AzureSettingsConnection="$(AzureSettingsConnection)"'
-
-    - task: PowerShell@2
       displayName: 'Set-Version'
       inputs:
         filePath: 'deploy/Shared.Deploy/Assembly/Set-Version.ps1'
