@@ -119,6 +119,19 @@ stages:
               appType: functionApp
               appName: $(functionAppName)
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+              appSettings: |
+                [
+                  {
+                    "name": "ASPNETCORE_ENVIRONMENT",
+                    "value": "$(ASPNETCORE_ENVIRONMENT)",
+                    "slotSetting": false
+                  },
+                  {
+                    "name": "AzureSettingsConnection",
+                    "value": "$(AzureSettingsConnection)", 
+                    "slotSetting": false
+                  }
+                ]
           - task: oneluckidevWebSmokeTest@1
             inputs:
               url: 'https://occurence-functions.azurewebsites.net'
