@@ -11,12 +11,16 @@ trigger:
     - deploy/Chronology.Infrastructure.Persistence.Migrations/*
 
 variables:
-  sourceDirectory: '$(System.DefaultWorkingDirectory)/deploy/Chronology.Infrastructure.Persistence.Migrations'
-  artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop/deploy/Chronology.Infrastructure.Persistence.Migrations'
-  name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-  MSBUILDSINGLELOADCONTEXT: 1
+- group: Development
+- name: sourceDirectory
+  value: '$(System.DefaultWorkingDirectory)/deploy/Chronology.Infrastructure.Persistence.Migrations'
+- name: artifactDirectory
+  value: '$(Build.ArtifactStagingDirectory)/../drop/deploy/Chronology.Infrastructure.Persistence.Migrations'
+- name: buildConfiguration
+  value: 'Release'  
+- name: MSBUILDSINGLELOADCONTEXT
+  value: 1
+
 
 stages:
 - stage: Build

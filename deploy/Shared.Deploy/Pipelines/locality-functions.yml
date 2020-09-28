@@ -5,7 +5,6 @@ trigger:
     - master
   paths:
     include:
-    - src/Locality.Presentation.Functions/*
     - src/Locality.Domain.Models/*
     - src/Locality.Presentation.Functions/*
     - src/Shared.Abstractions/*
@@ -14,12 +13,21 @@ trigger:
     - src/Shared.Specs/*
 
 variables:
-  azureSubscription: 'a9edfe99-d829-4bd0-8df8-9d954e5476d4'
-  functionAppName: 'locality-functions'
-  vmImageName: 'vs2017-win2016'
-  sourceDirectory: '$(System.DefaultWorkingDirectory)/src/Locality.Presentation.Functions'
-  testDirectory: '$(System.DefaultWorkingDirectory)/src/Locality.Specs.Unit'
-  MSBUILDSINGLELOADCONTEXT: 1
+- group: Development
+- name: azureSubscription
+  value: 'a9edfe99-d829-4bd0-8df8-9d954e5476d4'
+- name: functionAppName
+  value: 'locality-functions'
+- name: vmImageName
+  value: 'vs2017-win2016'
+- name: sourceDirectory
+  value: '$(System.DefaultWorkingDirectory)/src/Locality.Presentation.Functions'
+- name: testDirectory
+  value: '$(System.DefaultWorkingDirectory)/src/Locality.Specs.Unit'
+- name: buildConfiguration
+  value: 'Release'  
+- name: MSBUILDSINGLELOADCONTEXT
+  value: 1
 
 stages:
 - stage: Build

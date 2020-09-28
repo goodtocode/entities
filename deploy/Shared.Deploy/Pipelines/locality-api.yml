@@ -12,11 +12,13 @@ trigger:
     - src/Shared.Specs/*
 
 variables:
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src/Locality.Presentation.Api'
-  name: 5.$(Year:yy).$(DayOfYear)$(Rev:.rr)
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-  MSBUILDSINGLELOADCONTEXT: 1
+- group: Development
+- name: workingDirectory
+  value: '$(System.DefaultWorkingDirectory)/src/Locality.Presentation.Api'  
+- name: buildConfiguration
+  value: 'Release'  
+- name: MSBUILDSINGLELOADCONTEXT
+  value: 1
 
 stages:
 - stage: Build

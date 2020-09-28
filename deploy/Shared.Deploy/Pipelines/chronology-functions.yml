@@ -5,7 +5,6 @@ trigger:
     - master
   paths:
     include:
-    - src/Chronology.Presentation.Functions/*
     - src/Chronology.Domain.Models/*
     - src/Chronology.Presentation.Functions/*
     - src/Shared.Abstractions/*
@@ -14,12 +13,21 @@ trigger:
     - src/Shared.Specs/*
 
 variables:
-  azureSubscription: '8dbc1bf9-126e-4c82-ab32-bb86e39b6634'
-  functionAppName: 'chronology-functions'
-  vmImageName: 'vs2017-win2016'
-  sourceDirectory: '$(System.DefaultWorkingDirectory)/src/Chronology.Presentation.Functions'
-  testDirectory: '$(System.DefaultWorkingDirectory)/src/Chronology.Specs.Unit'
-  MSBUILDSINGLELOADCONTEXT: 1
+- group: Development
+- name: azureSubscription
+  value: '8dbc1bf9-126e-4c82-ab32-bb86e39b6634'
+- name: functionAppName
+  value: 'chronology-functions'
+- name: vmImageName
+  value: 'vs2017-win2016'
+- name: sourceDirectory
+  value: '$(System.DefaultWorkingDirectory)/src/Chronology.Presentation.Functions'
+- name: testDirectory
+  value: '$(System.DefaultWorkingDirectory)/src/Chronology.Specs.Unit'
+- name: buildConfiguration
+  value: 'Release'  
+- name: MSBUILDSINGLELOADCONTEXT
+  value: 1
 
 stages:
 - stage: Build

@@ -9,13 +9,15 @@ trigger:
     - tests/*
 
 variables:
-  sourceDirectory: '$(System.DefaultWorkingDirectory)/tests'
-  artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop'
-  buildVersion: $[ replace(variables['Build.BuildNumber'], '2020', '20.') ]
-  version: '5.$(buildVersion)'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-  MSBUILDSINGLELOADCONTEXT: 1
+- group: Development
+- name: sourceDirectory
+  value: '$(System.DefaultWorkingDirectory)/tests'
+- name: artifactDirectory
+  value: '$(Build.ArtifactStagingDirectory)/../drop'
+- name: buildConfiguration
+  value: 'Release'
+- name: MSBUILDSINGLELOADCONTEXT
+  value: 1
 
 stages:
 - stage: Build

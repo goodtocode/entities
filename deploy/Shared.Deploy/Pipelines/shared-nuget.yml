@@ -9,11 +9,15 @@ trigger:
     - src/*
 
 variables:
-  sourceDirectory: '$(System.DefaultWorkingDirectory)/src'
-  artifactDirectory: '$(Build.ArtifactStagingDirectory)/../drop'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-  MSBUILDSINGLELOADCONTEXT: 1
+- group: Development
+- name: sourceDirectory
+  value: '$(System.DefaultWorkingDirectory)/src'
+- name: artifactDirectory
+  value: '$(Build.ArtifactStagingDirectory)/../drop'
+- name: buildConfiguration
+  value: 'Release'
+- name: MSBUILDSINGLELOADCONTEXT
+  value: 1
 
 stages:
 - stage: Build

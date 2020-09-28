@@ -18,12 +18,21 @@ trigger:
     - src/Shared.Specs/*
 
 variables:
-  azureSubscription: '7fd0d3c5-89c8-450d-8f4a-e3ff842104cc'
-  functionAppName: 'subject-functions'
-  vmImageName: 'vs2017-win2016'
-  sourceDirectory: '$(System.DefaultWorkingDirectory)/src/Subjects.Presentation.Functions'
-  testDirectory: '$(System.DefaultWorkingDirectory)/src/Subjects.Specs.Unit'
-  MSBUILDSINGLELOADCONTEXT: 1
+- group: Development
+- name: azureSubscription
+  value: '7fd0d3c5-89c8-450d-8f4a-e3ff842104cc'
+- name: functionAppName
+  value: 'subject-functions'
+- name: vmImageName
+  value: 'vs2017-win2016'
+- name: sourceDirectory
+  value: '$(System.DefaultWorkingDirectory)/src/Subjects.Presentation.Functions'
+- name: testDirectory
+  value: '$(System.DefaultWorkingDirectory)/src/Subjects.Specs.Unit'
+- name: buildConfiguration
+  value: 'Release'  
+- name: MSBUILDSINGLELOADCONTEXT
+  value: 1
 
 stages:
 - stage: Build
