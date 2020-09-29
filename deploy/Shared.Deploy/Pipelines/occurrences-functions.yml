@@ -122,11 +122,6 @@ stages:
               appSettings: |
                 [
                   {
-                    "name": "ASPNETCORE_ENVIRONMENT",
-                    "value": "$(ASPNETCORE_ENVIRONMENT)",
-                    "slotSetting": false
-                  },
-                  {
                     "name": "AppSettingsConnection",
                     "value": "$(AppSettingsConnection)", 
                     "slotSetting": false
