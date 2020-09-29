@@ -119,14 +119,6 @@ stages:
               appType: functionApp
               appName: $(functionAppName)
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
-              appSettings: |
-                [
-                  {
-                    "name": "AppSettingsConnection",
-                    "value": "$(AppSettingsConnection)", 
-                    "slotSetting": false
-                  }
-                ]
           - task: oneluckidevWebSmokeTest@1
             inputs:
               url: 'https://occurence-functions.azurewebsites.net'
