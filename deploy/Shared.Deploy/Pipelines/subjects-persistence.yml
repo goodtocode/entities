@@ -85,25 +85,3 @@ stages:
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
-
-- stage: Deploy
-  displayName: Deploy stage
-  dependsOn: Build
-  condition: succeeded()
-
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy
-    environment: 'development'
-    pool:
-        name: Hosted Windows 2019 with VS2019
-        demands: msbuild
-
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: BatchScript@1
-            inputs:
-              workingFolder: $(artifactDirectory)
-              filename: $(artifactDirectory)/EF-Database-Update.cmd "$(StackSqlConnection)"
