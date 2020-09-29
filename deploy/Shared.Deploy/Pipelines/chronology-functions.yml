@@ -123,8 +123,8 @@ stages:
                     "slotSetting": false
                   },
                   {
-                    "name": "AzureSettingsConnection",
-                    "value": "$(AzureSettingsConnection)", 
+                    "name": "AppSettingsConnection",
+                    "value": "$(AppSettingsConnection)", 
                     "slotSetting": false
                   }
                 ]
