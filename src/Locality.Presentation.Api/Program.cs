@@ -20,7 +20,7 @@ namespace GoodToCode.Locality.Application
                     webBuilder.ConfigureAppConfiguration(config =>
                     {
                         var settings = config.Build();
-                        var connection = settings.GetConnectionString("AppConfig") ?? Environment.GetEnvironmentVariable("AzureSettingsConnection");
+                        var connection = settings.GetConnectionString("AppConfig") ?? Environment.GetEnvironmentVariable("AppSettingsConnection");
                         config.AddAzureAppConfiguration(options =>
                             options
                                 .Connect(connection)

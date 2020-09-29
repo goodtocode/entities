@@ -39,7 +39,7 @@ namespace GoodToCode.Shared.Specs
 
         public ConfigurationFactory()
         {
-            JsonPathOrAzureConnection = Environment.GetEnvironmentVariable("AzureSettingsConnection");
+            JsonPathOrAzureConnection = Environment.GetEnvironmentVariable("AppSettingsConnection");
         }
 
         public ConfigurationFactory(string jsonPathOrAzureConnection) : this()

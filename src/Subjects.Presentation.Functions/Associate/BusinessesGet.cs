@@ -18,7 +18,7 @@ namespace GoodToCode.Application.Functions.Functions
         static BusinessesGet()
         {
             var builder = new ConfigurationBuilder();
-            builder.AddAzureAppConfiguration(Environment.GetEnvironmentVariable("AzureSettingsConnection"));
+            builder.AddAzureAppConfiguration(Environment.GetEnvironmentVariable("AppSettingsConnection"));
             Configuration = builder.Build();
         }
 

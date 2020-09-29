@@ -21,7 +21,7 @@ namespace GoodToCode.Subjects.Functions
         static BusinessDelete()
         {
             var builder = new ConfigurationBuilder();
-            builder.AddAzureAppConfiguration(Environment.GetEnvironmentVariable("AzureSettingsConnection"));
+            builder.AddAzureAppConfiguration(Environment.GetEnvironmentVariable("AppSettingsConnection"));
             Configuration = builder.Build();
         }
 
