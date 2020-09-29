@@ -33,7 +33,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: $(vmImageName)
+        name: Hosted Windows 2019 with VS2019
 
     steps:
     - task: PowerShell@2
