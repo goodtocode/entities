@@ -1,5 +1,5 @@
 ﻿REM Ignore the junk char, darn bugs
-ECHO OFF
+ECHO ON
 set connectionString=%1
 IF %connectionString%.==. set connectionString=%StackSqlConnection%
 ECHO ON

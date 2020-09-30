@@ -1,5 +1,4 @@
 ﻿using GoodToCode.Subjects.Infrastructure;
-using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoodToCode.Subjects.Specs

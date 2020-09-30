@@ -1,5 +1,8 @@
 ﻿using GoodToCode.Occurrences.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
+using System;
 
 namespace GoodToCode.Occurrences.Infrastructure
 {
@@ -24,14 +27,26 @@ namespace GoodToCode.Occurrences.Infrastructure
         public virtual DbSet<EventSchedule> EventSchedule { get; set; }
         public virtual DbSet<EventType> EventType { get; set; }
 
+        public string GetConnectionFromAzureSettings(string configKey)
+        {
+            var builder = new ConfigurationBuilder();
+            builder.AddAzureAppConfiguration(options =>
+                options
+                    .Connect(Environment.GetEnvironmentVariable("AppSettingsConnection"))
+                    .Select(KeyFilter.Any, LabelFilter.Null)
+                    .Select(KeyFilter.Any, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production")
+            );
+            var config = builder.Build();
+
+            return config[configKey];
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var connectionStringSql = @"";
-                optionsBuilder.UseSqlServer(connectionStringSql);
-                //var connectionStringCosmos = "AccountEndpoint=https://goodtocodestack.documents.azure.com:443/;";
-                //optionsBuilder.UseCosmos(connectionStringCosmos);
+                optionsBuilder.UseSqlServer(GetConnectionFromAzureSettings("Stack:Shared:SqlConnection"));
+                //optionsBuilder.UseCosmos(GetConnectionFromAzureSettings("Stack:Shared:CosmosConnection"));
             }
         }
 

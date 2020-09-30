@@ -1,8 +1,8 @@
-﻿//https://www.syncfusion.com/blogs/post/build-crud-application-with-asp-net-core-entity-framework-visual-studio-2019.aspx
-using GoodToCode.Subjects.Models;
+﻿using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
+using System;
 
 namespace GoodToCode.Subjects.Infrastructure
 {
@@ -10,8 +10,7 @@ namespace GoodToCode.Subjects.Infrastructure
     {
         public SubjectsDbContext(DbContextOptions<SubjectsDbContext> options)
             : base(options)
-        {
-        }
+        { }
 
         public virtual DbSet<Business> Business { get; set; }
         public virtual DbSet<Detail> Detail { get; set; }
@@ -37,14 +36,26 @@ namespace GoodToCode.Subjects.Infrastructure
         public virtual DbSet<VentureOption> VentureOption { get; set; }
         public virtual DbSet<VentureResource> VentureResource { get; set; }
 
+        public string GetConnectionFromAzureSettings(string configKey)
+        {
+            var builder = new ConfigurationBuilder();
+            builder.AddAzureAppConfiguration(options =>
+                options
+                    .Connect(Environment.GetEnvironmentVariable("AppSettingsConnection"))
+                    .Select(KeyFilter.Any, LabelFilter.Null)
+                    .Select(KeyFilter.Any, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production")
+            );
+            var config = builder.Build();
+
+            return config[configKey];
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var connectionString = @"";
-                optionsBuilder.UseSqlServer(connectionString);
-                //var connectionStringCosmos = "AccountEndpoint=https://goodtocodestack.documents.azure.com:443/;";
-                //optionsBuilder.UseCosmos(connectionStringCosmos);
+                optionsBuilder.UseSqlServer(GetConnectionFromAzureSettings("Stack:Shared:SqlConnection"));
+                //optionsBuilder.UseCosmos(GetConnectionFromAzureSettings("Stack:Shared:CosmosConnection"));
             }
         }
 
