@@ -14,12 +14,8 @@ trigger:
 
 variables:
 - group: Development
-- name: azureSubscription
-  value: '8dbc1bf9-126e-4c82-ab32-bb86e39b6634'
 - name: functionAppName
   value: 'chronology-functions'
-- name: vmImageName
-  value: 'vs2017-win2016'
 - name: sourceDirectory
   value: '$(System.DefaultWorkingDirectory)/src/Chronology.Presentation.Functions'
 - name: testDirectory
@@ -37,7 +33,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: $(vmImageName)
+        name: Hosted Windows 2019 with VS2019
 
     steps:
     - task: PowerShell@2
@@ -90,48 +86,3 @@ stages:
 
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
-
-- stage: Deploy
-  displayName: Deploy stage
-  dependsOn: Build
-  condition: succeeded()
-
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy
-    environment: 'development'
-    pool:
-      vmImage: $(vmImageName)
-
-    strategy:
-      runOnce:
-        deploy:
-
-          steps:
-          - task: AzureFunctionApp@1
-            displayName: 'Azure functions app deploy'
-            inputs:
-              azureSubscription: '$(azureSubscription)'
-              appType: functionApp
-              appName: $(functionAppName)
-              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
-              appSettings: |
-                [
-                  {
-                    "name": "ASPNETCORE_ENVIRONMENT",
-                    "value": "$(ASPNETCORE_ENVIRONMENT)",
-                    "slotSetting": false
-                  },
-                  {
-                    "name": "AppSettingsConnection",
-                    "value": "$(AppSettingsConnection)", 
-                    "slotSetting": false
-                  }
-                ]
-          - task: oneluckidevWebSmokeTest@1
-            inputs:
-              url: 'https://chronology-functions.azurewebsites.net'
-              expectedReturnCode: '200'
-              retryAttemptCount: '3'
-              strictSSL: true
-              retryDelay: '1000'
