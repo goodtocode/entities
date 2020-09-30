@@ -25,7 +25,7 @@ namespace GoodToCode.Subjects.Specs
 
         public Fn_BusinessGetByKeySteps()
         {
-            _config = new ConfigurationFactory().CreateAzureSettings();
+            _config = new ConfigurationFactory().CreateFromAzureSettings();
         }
 
         [Given(@"I have a business key to get from the Azure Function")]

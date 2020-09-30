@@ -34,7 +34,7 @@ namespace GoodToCode.Chronology.Infrastructure
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var connectionStringSql = @"Server=tcp:goodtocodestack.database.windows.net,1433;Initial Catalog=StackData;Persist Security Info=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                var connectionStringSql = @"";
                 optionsBuilder.UseSqlServer(connectionStringSql);
                 //var connectionStringCosmos = "AccountEndpoint=https://goodtocodestack.documents.azure.com:443/;";
                 //optionsBuilder.UseCosmos(connectionStringCosmos);

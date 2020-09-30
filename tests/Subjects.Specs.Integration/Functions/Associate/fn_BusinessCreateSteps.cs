@@ -26,7 +26,7 @@ namespace GoodToCode.Subjects.Specs
 
         public Fn_BusinessCreateSteps()
         {
-            _config = new ConfigurationFactory().CreateAzureSettings();
+            _config = new ConfigurationFactory().CreateFromAzureSettings();
         }
 
         [Given(@"I have a new business for the Azure Function")]

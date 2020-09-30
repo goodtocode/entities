@@ -28,7 +28,7 @@ namespace GoodToCode.Subjects.Specs
 
         public Fn_BusinessUpdateSteps()
         {
-            _config = new ConfigurationFactory().CreateAzureSettings();
+            _config = new ConfigurationFactory().CreateFromAzureSettings();
         }
 
         [Given(@"I have an non empty business key for the Azure Function")]

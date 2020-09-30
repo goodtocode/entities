@@ -25,7 +25,7 @@ namespace GoodToCode.Subjects.Specs
 
         public Api_BusinessCreateSteps()
         {
-            _config = new ConfigurationFactory().CreateAzureSettings();
+            _config = new ConfigurationFactory().CreateFromAzureSettings();
         }
 
         [Given(@"I have a new business for the Web API")]
