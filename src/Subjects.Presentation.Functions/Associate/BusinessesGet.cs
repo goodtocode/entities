@@ -5,6 +5,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
@@ -18,7 +19,14 @@ namespace GoodToCode.Application.Functions.Functions
         static BusinessesGet()
         {
             var builder = new ConfigurationBuilder();
-            builder.AddAzureAppConfiguration(Environment.GetEnvironmentVariable("AppSettingsConnection"));
+            builder.AddAzureAppConfiguration(options =>
+                            options
+                                .Connect(Environment.GetEnvironmentVariable("AppSettingsConnection"))
+                                // Load configuration values with no label
+                                .Select(KeyFilter.Any, LabelFilter.Null)
+                                // Override with any configuration values specific to current hosting env
+                                .Select(KeyFilter.Any, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production")
+                        );
             Configuration = builder.Build();
         }
 

@@ -26,6 +26,9 @@ namespace GoodToCode.Subjects.Specs
 
         public Fn_BusinessCreateSteps()
         {
+#if DEBUG
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Local");
+#endif
             _config = new ConfigurationFactory().CreateFromAzureSettings();
         }
 

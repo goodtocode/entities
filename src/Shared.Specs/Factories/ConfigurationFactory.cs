@@ -61,7 +61,7 @@ namespace GoodToCode.Shared.Specs
                     // Load configuration values with no label
                     .Select(KeyFilter.Any, LabelFilter.Null)
                     // Override with any configuration values specific to current hosting env
-                    .Select(KeyFilter.Any, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"))
+                    .Select(KeyFilter.Any, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production")
             );
             return builder.Build();
         }
