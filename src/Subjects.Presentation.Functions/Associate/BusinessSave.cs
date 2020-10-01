@@ -1,3 +1,4 @@
+using GoodToCode.Shared.Extensions;
 using GoodToCode.Subjects.Infrastructure;
 using GoodToCode.Subjects.Models;
 using Microsoft.AspNetCore.Http;
@@ -6,10 +7,8 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -22,14 +21,7 @@ namespace GoodToCode.Subjects.Functions
         static BusinessSave()
         {
             var builder = new ConfigurationBuilder();
-            builder.AddAzureAppConfiguration(options =>
-                            options
-                                .Connect(Environment.GetEnvironmentVariable("AppSettingsConnection"))
-                                // Load configuration values with no label
-                                .Select(KeyFilter.Any, LabelFilter.Null)
-                                // Override with any configuration values specific to current hosting env
-                                .Select(KeyFilter.Any, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production")
-                        );
+            builder.AddAzureAppConfigurationDefault();
             Configuration = builder.Build();
         }
 

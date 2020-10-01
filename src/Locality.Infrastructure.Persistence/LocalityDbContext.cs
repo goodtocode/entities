@@ -1,8 +1,7 @@
 ﻿using GoodToCode.Locality.Models;
+using GoodToCode.Shared.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.AzureAppConfiguration;
-using System;
 
 namespace GoodToCode.Locality.Infrastructure
 {
@@ -30,12 +29,7 @@ namespace GoodToCode.Locality.Infrastructure
         public string GetConnectionFromAzureSettings(string configKey)
         {
             var builder = new ConfigurationBuilder();
-            builder.AddAzureAppConfiguration(options =>
-                options
-                    .Connect(Environment.GetEnvironmentVariable("AppSettingsConnection"))
-                    .Select(KeyFilter.Any, LabelFilter.Null)
-                    .Select(KeyFilter.Any, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production")
-            );
+            builder.AddAzureAppConfigurationDefault();
             var config = builder.Build();
 
             return config[configKey];

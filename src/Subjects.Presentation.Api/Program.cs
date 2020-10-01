@@ -20,13 +20,16 @@ namespace GoodToCode.Subjects.Application
                     webBuilder.ConfigureAppConfiguration(config =>
                     {
                         var settings = config.Build();
-                        var connection = settings.GetConnectionString("AppConfig") ?? Environment.GetEnvironmentVariable("AppSettingsConnection");
+                        var connection = settings.GetConnectionString("AppSettingsConnection") ?? Environment.GetEnvironmentVariable("AppSettingsConnection");
                         config.AddAzureAppConfiguration(options =>
                             options
                                 .Connect(connection)
-                                // Load configuration values with no label
+                                .ConfigureRefresh(refresh =>
+                                {
+                                    refresh.Register("Stack:Shared:RefreshSentinel", refreshAll: true)
+                                           .SetCacheExpiration(new TimeSpan(0, 60, 0));
+                                })
                                 .Select(KeyFilter.Any, LabelFilter.Null)
-                                // Override with any configuration values specific to current hosting env
                                 .Select(KeyFilter.Any, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production")
                         );
                     }).UseStartup<Startup>());
