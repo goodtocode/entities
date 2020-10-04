@@ -5,6 +5,37 @@ The goal of the GoodToCode Stack is to quick-start custom software applications 
 
 GoodToCode Stack is based on DDD, onion-architecture, vertical slice and CQRS in .NET Core and EF Core code-first.
 
+## Installation
+### Environment Variables
+. Create "AzureSettingConnection" (required)
+* Go to portal.azure.com
+* Create or find your Azure App Configuration service connection string
+    Powershell: $env:AzureSettingConnection="Endpoint=https://{Your-Endpoint}.azconfig.io;Id={Your-Key}"
+. Create "ASPNETCORE_ENVIRONMENT" (optional, defaults to "Production")
+* Local
+* Development
+* Production
+    Powershell: $env:ASPNETCORE_ENVIRONMENT="Development"
+
+### Azure App Configuration
+. Go to portal.azure.com
+. Create or find your Azure App Configuration service 
+. Add the following keys, with value from your Azure resources:
+* Stack:Chronology:ApiUrl - {Your-ApiService-Url} - text/plain
+* Stack:Chronology:FunctionsCode - {Your-FunctionApp-AppKey} - text/plain
+* Stack:Chronology:FunctionsUrl - {Your-FunctionApp-Url} - text/plain
+* Stack:Locality:ApiUrl - {Your-ApiService-Url} - text/plain
+* Stack:Locality:FunctionsCode - {Your-FunctionApp-AppKey} - text/plain
+* Stack:Locality:FunctionsUrl - {Your-FunctionApp-Url} - text/plain
+* Stack:Occurrences:ApiUrl - {Your-ApiService-Url} - text/plain
+* Stack:Occurrences:FunctionsCode - {Your-FunctionApp-AppKey} - text/plain
+* Stack:Occurrences:FunctionsUrl - {Your-FunctionApp-Url} - text/plain
+* Stack:Shared:Sentinel - 1 - text/plain
+* Stack:Shared:SqlConnection - {Your-AzureSql-ConnectionString} - text/plain
+* Stack:Subjects:ApiUrl - {Your-ApiService-Url} - text/plain
+* Stack:Subjects:FunctionsCode - {Your-FunctionApp-AppKey} - text/plain
+* Stack:Subjects:FunctionsUrl - {Your-FunctionApp-Url} - text/plain
+
 ## Namespaces
 ### GoodToCode.Chronology
 Includes all Domain Models for any chronological entity such as: Schedules (Schedule entity) and Hours of Operations (TimeRecurring entity)
