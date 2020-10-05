@@ -68,8 +68,7 @@ namespace GoodToCode.Subjects.Application
         }
 
         // POST: api/Businesses/
-        [HttpPost()]
-        [ProducesResponseType(typeof(Business), 200)]
+        [HttpPost()]        
         [ProducesResponseType(typeof(Business), 201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -88,12 +87,12 @@ namespace GoodToCode.Subjects.Application
 
             Uri.TryCreate($"{Request.Host}{Request.Path.ToString().AddLast("/").AddLast(cmdResponse.Result.BusinessKey.ToString())}", UriKind.RelativeOrAbsolute, out Uri getUrl);
 
-            return Created(getUrl, cmdResponse.Result);
+            return Created(getUrl ?? new Uri("http://localhost"), cmdResponse.Result);
         }
 
         // PUT: api/Businesses/376B76B4-1EA8-4B31-9238-41E59784B5DD
         [HttpPut("{key}")]
-        [ProducesResponseType(typeof(Business), 201)]
+        [ProducesResponseType(typeof(Business), 200)]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
