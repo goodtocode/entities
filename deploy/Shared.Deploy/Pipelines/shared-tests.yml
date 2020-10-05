@@ -66,33 +66,19 @@ stages:
           $(sourceDirectory)/**/*.csproj
         arguments: '--configuration $(BuildConfiguration)'
 
+    - task: DotNetCoreCLI@2
+      displayName: 'Unit Test'
+      inputs:
+        command: test
+        projects: |
+          $(sourceDirectory)/**/*.Specs.Integration.csproj
+
     - task: CmdLine@2
       inputs:
         script: |
           cd /
           cd $(sourceDirectory)
-          dotnet test
+          dotnet test --verbosity detailed
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
-
-- stage: Deploy
-  displayName: Deploy stage
-  dependsOn: Build
-  condition: succeeded()
-
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy
-    environment: 'development'
-    pool:
-        name: Hosted Windows 2019 with VS2019
-        demands: msbuild
-
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: CmdLine@2
-            inputs:
-              script: 'echo Publish report to Dev build report location. Releases will publish to production release folder.'
