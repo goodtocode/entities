@@ -7,20 +7,23 @@ GoodToCode Stack is based on DDD, onion-architecture, vertical slice and CQRS in
 
 ## Installation
 ### Environment Variables
-. Create "AzureSettingConnection" (required)
+1. Create "AzureSettingConnection" (required)
 * Go to portal.azure.com
 * Create or find your Azure App Configuration service connection string
+
     Powershell: $env:AzureSettingConnection="Endpoint=https://{Your-Endpoint}.azconfig.io;Id={Your-Key}"
-. Create "ASPNETCORE_ENVIRONMENT" (optional, defaults to "Production")
+    
+2. Create "ASPNETCORE_ENVIRONMENT" (optional, defaults to "Production")
 * Local
 * Development
 * Production
+
     Powershell: $env:ASPNETCORE_ENVIRONMENT="Development"
 
 ### Azure App Configuration
-. Go to portal.azure.com
-. Create or find your Azure App Configuration service 
-. Add the following keys, with value from your Azure resources:
+1. Go to portal.azure.com
+2. Create or find your Azure App Configuration service 
+3. Add the following keys, with value from your Azure resources:
 * Stack:Chronology:ApiUrl - {Your-ApiService-Url} - text/plain
 * Stack:Chronology:FunctionsCode - {Your-FunctionApp-AppKey} - text/plain
 * Stack:Chronology:FunctionsUrl - {Your-FunctionApp-Url} - text/plain
