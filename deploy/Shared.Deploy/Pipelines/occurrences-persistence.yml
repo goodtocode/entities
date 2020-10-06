@@ -7,15 +7,11 @@ trigger:
   paths:
     include:
     - src/Occurrences.Domain.Models/*
-    - src/Occurrences.Infrastructure.Persistence/*
+    - src/Occurrences.Infrastructure.Persistence/*    
     - deploy/Occurrences.Infrastructure.Persistence.Migrations/*
 
 variables:
 - group: Development
-- name: sourceDirectory
-  value: '$(System.DefaultWorkingDirectory)/deploy/Occurrences.Infrastructure.Persistence.Migrations'
-- name: artifactDirectory
-  value: '$(Build.ArtifactStagingDirectory)/../drop/deploy/Occurrences.Infrastructure.Persistence.Migrations'
 - name: buildConfiguration
   value: 'Release'  
 - name: MSBUILDSINGLELOADCONTEXT
@@ -55,7 +51,7 @@ stages:
       inputs:
         command: 'restore'
         projects: |
-          $(sourceDirectory)/*.csproj
+          $(System.DefaultWorkingDirectory)/**/*.csproj
         feedsToUse: config
         nugetConfigPath: .nuget/NuGet.config
 
@@ -64,16 +60,9 @@ stages:
       inputs:
         command: 'build'
         projects: |
-          $(sourceDirectory)/*.csproj
+          $(System.DefaultWorkingDirectory)/**/*.csproj
         arguments: '--configuration $(BuildConfiguration)'
 
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet test'
-      inputs:
-        command: test
-        projects: |
-          $(System.DefaultWorkingDirectory)/**/*.Specs.Unit.csproj
-          
     - task: CopyFiles@2
       displayName: 'Copy deploy'
       inputs:
