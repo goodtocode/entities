@@ -12,8 +12,6 @@ trigger:
 
 variables:
 - group: Development
-- name: sourceDirectory
-  value: '$(System.DefaultWorkingDirectory)/**'
 - name: buildConfiguration
   value: 'Release'  
 - name: MSBUILDSINGLELOADCONTEXT
@@ -36,7 +34,7 @@ stages:
       inputs:
         filePath: 'deploy/Shared.Deploy/Assembly/Set-Version.ps1'
         arguments: '-Path $(System.DefaultWorkingDirectory) -VersionToReplace 5.20.1 -Major 05'
-        workingDirectory: '$(sourceDirectory)'
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
 
     - task: DeleteFiles@1
       displayName: 'Delete unwanted projects'
@@ -53,7 +51,7 @@ stages:
       inputs:
         command: 'restore'
         projects: |
-          $(sourceDirectory)/*.csproj
+          $(System.DefaultWorkingDirectory)/**/*.csproj
         feedsToUse: config
         nugetConfigPath: .nuget/NuGet.config
 
@@ -62,7 +60,7 @@ stages:
       inputs:
         command: 'build'
         projects: |
-          $(sourceDirectory)/*.csproj
+          $(System.DefaultWorkingDirectory)/**/*.csproj
         arguments: '--configuration $(BuildConfiguration)'
 
     - task: CopyFiles@2
