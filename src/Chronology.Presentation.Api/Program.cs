@@ -13,7 +13,6 @@ namespace GoodToCode.Chronology.Application
             CreateHostBuilder(args).Build().Run();
         }
 
-        // dotnet user-secrets init; dotnet user-secrets set ConnectionStrings:AppConfig "<your_connection_string>"
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
