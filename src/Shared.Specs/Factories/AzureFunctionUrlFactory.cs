@@ -9,7 +9,7 @@ namespace GoodToCode.Subjects.Specs
     {
         private readonly IConfiguration _config;
         private string _urlBase;
-        private string _code;        
+        private string _code;
 
         public string UrlBase { get { _urlBase = _urlBase.IsNullOrWhiteSpace() ? _config[$"{AppConfigNamespace}:FunctionsUrl"] : _urlBase; return _urlBase; } private set { _urlBase = value; } }        
         public string Code { get { _code = _code.IsNullOrWhiteSpace() ? _config[$"{AppConfigNamespace}:FunctionsCode"] : _code; return _code; } private set { _code = value; } }
