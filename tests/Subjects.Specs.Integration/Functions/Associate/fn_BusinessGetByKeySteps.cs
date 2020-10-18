@@ -43,7 +43,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessIsQueriedByKeyViaAzureFunction()
         {
             var client = new HttpClientFactory().CreateJsonClient<Business>();
-            var response = await client.GetAsync(new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateGetByKeyUrl(SutKey));
+            var response = await client.GetAsync(new AzureFunctionUrlFactory(_config, "Stack:Subjects", "Business").CreateGetByKeyUrl(SutKey));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));

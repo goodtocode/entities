@@ -10,7 +10,7 @@ namespace GoodToCode.Subjects.Specs
         private readonly IConfiguration _config;
         private string _urlBase;
 
-        public string UrlBase { get { _urlBase = _urlBase.IsNullOrWhiteSpace() ? _config[$"Stack:{DomainNamespace}:ApiUrl"] : _urlBase; return _urlBase; } private set { _urlBase = value; } }
+        public string UrlBase { get { _urlBase = _urlBase.IsNullOrWhiteSpace() ? _config[$"Stack:{AppConfigNamespace}:ApiUrl"] : _urlBase; return _urlBase; } private set { _urlBase = value; } }
         public Guid RowKey { get; private set; } = Guid.Empty;
         public string GetAllUrl { get { return $"{UrlBase}/v1/{DomainModelPlural}"; } }
         public string GetByKeyUrl { get { return $"{UrlBase}/v1/{DomainModelPlural}/{RowKey}"; } }
@@ -19,7 +19,7 @@ namespace GoodToCode.Subjects.Specs
         public string SaveUrl { get { return $"{UrlBase}/v1/{DomainModelPlural}/{RowKey}"; } }
         public string DeleteUrl { get { return $"{UrlBase}/v1/{DomainModelPlural}/{RowKey}"; } }
 
-        public string DomainNamespace { get; private set; }
+        public string AppConfigNamespace { get; private set; }
         public string DomainModel { get; private set; }
         public string DomainModelPlural { get { return new EnglishPluralizationService().Pluralize(DomainModel); } }
 
@@ -27,7 +27,7 @@ namespace GoodToCode.Subjects.Specs
         {
             _config = config;
             DomainModel = domainModel;
-            DomainNamespace = domainNamespace;
+            AppConfigNamespace = domainNamespace;
         }
 
         public Uri CreateCreateUrl()

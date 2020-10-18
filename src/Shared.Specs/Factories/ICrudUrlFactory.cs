@@ -6,7 +6,7 @@ namespace GoodToCode.Subjects.Specs
     {
         string DomainModel { get; }
         string DomainModelPlural { get; }
-        string DomainNamespace { get; }
+        string AppConfigNamespace { get; }
         Guid RowKey { get; }
         string CreateUrl { get; }
         string DeleteUrl { get; }

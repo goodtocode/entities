@@ -18,7 +18,7 @@ namespace GoodToCode.Application.Functions.Functions
         static BusinessesGet()
         {
             var builder = new ConfigurationBuilder();
-            builder.AddAzureAppConfigurationDefault();
+            builder.AddAzureAppConfigurationDefault("Stack:Shared:Sentinel");
             Configuration = builder.Build();
         }
 

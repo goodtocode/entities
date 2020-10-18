@@ -38,7 +38,7 @@ namespace GoodToCode.Subjects.Infrastructure
         public string GetConnectionFromAzureSettings(string configKey)
         {
             var builder = new ConfigurationBuilder();
-            builder.AddAzureAppConfigurationDefault();
+            builder.AddAzureAppConfigurationDefault("Stack:Shared:Sentinel");
             var config = builder.Build();
 
             return config[configKey];

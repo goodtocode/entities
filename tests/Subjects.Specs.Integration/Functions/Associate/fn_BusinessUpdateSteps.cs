@@ -53,7 +53,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessIsPostedViaAzureFunction()
         {
             var client = new HttpClientFactory().CreateJsonClient<Business>();
-            var response = await client.PutAsync(new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateUpdateUrl(SutKey), new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
+            var response = await client.PutAsync(new AzureFunctionUrlFactory(_config, "Stack:Subjects", "Business").CreateUpdateUrl(SutKey), new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
@@ -66,7 +66,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task ThenTheBusinessIsUpdatedInPersistenceWhenQueriedFromAzureFunction()
         {
             var client = new HttpClientFactory().CreateJsonClient<Business>();
-            var response = await client.GetAsync(new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateGetByKeyUrl(SutKey));
+            var response = await client.GetAsync(new AzureFunctionUrlFactory(_config, "Stack:Subjects", "Business").CreateGetByKeyUrl(SutKey));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));

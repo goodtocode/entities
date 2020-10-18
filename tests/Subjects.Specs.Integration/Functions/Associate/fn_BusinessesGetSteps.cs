@@ -43,7 +43,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessesAreQueriedViaAzureFunction()
         {
             var client = new HttpClientFactory().CreateJsonClient<Business>();
-            var response = await client.GetAsync(new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateGetAllUrl());
+            var response = await client.GetAsync(new AzureFunctionUrlFactory(_config, "Stack:Subjects", "Business").CreateGetAllUrl());
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts = JsonConvert.DeserializeObject<List<Business>>(result).Take(5).ToList();

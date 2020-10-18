@@ -6,14 +6,14 @@ namespace GoodToCode.Shared.Extensions
 {
     public static class ConfigurationBuilderExtensions
     {
-        public static IConfiguration AddAzureAppConfigurationDefault(this ConfigurationBuilder item)
+        public static IConfiguration AddAzureAppConfigurationDefault(this ConfigurationBuilder item, string sentinelAppConfigKey)
         {            
             item.AddAzureAppConfiguration(options =>
                             options
                                 .Connect(Environment.GetEnvironmentVariable("AppSettingsConnection"))
                                 .ConfigureRefresh(refresh =>
                                 {
-                                    refresh.Register("Stack:Shared:Sentinel", refreshAll: true)
+                                    refresh.Register(sentinelAppConfigKey, refreshAll: true)
                                            .SetCacheExpiration(new TimeSpan(0, 60, 0));
                                 })
                                 .Select(KeyFilter.Any, LabelFilter.Null)

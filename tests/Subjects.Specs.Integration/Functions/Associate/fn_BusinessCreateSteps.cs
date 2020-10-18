@@ -42,7 +42,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessIsCreatedViaAzureFunction()
         {
             var client = new HttpClientFactory().CreateJsonClient<Business>();
-            var url = new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateCreateUrl();
+            var url = new AzureFunctionUrlFactory(_config, "Stack:Subjects", "Business").CreateCreateUrl();
             var response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
@@ -57,7 +57,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task ThenTheBusinessIsInsertedToPersistenceFromTheAzureFunction()
         {
             var client = new HttpClientFactory().CreateJsonClient<Business>();
-            var response = await client.GetAsync(new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateGetByKeyUrl(SutKey));
+            var response = await client.GetAsync(new AzureFunctionUrlFactory(_config, "Stack:Subjects", "Business").CreateGetByKeyUrl(SutKey));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
@@ -73,7 +73,7 @@ namespace GoodToCode.Subjects.Specs
             
             foreach (var item in RecycleBin)
             {
-                await client.DeleteAsync(new AzureFunctionUrlFactory(_config, "Subjects", "Business").CreateDeleteUrl(item.RowKey));
+                await client.DeleteAsync(new AzureFunctionUrlFactory(_config, "Stack:Subjects", "Business").CreateDeleteUrl(item.RowKey));
             }
         }
     }

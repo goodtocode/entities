@@ -21,7 +21,7 @@ namespace GoodToCode.Subjects.Functions
         static BusinessSave()
         {
             var builder = new ConfigurationBuilder();
-            builder.AddAzureAppConfigurationDefault();
+            builder.AddAzureAppConfigurationDefault("Stack:Shared:Sentinel");
             Configuration = builder.Build();
         }
 
