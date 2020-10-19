@@ -8,6 +8,7 @@
     <UserSecretsId>62c6cd2d-a344-4be7-ad09-8584ef23d0c6</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="GoodToCode.Shared.Extensions.Mvc" Version="5.10.293.250" />
     <PackageReference Include="MediatR" Version="8.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
@@ -23,8 +24,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
-    <ProjectReference Include="..\Shared.Extensions.Mvc\Shared.Extensions.Mvc.csproj" />
-    <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
     <ProjectReference Include="..\Subjects.Application.Services\Subjects.Application.Services.csproj" />
     <ProjectReference Include="..\Subjects.Infrastructure.Persistence\Subjects.Infrastructure.Persistence.csproj" />
   </ItemGroup>

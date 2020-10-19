@@ -9,6 +9,7 @@
     <UserSecretsId>8d45e4a2-24ea-4f68-97b5-4abd7a41983e</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="GoodToCode.Shared.Extensions.Mvc" Version="5.10.293.250" />
     <PackageReference Include="MediatR" Version="8.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
@@ -22,7 +23,6 @@
     <ProjectReference Include="..\Occurrences.Domain.Models\Occurrences.Domain.Models.csproj" />
     <ProjectReference Include="..\Occurrences.Infrastructure.Persistence\Occurrences.Infrastructure.Persistence.csproj" />
     <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
-    <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="Properties\launchSettings.json">

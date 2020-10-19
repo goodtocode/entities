@@ -42,7 +42,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
-    <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
     <ProjectReference Include="..\Subjects.Domain.Models\Subjects.Domain.Models.csproj" />
   </ItemGroup>
 

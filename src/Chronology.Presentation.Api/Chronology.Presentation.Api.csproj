@@ -9,6 +9,7 @@
     <UserSecretsId>5e16341c-94f3-46f2-8f2b-ac37cff93a43</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="GoodToCode.Shared.Extensions.Mvc" Version="5.10.293.250" />
     <PackageReference Include="MediatR" Version="8.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />

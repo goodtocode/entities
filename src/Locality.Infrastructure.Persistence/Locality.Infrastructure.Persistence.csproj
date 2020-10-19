@@ -45,7 +45,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Locality.Domain.Models\Locality.Domain.Models.csproj" />
     <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
-    <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
     <ProjectReference Include="..\Locality.Domain.Models\Locality.Domain.Models.csproj" />
   </ItemGroup>
 

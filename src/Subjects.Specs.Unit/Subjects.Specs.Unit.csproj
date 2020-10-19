@@ -42,6 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="GoodToCode.Shared.Specs" Version="5.10.293.250" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.8" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
@@ -105,8 +106,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
-    <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
-    <ProjectReference Include="..\Shared.Specs\Shared.Specs.csproj" />
     <ProjectReference Include="..\Subjects.Application.Services\Subjects.Application.Services.csproj" />
     <ProjectReference Include="..\Subjects.Domain.Models\Subjects.Domain.Models.csproj" />
     <ProjectReference Include="..\Subjects.Infrastructure.Persistence\Subjects.Infrastructure.Persistence.csproj" />

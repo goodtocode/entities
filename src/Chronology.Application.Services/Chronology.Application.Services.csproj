@@ -43,7 +43,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Chronology.Domain.Models\Chronology.Domain.Models.csproj" />
     <ProjectReference Include="..\Chronology.Infrastructure.Persistence\Chronology.Infrastructure.Persistence.csproj" />
-    <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

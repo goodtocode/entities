@@ -44,7 +44,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Occurrences.Domain.Models\Occurrences.Domain.Models.csproj" />
     <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
-    <ProjectReference Include="..\Shared.Extensions\Shared.Extensions.csproj" />
     <ProjectReference Include="..\Occurrences.Domain.Models\Occurrences.Domain.Models.csproj" />
   </ItemGroup>
 
