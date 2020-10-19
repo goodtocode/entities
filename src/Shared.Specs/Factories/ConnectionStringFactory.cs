@@ -21,12 +21,12 @@ namespace GoodToCode.Shared.Specs
             Configuration = config;
         }
 
-        public string CreateFromAzureSettings(string key = "Stack:Shared:SqlConnection")
+        public string CreateFromAzureSettings(string key)
         {   
             return Configuration[key];
         }
 
-        public string CreateFromConnectionString(string connectionName = "DefaultConnection")
+        public string CreateFromConnectionString(string connectionName)
         {
             return Configuration.GetConnectionString(connectionName);
         }

@@ -28,7 +28,7 @@ namespace GoodToCode.Subjects.Specs
         public BusinessGetByKeySteps()
         {
             _config = new ConfigurationFactory().CreateFromAzureSettings();
-            _connectionString = new ConnectionStringFactory(_config).CreateFromAzureSettings();
+            _connectionString = new ConnectionStringFactory(_config).CreateFromAzureSettings("Stack:Shared:SqlConnection");
             _dbContext = new DbContextFactory(_connectionString).Create();
         }
 

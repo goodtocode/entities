@@ -30,7 +30,7 @@ namespace GoodToCode.Chronology.Specs
         public ScheduleQuerySteps()
         {
             _config = new ConfigurationFactory().CreateFromAzureSettings();
-            _connectionString = new ConnectionStringFactory(_config).CreateFromAzureSettings();
+            _connectionString = new ConnectionStringFactory(_config).CreateFromAzureSettings("Stack:Shared:SqlConnection");
             _dbContext = new DbContextFactory(_connectionString).Create();
         }
 

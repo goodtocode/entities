@@ -31,7 +31,7 @@ namespace GoodToCode.Subjects.Specs
         public BusinessAggregateSteps()
         {
             _config = new ConfigurationFactory().CreateFromAzureSettings();
-            _connectionString = new ConnectionStringFactory(_config).CreateFromAzureSettings();
+            _connectionString = new ConnectionStringFactory(_config).CreateFromAzureSettings("Stack:Shared:SqlConnection");
             _dbContext = new DbContextFactory(_connectionString).Create();
             Aggregate = new AssociateAggregate(_dbContext);
         }

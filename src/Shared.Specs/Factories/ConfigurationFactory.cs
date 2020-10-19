@@ -52,7 +52,7 @@ namespace GoodToCode.Shared.Specs
             ConfigFiles = configFiles;
         }
 
-        public IConfiguration CreateFromAzureSettings()
+        public IConfiguration CreateFromAzureSettings(string sentinelAppSetting = "Stack:Shared:Sentinel")
         {
             var builder = new ConfigurationBuilder();
             builder.AddAzureAppConfiguration(options =>
@@ -60,7 +60,7 @@ namespace GoodToCode.Shared.Specs
                         .Connect(JsonPathOrAzureConnection ?? Environment.GetEnvironmentVariable("AppSettingsConnection"))
                         .ConfigureRefresh(refresh =>
                         {
-                            refresh.Register("Stack:Shared:Sentinel", refreshAll: true)
+                            refresh.Register(sentinelAppSetting, refreshAll: true)
                                     .SetCacheExpiration(new TimeSpan(0, 60, 0));
                         })
                         .Select(KeyFilter.Any, LabelFilter.Null)
