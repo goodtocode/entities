@@ -49,7 +49,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GoodToCode.Shared.Specs" Version="5.10.292.239" />
     <PackageReference Include="GoodToCode.Subjects.Domain.Models" Version="5.10.292.239" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.9" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />

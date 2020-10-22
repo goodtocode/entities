@@ -1,19 +1,20 @@
-﻿using GoodToCode.Shared.Specs;
+﻿using GoodToCode.Shared.Extensions;
 using GoodToCode.Subjects.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace GoodToCode.Subjects.Specs
 {
     [Binding]
-    public class Fn_BusinessesGetSteps : ICrudSteps<Business>
+    public class Fn_BusinessesGetSteps
     {
         private readonly IConfiguration _config;
         private readonly Fn_BusinessCreateSteps createSteps = new Fn_BusinessCreateSteps();
@@ -25,7 +26,19 @@ namespace GoodToCode.Subjects.Specs
 
         public Fn_BusinessesGetSteps()
         {
-            _config = new ConfigurationFactory().CreateFromAzureSettings();
+            var builder = new ConfigurationBuilder();
+            builder.AddAzureAppConfiguration(options =>
+                    options
+                        .Connect(Environment.GetEnvironmentVariable("AppSettingsConnection"))
+                        .ConfigureRefresh(refresh =>
+                        {
+                            refresh.Register("Stack:Shared:Sentinel", refreshAll: true)
+                                    .SetCacheExpiration(new TimeSpan(0, 60, 0));
+                        })
+                        .Select(KeyFilter.Any, LabelFilter.Null)
+                        .Select(KeyFilter.Any, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production")
+                    );
+            _config = builder.Build();
         }
 
         [Given(@"I request the list of businesses from the Azure Function")]
@@ -42,8 +55,8 @@ namespace GoodToCode.Subjects.Specs
         [When(@"Businesses are queried via Azure Function")]
         public async Task WhenBusinessesAreQueriedViaAzureFunction()
         {
-            var client = new HttpClientFactory().CreateJsonClient<Business>();
-            var response = await client.GetAsync(new AzureFunctionUrlFactory(_config, "Stack:Subjects", "Business").CreateGetAllUrl());
+            var client = new HttpClientJson<Business>();
+            var response = await client.GetAsync(new Uri($"{_config["Stack:Subjects:FunctionsUrl"]}/api/BusinessesGet?code={_config["Stack:Subjects:FunctionsCode"]}"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts = JsonConvert.DeserializeObject<List<Business>>(result).Take(5).ToList();

@@ -1,11 +1,11 @@
-﻿using GoodToCode.Shared.Specs;
+﻿using GoodToCode.Shared.Extensions;
 using GoodToCode.Subjects.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -15,7 +15,7 @@ using TechTalk.SpecFlow;
 namespace GoodToCode.Subjects.Specs
 {
     [Binding]
-    public class Fn_BusinessCreateSteps : ICrudSteps<Business>
+    public class Fn_BusinessCreateSteps
     {
         private readonly IConfiguration _config;
 
@@ -26,10 +26,19 @@ namespace GoodToCode.Subjects.Specs
 
         public Fn_BusinessCreateSteps()
         {
-//#if DEBUG
-//            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Local");
-//#endif
-            _config = new ConfigurationFactory().CreateFromAzureSettings();
+            var builder = new ConfigurationBuilder();
+            builder.AddAzureAppConfiguration(options =>
+                    options
+                        .Connect(Environment.GetEnvironmentVariable("AppSettingsConnection"))
+                        .ConfigureRefresh(refresh =>
+                        {
+                            refresh.Register("Stack:Shared:Sentinel", refreshAll: true)
+                                    .SetCacheExpiration(new TimeSpan(0, 60, 0));
+                        })
+                        .Select(KeyFilter.Any, LabelFilter.Null)
+                        .Select(KeyFilter.Any, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production")
+                    );
+            _config = builder.Build();
         }
 
         [Given(@"I have a new business for the Azure Function")]
@@ -41,8 +50,8 @@ namespace GoodToCode.Subjects.Specs
         [When(@"Business is created via Azure Function")]
         public async Task WhenBusinessIsCreatedViaAzureFunction()
         {
-            var client = new HttpClientFactory().CreateJsonClient<Business>();
-            var url = new AzureFunctionUrlFactory(_config, "Stack:Subjects", "Business").CreateCreateUrl();
+            var client = new HttpClientJson<Business>();
+            var url = new Uri($"{_config["Stack:Subjects:FunctionsUrl"]}/api/BusinessCreate?code={_config["Stack:Subjects:FunctionsCode"]}");
             var response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
@@ -56,8 +65,8 @@ namespace GoodToCode.Subjects.Specs
         [Then(@"the business is inserted to persistence from the Azure Function")]
         public async Task ThenTheBusinessIsInsertedToPersistenceFromTheAzureFunction()
         {
-            var client = new HttpClientFactory().CreateJsonClient<Business>();
-            var response = await client.GetAsync(new AzureFunctionUrlFactory(_config, "Stack:Subjects", "Business").CreateGetByKeyUrl(SutKey));
+            var client = new HttpClientJson<Business>();
+            var response = await client.GetAsync(new Uri($"{_config["Stack:Subjects:FunctionsUrl"]}/api/BusinessGet?code={_config["Stack:Subjects:FunctionsCode"]}&key={SutKey}"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
@@ -69,11 +78,11 @@ namespace GoodToCode.Subjects.Specs
         [TestCleanup]
         public async Task Cleanup()
         {
-            var client = new HttpClientFactory().CreateJsonClient<Business>();
+            var client = new HttpClientJson<Business>();
             
             foreach (var item in RecycleBin)
             {
-                await client.DeleteAsync(new AzureFunctionUrlFactory(_config, "Stack:Subjects", "Business").CreateDeleteUrl(item.RowKey));
+                await client.DeleteAsync(new Uri($"{_config["Stack:Subjects:FunctionsUrl"]}/api/BusinessDelete?code={_config["Stack:Subjects:FunctionsCode"]}&key={SutKey}"));
             }
         }
     }

@@ -5,34 +5,13 @@
     <AssemblyName>GoodToCode.Shared.Abstractions</AssemblyName>
     <RootNamespace>GoodToCode.Shared</RootNamespace>
     <Version>5.20.1</Version>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>    
-    <Company>GoodToCode</Company>
-    <Product>GoodToCode.Shared.Abstractions</Product>
-    <Authors>Robert J. Good</Authors>
-    <PackageTags>.NET C# EF Core DDD Web API Azure Functions</PackageTags>
-    <Description>GoodToCode.Shared.Abstractions</Description>
-    <Copyright>Copyright (c) GoodToCode. All rights reserved.</Copyright>
-    <PackageProjectUrl>https://github.com/goodtocode/stack</PackageProjectUrl>
-    <PackageIcon>storeicon.png</PackageIcon>
-    <RepositoryUrl>https://github.com/goodtocode/stack</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <PackageReleaseNotes>https://github.com/goodtocode/Stack/projects/1</PackageReleaseNotes>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="GoodToCode.Shared.Extensions" Version="5.10.293.250" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
     <PackageReference Include="NetTopologySuite" Version="2.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="storeicon.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
   </ItemGroup>
 
 </Project>
