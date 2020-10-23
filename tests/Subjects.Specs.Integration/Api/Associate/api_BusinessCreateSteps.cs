@@ -50,7 +50,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessIsCreatedViaWebAPI()
         {
             var client = new HttpClientJson<Business>();
-            var url = new Uri($"{_config["Stack:Subjects:ApiUrl"]}/v1/Users");
+            var url = new Uri($"{_config["Stack:Subjects:ApiUrl"]}/v1/Businesses");
             var response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();            
@@ -65,7 +65,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task ThenTheBusinessIsInsertedToPersistenceFromTheWebAPI()
         {
             var client = new HttpClientJson<Business>();
-            var response = await client.GetAsync(new Uri($"{_config["Stack:Subjects:ApiUrl"]}/v1/Users/{SutKey}"));
+            var response = await client.GetAsync(new Uri($"{_config["Stack:Subjects:ApiUrl"]}/v1/Businesses/{SutKey}"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
@@ -81,7 +81,7 @@ namespace GoodToCode.Subjects.Specs
             
             foreach (var item in RecycleBin)
             {
-                await client.DeleteAsync(new Uri($"{_config["Stack:Subjects:ApiUrl"]}/v1/Users/{item.RowKey}"));
+                await client.DeleteAsync(new Uri($"{_config["Stack:Subjects:ApiUrl"]}/v1/Businesses/{item.RowKey}"));
             }
         }
     }

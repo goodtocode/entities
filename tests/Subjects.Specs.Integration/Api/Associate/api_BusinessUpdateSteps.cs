@@ -67,7 +67,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessIsPostedViaWebAPI()
         {
             var client = new HttpClientJson<Business>();
-            var url = new Uri($"{_config["Stack:Subjects:ApiUrl"]}/v1/Users/{SutKey}");
+            var url = new Uri($"{_config["Stack:Subjects:ApiUrl"]}/v1/Businesses/{SutKey}");
             var response = await client.PutAsync(url, new StringContent(JsonConvert.SerializeObject(Sut), Encoding.UTF8, "application/json"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
@@ -81,7 +81,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task ThenTheBusinessIsUpdatedInPersistenceWhenQueriedFromWebAPI()
         {
             var client = new HttpClientJson<Business>();
-            var response = await client.GetAsync(new Uri($"{_config["Stack:Subjects:ApiUrl"]}/v1/Users/{SutKey}"));
+            var response = await client.GetAsync(new Uri($"{_config["Stack:Subjects:ApiUrl"]}/v1/Businesses/{SutKey}"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));

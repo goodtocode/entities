@@ -56,7 +56,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessesAreQueriedViaWebAPI()
         {
             var client = new HttpClientJson<Business>();
-            var response = await client.GetAsync(new Uri($"{_config["Stack:Subjects:ApiUrl"]}/v1/Users"));
+            var response = await client.GetAsync(new Uri($"{_config["Stack:Subjects:ApiUrl"]}/v1/Businesses"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts = JsonConvert.DeserializeObject<List<Business>>(result).Take(5).ToList();

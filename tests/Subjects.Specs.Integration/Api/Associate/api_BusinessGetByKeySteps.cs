@@ -55,7 +55,7 @@ namespace GoodToCode.Subjects.Specs
         public async Task WhenBusinessIsQueriedByKeyViaWebAPI()
         {
             var client = new HttpClientJson<Business>();
-            var response = await client.GetAsync(new Uri($"{_config["Stack:Subjects:ApiUrl"]}/v1/Users/{SutKey}"));
+            var response = await client.GetAsync(new Uri($"{_config["Stack:Subjects:ApiUrl"]}/v1/Businesses/{SutKey}"));
             Assert.IsTrue(response.IsSuccessStatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Suts.Add(JsonConvert.DeserializeObject<Business>(result));
