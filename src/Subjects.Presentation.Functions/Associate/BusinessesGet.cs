@@ -7,6 +7,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Application.Functions.Functions
@@ -18,7 +19,7 @@ namespace GoodToCode.Application.Functions.Functions
         static BusinessesGet()
         {
             var builder = new ConfigurationBuilder();
-            builder.AddAzureAppConfigurationDefault("Stack:Shared:Sentinel");
+            builder.AddAzureAppConfigurationWithSentinel(Environment.GetEnvironmentVariable("AppSettingsConnection"), "Stack:Shared:Sentinel");
             Configuration = builder.Build();
         }
 

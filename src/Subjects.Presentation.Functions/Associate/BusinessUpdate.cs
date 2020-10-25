@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@ namespace GoodToCode.Subjects.Functions
         static BusinessUpdate()
         {
             var builder = new ConfigurationBuilder();
-            builder.AddAzureAppConfigurationDefault("Stack:Shared:Sentinel");
+            builder.AddAzureAppConfigurationWithSentinel(Environment.GetEnvironmentVariable("AppSettingsConnection"), "Stack:Shared:Sentinel");
             Configuration = builder.Build();
         }
 

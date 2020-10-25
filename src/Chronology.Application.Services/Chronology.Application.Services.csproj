@@ -37,7 +37,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="9.2.2" />
-    <PackageReference Include="MediatR" Version="8.1.0" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>

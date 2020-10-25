@@ -2,6 +2,7 @@
 using GoodToCode.Shared.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace GoodToCode.Chronology.Infrastructure
 {
@@ -35,7 +36,8 @@ namespace GoodToCode.Chronology.Infrastructure
         public string GetConnectionFromAzureSettings(string configKey)
         {
             var builder = new ConfigurationBuilder();
-            builder.AddAzureAppConfigurationDefault("Stack:Shared:Sentinel");
+            builder.AddAzureAppConfigurationWithSentinel(Environment.GetEnvironmentVariable("AppSettingsConnection"), "Stack:Shared:Sentinel");
+            builder.AddAzureAppConfigurationWithSentinel(Environment.GetEnvironmentVariable("AppSettingsConnection"), "Stack:Shared:Sentinel");
             var config = builder.Build();
 
             return config[configKey];

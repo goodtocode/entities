@@ -20,7 +20,7 @@ namespace GoodToCode.Subjects.Functions
         static BusinessGet()
         {
             var builder = new ConfigurationBuilder();
-            builder.AddAzureAppConfigurationDefault("Stack:Shared:Sentinel");
+            builder.AddAzureAppConfigurationWithSentinel(Environment.GetEnvironmentVariable("AppSettingsConnection"), "Stack:Shared:Sentinel");
             Configuration = builder.Build();
         }
 
