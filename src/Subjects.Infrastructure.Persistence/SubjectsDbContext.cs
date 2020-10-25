@@ -36,22 +36,8 @@ namespace GoodToCode.Subjects.Infrastructure
         public virtual DbSet<VentureOption> VentureOption { get; set; }
         public virtual DbSet<VentureResource> VentureResource { get; set; }
 
-        public string GetConnectionFromAzureSettings(string configKey)
-        {
-            var builder = new ConfigurationBuilder();
-            builder.AddAzureAppConfigurationWithSentinel(Environment.GetEnvironmentVariable("AppSettingsConnection"), "Stack:Shared:Sentinel");
-            var config = builder.Build();
-
-            return config[configKey];
-        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(GetConnectionFromAzureSettings("Stack:Shared:SqlConnection"));
-                //optionsBuilder.UseCosmos(GetConnectionFromAzureSettings("Stack:Shared:CosmosConnection"));
-            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

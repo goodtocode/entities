@@ -640,3 +640,11 @@ END;
 
 GO
 
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20201025030800_20201024-200733')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20201025030800_20201024-200733', N'3.1.9');
+END;
+
+GO
+
