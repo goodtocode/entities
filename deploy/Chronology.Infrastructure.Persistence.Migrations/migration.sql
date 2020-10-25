@@ -577,15 +577,15 @@ GO
 IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200920045611_InitialCreate')
 BEGIN
     INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20200920045611_InitialCreate', N'3.1.8');
+    VALUES (N'20200920045611_InitialCreate', N'3.1.9');
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200930021243_20200929-191216')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20201025024530_20201024-194504')
 BEGIN
     INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20200930021243_20200929-191216', N'3.1.8');
+    VALUES (N'20201025024530_20201024-194504', N'3.1.9');
 END;
 
 GO

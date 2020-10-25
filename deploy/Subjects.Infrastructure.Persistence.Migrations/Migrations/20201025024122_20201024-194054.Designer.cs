@@ -4,14 +4,16 @@ using GoodToCode.Subjects.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GoodToCode.Subjects.Infrastructure.Persistence.Migrations.Migrations
 {
     [DbContext(typeof(SubjectsDbContextDeploy))]
-    partial class SubjectsDbContextDeployModelSnapshot : ModelSnapshot
+    [Migration("20201025024122_20201024-194054")]
+    partial class _20201024194054
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

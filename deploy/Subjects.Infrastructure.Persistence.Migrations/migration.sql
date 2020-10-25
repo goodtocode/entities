@@ -606,7 +606,7 @@ GO
 IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200920002123_20200919-172100')
 BEGIN
     INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20200920002123_20200919-172100', N'3.1.8');
+    VALUES (N'20200920002123_20200919-172100', N'3.1.9');
 END;
 
 GO
@@ -614,7 +614,28 @@ GO
 IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200920050134_20200919-220111')
 BEGIN
     INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20200920050134_20200919-220111', N'3.1.8');
+    VALUES (N'20200920050134_20200919-220111', N'3.1.9');
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20201025024122_20201024-194054')
+BEGIN
+    DECLARE @var0 sysname;
+    SELECT @var0 = [d].[name]
+    FROM [sys].[default_constraints] [d]
+    INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+    WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Subjects].[Business]') AND [c].[name] = N'BusinessName');
+    IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Subjects].[Business] DROP CONSTRAINT [' + @var0 + '];');
+    ALTER TABLE [Subjects].[Business] ALTER COLUMN [BusinessName] nvarchar(200) NOT NULL;
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20201025024122_20201024-194054')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20201025024122_20201024-194054', N'3.1.9');
 END;
 
 GO
