@@ -43,7 +43,7 @@ namespace GoodToCode.Chronology.Models
 
             return _recordsAffected;
         }
-        public async Task<Schedule> ScheduleDeleteAsync(ISchedule schedule)
+        public async Task<int> ScheduleDeleteAsync(ISchedule schedule)
         {
             // Record in local storage
 
@@ -62,7 +62,7 @@ namespace GoodToCode.Chronology.Models
             _recordsAffected = await _dbContext.SaveChangesAsync();
             schedule.RaiseDomainEvent(eventRaise);
 
-            return (Schedule)schedule;
+            return _recordsAffected;
         }
     }
 }

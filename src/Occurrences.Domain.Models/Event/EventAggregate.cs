@@ -42,7 +42,7 @@ namespace GoodToCode.Occurrences.Models
 
             return _recordsAffected;
         }
-        public async Task<Event> EventDeleteAsync(IEvent eventItem)
+        public async Task<int> EventDeleteAsync(IEvent eventItem)
         {
             // Record in local storage
 
@@ -61,7 +61,7 @@ namespace GoodToCode.Occurrences.Models
             _recordsAffected = await _dbContext.SaveChangesAsync();
             eventItem.RaiseDomainEvent(eventRaise);
 
-            return (Event)eventItem;
+            return _recordsAffected;
         }
     }
 }

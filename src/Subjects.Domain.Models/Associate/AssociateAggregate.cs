@@ -62,7 +62,7 @@ namespace GoodToCode.Subjects.Models
 
             return _recordsAffected;
         }
-        public async Task<Business> BusinessDeleteAsync(Guid key)
+        public async Task<int> BusinessDeleteAsync(Guid key)
         {
             // Record in local storage
             IDomainEvent<IBusiness> eventRaise;
@@ -77,7 +77,7 @@ namespace GoodToCode.Subjects.Models
                 business.RaiseDomainEvent(eventRaise);
             }
 
-            return (Business)business;
+            return _recordsAffected;
         }
 
         // Person

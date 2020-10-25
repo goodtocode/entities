@@ -42,7 +42,7 @@ namespace GoodToCode.Locality.Models
 
             return _recordsAffected;
         }
-        public async Task<Location> LocationDeleteAsync(ILocation location)
+        public async Task<int> LocationDeleteAsync(ILocation location)
         {
             // Record in local storage
 
@@ -61,7 +61,7 @@ namespace GoodToCode.Locality.Models
             _recordsAffected = await _dbContext.SaveChangesAsync();
             location.RaiseDomainEvent(eventRaise);
 
-            return (Location)location;
+            return _recordsAffected;
         }
     }
 }
