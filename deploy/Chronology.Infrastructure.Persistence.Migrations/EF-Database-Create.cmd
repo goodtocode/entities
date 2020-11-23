@@ -11,7 +11,11 @@ Echo   1. IP access to DB.
 Echo   2. DbContext.cs parameterless constructor 
 Echo   3. .NET Core only, csproj must be TargetFramework-netcoreapp3.1
 
-cd %~dp0
+set workingDir=%~dp0
+set workingDrive=%workingDir:~0,2%
+%workingDrive%
+cd %workingDir%
+cd ..\
 
 dotnet ef database drop --force
 REM Create new Azure DB
