@@ -1,6 +1,4 @@
-﻿//https://www.syncfusion.com/blogs/post/build-crud-application-with-asp-net-core-entity-framework-visual-studio-2019.aspx
-
-using GoodToCode.Shared.Extensions;
+﻿using GoodToCode.Shared.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;

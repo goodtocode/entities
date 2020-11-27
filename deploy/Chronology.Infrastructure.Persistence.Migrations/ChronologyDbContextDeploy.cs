@@ -1,5 +1,4 @@
-﻿using GoodToCode.Chronology.Models;
-using GoodToCode.Shared.Extensions;
+﻿using GoodToCode.Shared.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
