@@ -4,14 +4,16 @@ using GoodToCode.Chronology.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GoodToCode.Chronology.Infrastructure.Persistence.Migrations.Migrations
 {
     [DbContext(typeof(ChronologyDbContextDeploy))]
-    partial class ChronologyDbContextDeployModelSnapshot : ModelSnapshot
+    [Migration("20201127215519_20201127-135512")]
+    partial class _20201127135512
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
