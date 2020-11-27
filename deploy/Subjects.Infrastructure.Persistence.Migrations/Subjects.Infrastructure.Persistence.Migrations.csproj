@@ -16,9 +16,4 @@
     <ProjectReference Include="..\..\src\Subjects.Domain.Models\Subjects.Domain.Models.csproj" />
     <ProjectReference Include="..\..\src\Subjects.Infrastructure.Persistence\Subjects.Infrastructure.Persistence.csproj" />
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="EF-Migration-SQL.cmd" />
-  </Target>
-
 </Project>
