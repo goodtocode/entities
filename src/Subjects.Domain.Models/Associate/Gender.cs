@@ -1,10 +1,10 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
-    public class Gender : DomainModel<IGender>, IGender
+    public class Gender : DomainEntity<IGender>, IGender
     {
         public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return GenderKey; } set { GenderKey = value; } }

@@ -1,5 +1,5 @@
-﻿using GoodToCode.Extensions;
-using GoodToCode.Extensions.Mvc;
+﻿using GoodToCode.AspNet.Mvc;
+using GoodToCode.Shared.System;
 using GoodToCode.Subjects.Infrastructure;
 using GoodToCode.Subjects.Models;
 using MediatR;

@@ -1,10 +1,10 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 using System.Collections.Generic;
 
 namespace GoodToCode.Chronology.Models
 {
-    public interface ITimeType : IDomainModel<ITimeType>
+    public interface ITimeType : IDomainEntity<ITimeType>
     {
         
         

@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface ISetting : IDomainModel<ISetting>
+    public interface ISetting : IDomainEntity<ISetting>
     {
         Guid SettingKey { get; set; }
         string SettingName { get; set; }

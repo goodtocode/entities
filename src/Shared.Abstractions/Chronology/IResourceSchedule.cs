@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public interface IResourceSchedule : IDomainModel<IResourceSchedule>
+    public interface IResourceSchedule : IDomainEntity<IResourceSchedule>
     {
         
         

@@ -1,10 +1,10 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Chronology.Models
 {
-    public class AssociateSchedule : DomainModel<IAssociateSchedule>, IAssociateSchedule
+    public class AssociateSchedule : DomainEntity<IAssociateSchedule>, IAssociateSchedule
     {
 
         public override Guid RowKey { get { return ScheduleKey; } set { ScheduleKey = value; } }

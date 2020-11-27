@@ -1,10 +1,10 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
-    public class VentureDetail : DomainModel<IVentureDetail>, IVentureDetail
+    public class VentureDetail : DomainEntity<IVentureDetail>, IVentureDetail
     {
         public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return VentureDetailKey; } set { VentureDetailKey = value; } }

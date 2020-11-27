@@ -1,10 +1,10 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Chronology.Models
 {
-    public class VentureTimeRecurring : DomainModel<IVentureTimeRecurring>, IVentureTimeRecurring
+    public class VentureTimeRecurring : DomainEntity<IVentureTimeRecurring>, IVentureTimeRecurring
     {
         public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return VentureTimeRecurringKey; } set { VentureTimeRecurringKey = value; } }

@@ -1,11 +1,11 @@
 ﻿
-using GoodToCode.Shared.Models;
+using GoodToCode.Shared.Domain;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
-    public class ResourceType : DomainModel<IResourceType>, IResourceType
+    public class ResourceType : DomainEntity<IResourceType>, IResourceType
     {
         public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return ResourceTypeKey; } set { ResourceTypeKey = value; } }

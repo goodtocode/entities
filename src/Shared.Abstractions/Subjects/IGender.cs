@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface IGender : IDomainModel<IGender>
+    public interface IGender : IDomainEntity<IGender>
     {
         string GenderCode { get; set; }
         Guid GenderKey { get; set; }

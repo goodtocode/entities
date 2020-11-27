@@ -10,11 +10,9 @@
   
   <ItemGroup>
     <PackageReference Include="DoctorCode.Pluralization" Version="1.0.0" />
-    <PackageReference Include="GoodToCode.Shared.Extensions" Version="5.10.299.53" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+    <PackageReference Include="GoodToCode.Shared.Ddd" Version="5.11.332.205" />
+    <PackageReference Include="GoodToCode.Shared.Net" Version="5.11.332.205" />
     <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="4.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.9" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />

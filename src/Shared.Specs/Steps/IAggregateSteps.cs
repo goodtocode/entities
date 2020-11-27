@@ -1,6 +1,4 @@
-﻿using GoodToCode.Shared.Models;
-using System;
-using System.Collections.Generic;
+﻿using GoodToCode.Shared.Domain;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Specs

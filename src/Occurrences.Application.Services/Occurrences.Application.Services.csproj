@@ -37,6 +37,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="9.2.2" />
+    <PackageReference Include="GoodToCode.Shared.Cqrs" Version="5.11.332.205" />
     <PackageReference Include="MediatR" Version="9.0.0" />
   </ItemGroup>
 

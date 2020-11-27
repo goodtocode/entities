@@ -1,11 +1,11 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Locality.Models
 {
-    public class LocationArea : DomainModel<ILocationArea>, ILocationArea
+    public class LocationArea : DomainEntity<ILocationArea>, ILocationArea
     {
         public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return LocationAreaKey; } set { LocationAreaKey = value; } }

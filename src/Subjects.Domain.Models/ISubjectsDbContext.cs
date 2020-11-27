@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Persistence;
+﻿using GoodToCode.Shared.EntityFramework;
 using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
 

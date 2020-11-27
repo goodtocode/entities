@@ -1,5 +1,5 @@
 ﻿using GoodToCode.Locality.Models;
-using GoodToCode.Shared.Extensions;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;

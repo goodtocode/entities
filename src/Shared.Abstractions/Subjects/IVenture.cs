@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface IVenture : IDomainModel<IVenture>
+    public interface IVenture : IDomainEntity<IVenture>
     {
         string VentureDescription { get; set; }
         Guid? VentureGroupKey { get; set; }

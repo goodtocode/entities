@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface IDetailType : IDomainModel<IDetailType>
+    public interface IDetailType : IDomainEntity<IDetailType>
     {
         string DetailTypeDescription { get; set; }
         Guid DetailTypeKey { get; set; }

@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using NetTopologySuite.Geometries;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Locality.Models
 {
-    public class Polygon : DomainModel<IPolygon>, IPolygon
+    public class Polygon : DomainEntity<IPolygon>, IPolygon
     {
         public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return PolygonKey; } set { PolygonKey = value; } }

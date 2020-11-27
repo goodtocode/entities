@@ -11,6 +11,8 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <PackageReference Include="GoodToCode.Shared.Configuration" Version="5.11.332.205" />
+    <PackageReference Include="GoodToCode.Shared.System" Version="5.11.332.205" />
     <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.15.0" />
     <PackageReference Include="Microsoft.Azure.AppConfiguration.AspNetCore" Version="4.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="4.0.0" />

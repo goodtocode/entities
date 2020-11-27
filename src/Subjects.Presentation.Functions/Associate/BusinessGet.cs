@@ -1,5 +1,5 @@
-using GoodToCode.Extensions;
-using GoodToCode.Shared.Extensions;
+using GoodToCode.Shared.Configuration;
+using GoodToCode.Shared.System;
 using GoodToCode.Subjects.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

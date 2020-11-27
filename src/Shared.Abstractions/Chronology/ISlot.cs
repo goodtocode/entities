@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public interface ISlot : IDomainModel<ISlot>
+    public interface ISlot : IDomainEntity<ISlot>
     {
         string SlotDescription { get; set; }
         Guid SlotKey { get; set; }

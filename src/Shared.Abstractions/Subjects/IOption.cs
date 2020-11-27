@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface IOption : IDomainModel<IOption>
+    public interface IOption : IDomainEntity<IOption>
     {
         string OptionCode { get; set; }
         string OptionDescription { get; set; }

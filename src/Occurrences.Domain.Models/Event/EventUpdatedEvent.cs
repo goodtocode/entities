@@ -1,6 +1,6 @@
-﻿using GoodToCode.Shared.Messaging;
+﻿
 using GoodToCode.Occurrences.Models;
-using GoodToCode.Shared.Models;
+using GoodToCode.Shared.Domain;
 
 namespace GoodToCode.Occurrences.Models
 {

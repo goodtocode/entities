@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Extensions;
+﻿
 using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

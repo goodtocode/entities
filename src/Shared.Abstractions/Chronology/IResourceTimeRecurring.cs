@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public interface IResourceTimeRecurring : IDomainModel<IResourceTimeRecurring>
+    public interface IResourceTimeRecurring : IDomainEntity<IResourceTimeRecurring>
     {
         string DayName { get; set; }
         Guid ResourceKey { get; set; }

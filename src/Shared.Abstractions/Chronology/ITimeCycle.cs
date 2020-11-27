@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public interface ITimeCycle : IDomainModel<ITimeCycle>
+    public interface ITimeCycle : IDomainEntity<ITimeCycle>
     {
         
         int Days { get; set; }

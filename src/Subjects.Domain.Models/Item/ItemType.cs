@@ -1,10 +1,10 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
-    public class ItemType : DomainModel<IItemType>, IItemType
+    public class ItemType : DomainEntity<IItemType>, IItemType
     {
         public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return ItemTypeKey; } set { ItemTypeKey = value; } }

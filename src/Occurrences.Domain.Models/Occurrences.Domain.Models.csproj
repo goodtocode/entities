@@ -31,6 +31,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="GoodToCode.Shared.Ddd" Version="5.11.332.205" />
+    <PackageReference Include="GoodToCode.Shared.EntityFramework" Version="5.11.332.205" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
   </ItemGroup>
 

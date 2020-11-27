@@ -1,10 +1,10 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Chronology.Models
 {
-    public class Slot : DomainModel<ISlot>, ISlot
+    public class Slot : DomainEntity<ISlot>, ISlot
     {
         public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return SlotKey; } set { SlotKey = value; } }

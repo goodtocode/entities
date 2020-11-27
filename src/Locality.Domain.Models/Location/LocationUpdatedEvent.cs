@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 
 namespace GoodToCode.Locality.Models
 {

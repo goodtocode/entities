@@ -54,7 +54,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GoodToCode.Shared.Specs" Version="5.10.293.250" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
@@ -70,6 +69,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Occurrences.Application.Services\Occurrences.Application.Services.csproj" />
     <ProjectReference Include="..\Occurrences.Infrastructure.Persistence\Occurrences.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\Subjects.Specs.Unit\Subjects.Specs.Unit.csproj" />
   </ItemGroup>
 
   <ItemGroup>

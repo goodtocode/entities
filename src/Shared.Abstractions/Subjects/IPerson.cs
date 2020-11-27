@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface IPerson : IDomainModel<IPerson>
+    public interface IPerson : IDomainEntity<IPerson>
     {
         DateTime BirthDate { get; set; }
         string FirstName { get; set; }

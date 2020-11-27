@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface IAssociateOption : IDomainModel<IAssociateOption>
+    public interface IAssociateOption : IDomainEntity<IAssociateOption>
     {
         Guid AssociateKey { get; set; }
         Guid AssociateOptionKey { get; set; }

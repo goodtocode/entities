@@ -9,8 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GoodToCode.Shared.Extensions" Version="5.10.299.53" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+    <PackageReference Include="GoodToCode.Shared.Ddd" Version="5.11.332.205" />
     <PackageReference Include="NetTopologySuite" Version="2.1.0" />
   </ItemGroup>
 

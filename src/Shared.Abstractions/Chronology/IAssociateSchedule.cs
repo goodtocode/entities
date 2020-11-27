@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public interface IAssociateSchedule : IDomainModel<IAssociateSchedule>
+    public interface IAssociateSchedule : IDomainEntity<IAssociateSchedule>
     {
         Guid ScheduleKey { get; set; }
         Guid? ScheduleTypeKey { get; set; }

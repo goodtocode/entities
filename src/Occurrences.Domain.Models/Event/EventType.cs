@@ -1,11 +1,11 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Occurrences.Models
 {
-    public class EventType : DomainModel<IEventType>, IEventType
+    public class EventType : DomainEntity<IEventType>, IEventType
     {
         public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return EventTypeKey; } set { EventTypeKey = value; } }

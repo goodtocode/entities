@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Locality.Models
 {
-    public interface ILocationArea : IDomainModel<ILocationArea>
+    public interface ILocationArea : IDomainEntity<ILocationArea>
     {
         Guid PolygonKey { get; set; }        
         Guid LocationAreaKey { get; set; }

@@ -1,11 +1,11 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Occurrences.Models
 {
-    public class AssociateAppointment : DomainModel<IAssociateAppointment>, IAssociateAppointment
+    public class AssociateAppointment : DomainEntity<IAssociateAppointment>, IAssociateAppointment
     {
         public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return AssociateAppointmentKey; } set { AssociateAppointmentKey = value; } }

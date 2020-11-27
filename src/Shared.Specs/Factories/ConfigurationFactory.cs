@@ -69,19 +69,6 @@ namespace GoodToCode.Shared.Specs
             return builder.Build();
         }
 
-        public IConfiguration CreateFromJsonSettings()
-        {
-            JsonPathOrAzureConnection = FindConfiguration(JsonPathOrAzureConnection);
-            if (!ConfigFiles.Any()) ConfigFiles.AddRange(new string[] { BaseConfigFile, EnvironmentConfigFile });
-            var returnValue = new ConfigurationBuilder().SetBasePath(JsonPathOrAzureConnection);
-            foreach (var item in ConfigFiles)
-            {
-                returnValue.AddJsonFile(item);
-            }
-
-            return returnValue.Build();
-        }
-
         private string FindConfiguration(string configDirectory)
         {
             var returnValue = string.Empty;

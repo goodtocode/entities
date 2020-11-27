@@ -1,4 +1,4 @@
-﻿//using GoodToCode.Shared.Models;
+﻿//using GoodToCode.Shared.Domain;
 //using Microsoft.AspNetCore.Mvc;
 //using Microsoft.EntityFrameworkCore;
 //using System.Collections.Generic;

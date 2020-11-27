@@ -1,4 +1,5 @@
-﻿using GoodToCode.Subjects.Models;
+﻿using GoodToCode.Shared.Domain;
+using GoodToCode.Subjects.Models;
 
 namespace GoodToCode.Shared.Models
 {

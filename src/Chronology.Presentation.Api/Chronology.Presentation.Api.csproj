@@ -9,13 +9,13 @@
     <UserSecretsId>5e16341c-94f3-46f2-8f2b-ac37cff93a43</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="GoodToCode.Shared.Extensions.Mvc" Version="5.10.299.53" />
+    <PackageReference Include="GoodToCode.Shared.AspNet" Version="5.11.332.205" />
+    <PackageReference Include="GoodToCode.Shared.Configuration" Version="5.11.332.205" />
+    <PackageReference Include="GoodToCode.Shared.System" Version="5.11.332.205" />
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
     <PackageReference Include="Microsoft.Azure.AppConfiguration.AspNetCore" Version="4.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
   <ItemGroup>

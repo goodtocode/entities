@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Persistence;
+﻿using GoodToCode.Shared.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoodToCode.Locality.Models

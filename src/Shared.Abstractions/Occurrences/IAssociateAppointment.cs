@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Occurrences.Models
 {
-    public interface IAssociateAppointment : IDomainModel<IAssociateAppointment>
+    public interface IAssociateAppointment : IDomainEntity<IAssociateAppointment>
     {
         Guid AppointmentKey { get; set; }        
         Guid AssociateAppointmentKey { get; set; }

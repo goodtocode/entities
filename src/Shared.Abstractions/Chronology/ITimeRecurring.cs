@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public interface ITimeRecurring : IDomainModel<ITimeRecurring>
+    public interface ITimeRecurring : IDomainEntity<ITimeRecurring>
     {
         int BeginDay { get; set; }
         DateTime BeginTime { get; set; }

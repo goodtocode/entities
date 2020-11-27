@@ -1,11 +1,11 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Chronology.Models
 {
-    public class TimeRange : DomainModel<ITimeRange>, ITimeRange
+    public class TimeRange : DomainEntity<ITimeRange>, ITimeRange
     {
         public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return TimeRangeKey; } set { TimeRangeKey = value; } }

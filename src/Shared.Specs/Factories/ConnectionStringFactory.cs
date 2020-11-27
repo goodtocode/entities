@@ -11,11 +11,6 @@ namespace GoodToCode.Shared.Specs
             Configuration = new ConfigurationFactory().CreateFromAzureSettings();
         }
 
-        public ConnectionStringFactory(string projectFolder)
-        {
-            Configuration = new ConfigurationFactory(projectFolder).CreateFromJsonSettings();
-        }
-
         public ConnectionStringFactory(IConfiguration config)
         {
             Configuration = config;

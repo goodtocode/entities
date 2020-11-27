@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public interface ILocationTimeRecurring : IDomainModel<ILocationTimeRecurring>
+    public interface ILocationTimeRecurring : IDomainEntity<ILocationTimeRecurring>
     {        
         string DayName { get; set; }
         Guid LocationKey { get; set; }

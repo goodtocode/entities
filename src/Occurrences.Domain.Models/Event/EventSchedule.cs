@@ -1,10 +1,10 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Occurrences.Models
 {
-    public class EventSchedule : DomainModel<IEventSchedule>, IEventSchedule
+    public class EventSchedule : DomainEntity<IEventSchedule>, IEventSchedule
     {
         public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return EventScheduleKey; } set { EventScheduleKey = value; } }

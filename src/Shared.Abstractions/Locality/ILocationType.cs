@@ -1,10 +1,10 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 using System.Collections.Generic;
 
 namespace GoodToCode.Locality.Models
 {
-    public interface ILocationType : IDomainModel<ILocationType>
+    public interface ILocationType : IDomainEntity<ILocationType>
     {        
         string LocationTypeDescription { get; set; }
         Guid LocationTypeKey { get; set; }

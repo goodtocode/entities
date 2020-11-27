@@ -1,11 +1,11 @@
-﻿using GoodToCode.Shared.Models;
-using GoodToCode.Shared.Extensions;
+﻿using GoodToCode.Shared.Domain;
+
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Subjects.Models
 {
-    public class Associate : DomainModel<IAssociate>, IAssociate
+    public class Associate : DomainEntity<IAssociate>, IAssociate
     {
         public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return AssociateKey; } set { AssociateKey = value; } }

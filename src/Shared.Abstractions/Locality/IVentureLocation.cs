@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Locality.Models
 {
-    public interface IVentureLocation : IDomainModel<IVentureLocation>
+    public interface IVentureLocation : IDomainEntity<IVentureLocation>
     {
         Guid LocationKey { get; set; }
         Guid? LocationTypeKey { get; set; }

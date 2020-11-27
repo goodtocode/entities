@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Subjects.Models
 {
-    public interface IResource : IDomainModel<IResource>
+    public interface IResource : IDomainEntity<IResource>
     {
         string ResourceDescription { get; set; }
         Guid ResourceKey { get; set; }

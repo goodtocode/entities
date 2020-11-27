@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public interface IVentureTimeRecurring : IDomainModel<IVentureTimeRecurring>
+    public interface IVentureTimeRecurring : IDomainEntity<IVentureTimeRecurring>
     {
         string DayName { get; set; }
         Guid VentureKey { get; set; }

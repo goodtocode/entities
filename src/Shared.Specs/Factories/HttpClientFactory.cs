@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Extensions;
+﻿using GoodToCode.Shared.Net;
 using System.Net.Http;
 
 namespace GoodToCode.Shared.Specs

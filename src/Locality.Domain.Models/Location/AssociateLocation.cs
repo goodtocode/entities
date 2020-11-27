@@ -1,10 +1,10 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Locality.Models
 {
-    public class AssociateLocation : DomainModel<IAssociateLocation>, IAssociateLocation
+    public class AssociateLocation : DomainEntity<IAssociateLocation>, IAssociateLocation
     {
         public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return AssociateLocationKey; } set { AssociateLocationKey = value; } }

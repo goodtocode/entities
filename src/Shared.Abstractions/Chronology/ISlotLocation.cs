@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Chronology.Models
 {
-    public interface ISlotLocation : IDomainModel<ISlotLocation>
+    public interface ISlotLocation : IDomainEntity<ISlotLocation>
     {
         Guid LocationKey { get; set; }
         Guid? LocationTypeKey { get; set; }

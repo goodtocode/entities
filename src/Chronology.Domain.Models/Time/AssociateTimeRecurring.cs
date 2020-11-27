@@ -1,10 +1,10 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoodToCode.Chronology.Models
 {
-    public class AssociateTimeRecurring : DomainModel<IAssociateTimeRecurring>, IAssociateTimeRecurring
+    public class AssociateTimeRecurring : DomainEntity<IAssociateTimeRecurring>, IAssociateTimeRecurring
     {
         public override string PartitionKey { get; set; } = "Default";
         public override Guid RowKey { get { return AssociateTimeRecurringKey; } set { AssociateTimeRecurringKey = value; } }

@@ -1,5 +1,5 @@
 ﻿using GoodToCode.Chronology.Domain;
-using GoodToCode.Shared.Models;
+using GoodToCode.Shared.Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;

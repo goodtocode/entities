@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Occurrences.Models
 {
-    public interface IEventSchedule : IDomainModel<IEventSchedule>
+    public interface IEventSchedule : IDomainEntity<IEventSchedule>
     {
         Guid EventKey { get; set; }
         Guid EventScheduleKey { get; set; }

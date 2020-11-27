@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Locality.Models
 {
-    public interface ILocation : IDomainModel<ILocation>
+    public interface ILocation : IDomainEntity<ILocation>
     {
         
         string LocationDescription { get; set; }

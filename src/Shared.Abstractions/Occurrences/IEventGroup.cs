@@ -1,9 +1,9 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System;
 
 namespace GoodToCode.Occurrences.Models
 {
-    public interface IEventGroup : IDomainModel<IEventGroup>
+    public interface IEventGroup : IDomainEntity<IEventGroup>
     {
         string EventGroupDescription { get; set; }
         Guid EventGroupKey { get; set; }

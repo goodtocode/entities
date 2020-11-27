@@ -1,4 +1,5 @@
-using GoodToCode.Shared.Extensions;
+
+using GoodToCode.Shared.Configuration;
 using GoodToCode.Subjects.Infrastructure;
 using GoodToCode.Subjects.Models;
 using Microsoft.AspNetCore.Http;
