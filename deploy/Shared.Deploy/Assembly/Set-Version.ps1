@@ -41,7 +41,7 @@ $Path = Set-Unc -Path $Path
 # *** Execute
 # ***
 $Major = $Major.Replace('-1', '1')
-$Minor = $Minor.Replace('-1', (Get-Date -UFormat '%m').ToString()) # MM
+$Minor = $Minor.Replace('-1', (Get-Date -UFormat '%Y').ToString().Substring(2,2)) # YY
 $Revision = $Revision.Replace('-1', (Get-Date -UFormat '%j').ToString()) # DayOfYear
 $Build = $Build.Replace('-1', (Get-Date -UFormat '%H%M').ToString()) # HrMinSec
 
