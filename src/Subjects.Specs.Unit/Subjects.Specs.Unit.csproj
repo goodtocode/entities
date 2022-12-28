@@ -10,20 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="appsettings.Local.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <SpecFlowObsoleteCodeBehindFiles Remove="Application\Associate\BusinessCreate.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Application\BusinessCreate.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Application\BusinessGetByKey.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Associate\BusinessesGet.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Associate\BusinessGetByKey.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Associate\BusinessInsert.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Associate\BusinessUpdate.feature.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="appsettings.Local.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -43,10 +29,10 @@
 
   <ItemGroup>
     <Compile Update="Application\Associate\BusinessSaveCommand.feature.cs">
-      <DependentUpon>BusinessSaveCommand.feature</DependentUpon>
+      <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
     <Compile Update="Application\Associate\BusinessQuery.feature.cs">
-      <DependentUpon>BusinessQuery.feature</DependentUpon>
+      <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
     <Compile Update="Infrastructure\Associate\BusinessesGet.feature.cs">
       <DependentUpon>%(Filename)</DependentUpon>
@@ -55,7 +41,7 @@
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
     <Compile Update="Infrastructure\Associate\BusinessCreate.feature.cs">
-      <DependentUpon>BusinessCreate.feature</DependentUpon>
+      <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
     <Compile Update="Infrastructure\Associate\BusinessUpdate.feature.cs">
       <DependentUpon>%(Filename)</DependentUpon>
