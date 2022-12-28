@@ -1,124 +1,126 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <IsPackable>false</IsPackable>
-    <AssemblyName>GoodToCode.Occurrences.Specs.Unit</AssemblyName>
-    <RootNamespace>GoodToCode.Occurrences.Specs</RootNamespace>
-    <Version>5.20.1</Version>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-  </PropertyGroup>
-  
-  <ItemGroup>
-    <CustomAdditionalCompileInputs Remove="Application\Event\EventQuery.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Application\Event\EventSaveCommand.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Domain\Event\AssociateAggregate.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventCreate.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventDelete.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventesGet.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventGetByKey.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventUpdate.feature.cs" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <None Remove="appsettings.Local.json" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<IsPackable>false</IsPackable>
+		<AssemblyName>GoodToCode.Occurrences.Specs.Unit</AssemblyName>
+		<RootNamespace>GoodToCode.Occurrences.Specs</RootNamespace>
+		<Version>5.20.1</Version>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <UpToDateCheckBuild Remove="Application\Event\EventQuery.feature.cs" />
-    <UpToDateCheckBuild Remove="Application\Event\EventSaveCommand.feature.cs" />
-    <UpToDateCheckBuild Remove="Domain\Event\AssociateAggregate.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Associate\EventCreate.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Associate\EventDelete.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Associate\EventesGet.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Associate\EventGetByKey.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Associate\EventUpdate.feature.cs" />
-  </ItemGroup>
+	<ItemGroup>
+		<CustomAdditionalCompileInputs Remove="Application\Event\EventQuery.feature.cs" />
+		<CustomAdditionalCompileInputs Remove="Application\Event\EventSaveCommand.feature.cs" />
+		<CustomAdditionalCompileInputs Remove="Domain\Event\AssociateAggregate.feature.cs" />
+		<CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventCreate.feature.cs" />
+		<CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventDelete.feature.cs" />
+		<CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventesGet.feature.cs" />
+		<CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventGetByKey.feature.cs" />
+		<CustomAdditionalCompileInputs Remove="Infrastructure\Associate\EventUpdate.feature.cs" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Include="appsettings.Local.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="appsettings.Development.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="appsettings.Local.json" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Occurrences.Application.Services\Occurrences.Application.Services.csproj" />
-    <ProjectReference Include="..\Occurrences.Infrastructure.Persistence\Occurrences.Infrastructure.Persistence.csproj" />
-    <ProjectReference Include="..\Subjects.Specs.Unit\Subjects.Specs.Unit.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<UpToDateCheckBuild Remove="Application\Event\EventQuery.feature.cs" />
+		<UpToDateCheckBuild Remove="Application\Event\EventSaveCommand.feature.cs" />
+		<UpToDateCheckBuild Remove="Domain\Event\AssociateAggregate.feature.cs" />
+		<UpToDateCheckBuild Remove="Infrastructure\Associate\EventCreate.feature.cs" />
+		<UpToDateCheckBuild Remove="Infrastructure\Associate\EventDelete.feature.cs" />
+		<UpToDateCheckBuild Remove="Infrastructure\Associate\EventesGet.feature.cs" />
+		<UpToDateCheckBuild Remove="Infrastructure\Associate\EventGetByKey.feature.cs" />
+		<UpToDateCheckBuild Remove="Infrastructure\Associate\EventUpdate.feature.cs" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Application\Event\EventQuery.feature.cs">
-      <DependentUpon>EventQuery.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Application\Event\EventSaveCommand.feature.cs">
-      <DependentUpon>EventSaveCommand.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Domain\Event\EventAggregate.feature.cs">
-      <DependentUpon>EventAggregate.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Associate\EventCreate.feature.cs">
-      <DependentUpon>EventCreate.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Associate\EventDelete.feature.cs">
-      <DependentUpon>EventDelete.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Associate\EventsGet.feature.cs">
-      <DependentUpon>EventsGet.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Associate\EventGetByKey.feature.cs">
-      <DependentUpon>EventGetByKey.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Associate\EventUpdate.feature.cs">
-      <DependentUpon>EventUpdate.feature</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="appsettings.Local.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Include="appsettings.Development.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Include="appsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
 
-  <ItemGroup>
-    <SpecFlowFeatureFiles Update="Application\Event\EventQuery.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Application\Event\EventSaveCommand.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Domain\Event\EventAggregate.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Infrastructure\Associate\EventCreate.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Infrastructure\Associate\EventDelete.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Infrastructure\Associate\EventsGet.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Infrastructure\Associate\EventGetByKey.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Infrastructure\Associate\EventUpdate.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Occurrences.Application.Services\Occurrences.Application.Services.csproj" />
+		<ProjectReference Include="..\Occurrences.Infrastructure.Persistence\Occurrences.Infrastructure.Persistence.csproj" />
+		<ProjectReference Include="..\Subjects.Specs.Unit\Subjects.Specs.Unit.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Application\Event\EventQuery.feature.cs">
+			<DependentUpon>EventQuery.feature</DependentUpon>
+		</Compile>
+		<Compile Update="Application\Event\EventSaveCommand.feature.cs">
+			<DependentUpon>EventSaveCommand.feature</DependentUpon>
+		</Compile>
+		<Compile Update="Domain\Event\EventAggregate.feature.cs">
+			<DependentUpon>EventAggregate.feature</DependentUpon>
+		</Compile>
+		<Compile Update="Infrastructure\Associate\EventCreate.feature.cs">
+			<DependentUpon>EventCreate.feature</DependentUpon>
+		</Compile>
+		<Compile Update="Infrastructure\Associate\EventDelete.feature.cs">
+			<DependentUpon>EventDelete.feature</DependentUpon>
+		</Compile>
+		<Compile Update="Infrastructure\Associate\EventsGet.feature.cs">
+			<DependentUpon>EventsGet.feature</DependentUpon>
+		</Compile>
+		<Compile Update="Infrastructure\Associate\EventGetByKey.feature.cs">
+			<DependentUpon>EventGetByKey.feature</DependentUpon>
+		</Compile>
+		<Compile Update="Infrastructure\Associate\EventUpdate.feature.cs">
+			<DependentUpon>EventUpdate.feature</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<SpecFlowFeatureFiles Update="Application\Event\EventQuery.feature">
+			<Visible>$(UsingMicrosoftNETSdk)</Visible>
+			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
+		<SpecFlowFeatureFiles Update="Application\Event\EventSaveCommand.feature">
+			<Visible>$(UsingMicrosoftNETSdk)</Visible>
+			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
+		<SpecFlowFeatureFiles Update="Domain\Event\EventAggregate.feature">
+			<Visible>$(UsingMicrosoftNETSdk)</Visible>
+			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
+		<SpecFlowFeatureFiles Update="Infrastructure\Associate\EventCreate.feature">
+			<Visible>$(UsingMicrosoftNETSdk)</Visible>
+			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
+		<SpecFlowFeatureFiles Update="Infrastructure\Associate\EventDelete.feature">
+			<Visible>$(UsingMicrosoftNETSdk)</Visible>
+			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
+		<SpecFlowFeatureFiles Update="Infrastructure\Associate\EventsGet.feature">
+			<Visible>$(UsingMicrosoftNETSdk)</Visible>
+			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
+		<SpecFlowFeatureFiles Update="Infrastructure\Associate\EventGetByKey.feature">
+			<Visible>$(UsingMicrosoftNETSdk)</Visible>
+			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
+		<SpecFlowFeatureFiles Update="Infrastructure\Associate\EventUpdate.feature">
+			<Visible>$(UsingMicrosoftNETSdk)</Visible>
+			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
+	</ItemGroup>
 
 </Project>

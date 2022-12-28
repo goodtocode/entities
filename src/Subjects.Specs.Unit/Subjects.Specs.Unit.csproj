@@ -7,6 +7,8 @@
     <RootNamespace>GoodToCode.Subjects</RootNamespace>
     <Version>5.20.1</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	<Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>

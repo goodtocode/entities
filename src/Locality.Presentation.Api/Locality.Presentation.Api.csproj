@@ -1,38 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>GoodToCode.Locality.Presentation.WebApi</RootNamespace>
-    <AssemblyName>GoodToCode.Locality.Presentation.WebApi</AssemblyName>
-    <Version>5.20.1</Version>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <UserSecretsId>d17145f4-d465-442d-ab0f-4e5dc3b468fa</UserSecretsId>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace>GoodToCode.Locality.Presentation.WebApi</RootNamespace>
+		<AssemblyName>GoodToCode.Locality.Presentation.WebApi</AssemblyName>
+		<Version>5.20.1</Version>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<UserSecretsId>d17145f4-d465-442d-ab0f-4e5dc3b468fa</UserSecretsId>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="GoodToCode.Shared.AspNet" Version="5.11.332.205" />
-    <PackageReference Include="GoodToCode.Shared.Configuration" Version="5.11.332.205" />
-    <PackageReference Include="GoodToCode.Shared.System" Version="5.11.332.205" />
-    <PackageReference Include="MediatR" Version="9.0.0" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
-    <PackageReference Include="Microsoft.Azure.AppConfiguration.AspNetCore" Version="4.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="GoodToCode.Shared.AspNet" Version="5.11.332.205" />
+		<PackageReference Include="GoodToCode.Shared.Configuration" Version="5.11.332.205" />
+		<PackageReference Include="GoodToCode.Shared.System" Version="5.11.332.205" />
+		<PackageReference Include="MediatR" Version="9.0.0" />
+		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
+		<PackageReference Include="Microsoft.Azure.AppConfiguration.AspNetCore" Version="4.0.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Locality.Application.Services\Locality.Application.Services.csproj" />
-    <ProjectReference Include="..\Locality.Domain.Models\Locality.Domain.Models.csproj" />
-    <ProjectReference Include="..\Locality.Infrastructure.Persistence\Locality.Infrastructure.Persistence.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Locality.Application.Services\Locality.Application.Services.csproj" />
+		<ProjectReference Include="..\Locality.Domain.Models\Locality.Domain.Models.csproj" />
+		<ProjectReference Include="..\Locality.Infrastructure.Persistence\Locality.Infrastructure.Persistence.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Update="Properties\launchSettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<Content Update="Properties\launchSettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
 
 
 </Project>
