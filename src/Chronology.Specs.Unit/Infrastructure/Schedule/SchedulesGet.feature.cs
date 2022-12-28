@@ -19,7 +19,8 @@ namespace GoodToCode.Chronology.Specs.Infrastructure.Schedule
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Schedules Get", Description="\tGet all Schedules from persistence", SourceFile="Infrastructure\\Schedule\\SchedulesGet.feature", SourceLine=0)]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("Schedules Get")]
     public partial class SchedulesGetFeature
     {
         
@@ -30,7 +31,7 @@ namespace GoodToCode.Chronology.Specs.Infrastructure.Schedule
 #line 1 "SchedulesGet.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
+        [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -38,18 +39,19 @@ namespace GoodToCode.Chronology.Specs.Infrastructure.Schedule
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
+        [NUnit.Framework.OneTimeTearDownAttribute()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -58,6 +60,7 @@ namespace GoodToCode.Chronology.Specs.Infrastructure.Schedule
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<NUnit.Framework.TestContext>(NUnit.Framework.TestContext.CurrentContext);
         }
         
         public virtual void ScenarioStart()
@@ -70,9 +73,10 @@ namespace GoodToCode.Chronology.Specs.Infrastructure.Schedule
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Get all Schedules via Entity framework", new string[] {
-                "query",
-                "entityFramework"}, SourceLine=4)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Get all Schedules via Entity framework")]
+        [NUnit.Framework.CategoryAttribute("query")]
+        [NUnit.Framework.CategoryAttribute("entityFramework")]
         public virtual void GetAllSchedulesViaEntityFramework()
         {
             string[] tagsOfScenario = new string[] {

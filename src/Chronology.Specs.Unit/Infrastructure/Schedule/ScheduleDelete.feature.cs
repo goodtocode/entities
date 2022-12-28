@@ -19,7 +19,8 @@ namespace GoodToCode.Chronology.Specs.Infrastructure.Schedule
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Schedule Delete", Description="\tDelete a Schedule from persistence", SourceFile="Infrastructure\\Schedule\\ScheduleDelete.feature", SourceLine=0)]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("Schedule Delete")]
     public partial class ScheduleDeleteFeature
     {
         
@@ -30,7 +31,7 @@ namespace GoodToCode.Chronology.Specs.Infrastructure.Schedule
 #line 1 "ScheduleDelete.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
+        [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -38,18 +39,19 @@ namespace GoodToCode.Chronology.Specs.Infrastructure.Schedule
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
+        [NUnit.Framework.OneTimeTearDownAttribute()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -58,6 +60,7 @@ namespace GoodToCode.Chronology.Specs.Infrastructure.Schedule
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<NUnit.Framework.TestContext>(NUnit.Framework.TestContext.CurrentContext);
         }
         
         public virtual void ScenarioStart()
@@ -70,9 +73,10 @@ namespace GoodToCode.Chronology.Specs.Infrastructure.Schedule
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Delete an existing Schedule via Entity Framework", new string[] {
-                "crud",
-                "entityFramework"}, SourceLine=4)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Delete an existing Schedule via Entity Framework")]
+        [NUnit.Framework.CategoryAttribute("crud")]
+        [NUnit.Framework.CategoryAttribute("entityFramework")]
         public virtual void DeleteAnExistingScheduleViaEntityFramework()
         {
             string[] tagsOfScenario = new string[] {

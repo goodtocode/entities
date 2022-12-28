@@ -19,7 +19,8 @@ namespace GoodToCode.Chronology.Specs.Application.Schedule
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Schedule Save Command", Description="\tCreate and update a Schedule in persistence", SourceFile="Application\\Schedule\\ScheduleSaveCommand.feature", SourceLine=0)]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("Schedule Save Command")]
     public partial class ScheduleSaveCommandFeature
     {
         
@@ -30,7 +31,7 @@ namespace GoodToCode.Chronology.Specs.Application.Schedule
 #line 1 "ScheduleSaveCommand.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
+        [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -38,18 +39,19 @@ namespace GoodToCode.Chronology.Specs.Application.Schedule
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
+        [NUnit.Framework.OneTimeTearDownAttribute()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -58,6 +60,7 @@ namespace GoodToCode.Chronology.Specs.Application.Schedule
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<NUnit.Framework.TestContext>(NUnit.Framework.TestContext.CurrentContext);
         }
         
         public virtual void ScenarioStart()
@@ -70,9 +73,10 @@ namespace GoodToCode.Chronology.Specs.Application.Schedule
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Create a new Schedule via CQRS Command", new string[] {
-                "command",
-                "CQRS"}, SourceLine=4)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Create a new Schedule via CQRS Command")]
+        [NUnit.Framework.CategoryAttribute("command")]
+        [NUnit.Framework.CategoryAttribute("CQRS")]
         public virtual void CreateANewScheduleViaCQRSCommand()
         {
             string[] tagsOfScenario = new string[] {

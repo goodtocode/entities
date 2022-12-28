@@ -11,7 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
-using TechTalk.SpecRun.Common.Helper;
+
 
 namespace GoodToCode.Chronology.Specs
 {
@@ -47,7 +47,7 @@ namespace GoodToCode.Chronology.Specs
         [Given(@"the Schedule Save Command validates")]
         public void GivenTheScheduleSaveCommandValidates()
         {
-            Assert.IsFalse(Sut.ScheduleName.IsNullOrWhiteSpace());
+            Assert.IsFalse(string.IsNullOrWhiteSpace(Sut.ScheduleName));
         }
 
         [When(@"the Schedule is inserted via CQRS Command")]
