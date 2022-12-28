@@ -1,16 +1,10 @@
-﻿using GoodToCode.Shared.Specs;
+﻿using GoodToCode.Chronology.Infrastructure;
 using GoodToCode.Chronology.Models;
+using GoodToCode.Shared.Specs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
-using GoodToCode.Chronology.Infrastructure;
-using System;
-using System.Net.Http.Headers;
-using System.IO;
 
 namespace GoodToCode.Chronology.Specs
 {
@@ -22,7 +16,7 @@ namespace GoodToCode.Chronology.Specs
         private readonly IConfiguration _config;
         private readonly ScheduleCreateSteps createSteps = new ScheduleCreateSteps();
 
-        public Schedule Sut { get; private set; }
+        public Schedule Sut { get; private set; } = new();
         public IList<Schedule> Suts { get; private set; } = new List<Schedule>();
         public Guid SutKey { get; private set; }
         public IList<Schedule> RecycleBin { get; private set; } = new List<Schedule>();
@@ -47,7 +41,7 @@ namespace GoodToCode.Chronology.Specs
         public async Task WhenSchedulesAreQueriedViaEntityFrameworkAsync()
         {
             Suts = await _dbContext.Schedule.Take(10).ToListAsync();
-            Sut = Suts.FirstOrDefault();
+            Sut = Suts?.FirstOrDefault() ?? new Schedule();
         }
 
         [Then(@"All persisted Schedules are returned")]

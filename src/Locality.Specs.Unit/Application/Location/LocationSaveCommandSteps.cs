@@ -5,10 +5,6 @@ using GoodToCode.Shared.Specs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace GoodToCode.Locality.Specs
@@ -21,8 +17,8 @@ namespace GoodToCode.Locality.Specs
         private readonly IConfiguration _config;
 
         public Guid SutKey { get; private set; }
-        public Location Sut { get; private set; }
-        public IList<Location> RecycleBin { get; private set; }
+        public Location Sut { get; private set; } = new();
+        public IList<Location> RecycleBin { get; private set; } = new List<Location>();
 
         public LocationSaveCommandSteps()
         {

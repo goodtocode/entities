@@ -22,10 +22,10 @@ namespace GoodToCode.Occurrences.Specs
         private int _rowsAffected;
 
         public Guid SutKey { get; private set; }
-        public EventAggregate Aggregate { get; private set; }
-        public IList<EventAggregate> RecycleBin { get; private set; }
+        public EventAggregate Aggregate { get; private set; } = new EventAggregate(0);
+        public IList<EventAggregate> RecycleBin { get; private set; } = new List<EventAggregate>();
 
-        public Event SutEvent { get; private set; }
+        public Event SutEvent { get; private set; } = new();
 
         public EventAggregateSteps()
         {

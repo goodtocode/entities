@@ -4,11 +4,6 @@ using GoodToCode.Shared.Specs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace GoodToCode.Locality.Specs
@@ -22,10 +17,10 @@ namespace GoodToCode.Locality.Specs
         private int _rowsAffected;
 
         public Guid SutKey { get; private set; }
-        public LocationAggregate Aggregate { get; private set; }
-        public IList<LocationAggregate> RecycleBin { get; private set; }
+        public LocationAggregate Aggregate { get; private set; } = new LocationAggregate(0);
+        public IList<LocationAggregate> RecycleBin { get; private set; } = new List<LocationAggregate>();
 
-        public Location SutLocation { get; private set; }
+        public Location SutLocation { get; private set; } = new();
 
         public LocationAggregateSteps()
         {

@@ -34,7 +34,6 @@ namespace GoodToCode.Locality.Application
 
         private readonly LocationGetValidator _validator;
         private readonly List<KeyValuePair<string, string>> _errors;
-        private readonly ILogger<LocationGetHandler> _logger;
         private readonly LocalityDbContext _dbContext;
 
         public LocationGetHandler(LocalityDbContext dbContext)
@@ -56,9 +55,8 @@ namespace GoodToCode.Locality.Application
                     response.Result = _dbContext.Location.Where(request.QueryPredicate).ToList();
 
                 }
-                catch (Exception e)
+                catch
                 {
-                    _logger.LogCritical(e.ToString());
                     response.ErrorInfo.UserErrorMessage = "An unknown error has occurred.";
                     response.ErrorInfo.HasException = true;
                 }

@@ -34,7 +34,6 @@ namespace GoodToCode.Occurrences.Application
 
         private readonly EventGetQueryValidator _validator;
         private readonly List<KeyValuePair<string, string>> _errors;
-        private readonly ILogger<EventGetHandler> _logger;
         private readonly OccurrencesDbContext _dbContext;
 
         public EventGetHandler(OccurrencesDbContext dbContext)
@@ -56,9 +55,8 @@ namespace GoodToCode.Occurrences.Application
                     response.Result = _dbContext.Event.Where(request.QueryPredicate).ToList();
 
                 }
-                catch (Exception e)
+                catch
                 {
-                    _logger.LogCritical(e.ToString());
                     response.ErrorInfo.UserErrorMessage = "An unknown error has occurred.";
                     response.ErrorInfo.HasException = true;
                 }

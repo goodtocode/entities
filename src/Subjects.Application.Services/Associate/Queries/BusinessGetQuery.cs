@@ -2,7 +2,6 @@
 using GoodToCode.Subjects.Infrastructure;
 using GoodToCode.Subjects.Models;
 using MediatR;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +25,6 @@ namespace GoodToCode.Subjects.Application
 
         private readonly BusinessGetValidator _validator;
         private readonly List<KeyValuePair<string, string>> _errors;
-        private readonly ILogger<BusinessGetHandler> _logger;
         private readonly SubjectsDbContext _dbContext;
 
         public BusinessGetHandler(SubjectsDbContext dbContext)
@@ -47,9 +45,8 @@ namespace GoodToCode.Subjects.Application
                 {
                     response.Result = await _dbContext.Business.FindAsync(request.BusinessKey);
                 }
-                catch (Exception e)
+                catch
                 {
-                    _logger.LogCritical(e.ToString());
                     response.ErrorInfo.UserErrorMessage = "An unknown error has occurred.";
                     response.ErrorInfo.HasException = true;
                 }

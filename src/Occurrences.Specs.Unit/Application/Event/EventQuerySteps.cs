@@ -6,11 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace GoodToCode.Occurrences.Specs
@@ -24,7 +19,7 @@ namespace GoodToCode.Occurrences.Specs
         private readonly EventSaveCommandSteps commandSteps = new EventSaveCommandSteps();
 
         public Guid SutKey { get; private set; }
-        public IList<Event> Sut { get; private set; }
+        public IList<Event> Sut { get; private set; } = new List<Event>();
         public IList<Event> RecycleBin { get; private set; } = new List<Event>();
 
         public EventQuerySteps()
@@ -40,7 +35,7 @@ namespace GoodToCode.Occurrences.Specs
             commandSteps.GivenANewEventSaveCommandHasBeenCreated();
             await commandSteps.WhenTheEventIsInsertedViaCQRSCommand();
             Sut = await _dbContext.Event.Take(10).ToListAsync();
-            SutKey = Sut.FirstOrDefault().EventKey;
+            SutKey = Sut?.FirstOrDefault()?.EventKey ?? Guid.Empty;
             Assert.IsTrue(SutKey != Guid.Empty);
         }
 

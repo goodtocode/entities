@@ -4,11 +4,6 @@ using GoodToCode.Subjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace GoodToCode.Subjects.Specs
@@ -21,11 +16,11 @@ namespace GoodToCode.Subjects.Specs
         private readonly IConfiguration _config;
         private readonly BusinessCreateSteps createSteps = new BusinessCreateSteps();
         
-        private string SutName { get; set; }
-        private string SutNameNew { get; set; }
+        private string? SutName { get; set; }
+        private string? SutNameNew { get; set; }
 
         public Guid SutKey { get; private set; }
-        public Business Sut { get; private set; }
+        public Business Sut { get; private set; } = new();
         public IList<Business> Suts { get; private set; } = new List<Business>();
         public IList<Business> RecycleBin { get; private set; } = new List<Business>();
 

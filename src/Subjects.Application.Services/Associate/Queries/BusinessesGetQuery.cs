@@ -2,7 +2,6 @@
 using GoodToCode.Subjects.Infrastructure;
 using GoodToCode.Subjects.Models;
 using MediatR;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +30,6 @@ namespace GoodToCode.Subjects.Application
 
         private readonly BusinessesGetValidator _validator;
         private readonly List<KeyValuePair<string, string>> _errors;
-        private readonly ILogger<BusinessesGetHandler> _logger;
         private readonly SubjectsDbContext _dbContext;
 
         public BusinessesGetHandler(SubjectsDbContext dbContext)
@@ -53,9 +51,8 @@ namespace GoodToCode.Subjects.Application
                     response.Result = _dbContext.Business.Where(request.QueryPredicate).ToList();
 
                 }
-                catch (Exception e)
+                catch
                 {
-                    _logger.LogCritical(e.ToString());
                     response.ErrorInfo.UserErrorMessage = "An unknown error has occurred.";
                     response.ErrorInfo.HasException = true;
                 }

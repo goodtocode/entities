@@ -1,17 +1,12 @@
-﻿using GoodToCode.Shared.Specs;
-using GoodToCode.Locality.Application;
+﻿using GoodToCode.Locality.Application;
+using GoodToCode.Locality.Infrastructure;
 using GoodToCode.Locality.Models;
+using GoodToCode.Shared.Specs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
-using GoodToCode.Locality.Infrastructure;
-using System.IO;
 
 namespace GoodToCode.Locality.Specs
 {
@@ -24,7 +19,7 @@ namespace GoodToCode.Locality.Specs
         private readonly LocationSaveCommandSteps commandSteps = new LocationSaveCommandSteps();
 
         public Guid SutKey { get; private set; }
-        public IList<Location> Sut { get; private set; }
+        public IList<Location> Sut { get; private set; } = new List<Location>();
         public IList<Location> RecycleBin { get; private set; } = new List<Location>();
 
         public LocationQuerySteps()
@@ -40,7 +35,7 @@ namespace GoodToCode.Locality.Specs
             commandSteps.GivenANewLocationSaveCommandHasBeenCreated();
             await commandSteps.WhenTheLocationIsInsertedViaCQRSCommand();
             Sut = await _dbContext.Location.Take(10).ToListAsync();
-            SutKey = Sut.FirstOrDefault().LocationKey;
+            SutKey = Sut?.FirstOrDefault()?.LocationKey ?? Guid.Empty;
             Assert.IsTrue(SutKey != Guid.Empty);
         }
 

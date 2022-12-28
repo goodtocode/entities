@@ -1,16 +1,11 @@
-﻿using GoodToCode.Subjects.Infrastructure;
+﻿using GoodToCode.Shared.Specs;
+using GoodToCode.Subjects.Infrastructure;
 using GoodToCode.Subjects.Models;
-using GoodToCode.Shared.Specs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TechTalk.SpecFlow;
-using System.IO;
 using Newtonsoft.Json;
+using TechTalk.SpecFlow;
 
 namespace GoodToCode.Subjects.Specs
 {
@@ -23,10 +18,10 @@ namespace GoodToCode.Subjects.Specs
         private int _rowsAffected;
 
         public Guid SutKey { get; private set; }
-        public AssociateAggregate Aggregate { get; private set; }
-        public IList<AssociateAggregate> RecycleBin { get; private set; }
+        public AssociateAggregate Aggregate { get; private set; } = new(0);
+        public IList<AssociateAggregate> RecycleBin { get; private set; } = new List<AssociateAggregate>();
 
-        public Business SutBusiness { get; private set; }
+        public Business SutBusiness { get; private set; } = new();
 
         public BusinessAggregateSteps()
         {
@@ -52,7 +47,7 @@ namespace GoodToCode.Subjects.Specs
         {
             var serialized = JsonConvert.SerializeObject(SutBusiness);
             var deserialized = JsonConvert.DeserializeObject<Business>(serialized);
-            Assert.IsTrue(deserialized.BusinessName.Length > 0);
+            Assert.IsTrue(deserialized?.BusinessName.Length > 0);
         }
 
         [When(@"the business does not exist in persistence")]

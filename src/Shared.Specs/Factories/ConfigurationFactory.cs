@@ -1,10 +1,6 @@
 ﻿using GoodToCode.Shared.Specs.Factories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Reflection;
 
 namespace GoodToCode.Shared.Specs
@@ -20,7 +16,6 @@ namespace GoodToCode.Shared.Specs
     public class ConfigurationFactory
     {
         public string CurrentEnvironment { get { return new EnvironmentVariableFactory().CreateASPNETCORE_ENVIRONMENT(); } }
-        public IConfiguration Configuration { get; }
         public string JsonPathOrAzureConnection { get; set; }
         public string BaseConfigFile { get { return "appsettings.json"; } }
         public string EnvironmentConfigFile { get { return $"appsettings.{CurrentEnvironment}.json"; } }
@@ -33,13 +28,13 @@ namespace GoodToCode.Shared.Specs
                 string codeBase = Assembly.GetExecutingAssembly().Location;
                 UriBuilder uri = new UriBuilder(codeBase);
                 string path = Uri.UnescapeDataString(uri.Path);
-                return Path.GetDirectoryName(path);
+                return Path.GetDirectoryName(path) ?? "";
             }
         }
 
         public ConfigurationFactory()
         {
-            JsonPathOrAzureConnection = Environment.GetEnvironmentVariable("AppSettingsConnection");
+            JsonPathOrAzureConnection = Environment.GetEnvironmentVariable("AppSettingsConnection") ?? "";
         }
 
         public ConfigurationFactory(string jsonPathOrAzureConnection) : this()
@@ -88,10 +83,10 @@ namespace GoodToCode.Shared.Specs
             var returnValue = string.Empty;
             if (Directory.GetFiles(configDirectory, BaseConfigFile).Length > 0)
                 returnValue = configDirectory;
-            else if (Directory.GetParent(configDirectory).GetFiles(BaseConfigFile).Length > 0)
-                returnValue = Directory.GetParent(configDirectory).FullName;
+            else if (Directory.GetParent(configDirectory)?.GetFiles(BaseConfigFile).Length > 0)
+                returnValue = Directory.GetParent(configDirectory)?.FullName;
 
-            return returnValue;
+            return returnValue ?? "";
         }
     }
 }

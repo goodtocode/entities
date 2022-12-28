@@ -1,17 +1,12 @@
-﻿using GoodToCode.Shared.Specs;
-using GoodToCode.Chronology.Application;
+﻿using GoodToCode.Chronology.Application;
+using GoodToCode.Chronology.Infrastructure;
 using GoodToCode.Chronology.Models;
+using GoodToCode.Shared.Specs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
-using GoodToCode.Chronology.Infrastructure;
-using System.IO;
 
 namespace GoodToCode.Chronology.Specs
 {
@@ -24,7 +19,7 @@ namespace GoodToCode.Chronology.Specs
         private readonly ScheduleSaveCommandSteps commandSteps = new ScheduleSaveCommandSteps();
 
         public Guid SutKey { get; private set; }
-        public IList<Schedule> Sut { get; private set; }
+        public IList<Schedule> Sut { get; private set; } = new List<Schedule>();
         public IList<Schedule> RecycleBin { get; private set; } = new List<Schedule>();
 
         public ScheduleQuerySteps()
@@ -40,7 +35,7 @@ namespace GoodToCode.Chronology.Specs
             commandSteps.GivenANewScheduleSaveCommandHasBeenCreated();
             await commandSteps.WhenTheScheduleIsInsertedViaCQRSCommand();
             Sut = await _dbContext.Schedule.Take(10).ToListAsync();
-            SutKey = Sut.FirstOrDefault().ScheduleKey;
+            SutKey = Sut?.FirstOrDefault()?.ScheduleKey ?? Guid.Empty;
             Assert.IsTrue(SutKey != Guid.Empty);
         }
 

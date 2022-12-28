@@ -34,7 +34,6 @@ namespace GoodToCode.Chronology.Application
 
         private readonly ScheduleGetValidator _validator;
         private readonly List<KeyValuePair<string, string>> _errors;
-        private readonly ILogger<ScheduleGetHandler> _logger;
         private readonly ChronologyDbContext _dbContext;
 
         public ScheduleGetHandler(ChronologyDbContext dbContext)
@@ -56,9 +55,8 @@ namespace GoodToCode.Chronology.Application
                     response.Result = _dbContext.Schedule.Where(request.QueryPredicate).ToList();
 
                 }
-                catch (Exception e)
+                catch
                 {
-                    _logger.LogCritical(e.ToString());
                     response.ErrorInfo.UserErrorMessage = "An unknown error has occurred.";
                     response.ErrorInfo.HasException = true;
                 }
