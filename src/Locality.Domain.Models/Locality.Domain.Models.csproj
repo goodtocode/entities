@@ -32,7 +32,6 @@
   <ItemGroup>
     <PackageReference Include="GoodToCode.Shared.Ddd" Version="5.11.332.205" />
     <PackageReference Include="GoodToCode.Shared.EntityFramework" Version="5.11.332.205" />
-    <PackageReference Include="NetTopologySuite" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>

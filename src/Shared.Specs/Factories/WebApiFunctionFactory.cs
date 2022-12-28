@@ -1,7 +1,7 @@
 ﻿using DoctorCode.Pluralization;
 using Microsoft.Extensions.Configuration;
 using System;
-using TechTalk.SpecRun.Common.Helper;
+
 
 namespace GoodToCode.Subjects.Specs
 {
@@ -10,7 +10,7 @@ namespace GoodToCode.Subjects.Specs
         private readonly IConfiguration _config;
         private string _urlBase;
 
-        public string UrlBase { get { _urlBase = _urlBase.IsNullOrWhiteSpace() ? _config[$"Stack:{AppConfigNamespace}:ApiUrl"] : _urlBase; return _urlBase; } private set { _urlBase = value; } }
+        public string UrlBase { get { _urlBase = string.IsNullOrWhiteSpace(_urlBase) ? _config[$"Stack:{AppConfigNamespace}:ApiUrl"] : _urlBase; return _urlBase; } private set { _urlBase = value; } }
         public Guid RowKey { get; private set; } = Guid.Empty;
         public string GetAllUrl { get { return $"{UrlBase}/v1/{DomainModelPlural}"; } }
         public string GetByKeyUrl { get { return $"{UrlBase}/v1/{DomainModelPlural}/{RowKey}"; } }

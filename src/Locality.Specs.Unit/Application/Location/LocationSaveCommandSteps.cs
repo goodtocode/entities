@@ -1,17 +1,15 @@
-﻿using GoodToCode.Shared.Specs;
-using GoodToCode.Locality.Application;
+﻿using GoodToCode.Locality.Application;
+using GoodToCode.Locality.Infrastructure;
 using GoodToCode.Locality.Models;
+using GoodToCode.Shared.Specs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
-using TechTalk.SpecRun.Common.Helper;
-using GoodToCode.Locality.Infrastructure;
-using System.Collections.Generic;
-using System.IO;
 
 namespace GoodToCode.Locality.Specs
 {
@@ -47,7 +45,7 @@ namespace GoodToCode.Locality.Specs
         [Given(@"the Location Save Command validates")]
         public void GivenTheLocationSaveCommandValidates()
         {
-            Assert.IsFalse(Sut.LocationName.IsNullOrWhiteSpace());
+            Assert.IsFalse(string.IsNullOrWhiteSpace(Sut.LocationName));
         }
 
         [When(@"the Location is inserted via CQRS Command")]

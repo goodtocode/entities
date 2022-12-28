@@ -11,7 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
-using TechTalk.SpecRun.Common.Helper;
+
 
 namespace GoodToCode.Occurrences.Specs
 {
@@ -47,7 +47,7 @@ namespace GoodToCode.Occurrences.Specs
         [Given(@"the Event Save Command validates")]
         public void GivenTheEventSaveCommandValidates()
         {
-            Assert.IsFalse(Sut.EventName.IsNullOrWhiteSpace());
+            Assert.IsFalse(string.IsNullOrWhiteSpace(Sut.EventName));
         }
 
         [When(@"the Event is inserted via CQRS Command")]

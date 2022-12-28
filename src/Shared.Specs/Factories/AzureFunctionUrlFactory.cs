@@ -1,7 +1,6 @@
 ﻿using DoctorCode.Pluralization;
 using Microsoft.Extensions.Configuration;
 using System;
-using TechTalk.SpecRun.Common.Helper;
 
 namespace GoodToCode.Subjects.Specs
 {
@@ -11,8 +10,8 @@ namespace GoodToCode.Subjects.Specs
         private string _urlBase;
         private string _code;
 
-        public string UrlBase { get { _urlBase = _urlBase.IsNullOrWhiteSpace() ? _config[$"{AppConfigNamespace}:FunctionsUrl"] : _urlBase; return _urlBase; } private set { _urlBase = value; } }        
-        public string Code { get { _code = _code.IsNullOrWhiteSpace() ? _config[$"{AppConfigNamespace}:FunctionsCode"] : _code; return _code; } private set { _code = value; } }
+        public string UrlBase { get { _urlBase = string.IsNullOrWhiteSpace(_urlBase) ? _config[$"{AppConfigNamespace}:FunctionsUrl"] : _urlBase; return _urlBase; } private set { _urlBase = value; } }        
+        public string Code { get { _code = string.IsNullOrWhiteSpace(_code) ? _config[$"{AppConfigNamespace}:FunctionsCode"] : _code; return _code; } private set { _code = value; } }
         public Guid RowKey { get; private set; } = Guid.Empty;
         public string GetAllUrl { get { return $"{UrlBase}/api/{DomainModelPlural}Get?code={Code}"; } }
         public string GetByKeyUrl { get { return $"{UrlBase}/api/{DomainModel}Get?code={Code}&key={RowKey}"; } }

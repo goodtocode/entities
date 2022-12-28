@@ -11,7 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
-using TechTalk.SpecRun.Common.Helper;
+
 
 namespace GoodToCode.Subjects.Specs
 {
@@ -48,7 +48,7 @@ namespace GoodToCode.Subjects.Specs
         [Given(@"the Business Save Command validates")]
         public void GivenTheBusinessSaveCommandValidates()
         {
-            Assert.IsFalse(Sut.BusinessName.IsNullOrWhiteSpace());
+            Assert.IsFalse(string.IsNullOrWhiteSpace(Sut.BusinessName));
         }
 
         [When(@"the Business is inserted via CQRS Command")]

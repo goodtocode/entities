@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <AssemblyName>GoodToCode.Chronology.Specs.Unit</AssemblyName>
     <RootNamespace>GoodToCode.Chronology.Specs</RootNamespace>
@@ -10,29 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <CustomAdditionalCompileInputs Remove="Application\Schedule\ScheduleQuery.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Application\Schedule\ScheduleSaveCommand.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Domain\Schedule\ScheduleAggregate.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\ScheduleCreate.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\ScheduleDelete.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\SchedulesGet.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\ScheduleGetByKey.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\ScheduleUpdate.feature.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="appsettings.Local.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckBuild Remove="Application\Schedule\ScheduleQuery.feature.cs" />
-    <UpToDateCheckBuild Remove="Application\Schedule\ScheduleSaveCommand.feature.cs" />
-    <UpToDateCheckBuild Remove="Domain\Schedule\ScheduleAggregate.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Schedule\ScheduleCreate.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Schedule\ScheduleDelete.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Schedule\SchedulesGet.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Schedule\ScheduleGetByKey.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Schedule\ScheduleUpdate.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,49 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
-    <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
-    <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
-    <PackageReference Include="coverlet.collector" Version="1.3.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="SpecFlow" Version="3.4.31" />
-    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.4.31" />
-    <PackageReference Include="SpecRun.SpecFlow" Version="3.4.19" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Chronology.Application.Services\Chronology.Application.Services.csproj" />
     <ProjectReference Include="..\Chronology.Infrastructure.Persistence\Chronology.Infrastructure.Persistence.csproj" />
     <ProjectReference Include="..\Shared.Specs\Shared.Specs.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Application\Schedule\ScheduleQuery.feature.cs">
-      <DependentUpon>ScheduleQuery.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Application\Schedule\ScheduleSaveCommand.feature.cs">
-      <DependentUpon>ScheduleSaveCommand.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Domain\Schedule\ScheduleAggregate.feature.cs">
-      <DependentUpon>ScheduleAggregate.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Schedule\ScheduleCreate.feature.cs">
-      <DependentUpon>ScheduleCreate.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Schedule\ScheduleDelete.feature.cs">
-      <DependentUpon>ScheduleDelete.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Schedule\SchedulesGet.feature.cs">
-      <DependentUpon>SchedulesGet.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Schedule\ScheduleGetByKey.feature.cs">
-      <DependentUpon>ScheduleGetByKey.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Schedule\ScheduleUpdate.feature.cs">
-      <DependentUpon>ScheduleUpdate.feature</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
