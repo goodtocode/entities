@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>GoodToCode.Occurrences.Application.WebApi</RootNamespace>
     <AssemblyName>GoodToCode.Occurrences.Application.WebApi</AssemblyName>
     <Version>5.20.1</Version>

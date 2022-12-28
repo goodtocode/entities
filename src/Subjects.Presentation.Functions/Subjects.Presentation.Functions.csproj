@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AzureFunctionsVersion>v3</AzureFunctionsVersion>
+    <TargetFramework>net6.0</TargetFramework>
+    <AzureFunctionsVersion>v4</AzureFunctionsVersion>
     <AssemblyName>GoodToCode.Subjects.Presentation.Functions</AssemblyName>
     <RootNamespace>GoodToCode.Subjects.Presentation.Functions</RootNamespace>
     <Version>5.20.1</Version>
