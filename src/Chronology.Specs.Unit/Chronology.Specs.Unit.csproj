@@ -10,29 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <CustomAdditionalCompileInputs Remove="Application\Schedule\ScheduleQuery.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Application\Schedule\ScheduleSaveCommand.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Domain\Schedule\ScheduleAggregate.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\ScheduleCreate.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\ScheduleDelete.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\SchedulesGet.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\ScheduleGetByKey.feature.cs" />
-    <CustomAdditionalCompileInputs Remove="Infrastructure\Schedule\ScheduleUpdate.feature.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="appsettings.Local.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckBuild Remove="Application\Schedule\ScheduleQuery.feature.cs" />
-    <UpToDateCheckBuild Remove="Application\Schedule\ScheduleSaveCommand.feature.cs" />
-    <UpToDateCheckBuild Remove="Domain\Schedule\ScheduleAggregate.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Schedule\ScheduleCreate.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Schedule\ScheduleDelete.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Schedule\SchedulesGet.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Schedule\ScheduleGetByKey.feature.cs" />
-    <UpToDateCheckBuild Remove="Infrastructure\Schedule\ScheduleUpdate.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,33 +35,6 @@
     <ProjectReference Include="..\Chronology.Application.Services\Chronology.Application.Services.csproj" />
     <ProjectReference Include="..\Chronology.Infrastructure.Persistence\Chronology.Infrastructure.Persistence.csproj" />
     <ProjectReference Include="..\Shared.Specs\Shared.Specs.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Application\Schedule\ScheduleQuery.feature.cs">
-      <DependentUpon>ScheduleQuery.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Application\Schedule\ScheduleSaveCommand.feature.cs">
-      <DependentUpon>ScheduleSaveCommand.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Domain\Schedule\ScheduleAggregate.feature.cs">
-      <DependentUpon>ScheduleAggregate.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Schedule\ScheduleCreate.feature.cs">
-      <DependentUpon>ScheduleCreate.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Schedule\ScheduleDelete.feature.cs">
-      <DependentUpon>ScheduleDelete.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Schedule\SchedulesGet.feature.cs">
-      <DependentUpon>SchedulesGet.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Schedule\ScheduleGetByKey.feature.cs">
-      <DependentUpon>ScheduleGetByKey.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Infrastructure\Schedule\ScheduleUpdate.feature.cs">
-      <DependentUpon>ScheduleUpdate.feature</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
