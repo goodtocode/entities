@@ -4,10 +4,6 @@ using GoodToCode.Shared.Specs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace GoodToCode.Chronology.Specs
@@ -22,9 +18,8 @@ namespace GoodToCode.Chronology.Specs
 
         public Guid SutKey { get; private set; }
         public ScheduleAggregate Aggregate { get; private set; }
-        public IList<ScheduleAggregate> RecycleBin { get; private set; }
-
-        public Schedule SutSchedule { get; private set; }
+        public IList<ScheduleAggregate> RecycleBin { get; private set; } = new List<ScheduleAggregate>();
+        public Schedule SutSchedule { get; private set; } = new Schedule();
 
         public ScheduleAggregateSteps()
         {

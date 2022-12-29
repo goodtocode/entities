@@ -6,11 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace GoodToCode.Subjects.Specs
@@ -40,7 +35,7 @@ namespace GoodToCode.Subjects.Specs
             commandSteps.GivenANewBusinessSaveCommandHasBeenCreated();
             await commandSteps.WhenTheBusinessIsInsertedViaCQRSCommand();
             Sut.Add(await _dbContext.Business.FirstOrDefaultAsync());
-            SutKey = Sut.FirstOrDefault().BusinessKey;
+            SutKey = Sut?.FirstOrDefault()?.BusinessKey ?? Guid.Empty;
             Assert.IsTrue(SutKey != Guid.Empty);
         }
 

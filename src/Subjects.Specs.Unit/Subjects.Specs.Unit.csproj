@@ -7,21 +7,9 @@
     <RootNamespace>GoodToCode.Subjects</RootNamespace>
     <Version>5.20.1</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	<Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="appsettings.Local.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <SpecFlowObsoleteCodeBehindFiles Remove="Application\Associate\BusinessCreate.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Application\BusinessCreate.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Application\BusinessGetByKey.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Associate\BusinessesGet.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Associate\BusinessGetByKey.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Associate\BusinessInsert.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Infrastructure\Associate\BusinessUpdate.feature.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Include="appsettings.Local.json">
@@ -43,10 +31,10 @@
 
   <ItemGroup>
     <Compile Update="Application\Associate\BusinessSaveCommand.feature.cs">
-      <DependentUpon>BusinessSaveCommand.feature</DependentUpon>
+      <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
     <Compile Update="Application\Associate\BusinessQuery.feature.cs">
-      <DependentUpon>BusinessQuery.feature</DependentUpon>
+      <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
     <Compile Update="Infrastructure\Associate\BusinessesGet.feature.cs">
       <DependentUpon>%(Filename)</DependentUpon>
@@ -55,7 +43,7 @@
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
     <Compile Update="Infrastructure\Associate\BusinessCreate.feature.cs">
-      <DependentUpon>BusinessCreate.feature</DependentUpon>
+      <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
     <Compile Update="Infrastructure\Associate\BusinessUpdate.feature.cs">
       <DependentUpon>%(Filename)</DependentUpon>
@@ -92,9 +80,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
     <ProjectReference Include="..\Shared.Specs\Shared.Specs.csproj" />
-    <ProjectReference Include="..\Subjects.Application.Services\Subjects.Application.Services.csproj" />
-    <ProjectReference Include="..\Subjects.Domain.Models\Subjects.Domain.Models.csproj" />
-    <ProjectReference Include="..\Subjects.Infrastructure.Persistence\Subjects.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\Subjects.Core.Application\Subjects.Core.Application.csproj" />
+    <ProjectReference Include="..\Subjects.Core.Domain\Subjects.Core.Domain.csproj" />
+    <ProjectReference Include="..\Subjects.Infrastructure\Subjects.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

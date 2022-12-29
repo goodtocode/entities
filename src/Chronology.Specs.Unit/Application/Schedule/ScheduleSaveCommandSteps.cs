@@ -5,11 +5,6 @@ using GoodToCode.Shared.Specs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 
@@ -23,8 +18,8 @@ namespace GoodToCode.Chronology.Specs
         private readonly IConfiguration _config;
 
         public Guid SutKey { get; private set; }
-        public Schedule Sut { get; private set; }
-        public IList<Schedule> RecycleBin { get; private set; }
+        public Schedule Sut { get; private set; } = new();
+        public IList<Schedule> RecycleBin { get; private set; } = new List<Schedule>();
 
         public ScheduleSaveCommandSteps()
         {

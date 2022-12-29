@@ -1,14 +1,10 @@
-﻿using GoodToCode.Shared.Specs;
+﻿using GoodToCode.Occurrences.Infrastructure;
 using GoodToCode.Occurrences.Models;
+using GoodToCode.Shared.Specs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
-using GoodToCode.Occurrences.Infrastructure;
-using System.Collections.Generic;
-using System.IO;
 
 namespace GoodToCode.Occurrences.Specs
 {
@@ -20,8 +16,8 @@ namespace GoodToCode.Occurrences.Specs
         private readonly IConfiguration _config;
         private readonly EventCreateSteps createSteps = new EventCreateSteps();
 
-        public Event Sut { get; set; }
-        public IList<Event> Suts { get; set; }
+        public Event Sut { get; set; } = new();
+        public IList<Event> Suts { get; set; } = new List<Event>();
         public Guid SutKey { get; set; }
         public IList<Event> RecycleBin { get; set; } = new List<Event>();
 

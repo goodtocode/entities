@@ -4,11 +4,6 @@ using GoodToCode.Shared.Specs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace GoodToCode.Chronology.Specs
@@ -21,8 +16,8 @@ namespace GoodToCode.Chronology.Specs
         private readonly IConfiguration _config;
         private int _rowsAffected;
 
-        public Schedule Sut { get; set; }
-        public IList<Schedule> Suts { get; set; }
+        public Schedule Sut { get; set; } = new Schedule();
+        public IList<Schedule> Suts { get; set; } = new List<Schedule>();
         public Guid SutKey { get; set; }
         public IList<Schedule> RecycleBin { get; set; } = new List<Schedule>();
 

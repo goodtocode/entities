@@ -1,15 +1,10 @@
-﻿using GoodToCode.Shared.Specs;
+﻿using GoodToCode.Locality.Infrastructure;
 using GoodToCode.Locality.Models;
+using GoodToCode.Shared.Specs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
-using GoodToCode.Locality.Infrastructure;
-using System.Collections.Generic;
-using System.IO;
 
 namespace GoodToCode.Locality.Specs
 {
@@ -21,7 +16,7 @@ namespace GoodToCode.Locality.Specs
         private readonly IConfiguration _config;
         private int _rowsAffected;
         public Guid SutKey { get; private set; }
-        public Location Sut { get; private set; }
+        public Location Sut { get; private set; } = new();
         public IList<Location> Suts { get; private set; } = new List<Location>();
         public IList<Location> RecycleBin { get; private set; } = new List<Location>();
 

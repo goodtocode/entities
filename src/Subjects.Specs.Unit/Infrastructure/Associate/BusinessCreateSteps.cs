@@ -5,12 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace GoodToCode.Subjects.Specs
@@ -24,7 +18,7 @@ namespace GoodToCode.Subjects.Specs
         private int _rowsAffected;
         
         public Guid SutKey { get; private set; }
-        public Business Sut { get; private set; }
+        public Business Sut { get; private set; } = new();
         public IList<Business> Suts { get; private set; } = new List<Business>();
         public IList<Business> RecycleBin { get; private set; } = new List<Business>();
 
@@ -53,7 +47,7 @@ namespace GoodToCode.Subjects.Specs
             var comparison = Sut.BusinessName;
             var serialized = JsonConvert.SerializeObject(Sut);
             var deserialized = JsonConvert.DeserializeObject<Business>(serialized);
-            Assert.IsTrue(deserialized.BusinessName == comparison);
+            Assert.IsTrue(deserialized?.BusinessName == comparison);
         }
 
         [When(@"the Business does not exist in persistence by key")]

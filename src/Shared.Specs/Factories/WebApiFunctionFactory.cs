@@ -8,7 +8,7 @@ namespace GoodToCode.Subjects.Specs
     public class WebApiUrlFactory : ICrudUrlFactory
     {
         private readonly IConfiguration _config;
-        private string _urlBase;
+        private string _urlBase = "http://localhost";
 
         public string UrlBase { get { _urlBase = string.IsNullOrWhiteSpace(_urlBase) ? _config[$"Stack:{AppConfigNamespace}:ApiUrl"] : _urlBase; return _urlBase; } private set { _urlBase = value; } }
         public Guid RowKey { get; private set; } = Guid.Empty;

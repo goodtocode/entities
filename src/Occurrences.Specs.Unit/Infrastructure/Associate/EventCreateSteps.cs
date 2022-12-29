@@ -1,15 +1,10 @@
-﻿using GoodToCode.Shared.Specs;
+﻿using GoodToCode.Occurrences.Infrastructure;
 using GoodToCode.Occurrences.Models;
+using GoodToCode.Shared.Specs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
-using GoodToCode.Occurrences.Infrastructure;
-using System.Collections.Generic;
-using System.IO;
 
 namespace GoodToCode.Occurrences.Specs
 {
@@ -22,7 +17,7 @@ namespace GoodToCode.Occurrences.Specs
         private int _rowsAffected;
 
         public Guid SutKey { get; set; }
-        public Event Sut { get; private set; }
+        public Event Sut { get; private set; } = new Event();
         public IList<Event> Suts { get; private set; } = new List<Event>();        
 
         public IList<Event> RecycleBin { get; set; } = new List<Event>();
