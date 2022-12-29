@@ -56,8 +56,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Occurrences.Application.Services\Occurrences.Application.Services.csproj" />
-		<ProjectReference Include="..\Occurrences.Infrastructure.Persistence\Occurrences.Infrastructure.Persistence.csproj" />
+		<ProjectReference Include="..\Occurrences.Core.Application\Occurrences.Core.Application.csproj" />
+		<ProjectReference Include="..\Occurrences.Infrastructure\Occurrences.Infrastructure.csproj" />
 		<ProjectReference Include="..\Subjects.Specs.Unit\Subjects.Specs.Unit.csproj" />
 	</ItemGroup>
 

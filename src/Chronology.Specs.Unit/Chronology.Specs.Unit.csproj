@@ -34,8 +34,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Chronology.Application.Services\Chronology.Application.Services.csproj" />
-		<ProjectReference Include="..\Chronology.Infrastructure.Persistence\Chronology.Infrastructure.Persistence.csproj" />
+		<ProjectReference Include="..\Chronology.Core.Application\Chronology.Core.Application.csproj" />
+		<ProjectReference Include="..\Chronology.Infrastructure\Chronology.Infrastructure.csproj" />
 		<ProjectReference Include="..\Shared.Specs\Shared.Specs.csproj" />
 	</ItemGroup>
 

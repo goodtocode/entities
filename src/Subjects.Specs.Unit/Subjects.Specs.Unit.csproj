@@ -80,9 +80,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
     <ProjectReference Include="..\Shared.Specs\Shared.Specs.csproj" />
-    <ProjectReference Include="..\Subjects.Application.Services\Subjects.Application.Services.csproj" />
-    <ProjectReference Include="..\Subjects.Domain.Models\Subjects.Domain.Models.csproj" />
-    <ProjectReference Include="..\Subjects.Infrastructure.Persistence\Subjects.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\Subjects.Core.Application\Subjects.Core.Application.csproj" />
+    <ProjectReference Include="..\Subjects.Core.Domain\Subjects.Core.Domain.csproj" />
+    <ProjectReference Include="..\Subjects.Infrastructure\Subjects.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <OutputType>Library</OutputType>
+    <AssemblyName>GoodToCode.Chronology.Infrastructure</AssemblyName>
+    <RootNamespace>GoodToCode.Chronology.Infrastructure</RootNamespace>
+    <Version>5.20.1</Version>
+    <IsPackable>true</IsPackable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Company>GoodToCode</Company>
+    <Product>GoodToCode.Chronology.Infrastructure</Product>
+    <Authors>Robert J. Good</Authors>
+    <PackageTags>.NET C# EF Core DDD Web API Azure Functions</PackageTags>
+    <Description>GoodToCode.Chronology.Infrastructure</Description>
+    <Copyright>Copyright (c) GoodToCode. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/goodtocode/stack</PackageProjectUrl>
+    <PackageIcon>storeicon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/goodtocode/stack</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageReleaseNotes>https://github.com/goodtocode/Stack/projects/1</PackageReleaseNotes>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="storeicon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Chronology.Core.Domain\Chronology.Core.Domain.csproj" />
+    <ProjectReference Include="..\Shared.Abstractions\Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\Chronology.Core.Domain\Chronology.Core.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

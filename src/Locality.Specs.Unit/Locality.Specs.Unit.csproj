@@ -56,9 +56,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Locality.Application.Services\Locality.Application.Services.csproj" />
-		<ProjectReference Include="..\Locality.Domain.Models\Locality.Domain.Models.csproj" />
-		<ProjectReference Include="..\Locality.Infrastructure.Persistence\Locality.Infrastructure.Persistence.csproj" />
+		<ProjectReference Include="..\Locality.Core.Application\Locality.Core.Application.csproj" />
+		<ProjectReference Include="..\Locality.Core.Domain\Locality.Core.Domain.csproj" />
+		<ProjectReference Include="..\Locality.Infrastructure\Locality.Infrastructure.csproj" />
 		<ProjectReference Include="..\Shared.Specs\Shared.Specs.csproj" />
 	</ItemGroup>
 
