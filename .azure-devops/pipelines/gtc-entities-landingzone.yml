@@ -19,6 +19,9 @@ parameters:
   - name: subscriptionService
     type: string 
     default: "gtc-entities-001"
+  - name: subscriptionId
+    type: string 
+    default: "2d60a88f-6c6a-48e6-844b-69bb857dd4fe"
 
 variables:
   - template: ../variables/common.yml
@@ -35,7 +38,7 @@ stages:
           - template: ../steps/landingzone-infrastructure-steps.yml
             parameters:
               armPath: '$(armPath)'
-              subscriptionId: '$(subscriptionId)'
+              subscriptionId: '${{ parameters.subscriptionId }}'
               subscriptionService: '${{ parameters.subscriptionService }}'
               rgName: '$(rgName)'
               rgLocation: '$(rgLocation)'
@@ -52,7 +55,7 @@ stages:
             inputs:
                 deploymentScope: "Resource Group"
                 azureResourceManagerConnection: "${{ parameters.subscriptionService }}"
-                subscriptionId: '$(subscriptionId)'
+                subscriptionId: '${{ parameters.subscriptionId }}'
                 action: "Create Or Update Resource Group"
                 resourceGroupName: '$(rgName)'
                 location: '$(rgLocation)'
@@ -67,7 +70,7 @@ stages:
             inputs:
                 deploymentScope: "Resource Group"
                 azureResourceManagerConnection: "${{ parameters.subscriptionService }}"
-                subscriptionId: '$(subscriptionId)'
+                subscriptionId: '${{ parameters.subscriptionId }}'
                 action: "Create Or Update Resource Group"
                 resourceGroupName: '$(rgName)'
                 location: '$(rgLocation)'
