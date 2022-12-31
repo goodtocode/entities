@@ -48,7 +48,7 @@ stages:
               workLocation: '$(rgLocation)'
               workName: '$(workName)'
               workResourceGroupName: '$(workResourceGroupName)'
-              workSubscriptionId: '$(subscriptionId)'
+              workSubscriptionId: '${{ parameters.subscriptionId }}'
 
   - stage: production
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
@@ -61,7 +61,7 @@ stages:
           - template: ../steps/landingzone-infrastructure-steps.yml
             parameters:
               armPath: '$(armPath)'
-              subscriptionId: '$(subscriptionId)'
+              subscriptionId: '${{ parameters.subscriptionId }}'
               subscriptionService: '${{ parameters.subscriptionService }}'
               rgName: '$(rgName)'
               rgLocation: '$(rgLocation)'
@@ -71,4 +71,4 @@ stages:
               workLocation: '$(rgLocation)'
               workName: '$(workName)'
               workResourceGroupName: '$(workResourceGroupName)'
-              workSubscriptionId: '$(subscriptionId)'
+              workSubscriptionId: '${{ parameters.subscriptionId }}'

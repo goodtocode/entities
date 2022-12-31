@@ -1,4 +1,5 @@
 variables:
+  - group: gtc-rg-entities-dev
   - template: common.yml
   - name: rgEnvironment
     value: 'Development'

@@ -21,7 +21,7 @@ parameters:
     default: "gtc-entities-001"
   - name: subscriptionId
     type: string 
-    default: "2d60a88f-6c6a-48e6-844b-69bb857dd4fe"
+    default: "$(subscriptionId)"
 
 variables:
   - template: ../variables/common.yml
