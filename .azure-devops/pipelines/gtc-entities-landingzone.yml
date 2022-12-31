@@ -63,7 +63,7 @@ stages:
                 csmFile: "$(armPath)/plan-appplan.json"        
                 csmParametersFile: "$(armPath)/plan-appplan.parameters.json"        
                 deploymentMode: "Validation"
-                overrideParameters: -name "$(planName)" -sku "$(planSku)" -location '$(rgLocation)' -skuCapacity "4"
+                overrideParameters: -name "$(planName)" -sku "$(planSku)" -location "$(rgLocation)" -skuCapacity "4"
 
           - task: AzureResourceManagerTemplateDeployment@3
             displayName: "Deploy $(planName)"
@@ -78,4 +78,4 @@ stages:
                 csmFile: "$(armPath)/plan-appplan.json"
                 csmParametersFile: "$(armPath)/plan-appplan.parameters.json"
                 deploymentMode: "Incremental"
-                overrideParameters: -name "$(planName)" -sku "$(planSku)" -location '$(rgLocation)' -skuCapacity "4"
+                overrideParameters: -name "$(planName)" -sku "$(planSku)" -location "$(rgLocation)" -skuCapacity "4"
