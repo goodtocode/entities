@@ -15,3 +15,5 @@ variables:
     value: '$(Agent.TempDirectory)/ymltemp'
   - name: testsPath
     value: '$(System.DefaultWorkingDirectory)/tests'
+  - name: planCapacity
+    value: 4

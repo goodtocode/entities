@@ -30,7 +30,7 @@ stages:
   - stage: development
     condition: ne(variables['Build.SourceBranch'], 'refs/heads/main')
     variables:
-      - template: ../variables/development.yml
+      - template: ../variables/development-subjects.yml
 
     jobs:
       - job: deploy_landing_zone
@@ -50,25 +50,15 @@ stages:
               workResourceGroupName: '$(workResourceGroupName)'
               workSubscriptionId: '${{ parameters.subscriptionId }}'
 
-  - stage: production
-    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
-    variables:
-      - template: ../variables/production.yml
-
-    jobs:
-      - job: deploy_landing_zone
-        steps:
-          - template: ../steps/landingzone-infrastructure-steps.yml
+          - template: ../steps/api-infrastructure-steps.yml
             parameters:
               armPath: '$(armPath)'
               subscriptionId: '${{ parameters.subscriptionId }}'
               subscriptionService: '${{ parameters.subscriptionService }}'
               rgName: '$(rgName)'
               rgLocation: '$(rgLocation)'
-              appiName: '$(appiName)'
-              kvName: '$(kvName)'
-              stName: '$(stName)'
-              workLocation: '$(rgLocation)'
-              workName: '$(workName)'
-              workResourceGroupName: '$(workResourceGroupName)'
-              workSubscriptionId: '${{ parameters.subscriptionId }}'
+              rgEnvironment: '$(rgEnvironment)'
+              planName: '$(planName)'
+              planSku: '$(planSku)'
+              planCapacity: '$(planCapacity)'
+              apiName: '$(apiName)'
