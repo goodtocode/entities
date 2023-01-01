@@ -15,5 +15,9 @@ variables:
     value: 'stsubjectsdev001'
   - name: workName
     value: 'work-entities-dev-001'
-  - name: workResourceGroupName
+  - name: rgSharedName
     value: 'gtc-rg-entities-dev-001'
+  - name: planName
+    value: 'plan-entities-dev-001'
+  - name: planSku
+    value: 'F1'

@@ -47,7 +47,7 @@ stages:
               stName: '$(stName)'
               workLocation: '$(rgLocation)'
               workName: '$(workName)'
-              workResourceGroupName: '$(workResourceGroupName)'
+              workResourceGroupName: '$(rgSharedName)'
               workSubscriptionId: '${{ parameters.subscriptionId }}'
 
           - template: ../steps/api-infrastructure-steps.yml
@@ -59,6 +59,7 @@ stages:
               rgLocation: '$(rgLocation)'
               rgEnvironment: '$(rgEnvironment)'
               planName: '$(planName)'
+              planResourceGroupName: '$(rgSharedName)'
               planSku: '$(planSku)'
               planCapacity: '$(planCapacity)'
               apiName: '$(apiName)'
