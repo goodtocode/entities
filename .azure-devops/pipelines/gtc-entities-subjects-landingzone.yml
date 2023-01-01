@@ -50,6 +50,36 @@ stages:
               workResourceGroupName: '$(rgSharedName)'
               workSubscriptionId: '${{ parameters.subscriptionId }}'
 
+          - task: AzureResourceManagerTemplateDeployment@3
+            displayName: "Validate $(apiName)"
+            inputs:
+                deploymentScope: "Resource Group"
+                azureResourceManagerConnection: "${{ parameters.subscriptionService }}"
+                subscriptionId: "${{ parameters.subscriptionId }}"
+                action: "Create Or Update Resource Group"
+                resourceGroupName: "$(rgSharedName)"
+                location: "$(rgLocation)"
+                templateLocation: "Linked artifact"
+                csmFile: "$(armPath)/api-apiapp.json"        
+                csmParametersFile: "$(armPath)/api-apiapp.parameters.json"        
+                deploymentMode: "Validation"
+                overrideParameters: -name "$(apiName)" -location "$(rgLocation)" -planName "$(planName)" 
+
+          - task: AzureResourceManagerTemplateDeployment@3
+            displayName: "Deploy $(apiName)"
+            inputs:
+                deploymentScope: "Resource Group"
+                azureResourceManagerConnection: "${{ parameters.subscriptionService }}"
+                subscriptionId: "${{ parameters.subscriptionId }}"
+                action: "Create Or Update Resource Group"
+                resourceGroupName: "$(rgSharedName)"
+                location: "$(rgLocation)"
+                templateLocation: "Linked artifact"
+                csmFile: "$(armPath)/api-apiapp.json"
+                csmParametersFile: "$(armPath)/api-apiapp.parameters.json"
+                deploymentMode: "Incremental"
+                overrideParameters: -name "$(apiName)" -location "$(rgLocation)" -planName "$(planName)" 
+
           - template: ../steps/api-infrastructure-steps.yml
             parameters:
               armPath: '$(armPath)'
