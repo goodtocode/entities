@@ -21,3 +21,5 @@ variables:
     value: 'plan-entities-dev-001'
   - name: planSku
     value: 'F1'
+  - name: apiName
+    value: 'api-subjects-dev-001'
