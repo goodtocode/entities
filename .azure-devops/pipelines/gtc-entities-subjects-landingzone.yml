@@ -79,17 +79,3 @@ stages:
                 csmParametersFile: "$(armPath)/api-apiapp.parameters.json"
                 deploymentMode: "Incremental"
                 overrideParameters: -name "$(apiName)" -location "$(rgLocation)" -planName "$(planName)" 
-
-          - template: ../steps/api-infrastructure-steps.yml
-            parameters:
-              armPath: '$(armPath)'
-              subscriptionId: '${{ parameters.subscriptionId }}'
-              subscriptionService: '${{ parameters.subscriptionService }}'
-              rgName: '$(rgName)'
-              rgLocation: '$(rgLocation)'
-              rgEnvironment: '$(rgEnvironment)'
-              planName: '$(planName)'
-              planResourceGroupName: '$(rgSharedName)'
-              planSku: '$(planSku)'
-              planCapacity: '$(planCapacity)'
-              apiName: '$(apiName)'
