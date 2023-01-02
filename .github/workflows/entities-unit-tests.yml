@@ -41,7 +41,7 @@ jobs:
     - name: Bicep Lint
       uses: Azure/cli@v1
       with:
-        inlineScript: az bicep build --file main.bicep
+        inlineScript: az bicep build --file /.azure/main.bicep
         
     # Validate whether a template is valid at subscription scope
     - name: Bicep Validate
@@ -50,7 +50,7 @@ jobs:
         inlineScript: |
           az deployment sub validate \
             --name validate-${{ github.run_id }} \
-            --template-file main.bicep \
+            --template-file /.azure/main.bicep \
             --location $LOCATION 
 
     # Perform a security scan of the bicep code using checkov
