@@ -1,16 +1,42 @@
-env:
-  armPath: .
-  subscriptionId: 00000000-0000-0000-0000-000000000000
-  subscriptionService: COMPANY-PRODUCT-001
-  rgName: rg-PRODUCT-001
-  rgLocation: West US 3
-  appiName: appi-PRODUCT-ENVIRONMENT-001
-  kvName: kv-PRODUCT-ENVIRONMENT-001
-  stName: stPRODUCTENVIRONMENT001
-  workLocation: West US 3
-  workName: work-PRODUCT-ENVIRONMENT-001
-  workResourceGroupName: rg-PRODUCT-001
-  workSubscriptionId: 00000000-0000-0000-0000-000000000000
+on:
+  workflow_call:
+    inputs:
+      armPath:
+        required: true
+        type: string
+      subscriptionId:
+        required: true
+        type: string
+      subscriptionService:
+        required: true
+        type: string
+      rgName:
+        required: true
+        type: string
+      rgLocation:
+        required: true
+        type: string
+      appiName:
+        required: true
+        type: string
+      kvName:
+        required: true
+        type: string
+      stName:
+        required: true
+        type: string
+      workLocation:
+        required: true
+        type: string
+      workName:
+        required: true
+        type: string
+      workResourceGroupName:
+        required: true
+        type: string
+      workSubscriptionId:
+        required: true
+        type: string
 
 jobs:
   build:
@@ -22,36 +48,36 @@ jobs:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-    - name: Validate ${{ env. parameters.stName   }}
+    - name: Validate ${{ inputs.parameters.stName   }}
       uses: Azure/cli@v1.0.0
       with:
-        inlineScript: az deployment group create --resource-group ${{ env. parameters.rgName  }} --template-file ${{ env. parameters.armPath  }}/st-storageaccount.json --parameters  ${{ env. parameters.armPath  }}/st-storageaccount.parameters.json -name "${{ env. parameters.stName   }}"
-    - name: Deploy ${{ env. parameters.stName   }}
+        inlineScript: az deployment group create --resource-group ${{ inputs.parameters.rgName  }} --template-file ${{ inputs.parameters.armPath  }}/st-storageaccount.json --parameters  ${{ inputs.parameters.armPath  }}/st-storageaccount.parameters.json -name "${{ inputs.parameters.stName   }}"
+    - name: Deploy ${{ inputs.parameters.stName   }}
       uses: Azure/cli@v1.0.0
       with:
-        inlineScript: az deployment group create --resource-group ${{ env. parameters.rgName  }} --template-file ${{ env. parameters.armPath  }}/st-storageaccount.json --parameters  ${{ env. parameters.armPath  }}/st-storageaccount.parameters.json -name "${{ env. parameters.stName   }}"
-    - name: Validate ${{ env. parameters.workName   }}
+        inlineScript: az deployment group create --resource-group ${{ inputs.parameters.rgName  }} --template-file ${{ inputs.parameters.armPath  }}/st-storageaccount.json --parameters  ${{ inputs.parameters.armPath  }}/st-storageaccount.parameters.json -name "${{ inputs.parameters.stName   }}"
+    - name: Validate ${{ inputs.parameters.workName   }}
       uses: Azure/cli@v1.0.0
       with:
-        inlineScript: az deployment group create --resource-group ${{ env. parameters.workResourceGroupName  }} --template-file ${{ env. parameters.armPath  }}/work-loganalyticsworkspace.json --parameters  ${{ env. parameters.armPath  }}/work-loganalyticsworkspace.parameters.json -name "${{ env. parameters.workName   }}"
-    - name: Deploy ${{ env. parameters.workName   }}
+        inlineScript: az deployment group create --resource-group ${{ inputs.parameters.workResourceGroupName  }} --template-file ${{ inputs.parameters.armPath  }}/work-loganalyticsworkspace.json --parameters  ${{ inputs.parameters.armPath  }}/work-loganalyticsworkspace.parameters.json -name "${{ inputs.parameters.workName   }}"
+    - name: Deploy ${{ inputs.parameters.workName   }}
       uses: Azure/cli@v1.0.0
       with:
-        inlineScript: az deployment group create --resource-group ${{ env. parameters.workResourceGroupName  }} --template-file ${{ env. parameters.armPath  }}/work-loganalyticsworkspace.json --parameters  ${{ env. parameters.armPath  }}/work-loganalyticsworkspace.parameters.json -name "${{ env. parameters.workName   }}"
-    - name: Validate ${{ env. parameters.appiName  }}
+        inlineScript: az deployment group create --resource-group ${{ inputs.parameters.workResourceGroupName  }} --template-file ${{ inputs.parameters.armPath  }}/work-loganalyticsworkspace.json --parameters  ${{ inputs.parameters.armPath  }}/work-loganalyticsworkspace.parameters.json -name "${{ inputs.parameters.workName   }}"
+    - name: Validate ${{ inputs.parameters.appiName  }}
       uses: Azure/cli@v1.0.0
       with:
-        inlineScript: az deployment group create --resource-group ${{ env. parameters.rgName  }} --template-file ${{ env. parameters.armPath  }}/appi-applicationinsights.json --parameters  ${{ env. parameters.armPath  }}/appi-applicationinsights.parameters.json -name "${{ env. parameters.appiName  }}" -workName "${{ env. parameters.workName  }}" -workResourceGroupName "${{ env. parameters.workResourceGroupName  }}"
-    - name: Deploy ${{ env. parameters.appiName  }}
+        inlineScript: az deployment group create --resource-group ${{ inputs.parameters.rgName  }} --template-file ${{ inputs.parameters.armPath  }}/appi-applicationinsights.json --parameters  ${{ inputs.parameters.armPath  }}/appi-applicationinsights.parameters.json -name "${{ inputs.parameters.appiName  }}" -workName "${{ inputs.parameters.workName  }}" -workResourceGroupName "${{ inputs.parameters.workResourceGroupName  }}"
+    - name: Deploy ${{ inputs.parameters.appiName  }}
       uses: Azure/cli@v1.0.0
       with:
-        inlineScript: az deployment group create --resource-group ${{ env. parameters.rgName  }} --template-file ${{ env. parameters.armPath  }}/appi-applicationinsights.json --parameters  ${{ env. parameters.armPath  }}/appi-applicationinsights.parameters.json -name "${{ env. parameters.appiName  }}" -workName "${{ env. parameters.workName  }}" -workResourceGroupName "${{ env. parameters.workResourceGroupName  }}"
-    - name: Validate ${{ env. parameters.kvName   }}
+        inlineScript: az deployment group create --resource-group ${{ inputs.parameters.rgName  }} --template-file ${{ inputs.parameters.armPath  }}/appi-applicationinsights.json --parameters  ${{ inputs.parameters.armPath  }}/appi-applicationinsights.parameters.json -name "${{ inputs.parameters.appiName  }}" -workName "${{ inputs.parameters.workName  }}" -workResourceGroupName "${{ inputs.parameters.workResourceGroupName  }}"
+    - name: Validate ${{ inputs.parameters.kvName   }}
       uses: Azure/cli@v1.0.0
       with:
-        inlineScript: az deployment group create --resource-group ${{ env. parameters.rgName  }} --template-file ${{ env. parameters.armPath  }}/kv-keyvault.json --parameters  ${{ env. parameters.armPath  }}/kv-keyvault.parameters.json -name "${{ env. parameters.kvName   }}"
-    - name: Deploy ${{ env. parameters.kvName   }}
+        inlineScript: az deployment group create --resource-group ${{ inputs.parameters.rgName  }} --template-file ${{ inputs.parameters.armPath  }}/kv-keyvault.json --parameters  ${{ inputs.parameters.armPath  }}/kv-keyvault.parameters.json -name "${{ inputs.parameters.kvName   }}"
+    - name: Deploy ${{ inputs.parameters.kvName   }}
       uses: Azure/cli@v1.0.0
       with:
-        inlineScript: az deployment group create --resource-group ${{ env. parameters.rgName  }} --template-file ${{ env. parameters.armPath  }}/kv-keyvault.json --parameters  ${{ env. parameters.armPath  }}/kv-keyvault.parameters.json -name "${{ env. parameters.kvName   }}"
+        inlineScript: az deployment group create --resource-group ${{ inputs.parameters.rgName  }} --template-file ${{ inputs.parameters.armPath  }}/kv-keyvault.json --parameters  ${{ inputs.parameters.armPath  }}/kv-keyvault.parameters.json -name "${{ inputs.parameters.kvName   }}"
                     
