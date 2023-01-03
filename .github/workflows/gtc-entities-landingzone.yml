@@ -18,6 +18,8 @@ permissions:
 
 jobs:  
   development_Stage_deploy_landing_zone:
+    nane: 'Deploy landing zone IaC'
+    runs-on: ubuntu-latest
     env:
       template: ../variables/development.yml
     if: (github.ref != 'refs/heads/main')
@@ -36,24 +38,3 @@ jobs:
         workName: ${{ env.workName }}
         workResourceGroupName: ${{ env.workResourceGroupName }}
         workSubscriptionId: ${{ env.subscriptionId }}
-  production_Stage_deploy_landing_zone:
-    env:
-      template: ../variables/production.yml
-    if: (github.ref == 'refs/heads/main')
-    steps:
-    - uses: ./.github/reusable-workflows/landingzone-infrastructure-steps.yml
-    - run: |
-        #../steps/landingzone-infrastructure-steps.yml
-        armPath: ${{ env.armPath }}
-        subscriptionId: ${{ env.subscriptionId }}
-        subscriptionService: ${{ env. parameters.subscriptionService  }}
-        rgName: ${{ env.rgName }}
-        rgLocation: ${{ env.rgLocation }}
-        appiName: ${{ env.appiName }}
-        kvName: ${{ env.kvName }}
-        stName: ${{ env.stName }}
-        workLocation: ${{ env.rgLocation }}
-        workName: ${{ env.workName }}
-        workResourceGroupName: ${{ env.workResourceGroupName }}
-        workSubscriptionId: ${{ env.subscriptionId }}
-                    
