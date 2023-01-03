@@ -18,7 +18,7 @@ permissions:
 
 jobs:  
   development_Stage_deploy_landing_zone:
-    nane: 'Deploy landing zone IaC'
+    name: 'Deploy landing zone IaC'
     runs-on: ubuntu-latest
     env:
       template: ../variables/development.yml
