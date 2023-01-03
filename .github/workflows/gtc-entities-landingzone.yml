@@ -24,7 +24,10 @@ jobs:
       template: ../variables/development.yml
     if: (github.ref != 'refs/heads/main')
     steps:
-    - uses: ../reusable-workflows/landingzone-infrastructure-steps.yml
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - uses: ./.github/reusable-workflows/landingzone-infrastructure-steps.yml
     - run: |
         armPath: ${{ env.armPath }}
         subscriptionId: ${{ env.subscriptionId }}
