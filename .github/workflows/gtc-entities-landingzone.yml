@@ -10,15 +10,14 @@ on:
 env:
   subscriptionService: AZURE_DEVOPS_SERVICE_CONNECTION
   template: ../variables/common.yml
-jobs:
+jobs:  
   development_Stage_deploy_landing_zone:
     env:
       template: ../variables/development.yml
     if: (github.ref != 'refs/heads/main')
     steps:
-    - uses: actions/checkout@v2
+    - uses: ./.github/reusable-workflows/landingzone-infrastructure-steps.yml
     - run: |
-        #../steps/landingzone-infrastructure-steps.yml
         armPath: ${{ env.armPath }}
         subscriptionId: ${{ env.subscriptionId }}
         subscriptionService: ${{ env. parameters.subscriptionService  }}
@@ -36,7 +35,7 @@ jobs:
       template: ../variables/production.yml
     if: (github.ref == 'refs/heads/main')
     steps:
-    - uses: actions/checkout@v2
+    - uses: ./.github/reusable-workflows/landingzone-infrastructure-steps.yml
     - run: |
         #../steps/landingzone-infrastructure-steps.yml
         armPath: ${{ env.armPath }}

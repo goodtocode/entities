@@ -1,81 +1,57 @@
-name: landingzone-infrastructure-steps.yml
-
-on:
-  workflow_call:
-    inputs:
-      appiName:
-        description: 'Name of the appi- resource to deploy - Example: appi-PRODUCT-ENVIRONMENT-001'
-        required: true
-        type: string
-      armPath:
-        description: 'Path to ARM files - Example: ./.azure'
-        required: true
-        type: string
-      armSuffix:
-        description: 'ARM file suffix. json or bicep'
-        required: false
-        type: string
-        default: 'json'
-      kvName:
-        description: 'Name of the kv- resource to deploy - Example: kv-PRODUCT-ENVIRONMENT-001'
-        required: true
-        type: string
-      rgLocation:
-        description: 'Azure Region of the resource group - Example: westus2'
-        required: true
-        type: string
-      rgName:
-        description: 'Name of Azure Resource Group - Example: COMPANY-rg-PRODUCT-001'
-        required: true
-        type: string
-      stName:
-        description: 'Name of the st- resource to deploy - Example: stPRODUCTENVIRONMENT001'
-        required: true
-        type: string
-      workName:
-        description: 'Name of the work- resource to deploy - Example: work-PRODUCT-ENVIRONMENT-001'
-        required: true
-        type: string
-    secrets:
-      azureCredentials:
-        description: 'Azure AD Service Principle (App Registration) to use for deployment - Default: secrets.AZURE_CREDENTIALS'
-        required: true
+env:
+  armPath: .
+  subscriptionId: 00000000-0000-0000-0000-000000000000
+  subscriptionService: COMPANY-PRODUCT-001
+  rgName: rg-PRODUCT-001
+  rgLocation: West US 3
+  appiName: appi-PRODUCT-ENVIRONMENT-001
+  kvName: kv-PRODUCT-ENVIRONMENT-001
+  stName: stPRODUCTENVIRONMENT001
+  workLocation: West US 3
+  workName: work-PRODUCT-ENVIRONMENT-001
+  workResourceGroupName: rg-PRODUCT-001
+  workSubscriptionId: 00000000-0000-0000-0000-000000000000
 
 jobs:
-  validate-inputs:
-      runs-on: ubuntu-latest
-      environment: development
-      outputs:
-        creds-exists: ${{ steps.secret-exists.outputs.credsExist }}
-      steps:
-          - id: creds-exists
-            if: ${{ github.event.inputs.azureCredentials != '' }}
-            run: |
-              echo "::set-output name=credsExist::true"
-
-  deploy_landingzone_step:
-    runs-on: ubuntu-latest
-    environment: development
-    needs: [validate-inputs]
+  build:
     steps:
-    - uses: actions/checkout@v2
-    - name: Azure Login
+    # Authenticate to Az CLI using OIDC
+    - name: 'Az CLI login'
       uses: azure/login@v1
       with:
-        creds: ${{ github.event.inputs.azureCredentials }}
-    - name: Deploy ${{ github.event.inputs.stName }}
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    - name: Validate ${{ env. parameters.stName   }}
       uses: Azure/cli@v1.0.0
       with:
-        inlineScript: az deployment group create --resource-group ${{ github.event.inputs.rgName }} --template-file ${{ github.event.inputs.armPath }}/st-storageaccount${{ github.event.inputs.armSuffix }} --parameters  ${{ github.event.inputs.armPath }}/st-storageaccount.parameters${{ github.event.inputs.armSuffix }} -name "${{ github.event.inputs.stName }}"
-    - name: Deploy ${{ github.event.inputs.workName }}
+        inlineScript: az deployment group create --resource-group ${{ env. parameters.rgName  }} --template-file ${{ env. parameters.armPath  }}/st-storageaccount.json --parameters  ${{ env. parameters.armPath  }}/st-storageaccount.parameters.json -name "${{ env. parameters.stName   }}"
+    - name: Deploy ${{ env. parameters.stName   }}
       uses: Azure/cli@v1.0.0
       with:
-        inlineScript: az deployment group create --resource-group ${{ github.event.inputs.rgName }} --template-file ${{ github.event.inputs.armPath }}/work-loganalyticsworkspace${{ github.event.inputs.armSuffix }} --parameters  ${{ github.event.inputs.armPath }}/work-loganalyticsworkspace.parameters${{ github.event.inputs.armSuffix }} -name "${{ github.event.inputs.workName }}"
-    - name: Deploy ${{ github.event.inputs.appiName }}
+        inlineScript: az deployment group create --resource-group ${{ env. parameters.rgName  }} --template-file ${{ env. parameters.armPath  }}/st-storageaccount.json --parameters  ${{ env. parameters.armPath  }}/st-storageaccount.parameters.json -name "${{ env. parameters.stName   }}"
+    - name: Validate ${{ env. parameters.workName   }}
       uses: Azure/cli@v1.0.0
       with:
-        inlineScript: az deployment group create --resource-group ${{ github.event.inputs.rgName }} --template-file ${{ github.event.inputs.armPath }}/appi-applicationinsights${{ github.event.inputs.armSuffix }} --parameters  ${{ github.event.inputs.armPath }}/appi-applicationinsights.parameters${{ github.event.inputs.armSuffix }} -name "${{ github.event.inputs.appiName }}" -workName "${{ github.event.inputs.workName }}"
-    - name: Deploy ${{ github.event.inputs.kvName }}
+        inlineScript: az deployment group create --resource-group ${{ env. parameters.workResourceGroupName  }} --template-file ${{ env. parameters.armPath  }}/work-loganalyticsworkspace.json --parameters  ${{ env. parameters.armPath  }}/work-loganalyticsworkspace.parameters.json -name "${{ env. parameters.workName   }}"
+    - name: Deploy ${{ env. parameters.workName   }}
       uses: Azure/cli@v1.0.0
       with:
-        inlineScript: az deployment group create --resource-group ${{ github.event.inputs.rgName }} --template-file ${{ github.event.inputs.armPath }}/kv-keyvault${{ github.event.inputs.armSuffix }} --parameters  ${{ github.event.inputs.armPath }}/kv-keyvault.parameters${{ github.event.inputs.armSuffix }} -name "${{ github.event.inputs.kvName }}"
+        inlineScript: az deployment group create --resource-group ${{ env. parameters.workResourceGroupName  }} --template-file ${{ env. parameters.armPath  }}/work-loganalyticsworkspace.json --parameters  ${{ env. parameters.armPath  }}/work-loganalyticsworkspace.parameters.json -name "${{ env. parameters.workName   }}"
+    - name: Validate ${{ env. parameters.appiName  }}
+      uses: Azure/cli@v1.0.0
+      with:
+        inlineScript: az deployment group create --resource-group ${{ env. parameters.rgName  }} --template-file ${{ env. parameters.armPath  }}/appi-applicationinsights.json --parameters  ${{ env. parameters.armPath  }}/appi-applicationinsights.parameters.json -name "${{ env. parameters.appiName  }}" -workName "${{ env. parameters.workName  }}" -workResourceGroupName "${{ env. parameters.workResourceGroupName  }}"
+    - name: Deploy ${{ env. parameters.appiName  }}
+      uses: Azure/cli@v1.0.0
+      with:
+        inlineScript: az deployment group create --resource-group ${{ env. parameters.rgName  }} --template-file ${{ env. parameters.armPath  }}/appi-applicationinsights.json --parameters  ${{ env. parameters.armPath  }}/appi-applicationinsights.parameters.json -name "${{ env. parameters.appiName  }}" -workName "${{ env. parameters.workName  }}" -workResourceGroupName "${{ env. parameters.workResourceGroupName  }}"
+    - name: Validate ${{ env. parameters.kvName   }}
+      uses: Azure/cli@v1.0.0
+      with:
+        inlineScript: az deployment group create --resource-group ${{ env. parameters.rgName  }} --template-file ${{ env. parameters.armPath  }}/kv-keyvault.json --parameters  ${{ env. parameters.armPath  }}/kv-keyvault.parameters.json -name "${{ env. parameters.kvName   }}"
+    - name: Deploy ${{ env. parameters.kvName   }}
+      uses: Azure/cli@v1.0.0
+      with:
+        inlineScript: az deployment group create --resource-group ${{ env. parameters.rgName  }} --template-file ${{ env. parameters.armPath  }}/kv-keyvault.json --parameters  ${{ env. parameters.armPath  }}/kv-keyvault.parameters.json -name "${{ env. parameters.kvName   }}"
+                    

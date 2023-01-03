@@ -9,8 +9,4 @@ env:
   testsPath: ${{ github.workspace }}/tests
   srcPath: ${{ github.workspace }}/src
   scriptsPath: ${{ github.workspace }}/scripts
-  funcPath: ${{ github.workspace }}/src/PRODUCT.Functions
-  webjobPath: ${{ github.workspace }}/src/PRODUCT.WebJob
-  logicPath: ${{ github.workspace }}/src/PRODUCT.LogicApps.NAME
   buildConfiguration: Release
-  MSBUILDSINGLELOADCONTEXT: 1
