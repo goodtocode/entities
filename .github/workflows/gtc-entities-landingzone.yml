@@ -14,7 +14,7 @@ env:
   KEYVAULT_NAME: 'kv-entities-dev-001'
   PLAN_CAPACITY: 4
   PLAN_NAME: 'plan-entities-dev-001'
-  PLAN_SKU: 'B1'
+  PLAN_SKU: 'F1'
   STORAGE_NAME: 'stentitiesdev001'
   WORKSPACE_NAME: 'work-entities-dev-001'
 
