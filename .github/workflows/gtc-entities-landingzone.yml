@@ -3,13 +3,21 @@ on:
     branches:
     - '*'
     paths:
-    - .azure/*
+    - '.azure/*'
   pull-request:
     branches-ignore:
     - '*'
+
 env:
   subscriptionService: AZURE_DEVOPS_SERVICE_CONNECTION
   template: ../variables/common.yml
+
+#Special permissions required for OIDC authentication
+permissions:
+  id-token: write
+  contents: read
+  security-events: write
+
 jobs:  
   development_Stage_deploy_landing_zone:
     env:
