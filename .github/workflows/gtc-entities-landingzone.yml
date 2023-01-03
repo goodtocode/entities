@@ -1,12 +1,10 @@
 on:
   push:
     branches:
-    - '*'
-    paths:
-    - '.azure/*'
-  pull-request:
-    branches-ignore:
-    - '*'
+    - main  
+  pull_request:
+    branches:
+    - main    
 
 env:
   subscriptionService: AZURE_DEVOPS_SERVICE_CONNECTION
