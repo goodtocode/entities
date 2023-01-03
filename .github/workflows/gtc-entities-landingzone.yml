@@ -24,21 +24,20 @@ jobs:
       template: ../variables/development.yml
     if: (github.ref != 'refs/heads/main')
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-
-    - name: Landing_zone
-      uses: ./.github/workflows/landingzone-infrastructure-steps.yml
-    - run: |
-        armPath: ${{ env.armPath }}
-        subscriptionId: ${{ env.subscriptionId }}
-        subscriptionService: ${{ env. parameters.subscriptionService  }}
-        rgName: ${{ env.rgName }}
-        rgLocation: ${{ env.rgLocation }}
-        appiName: ${{ env.appiName }}
-        kvName: ${{ env.kvName }}
-        stName: ${{ env.stName }}
-        workLocation: ${{ env.rgLocation }}
-        workName: ${{ env.workName }}
-        workResourceGroupName: ${{ env.workResourceGroupName }}
-        workSubscriptionId: ${{ env.subscriptionId }}
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Landing_zone
+        uses: ./.github/workflows/landingzone-infrastructure-steps.yml
+      - run: |
+          armPath: ${{ env.armPath }}
+          subscriptionId: ${{ env.subscriptionId }}
+          subscriptionService: ${{ env. parameters.subscriptionService  }}
+          rgName: ${{ env.rgName }}
+          rgLocation: ${{ env.rgLocation }}
+          appiName: ${{ env.appiName }}
+          kvName: ${{ env.kvName }}
+          stName: ${{ env.stName }}
+          workLocation: ${{ env.rgLocation }}
+          workName: ${{ env.workName }}
+          workResourceGroupName: ${{ env.workResourceGroupName }}
+          workSubscriptionId: ${{ env.subscriptionId }}

@@ -40,6 +40,7 @@ on:
 
 jobs:
   build:
+    runs-on: ubuntu-latest
     steps:
     # Authenticate to Az CLI using OIDC
     - name: 'Az CLI login'
