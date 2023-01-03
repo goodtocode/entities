@@ -75,5 +75,5 @@ jobs:
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ env.AZURE_RG_NAME }}
-          template: ${{ env.ARM_PATH }}/api-applicationinsights.json
+          template: ${{ env.ARM_PATH }}/api-apiapp.json
           parameters: name=${{ env.API_NAME }} planName=${{ env.PLAN_NAME }} appiKey=${{ secrets.APPI_KEY }} appiConnection=${{ secrets.APPI_CONNECTION }} rgEnvironment=${{ secrets.AZURE_RG_ENVIRONMENT }}
