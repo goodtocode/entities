@@ -7,8 +7,12 @@ on:
     - main    
 
 env:
-  subscriptionService: AZURE_DEVOPS_SERVICE_CONNECTION
-  template: ../variables/common.yml
+  armPath: './.azure'
+  rgEnvironment: 'Development'
+  rgName: 'rg-entities-dev-001'
+  stName: 'stentitiesdev001'
+  locationName: 'West US 3'
+
 
 #Special permissions required for OIDC authentication
 permissions:
@@ -36,31 +40,3 @@ jobs:
         uses: Azure/cli@v1.0.0
         with:
           inlineScript: az deployment group create --resource-group ${{ env.rgName  }} --template-file ${{ env.armPath  }}/st-storageaccount.json --parameters  ${{ env.armPath  }}/st-storageaccount.parameters.json -name "${{ env.stName   }}"
-      - name: Deploy ${{ env.stName   }}
-        uses: Azure/cli@v1.0.0
-        with:
-          inlineScript: az deployment group create --resource-group ${{ env.rgName  }} --template-file ${{ env.armPath  }}/st-storageaccount.json --parameters  ${{ env.armPath  }}/st-storageaccount.parameters.json -name "${{ env.stName   }}"
-      - name: Validate ${{ env.workName   }}
-        uses: Azure/cli@v1.0.0
-        with:
-          inlineScript: az deployment group create --resource-group ${{ env.workResourceGroupName  }} --template-file ${{ env.armPath  }}/work-loganalyticsworkspace.json --parameters  ${{ env.armPath  }}/work-loganalyticsworkspace.parameters.json -name "${{ env.workName   }}"
-      - name: Deploy ${{ env.workName   }}
-        uses: Azure/cli@v1.0.0
-        with:
-          inlineScript: az deployment group create --resource-group ${{ env.workResourceGroupName  }} --template-file ${{ env.armPath  }}/work-loganalyticsworkspace.json --parameters  ${{ env.armPath  }}/work-loganalyticsworkspace.parameters.json -name "${{ env.workName   }}"
-      - name: Validate ${{ env.appiName  }}
-        uses: Azure/cli@v1.0.0
-        with:
-          inlineScript: az deployment group create --resource-group ${{ env.rgName  }} --template-file ${{ env.armPath  }}/appi-applicationinsights.json --parameters  ${{ env.armPath  }}/appi-applicationinsights.parameters.json -name "${{ env.appiName  }}" -workName "${{ env.workName  }}" -workResourceGroupName "${{ env.workResourceGroupName  }}"
-      - name: Deploy ${{ env.appiName  }}
-        uses: Azure/cli@v1.0.0
-        with:
-          inlineScript: az deployment group create --resource-group ${{ env.rgName  }} --template-file ${{ env.armPath  }}/appi-applicationinsights.json --parameters  ${{ env.armPath  }}/appi-applicationinsights.parameters.json -name "${{ env.appiName  }}" -workName "${{ env.workName  }}" -workResourceGroupName "${{ env.workResourceGroupName  }}"
-      - name: Validate ${{ env.kvName   }}
-        uses: Azure/cli@v1.0.0
-        with:
-          inlineScript: az deployment group create --resource-group ${{ env.rgName  }} --template-file ${{ env.armPath  }}/kv-keyvault.json --parameters  ${{ env.armPath  }}/kv-keyvault.parameters.json -name "${{ env.kvName   }}"
-      - name: Deploy ${{ env.kvName   }}
-        uses: Azure/cli@v1.0.0
-        with:
-          inlineScript: az deployment group create --resource-group ${{ env.rgName  }} --template-file ${{ env.armPath  }}/kv-keyvault.json --parameters  ${{ env.armPath  }}/kv-keyvault.parameters.json -name "${{ env.kvName   }}"
