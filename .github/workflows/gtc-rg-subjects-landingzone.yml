@@ -14,7 +14,6 @@ env:
   AZURE_RG_LOCATION: 'westus3'
   AZURE_RG_NAME: 'gtc-rg-subjects-dev-001'
   KEYVAULT_NAME: 'kv-subjects-dev-001'
-  PLAN_CAPACITY: 4
   PLAN_NAME: 'plan-entities-dev-001'
   SHARED_RG_NAME: 'gtc-rg-entities-dev-001'
   STORAGE_NAME: 'stsubjectsdev001'
