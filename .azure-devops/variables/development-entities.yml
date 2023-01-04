@@ -1,0 +1,21 @@
+variables:
+  - group: gtc-rg-entities-dev
+  - template: common.yml
+  - name: rgEnvironment
+    value: 'Development'
+  - name: rgName
+    value: 'gtc-rg-entities-dev-001'
+  - name: rgLocation
+    value: 'West US 3'
+  - name: 'appiName'
+    value: 'appi-entities-dev-001'
+  - name: 'kvName'
+    value: 'kv-entities-dev-001'
+  - name: stName
+    value: 'stentitiesdev001'
+  - name: workName
+    value: 'work-entities-dev-001'
+  - name: planName
+    value: 'plan-entities-dev-001'
+  - name: planSku
+    value: 'F1'

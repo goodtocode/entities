@@ -1,0 +1,81 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - '*'
+  paths:
+    include:
+    - .azure/*
+
+pr:
+  branches:
+    exclude:
+    - '*'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+parameters:
+  - name: subscriptionService
+    type: string 
+    default: "gtc-entities-001"
+  - name: subscriptionId
+    type: string 
+    default: "$(subscriptionId)"
+
+variables:
+  - template: ../variables/common.yml
+      
+stages:
+  - stage: development
+    condition: ne(variables['Build.SourceBranch'], 'refs/heads/main')
+    variables:
+      - template: ../variables/development-subjects.yml
+
+    jobs:
+      - job: deploy_landing_zone
+        steps:
+          - template: ../steps/landingzone-infrastructure-steps.yml
+            parameters:
+              armPath: '$(armPath)'
+              subscriptionId: '${{ parameters.subscriptionId }}'
+              subscriptionService: '${{ parameters.subscriptionService }}'
+              rgName: '$(rgName)'
+              rgLocation: '$(rgLocation)'
+              appiName: '$(appiName)'
+              kvName: '$(kvName)'
+              stName: '$(stName)'
+              workLocation: '$(rgLocation)'
+              workName: '$(workName)'
+              workResourceGroupName: '$(rgSharedName)'
+              workSubscriptionId: '${{ parameters.subscriptionId }}'
+
+          - task: AzureResourceManagerTemplateDeployment@3
+            displayName: "Validate $(apiName)"
+            inputs:
+                deploymentScope: "Resource Group"
+                azureResourceManagerConnection: "${{ parameters.subscriptionService }}"
+                subscriptionId: "${{ parameters.subscriptionId }}"
+                action: "Create Or Update Resource Group"
+                resourceGroupName: "$(rgSharedName)"
+                location: "$(rgLocation)"
+                templateLocation: "Linked artifact"
+                csmFile: "$(armPath)/api-apiapp.json"        
+                csmParametersFile: "$(armPath)/api-apiapp.parameters.json"        
+                deploymentMode: "Validation"
+                overrideParameters: -name "$(apiName)" -location "$(rgLocation)" -planName "$(planName)" 
+
+          - task: AzureResourceManagerTemplateDeployment@3
+            displayName: "Deploy $(apiName)"
+            inputs:
+                deploymentScope: "Resource Group"
+                azureResourceManagerConnection: "${{ parameters.subscriptionService }}"
+                subscriptionId: "${{ parameters.subscriptionId }}"
+                action: "Create Or Update Resource Group"
+                resourceGroupName: "$(rgSharedName)"
+                location: "$(rgLocation)"
+                templateLocation: "Linked artifact"
+                csmFile: "$(armPath)/api-apiapp.json"
+                csmParametersFile: "$(armPath)/api-apiapp.parameters.json"
+                deploymentMode: "Incremental"
+                overrideParameters: -name "$(apiName)" -location "$(rgLocation)" -planName "$(planName)" 
