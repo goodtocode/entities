@@ -2,6 +2,9 @@ on:
   push:
     branches-ignore:
     - main
+    paths:
+    - .github/workflows/gtc-rg-entities-landingzone.yml
+    - .azure/**/*.json
   pull_request:
     branches:
     - main    
