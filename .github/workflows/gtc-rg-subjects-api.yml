@@ -3,25 +3,14 @@ on:
     branches-ignore:
     - main
     paths:
+    - .github/workflows/gtc-rg-subjects-api.yml
     - src/**
   pull_request:
     branches:
     - main    
     paths:
+    - .github/workflows/gtc-rg-subjects-api.yml
     - src/**
-
-env:
-  API_NAME: 'api-subjects-dev-001'
-  APPINSIGHTS_NAME: 'appi-subjects-dev-001'
-  ARM_PATH: './.azure'
-  AZURE_RG_ENVIRONMENT: 'Development'
-  AZURE_RG_LOCATION: 'westus3'
-  AZURE_RG_NAME: 'gtc-rg-subjects-dev-001'
-  KEYVAULT_NAME: 'kv-subjects-dev-001'
-  PLAN_NAME: 'plan-entities-dev-001'
-  SHARED_RG_NAME: 'gtc-rg-entities-dev-001'
-  STORAGE_NAME: 'stsubjectsdev001'
-  WORKSPACE_NAME: 'work-entities-dev-001'  
 
 permissions:
   id-token: write
@@ -33,6 +22,8 @@ jobs:
     name: 'Deploy landing zone IaC'
     runs-on: ubuntu-latest
     environment: development
+    env:
+      API_NAME: 'api-subjects-dev-001'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -49,39 +40,3 @@ jobs:
         app-name: '${{ env.API_NAME }}'
         app-settings-json: '${{ secrets.APP_SETTINGS }}' 
         connection-strings-json: '${{ secrets.CONNECTION_STRINGS }}'
-        #general-settings-json: '{"alwaysOn": "false", "webSocketsEnabled": "true"}' #'General configuration settings as Key Value pairs'      
-
-# Set in github environment secrets
-# App settings
-#[
-#  {
-#    "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-#    "value": "<value>",
-#    "slotSetting": false
-#  },
-#  {
-#    "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
-#    "value": "<value>",
-#    "slotSetting": false
-#  },
-#  {
-#  "name": "APPCONFIGURATIONSTORE_CONNECTION_STRING",
-#  "value": "<value>",
-#  "slotSetting": false
-#  },
-#  {
-#    "name": "ASPNETCORE_ENVIRONMENT",
-#    "value": "<value>",
-#    "slotSetting": false
-#  }
-#]
-
-# Connection strings
-#[
-#  {
-#    "name": "EntitiesConnection",
-#    "value": "conn-string-1",
-#    "type": "SQLServer",
-#    "slotSetting": false
-#  }
-#]
