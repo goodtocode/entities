@@ -1,10 +1,13 @@
 on:
   push:
     branches-ignore:
-    - main  
+    - main
   pull_request:
     branches:
     - main    
+    paths:
+    - .github/workflows/gtc-rg-entities-landingzone.yml
+    - .azure/**/*.json
 
 env:
   APPINSIGHTS_NAME: 'appi-entities-dev-001'
