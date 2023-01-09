@@ -18,8 +18,8 @@ permissions:
   security-events: write
 
 jobs:  
-  development_Stage_deploy_landing_zone:
-    name: 'Deploy landing zone IaC'
+  development_Stage_deploy_app_service:
+    name: 'Deploy App Service'
     runs-on: ubuntu-latest
     environment: development
     env:
@@ -36,7 +36,7 @@ jobs:
       - name: '${{ env.API_NAME }} Settings'
         id: settings
         uses: azure/appservice-settings@v1
-      with:
-        app-name: '${{ env.API_NAME }}'
-        app-settings-json: '${{ secrets.APP_SETTINGS }}' 
-        connection-strings-json: '${{ secrets.CONNECTION_STRINGS }}'
+        with:
+          app-name: '${{ env.API_NAME }}'
+          app-settings-json: '${{ secrets.APP_SETTINGS }}' 
+          connection-strings-json: '${{ secrets.CONNECTION_STRINGS }}'
