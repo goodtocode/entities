@@ -47,26 +47,27 @@ jobs:
         connection-strings-json: '${{ secrets.CONNECTION_STRINGS }}'
         #general-settings-json: '{"alwaysOn": "false", "webSocketsEnabled": "true"}' #'General configuration settings as Key Value pairs'      
 
+# Set in github environment secrets
 # App settings
 #[
 #  {
 #    "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-#    "value": "<value-1>",
+#    "value": "<value>",
 #    "slotSetting": false
 #  },
 #  {
 #    "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
-#    "value": "<value-2>",
+#    "value": "<value>",
 #    "slotSetting": false
 #  },
 #  {
 #  "name": "APPCONFIGURATIONSTORE_CONNECTION_STRING",
-#  "value": "<value-2>",
+#  "value": "<value>",
 #  "slotSetting": false
 #  },
 #  {
 #    "name": "ASPNETCORE_ENVIRONMENT",
-#    "value": "<value-2>",
+#    "value": "<value>",
 #    "slotSetting": false
 #  }
 #]
@@ -74,15 +75,9 @@ jobs:
 # Connection strings
 #[
 #  {
-#    "name": "name-1",
+#    "name": "EntitiesConnection",
 #    "value": "conn-string-1",
 #    "type": "SQLServer",
 #    "slotSetting": false
-#  },
-#  {
-#    "name": "name-2",
-#    "value": "conn-string-2",
-#    "type": "PostgreSQL",
-#    "slotSetting": false
-#  },
+#  }
 #]
