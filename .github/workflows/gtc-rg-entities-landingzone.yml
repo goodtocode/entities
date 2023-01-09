@@ -1,6 +1,6 @@
 on:
   push:
-    branches:
+    branches-ignore:
     - main  
   pull_request:
     branches:
@@ -27,9 +27,7 @@ jobs:
   development_Stage_deploy_landing_zone:
     name: 'Deploy landing zone IaC'
     runs-on: ubuntu-latest
-    env:
-      template: ../variables/development.yml
-    if: (github.ref != 'refs/heads/main')
+    environment: development
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -76,6 +74,14 @@ jobs:
           template: ${{ env.ARM_PATH }}/appi-applicationinsights.json
           parameters: name=${{ env.APPINSIGHTS_NAME }} workName=${{ env.WORKSPACE_NAME }}
       # plan-PRODUCT-ENVIRONMENT-001
+      - name: Deploy ${{ env.PLAN_NAME }}
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: ${{ env.AZURE_RG_NAME }}
+          template: ${{ env.ARM_PATH }}/plan-appplan.json
+          parameters: name=${{ env.PLAN_NAME }} sku=${{ env.PLAN_SKU }} skuCapacity=${{ env.PLAN_CAPACITY }}
+      # appcs-PRODUCT-ENVIRONMENT-001
       - name: Deploy ${{ env.PLAN_NAME }}
         uses: azure/arm-deploy@v1
         with:

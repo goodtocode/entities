@@ -1,6 +1,6 @@
 on:
   push:
-    branches:
+    branches-ignore:
     - main  
   pull_request:
     branches:
@@ -28,9 +28,7 @@ jobs:
   development_Stage_deploy_landing_zone:
     name: 'Deploy landing zone IaC'
     runs-on: ubuntu-latest
-    env:
-      template: ../variables/development.yml
-    if: (github.ref != 'refs/heads/main')
+    environment: development
     steps:
       - name: Checkout
         uses: actions/checkout@v3
