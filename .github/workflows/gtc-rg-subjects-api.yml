@@ -68,13 +68,13 @@ jobs:
         env:
           AZURE_CREDENTIALS: ${{ env.AZURE_CRED }}
         with:
-          resourceGroupName: ${{ secrets.AZURE_RG_NAME }}
-          appName: ${{ secrets.AZURE_WEBAPP_NAME }}
+          resourceGroupName: ${{ env.AZURE_RG_NAME }}
+          appName: ${{ env.AZURE_WEBAPP_NAME }}
 
       - name: functionapp deploy
         uses: Azure/functions-action@v1
         with:
-          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
           package: published
           publish-profile: ${{ steps.publishprofile.outputs.profile }}
 
@@ -91,8 +91,8 @@ jobs:
         env:
           AZURE_CREDENTIALS: ${{ secrets.AZURE_CRED }}
         with:
-          resourceGroupName: ${{ secrets.AZURE_RG_NAME }}
-          appName: ${{ secrets.AZURE_WEBAPP_NAME }}
+          resourceGroupName: ${{ env.AZURE_RG_NAME }}
+          appName: ${{ env.AZURE_WEBAPP_NAME }}
           reset: true
 
       - name: 'Az CLI login'
