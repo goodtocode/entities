@@ -23,6 +23,7 @@ env:
   PLAN_SKU: 'F1'
   SQL_NAME: 'sql-entities-dev-001'
   SQLDB_NAME: 'sqldb-entities-dev-001'
+  SQLDB_SKU: 'Basic'
   STORAGE_NAME: 'stentitiesdev001'
   WORKSPACE_NAME: 'work-entities-dev-001'
 

@@ -18,55 +18,84 @@ permissions:
   security-events: write
 
 jobs:  
-  build_src:
-    name: 'Build and Test .NET'
+  build-test-and-deploy:
+    name: 'Build, Test and Deploy .NET'
     runs-on: ubuntu-latest
     environment: development    
-    env:
-      API_NAME: 'api-subjects-dev-001'
+
     strategy:
       matrix:
         dotnet-version: [ '6.0.x', '7.0.x' ]
+
+    env:
+      AZURE_WEBAPP_NAME: api-subjects-dev-001    # set this to your application's name
+      AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
+      AZURE_RESOURCEGROUP_NAME: demo-webappsql-gh-actions # set this to your preferred resource group name
+      SQLSERVER_NAME: demo-webappsql-gh-actions-srv                          # set this to your preferred sql server name
+      DATABASE_NAME: demo-webappsql-gh-actions-db                   # set this to your preferred sql database name
+      SQLADMIN_LOGIN: ${{ secrets.SQLADMIN_LOGIN  }}                # Create a secret in your Github repo for the SQL Admin login name you want to use
+      SQLADMIN_PASS: ${{ secrets.SQLADMIN_PASS  }}                 # Create a secret in your Github repo for the SQL Admin password you want to use
+
     steps:
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v3
-      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+
+      - name: dotnet version ${{ matrix.DOTNET_VERSION }}
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
-      - name: Install dependencies
-        run: dotnet restore
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
-      - name: Test
-        run: dotnet test --no-restore --verbosity normal
-        - name: Upload dotnet test results
-          uses: actions/upload-artifact@v3
-          with:
-            name: dotnet-results-${{ matrix.dotnet-version }}
-            path: TestResults-${{ matrix.dotnet-version }}
-          # Use always() to always run this step to publish test results when there are test failures
-          if: ${{ always() }}
+          dotnet-version: ${{ matrix.DOTNET_VERSION }}
 
-  deploy_app_service:
-    name: 'Deploy to App Service'
-    runs-on: ubuntu-latest
-    environment: development
-    env:
-      API_NAME: 'api-subjects-dev-001'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Az CLI login
+      - name: dotnet build test and publish
+        run: |
+          dotnet build --configuration Release --no-restore          
+          dotnet test --verbosity normal
+          dotnet publish -c Release -o ${{ env.AZURE_WEBAPP_NAME }} 
+
+      - name: dotnet test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: dotnet-results-${{ matrix.DOTNET_VERSION }}
+          path: TestResults-${{ matrix.DOTNET_VERSION }}
+        if: ${{ always() }}
+
+      - name: azure webapps deploy
+        uses: azure/webapps-deploy@v2
+        with: 
+          app-name: ${{ env.AZURE_WEBAPP_NAME }} 
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} 
+          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/${{ env.AZURE_WEBAPP_NAME }}'
+          slot-name: staging
+
+      - name: 'Az CLI login'
         uses: azure/login@v1
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      - name: ${{ env.API_NAME }} Settings
+
+      - name: ${{ env.AZURE_WEBAPP_NAME }} Settings
         id: settings
         uses: azure/appservice-settings@v1
         with:
-          app-name: '${{ env.API_NAME }}'
+          app-name: '${{ env.AZURE_WEBAPP_NAME }}'
           app-settings-json: '${{ secrets.APP_SETTINGS }}' 
           connection-strings-json: '${{ secrets.CONNECTION_STRINGS }}'
+
+      - name: create db connection string
+        run: |
+          CONN_STR=$(az sql db show-connection-string --client ado.net --server ${{ env.SQLSERVER_NAME }} --name ${{ env.DATABASE_NAME }} -o tsv)
+          CONN_STR=$(echo $CONN_STR | sed "s/<username>/${{ env.SQLADMIN_LOGIN }}/g")
+          CONN_STR=$(echo $CONN_STR | sed "s/<password>/${{ env.SQLADMIN_PASS }}/g")
+          echo "SQL_DB_CONN_STR=$CONN_STR" >> $GITHUB_ENV
+
+      - name: Update Database
+        run: |
+          dotnet tool install --global dotnet-ef
+          dotnet ef database update
+        env:
+          ConnectionStrings__MyDbConnection: ${{ env.SQL_DB_CONN_STR }}
+      
+      - name: Swap to production slot
+        run: |
+          az webapp deployment slot swap --resource-group ${{ env.AZURE_RESOURCEGROUP_NAME }} --name ${{ env.AZURE_WEBAPP_NAME }} --slot staging --target-slot production
+          echo "Swap finished. App Service Application URL: https://$(az webapp show --resource-group ${{ env.AZURE_RESOURCEGROUP_NAME }} --name ${{ env.AZURE_WEBAPP_NAME }} --query hostNames[0] -o tsv)"
