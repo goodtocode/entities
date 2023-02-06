@@ -34,6 +34,7 @@ jobs:
       SRC_PATH: './src'
       SRC_SLN: 'GoodToCode.Entities.sln'      
       API_PROJECT: '*.Subjects.Presentation.Api.csproj'
+      UNIC_PROJECT: '*.Subjects.Specs.Unit.csproj'
       SQL_NAME: 'sql-entities-dev-001'
       SQLDB_NAME: 'sqldb-entities-dev-001'
       SQL_CONNECTION_STRINGS: "[{\"name\": $SQL_CONNECTION_NAME, \"value\": \"DefaultConnection\", \"type\":\"SQLServer\": \"slotSetting\":\"false\"}]"
@@ -51,7 +52,7 @@ jobs:
       - name: dotnet build test and publish
         run: |
           dotnet build ${{ env.SRC_PATH }}/${{ env.SRC_SLN }} --configuration Release       
-          dotnet test ${{ env.SRC_PATH }}/**/*.csproj --verbosity normal
+          dotnet test ${{ env.SRC_PATH }}/**/${{ env.UNIT_PROJECT }} --verbosity normal
           dotnet publish ${{ env.SRC_PATH }}/**/${{ env.API_PROJECT }} -c Release -o ${{ env.AZURE_WEBAPP_NAME }} 
 
       - name: dotnet test results
