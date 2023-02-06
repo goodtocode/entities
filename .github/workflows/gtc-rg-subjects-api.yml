@@ -34,7 +34,7 @@ jobs:
       SRC_PATH: './src'
       SRC_SLN: 'GoodToCode.Entities.sln'      
       API_PROJECT: '*.Subjects.Presentation.Api.csproj'
-      UNIC_PROJECT: '*.Subjects.Specs.Unit.csproj'
+      UNIT_PROJECT: '*.Subjects.Specs.Unit.csproj'
       SQL_NAME: 'sql-entities-dev-001'
       SQLDB_NAME: 'sqldb-entities-dev-001'
       SQL_CONNECTION_STRINGS: "[{\"name\": $SQL_CONNECTION_NAME, \"value\": \"DefaultConnection\", \"type\":\"SQLServer\": \"slotSetting\":\"false\"}]"
