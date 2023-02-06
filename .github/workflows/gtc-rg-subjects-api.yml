@@ -62,6 +62,13 @@ jobs:
           path: TestResults-${{ matrix.DOTNET_VERSION }}
         if: ${{ always() }}
 
+      - name: az login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       - name: get publish profile
         id: publishprofile
         uses: aliencube/publish-profile-actions@v1
@@ -95,13 +102,6 @@ jobs:
           resourceGroupName: ${{ env.AZURE_RG_NAME }}
           appName: ${{ env.AZURE_WEBAPP_NAME }}
           reset: true
-
-      - name: 'Az CLI login'
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: create db connection string
         run: |
