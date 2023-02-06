@@ -90,7 +90,7 @@ jobs:
           resourceGroupName: ${{ env.AZURE_RG_NAME }}
           template: ${{ env.ARM_PATH }}/plan-appplan.json
           parameters: name=${{ env.PLAN_NAME }} sku=${{ env.PLAN_SKU }} skuCapacity=${{ env.PLAN_CAPACITY }}
-      # appcs-PRODUCT-ENVIRONMENT-001
+      # sqldb-PRODUCT-ENVIRONMENT-001
       - name: Deploy ${{ env.SQLDB_NAME }}
         uses: azure/arm-deploy@v1
         with:
