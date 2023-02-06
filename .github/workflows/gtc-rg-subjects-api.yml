@@ -31,6 +31,8 @@ jobs:
       AZURE_WEBAPP_NAME: api-subjects-dev-001
       AZURE_WEBAPP_PACKAGE_PATH: '.'
       AZURE_RG_NAME: 'gtc-rg-subjects-dev-001'
+      SRC_PATH: './src'
+      SRC_PROJECT: '*.Subjects.Presentation.Api.csproj'
       SQL_NAME: 'sql-entities-dev-001'
       SQLDB_NAME: 'sqldb-entities-dev-001'
       SQL_CONNECTION_STRINGS: "[{\"name\": $SQL_CONNECTION_NAME, \"value\": \"DefaultConnection\", \"type\":\"SQLServer\": \"slotSetting\":\"false\"}]"
@@ -47,9 +49,9 @@ jobs:
 
       - name: dotnet build test and publish
         run: |
-          dotnet build --configuration Release       
-          dotnet test --verbosity normal
-          dotnet publish -c Release -o ${{ env.AZURE_WEBAPP_NAME }} 
+          dotnet build ${{ env.SRC_PATH }}/**/*.csproj --configuration Release       
+          dotnet test ${{ env.SRC_PATH }}/**/*.csproj --verbosity normal
+          dotnet publish ${{ env.SRC_PATH }}/**/${{ env.SRC_PROJECT }} -c Release -o ${{ env.AZURE_WEBAPP_NAME }} 
 
       - name: dotnet test results
         uses: actions/upload-artifact@v3
