@@ -49,7 +49,7 @@ jobs:
 
       - name: dotnet build test and publish
         run: |
-          dotnet build ${{ env.SRC_PATH }}/**/*.csproj --configuration Release       
+          dotnet build ${{ env.SRC_PATH }}/**/*.sln --configuration Release       
           dotnet test ${{ env.SRC_PATH }}/**/*.csproj --verbosity normal
           dotnet publish ${{ env.SRC_PATH }}/**/${{ env.SRC_PROJECT }} -c Release -o ${{ env.AZURE_WEBAPP_NAME }} 
 
