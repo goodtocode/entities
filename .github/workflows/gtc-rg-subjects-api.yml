@@ -92,7 +92,7 @@ jobs:
           app-name: ${{ env.AZURE_WEBAPP_NAME }} 
           publish-profile: ${{ steps.publishprofile.outputs.profile }}
           package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/${{ env.AZURE_WEBAPP_NAME }}'
-          slot-name: staging
+          #slot-name: staging
 
       - name: Reset publish profile
         uses: aliencube/publish-profile-actions@v1
@@ -129,3 +129,4 @@ jobs:
         run: |
           az webapp deployment slot swap --resource-group ${{ env.AZURE_RG_NAME }} --name ${{ env.AZURE_WEBAPP_NAME }} --slot staging --target-slot production
           echo "Swap finished. App Service Application URL: https://$(az webapp show --resource-group ${{ env.AZURE_RG_NAME }} --name ${{ env.AZURE_WEBAPP_NAME }} --query hostNames[0] -o tsv)"
+        if: ${{ false }}
