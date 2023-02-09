@@ -37,7 +37,7 @@ jobs:
       UNIT_PROJECT: 'Subjects.Specs.Unit.csproj'
       SQL_NAME: 'sql-entities-dev-001'
       SQLDB_NAME: 'sqldb-entities-dev-001'
-      SQL_CONNECTION_STRINGS: "[{\"name\": $SQL_CONNECTION_NAME, \"value\": \"DefaultConnection\", \"type\":\"SQLServer\": \"slotSetting\":\"false\"}]"
+      SQL_CONNECTION_STRINGS: '[{"name": $SQL_CONNECTION_NAME, "value": "DefaultConnection", "type":"SQLServer": "slotSetting":"false"}]'
       AZURE_CRED: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
 
     steps:
