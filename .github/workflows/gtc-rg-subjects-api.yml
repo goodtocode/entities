@@ -37,7 +37,6 @@ jobs:
       UNIT_PROJECT: 'Subjects.Specs.Unit.csproj'
       SQL_NAME: 'sql-entities-dev-001'
       SQLDB_NAME: 'sqldb-entities-dev-001'
-      SQL_CONNECTION_STRINGS: '[{"name": $SQL_CONNECTION_NAME, "value": "DefaultConnection", "type":"SQLServer": "slotSetting":"false"}]'
       AZURE_CRED: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
 
     steps:
@@ -116,7 +115,7 @@ jobs:
         with:
           app-name: '${{ env.AZURE_WEBAPP_NAME }}'
           app-settings-json: '${{ secrets.APP_SETTINGS }}' 
-          connection-strings-json: '${{ env.SQL_CONNECTION_STRINGS }}'
+          connection-strings-json: '[{"name": "DefaultConnection", "value": $SQLDB_CONN_STR, "type":"SQLServer", "slotSetting":"false"}]'
 
       - name: Update Database
         run: |
