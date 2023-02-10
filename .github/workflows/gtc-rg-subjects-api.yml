@@ -123,6 +123,7 @@ jobs:
           dotnet ef database update
         env:
           ConnectionStrings__MyDbConnection: ${{ env.SQLDB_CONN_STR }}
+        if: ${{ false }}
       
       - name: Swap to production slot
         run: |
