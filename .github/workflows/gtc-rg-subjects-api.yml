@@ -34,6 +34,7 @@ jobs:
       SRC_PATH: './src'
       SRC_SLN: 'GoodToCode.Entities.sln'      
       API_PROJECT: 'Subjects.Presentation.Api.csproj'
+      INFRA_PROJECT: 'Subjects.Infrastructure.csproj'
       UNIT_PROJECT: 'Subjects.Specs.Unit.csproj'
       SQL_NAME: 'sql-entities-dev-001'
       SQLDB_NAME: 'sqldb-entities-dev-001'
@@ -120,10 +121,9 @@ jobs:
       - name: Update Database
         run: |
           dotnet tool install --global dotnet-ef
-          dotnet ef database update
+          dotnet ef database update --project ${{ env.SRC_PATH }}/**/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/**/${{ env.API_PROJECT }}
         env:
-          ConnectionStrings__MyDbConnection: ${{ env.SQLDB_CONN_STR }}
-        if: ${{ false }}
+          ConnectionStrings__MyDbConnection: ${{ env.SQLDB_CONN_STR }}        
       
       - name: Swap to production slot
         run: |
