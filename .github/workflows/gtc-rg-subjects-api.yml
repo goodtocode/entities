@@ -116,12 +116,12 @@ jobs:
         with:
           app-name: '${{ env.AZURE_WEBAPP_NAME }}'
           app-settings-json: '${{ secrets.APP_SETTINGS }}' 
-          connection-strings-json: '[{"name": "DefaultConnection", "value": "$SQLDB_CONN_STR", "type":"SQLServer", "slotSetting":"false"}]'
+          connection-strings-json: '[{"name": "DefaultConnection", "value": "${{ env.SQLDB_CONN_STR }}", "type":"SQLServer", "slotSetting":"false"}]'
 
       - name: Update Database
         run: |
           dotnet tool install --global dotnet-ef
-          dotnet ef database update --project ${{ env.SRC_PATH }}/**/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/**/${{ env.API_PROJECT }}
+          dotnet ef database update --project ${{ env.SRC_PATH }}/**/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/**/${{ env.API_PROJECT }} --connection ${{ env.SQLDB_CONN_STR }}
         env:
           ConnectionStrings__MyDbConnection: ${{ env.SQLDB_CONN_STR }}        
       
