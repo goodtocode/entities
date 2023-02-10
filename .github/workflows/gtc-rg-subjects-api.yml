@@ -110,18 +110,32 @@ jobs:
           CONN_STR=$(echo $CONN_STR | sed "s/<password>/${{ secrets.SQL_PASSWORD }}/g")
           echo "SQLDB_CONN_STR=$CONN_STR" >> $GITHUB_ENV
 
+      - name: create connection string json
+        run: |
+            $ConnRaw = @[
+                @{
+                'name' = 'DefaultConnection'
+                'value' = 'CPU'
+                'type' = '$SQLDB_CONN_STR'
+                'slotSetting' = 'false'
+                }
+            ]
+            $Connections = $ConnRaw | ConvertTo-Json
+            echo "CONN_STR_JSON=$Connections" >> $GITHUB_ENV
+        shell: powershell 
+
       - name: ${{ env.AZURE_WEBAPP_NAME }} Settings
         id: settings
         uses: azure/appservice-settings@v1
         with:
           app-name: '${{ env.AZURE_WEBAPP_NAME }}'
           app-settings-json: '${{ secrets.APP_SETTINGS }}' 
-          connection-strings-json: '[{"name": "DefaultConnection", "value": "${{ env.SQLDB_CONN_STR }}", "type":"SQLServer", "slotSetting":"false"}]'
+          connection-strings-json: '$CONN_STR_JSON'
 
       - name: Update Database
         run: |
           dotnet tool install --global dotnet-ef
-          dotnet ef database update --project ${{ env.SRC_PATH }}/**/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/**/${{ env.API_PROJECT }} --connection ${{ env.SQLDB_CONN_STR }}
+          dotnet ef database update --project ${{ env.SRC_PATH }}/**/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/**/${{ env.API_PROJECT }} --connection $SQLDB_CONN_STR
         env:
           ConnectionStrings__MyDbConnection: ${{ env.SQLDB_CONN_STR }}        
       
