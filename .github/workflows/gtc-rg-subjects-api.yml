@@ -120,9 +120,9 @@ jobs:
                 'slotSetting' = 'false'
                 }
             ]
-            $Connections = $ConnRaw | ConvertTo-Json
-            echo "CONN_STR_JSON=$Connections" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+            $Connections = $ConnRaw | ConvertTo-Json            
         shell: powershell 
+        #echo "CONN_STR_JSON=$Connections" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: ${{ env.AZURE_WEBAPP_NAME }} Settings
         id: settings
