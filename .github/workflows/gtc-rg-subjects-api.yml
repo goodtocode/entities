@@ -121,7 +121,7 @@ jobs:
                 }
             ]
             $Connections = $ConnRaw | ConvertTo-Json
-            echo "CONN_STR_JSON=$Connections" >> $GITHUB_ENV
+            echo "CONN_STR_JSON=$Connections" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         shell: powershell 
 
       - name: ${{ env.AZURE_WEBAPP_NAME }} Settings
