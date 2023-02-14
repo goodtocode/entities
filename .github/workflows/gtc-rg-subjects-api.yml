@@ -107,8 +107,9 @@ jobs:
 
       - name: get ${{ env.APPI_NAME }} connection
         run: |
-          TEMP_STR=$(az monitor app-insights api-key show -g ${{ env.AZURE_RG_NAME }} --app ${{ env.APPI_NAME }} --api-key demo-key)
+          TEMP_STR=$(az monitor app-insights component show -g ${{ env.AZURE_RG_NAME }} --app ${{ env.APPI_NAME }} --api-key demo-key)
           echo "APPI_CONN_STR=$CONN_STR" >> $GITHUB_ENV
+        #"instrumentationKey": "asdf", "connectionString": "asdf"
 
       - name: ${{ env.AZURE_WEBAPP_NAME }} appsettings
         run: |
