@@ -31,7 +31,7 @@ jobs:
       AZURE_WEBAPP_NAME: api-subjects-dev-001
       AZURE_WEBAPP_PACKAGE_PATH: '.'
       AZURE_RG_NAME: 'gtc-rg-subjects-dev-001'
-      RUNTIME_ENV: 'development'
+      RUNTIME_ENV: 'Development'
       SRC_PATH: './src'
       SRC_SLN: 'GoodToCode.Entities.sln'      
       API_PROJECT: 'Subjects.Presentation.Api.csproj'
@@ -107,17 +107,17 @@ jobs:
 
       - name: get ${{ env.APPI_NAME }} connection
         run: |
-          $TEMP_JSON = az monitor app-insights component show -g ${{ env.AZURE_RG_NAME }} --app ${{ env.APPI_NAME }} --api-key demo-key | ConvertFrom-Json
-          $INSTR_KEY = ($TEMP_JSON.list | Where instrumentationKey).instrumentationKey 
-          $CONN_STR = ($TEMP_JSON.list | Where connectionString).connectionString
+          $TEMP_JSON = az monitor app-insights component show -g ${{ env.AZURE_RG_NAME }} --app ${{ env.APPI_NAME }} | ConvertFrom-Json
+          $INSTR_KEY = $TEMP_JSON.instrumentationKey 
+          $CONN_STR = $TEMP_JSON.connectionString
           echo "APPI_INSTR_KEY=$INSTR_KEY" >> $GITHUB_ENV
           echo "APPI_CONN_STR=$CONN_STR" >> $GITHUB_ENV
         shell: powershell
 
       - name: ${{ env.AZURE_WEBAPP_NAME }} appsettings
         run: |
-          az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings APPINSIGHTS_INSTRUMENTATIONKEY=
-          az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings APPLICATIONINSIGHTS_CONNECTION_STRING=
+          az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings APPINSIGHTS_INSTRUMENTATIONKEY=$APPI_INSTR_KEY
+          az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings APPLICATIONINSIGHTS_CONNECTION_STRING=$APPI_CONN_STR
           az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings ASPNETCORE_ENVIRONMENT=${{ env.RUNTIME_ENV }}
 
       - name: create db connection string
