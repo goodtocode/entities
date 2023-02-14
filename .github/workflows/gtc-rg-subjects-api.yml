@@ -107,9 +107,12 @@ jobs:
 
       - name: get ${{ env.APPI_NAME }} connection
         run: |
-          TEMP_STR=$(az monitor app-insights component show -g ${{ env.AZURE_RG_NAME }} --app ${{ env.APPI_NAME }} --api-key demo-key)
+          $TEMP_JSON = az monitor app-insights component show -g ${{ env.AZURE_RG_NAME }} --app ${{ env.APPI_NAME }} --api-key demo-key | ConvertFrom-Json
+          $INSTR_KEY = ($TEMP_JSON.list | Where instrumentationKey).instrumentationKey 
+          $CONN_STR = ($TEMP_JSON.list | Where connectionString).connectionString
+          echo "APPI_INSTR_KEY=$INSTR_KEY" >> $GITHUB_ENV
           echo "APPI_CONN_STR=$CONN_STR" >> $GITHUB_ENV
-        #"instrumentationKey": "asdf", "connectionString": "asdf"
+        shell: powershell
 
       - name: ${{ env.AZURE_WEBAPP_NAME }} appsettings
         run: |
