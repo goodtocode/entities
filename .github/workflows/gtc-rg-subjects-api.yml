@@ -27,13 +27,15 @@ jobs:
       matrix:
         dotnet-version: [ '7.0.x' ]
 
-    env:
+    env:      
       AZURE_WEBAPP_NAME: api-subjects-dev-001
       AZURE_WEBAPP_PACKAGE_PATH: '.'
       AZURE_RG_NAME: 'gtc-rg-subjects-dev-001'
+      RUNTIME_ENV: 'development'
       SRC_PATH: './src'
       SRC_SLN: 'GoodToCode.Entities.sln'      
       API_PROJECT: 'Subjects.Presentation.Api.csproj'
+      APPI_NAME: 'appi-subjects-dev-001'
       INFRA_PROJECT: 'Subjects.Infrastructure.csproj'
       UNIT_PROJECT: 'Subjects.Specs.Unit.csproj'
       SQL_NAME: 'sql-entities-dev-001'
@@ -103,35 +105,28 @@ jobs:
           appName: ${{ env.AZURE_WEBAPP_NAME }}
           reset: true
 
+      - name: get ${{ env.APPI_NAME }} connection
+        run: |
+          TEMP_STR=$(az monitor app-insights api-key show -g ${{ env.AZURE_RG_NAME }} --app ${{ env.APPI_NAME }} --api-key demo-key)
+          echo "APPI_CONN_STR=$CONN_STR" >> $GITHUB_ENV
+
+      - name: ${{ env.AZURE_WEBAPP_NAME }} appsettings
+        run: |
+          az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings APPINSIGHTS_INSTRUMENTATIONKEY=
+          az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings APPLICATIONINSIGHTS_CONNECTION_STRING=
+          az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings ASPNETCORE_ENVIRONMENT=${{ env.RUNTIME_ENV }}
+
       - name: create db connection string
         run: |
-          CONN_STR=$(az sql db show-connection-string --client ado.net --server ${{ env.SQL_NAME }} --name ${{ env.SQLDB_NAME }} -o tsv)
-          CONN_STR=$(echo $CONN_STR | sed "s/<username>/${{ secrets.SQL_USER }}/g")
-          CONN_STR=$(echo $CONN_STR | sed "s/<password>/${{ secrets.SQL_PASSWORD }}/g")
+          TEMP_STR=$(az sql db show-connection-string --client ado.net --server ${{ env.SQL_NAME }} --name ${{ env.SQLDB_NAME }} -o tsv)
+          TEMP_STR=$(echo $TEMP_STR | sed "s/<username>/${{ secrets.SQL_USER }}/g")
+          TEMP_STR=$(echo $TEMP_STR | sed "s/<password>/${{ secrets.SQL_PASSWORD }}/g")
           echo "SQLDB_CONN_STR=$CONN_STR" >> $GITHUB_ENV
 
-      - name: create connection string json
+      - name: ${{ env.AZURE_WEBAPP_NAME }} connection strings
         run: |
-            $ConnRaw = @[
-                @{
-                'name' = 'DefaultConnection'
-                'value' = 'CPU'
-                'type' = '$SQLDB_CONN_STR'
-                'slotSetting' = 'false'
-                }
-            ]
-            $Connections = $ConnRaw | ConvertTo-Json            
-        shell: powershell 
-        #echo "CONN_STR_JSON=$Connections" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-
-      - name: ${{ env.AZURE_WEBAPP_NAME }} Settings
-        id: settings
-        uses: azure/appservice-settings@v1
-        with:
-          app-name: '${{ env.AZURE_WEBAPP_NAME }}'
-          app-settings-json: '${{ secrets.APP_SETTINGS }}' 
-          connection-strings-json: '$CONN_STR_JSON'
-
+          az webapp config connection-string set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -t SQLServer --settings DefaultConnection='$SQLDB_CONN_STR'
+      
       - name: Update Database
         run: |
           dotnet tool install --global dotnet-ef
