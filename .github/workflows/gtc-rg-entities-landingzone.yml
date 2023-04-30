@@ -11,6 +11,14 @@ on:
     paths:
     - .github/workflows/gtc-rg-entities-landingzone.yml
     - .azure/**/*.json
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to run'     
+        required: true
+        default: 'development'
+      mode:
+        description: 'Running mode'  
 
 env:
   APPINSIGHTS_NAME: 'appi-entities-dev-001'
