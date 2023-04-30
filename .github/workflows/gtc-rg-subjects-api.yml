@@ -105,6 +105,8 @@ jobs:
           appName: ${{ env.AZURE_WEBAPP_NAME }}
           reset: true
 
+      # Get instrumentation key: az monitor app-insights component show --app <app-name> -g <rg-name>
+      # Get connection: az monitor app-insights component show -g ${{ env.AZURE_RG_NAME }} --app ${{ env.APPI_NAME }}
       - name: get ${{ env.APPI_NAME }} connection
         run: |
           $TEMP_JSON = az monitor app-insights component show -g ${{ env.AZURE_RG_NAME }} --app ${{ env.APPI_NAME }} | ConvertFrom-Json
@@ -120,6 +122,7 @@ jobs:
           az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings APPLICATIONINSIGHTS_CONNECTION_STRING=$APPI_CONN_STR
           az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings ASPNETCORE_ENVIRONMENT=${{ env.RUNTIME_ENV }}
 
+      # Get Azure SQL DB Conenction: az sql db show-connection-string --client ado.net --server ${{ env.SQL_NAME }} --name ${{ env.SQLDB_NAME }} -o tsv
       - name: create db connection string
         run: |
           TEMP_STR=$(az sql db show-connection-string --client ado.net --server ${{ env.SQL_NAME }} --name ${{ env.SQLDB_NAME }} -o tsv)
