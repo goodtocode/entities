@@ -114,7 +114,7 @@ jobs:
           $CONN_STR = $TEMP_JSON.connectionString
           echo "APPI_INSTR_KEY=$INSTR_KEY" >> $env.GITHUB_ENV
           echo "APPI_CONN_STR=$CONN_STR" >> $env.GITHUB_ENV
-        shell: powershell
+        shell: pwsh
 
       - name: ${{ env.AZURE_WEBAPP_NAME }} appsettings
         run: |
