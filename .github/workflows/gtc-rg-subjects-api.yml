@@ -146,7 +146,8 @@ jobs:
       - name: Update Database
         run: |
           dotnet tool install --global dotnet-ef
-          dotnet ef database update --project ${{ env.SRC_PATH }}/**/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/**/${{ env.API_PROJECT }} --connection $SQLDB_CONN_STR
+          dotnet tool restore
+          dotnet ef database update --project ${{ env.SRC_PATH }}/**/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/**/${{ env.API_PROJECT }} --connection $SQLDB_CONN_STR --context SubjectsDbContext
         env:
           ConnectionStrings__MyDbConnection: ${{ env.SQLDB_CONN_STR }}        
       
