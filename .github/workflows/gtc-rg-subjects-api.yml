@@ -120,9 +120,11 @@ jobs:
           az config set extension.use_dynamic_install=yes_without_prompt
           $TEMP_JSON = az monitor app-insights component show -g ${{ env.AZURE_RG_NAME }} --app ${{ env.APPI_NAME }} | ConvertFrom-Json
           $INSTR_KEY = $TEMP_JSON.instrumentationKey 
-          $CONN_STR = $TEMP_JSON.connectionString
+          $CONN_STR = $TEMP_JSON.connectionString          
           echo "APPI_INSTR_KEY=$INSTR_KEY" >> $env.GITHUB_ENV
           echo "APPI_CONN_STR=$CONN_STR" >> $env.GITHUB_ENV
+          echo "APPI_INSTR_KEY=$INSTR_KEY" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf-8 -Append
+          echo "APPI_CONN_STR=$CONN_STR" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf-8 -Append
         shell: pwsh
 
       - name: ${{ env.AZURE_WEBAPP_NAME }} appsettings
