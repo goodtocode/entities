@@ -115,35 +115,29 @@ jobs:
 
       # Get instrumentation key: az monitor app-insights component show --app <app-name> -g <rg-name>
       # Get connection: az monitor app-insights component show -g ${{ env.AZURE_RG_NAME }} --app ${{ env.APPI_NAME }}
-      - name: get ${{ env.APPI_NAME }} connection
+      - name: ${{ env.AZURE_WEBAPP_NAME }} app settings
         run: |
           az config set extension.use_dynamic_install=yes_without_prompt
           $TEMP_JSON = az monitor app-insights component show -g ${{ env.AZURE_RG_NAME }} --app ${{ env.APPI_NAME }} | ConvertFrom-Json
           $INSTR_KEY = $TEMP_JSON.instrumentationKey 
           $CONN_STR = $TEMP_JSON.connectionString          
+          az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings APPINSIGHTS_INSTRUMENTATIONKEY=$INSTR_KEY
+          az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings APPLICATIONINSIGHTS_CONNECTION_STRING=$CONN_STR
+          az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings ASPNETCORE_ENVIRONMENT=${{ env.RUNTIME_ENV }}
           echo "APPI_INSTR_KEY=$INSTR_KEY" >> $env.GITHUB_ENV
           echo "APPI_CONN_STR=$CONN_STR" >> $env.GITHUB_ENV
           echo "APPI_INSTR_KEY=$INSTR_KEY" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf-8 -Append
           echo "APPI_CONN_STR=$CONN_STR" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf-8 -Append
         shell: pwsh
 
-      - name: ${{ env.AZURE_WEBAPP_NAME }} appsettings
-        run: |
-          az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings APPINSIGHTS_INSTRUMENTATIONKEY="$env:APPI_INSTR_KEY"
-          az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings APPLICATIONINSIGHTS_CONNECTION_STRING="$env:APPI_CONN_STR"
-          az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings ASPNETCORE_ENVIRONMENT=${{ env.RUNTIME_ENV }}
-
       # Get Azure SQL DB Conenction: az sql db show-connection-string --client ado.net --server ${{ env.SQL_NAME }} --name ${{ env.SQLDB_NAME }} -o tsv
-      - name: create db connection string
+      - name: ${{ env.AZURE_WEBAPP_NAME }} connection strings
         run: |
           TEMP_STR=$(az sql db show-connection-string --client ado.net --server ${{ env.SQL_NAME }} --name ${{ env.SQLDB_NAME }} -o tsv)
           TEMP_STR=$(echo $TEMP_STR | sed "s/<username>/${{ secrets.SQL_USER }}/g")
           TEMP_STR=$(echo $TEMP_STR | sed "s/<password>/${{ secrets.SQL_PASSWORD }}/g")
+          az webapp config connection-string set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -t SQLServer --settings DefaultConnection=$CONN_STR
           echo "SQLDB_CONN_STR=$CONN_STR" >> $GITHUB_ENV
-
-      - name: ${{ env.AZURE_WEBAPP_NAME }} connection strings
-        run: |
-          az webapp config connection-string set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -t SQLServer --settings DefaultConnection="$env:SQLDB_CONN_STR"
       
       - name: Update Database
         run: |
