@@ -124,10 +124,6 @@ jobs:
           az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings APPINSIGHTS_INSTRUMENTATIONKEY=$INSTR_KEY
           az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings APPLICATIONINSIGHTS_CONNECTION_STRING=$CONN_STR
           az webapp config appsettings set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} --settings ASPNETCORE_ENVIRONMENT=${{ env.RUNTIME_ENV }}
-          echo "APPI_INSTR_KEY=$INSTR_KEY" >> $env.GITHUB_ENV
-          echo "APPI_CONN_STR=$CONN_STR" >> $env.GITHUB_ENV
-          echo "APPI_INSTR_KEY=$INSTR_KEY" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf-8 -Append
-          echo "APPI_CONN_STR=$CONN_STR" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf-8 -Append
         shell: pwsh
 
       # Get Azure SQL DB Conenction: az sql db show-connection-string --client ado.net --server ${{ env.SQL_NAME }} --name ${{ env.SQLDB_NAME }} -o tsv
@@ -136,17 +132,11 @@ jobs:
           TEMP_STR=$(az sql db show-connection-string --client ado.net --server ${{ env.SQL_NAME }} --name ${{ env.SQLDB_NAME }} -o tsv)
           TEMP_STR=$(echo $TEMP_STR | sed "s/<username>/${{ secrets.SQL_USER }}/g")
           TEMP_STR=$(echo $TEMP_STR | sed "s/<password>/${{ secrets.SQL_PASSWORD }}/g")
-          az webapp config connection-string set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -t SQLServer --settings DefaultConnection=$CONN_STR
-          echo "SQLDB_CONN_STR=$CONN_STR" >> $GITHUB_ENV
-      
-      - name: Update Database
-        run: |
+          az webapp config connection-string set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -t SQLServer --settings DefaultConnection=$TEMP_STR
           dotnet tool install --global dotnet-ef
           dotnet tool restore
-          dotnet ef database update --project ${{ env.SRC_PATH }}/**/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/**/${{ env.API_PROJECT }} --connection $env:SQLDB_CONN_STR --context SubjectsDbContext
-        env:
-          ConnectionStrings__MyDbConnection: $env:SQLDB_CONN_STR
-      
+          dotnet ef database update --project ${{ env.SRC_PATH }}/**/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/**/${{ env.API_PROJECT }} --connection $TEMP_STR --context SubjectsDbContext
+           
       - name: Swap to production slot
         run: |
           az webapp deployment slot swap --resource-group ${{ env.AZURE_RG_NAME }} --name ${{ env.AZURE_WEBAPP_NAME }} --slot staging --target-slot production

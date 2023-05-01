@@ -11,7 +11,7 @@ namespace GoodToCode.Subjects.Infrastructure
         {
             services.AddDbContextPool<SubjectsDbContext>(options =>
             {
-                options.UseSqlServer(configuration["Stack:Shared:SqlConnection"]);
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddScoped<ISubjectsDbContext, SubjectsDbContext>();
