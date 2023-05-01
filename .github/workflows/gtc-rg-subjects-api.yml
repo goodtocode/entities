@@ -141,7 +141,7 @@ jobs:
 
       - name: ${{ env.AZURE_WEBAPP_NAME }} connection strings
         run: |
-          az webapp config connection-string set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -t SQLServer --settings DefaultConnection=${{ env.SQLDB_CONN_STR }}
+          az webapp config connection-string set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -t SQLServer --settings DefaultConnection='${{ env.SQLDB_CONN_STR }}'
       
       - name: Update Database
         run: |
