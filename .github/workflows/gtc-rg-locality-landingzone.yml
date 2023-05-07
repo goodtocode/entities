@@ -1,10 +1,16 @@
 on:
   push:
-    branches:
-    - main  
+    branches-ignore:
+    - main
+    paths:
+    - .github/workflows/gtc-rg-locality-landingzone.yml
+    - .azure/**/*.json
   pull_request:
     branches:
     - main    
+    paths:
+    - .github/workflows/gtc-rg-locality-landingzone.yml
+    - .azure/**/*.json
 
 env:
   API_NAME: 'api-locality-dev-001'
@@ -28,9 +34,7 @@ jobs:
   development_Stage_deploy_landing_zone:
     name: 'Deploy landing zone IaC'
     runs-on: ubuntu-latest
-    env:
-      template: ../variables/development.yml
-    if: (github.ref != 'refs/heads/main')
+    environment: development
     steps:
       - name: Checkout
         uses: actions/checkout@v3
