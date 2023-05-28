@@ -4,13 +4,13 @@ on:
     - main
     paths:
     - .github/workflows/gtc-rg-subjects-api.yml
-    - src/**
+    - src/subjects/**
   pull_request:
     branches:
     - main    
     paths:
     - .github/workflows/gtc-rg-subjects-api.yml
-    - src/**
+    - src/subjects/**
   workflow_dispatch:
     inputs:
       environment:
@@ -40,12 +40,14 @@ jobs:
       AZURE_WEBAPP_PACKAGE_PATH: '.'
       AZURE_RG_NAME: 'gtc-rg-subjects-dev-001'
       RUNTIME_ENV: 'Development'
-      SRC_PATH: './src'
-      SRC_SLN: 'GoodToCode.Entities.sln'      
-      API_PROJECT: 'Subjects.Presentation.Api.csproj'
+      SRC_PATH: './src/Subjects'
+      SRC_SLN: 'Goodtocode.Subjects.sln'      
+      API_PATH: 'Presentation/WebApi'
+      API_PROJECT: 'WebApi.csproj'
       APPI_NAME: 'appi-subjects-dev-001'
-      INFRA_PROJECT: 'Subjects.Infrastructure.csproj'
-      UNIT_PROJECT: 'Subjects.Specs.Unit.csproj'
+      INFRA_PROJECT: 'Persistence.csproj'
+      UNIT_PATH: 'Specs/Application.Unit'
+      UNIT_PROJECT: 'Application.Unit.csproj'
       SQL_NAME: 'sql-entities-dev-001'
       SQLDB_NAME: 'sqldb-entities-dev-001'
       AZURE_CRED: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
@@ -62,8 +64,9 @@ jobs:
       - name: dotnet build test and publish
         run: |
           dotnet build ${{ env.SRC_PATH }}/${{ env.SRC_SLN }} --configuration Release       
-          dotnet test ${{ env.SRC_PATH }}/**/${{ env.UNIT_PROJECT }} --verbosity normal
-          dotnet publish ${{ env.SRC_PATH }}/**/${{ env.API_PROJECT }} -c Release -o ${{ env.AZURE_WEBAPP_NAME }} 
+          dotnet test ${{ env.SRC_PATH }}/${{ env.UNIT_PATH }}/${{ env.UNIT_PROJECT }} --verbosity normal
+          dotnet publish ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --configuration Release -o ${{ env.AZURE_WEBAPP_NAME }} 
+        shell: pwsh
 
       - name: dotnet test results
         uses: actions/upload-artifact@v3

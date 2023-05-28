@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<RootNamespace>Goodtocode.Subjects.Integration</RootNamespace>
+		<AssemblyName>Goodtocode.Subjects.Integration</AssemblyName>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="CSharpFunctionalExtensions" Version="2.39.0" />
+		<PackageReference Include="MediatR" Version="12.0.1" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Common\Library.Ddd\Library.Ddd.csproj" />
+	</ItemGroup>
+</Project>
