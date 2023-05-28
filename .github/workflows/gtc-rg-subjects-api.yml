@@ -45,6 +45,7 @@ jobs:
       API_PATH: 'Presentation/WebApi'
       API_PROJECT: 'WebApi.csproj'
       APPI_NAME: 'appi-subjects-dev-001'
+      INFRA_PATH: 'Infrastructure/Persistence'
       INFRA_PROJECT: 'Persistence.csproj'
       UNIT_PATH: 'Specs/Application.Unit'
       UNIT_PROJECT: 'Application.Unit.csproj'
@@ -138,7 +139,7 @@ jobs:
           az webapp config connection-string set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -t SQLServer --settings DefaultConnection=$TEMP_STR
           dotnet tool install --global dotnet-ef
           dotnet tool restore
-          dotnet ef database update --project ${{ env.SRC_PATH }}/**/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/**/${{ env.API_PROJECT }} --connection $TEMP_STR --context SubjectsDbContext
+          dotnet ef database update --project ${{ env.SRC_PATH }}/${{ env.INFRA_PATH }}/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --connection $TEMP_STR --context SubjectsDbContext
         shell: pwsh
            
       - name: Swap to production slot
