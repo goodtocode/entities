@@ -10,7 +10,7 @@ namespace Goodtocode.Subjects.WebApi.Common;
 [Route("api/[controller]/[action]")]
 public abstract class BaseController : ControllerBase
 {
-    private IMediator _mediator;
+    private IMediator? _mediator;
 
     /// <summary>
     ///     Defines a mediator to encapsulate request/response and publishing interaction

@@ -36,7 +36,7 @@ public partial class SubjectsDbContext : DbContext, ISubjectsDbContext
     //public virtual DbSet<VentureOption> VentureOption { get; set; }
     //public virtual DbSet<VentureResource> VentureResource { get; set; }
 
-    public DatabaseFacade Database { get; set; }
+    public override DatabaseFacade Database { get; }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {

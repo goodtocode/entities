@@ -32,6 +32,30 @@
                 Defines a mediator to encapsulate request/response and publishing interaction
             </summary>
         </member>
+        <member name="T:Goodtocode.Subjects.WebApi.Common.ConfigureSwaggerOptions">
+            <summary>
+            Configures swagger options
+            </summary>
+        </member>
+        <member name="M:Goodtocode.Subjects.WebApi.Common.ConfigureSwaggerOptions.#ctor(Microsoft.AspNetCore.Mvc.ApiExplorer.IApiVersionDescriptionProvider)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="provider"></param>
+        </member>
+        <member name="M:Goodtocode.Subjects.WebApi.Common.ConfigureSwaggerOptions.Configure(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions)">
+            <summary>
+            Configures the swagger options by delegate
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:Goodtocode.Subjects.WebApi.Common.ConfigureSwaggerOptions.Configure(System.String,Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions)">
+            <summary>
+            Configures options
+            </summary>
+            <param name="name"></param>
+            <param name="options"></param>
+        </member>
         <member name="T:Goodtocode.Subjects.WebApi.Controllers.BusinessController">
             <summary>
                 Businesses Controller V1.0

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Goodtocode.Subjects.Domain;
-using Goodtocode.Subjects.Application;
 using MediatR;
 
 namespace Goodtocode.Subjects.Application;
@@ -12,7 +11,7 @@ public class GetBusinessQuery : IRequest<BusinessEntity>, IBusinessEntity
     public string TaxNumber { get; set; } = string.Empty;
 }
 
-public class GetBusinessQueryHandler : IRequestHandler<GetBusinessQuery, IBusinessEntity>
+public class GetBusinessQueryHandler : IRequestHandler<GetBusinessQuery, BusinessEntity?>
 {
     private readonly IMapper _mapper;
     private readonly IBusinessRepo _userBusinessRepo;
@@ -23,7 +22,7 @@ public class GetBusinessQueryHandler : IRequestHandler<GetBusinessQuery, IBusine
         _mapper = mapper;
     }
 
-    public async Task<IBusinessEntity> Handle(GetBusinessQuery request,
+    public async Task<BusinessEntity?> Handle(GetBusinessQuery request,
         CancellationToken cancellationToken)
     {
         var business =

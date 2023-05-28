@@ -59,7 +59,7 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
 
     private void HandleValidationException(ExceptionContext context)
     {
-        var exception = context.Exception as ValidationException;
+        var exception = context.Exception as ValidationException ?? new ValidationException();
 
         var details = new ValidationProblemDetails(exception.Errors)
         {
@@ -85,7 +85,7 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
 
     private void HandleNotFoundException(ExceptionContext context)
     {
-        var exception = context.Exception as NotFoundException;
+        var exception = context.Exception as NotFoundException ?? new NotFoundException();
 
         var details = new ProblemDetails
         {

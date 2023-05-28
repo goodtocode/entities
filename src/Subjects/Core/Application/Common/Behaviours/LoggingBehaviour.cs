@@ -19,8 +19,10 @@ public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest> where T
 
         var userName = string.Empty;
 
-
-        _logger.LogInformation("Events Request: {Name} {@Request}",
-            requestName, request);
+        await Task.Run(() =>
+        {
+            _logger.LogInformation("Events Request: {Name} {@Request}",
+                requestName, request);
+        });
     }
 }

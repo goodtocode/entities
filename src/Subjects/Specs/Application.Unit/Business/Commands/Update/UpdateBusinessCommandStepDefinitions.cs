@@ -13,7 +13,7 @@ namespace Goodtocode.Subjects.Unit.Business.Commands.Update;
 public class UpdateBusinessCommandStepDefinitions : TestBase
 {
     private IDictionary<string, string[]> _commandErrors = new ConcurrentDictionary<string, string[]>();
-    private string[] _expectedInvalidFields;
+    private string[]? _expectedInvalidFields;
     private Guid _businessKey;
     private string _businessName = string.Empty;
     private string _taxNumber = string.Empty;

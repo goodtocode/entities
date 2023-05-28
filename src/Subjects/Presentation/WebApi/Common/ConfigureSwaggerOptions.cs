@@ -6,15 +6,26 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Goodtocode.Subjects.WebApi.Common;
 
+/// <summary>
+/// Configures swagger options
+/// </summary>
 public class ConfigureSwaggerOptions : IConfigureNamedOptions<SwaggerGenOptions>
 {
     private readonly IApiVersionDescriptionProvider provider;
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="provider"></param>
     public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider)
     {
         this.provider = provider;
     }
 
+    /// <summary>
+    /// Configures the swagger options by delegate
+    /// </summary>
+    /// <param name="options"></param>
     public void Configure(SwaggerGenOptions options)
     {
         foreach (var description in provider.ApiVersionDescriptions)
@@ -25,12 +36,17 @@ public class ConfigureSwaggerOptions : IConfigureNamedOptions<SwaggerGenOptions>
         options.IncludeXmlComments(xmlPath);
     }
 
-    public void Configure(string name, SwaggerGenOptions options)
+    /// <summary>
+    /// Configures options
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="options"></param>
+    public void Configure(string? name, SwaggerGenOptions options)
     {
         Configure(options);
     }
 
-    private OpenApiInfo CreateVersionInfo(ApiVersionDescription description)
+    private static OpenApiInfo CreateVersionInfo(ApiVersionDescription description)
     {
         var info = new OpenApiInfo
         {
