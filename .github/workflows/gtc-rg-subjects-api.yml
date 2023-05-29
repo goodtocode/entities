@@ -65,8 +65,8 @@ jobs:
 
       - name: Set-Version.ps1
         run: |
-          ${{ env.SCRIPTS_PATH }}/Set-Version.ps1 -Path ${{ env.SRC_PATH }} -VersionToReplace 1.0.0
-          echo "VERSION=$FileVersion" >> $GITHUB_ENV
+          $version = ${{ env.SCRIPTS_PATH }}/Set-Version.ps1 -Path ${{ env.SRC_PATH }} -VersionToReplace 1.0.0
+          echo "VERSION=$version" >> $GITHUB_ENV
         shell: pwsh
 
       - name: dotnet build test and publish
