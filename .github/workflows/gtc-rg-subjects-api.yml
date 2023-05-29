@@ -49,6 +49,7 @@ jobs:
       INFRA_PROJECT: 'Persistence.csproj'
       UNIT_PATH: 'Specs/Application.Unit'
       UNIT_PROJECT: 'Application.Unit.csproj'
+      SCRIPTS_PATH: './github/scripts'
       SQL_NAME: 'sql-entities-dev-001'
       SQLDB_NAME: 'sqldb-entities-dev-001'
       AZURE_CRED: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
@@ -61,6 +62,12 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ matrix.DOTNET_VERSION }}
+
+      - name: Set-Version.ps1
+        run: |
+          ${{ env.SCRIPTS_PATH }}/Set-Version.ps1 -Path ${{ env.SRC_PATH }} -VersionToReplace 1.0.0
+          echo "VERSION=$FileVersion" >> $GITHUB_ENV
+        shell: pwsh
 
       - name: dotnet build test and publish
         run: |
@@ -138,8 +145,10 @@ jobs:
           $TEMP_STR=$TEMP_STR.replace("<password>", "${{ secrets.SQL_PASSWORD }}")
           az webapp config connection-string set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -t SQLServer --settings DefaultConnection=$TEMP_STR
           dotnet tool install --global dotnet-ef
-          dotnet tool restore
-          dotnet ef database update --project ${{ env.SRC_PATH }}/${{ env.INFRA_PATH }}/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --connection $TEMP_STR --context SubjectsDbContext
+          dotnet tool restore          
+          dotnet ef migrations add ${{ env.VERSION }} --project ${{ env.SRC_PATH }}/${{ env.INFRA_PATH }}/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --context SubjectsDbContext
+          dotnet ef migrations script --project ${{ env.SRC_PATH }}/${{ env.INFRA_PATH }}/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --context SubjectsDbContext --output ${{ github.workspace }}/sql/migrations.sql --idempotent
+          dotnet ef database update --project ${{ env.SRC_PATH }}/${{ env.INFRA_PATH }}/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --context SubjectsDbContext --connection $TEMP_STR
         shell: pwsh
            
       - name: Swap to production slot

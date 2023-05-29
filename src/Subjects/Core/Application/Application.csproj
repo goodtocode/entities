@@ -3,6 +3,7 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<RootNamespace>Goodtocode.Subjects.Application</RootNamespace>
 		<AssemblyName>Goodtocode.Subjects.Application</AssemblyName>
+		<Version>1.0.0</Version>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
@@ -13,6 +14,6 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\Domain\Domain.csproj" />
+		<ProjectReference Include="..\Domain\Domain.csproj" />
 	</ItemGroup>
 </Project>

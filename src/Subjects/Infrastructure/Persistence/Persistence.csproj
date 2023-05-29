@@ -3,6 +3,7 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<RootNamespace>Goodtocode.Subjects.Persistence</RootNamespace>
 		<AssemblyName>Goodtocode.Subjects.Persistence</AssemblyName>
+		<Version>1.0.0</Version>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
@@ -22,7 +23,7 @@
 		<PackageReference Include="System.ServiceModel.Primitives" Version="6.0.0" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Core\Application\Application.csproj" />
-	  <ProjectReference Include="..\..\Core\Domain\Domain.csproj" />
+		<ProjectReference Include="..\..\Core\Application\Application.csproj" />
+		<ProjectReference Include="..\..\Core\Domain\Domain.csproj" />
 	</ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 	<PropertyGroup>
 		<RootNamespace>Goodtocode.Subjects.Integration</RootNamespace>
 		<AssemblyName>Goodtocode.Subjects.Integration</AssemblyName>
+		<Version>1.0.0</Version>
 		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
@@ -12,6 +13,6 @@
 		<PackageReference Include="MediatR" Version="12.0.1" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Common\Library.Ddd\Library.Ddd.csproj" />
+		<ProjectReference Include="..\..\Common\Library.Ddd\Library.Ddd.csproj" />
 	</ItemGroup>
 </Project>
