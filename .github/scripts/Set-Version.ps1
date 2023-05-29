@@ -25,15 +25,13 @@ param
 # *** Initialize
 # ***
 if ($IsWindows) { Set-ExecutionPolicy Unrestricted -Scope Process -Force }
-$VerbosePreference = 'Continue' #'SilentlyContinue'
+$VerbosePreference = 'SilentlyContinue' #'Continue'
 [String]$ThisScript = $MyInvocation.MyCommand.Path
 [String]$ThisDir = Split-Path $ThisScript
 [DateTime]$Now = Get-Date
-$OrigDir = Get-Location
-#Set-Location $ThisDir # Ensure our location is correct, so we can use relative paths
-Write-Host "*****************************"
-Write-Host "*** Starting: $ThisScript on $Now"
-Write-Host "*****************************"
+Write-Debug "*****************************"
+Write-Debug "*** Starting: $ThisScript on $Now"
+Write-Debug "*****************************"
 # Imports
 Import-Module "$ThisDir/System.psm1"
 
@@ -65,7 +63,7 @@ $FileVersion = "$Major.$Minor.$Revision.$Build" # Ref: https://learn.microsoft.c
 $AssemblyVersion = "$Major.$Minor.0.0"
 $InformationalVersion = "$Major.$Minor.$Revision$PreRelease$CommitHash"
 $SemanticVersion = "$Major.$Minor.$Patch$PreRelease"
-Write-Host "FileVersion: $FileVersion SemanticVersion: $SemanticVersion AssemblyVersion: $AssemblyVersion InformationalVersion: $InformationalVersion"
+Write-Debug "FileVersion: $FileVersion SemanticVersion: $SemanticVersion AssemblyVersion: $AssemblyVersion InformationalVersion: $InformationalVersion"
 
 # Package.json version
 Update-LineByContains -Path $Path -Contains 'version' -Line """version"": ""$FileVersion""," -Include package.json
@@ -80,7 +78,5 @@ Update-LineByContains -Path $Path -Contains "FileVersion(" -Line "[assembly: Fil
 Update-LineByContains -Path $Path -Contains "AssemblyVersion(" -Line "[assembly: AssemblyVersion(""$AssemblyVersion"")]" -Include AssemblyInfo.cs
 # *.vsixmanifest VSIX Visual Studio Templates
 Update-TextByContains -Path $Path -Contains "<Identity Id" -Old $VersionToReplace -New $FileVersion -Include *.vsixmanifest
-
-Set-Location $OrigDir
 
 Write-Output $FileVersion
