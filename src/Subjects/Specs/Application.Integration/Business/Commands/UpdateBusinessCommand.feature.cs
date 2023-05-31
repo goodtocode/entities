@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Application.Integration.LearnerCourses.Commands.UpdateRegisteredName
+namespace Goodtocode.Subjects.Unit.Business.Commands.Update
 {
     using TechTalk.SpecFlow;
     using System;

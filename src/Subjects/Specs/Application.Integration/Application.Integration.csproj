@@ -45,8 +45,8 @@
 		<Compile Update="LearnerCourses\Commands\UpdateProgress\UpdateLearnerCourseProgressV1.feature.cs">
 			<DependentUpon>%(Filename)</DependentUpon>
 		</Compile>
-		<Compile Update="LearnerCourses\Commands\UpdateRegisteredName\UpdateLearnerCourseRegisteredNameCommandV1.feature.cs">
-			<DependentUpon>%(Filename)</DependentUpon>
+		<Compile Update="Business\Commands\UpdateBusinessCommand.feature.cs">
+			<DependentUpon>UpdateBusinessCommand.feature</DependentUpon>
 		</Compile>
 		<Compile Update="LearnerCourses\Queries\GetAll\GetLearnerCoursesQueryV1.feature.cs">
 			<DependentUpon>%(Filename)</DependentUpon>
@@ -64,7 +64,7 @@
 			<Visible>$(UsingMicrosoftNETSdk)</Visible>
 			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
 		</SpecFlowFeatureFiles>
-		<SpecFlowFeatureFiles Update="LearnerCourses\Commands\UpdateRegisteredName\UpdateLearnerCourseRegisteredNameCommandV1.feature">
+		<SpecFlowFeatureFiles Update="Business\Commands\UpdateBusinessCommand.feature">
 			<Visible>$(UsingMicrosoftNETSdk)</Visible>
 			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
 		</SpecFlowFeatureFiles>
@@ -80,6 +80,11 @@
 			<Visible>$(UsingMicrosoftNETSdk)</Visible>
 			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
 		</SpecFlowFeatureFiles>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Business\Queries\" />
+	  <Folder Include="LearnerCourses\Commands\UpdateRegisteredName\" />
 	</ItemGroup>
 
 </Project>
