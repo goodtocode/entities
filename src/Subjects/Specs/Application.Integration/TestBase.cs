@@ -1,21 +1,16 @@
 ﻿using AutoMapper;
 using Goodtocode.Subjects.Application;
 using Goodtocode.Subjects.Application.Common.Mappings;
+using Goodtocode.Subjects.Integration.Common;
 using Goodtocode.Subjects.Persistence;
+using Goodtocode.Subjects.Persistence.Contexts;
 
 namespace Goodtocode.Application.Integration;
 
 [SetUpFixture]
 public class TestBase
 {
-    public enum ResponseType
-    {
-        Successful,
-        BadRequest,
-        NotFound,
-        Error
-    }
-
+    protected string _def = string.Empty;
     private static IConfigurationRoot _configuration = null!;
     private static IServiceScopeFactory _scopeFactory = null!;
 
@@ -29,7 +24,7 @@ public class TestBase
 
     public IMapper Mapper { get; }
 
-    public IHttpClientFactory? HttpContextFactory { get; set; }
+    public IBusinessRepo BusinessRepo { get; private set; }
 
     [OneTimeSetUp]
     public void RunBeforeAnyTests()
@@ -51,9 +46,17 @@ public class TestBase
 
         services.AddLogging();
 
-        _scopeFactory = services.BuildServiceProvider().GetService<IServiceScopeFactory>();
+        _scopeFactory = services.BuildServiceProvider().GetRequiredService<IServiceScopeFactory>();
         var sp = services.BuildServiceProvider();
-        HttpContextFactory = sp.GetService<IHttpClientFactory>();
+        BusinessRepo = sp.GetRequiredService<IBusinessRepo>();
+    }
+
+    private static void SeedContext()
+    {
+        using var scope = _scopeFactory.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<SubjectsDbContext>();
+        var seeder = scope.ServiceProvider.GetRequiredService<IContextSeeder>();
+        seeder.SeedSampleDataAsync(context);
     }
 
     //public static async Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request)
@@ -114,7 +117,7 @@ public class TestBase
 
     //    return await context.Set<TEntity>().CountAsync();
     //}
-    
+
     [OneTimeTearDown]
     public void RunAfterAnyTests()
     {

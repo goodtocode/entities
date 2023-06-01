@@ -78,11 +78,11 @@ namespace Goodtocode.Subjects.Unit.Business.Commands.Update
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Update business")]
-        [NUnit.Framework.TestCaseAttribute("success TaxNumber Add", "Success", "", "d1604a05-f883-40f1-803b-8562b5674f1a", "BizName", "123-4567", null)]
-        [NUnit.Framework.TestCaseAttribute("success TaxNumber Update", "Success", "", "d1604a05-f883-40f1-803b-8562b5674f1a", "BizName", "123-4567", null)]
-        [NUnit.Framework.TestCaseAttribute("success TaxNumber Remove", "Success", "", "d1604a05-f883-40f1-803b-8562b5674f1a", "BizName", "", null)]
-        [NUnit.Framework.TestCaseAttribute("success Name Update", "Success", "", "d1604a05-f883-40f1-803b-8562b5674f1a", "BizName", "123-4567", null)]
-        [NUnit.Framework.TestCaseAttribute("bad request Invalid BusinessKey", "BadRequest", "BusinessKey", "11111", "BizName", "123-4567", null)]
+        [NUnit.Framework.TestCaseAttribute("success TaxNumber Add", "Success", "", "d1604a05-f883-40f1-803b-8562b5674f1a", "businessName", "123-4567", null)]
+        [NUnit.Framework.TestCaseAttribute("success TaxNumber Update", "Success", "", "d1604a05-f883-40f1-803b-8562b5674f1a", "businessName", "123-4567", null)]
+        [NUnit.Framework.TestCaseAttribute("success TaxNumber Remove", "Success", "", "d1604a05-f883-40f1-803b-8562b5674f1a", "businessName", "", null)]
+        [NUnit.Framework.TestCaseAttribute("success Name Update", "Success", "", "d1604a05-f883-40f1-803b-8562b5674f1a", "businessName", "123-4567", null)]
+        [NUnit.Framework.TestCaseAttribute("bad request Invalid BusinessKey", "BadRequest", "BusinessKey", "11111", "businessName", "123-4567", null)]
         [NUnit.Framework.TestCaseAttribute("bad request Invalid BusinessName", "BadRequest", "BusinessName", "d1604a05-f883-40f1-803b-8562b5674f1a", "", "123-4567", null)]
         [NUnit.Framework.TestCaseAttribute("bad request", "BadRequest", "BusinessKey,BusinessName", "11111", "", "", null)]
         public void UpdateBusiness(string def, string response, string responseErrors, string requestBusinessKey, string requestBusinessName, string requestTaxNumber, string[] exampleTags)

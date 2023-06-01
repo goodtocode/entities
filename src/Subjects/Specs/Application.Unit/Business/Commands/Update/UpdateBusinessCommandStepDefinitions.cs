@@ -40,9 +40,9 @@ public class UpdateBusinessCommandStepDefinitions : TestBase
     }
 
     [Given(@"I have a TaxNumber ""([^""]*)""")]
-    public void GivenIHaveATaxNumber(string TaxNumber)
+    public void GivenIHaveATaxNumber(string taxNumber)
     {
-        _taxNumber = TaxNumber;
+        _taxNumber = taxNumber;
     }
 
     [When(@"I update the business")]

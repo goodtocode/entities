@@ -1,6 +1,7 @@
 ﻿using Goodtocode.Subjects.Application;
 using Goodtocode.Subjects.Persistence;
 using Goodtocode.Subjects.Persistence.Contexts;
+using Microsoft.AspNetCore.Http;
 
 namespace Goodtocode.Application.Integration;
 
@@ -9,6 +10,7 @@ public class Testing
 {
     private static IConfigurationRoot _configuration = null!;
     private static IServiceScopeFactory _scopeFactory = null!;
+    protected IBusinessRepo? _businessRepo;
 
     public Testing()
     {
@@ -38,6 +40,8 @@ public class Testing
         _scopeFactory = services
             .BuildServiceProvider()
             .GetRequiredService<IServiceScopeFactory>();
+        var sp = services.BuildServiceProvider();
+        _businessRepo = sp.GetService<IBusinessRepo>();
     }
 
     private static void SeedContext()

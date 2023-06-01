@@ -1,4 +1,13 @@
+using FluentValidation.Results;
+using Goodtocode.Application.Integration;
+using Goodtocode.Subjects.Application.Business.Commands;
+using Goodtocode.Subjects.Application.Common.Exceptions;
+using Goodtocode.Subjects.Application;
+using System.Collections.Concurrent;
 using TechTalk.SpecFlow;
+using static Goodtocode.Subjects.Integration.Common.ResponseTypes;
+using Azure;
+using FluentAssertions;
 
 namespace Goodtocode.Subjects.Unit.Business.Commands.Update;
 
@@ -6,139 +15,111 @@ namespace Goodtocode.Subjects.Unit.Business.Commands.Update;
 [Scope(Tag = "updateRegisteredNameCommandV1")]
 public class UpdateLearnerRegisteredNameCommandV1StepDefinitions : TestBase
 {
-    //private string _firstName;
-    //private string _lastName;
-    //private Guid _learnerKey;
-    //private TestBase.ResponseType _responseType;
-    //private IDictionary<string, string[]> _responseErrors = new Dictionary<string, string[]>();
-    //private List<ValidationFailure> _validatorErrors = new List<ValidationFailure>();
+    private IDictionary<string, string[]> _commandErrors = new ConcurrentDictionary<string, string[]>();
+    private string[]? _expectedInvalidFields;
+    private Guid _businessKey;
+    private string _businessName = string.Empty;
+    private string _taxNumber = string.Empty;
+    private object _responseType = string.Empty;
+    private ValidationResult _validationErrors = new();
 
-    //[Given(@"I have a learnerKey And The learner exists")]
-    //public void GivenIHaveALearnerKeyAndTheLearnerExists()
-    //{
-    //    _learnerKey = Guid.Parse("ad790f32-f501-4838-8e4a-c1b057c44f30");
-    //}
+    [Given(@"I have a def ""([^""]*)""")]
+    public void GivenIHaveADef(string def)
+    {
+        _def = def;
+    }
 
-    //[Given(@"I have a learnerKey and the learner does not exist")]
-    //public void GivenIHaveALearnerKeyAndTheLearnerDoesNotExist()
-    //{
-    //    _learnerKey = Guid.Parse("ad790f32-f501-4838-8e4a-000000000000");
-    //}
+    [Given(@"I have a BusinessKey ""([^""]*)""")]
+    public void GivenIHaveABusinessKey(string businessKey)
+    {
+        Guid.TryParse(businessKey, out _businessKey);
+    }
 
-    //[Given(@"I have a learners firstName")]
-    //public void GivenIHaveALearnersFirstName()
-    //{
-    //    _firstName = "ErikNew";
-    //}
+    [Given(@"I have a BusinessName ""([^""]*)""")]
+    public void GivenIHaveABusinessName(string businessName)
+    {
+        _businessName = businessName;
+    }
 
-    //[Given(@"I have a learners lastName")]
-    //public void GivenIHaveALearnersLastName()
-    //{
-    //    _lastName = "ChrisNew";
-    //}
+    [Given(@"I have a TaxNumber ""([^""]*)""")]
+    public void GivenIHaveATaxNumber(string taxNumber)
+    {
+        _taxNumber = taxNumber;
+    }
 
-    //[When(@"I update the Learner Course Registered Name")]
-    //public async Task WhenIUpdateTheLearnerCourseRegisteredName()
-    //{
-    //    var request = new UpdateLearnerCourseRegistrationNameCommand
-    //    {
-    //        LearnerKey = _learnerKey,
-    //        FirstName = _firstName,
-    //        Lastname = _lastName
-    //    };
+    [When(@"I update the business")]
+    public async Task WhenIUpdateTheBusiness()
+    {
 
-    //    var requestValidator = new UpdateLearnerCourseRegistrationNameCommandValidator();
-    //    var validationResult = requestValidator.Validate(request);
+        var request = new UpdateBusinessCommand
+        {
+            BusinessKey = _businessKey,
+            BusinessName = _businessName,
+            TaxNumber = _taxNumber
+        };
 
-    //    if (validationResult.IsValid)
-    //    {
-    //        try
-    //        {
-    //            await SendAsync(request);
-    //            _responseType = TestBase.ResponseType.Successful;
-    //        }
-    //        catch (Exception e)
-    //        {
-    //            switch (e)
-    //            {
-    //                case NotFoundException notFoundException:
-    //                    _responseType = ResponseType.NotFound;
-    //                    break;
-    //                case ValidationException validationException:
-    //                    _responseType = ResponseType.BadRequest;
-    //                    _responseErrors = validationException.Errors;
-    //                    break;
-    //                default:
-    //                    _responseType = ResponseType.Error;
-    //                    break;
-    //            }
-    //        }
-    //    }
-    //    else
-    //    {
-    //        _responseType = ResponseType.BadRequest;
-    //        _validatorErrors = validationResult.Errors;
-    //    }
-    //}
+        var requestValidator = new UpdateBusinessCommandValidator();
 
-    //[Then(@"The response is successful")]
-    //public void ThenTheResponseIsSuccessful()
-    //{
-    //    _responseType.Should().Be(ResponseType.Successful);
-    //}
+        _validationErrors = await requestValidator.ValidateAsync(request);
 
-    //[Then(@"The response tells me the Learner Course does not found")]
-    //public void ThenTheResponseTellsMeTheLearnerCourseDoesNotFound()
-    //{
-    //    _responseType.Should().Be(ResponseType.NotFound);
-    //}
+        if (_validationErrors.IsValid)
+            try
+            {
+                var handler = new UpdateBusinessCommandHandler(base.BusinessRepo);
+                await handler.Handle(request, CancellationToken.None);
+                _responseType = CommandResponseType.Successful;
+            }
+            catch (Exception e)
+            {
+                switch (e)
+                {
+                    case ValidationException validationException:
+                        _commandErrors = validationException.Errors;
+                        _responseType = CommandResponseType.BadRequest;
+                        break;
+                    case NotFoundException notFoundException:
+                        _responseType = CommandResponseType.NotFound;
+                        break;
+                    default:
+                        _responseType = CommandResponseType.Error;
+                        break;
+                }
+            }
+        else
+            _responseType = CommandResponseType.BadRequest;
+    }
 
-    //[Given(@"I have an empty learnerKey")]
-    //public void GivenIHaveAnEmptyLearnerKey()
-    //{
-    //    _learnerKey = Guid.Empty;
-    //}
+    [Then(@"The response is ""([^""]*)""")]
+    public void ThenTheResponseIs(string response)
+    {
+        switch (response)
+        {
+            case "Success":
+                _responseType.Should().Be(CommandResponseType.Successful);
+                break;
+            case "BadRequest":
+                _responseType.Should().Be(CommandResponseType.BadRequest);
+                break;
+            case "NotFound":
+                _responseType.Should().Be(CommandResponseType.NotFound);
+                break;
+        }
+    }
 
-    //[Given(@"I have an empty learners firstName")]
-    //public void GivenIHaveAnEmptyLearnersFirstName()
-    //{
-    //    _firstName = string.Empty;
-    //}
+    [Then(@"If the response has validation issues I see the ""([^""]*)"" in the response")]
+    public void ThenIfTheResponseHasValidationIssuesISeeTheInTheResponse(string expectedInvalidFields)
+    {
+        if (string.IsNullOrWhiteSpace(expectedInvalidFields)) return;
 
-    //[Given(@"I have an empty learners lastName")]
-    //public void GivenIHaveAnEmptyLearnersLastName()
-    //{
-    //    _lastName = string.Empty;
-    //}
+        _expectedInvalidFields = expectedInvalidFields.Split(",");
 
-    //[Then(@"The response tells me I mad a bad request")]
-    //public void ThenTheResponseTellsMeIMadABadRequest()
-    //{
-    //    _responseType.Should().Be(ResponseType.BadRequest);
-    //}
+        foreach (var field in _expectedInvalidFields)
+        {
+            var hasCommandValidatorErrors = _validationErrors.Errors.Any(x => x.PropertyName == field.Trim());
+            var hasCommandErrors = _commandErrors.Any(x => x.Key == field.Trim());
+            var hasErrorMatch = hasCommandErrors || hasCommandValidatorErrors;
 
-    //[Then(@"The response validation errors tell me the learners firstName is required")]
-    //public void ThenTheResponseErrorsTellMeTheLearnersFirstNameIsRequired()
-    //{
-    //    _validatorErrors.Any(x => x.PropertyName == "FirstName");
-    //}
-
-    //[Then(@"The response validation errors tell me the learners lastName is required")]
-    //public void ThenTheResponseErrorsTellMeTheLearnersLastNameIsRequired()
-    //{
-    //    _validatorErrors.Any(x => x.PropertyName == "LastName");
-    //}
-
-    //[Then(@"The response validation errors tell me the externalCourseId is required")]
-    //public void ThenTheResponseErrorsTellMeTheExternalCourseIdIsRequired()
-    //{
-    //    _validatorErrors.Any(x => x.PropertyName == "ExternalCourseid");
-    //}
-
-    //[Then(@"The response validation errors tell me the learnerKey is required")]
-    //public void ThenTheResponseErrorsTellMeTheLearnerKeyIsRequired()
-    //{
-    //    _validatorErrors.Any(x => x.PropertyName == "LearnerKey");
-    //}
-
+            hasErrorMatch.Should().BeTrue();
+        }
+    }
 }

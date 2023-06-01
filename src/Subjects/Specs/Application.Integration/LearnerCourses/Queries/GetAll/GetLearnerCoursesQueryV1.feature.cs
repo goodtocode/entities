@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Application.Integration.LearnerCourses.Queries.GetAll
+namespace Goodtocode.Subjects.Integration.LearnerCourses.Queries.GetAll
 {
     using TechTalk.SpecFlow;
     using System;

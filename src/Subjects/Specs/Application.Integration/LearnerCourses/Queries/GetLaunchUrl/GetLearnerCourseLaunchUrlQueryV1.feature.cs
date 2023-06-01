@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Application.Integration.LearnerCourses.Queries.GetLaunchUrl
+namespace Goodtocode.Subjects.Integration.LearnerCourses.Queries.GetLaunchUrl
 {
     using TechTalk.SpecFlow;
     using System;
