@@ -1,15 +1,11 @@
 using FluentValidation.Results;
-using Goodtocode.Application.Integration;
+using Goodtocode.Subjects.Application;
 using Goodtocode.Subjects.Application.Business.Commands;
 using Goodtocode.Subjects.Application.Common.Exceptions;
-using Goodtocode.Subjects.Application;
 using System.Collections.Concurrent;
-using TechTalk.SpecFlow;
 using static Goodtocode.Subjects.Integration.Common.ResponseTypes;
-using Azure;
-using FluentAssertions;
 
-namespace Goodtocode.Subjects.Unit.Business.Commands.Update;
+namespace Goodtocode.Subjects.Integration.Business.Commands.Update;
 
 [Binding]
 [Scope(Tag = "updateRegisteredNameCommandV1")]

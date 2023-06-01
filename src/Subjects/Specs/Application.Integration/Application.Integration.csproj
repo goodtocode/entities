@@ -10,6 +10,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<SpecFlowObsoleteCodeBehindFiles Remove="Business\Queries\GetBusinessesByKey.feature.cs" />
+		<SpecFlowObsoleteCodeBehindFiles Remove="Business\Queries\GetBusinessesByName.feature.cs" />
 		<SpecFlowObsoleteCodeBehindFiles Remove="LearnerCourses\Commands\UpdateProgress\UpdateLearnerCourseProgressV1.feature.cs" />
 		<SpecFlowObsoleteCodeBehindFiles Remove="LearnerCourses\Commands\UpdateRegisteredName\UpdateLearnerCourseRegisteredNameCommandV1.feature.cs" />
 		<SpecFlowObsoleteCodeBehindFiles Remove="LearnerCourses\Queries\GetAll\GetLearnerCoursesQueryV1.feature.cs" />
@@ -42,6 +44,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="Business\Queries\GetBusinessesByKey.feature.cs">
+		  <DependentUpon>%(Filename)</DependentUpon>
+		</Compile>
+		<Compile Update="Business\Queries\GetBusinessesByName.feature.cs">
+		  <DependentUpon>%(Filename)</DependentUpon>
+		</Compile>
 		<Compile Update="LearnerCourses\Commands\UpdateProgress\UpdateLearnerCourseProgressV1.feature.cs">
 			<DependentUpon>%(Filename)</DependentUpon>
 		</Compile>
@@ -60,6 +68,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<SpecFlowFeatureFiles Update="Business\Queries\GetBusinessesByKey.feature">
+		  <Visible>$(UsingMicrosoftNETSdk)</Visible>
+		  <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
+		<SpecFlowFeatureFiles Update="Business\Queries\GetBusinessesByName.feature">
+		  <Visible>$(UsingMicrosoftNETSdk)</Visible>
+		  <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
 		<SpecFlowFeatureFiles Update="LearnerCourses\Commands\UpdateProgress\UpdateLearnerCourseProgressV1.feature">
 			<Visible>$(UsingMicrosoftNETSdk)</Visible>
 			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
@@ -83,7 +99,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Business\Queries\" />
 	  <Folder Include="LearnerCourses\Commands\UpdateRegisteredName\" />
 	</ItemGroup>
 
