@@ -41,19 +41,6 @@ public class GetBusinessesByKeyStepDefinitions : TestBase
     [When(@"I query for matching Businesses")]
     public async Task WhenIQueryForMatchingBusinesses()
     {
-        var userBusinessesRepoMock = new Mock<IBusinessRepo>();
-
-        if (_businessExists)
-        {
-            userBusinessesRepoMock
-                .Setup(x => x.GetBusinessAsync(_businessKey, It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(Result.Success<BusinessEntity?>(new BusinessEntity()
-                {
-                    BusinessKey = new Guid("2016a497-e56c-4be8-8ef6-3dc5ae1699ce"),
-                    BusinessName = "BusinessInDb"
-                })));
-        }
-
         var request = new GetBusinessQuery
         {
             BusinessKey = _businessKey
@@ -66,7 +53,7 @@ public class GetBusinessesByKeyStepDefinitions : TestBase
         if (_validationErrors.IsValid)
             try
             {
-                var handler = new GetBusinessQueryHandler(userBusinessesRepoMock.Object, Mapper);
+                var handler = new GetBusinessQueryHandler(BusinessRepo, Mapper);
                 _response = await handler.Handle(request, CancellationToken.None);
                 _responseType = CommandResponseType.Successful;
             }

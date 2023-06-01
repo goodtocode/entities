@@ -43,20 +43,6 @@ public class GetBusinessesByNameStepDefinitions : TestBase
     {
         var userBusinessesRepoMock = new Mock<IBusinessRepo>();
 
-        if (_businessExists)
-        {
-            userBusinessesRepoMock
-                .Setup(x => x.GetBusinessesByNameAsync(_businessName, It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(Result.Success(new List<BusinessEntity>
-                {
-                    new()
-                    {
-                        BusinessKey = new Guid(),
-                        BusinessName = "BusinessInDb"
-                    }
-                })));
-        }
-
         var request = new GetBusinessesByNameQuery
         {
             BusinessName = _businessName
@@ -69,7 +55,7 @@ public class GetBusinessesByNameStepDefinitions : TestBase
         if (_validationErrors.IsValid)
             try
             {
-                var handler = new GetBusinessesByNameQueryHandler(userBusinessesRepoMock.Object);
+                var handler = new GetBusinessesByNameQueryHandler(BusinessRepo);
                 _response = await handler.Handle(request, CancellationToken.None);
                 _responseType = CommandResponseType.Successful;
             }
