@@ -5,10 +5,10 @@ using Goodtocode.Subjects.Application.Common.Exceptions;
 using System.Collections.Concurrent;
 using static Goodtocode.Subjects.Integration.Common.ResponseTypes;
 
-namespace Goodtocode.Subjects.Integration.Business.Commands.Update;
+namespace Goodtocode.Subjects.Integration.Business.Commands;
 
 [Binding]
-[Scope(Tag = "updateRegisteredNameCommandV1")]
+[Scope(Tag = "updateBusinessCommand")]
 public class UpdateLearnerRegisteredNameCommandV1StepDefinitions : TestBase
 {
     private IDictionary<string, string[]> _commandErrors = new ConcurrentDictionary<string, string[]>();
