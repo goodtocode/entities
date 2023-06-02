@@ -1,4 +1,5 @@
-﻿using Goodtocode.Subjects.Domain;
+﻿using Goodtocode.Subjects.Application.Common.Exceptions;
+using Goodtocode.Subjects.Domain;
 using MediatR;
 
 namespace Goodtocode.Subjects.Application;
@@ -25,6 +26,6 @@ public class UpdateBusinessCommandHandler : IRequestHandler<UpdateBusinessComman
             await _userBusinessRepo.UpdateBusinessAsync(request, cancellationToken);
 
         if (updateResult.IsFailure)
-            throw new Exception(updateResult.Error);
+            throw new NotFoundException(updateResult.Error);
     }
 }

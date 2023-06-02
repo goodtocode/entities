@@ -59,19 +59,18 @@ public class GetBusinessesByKeyStepDefinitions : TestBase
             }
             catch (Exception e)
             {
-                if (e is ValidationException validationException)
+                switch (e)
                 {
-                    _commandErrors = validationException.Errors;
-                    _responseType = CommandResponseType.BadRequest;
-                }
-
-                else if (e is NotFoundException notFoundException)
-                {
-                    _responseType = CommandResponseType.NotFound;
-                }
-                else
-                {
-                    _responseType = CommandResponseType.Error;
+                    case ValidationException validationException:
+                        _commandErrors = validationException.Errors;
+                        _responseType = CommandResponseType.BadRequest;
+                        break;
+                    case NotFoundException notFoundException:
+                        _responseType = CommandResponseType.NotFound;
+                        break;
+                    default:
+                        _responseType = CommandResponseType.Error;
+                        break;
                 }
             }
         else
