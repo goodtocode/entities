@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using CSharpFunctionalExtensions;
+using Goodtocode.Subjects.Application.Common.Exceptions;
 using Goodtocode.Subjects.Domain;
 using MediatR;
 
@@ -28,6 +30,9 @@ public class GetBusinessQueryHandler : IRequestHandler<GetBusinessQuery, Busines
         var business =
             await _userBusinessRepo.GetBusinessAsync(request.BusinessKey,
                 cancellationToken);
+
+        if (business.IsFailure)
+            throw new NotFoundException("User Course Details Not Found");
 
         return business.Value;
     }
