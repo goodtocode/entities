@@ -24,7 +24,7 @@ public class TestBase
 
     public IMapper Mapper { get; }
 
-    public IBusinessRepo BusinessRepo { get; private set; }
+    public IBusinessRepo? BusinessRepo { get; private set; }
 
     [OneTimeSetUp]
     public void RunBeforeAnyTests()
@@ -44,11 +44,15 @@ public class TestBase
             w.EnvironmentName == "Development" &&
             w.ApplicationName == "Courses.WebApi"));
 
+        services.AddScoped<IContextSeeder, ContextSeeder>();
+
         services.AddLogging();
 
         _scopeFactory = services.BuildServiceProvider().GetRequiredService<IServiceScopeFactory>();
         var sp = services.BuildServiceProvider();
         BusinessRepo = sp.GetRequiredService<IBusinessRepo>();
+        
+        SeedContext();
     }
 
     private static void SeedContext()
