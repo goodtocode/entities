@@ -23,7 +23,7 @@ public class GetBusinessesByNameQueryHandler : IRequestHandler<GetBusinessesByNa
         var businesses =
             await _userBusinessesRepo.GetBusinessesByNameAsync(request.BusinessName,
                 cancellationToken);
-
-        return businesses.Value ?? new List<BusinessEntity>();
+        
+        return businesses.GetValueOrDefault();
     }
 }

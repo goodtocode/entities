@@ -31,9 +31,9 @@ public class GetBusinessQueryHandler : IRequestHandler<GetBusinessQuery, Busines
             await _userBusinessRepo.GetBusinessAsync(request.BusinessKey,
                 cancellationToken);
 
-        if (business.IsFailure)
-            throw new NotFoundException("User Course Details Not Found");
-
-        return business.Value;
+        return business.Match(
+            value => business.Value,
+            failure => throw new NotFoundException(business.Error)
+            );
     }
 }
