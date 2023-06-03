@@ -67,8 +67,7 @@ jobs:
         run: |
           $version = ${{ env.SCRIPTS_PATH }}/Set-Version.ps1 -Path ${{ env.SRC_PATH }} -VersionToReplace 1.0.0
           echo "Version: $version"
-          echo "::set-env name=FILE_VERSION::$version"
-          echo "VERSION=$version" >> $env:GITHUB_ENV
+          echo "FILE_VERSION=$version" >> $env:GITHUB_ENV
         shell: pwsh
 
       - name: dotnet build test and publish
@@ -148,7 +147,7 @@ jobs:
           az webapp config connection-string set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -t SQLServer --settings DefaultConnection=$TEMP_STR
           dotnet tool install --global dotnet-ef
           dotnet tool restore          
-          dotnet ef migrations add v${{ env.FILE_VERSION }}${{ env.VERSION }} --project ${{ env.SRC_PATH }}/${{ env.INFRA_PATH }}/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --context SubjectsDbContext
+          dotnet ef migrations add "v${{ env.FILE_VERSION }}" --project ${{ env.SRC_PATH }}/${{ env.INFRA_PATH }}/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --context SubjectsDbContext
           dotnet ef migrations script --project ${{ env.SRC_PATH }}/${{ env.INFRA_PATH }}/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --context SubjectsDbContext --output ${{ github.workspace }}/sql/migrations.sql --idempotent
           dotnet ef database update --project ${{ env.SRC_PATH }}/${{ env.INFRA_PATH }}/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --context SubjectsDbContext --connection $TEMP_STR
         shell: pwsh
