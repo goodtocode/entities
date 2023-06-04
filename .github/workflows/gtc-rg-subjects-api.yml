@@ -4,13 +4,13 @@ on:
     - main
     paths:
     - .github/workflows/gtc-rg-subjects-api.yml
-    - src/**
+    - src/Subjects/**
   pull_request:
     branches:
     - main    
     paths:
     - .github/workflows/gtc-rg-subjects-api.yml
-    - src/**
+    - src/Subjects/**
   workflow_dispatch:
     inputs:
       environment:
@@ -40,12 +40,16 @@ jobs:
       AZURE_WEBAPP_PACKAGE_PATH: '.'
       AZURE_RG_NAME: 'gtc-rg-subjects-dev-001'
       RUNTIME_ENV: 'Development'
-      SRC_PATH: './src'
-      SRC_SLN: 'GoodToCode.Entities.sln'      
-      API_PROJECT: 'Subjects.Presentation.Api.csproj'
+      SRC_PATH: './src/Subjects'
+      SRC_SLN: 'Goodtocode.Subjects.sln'      
+      API_PATH: 'Presentation/WebApi'
+      API_PROJECT: 'WebApi.csproj'
       APPI_NAME: 'appi-subjects-dev-001'
-      INFRA_PROJECT: 'Subjects.Infrastructure.csproj'
-      UNIT_PROJECT: 'Subjects.Specs.Unit.csproj'
+      INFRA_PATH: 'Infrastructure/Persistence'
+      INFRA_PROJECT: 'Persistence.csproj'
+      UNIT_PATH: 'Specs/Application.Unit'
+      UNIT_PROJECT: 'Application.Unit.csproj'
+      SCRIPTS_PATH: './.github/scripts'
       SQL_NAME: 'sql-entities-dev-001'
       SQLDB_NAME: 'sqldb-entities-dev-001'
       AZURE_CRED: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
@@ -59,11 +63,19 @@ jobs:
         with:
           dotnet-version: ${{ matrix.DOTNET_VERSION }}
 
+      - name: Set-Version.ps1
+        run: |
+          $version = ${{ env.SCRIPTS_PATH }}/Set-Version.ps1 -Path ${{ env.SRC_PATH }} -VersionToReplace 1.0.0
+          echo "Version: $version"
+          echo "FILE_VERSION=$version" >> $env:GITHUB_ENV
+        shell: pwsh
+
       - name: dotnet build test and publish
         run: |
           dotnet build ${{ env.SRC_PATH }}/${{ env.SRC_SLN }} --configuration Release       
-          dotnet test ${{ env.SRC_PATH }}/**/${{ env.UNIT_PROJECT }} --verbosity normal
-          dotnet publish ${{ env.SRC_PATH }}/**/${{ env.API_PROJECT }} -c Release -o ${{ env.AZURE_WEBAPP_NAME }} 
+          dotnet test ${{ env.SRC_PATH }}/${{ env.UNIT_PATH }}/${{ env.UNIT_PROJECT }} --verbosity normal
+          dotnet publish ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --configuration Release -o ${{ env.AZURE_WEBAPP_NAME }} 
+        shell: pwsh
 
       - name: dotnet test results
         uses: actions/upload-artifact@v3
@@ -132,11 +144,20 @@ jobs:
           $TEMP_STR=az sql db show-connection-string --client ado.net --server ${{ env.SQL_NAME }} --name ${{ env.SQLDB_NAME }} -o tsv
           $TEMP_STR=$TEMP_STR.replace("<username>", "${{ secrets.SQL_USER }}")
           $TEMP_STR=$TEMP_STR.replace("<password>", "${{ secrets.SQL_PASSWORD }}")
-          az webapp config connection-string set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -t SQLServer --settings DefaultConnection=$TEMP_STR
+          az webapp config connection-string set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -t SQLServer --settings DefaultConnection'$TEMP_STR'
           dotnet tool install --global dotnet-ef
-          dotnet tool restore
-          dotnet ef database update --project ${{ env.SRC_PATH }}/**/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/**/${{ env.API_PROJECT }} --connection $TEMP_STR --context SubjectsDbContext
+          dotnet tool restore          
+          dotnet ef migrations add "v${{ env.FILE_VERSION }}" --project ${{ env.SRC_PATH }}/${{ env.INFRA_PATH }}/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --context SubjectsDbContext
+          dotnet ef migrations script --project ${{ env.SRC_PATH }}/${{ env.INFRA_PATH }}/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --context SubjectsDbContext --output ${{ github.workspace }}/sql/migrations.sql --idempotent
+          sqlcmd -S  ${{ env.SQL_NAME }}.database.windows.net -i ${{ github.workspace }}/sql/migrations.sql -d ${{ env.SQLDB_NAME }} -U ${{ secrets.SQL_USER }} -P ${{ secrets.SQL_PASSWORD }}
+          #dotnet ef database update --project ${{ env.SRC_PATH }}/${{ env.INFRA_PATH }}/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --context SubjectsDbContext --connection '$TEMP_STR'
         shell: pwsh
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifacts
+          path: ${{ github.workspace }}/sql/migrations.sql
            
       - name: Swap to production slot
         run: |
