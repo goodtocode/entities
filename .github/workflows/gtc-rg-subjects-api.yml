@@ -144,12 +144,13 @@ jobs:
           $TEMP_STR=az sql db show-connection-string --client ado.net --server ${{ env.SQL_NAME }} --name ${{ env.SQLDB_NAME }} -o tsv
           $TEMP_STR=$TEMP_STR.replace("<username>", "${{ secrets.SQL_USER }}")
           $TEMP_STR=$TEMP_STR.replace("<password>", "${{ secrets.SQL_PASSWORD }}")
-          az webapp config connection-string set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -t SQLServer --settings DefaultConnection=$TEMP_STR
+          az webapp config connection-string set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -t SQLServer --settings DefaultConnection'$TEMP_STR'
           dotnet tool install --global dotnet-ef
           dotnet tool restore          
           dotnet ef migrations add "v${{ env.FILE_VERSION }}" --project ${{ env.SRC_PATH }}/${{ env.INFRA_PATH }}/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --context SubjectsDbContext
           dotnet ef migrations script --project ${{ env.SRC_PATH }}/${{ env.INFRA_PATH }}/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --context SubjectsDbContext --output ${{ github.workspace }}/sql/migrations.sql --idempotent
-          dotnet ef database update --project ${{ env.SRC_PATH }}/${{ env.INFRA_PATH }}/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --context SubjectsDbContext --connection $TEMP_STR
+          sqlcmd -S  ${{ env.SQL_NAME }}.database.windows.net -i ${{ github.workspace }}/sql/migrations.sql -d ${{ env.SQLDB_NAME }} -U ${{ secrets.SQL_USER }} -P ${{ secrets.SQL_PASSWORD }}
+          #dotnet ef database update --project ${{ env.SRC_PATH }}/${{ env.INFRA_PATH }}/${{ env.INFRA_PROJECT }} --startup-project ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --context SubjectsDbContext --connection '$TEMP_STR'
         shell: pwsh
 
       - name: Upload artifact
