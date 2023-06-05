@@ -20,7 +20,7 @@ GoodToCode Entities is based on DDD, onion-architecture, vertical slice and CQRS
     Powershell: $env:ASPNETCORE_ENVIRONMENT="Development"
 
 ### Azure Infrastructure as Code (IaC)
-#### Option 1: Create a Cloud Adoption Framework (CAF) Landing Zone
+#### Create a Cloud Adoption Framework (CAF) Landing Zone
 
 [About CAF Landing Zones](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/)
 1. If you are using GitHub Actions
