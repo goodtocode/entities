@@ -22,6 +22,7 @@ on:
 
 env:
   API_NAME: 'api-subjects-dev-001'
+  API_IDENTITY: 'identity-subjects-dev-001'
   APPINSIGHTS_NAME: 'appi-subjects-dev-001'
   ARM_PATH: './.azure'
   AZURE_RG_ENVIRONMENT: 'Development'
@@ -88,3 +89,12 @@ jobs:
           resourceGroupName: ${{ env.AZURE_RG_NAME }}
           template: ${{ env.ARM_PATH }}/api-apiapp.json
           parameters: name=${{ env.API_NAME }} planName=${{ env.PLAN_NAME }} planResourceGroupName=${{ env.SHARED_RG_NAME }} appiKey=${{ secrets.APPI_KEY }} appiConnection=${{ secrets.APPI_CONNECTION }} rgEnvironment=${{ env.AZURE_RG_ENVIRONMENT }}
+
+      - name: create and assign identity
+        run: |
+          az identity create --resource-group ${{ env.AZURE_RG_NAME }} --name ${{ env.API_IDENTITY }}
+          # The following command requires Security Reader
+          $objectId = az ad sp list --display-name ${{ env.API_IDENTITY }} --query "[?displayName=='${{ env.API_IDENTITY }}'].id" --output tsv
+          az webapp identity assign --resource-group ${{ env.AZURE_RG_NAME }} --name ${{ env.API_NAME }} --identities $objectId
+          az keyvault set-policy -n ${{ env.KEYVAULT_NAME }} -g ${{ env.AZURE_RG_NAME }} --object-id $objectId --secret-permissions get          
+        shell: pwsh

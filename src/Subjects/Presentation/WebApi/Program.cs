@@ -1,3 +1,4 @@
+using Azure.Identity;
 using FluentValidation.AspNetCore;
 using Goodtocode.Subjects.Application;
 using Goodtocode.Subjects.Persistence;
@@ -99,6 +100,9 @@ builder.Configuration
     .AddJsonFile("appsettings.json", true, true)
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName ?? "Development"}.json", true, true)
     .AddEnvironmentVariables();
+
+if (builder.Configuration.GetValue<bool>("UseKeyVault"))
+    builder.Configuration.AddAzureKeyVault(new Uri(builder.Configuration["Azure:KeyVaultUri"]), new DefaultAzureCredential());
 
 BuildApiVerAndApiExplorer(builder);
 

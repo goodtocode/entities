@@ -1,75 +1,47 @@
-# GoodToCode Stack
+# GoodToCode Entities
+<sup>The goal of GoodToCode Entities is to quick-start custom software applications by providing easy-to-extend Domain Entities and the APIs/Azure Functions that exposes these entities.</sup>
 
-GoodToCode Stack is a Microservice/Serverless centric collection of common Domain Entities that you often include in software applications. These Entities, like Person and Location, can be assembled and used in your business apps and APIs.
-The goal of the GoodToCode Stack is to quick-start custom software applications by providing easy-to-extend Domain Entities and the APIs/Azure Functions that exposes these entities.
+![Entities LZ](https://github.com/goodtocode/entities/actions/workflows/gtc-rg-entities-landingzone.yml/badge.svg)
 
-GoodToCode Stack is based on DDD, onion-architecture, vertical slice and CQRS in .NET Core and EF Core code-first.
+![Subjects LZ](https://github.com/goodtocode/entities/actions/workflows/gtc-rg-subjects-landingzone.yml/badge.svg)
+
+![Subjects API](https://github.com/goodtocode/entities/actions/workflows/gtc-rg-chronology-landingzone.yml/badge.svg)
+
+GoodToCode Entities is a Microservice/Serverless centric collection of common Domain Entities that you often include in software applications. These Entities, like Person and Location, can be assembled and used in your business apps and APIs.
+
+GoodToCode Entities is based on DDD, onion-architecture, vertical slice and CQRS in .NET Core and EF Core code-first.
 
 ## Installation
 ### Environment Variables
-1. Create "AppSettingsConnection" (required)
-* Go to portal.azure.com
-* Create or find your Azure App Configuration service connection string
-
-    Powershell: $env:AppSettingsConnection="Endpoint=https://{Your-Endpoint}.azconfig.io;Id={Your-Key}"
-    
-2. Create "ASPNETCORE_ENVIRONMENT" (optional, defaults to "Production")
-* Local
+1. Create "ASPNETCORE_ENVIRONMENT" and set it to Development. These relate to the appsettings.ENVIRONMENT.json files.
 * Development
 * Production
 
     Powershell: $env:ASPNETCORE_ENVIRONMENT="Development"
 
-### Azure App Configuration
-1. Go to portal.azure.com
-2. Create or find your Azure App Configuration service 
-3. Add the following keys, with value from your Azure resources:
-* Stack:Chronology:ApiUrl - {Your-ApiService-Url} - text/plain
-* Stack:Chronology:FunctionsCode - {Your-FunctionApp-AppKey} - text/plain
-* Stack:Chronology:FunctionsUrl - {Your-FunctionApp-Url} - text/plain
-* Stack:Locality:ApiUrl - {Your-ApiService-Url} - text/plain
-* Stack:Locality:FunctionsCode - {Your-FunctionApp-AppKey} - text/plain
-* Stack:Locality:FunctionsUrl - {Your-FunctionApp-Url} - text/plain
-* Stack:Occurrences:ApiUrl - {Your-ApiService-Url} - text/plain
-* Stack:Occurrences:FunctionsCode - {Your-FunctionApp-AppKey} - text/plain
-* Stack:Occurrences:FunctionsUrl - {Your-FunctionApp-Url} - text/plain
-* Stack:Shared:Sentinel - 1 - text/plain
-* Stack:Shared:SqlConnection - {Your-AzureSql-ConnectionString} - text/plain
-* Stack:Subjects:ApiUrl - {Your-ApiService-Url} - text/plain
-* Stack:Subjects:FunctionsCode - {Your-FunctionApp-AppKey} - text/plain
-* Stack:Subjects:FunctionsUrl - {Your-FunctionApp-Url} - text/plain
+### Azure Infrastructure as Code (IaC)
+#### Create a Cloud Adoption Framework (CAF) Landing Zone
 
-## Namespaces
-### GoodToCode.Chronology
-Includes all Domain Models for any chronological entity such as: Schedules (Schedule entity) and Hours of Operations (TimeRecurring entity)
+[About CAF Landing Zones](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/)
+1. If you are using GitHub Actions
+* Create the shared Entities resource group: .github/workflows/gtc-rg-entities-landingzone.yml
+* Create the Subjects resource group: .github/workflows/gtc-rg-subjects-landingzone.yml
+* Deploy the Subjects API and runs EF Migrations: .github/workflows/gtc-rg-subjects-api.yml
 
-### GoodToCode.Locality
-Includes all Domain Models for any locale-centric entity such as: Locations (Location entity) and LatLongs (LatLong entity)
+2. If you are using Azure DevOps Pipelines
+* Create the shared Entities resource group: .azure-devops/pipelines/gtc-entities-landingzone.yml
+* Create the Subjects resource group: .azure-devops/pipelines/gtc-entities-subjects-landingzone.yml
+* Deploy the Subjects API: .azure-devops/pipelines/gtc-entities-subjects-api.yml
+* Deploy the Subjects EF Migrations: .azure-devops/pipelines/gtc-entities-subjects-ef.yml
 
-### GoodToCode.Subjects
-Includes all Domain Models for any subject entity such as: People (Person entity) and Businesses (Business entity)
-
-### GoodToCode.Occurrences
-Includes all Domain Models for any occurnce of one or more Chronology + Locality + Subject entities such as: Events (Event entity) and Appointments (Appointment entity)
-
-### GoodToCode.Shared
-Shared kernel on which all projects depend. Primary aspect is GoodToCode.Stack.Abstractions, which allows external applications to code to abstractions of the stack.
-
-## Projects
-### GoodToCode.Presentation.Api: 
-ASP.NET Web API endpoints exposing that vertical's Application Service
-
-### GoodToCode.Presentation.Functions: 
-Azure Functions HTTP endpoints exposing that vertical's Application Service
-
-### GoodToCode.Application.Services: 
-CQRS Commands and Queries that call aggregate roots.
-
-### GoodToCode.Domain.Models: 
-Domain aggregates and domain models
-
-### GoodToCode.Infrastructure.Persistence: 
-EF Core code first persistence layer for SQL Server, CosmosDb, Azure Storage Tables and PosgreSQL
-
-Disclaimer: This work is under development mostly for internal projects, and is still highly volatile. Watch for any Releases, which will include tested and hardened versions.
+## Projects and Namespaces
+Namespace | Path | Contents
+--- | --- | ---
+Goodtocode.Subjects.Common | /src/Subjects/Common | Includes shared kernel library that are candidates to share with other projects.
+Goodtocode.Subjects.Domain | /src/Subjects/Core/Domain | Includes core domain objects, entities and interfaces. This only references .NET.
+Goodtocode.Subjects.Application | /src/Subjects/Core/Application | Includes core application commands and queries. This only references Domain.
+Goodtocode.Subjects.Persistence | /src/Subjects/Infrastructure/Persistence |Includes infrastructure concerns such as repositories, dbcontexts. This references Domain and Application.
+Goodtocode.Subjects.WebApi | /src/Subjects/Common | Includes presentation Web API. This references Persistence.
+Goodtocode.Subjects.Unit | /src/Subjects/Specs/Application.Unit | Unit tests that exercise Domain and Applicaiton with mocked infrastructure. This references Persistence.
+Goodtocode.Subjects.Integration | /src/Subjects/Specs/Application.Integration | Unit tests that exercise Domain, Application and Presistence. Uses In-memory Database. This references Persistence.
 

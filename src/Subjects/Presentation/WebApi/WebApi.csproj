@@ -12,6 +12,7 @@
 		<UserSecretsId>63900286-13de-4cdc-8af3-bd8b4ba5467c</UserSecretsId>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
 		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
 		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
