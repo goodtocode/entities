@@ -50,18 +50,20 @@ public class ConfigureSwaggerOptions : IConfigureNamedOptions<SwaggerGenOptions>
     {
         var info = new OpenApiInfo
         {
-            Title = "Events Internal API",
+            Title = "Entities API",
             Version = description.ApiVersion.ToString(),
-            Description = "An API to interact with Events Internal Api",
+            Description = "An API to interact with Api",
             Contact = new OpenApiContact
             {
-                //Email = "",
-                //Name = ""
+                Email = "developers@goodtocode.com",
+                Name = "GoodToCode",
+                Url = new Uri("https://www.github.com/goodtocode")
+
             },
             License = new OpenApiLicense
             {
-                //Name = "MIT License",
-                //Url = new Uri("https://opensource.org/licenses/MIT")
+                Name = "MIT License",
+                Url = new Uri("https://opensource.org/licenses/MIT")
             }
         };
 
