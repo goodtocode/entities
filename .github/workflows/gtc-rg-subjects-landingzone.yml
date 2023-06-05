@@ -94,6 +94,7 @@ jobs:
         run: |
           az identity create --resource-group ${{ env.AZURE_RG_NAME }} --name ${{ env.API_IDENTITY }}
           az webapp identity assign --resource-group ${{ env.AZURE_RG_NAME }} --name ${{ env.API_NAME }} --identities ${{ env.API_IDENTITY }}
+          # The following command requires Security Reader?
           $objectId = az ad sp list --display-name identity-subjects-dev-001 --query "[?displayName=='identity-subjects-dev-001'].id" --output tsv
-          az keyvault set-policy -n ${{ env.KEYVAULT_NAME }} -g ${{ env.AZURE_RG_NAME }} --object-id $objectId --secret-permissions get
+          az keyvault set-policy -n ${{ env.KEYVAULT_NAME }} -g ${{ env.AZURE_RG_NAME }} --object-id $objectId --secret-permissions get          
         shell: pwsh
