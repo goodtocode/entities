@@ -99,8 +99,10 @@ builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", true, true)
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName ?? "Development"}.json", true, true)
-    .AddAzureKeyVault(new Uri(builder.Configuration["Azure:KeyVaultUri"]), new DefaultAzureCredential())
     .AddEnvironmentVariables();
+
+if (builder.Configuration.GetValue<bool>("UseKeyVault"))
+    builder.Configuration.AddAzureKeyVault(new Uri(builder.Configuration["Azure:KeyVaultUri"]), new DefaultAzureCredential());
 
 BuildApiVerAndApiExplorer(builder);
 

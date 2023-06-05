@@ -1,6 +1,6 @@
 [
     {
-        "name": "DefaultConnection",
+        "name": "SubjectsConnection",
         "value": "conn-string-1",
         "type": "SQLServer",
         "slotSetting": false
