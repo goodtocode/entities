@@ -94,5 +94,5 @@ jobs:
         run: |
           az identity create --resource-group ${{ env.AZURE_RG_NAME }} --name ${{ env.API_IDENTITY }}
           az webapp identity assign --resource-group ${{ env.AZURE_RG_NAME }} --name ${{ env.API_NAME }} --identities ${{ env.API_IDENTITY }}
-          az keyvault set-policy -n ${{ env.KEYVAULT_NAME }} -g ${{ env.AZURE_RG_NAME }} --object-id ${{ env.API_IDENTITY }} --secret-permissions get
+          az keyvault set-policy -n ${{ env.KEYVAULT_NAME }} -g ${{ env.AZURE_RG_NAME }} --object-id /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourcegroups/${{ env.SHARED_RG_NAME }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/${{ env.API_IDENTITY }} --secret-permissions get
         shell: pwsh
