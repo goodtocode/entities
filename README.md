@@ -5,13 +5,13 @@
 
 ![Subjects LZ](https://github.com/goodtocode/entities/actions/workflows/gtc-rg-subjects-landingzone.yml/badge.svg)
 
-![Subjects API](https://github.com/goodtocode/entities/actions/workflows/gtc-rg-chronology-landingzone.yml/badge.svg)
+![Subjects API](https://github.com/goodtocode/entities/actions/workflows/gtc-rg-subjects-api.yml/badge.svg)
 
 GoodToCode Entities is a Microservice/Serverless centric collection of common Domain Entities that you often include in software applications. These Entities, like Person and Location, can be assembled and used in your business apps and APIs.
 
 GoodToCode Entities is based on DDD, onion-architecture, vertical slice and CQRS in .NET Core and EF Core code-first.
 
-## Installation
+## Dev Environment Installation
 ### Environment Variables
 1. Create "ASPNETCORE_ENVIRONMENT" and set it to Development. These relate to the appsettings.ENVIRONMENT.json files.
 * Development
@@ -39,9 +39,27 @@ Namespace | Path | Contents
 --- | --- | ---
 Goodtocode.Subjects.Common | /src/Subjects/Common | Includes shared kernel library that are candidates to share with other projects.
 Goodtocode.Subjects.Domain | /src/Subjects/Core/Domain | Includes core domain objects, entities and interfaces. This only references .NET.
-Goodtocode.Subjects.Application | /src/Subjects/Core/Application | Includes core application commands and queries. This only references Domain.
+odtocode.Subjects.Application | /src/Subjects/Core/Application | Includes core application commands and queries. This only references Domain.
 Goodtocode.Subjects.Persistence | /src/Subjects/Infrastructure/Persistence |Includes infrastructure concerns such as repositories, dbcontexts. This references Domain and Application.
 Goodtocode.Subjects.WebApi | /src/Subjects/Common | Includes presentation Web API. This references Persistence.
 Goodtocode.Subjects.Unit | /src/Subjects/Specs/Application.Unit | Unit tests that exercise Domain and Applicaiton with mocked infrastructure. This references Persistence.
 Goodtocode.Subjects.Integration | /src/Subjects/Specs/Application.Integration | Unit tests that exercise Domain, Application and Presistence. Uses In-memory Database. This references Persistence.
 
+## Dev Box Installation
+Package | Command
+--- | ---
+OS | Windows or Linux (default Windows)
+Windows Terminal | winget install --id=Microsoft.WindowsTerminal -e
+Git SCM | winget install --id Git.Git -e --source winget
+Visual Studio Code | winget install Microsoft.VisualStudioCode -e
+.NET 7 SDK | winget install dotnet-sdk-74
+
+## Visual Studio Code Setup
+Action/Command | Operation
+--- | ---
+Extensions C# | ms-dotnettools.csharp - https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp
+Extensions SQL Server | ms-mssql.mssql - https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql
+Ctrl+Shft+P | .NET Generate Assets for Build and Debug -> Create tasks.json from Template -> .NET Core
+`
+Type build | Select Tasks: Configure Default Build Task
+Optional Py/Js/Jsx/Tsx | VisualStudioExptTeam.vscodeintellicode - https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode
