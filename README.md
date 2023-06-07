@@ -19,7 +19,7 @@ GoodToCode Entities is based on DDD, onion-architecture, vertical slice and CQRS
 
     Powershell: $env:ASPNETCORE_ENVIRONMENT="Development"
 
-### Azure Infrastructure as Code (IaC)
+### Azure Infrastructure
 #### Create a Cloud Adoption Framework (CAF) Landing Zone
 
 [About CAF Landing Zones](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/)
@@ -33,6 +33,10 @@ GoodToCode Entities is based on DDD, onion-architecture, vertical slice and CQRS
 * Create the Subjects resource group: .azure-devops/pipelines/gtc-entities-subjects-landingzone.yml
 * Deploy the Subjects API: .azure-devops/pipelines/gtc-entities-subjects-api.yml
 * Deploy the Subjects EF Migrations: .azure-devops/pipelines/gtc-entities-subjects-ef.yml
+
+#### Azure AD and B2C Identity
+
+[Blazor WebAssebly Azure B2C](https://learn.microsoft.com/en-us/aspnet/core/blazor/security/webassembly/hosted-with-azure-active-directory-b2c?view=aspnetcore-6.0)
 
 ## Projects and Namespaces
 Namespace | Path | Contents
