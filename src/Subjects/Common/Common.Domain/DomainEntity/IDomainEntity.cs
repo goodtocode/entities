@@ -1,6 +1,6 @@
-﻿using Goodtocode.Library.Ddd;
+﻿using Goodtocode.Common.Domain;
 
-namespace Goodtocode.Library.Ddd;
+namespace Goodtocode.Common.Domain;
 
 public interface IDomainEntity<TModel> where TModel : IDomainObject
 {

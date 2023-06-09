@@ -1,8 +1,8 @@
-﻿using Goodtocode.Library.Ddd;
+﻿using Goodtocode.Common.Domain;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
-namespace Goodtocode.Library.Ddd;
+namespace Goodtocode.Common.Domain;
 
 public abstract class DomainEntity<TModel> : IDomainEntity<TModel> where TModel : IDomainObject
 {

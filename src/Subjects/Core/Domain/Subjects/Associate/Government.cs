@@ -1,5 +1,5 @@
 ﻿//using Goodtocode.Subjects.Domain;
-//using Goodtocode.Library.Ddd;
+//using Goodtocode.Common.Domain;
 
 //namespace Goodtocode.Subjects
 //{

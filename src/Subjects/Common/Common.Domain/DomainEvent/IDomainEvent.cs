@@ -1,4 +1,4 @@
-﻿namespace Goodtocode.Library.Ddd;
+﻿namespace Goodtocode.Common.Domain;
 
 public interface IDomainEvent<T> where T : IDomainObject
 {

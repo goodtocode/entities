@@ -1,5 +1,5 @@
 ﻿//using Goodtocode.Subjects.Option;
-//using Goodtocode.Library.Ddd;
+//using Goodtocode.Common.Domain;
 //using System;
 //using System.ComponentModel.DataAnnotations;
 

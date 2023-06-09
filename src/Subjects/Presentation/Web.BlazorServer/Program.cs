@@ -27,6 +27,21 @@ builder.Services.AddServerSideBlazor()
     .AddMicrosoftIdentityConsentHandler();
 builder.Services.AddSingleton<WeatherForecastService>();
 
+//builder.Services.AddHttpClient("SubjectsClient", client =>
+//{
+//    client.DefaultRequestHeaders.Clear();
+//    client.BaseAddress = new Uri(builder.Configuration["Entities:Subjects:Url"]);
+//}
+//).AddHttpMessageHandler<BearerTokenHandler>();
+
+//builder.Services.AddSingleton(x => new ScromOauthParams(
+//    configuration["Scorm:ServiceUrl"],
+//    configuration["Scorm:TokenUrl"],
+//    configuration["Scorm:ClientId"],
+//    configuration["Scorm:ClientSecret"],
+//    configuration["Scorm:ClientScopes"]
+//));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -13,6 +13,6 @@
 		<PackageReference Include="MediatR" Version="12.0.1" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Common\Library.Ddd\Library.Ddd.csproj" />
+	  <ProjectReference Include="..\..\Common\Common.Domain\Common.Domain.csproj" />
 	</ItemGroup>
 </Project>
