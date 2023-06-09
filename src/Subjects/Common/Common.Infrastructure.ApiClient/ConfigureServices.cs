@@ -6,8 +6,10 @@ namespace Goodtocode.Common.Infrastructure.ApiClient
     public static class ConfigureServices
     {
         public static IServiceCollection AddApiClientServices(this IServiceCollection services,
-            string apiClientName, string url, int retry)
-        {
+            string apiClientName, string url, ClientCredentialSetting configureClient)
+        {            
+            services.AddTransient<BearerTokenHandler>();
+            services.AddSingleton<AccessToken>(new AccessToken(configureClient));
             services.AddHttpClient(apiClientName, client =>
                     {
                         client.DefaultRequestHeaders.Clear();
@@ -16,8 +18,9 @@ namespace Goodtocode.Common.Infrastructure.ApiClient
                 ).AddHttpMessageHandler<BearerTokenHandler>()
                 .AddPolicyHandler(
                     Policy.HandleResult<HttpResponseMessage>(r => !r.IsSuccessStatusCode)
-                        .RetryAsync(retry)
+                        .RetryAsync(3)
                 );
+
             return services;
         }
     }
