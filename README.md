@@ -61,10 +61,9 @@ Visual Studio Code | winget install Microsoft.VisualStudioCode -e
 ## Visual Studio Code Setup
 Action/Command | Operation
 --- | ---
-Extensions C# | ms-dotnettools.csharp
-Extensions Wasm Companion | ms-dotnettools.blazorwasm-companion
-Extensions SQL Server | ms-mssql.mssql
+Extensions C# | ms-dotnettools.csharp - https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp
+Extensions SQL Server | ms-mssql.mssql - https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql
 Ctrl+Shft+P | .NET Generate Assets for Build and Debug -> Create tasks.json from Template -> .NET Core
 `
 Type build | Select Tasks: Configure Default Build Task
-Optional Py/Js/Jsx/Tsx | VisualStudioExptTeam.vscodeintellicode
+Optional Py/Js/Jsx/Tsx | VisualStudioExptTeam.vscodeintellicode - https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode
