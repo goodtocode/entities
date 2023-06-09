@@ -35,24 +35,6 @@ builder.Services.AddApiClientServices("SubjectsApiClient", builder.Configuration
     builder.Configuration["Subjects:Scope"])
 );
 
-//builder.Services.AddTransient<BearerTokenHandler>();
-//builder.Services.AddSingleton<AccessToken>();
-//builder.Services.AddSingleton(AccessTokenSetting => new ClientCredentialSetting(
-//    builder.Configuration["Subjects:ClientId"],
-//    builder.Configuration["Subjects:ClientSecret"],
-//    builder.Configuration["Subjects:TokenUrl"],
-//    builder.Configuration["Subjects:Scope"]));
-//builder.Services.AddHttpClient("SubjectsApiClient", client =>
-//{
-//    client.DefaultRequestHeaders.Clear();
-//    client.BaseAddress = new Uri(builder.Configuration["Subjects:Url"]);
-//}
-//    ).AddHttpMessageHandler<BearerTokenHandler>()
-//    .AddPolicyHandler(
-//        Policy.HandleResult<HttpResponseMessage>(r => !r.IsSuccessStatusCode)
-//            .RetryAsync(3)
-//    );
-
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", true, true)
