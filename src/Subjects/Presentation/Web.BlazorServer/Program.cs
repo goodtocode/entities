@@ -26,6 +26,7 @@ builder.Services.AddServerSideBlazor()
     .AddMicrosoftIdentityConsentHandler();
 
 builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddSingleton<BusinessService>();
 
 builder.Services.AddApiClientServices("SubjectsApiClient", builder.Configuration["Subjects:Url"], 
     new ClientCredentialSetting(

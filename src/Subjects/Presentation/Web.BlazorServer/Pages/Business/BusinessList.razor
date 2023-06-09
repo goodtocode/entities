@@ -1,0 +1,54 @@
+﻿@page "/businesssearch"
+@using Goodtocode.Subjects.BlazorServer.Data;
+@using Goodtocode.Subjects.Domain;
+
+@inject BusinessService Service
+
+<PageTitle>Business Search</PageTitle>
+
+<h1>Business Search</h1>
+
+<p>Search for businesses</p>
+<input placeholder="Business Name" @bind="businessName" />
+<button class="btn btn-primary" @onclick="GetBusineses">Search</button>
+
+@if (businesses == null)
+{
+    <p><em>Please search for a business...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Name</th>
+                <th>Tax Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var business in businesses)
+            {
+                <tr>
+                    <td>@business.BusinessKey</td>
+                    <td>@business.BusinessName</td>
+                    <td>@business.TaxNumber</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private string businessName;
+    private IEnumerable<BusinessEntity> businesses;
+
+    protected override async Task OnInitializedAsync()
+    {        
+    }
+
+    private async Task GetBusineses()
+    {
+        businesses = await Service.GetBusinessesAsync(businessName);
+    }   
+}
