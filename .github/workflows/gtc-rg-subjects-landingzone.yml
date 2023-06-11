@@ -32,6 +32,7 @@ env:
   PLAN_NAME: 'plan-entities-dev-001'
   SHARED_RG_NAME: 'gtc-rg-entities-dev-001'
   STORAGE_NAME: 'stsubjectsdev001'
+  WEB_NAME: 'web-subjects-dev-001'
   WORKSPACE_NAME: 'work-entities-dev-001'  
 
 permissions:
@@ -81,6 +82,7 @@ jobs:
           resourceGroupName: ${{ env.AZURE_RG_NAME }}
           template: ${{ env.ARM_PATH }}/appi-applicationinsights.json
           parameters: name=${{ env.APPINSIGHTS_NAME }} workName=${{ env.WORKSPACE_NAME }} workResourceGroupName=${{ env.SHARED_RG_NAME }}
+      
       # api-PRODUCT-ENVIRONMENT-001
       - name: Deploy ${{ env.API_NAME }}
         uses: azure/arm-deploy@v1
@@ -90,7 +92,7 @@ jobs:
           template: ${{ env.ARM_PATH }}/api-apiapp.json
           parameters: name=${{ env.API_NAME }} planName=${{ env.PLAN_NAME }} planResourceGroupName=${{ env.SHARED_RG_NAME }} appiKey=${{ secrets.APPI_KEY }} appiConnection=${{ secrets.APPI_CONNECTION }} rgEnvironment=${{ env.AZURE_RG_ENVIRONMENT }}
 
-      - name: create and assign identity
+      - name: Identity ${{ env.API_NAME }}
         run: |
           az identity create --resource-group ${{ env.AZURE_RG_NAME }} --name ${{ env.API_IDENTITY }}
           # The following command requires Security Reader
@@ -98,3 +100,12 @@ jobs:
           az webapp identity assign --resource-group ${{ env.AZURE_RG_NAME }} --name ${{ env.API_NAME }} --identities $objectId
           az keyvault set-policy -n ${{ env.KEYVAULT_NAME }} -g ${{ env.AZURE_RG_NAME }} --object-id $objectId --secret-permissions get          
         shell: pwsh
+
+      # web-PRODUCT-ENVIRONMENT-001
+      - name: Deploy ${{ env.API_NAME }}
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: ${{ env.AZURE_RG_NAME }}
+          template: ${{ env.ARM_PATH }}/web-webapp.json
+          parameters: name=${{ env.WEB_NAME }} planName=${{ env.PLAN_NAME }} planResourceGroupName=${{ env.SHARED_RG_NAME }} appiKey=${{ secrets.APPI_KEY }} appiConnection=${{ secrets.APPI_CONNECTION }} rgEnvironment=${{ env.AZURE_RG_ENVIRONMENT }}
