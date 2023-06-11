@@ -121,10 +121,10 @@ jobs:
       # Get Azure SQL DB Conenction: az sql db show-connection-string --client ado.net --server ${{ env.SQL_NAME }} --name ${{ env.SQLDB_NAME }} -o tsv
       - name: ${{ env.AZURE_WEBAPP_NAME }} connection strings
         run: |
-          $TEMP_STR=az sql db show-connection-string --client ado.net --server ${{ env.SQL_NAME }} --name ${{ env.SQLDB_NAME }} -o tsv
-          $TEMP_STR=$TEMP_STR.replace("<username>", "${{ secrets.SQL_USER }}")
-          $TEMP_STR=$TEMP_STR.replace("<password>", "${{ secrets.SQL_PASSWORD }}")
-          az webapp config connection-string set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -t SQLServer --settings SubjectsConnection='$TEMP_STR'
+          $TEMP_STR = az sql db show-connection-string --client ado.net --server ${{ env.SQL_NAME }} --name ${{ env.SQLDB_NAME }} -o tsv
+          $TEMP_STR = $TEMP_STR.replace("<username>", "${{ secrets.SQL_USER }}")
+          $TEMP_STR = $TEMP_STR.replace("<password>", "${{ secrets.SQL_PASSWORD }}")
+          az webapp config connection-string set -g ${{ env.AZURE_RG_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -t SQLServer --settings SubjectsConnection="$TEMP_STR"
         shell: pwsh
 
       - name: Upload artifact
