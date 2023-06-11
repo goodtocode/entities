@@ -102,7 +102,7 @@ jobs:
         shell: pwsh
 
       # web-PRODUCT-ENVIRONMENT-001
-      - name: Deploy ${{ env.API_NAME }}
+      - name: Deploy ${{ env.WEB_NAME }}
         uses: azure/arm-deploy@v1
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
