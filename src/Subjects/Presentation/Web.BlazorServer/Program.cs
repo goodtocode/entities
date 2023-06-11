@@ -31,7 +31,7 @@ builder.Services.AddSingleton<BusinessService>();
 builder.Services.AddApiClientServices("SubjectsApiClient", builder.Configuration["Subjects:Url"], 
     new ClientCredentialSetting(
     builder.Configuration["Subjects:ClientId"],
-    builder.Configuration["Subjects:ClientSecret"],
+    builder.Configuration["SubjectsClientSecret"],
     builder.Configuration["Subjects:TokenUrl"],
     builder.Configuration["Subjects:Scope"])
 );

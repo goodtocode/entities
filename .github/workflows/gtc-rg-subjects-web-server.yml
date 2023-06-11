@@ -107,7 +107,7 @@ jobs:
 
       # Get instrumentation key: az monitor app-insights component show --app <app-name> -g <rg-name>
       # Get connection: az monitor app-insights component show -g ${{ env.AZURE_RG_NAME }} --app ${{ env.APPI_NAME }}
-      - name: ${{ env.AZURE_WEBAPP_NAME }} app settings
+      - name: ${{ env.AZURE_WEBAPP_NAME }} App Insights settings
         run: |
           az config set extension.use_dynamic_install=yes_without_prompt
           $TEMP_JSON = az monitor app-insights component show -g ${{ env.AZURE_RG_NAME }} --app ${{ env.APPI_NAME }} | ConvertFrom-Json
