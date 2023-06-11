@@ -3,14 +3,16 @@ on:
     branches-ignore:
     - main
     paths:
-    - .github/workflows/gtc-rg-subjects-api.yml
-    - src/Subjects/**
+      - '.github/workflows/gtc-rg-subjects-api.yml'
+      - 'src/Subjects/**'
+      - '!src/Subjects/Presentation/Web.BlazorServer/**'
   pull_request:
     branches:
     - main    
     paths:
-    - .github/workflows/gtc-rg-subjects-api.yml
-    - src/Subjects/**
+    - '.github/workflows/gtc-rg-subjects-api.yml'
+    - 'src/Subjects/**'
+    - '!src/Subjects/Presentation/Web.BlazorServer/**'
   workflow_dispatch:
     inputs:
       environment:
