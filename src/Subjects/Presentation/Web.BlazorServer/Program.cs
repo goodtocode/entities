@@ -1,11 +1,9 @@
+using Azure.Identity;
 using Goodtocode.Common.Infrastructure.ApiClient;
 using Goodtocode.Subjects.BlazorServer.Data;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
-using Polly;
-using static Azure.Core.HttpHeader;
-using static System.Formats.Asn1.AsnWriter;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,14 +19,7 @@ builder.Services.AddAuthorization(options =>
     options.FallbackPolicy = options.DefaultPolicy;
 });
 
-builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor()
-    .AddMicrosoftIdentityConsentHandler();
-
-builder.Services.AddSingleton<WeatherForecastService>();
-builder.Services.AddSingleton<BusinessService>();
-
-builder.Services.AddApiClientServices("SubjectsApiClient", builder.Configuration["Subjects:Url"], 
+builder.Services.AddApiClientServices("SubjectsApiClient", builder.Configuration["Subjects:Url"],
     new ClientCredentialSetting(
     builder.Configuration["Subjects:ClientId"],
     builder.Configuration["SubjectsClientSecret"],
@@ -36,11 +27,27 @@ builder.Services.AddApiClientServices("SubjectsApiClient", builder.Configuration
     builder.Configuration["Subjects:Scope"])
 );
 
+builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor()
+    .AddMicrosoftIdentityConsentHandler();
+
+builder.Services.AddApplicationInsightsTelemetry(options =>
+{
+    options.ConnectionString = builder.Configuration["ApplicationInsights:ConnectionString"];
+});
+
+
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", true, true)
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName ?? "Development"}.json", true, true)
     .AddEnvironmentVariables();
+
+if (builder.Configuration.GetValue<bool>("UseKeyVault"))
+    builder.Configuration.AddAzureKeyVault(new Uri(builder.Configuration["Azure:KeyVaultUri"]), new DefaultAzureCredential());
+
+builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddSingleton<BusinessService>();
 
 var app = builder.Build();
 

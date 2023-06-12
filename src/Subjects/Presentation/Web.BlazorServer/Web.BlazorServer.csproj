@@ -12,15 +12,18 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" NoWarn="NU1605" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.5" NoWarn="NU1605" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Identity.Web" Version="2.11.1" />
 		<PackageReference Include="Microsoft.Identity.Web.UI" Version="2.11.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Common\Common.Infrastructure.ApiClient\Common.Infrastructure.ApiClient.csproj" />
-	  <ProjectReference Include="..\..\Core\Domain\Domain.csproj" />
+		<ProjectReference Include="..\..\Common\Common.Infrastructure.ApiClient\Common.Infrastructure.ApiClient.csproj" />
+		<ProjectReference Include="..\..\Core\Domain\Domain.csproj" />
 	</ItemGroup>
 
 </Project>
