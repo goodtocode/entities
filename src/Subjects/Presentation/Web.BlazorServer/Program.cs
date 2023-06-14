@@ -7,6 +7,15 @@ using Microsoft.Identity.Web.UI;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", true, true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName ?? "Development"}.json", true, true)
+    .AddEnvironmentVariables();
+
+if (builder.Configuration.GetValue<bool>("Azure:UseKeyVault"))
+    builder.Configuration.AddAzureKeyVault(new Uri(builder.Configuration["Azure:KeyVaultUri"]), new DefaultAzureCredential());
+
 // Add services to the container.
 builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
@@ -19,14 +28,6 @@ builder.Services.AddAuthorization(options =>
     options.FallbackPolicy = options.DefaultPolicy;
 });
 
-builder.Services.AddApiClientServices("SubjectsApiClient", builder.Configuration["Subjects:Url"],
-    new ClientCredentialSetting(
-    builder.Configuration["Subjects:ClientId"],
-    builder.Configuration["SubjectsClientSecret"],
-    builder.Configuration["Subjects:TokenUrl"],
-    builder.Configuration["Subjects:Scope"])
-);
-
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor()
     .AddMicrosoftIdentityConsentHandler();
@@ -36,15 +37,13 @@ builder.Services.AddApplicationInsightsTelemetry(options =>
     options.ConnectionString = builder.Configuration["ApplicationInsights:ConnectionString"];
 });
 
-
-builder.Configuration
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json", true, true)
-    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName ?? "Development"}.json", true, true)
-    .AddEnvironmentVariables();
-
-if (builder.Configuration.GetValue<bool>("UseKeyVault"))
-    builder.Configuration.AddAzureKeyVault(new Uri(builder.Configuration["Azure:KeyVaultUri"]), new DefaultAzureCredential());
+builder.Services.AddApiClientServices("SubjectsApiClient", builder.Configuration["Subjects:Url"],
+    new ClientCredentialSetting(
+    builder.Configuration["Subjects:ClientId"],
+    builder.Configuration["SubjectsClientSecret"],
+    builder.Configuration["Subjects:TokenUrl"],
+    builder.Configuration["Subjects:Scope"])
+);
 
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSingleton<BusinessService>();
