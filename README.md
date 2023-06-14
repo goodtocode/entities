@@ -67,3 +67,17 @@ Ctrl+Shft+P | .NET Generate Assets for Build and Debug -> Create tasks.json from
 `
 Type build | Select Tasks: Configure Default Build Task
 Optional Py/Js/Jsx/Tsx | VisualStudioExptTeam.vscodeintellicode - https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode
+
+## Notable NuGet packages
+### Api.WebApi
+Package | Purpose
+--- | ---
+dotnet add package Azure.Extensions.AspNetCore.Configuration.Secrets | Key Vault Secrets
+dotnet add package FluentValidation.AspNetCore | Fluent Assertions
+dotnet add package Microsoft.AspNetCore.OpenApi | OpenAPI (swagger UI)
+dotnet add package Swashbuckle.AspNetCore | Swagger Gen (swagger.json)
+### Web.BlazorServer
+Package | Purpose
+--- | ---
+dotnet add package Azure.Extensions.AspNetCore.Configuration.Secrets | Key Vault Secrets
+dotnet add package BlazorPro.Spinkit | Spinners for progress

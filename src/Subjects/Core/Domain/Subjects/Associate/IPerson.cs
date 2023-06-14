@@ -1,4 +1,4 @@
-﻿//using Goodtocode.Library.Ddd;
+﻿//using Goodtocode.Common.Domain;
 
 //namespace Goodtocode.Subjects.Domain;
 
