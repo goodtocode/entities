@@ -14,7 +14,11 @@
 
 @if (businesses == null)
 {
-    <p><em>Please search for a business...</em></p>
+    <p class=""><em>Please search for a business...</em></p>
+}
+else if (businesses.Count() == 0)
+{
+    <div class="alert alert-danger" role="alert">Business not found</div>
 }
 else
 {
