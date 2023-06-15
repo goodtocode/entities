@@ -11,7 +11,7 @@ public interface IBusinessRepo
     Task<Result<List<BusinessEntity>>> GetBusinessesByNameAsync(string businessName,
         CancellationToken cancellationToken);
 
-    Task<Result> AddBusinessAsync(IBusinessObject businessInfo,
+    Task<Result<BusinessEntity>> AddBusinessAsync(IBusinessObject businessInfo,
         CancellationToken cancellationToken);
 
     Task<Result> UpdateBusinessAsync(IBusinessEntity businessInfo,

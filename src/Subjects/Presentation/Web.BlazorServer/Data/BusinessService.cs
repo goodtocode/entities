@@ -1,3 +1,4 @@
+using Goodtocode.Subjects.BlazorServer.Pages.Business;
 using Goodtocode.Subjects.Domain;
 using System.Net;
 using System.Text.Json;
@@ -22,6 +23,8 @@ public class BusinessService
         {
             response.EnsureSuccessStatusCode();
             business = JsonSerializer.Deserialize<BusinessEntity>(response.Content.ReadAsStream());
+            if (business == null)
+                throw new Exception();
         }
         return business;
     }
@@ -35,7 +38,26 @@ public class BusinessService
         {
             response.EnsureSuccessStatusCode();
             business = JsonSerializer.Deserialize<List<BusinessEntity>>(response.Content.ReadAsStream());
+            if (business == null)
+                throw new Exception();
         }
         return business;
+    }
+
+    public async Task<BusinessEntity> CreateBusinessAsync(BusinessObject business)
+    {
+        BusinessEntity? businessCreated = null;
+        var httpClient = _clientFactory.CreateClient("SubjectsApiClient");
+        var response = await httpClient.PutAsJsonAsync<BusinessObject>($"{httpClient.BaseAddress}/Business?api-version=1", business);        
+
+        if (response.StatusCode == HttpStatusCode.Created)
+            businessCreated = JsonSerializer.Deserialize<BusinessEntity>(await response.Content.ReadAsStreamAsync());
+
+        if (businessCreated == null)
+            throw new Exception();
+        
+        response.EnsureSuccessStatusCode();
+
+        return businessCreated;
     }
 }

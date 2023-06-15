@@ -1,0 +1,24 @@
+﻿@page "/businesscreate"
+@using Goodtocode.Subjects.BlazorServer.Data;
+@using Goodtocode.Subjects.Domain;
+
+@inject BusinessService Service
+
+<PageTitle>Create a Business</PageTitle>
+
+<h1>Business Create</h1>
+
+<p>Create a businesses</p>
+<input placeholder="Business Name" @bind="businessName" />
+<input placeholder="Tax Number" @bind="businessName" />
+<button class="btn btn-primary" @onclick="CreateBusineses">Create</button>
+
+@code {
+    private string businessName = string.Empty;
+    private BusinessObject business = new BusinessObject();
+
+    private async Task CreateBusineses()
+    {
+        await Service.CreateBusinessAsync(business);
+    }   
+}

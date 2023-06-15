@@ -1,16 +1,17 @@
-﻿using Goodtocode.Subjects.Domain;
+﻿using CSharpFunctionalExtensions;
+using Goodtocode.Subjects.Application.Common.Exceptions;
+using Goodtocode.Subjects.Domain;
 using MediatR;
 
 namespace Goodtocode.Subjects.Application;
 
-public class AddBusinessCommand : IRequest, IBusinessEntity
+public class AddBusinessCommand : IRequest<BusinessEntity>, IBusinessObject
 {
-    public Guid BusinessKey { get; set; }
     public string BusinessName { get; set; } = string.Empty;
     public string TaxNumber { get; set; } = string.Empty;
 }
 
-public class AddBusinessCommandHandler : IRequestHandler<AddBusinessCommand>
+public class AddBusinessCommandHandler : IRequestHandler<AddBusinessCommand, BusinessEntity>
 {
     private readonly IBusinessRepo _userBusinessRepo;
 
@@ -19,12 +20,14 @@ public class AddBusinessCommandHandler : IRequestHandler<AddBusinessCommand>
         _userBusinessRepo = BusinessRepo;
     }
 
-    public async Task Handle(AddBusinessCommand request, CancellationToken cancellationToken)
+    public async Task<BusinessEntity> Handle(AddBusinessCommand request, CancellationToken cancellationToken)
     {
-        var AddResult =
+        var business =
             await _userBusinessRepo.AddBusinessAsync(request, cancellationToken);
 
-        if (AddResult.IsFailure)
-            throw new Exception(AddResult.Error);
+        return business.Match(
+            value => business.Value,
+            failure => throw new ConflictException(business.Error)
+            );
     }
 }

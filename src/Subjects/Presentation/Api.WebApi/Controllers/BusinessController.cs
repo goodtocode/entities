@@ -63,15 +63,16 @@ public class BusinessController : BaseController
     ///     "TaxNumber": "12-445666"
     ///     }
     /// </remarks>
-    /// <returns>bool</returns>
+    /// <returns>Created Item URI and Object</returns>
     [HttpPut(Name = "AddBusinessCommand")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<ActionResult> Put([FromBody] AddBusinessCommand command)
     {
-        await Mediator.Send(command);
+        var createdEntity = await Mediator.Send(command);
 
-        return Ok();
+        return Created(new Uri($"{Request.Path}/{createdEntity.Key}", UriKind.Relative), createdEntity);
     }
 
     /// <summary>

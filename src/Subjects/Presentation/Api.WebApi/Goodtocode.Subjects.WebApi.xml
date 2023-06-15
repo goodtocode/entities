@@ -83,7 +83,7 @@
                 "TaxNumber": "12-445666"
                 }
             </remarks>
-            <returns>bool</returns>
+            <returns>Created Item URI and Object</returns>
         </member>
         <member name="M:Goodtocode.Subjects.WebApi.Controllers.BusinessController.Post(System.Guid,Goodtocode.Subjects.Application.UpdateBusinessCommand)">
             <summary>

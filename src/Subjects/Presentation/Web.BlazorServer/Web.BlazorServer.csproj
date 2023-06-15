@@ -27,4 +27,10 @@
 		<ProjectReference Include="..\..\Core\Domain\Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Content Update="Pages\Business\BusinessCreate.razor">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	  </Content>
+	</ItemGroup>
+
 </Project>

@@ -1,6 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using Goodtocode.Subjects.Application;
 using Goodtocode.Subjects.Domain;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 
@@ -30,12 +31,24 @@ public class BusinessRepo : IBusinessRepo
         return Result.Success(businessResult);
     }
 
-    public async Task<Result> AddBusinessAsync(IBusinessObject businessInfo, CancellationToken cancellationToken)
+    public async Task<Result<BusinessEntity>> AddBusinessAsync(IBusinessObject businessInfo, CancellationToken cancellationToken)
     {
         if (businessInfo == null)
-            return Result.Failure("Cannot add. Business is null.");
+            return Result.Failure<BusinessEntity>("Cannot add. Business is null.");
         var businessResult = await _context.Business.AddAsync((BusinessEntity)businessInfo, cancellationToken);
-        return Result.Success(businessResult);
+        
+        try
+        {
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+        catch (DbUpdateException e)
+        when (e.InnerException?.InnerException is SqlException sqlEx &&
+          (sqlEx.Number == 2601 || sqlEx.Number == 2627))
+        {
+            return Result.Failure<BusinessEntity>("Cannot add. Duplicate record exists.");
+        }
+
+        return Result.Success<BusinessEntity>(businessResult.Entity);
     }
 
     public async Task<Result> UpdateBusinessAsync(IBusinessEntity businessInfo, CancellationToken cancellationToken)

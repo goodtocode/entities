@@ -44,12 +44,8 @@ else
 }
 
 @code {
-    private string businessName;
-    private IEnumerable<BusinessEntity> businesses;
-
-    protected override async Task OnInitializedAsync()
-    {        
-    }
+    private string businessName = string.Empty;
+    private IEnumerable<BusinessEntity> businesses = new List<BusinessEntity>();
 
     private async Task GetBusineses()
     {
