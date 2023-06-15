@@ -22,6 +22,7 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
         _exceptionHandlers = new Dictionary<Type, Action<ExceptionContext>>
         {
             {typeof(ValidationException), HandleValidationException},
+            {typeof(ConflictException), HandleConflictException},
             {typeof(NotFoundException), HandleNotFoundException},
             {typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException},
             {typeof(ForbiddenAccessException), HandleForbiddenAccessException}
@@ -79,6 +80,22 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
         };
 
         context.Result = new BadRequestObjectResult(details);
+
+        context.ExceptionHandled = true;
+    }
+
+    private void HandleConflictException(ExceptionContext context)
+    {
+        var exception = context.Exception as ConflictException ?? new ConflictException();
+
+        var details = new ProblemDetails
+        {
+            Type = "https://tools.ietf.org/html/rfc7231#section-6.5.8",
+            Title = "The specified resource has a conflict.",
+            Detail = exception.Message
+        };
+
+        context.Result = new ConflictObjectResult(details);
 
         context.ExceptionHandled = true;
     }
