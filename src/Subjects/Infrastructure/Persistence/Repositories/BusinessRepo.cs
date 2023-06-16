@@ -35,7 +35,14 @@ public class BusinessRepo : IBusinessRepo
     {
         if (businessInfo == null)
             return Result.Failure<BusinessEntity>("Cannot add. Business is null.");
-        var businessResult = await _context.Business.AddAsync((BusinessEntity)businessInfo, cancellationToken);
+
+        var businessEntity = new BusinessEntity
+        {
+            BusinessName = businessInfo.BusinessName,
+            TaxNumber = businessInfo.TaxNumber
+        };
+
+        var businessResult = await _context.Business.AddAsync(businessEntity, cancellationToken);
         
         try
         {
