@@ -100,7 +100,7 @@ public class BusinessController : BaseController
         var command = business.CopyPropertiesSafe<UpdateBusinessCommand>();
         command.BusinessKey = businessKey;
         await Mediator.Send(command);
-
+        
         return Ok();
     }
 }
