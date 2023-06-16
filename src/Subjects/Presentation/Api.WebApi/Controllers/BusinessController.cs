@@ -1,4 +1,5 @@
-﻿using Goodtocode.Subjects.Application;
+﻿using Goodtocode.Common.Extensions;
+using Goodtocode.Subjects.Application;
 using Goodtocode.Subjects.Domain;
 using Goodtocode.Subjects.WebApi.Common;
 using Microsoft.AspNetCore.Mvc;
@@ -68,8 +69,9 @@ public class BusinessController : BaseController
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status409Conflict)]
-    public async Task<ActionResult> Put([FromBody] AddBusinessCommand command)
+    public async Task<ActionResult> Put([FromBody] BusinessObject business)
     {
+        var command = business.CopyPropertiesSafe<AddBusinessCommand>();
         var createdEntity = await Mediator.Send(command);
 
         return Created(new Uri($"{Request.Path}/{createdEntity.Key}", UriKind.Relative), createdEntity);
@@ -92,8 +94,11 @@ public class BusinessController : BaseController
     [HttpPost(Name = "UpdateBusinessCommand")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Post(Guid businessKey, [FromBody] UpdateBusinessCommand command)
+    public async Task<ActionResult> Post(Guid businessKey, [FromBody] BusinessObject business)
     {
+
+        var command = business.CopyPropertiesSafe<UpdateBusinessCommand>();
+        command.BusinessKey = businessKey;
         await Mediator.Send(command);
 
         return Ok();

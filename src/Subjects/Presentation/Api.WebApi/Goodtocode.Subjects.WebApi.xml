@@ -70,7 +70,7 @@
             </remarks>
             <returns>BusinessEntity</returns>
         </member>
-        <member name="M:Goodtocode.Subjects.WebApi.Controllers.BusinessController.Put(Goodtocode.Subjects.Application.AddBusinessCommand)">
+        <member name="M:Goodtocode.Subjects.WebApi.Controllers.BusinessController.Put(Goodtocode.Subjects.Domain.BusinessObject)">
             <summary>
                 Add Business
             </summary>
@@ -85,7 +85,7 @@
             </remarks>
             <returns>Created Item URI and Object</returns>
         </member>
-        <member name="M:Goodtocode.Subjects.WebApi.Controllers.BusinessController.Post(System.Guid,Goodtocode.Subjects.Application.UpdateBusinessCommand)">
+        <member name="M:Goodtocode.Subjects.WebApi.Controllers.BusinessController.Post(System.Guid,Goodtocode.Subjects.Domain.BusinessObject)">
             <summary>
                 Update Business
             </summary>
