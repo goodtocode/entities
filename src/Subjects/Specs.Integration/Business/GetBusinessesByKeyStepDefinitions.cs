@@ -18,8 +18,7 @@ public class GetBusinessesByKeyStepDefinitions : TestBase
     private CommandResponseType _responseType;
     private ValidationResult _validationErrors = new();
     private Guid _businessKey = Guid.Empty;
-    private bool _businessExists;
-
+    
     [Given(@"I have a def ""([^""]*)""")]
     public void GivenIHaveADef(string def)
     {
@@ -30,12 +29,6 @@ public class GetBusinessesByKeyStepDefinitions : TestBase
     public void GivenIHaveABusinessName(Guid businessKey)
     {
         _businessKey = businessKey;
-    }
-
-    [Given(@"the business exists ""([^""]*)""")]
-    public void GivenTheBusinessExists(bool exists)
-    {
-        _businessExists = exists;
     }
 
     [When(@"I query for matching Businesses")]

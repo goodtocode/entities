@@ -53,7 +53,7 @@ public class AddBusinessCommandStepDefinitions : TestBase
         if (_validationErrors.IsValid)
             try
             {
-                var handler = new AddBusinessCommandHandler(base.BusinessRepo);
+                var handler = new AddBusinessCommandHandler(BusinessRepo);
                 await handler.Handle(request, CancellationToken.None);
                 _responseType = CommandResponseType.Successful;
             }

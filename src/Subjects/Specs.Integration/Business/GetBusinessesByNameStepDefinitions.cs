@@ -18,7 +18,6 @@ public class GetBusinessesByNameStepDefinitions : TestBase
     private CommandResponseType _responseType;
     private ValidationResult _validationErrors = new();
     private string _businessName = string.Empty;
-    private bool _businessExists;
 
     [Given(@"I have a def ""([^""]*)""")]
     public void GivenIHaveADef(string p0)
@@ -32,17 +31,9 @@ public class GetBusinessesByNameStepDefinitions : TestBase
         _businessName = businessInDb;
     }
 
-    [Given(@"the business exists ""([^""]*)""")]
-    public void GivenTheBusinessExists(bool exists)
-    {
-        _businessExists = exists;
-    }
-
     [When(@"I query for matching Businesses")]
     public async Task WhenIQueryForMatchingBusinesses()
     {
-        var userBusinessesRepoMock = new Mock<IBusinessRepo>();
-
         var request = new GetBusinessesByNameQuery
         {
             BusinessName = _businessName
@@ -67,7 +58,7 @@ public class GetBusinessesByNameStepDefinitions : TestBase
                         _commandErrors = validationException.Errors;
                         _responseType = CommandResponseType.BadRequest;
                         break;
-                    case NotFoundException notFoundException:
+                    case NotFoundException:
                         _responseType = CommandResponseType.NotFound;
                         break;
                     default:

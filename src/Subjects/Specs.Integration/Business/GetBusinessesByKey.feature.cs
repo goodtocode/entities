@@ -78,10 +78,10 @@ namespace Goodtocode.Subjects.Integration.Business
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Get Existing Business By Name")]
-        [NUnit.Framework.TestCaseAttribute("success exists", "Success", "", "2016a497-e56c-4be8-8ef6-3dc5ae1699ce", "true", null)]
-        [NUnit.Framework.TestCaseAttribute("Business NotFound", "NotFound", "", "1234a497-1234-1234-8ef6-3dc5ae1699ce", "false", null)]
-        [NUnit.Framework.TestCaseAttribute("empty key", "BadRequest", "BusinessKey", "00000000-0000-0000-0000-000000000000", "false", null)]
-        public void GetExistingBusinessByName(string def, string response, string responseErrors, string businessKey, string businessExists, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("success exists", "Success", "", "2016a497-e56c-4be8-8ef6-3dc5ae1699ce", null)]
+        [NUnit.Framework.TestCaseAttribute("Business NotFound", "NotFound", "", "1234a497-1234-1234-8ef6-3dc5ae1699ce", null)]
+        [NUnit.Framework.TestCaseAttribute("empty key", "BadRequest", "BusinessKey", "00000000-0000-0000-0000-000000000000", null)]
+        public void GetExistingBusinessByName(string def, string response, string responseErrors, string businessKey, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
@@ -89,7 +89,6 @@ namespace Goodtocode.Subjects.Integration.Business
             argumentsOfScenario.Add("response", response);
             argumentsOfScenario.Add("responseErrors", responseErrors);
             argumentsOfScenario.Add("businessKey", businessKey);
-            argumentsOfScenario.Add("businessExists", businessExists);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Existing Business By Name", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 7
 this.ScenarioInitialize(scenarioInfo);
@@ -108,21 +107,18 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And(string.Format("I have a BusinessKey \"{0}\"", businessKey), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 10
- testRunner.And(string.Format("the business exists \"{0}\"", businessExists), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 11
  testRunner.When("I query for matching Businesses", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 12
+#line 11
  testRunner.Then(string.Format("the response is \"{0}\"", response), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 13
+#line 12
  testRunner.And(string.Format("if the response has validation issues I see the \"{0}\" in the response", responseErrors), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 14
+#line 13
  testRunner.And("if the response is valid then the response contains a business", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 15
+#line 14
  testRunner.And(string.Format("the business has a matching BusinessKey of \"{0}\"", businessKey), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
