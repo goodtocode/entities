@@ -7,6 +7,7 @@ internal class ResponseTypes
         Successful,
         BadRequest,
         NotFound,
+        Conflict,
         Error
     }
 }

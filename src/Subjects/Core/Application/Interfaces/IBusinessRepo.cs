@@ -16,4 +16,7 @@ public interface IBusinessRepo
 
     Task<Result> UpdateBusinessAsync(IBusinessEntity businessInfo,
         CancellationToken cancellationToken);
+
+    Task<Result> DeleteBusinessAsync(Guid businessKey,
+    CancellationToken cancellationToken);
 }

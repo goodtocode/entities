@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Goodtocode.Subjects.Unit.Business.Commands.Update
+namespace Goodtocode.Subjects.Unit.Business.Commands
 {
     using TechTalk.SpecFlow;
     using System;
@@ -37,7 +37,7 @@ namespace Goodtocode.Subjects.Unit.Business.Commands.Update
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Business/Commands/Update", "Update Business Command", "As an customer service agent\r\nI can change business information\r\nAnd get the syst" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Business/Commands", "Update Business Command", "As an customer service agent\r\nI can change business information\r\nAnd get the syst" +
                     "em of record updated", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }

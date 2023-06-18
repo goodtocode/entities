@@ -68,4 +68,14 @@ public class BusinessRepo : IBusinessRepo
         var result = await _context.SaveChangesAsync(cancellationToken);
         return Result.Success();
     }
+
+    public async Task<Result> DeleteBusinessAsync(Guid businessKey, CancellationToken cancellationToken)
+    {
+        var businessResult = await _context.Business.FindAsync(new object?[] { businessKey, cancellationToken }, cancellationToken: cancellationToken);
+        if (businessResult == null)
+            return Result.Failure("Cannot delete. Business not found.");
+        _context.Business.Remove(businessResult);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+        return Result.Success();
+    }
 }

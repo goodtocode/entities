@@ -94,6 +94,7 @@ public class BusinessController : BaseController
     [HttpPost(Name = "UpdateBusinessCommand")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Post(Guid businessKey, [FromBody] BusinessObject business)
     {
 
@@ -102,5 +103,34 @@ public class BusinessController : BaseController
         await Mediator.Send(command);
         
         return Ok();
+    }
+
+    /// <summary>
+    ///     Delete a Business
+    /// </summary>
+    /// <remarks>
+    ///     Sample request:
+    ///     "BusinessKey": d3d42e6e-87c5-49d6-aec0-7995711d6612,
+    ///     "api-version":  1
+    ///     HttpPost Body
+    ///     {    
+    ///     "BusinessName": "My Business",
+    ///     "TaxNumber": "12-445666"
+    ///     }
+    /// </remarks>
+    /// <returns>bool</returns>
+    [HttpPost(Name = "UpdateBusinessCommand")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> Delete(Guid businessKey)
+    {
+
+        var command = new DeleteBusinessCommand
+        {
+            BusinessKey = businessKey
+        };
+        await Mediator.Send(command);
+
+        return NoContent();
     }
 }

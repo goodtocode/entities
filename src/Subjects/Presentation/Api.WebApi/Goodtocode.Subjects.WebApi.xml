@@ -101,6 +101,22 @@
             </remarks>
             <returns>bool</returns>
         </member>
+        <member name="M:Goodtocode.Subjects.WebApi.Controllers.BusinessController.Delete(System.Guid)">
+            <summary>
+                Delete a Business
+            </summary>
+            <remarks>
+                Sample request:
+                "BusinessKey": d3d42e6e-87c5-49d6-aec0-7995711d6612,
+                "api-version":  1
+                HttpPost Body
+                {    
+                "BusinessName": "My Business",
+                "TaxNumber": "12-445666"
+                }
+            </remarks>
+            <returns>bool</returns>
+        </member>
         <member name="T:Goodtocode.Subjects.WebApi.Controllers.BusinessesController">
             <summary>
                 Businesses Controller V1.0
