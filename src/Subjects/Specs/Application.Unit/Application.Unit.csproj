@@ -39,6 +39,9 @@
 		<Compile Update="Business\Commands\AddBusinessCommand.feature.cs">
 		  <DependentUpon>AddBusinessCommand.feature</DependentUpon>
 		</Compile>
+		<Compile Update="Business\Commands\DeleteBusinessCommand.feature.cs">
+		  <DependentUpon>DeleteBusinessCommand.feature</DependentUpon>
+		</Compile>
 		<Compile Update="Business\Commands\UpdateBusinessCommand.feature.cs">
 			<DependentUpon>UpdateBusinessCommand.feature</DependentUpon>
 		</Compile>
@@ -51,6 +54,10 @@
 	</ItemGroup>
 	<ItemGroup>
 		<SpecFlowFeatureFiles Update="Business\Commands\AddBusinessCommand.feature">
+		  <Visible>$(UsingMicrosoftNETSdk)</Visible>
+		  <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
+		<SpecFlowFeatureFiles Update="Business\Commands\DeleteBusinessCommand.feature">
 		  <Visible>$(UsingMicrosoftNETSdk)</Visible>
 		  <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
 		</SpecFlowFeatureFiles>
