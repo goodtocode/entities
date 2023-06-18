@@ -23,8 +23,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Common\Common.Infrastructure.ApiClient\Common.Infrastructure.ApiClient.csproj" />
-		<ProjectReference Include="..\..\Core\Domain\Domain.csproj" />
+	  <ProjectReference Include="..\Common\Common.Infrastructure.ApiClient\Common.Infrastructure.ApiClient.csproj" />
+	  <ProjectReference Include="..\Infrastructure.Persistence\Infrastructure.Persistence.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

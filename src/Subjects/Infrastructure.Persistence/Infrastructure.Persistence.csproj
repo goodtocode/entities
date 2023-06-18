@@ -23,7 +23,6 @@
 		<PackageReference Include="System.ServiceModel.Primitives" Version="6.0.0" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Core\Application\Application.csproj" />
-		<ProjectReference Include="..\..\Core\Domain\Domain.csproj" />
+	  <ProjectReference Include="..\Core.Application\Core.Application.csproj" />
 	</ItemGroup>
 </Project>
