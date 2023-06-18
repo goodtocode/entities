@@ -2,7 +2,6 @@ using FluentValidation.Results;
 using Goodtocode.Subjects.Application;
 using Goodtocode.Subjects.Application.Business.Commands;
 using Goodtocode.Subjects.Application.Common.Exceptions;
-using Moq;
 using System.Collections.Concurrent;
 using static Goodtocode.Subjects.Integration.Common.ResponseTypes;
 
@@ -15,8 +14,6 @@ public class DeleteBusinessCommandStepDefinitions : TestBase
     private IDictionary<string, string[]> _commandErrors = new ConcurrentDictionary<string, string[]>();
     private string[]? _expectedInvalidFields;
     private Guid _businessKey;
-    private string _businessName = string.Empty;
-    private string _taxNumber = string.Empty;
     private object _responseType = string.Empty;
     private ValidationResult _validationErrors = new();
 
@@ -35,8 +32,6 @@ public class DeleteBusinessCommandStepDefinitions : TestBase
     [When(@"I delete the business")]
     public async Task WhenIDeleteTheBusiness()
     {
-        var userBusinessRepoMock = new Mock<IBusinessRepo>();
-
         var request = new DeleteBusinessCommand
         {
             BusinessKey = _businessKey,
@@ -49,7 +44,7 @@ public class DeleteBusinessCommandStepDefinitions : TestBase
         if (_validationErrors.IsValid)
             try
             {
-                var handler = new DeleteBusinessCommandHandler(userBusinessRepoMock.Object);
+                var handler = new DeleteBusinessCommandHandler(base.BusinessRepo);
                 await handler.Handle(request, CancellationToken.None);
                 _responseType = CommandResponseType.Successful;
             }
