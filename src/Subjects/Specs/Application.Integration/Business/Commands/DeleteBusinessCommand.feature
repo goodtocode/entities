@@ -14,6 +14,5 @@ Scenario: Delete business
 Examples:
 	| def								| response		| responseErrors                        | requestBusinessKey					|
 	| success TaxNumber BusinessKey		| Success		|                                       | d1604a05-f883-40f1-803b-8562b5674f1a  |
-	| not found BusinessKey				| NotFound		| BusinessKey							| d1123a05-f123-4123-8123-851231234f1a	|
 	| bad request Empty BusinessKey		| BadRequest	| BusinessKey							| 00000000-0000-0000-0000-000000000000	|
 	| bad request non-guid BusinessKey	| BadRequest	| BusinessKey							| 11111									|

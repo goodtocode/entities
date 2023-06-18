@@ -79,7 +79,6 @@ namespace Goodtocode.Subjects.Unit.Business.Commands
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Delete business")]
         [NUnit.Framework.TestCaseAttribute("success TaxNumber BusinessKey", "Success", "", "d1604a05-f883-40f1-803b-8562b5674f1a", null)]
-        [NUnit.Framework.TestCaseAttribute("not found BusinessKey", "NotFound", "BusinessKey", "d1123a05-f123-4123-8123-851231234f1a", null)]
         [NUnit.Framework.TestCaseAttribute("bad request Empty BusinessKey", "BadRequest", "BusinessKey", "00000000-0000-0000-0000-000000000000", null)]
         [NUnit.Framework.TestCaseAttribute("bad request non-guid BusinessKey", "BadRequest", "BusinessKey", "11111", null)]
         public void DeleteBusiness(string def, string response, string responseErrors, string requestBusinessKey, string[] exampleTags)

@@ -15,8 +15,6 @@ public class DeleteBusinessCommandStepDefinitions : TestBase
     private IDictionary<string, string[]> _commandErrors = new ConcurrentDictionary<string, string[]>();
     private string[]? _expectedInvalidFields;
     private Guid _businessKey;
-    private string _businessName = string.Empty;
-    private string _taxNumber = string.Empty;
     private object _responseType = string.Empty;
     private ValidationResult _validationErrors = new();
 
