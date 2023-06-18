@@ -7,7 +7,7 @@ using Moq;
 using System.Collections.Concurrent;
 using static Goodtocode.Subjects.Unit.Common.ResponseTypes;
 
-namespace Goodtocode.Subjects.Unit.Business.Queries;
+namespace Goodtocode.Subjects.Unit.Business;
 
 [Binding]
 [Scope(Tag = "getBusinessesByName")]
@@ -18,7 +18,7 @@ public class GetBusinessesByNameStepDefinitions : TestBase
     private List<BusinessEntity> _response = new();
     private CommandResponseType _responseType;
     private ValidationResult _validationErrors = new();
-    private string _businessName = String.Empty;
+    private string _businessName = string.Empty;
     private bool _businessExists;
 
     [Given(@"I have a def ""([^""]*)""")]

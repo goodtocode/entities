@@ -6,7 +6,7 @@ using Goodtocode.Subjects.Domain;
 using System.Collections.Concurrent;
 using static Goodtocode.Subjects.Integration.Common.ResponseTypes;
 
-namespace Goodtocode.Subjects.Integration.Business.Queries;
+namespace Goodtocode.Subjects.Integration.Business;
 
 [Binding]
 [Scope(Tag = "getBusinessesByKey")]

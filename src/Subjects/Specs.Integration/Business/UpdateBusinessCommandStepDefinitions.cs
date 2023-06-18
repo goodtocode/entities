@@ -2,15 +2,14 @@ using FluentValidation.Results;
 using Goodtocode.Subjects.Application;
 using Goodtocode.Subjects.Application.Business.Commands;
 using Goodtocode.Subjects.Application.Common.Exceptions;
-using Moq;
 using System.Collections.Concurrent;
-using static Goodtocode.Subjects.Unit.Common.ResponseTypes;
+using static Goodtocode.Subjects.Integration.Common.ResponseTypes;
 
-namespace Goodtocode.Subjects.Unit.Business.Commands;
+namespace Goodtocode.Subjects.Integration.Business;
 
 [Binding]
 [Scope(Tag = "updateBusinessCommand")]
-public class UpdateBusinessCommandStepDefinitions : TestBase
+public class UpdateLearnerRegisteredNameCommandV1StepDefinitions : TestBase
 {
     private IDictionary<string, string[]> _commandErrors = new ConcurrentDictionary<string, string[]>();
     private string[]? _expectedInvalidFields;
@@ -25,7 +24,6 @@ public class UpdateBusinessCommandStepDefinitions : TestBase
     {
         _def = def;
     }
-
 
     [Given(@"I have a BusinessKey ""([^""]*)""")]
     public void GivenIHaveABusinessKey(string businessKey)
@@ -48,7 +46,6 @@ public class UpdateBusinessCommandStepDefinitions : TestBase
     [When(@"I update the business")]
     public async Task WhenIUpdateTheBusiness()
     {
-        var userBusinessRepoMock = new Mock<IBusinessRepo>();
 
         var request = new UpdateBusinessCommand
         {
@@ -64,7 +61,7 @@ public class UpdateBusinessCommandStepDefinitions : TestBase
         if (_validationErrors.IsValid)
             try
             {
-                var handler = new UpdateBusinessCommandHandler(userBusinessRepoMock.Object);
+                var handler = new UpdateBusinessCommandHandler(BusinessRepo);
                 await handler.Handle(request, CancellationToken.None);
                 _responseType = CommandResponseType.Successful;
             }

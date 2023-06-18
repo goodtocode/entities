@@ -2,20 +2,19 @@ using FluentValidation.Results;
 using Goodtocode.Subjects.Application;
 using Goodtocode.Subjects.Application.Business.Commands;
 using Goodtocode.Subjects.Application.Common.Exceptions;
+using Moq;
 using System.Collections.Concurrent;
-using static Goodtocode.Subjects.Integration.Common.ResponseTypes;
+using static Goodtocode.Subjects.Unit.Common.ResponseTypes;
 
-namespace Goodtocode.Subjects.Integration.Business.Commands;
+namespace Goodtocode.Subjects.Unit.Business;
 
 [Binding]
-[Scope(Tag = "updateBusinessCommand")]
-public class UpdateLearnerRegisteredNameCommandV1StepDefinitions : TestBase
+[Scope(Tag = "deleteBusinessCommand")]
+public class DeleteBusinessCommandStepDefinitions : TestBase
 {
     private IDictionary<string, string[]> _commandErrors = new ConcurrentDictionary<string, string[]>();
     private string[]? _expectedInvalidFields;
     private Guid _businessKey;
-    private string _businessName = string.Empty;
-    private string _taxNumber = string.Empty;
     private object _responseType = string.Empty;
     private ValidationResult _validationErrors = new();
 
@@ -31,37 +30,24 @@ public class UpdateLearnerRegisteredNameCommandV1StepDefinitions : TestBase
         Guid.TryParse(businessKey, out _businessKey);
     }
 
-    [Given(@"I have a BusinessName ""([^""]*)""")]
-    public void GivenIHaveABusinessName(string businessName)
+    [When(@"I delete the business")]
+    public async Task WhenIDeleteTheBusiness()
     {
-        _businessName = businessName;
-    }
+        var userBusinessRepoMock = new Mock<IBusinessRepo>();
 
-    [Given(@"I have a TaxNumber ""([^""]*)""")]
-    public void GivenIHaveATaxNumber(string taxNumber)
-    {
-        _taxNumber = taxNumber;
-    }
-
-    [When(@"I update the business")]
-    public async Task WhenIUpdateTheBusiness()
-    {
-
-        var request = new UpdateBusinessCommand
+        var request = new DeleteBusinessCommand
         {
             BusinessKey = _businessKey,
-            BusinessName = _businessName,
-            TaxNumber = _taxNumber
         };
 
-        var requestValidator = new UpdateBusinessCommandValidator();
+        var requestValidator = new DeleteBusinessCommandValidator();
 
         _validationErrors = await requestValidator.ValidateAsync(request);
 
         if (_validationErrors.IsValid)
             try
             {
-                var handler = new UpdateBusinessCommandHandler(base.BusinessRepo);
+                var handler = new DeleteBusinessCommandHandler(userBusinessRepoMock.Object);
                 await handler.Handle(request, CancellationToken.None);
                 _responseType = CommandResponseType.Successful;
             }

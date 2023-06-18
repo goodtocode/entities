@@ -6,14 +6,15 @@ using Moq;
 using System.Collections.Concurrent;
 using static Goodtocode.Subjects.Unit.Common.ResponseTypes;
 
-namespace Goodtocode.Subjects.Unit.Business.Commands;
+namespace Goodtocode.Subjects.Unit.Business;
 
 [Binding]
-[Scope(Tag = "addBusinessCommand")]
-public class AddBusinessCommandStepDefinitions : TestBase
+[Scope(Tag = "updateBusinessCommand")]
+public class UpdateBusinessCommandStepDefinitions : TestBase
 {
     private IDictionary<string, string[]> _commandErrors = new ConcurrentDictionary<string, string[]>();
     private string[]? _expectedInvalidFields;
+    private Guid _businessKey;
     private string _businessName = string.Empty;
     private string _taxNumber = string.Empty;
     private object _responseType = string.Empty;
@@ -23,6 +24,13 @@ public class AddBusinessCommandStepDefinitions : TestBase
     public void GivenIHaveADef(string def)
     {
         _def = def;
+    }
+
+
+    [Given(@"I have a BusinessKey ""([^""]*)""")]
+    public void GivenIHaveABusinessKey(string businessKey)
+    {
+        Guid.TryParse(businessKey, out _businessKey);
     }
 
     [Given(@"I have a BusinessName ""([^""]*)""")]
@@ -37,25 +45,26 @@ public class AddBusinessCommandStepDefinitions : TestBase
         _taxNumber = taxNumber;
     }
 
-    [When(@"I add the business")]
-    public async Task WhenIAddTheBusiness()
+    [When(@"I update the business")]
+    public async Task WhenIUpdateTheBusiness()
     {
         var userBusinessRepoMock = new Mock<IBusinessRepo>();
 
-        var request = new AddBusinessCommand
+        var request = new UpdateBusinessCommand
         {
+            BusinessKey = _businessKey,
             BusinessName = _businessName,
             TaxNumber = _taxNumber
         };
 
-        var requestValidator = new AddBusinessCommandValidator();
+        var requestValidator = new UpdateBusinessCommandValidator();
 
         _validationErrors = await requestValidator.ValidateAsync(request);
 
         if (_validationErrors.IsValid)
             try
             {
-                var handler = new AddBusinessCommandHandler(userBusinessRepoMock.Object);
+                var handler = new UpdateBusinessCommandHandler(userBusinessRepoMock.Object);
                 await handler.Handle(request, CancellationToken.None);
                 _responseType = CommandResponseType.Successful;
             }
@@ -67,8 +76,8 @@ public class AddBusinessCommandStepDefinitions : TestBase
                         _commandErrors = validationException.Errors;
                         _responseType = CommandResponseType.BadRequest;
                         break;
-                    case ConflictException conflictException:
-                        _responseType = CommandResponseType.Conflict;
+                    case NotFoundException notFoundException:
+                        _responseType = CommandResponseType.NotFound;
                         break;
                     default:
                         _responseType = CommandResponseType.Error;
@@ -90,8 +99,8 @@ public class AddBusinessCommandStepDefinitions : TestBase
             case "BadRequest":
                 _responseType.Should().Be(CommandResponseType.BadRequest);
                 break;
-            case "Conflict":
-                _responseType.Should().Be(CommandResponseType.Conflict);
+            case "NotFound":
+                _responseType.Should().Be(CommandResponseType.NotFound);
                 break;
         }
     }

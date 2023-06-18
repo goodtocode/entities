@@ -16,9 +16,9 @@ Scenario: Update business
 Examples:
 	| def									| response   | responseErrors                                   | requestBusinessKey					| requestBusinessName	| requestTaxNumber	|
 	| success TaxNumber Add					| Success    |                                                  | d1604a05-f883-40f1-803b-8562b5674f1a  | businessName			| 123-4567			|
-	| success TaxNumber Update				| Success    |                                                  | d1604a05-f883-40f1-803b-8562b5674f1a  | businessName			| 123-4567			|
+	| success TaxNumber Update				| Success    |                                                  | d1604a05-f883-40f1-803b-8562b5674f1a  | businessName			| 123-5678			|
 	| success TaxNumber Remove				| Success    |                                                  | d1604a05-f883-40f1-803b-8562b5674f1a  | businessName			| 					|
-	| success Name Update					| Success    |                                                  | d1604a05-f883-40f1-803b-8562b5674f1a  | businessName			| 123-4567			|	
+	| success Name Update					| Success    |                                                  | d1604a05-f883-40f1-803b-8562b5674f1a  | businessName Updates	| 123-4567			|	
 	| bad request Invalid BusinessKey		| BadRequest | BusinessKey										| 11111									| businessName			| 123-4567			|
 	| bad request Invalid BusinessName		| BadRequest | BusinessName	                                    | d1604a05-f883-40f1-803b-8562b5674f1a  |						| 123-4567			|
 	| bad request							| BadRequest | BusinessKey,BusinessName							| 11111									| 						| 					|

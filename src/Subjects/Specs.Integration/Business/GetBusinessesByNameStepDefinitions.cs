@@ -1,51 +1,62 @@
+using CSharpFunctionalExtensions;
 using FluentValidation.Results;
 using Goodtocode.Subjects.Application;
-using Goodtocode.Subjects.Application.Business.Commands;
 using Goodtocode.Subjects.Application.Common.Exceptions;
+using Goodtocode.Subjects.Domain;
 using System.Collections.Concurrent;
 using static Goodtocode.Subjects.Integration.Common.ResponseTypes;
 
-namespace Goodtocode.Subjects.Integration.Business.Commands;
+namespace Goodtocode.Subjects.Integration.Business;
 
 [Binding]
-[Scope(Tag = "deleteBusinessCommand")]
-public class DeleteBusinessCommandStepDefinitions : TestBase
+[Scope(Tag = "getBusinessesByName")]
+public class GetBusinessesByNameStepDefinitions : TestBase
 {
     private IDictionary<string, string[]> _commandErrors = new ConcurrentDictionary<string, string[]>();
     private string[]? _expectedInvalidFields;
-    private Guid _businessKey;
-    private object _responseType = string.Empty;
+    private List<BusinessEntity> _response = new();
+    private CommandResponseType _responseType;
     private ValidationResult _validationErrors = new();
+    private string _businessName = string.Empty;
+    private bool _businessExists;
 
     [Given(@"I have a def ""([^""]*)""")]
-    public void GivenIHaveADef(string def)
+    public void GivenIHaveADef(string p0)
     {
-        _def = def;
+        _def = p0;
     }
 
-    [Given(@"I have a BusinessKey ""([^""]*)""")]
-    public void GivenIHaveABusinessKey(string businessKey)
+    [Given(@"I have a BusinessName ""([^""]*)""")]
+    public void GivenIHaveABusinessName(string businessInDb)
     {
-        Guid.TryParse(businessKey, out _businessKey);
+        _businessName = businessInDb;
     }
 
-    [When(@"I delete the business")]
-    public async Task WhenIDeleteTheBusiness()
+    [Given(@"the business exists ""([^""]*)""")]
+    public void GivenTheBusinessExists(bool exists)
     {
-        var request = new DeleteBusinessCommand
+        _businessExists = exists;
+    }
+
+    [When(@"I query for matching Businesses")]
+    public async Task WhenIQueryForMatchingBusinesses()
+    {
+        var userBusinessesRepoMock = new Mock<IBusinessRepo>();
+
+        var request = new GetBusinessesByNameQuery
         {
-            BusinessKey = _businessKey,
+            BusinessName = _businessName
         };
 
-        var requestValidator = new DeleteBusinessCommandValidator();
+        var requestValidator = new GetBusinessesByNameQueryValidator();
 
         _validationErrors = await requestValidator.ValidateAsync(request);
 
         if (_validationErrors.IsValid)
             try
             {
-                var handler = new DeleteBusinessCommandHandler(base.BusinessRepo);
-                await handler.Handle(request, CancellationToken.None);
+                var handler = new GetBusinessesByNameQueryHandler(BusinessRepo);
+                _response = await handler.Handle(request, CancellationToken.None);
                 _responseType = CommandResponseType.Successful;
             }
             catch (Exception e)
@@ -68,7 +79,7 @@ public class DeleteBusinessCommandStepDefinitions : TestBase
             _responseType = CommandResponseType.BadRequest;
     }
 
-    [Then(@"The response is ""([^""]*)""")]
+    [Then(@"the response is ""([^""]*)""")]
     public void ThenTheResponseIs(string response)
     {
         switch (response)
@@ -85,12 +96,12 @@ public class DeleteBusinessCommandStepDefinitions : TestBase
         }
     }
 
-    [Then(@"If the response has validation issues I see the ""([^""]*)"" in the response")]
-    public void ThenIfTheResponseHasValidationIssuesISeeTheInTheResponse(string expectedInvalidFields)
+    [Then(@"if the response has validation issues I see the ""([^""]*)"" in the response")]
+    public void ThenIfTheResponseHasValidationIssuesISeeTheInTheResponse(string responseErrors)
     {
-        if (string.IsNullOrWhiteSpace(expectedInvalidFields)) return;
+        if (string.IsNullOrWhiteSpace(responseErrors)) return;
 
-        _expectedInvalidFields = expectedInvalidFields.Split(",");
+        _expectedInvalidFields = responseErrors.Split(",");
 
         foreach (var field in _expectedInvalidFields)
         {
@@ -100,5 +111,19 @@ public class DeleteBusinessCommandStepDefinitions : TestBase
 
             hasErrorMatch.Should().BeTrue();
         }
+    }
+
+    [Then(@"if the response is valid then the response contains a collection of businesses")]
+    public void ThenIfTheResponseIsValidThenTheResponseContainsACollectionOfBusinesses()
+    {
+        if (_responseType != CommandResponseType.Successful) return;
+        _response.Any().Should().BeTrue();
+    }
+
+    [Then(@"each business has a matching BusinessName of ""([^""]*)""")]
+    public void ThenEachBusinessHasAMatchingBusinessNameOf(string businessInDb)
+    {
+        if (_responseType != CommandResponseType.Successful) return;
+        foreach (var business in _response) business.BusinessName.Should().Be(businessInDb);
     }
 }

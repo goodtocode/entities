@@ -10,11 +10,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<SpecFlowObsoleteCodeBehindFiles Remove="Business\Queries\GetBusinessesByKey.feature.cs" />
-		<SpecFlowObsoleteCodeBehindFiles Remove="Business\Queries\GetBusinessesByName.feature.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.2" />
 		<PackageReference Include="Moq" Version="4.18.4" />
 		<PackageReference Include="Respawn" Version="6.0.0" />
@@ -39,36 +34,29 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="Business\Commands\DeleteBusinessCommand.feature.cs">
+		<Compile Update="Business\DeleteBusinessCommand.feature.cs">
 		  <Visible>true</Visible>
 		  <DependentUpon>%(Filename)</DependentUpon>
 		  <DesignTime>true</DesignTime>
 		  <AutoGen>true</AutoGen>
 		</Compile>
-		<Compile Update="Business\Commands\Update\UpdateBusinessCommand.feature.cs">
-			<DependentUpon>UpdateBusinessCommand.feature</DependentUpon>
-		</Compile>
-		<Compile Update="Business\Queries\GetBusinessesByKey.feature.cs">
+		<Compile Update="Business\GetBusinessesByKey.feature.cs">
 			<DependentUpon>GetBusinessesByKey.feature</DependentUpon>
 		</Compile>
-		<Compile Update="Business\Queries\GetBusinessesByName.feature.cs">
+		<Compile Update="Business\GetBusinessesByName.feature.cs">
 			<DependentUpon>GetBusinessesByName.feature</DependentUpon>
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
-		<SpecFlowFeatureFiles Update="Business\Commands\DeleteBusinessCommand.feature">
+		<SpecFlowFeatureFiles Update="Business\DeleteBusinessCommand.feature">
 		  <Visible>$(UsingMicrosoftNETSdk)</Visible>
 		  <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
 		</SpecFlowFeatureFiles>
-		<SpecFlowFeatureFiles Update="Business\Commands\Update\UpdateBusinessCommand.feature">
+		<SpecFlowFeatureFiles Update="Business\GetBusinessesByKey.feature">
 			<Visible>$(UsingMicrosoftNETSdk)</Visible>
 			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
 		</SpecFlowFeatureFiles>
-		<SpecFlowFeatureFiles Update="Business\Queries\GetBusinessesByKey.feature">
-			<Visible>$(UsingMicrosoftNETSdk)</Visible>
-			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-		</SpecFlowFeatureFiles>
-		<SpecFlowFeatureFiles Update="Business\Queries\GetBusinessesByName.feature">
+		<SpecFlowFeatureFiles Update="Business\GetBusinessesByName.feature">
 			<Visible>$(UsingMicrosoftNETSdk)</Visible>
 			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
 		</SpecFlowFeatureFiles>

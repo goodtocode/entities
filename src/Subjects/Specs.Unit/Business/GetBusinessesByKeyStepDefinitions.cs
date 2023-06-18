@@ -3,33 +3,34 @@ using FluentValidation.Results;
 using Goodtocode.Subjects.Application;
 using Goodtocode.Subjects.Application.Common.Exceptions;
 using Goodtocode.Subjects.Domain;
+using Moq;
 using System.Collections.Concurrent;
-using static Goodtocode.Subjects.Integration.Common.ResponseTypes;
+using static Goodtocode.Subjects.Unit.Common.ResponseTypes;
 
-namespace Goodtocode.Subjects.Integration.Business.Queries;
+namespace Goodtocode.Subjects.Unit.Business;
 
 [Binding]
-[Scope(Tag = "getBusinessesByName")]
-public class GetBusinessesByNameStepDefinitions : TestBase
+[Scope(Tag = "getBusinessesByKey")]
+public class GetBusinessesByKeyStepDefinitions : TestBase
 {
     private IDictionary<string, string[]> _commandErrors = new ConcurrentDictionary<string, string[]>();
     private string[]? _expectedInvalidFields;
-    private List<BusinessEntity> _response = new();
+    private BusinessEntity _response = new();
     private CommandResponseType _responseType;
     private ValidationResult _validationErrors = new();
-    private string _businessName = String.Empty;
+    private Guid _businessKey = Guid.Empty;
     private bool _businessExists;
 
     [Given(@"I have a def ""([^""]*)""")]
-    public void GivenIHaveADef(string p0)
+    public void GivenIHaveADef(string def)
     {
-        _def = p0;
+        _def = def;
     }
 
-    [Given(@"I have a BusinessName ""([^""]*)""")]
-    public void GivenIHaveABusinessName(string businessInDb)
+    [Given(@"I have a BusinessKey ""([^""]*)""")]
+    public void GivenIHaveABusinessName(Guid businessKey)
     {
-        _businessName = businessInDb;
+        _businessKey = businessKey;
     }
 
     [Given(@"the business exists ""([^""]*)""")]
@@ -43,36 +44,48 @@ public class GetBusinessesByNameStepDefinitions : TestBase
     {
         var userBusinessesRepoMock = new Mock<IBusinessRepo>();
 
-        var request = new GetBusinessesByNameQuery
+        if (_businessExists)
         {
-            BusinessName = _businessName
+            userBusinessesRepoMock
+                .Setup(x => x.GetBusinessAsync(_businessKey, It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(Result.Success<BusinessEntity?>(new BusinessEntity()
+                {
+                    BusinessKey = new Guid("2016a497-e56c-4be8-8ef6-3dc5ae1699ce"),
+                    BusinessName = "BusinessInDb"
+                })));
+        }
+
+        var request = new GetBusinessQuery
+        {
+            BusinessKey = _businessKey
         };
 
-        var requestValidator = new GetBusinessesByNameQueryValidator();
+        var requestValidator = new GetBusinessQueryValidator();
 
         _validationErrors = await requestValidator.ValidateAsync(request);
 
         if (_validationErrors.IsValid)
             try
             {
-                var handler = new GetBusinessesByNameQueryHandler(BusinessRepo);
+                var handler = new GetBusinessQueryHandler(userBusinessesRepoMock.Object, Mapper);
                 _response = await handler.Handle(request, CancellationToken.None);
                 _responseType = CommandResponseType.Successful;
             }
             catch (Exception e)
             {
-                switch (e)
+                if (e is ValidationException validationException)
                 {
-                    case ValidationException validationException:
-                        _commandErrors = validationException.Errors;
-                        _responseType = CommandResponseType.BadRequest;
-                        break;
-                    case NotFoundException notFoundException:
-                        _responseType = CommandResponseType.NotFound;
-                        break;
-                    default:
-                        _responseType = CommandResponseType.Error;
-                        break;
+                    _commandErrors = validationException.Errors;
+                    _responseType = CommandResponseType.BadRequest;
+                }
+
+                else if (e is NotFoundException notFoundException)
+                {
+                    _responseType = CommandResponseType.NotFound;
+                }
+                else
+                {
+                    _responseType = CommandResponseType.Error;
                 }
             }
         else
@@ -113,17 +126,18 @@ public class GetBusinessesByNameStepDefinitions : TestBase
         }
     }
 
-    [Then(@"if the response is valid then the response contains a collection of businesses")]
-    public void ThenIfTheResponseIsValidThenTheResponseContainsACollectionOfBusinesses()
+    [Then(@"if the response is valid then the response contains a business")]
+    public void ThenIfTheResponseIsValidThenTheResponseContainsABusiness()
     {
         if (_responseType != CommandResponseType.Successful) return;
-        _response.Any().Should().BeTrue();
+        _response.BusinessKey.Should().NotBeEmpty();
     }
 
-    [Then(@"each business has a matching BusinessName of ""([^""]*)""")]
-    public void ThenEachBusinessHasAMatchingBusinessNameOf(string businessInDb)
+    [Then(@"the business has a matching BusinessKey of ""([^""]*)""")]
+    public void ThenTheBusinessHasAMatchingBusinessKeyOf(Guid businessKey)
     {
         if (_responseType != CommandResponseType.Successful) return;
-        foreach (var business in _response) business.BusinessName.Should().Be(businessInDb);
+        _response.BusinessKey.Should().Be(businessKey);
     }
+
 }

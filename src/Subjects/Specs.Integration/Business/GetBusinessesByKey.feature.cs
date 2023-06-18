@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Goodtocode.Subjects.Integration.Business.Queries
+namespace Goodtocode.Subjects.Integration.Business
 {
     using TechTalk.SpecFlow;
     using System;
@@ -20,25 +20,25 @@ namespace Goodtocode.Subjects.Integration.Business.Queries
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Find Businesses by name")]
-    [NUnit.Framework.CategoryAttribute("getBusinessesByName")]
-    public partial class FindBusinessesByNameFeature
+    [NUnit.Framework.DescriptionAttribute("Find Businesses by key")]
+    [NUnit.Framework.CategoryAttribute("getBusinessesByKey")]
+    public partial class FindBusinessesByKeyFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private static string[] featureTags = new string[] {
-                "getBusinessesByName"};
+                "getBusinessesByKey"};
         
-#line 1 "GetBusinessesByName.feature"
+#line 1 "GetBusinessesByKey.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Business/Queries", "Find Businesses by name", "\tAs a customer service rep\r\n\tWhen I search for a business by name critera\r\n\tI can" +
-                    " see a list of businesses that match the name criteria", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Business", "Find Businesses by key", "\tAs a customer service rep\r\n\tWhen I search for a business by key critera\r\n\tI can " +
+                    "see a exact match for a business", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -78,16 +78,16 @@ namespace Goodtocode.Subjects.Integration.Business.Queries
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Get Existing Business By Name")]
-        [NUnit.Framework.TestCaseAttribute("success exists", "Success", "", "BusinessInDb", "true", null)]
-        [NUnit.Framework.TestCaseAttribute("empty name", "BadRequest", "BusinessName", "", "false", null)]
-        public void GetExistingBusinessByName(string def, string response, string responseErrors, string businessName, string businessExists, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("success exists", "Success", "", "2016a497-e56c-4be8-8ef6-3dc5ae1699ce", "true", null)]
+        [NUnit.Framework.TestCaseAttribute("empty key", "BadRequest", "BusinessKey", "00000000-0000-0000-0000-000000000000", "false", null)]
+        public void GetExistingBusinessByName(string def, string response, string responseErrors, string businessKey, string businessExists, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("def", def);
             argumentsOfScenario.Add("response", response);
             argumentsOfScenario.Add("responseErrors", responseErrors);
-            argumentsOfScenario.Add("businessName", businessName);
+            argumentsOfScenario.Add("businessKey", businessKey);
             argumentsOfScenario.Add("businessExists", businessExists);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Existing Business By Name", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 7
@@ -104,7 +104,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given(string.Format("I have a def \"{0}\"", def), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 9
- testRunner.And(string.Format("I have a BusinessName \"{0}\"", businessName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I have a BusinessKey \"{0}\"", businessKey), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 10
  testRunner.And(string.Format("the business exists \"{0}\"", businessExists), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -119,10 +119,10 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And(string.Format("if the response has validation issues I see the \"{0}\" in the response", responseErrors), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 14
- testRunner.And("if the response is valid then the response contains a collection of businesses", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("if the response is valid then the response contains a business", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 15
- testRunner.And(string.Format("each business has a matching BusinessName of \"{0}\"", businessName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("the business has a matching BusinessKey of \"{0}\"", businessKey), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
