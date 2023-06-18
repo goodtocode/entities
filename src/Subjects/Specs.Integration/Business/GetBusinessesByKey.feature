@@ -17,4 +17,5 @@ Scenario: Get Existing Business By Name
 Examples:
 	| def                | response   | responseErrors | businessKey							| businessExists |
 	| success exists     | Success    |                | 2016a497-e56c-4be8-8ef6-3dc5ae1699ce	| true           |
+	| Business NotFound  | NotFound   |                | 1234a497-1234-1234-8ef6-3dc5ae1699ce	| false          |
 	| empty key          | BadRequest | BusinessKey    | 00000000-0000-0000-0000-000000000000	| false          |

@@ -27,7 +27,7 @@ public class DeleteBusinessCommandStepDefinitions : TestBase
     [Given(@"I have a BusinessKey ""([^""]*)""")]
     public void GivenIHaveABusinessKey(string businessKey)
     {
-        Guid.TryParse(businessKey, out _businessKey);
+        _businessKey = Guid.Parse(businessKey);
     }
 
     [When(@"I delete the business")]
@@ -59,7 +59,7 @@ public class DeleteBusinessCommandStepDefinitions : TestBase
                         _commandErrors = validationException.Errors;
                         _responseType = CommandResponseType.BadRequest;
                         break;
-                    case NotFoundException notFoundException:
+                    case NotFoundException:
                         _responseType = CommandResponseType.NotFound;
                         break;
                     default:

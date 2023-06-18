@@ -65,7 +65,7 @@ public class AddBusinessCommandStepDefinitions : TestBase
                         _commandErrors = validationException.Errors;
                         _responseType = CommandResponseType.BadRequest;
                         break;
-                    case ConflictException conflictException:
+                    case ConflictException:
                         _responseType = CommandResponseType.Conflict;
                         break;
                     default:

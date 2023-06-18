@@ -79,6 +79,7 @@ namespace Goodtocode.Subjects.Integration.Business
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Get Existing Business By Name")]
         [NUnit.Framework.TestCaseAttribute("success exists", "Success", "", "2016a497-e56c-4be8-8ef6-3dc5ae1699ce", "true", null)]
+        [NUnit.Framework.TestCaseAttribute("Business NotFound", "NotFound", "", "1234a497-1234-1234-8ef6-3dc5ae1699ce", "false", null)]
         [NUnit.Framework.TestCaseAttribute("empty key", "BadRequest", "BusinessKey", "00000000-0000-0000-0000-000000000000", "false", null)]
         public void GetExistingBusinessByName(string def, string response, string responseErrors, string businessKey, string businessExists, string[] exampleTags)
         {

@@ -65,7 +65,7 @@ public class GetBusinessesByKeyStepDefinitions : TestBase
                         _commandErrors = validationException.Errors;
                         _responseType = CommandResponseType.BadRequest;
                         break;
-                    case NotFoundException notFoundException:
+                    case NotFoundException:
                         _responseType = CommandResponseType.NotFound;
                         break;
                     default:

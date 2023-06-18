@@ -23,6 +23,7 @@ public class TestBase
         Mapper = new MapperConfiguration(cfg => { cfg.AddProfile<MappingProfile>(); })
             .CreateMapper();
         RunBeforeAnyTests();
+        BusinessRepo ??= new Mock<IBusinessRepo>().Object;
     }
 
     [OneTimeSetUp]
@@ -49,7 +50,7 @@ public class TestBase
 
         _scopeFactory = services.BuildServiceProvider().GetRequiredService<IServiceScopeFactory>();
         var sp = services.BuildServiceProvider();
-        BusinessRepo = sp.GetRequiredService<IBusinessRepo>() ?? new Mock<IBusinessRepo>().Object;
+        BusinessRepo = sp.GetRequiredService<IBusinessRepo>();
 
         SeedContext();
     }

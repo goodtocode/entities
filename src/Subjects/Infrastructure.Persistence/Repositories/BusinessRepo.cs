@@ -65,7 +65,7 @@ public class BusinessRepo : IBusinessRepo
             return Result.Failure("Cannot update. Business not found.");
         businessResult.BusinessName = businessInfo.BusinessName;
         businessResult.TaxNumber = businessInfo.TaxNumber;
-        var result = await _context.SaveChangesAsync(cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
         return Result.Success();
     }
 
@@ -75,7 +75,7 @@ public class BusinessRepo : IBusinessRepo
         if (businessResult == null)
             return Result.Failure("Cannot delete. Business not found.");
         _context.Business.Remove(businessResult);
-        var result = await _context.SaveChangesAsync(cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
         return Result.Success();
     }
 }
