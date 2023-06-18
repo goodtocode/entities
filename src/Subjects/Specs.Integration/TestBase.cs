@@ -4,6 +4,7 @@ using Goodtocode.Subjects.Application.Common.Mappings;
 using Goodtocode.Subjects.Integration.Common;
 using Goodtocode.Subjects.Persistence;
 using Goodtocode.Subjects.Persistence.Contexts;
+using Goodtocode.Subjects.Persistence.Repositories;
 
 namespace Goodtocode.Application.Integration;
 
@@ -14,17 +15,15 @@ public class TestBase
     private static IConfigurationRoot _configuration = null!;
     private static IServiceScopeFactory _scopeFactory = null!;
 
+    public IMapper Mapper { get; }
+    public IBusinessRepo BusinessRepo { get; private set; }
+
     public TestBase()
     {
         Mapper = new MapperConfiguration(cfg => { cfg.AddProfile<MappingProfile>(); })
             .CreateMapper();
-
         RunBeforeAnyTests();
     }
-
-    public IMapper Mapper { get; }
-
-    public IBusinessRepo? BusinessRepo { get; private set; }
 
     [OneTimeSetUp]
     public void RunBeforeAnyTests()
@@ -50,8 +49,8 @@ public class TestBase
 
         _scopeFactory = services.BuildServiceProvider().GetRequiredService<IServiceScopeFactory>();
         var sp = services.BuildServiceProvider();
-        BusinessRepo = sp.GetRequiredService<IBusinessRepo>();
-        
+        BusinessRepo = sp.GetRequiredService<IBusinessRepo>() ?? new Mock<IBusinessRepo>().Object;
+
         SeedContext();
     }
 

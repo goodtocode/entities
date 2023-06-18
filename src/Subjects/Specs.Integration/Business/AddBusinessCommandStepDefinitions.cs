@@ -1,24 +1,23 @@
-using CSharpFunctionalExtensions;
 using FluentValidation.Results;
 using Goodtocode.Subjects.Application;
+using Goodtocode.Subjects.Application.Business.Commands;
 using Goodtocode.Subjects.Application.Common.Exceptions;
-using Goodtocode.Subjects.Domain;
+using Moq;
 using System.Collections.Concurrent;
 using static Goodtocode.Subjects.Integration.Common.ResponseTypes;
 
 namespace Goodtocode.Subjects.Integration.Business;
 
 [Binding]
-[Scope(Tag = "getBusinessesByKey")]
-public class GetBusinessesByKeyStepDefinitions : TestBase
+[Scope(Tag = "addBusinessCommand")]
+public class AddBusinessCommandStepDefinitions : TestBase
 {
     private IDictionary<string, string[]> _commandErrors = new ConcurrentDictionary<string, string[]>();
     private string[]? _expectedInvalidFields;
-    private BusinessEntity _response = new();
-    private CommandResponseType _responseType;
+    private string _businessName = string.Empty;
+    private string _taxNumber = string.Empty;
+    private object _responseType = string.Empty;
     private ValidationResult _validationErrors = new();
-    private Guid _businessKey = Guid.Empty;
-    private bool _businessExists;
 
     [Given(@"I have a def ""([^""]*)""")]
     public void GivenIHaveADef(string def)
@@ -26,35 +25,36 @@ public class GetBusinessesByKeyStepDefinitions : TestBase
         _def = def;
     }
 
-    [Given(@"I have a BusinessKey ""([^""]*)""")]
-    public void GivenIHaveABusinessName(Guid businessKey)
+    [Given(@"I have a BusinessName ""([^""]*)""")]
+    public void GivenIHaveABusinessName(string businessName)
     {
-        _businessKey = businessKey;
+        _businessName = businessName;
     }
 
-    [Given(@"the business exists ""([^""]*)""")]
-    public void GivenTheBusinessExists(bool exists)
+    [Given(@"I have a TaxNumber ""([^""]*)""")]
+    public void GivenIHaveATaxNumber(string taxNumber)
     {
-        _businessExists = exists;
+        _taxNumber = taxNumber;
     }
 
-    [When(@"I query for matching Businesses")]
-    public async Task WhenIQueryForMatchingBusinesses()
+    [When(@"I add the business")]
+    public async Task WhenIAddTheBusiness()
     {
-        var request = new GetBusinessQuery
+        var request = new AddBusinessCommand
         {
-            BusinessKey = _businessKey
+            BusinessName = _businessName,
+            TaxNumber = _taxNumber
         };
 
-        var requestValidator = new GetBusinessQueryValidator();
+        var requestValidator = new AddBusinessCommandValidator();
 
         _validationErrors = await requestValidator.ValidateAsync(request);
 
         if (_validationErrors.IsValid)
             try
             {
-                var handler = new GetBusinessQueryHandler(BusinessRepo, Mapper);
-                _response = await handler.Handle(request, CancellationToken.None) ?? new BusinessEntity();
+                var handler = new AddBusinessCommandHandler(base.BusinessRepo);
+                await handler.Handle(request, CancellationToken.None);
                 _responseType = CommandResponseType.Successful;
             }
             catch (Exception e)
@@ -65,8 +65,8 @@ public class GetBusinessesByKeyStepDefinitions : TestBase
                         _commandErrors = validationException.Errors;
                         _responseType = CommandResponseType.BadRequest;
                         break;
-                    case NotFoundException notFoundException:
-                        _responseType = CommandResponseType.NotFound;
+                    case ConflictException conflictException:
+                        _responseType = CommandResponseType.Conflict;
                         break;
                     default:
                         _responseType = CommandResponseType.Error;
@@ -77,7 +77,7 @@ public class GetBusinessesByKeyStepDefinitions : TestBase
             _responseType = CommandResponseType.BadRequest;
     }
 
-    [Then(@"the response is ""([^""]*)""")]
+    [Then(@"The response is ""([^""]*)""")]
     public void ThenTheResponseIs(string response)
     {
         switch (response)
@@ -88,18 +88,18 @@ public class GetBusinessesByKeyStepDefinitions : TestBase
             case "BadRequest":
                 _responseType.Should().Be(CommandResponseType.BadRequest);
                 break;
-            case "NotFound":
-                _responseType.Should().Be(CommandResponseType.NotFound);
+            case "Conflict":
+                _responseType.Should().Be(CommandResponseType.Conflict);
                 break;
         }
     }
 
-    [Then(@"if the response has validation issues I see the ""([^""]*)"" in the response")]
-    public void ThenIfTheResponseHasValidationIssuesISeeTheInTheResponse(string responseErrors)
+    [Then(@"If the response has validation issues I see the ""([^""]*)"" in the response")]
+    public void ThenIfTheResponseHasValidationIssuesISeeTheInTheResponse(string expectedInvalidFields)
     {
-        if (string.IsNullOrWhiteSpace(responseErrors)) return;
+        if (string.IsNullOrWhiteSpace(expectedInvalidFields)) return;
 
-        _expectedInvalidFields = responseErrors.Split(",");
+        _expectedInvalidFields = expectedInvalidFields.Split(",");
 
         foreach (var field in _expectedInvalidFields)
         {
@@ -110,19 +110,4 @@ public class GetBusinessesByKeyStepDefinitions : TestBase
             hasErrorMatch.Should().BeTrue();
         }
     }
-
-    [Then(@"if the response is valid then the response contains a business")]
-    public void ThenIfTheResponseIsValidThenTheResponseContainsABusiness()
-    {
-        if (_responseType != CommandResponseType.Successful) return;
-        _response.BusinessKey.Should().NotBeEmpty();
-    }
-
-    [Then(@"the business has a matching BusinessKey of ""([^""]*)""")]
-    public void ThenTheBusinessHasAMatchingBusinessKeyOf(Guid businessKey)
-    {
-        if (_responseType != CommandResponseType.Successful) return;
-        _response.BusinessKey.Should().Be(businessKey);
-    }
-
 }
