@@ -40,12 +40,11 @@ builder.Services.AddApplicationInsightsTelemetry(options =>
 builder.Services.AddApiClientServices("SubjectsApiClient", builder.Configuration["Subjects:Url"],
     new ClientCredentialSetting(
     builder.Configuration["Subjects:ClientId"],
-    builder.Configuration["SubjectsClientSecret"],
+    builder.Configuration["Subjects:ClientSecret"],
     builder.Configuration["Subjects:TokenUrl"],
     builder.Configuration["Subjects:Scope"])
 );
 
-builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSingleton<BusinessService>();
 
 var app = builder.Build();
