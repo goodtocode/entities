@@ -1,0 +1,20 @@
+﻿----------------------------------------------------------------
+---- SessionflowSequence
+----------------------------------------------------------------
+---- [SessionflowSequence]
+--MERGE INTO [Entity].[SessionflowSequence] AS Target 
+--USING (VALUES 
+--	(newID(), N'Fictional Step 1', N'Description for fictional step 1.', FIRST_SESSIONFLOW_STEP_Id, 0),
+--	(newID(), N'Fictional Step 2', N'Description for fictional step 2.', NEXT_SESSIONFLOW_STEP_Id, 1),
+--	(newID(), N'Fictional Step 3', N'Description for fictional step 3.', FINAL_SESSIONFLOW_STEP_Id, 2)
+--	)
+--AS Source ([SessionflowSequenceKey], [FlowKey], [SessionflowStepKey], [SortOrder])
+--ON Target.[SessionflowStepKey] = Source.[SessionflowStepKey]
+---- Update
+--WHEN MATCHED THEN 
+--UPDATE SET [FlowKey] = Source.[FlowKey], [SessionflowStepKey] = Source.[SessionflowStepKey], [SortOrder] = Source.[SortOrder]
+---- Insert 
+--WHEN NOT MATCHED BY TARGET THEN 
+--INSERT ([SessionflowSequenceKey], [FlowKey], [SessionflowStepKey], [SortOrder])
+--	Values (Source.[SessionflowSequenceKey],Source. [FlowKey], Source.[SessionflowStepKey], Source.[SortOrder])
+--;
