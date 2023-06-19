@@ -9,9 +9,11 @@
 <h1>Business Create</h1>
 
 <p>Create a businesses</p>
-<input placeholder="Business Name" @bind="businessName" />
-<input placeholder="Tax Number" @bind="businessName" />
-<button class="btn btn-primary" @onclick="CreateBusineses">Create</button>
+<EditForm Model="@business">
+    <input placeholder="Business Name" @bind-value="@business.BusinessName" />
+    <input placeholder="Tax Number" @bind-value="@business.TaxNumber" />
+    <button class="btn btn-primary" @onclick="CreateBusineses">Create</button>
+</EditForm>
 
 @code {
     private string businessName = string.Empty;
