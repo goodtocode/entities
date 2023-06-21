@@ -49,8 +49,6 @@
 
     private async Task GetBusineses()
     {
-        var context = new EditContext(businessSearch);
-        var isvalid = context.Validate();
         alertMessage = string.Empty;
         businesses = await Service.GetBusinessesAsync(businessSearch.Name);
         if (businesses.Count() == 0)
