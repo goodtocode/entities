@@ -1,20 +1,23 @@
 ﻿@page "/businesssearch"
 @using Goodtocode.Subjects.BlazorServer.Data;
+@using Goodtocode.Subjects.BlazorServer.Models;
 @using Goodtocode.Subjects.Domain;
 
 @inject BusinessService Service
 
 <PageTitle>Business Search</PageTitle>
 
-<h1>Business Search</h1>
+<EditForm Model="@businessSearch" OnValidSubmit="@GetBusineses">
+    <DataAnnotationsValidator />
+    <div class="input-group mb-3">
+        <input type="text" class="form-control form-control-lg" placeholder="Search" aria-label="Search" aria-describedby="button-addon2"
+        @bind="@businessSearch.Name" @onkeydown="@(async e => { if (e.Key == "Enter") { await GetBusineses(); } })">
+        <button class="btn btn-primary btn-lg" type="submit" id="button-addon2"><i class="bi bi-search"></i></button>
+    </div>
+    <ValidationSummary />
+    <div hidden="@string.IsNullOrEmpty(alertMessage)" class="alert alert-danger" role="alert">@alertMessage</div>
+</EditForm>
 
-<p>Search for businesses</p>
-<input placeholder="Business Name" @bind="businessName" />
-<button class="btn btn-primary" @onclick="GetBusineses">Search</button>
-@if (alertMessage.Length > 0)
-{
-    <div class="alert alert-danger" role="alert" @bind="alertMessage"></div>
-}
 
 @if (businesses.Count() > 0)
 {
@@ -41,13 +44,15 @@
 
 @code {
     private string alertMessage = string.Empty;
-    private string businessName = string.Empty;
+    private BusinessSearchModel businessSearch = new BusinessSearchModel();
     private IEnumerable<BusinessEntity> businesses = new List<BusinessEntity>();
 
     private async Task GetBusineses()
     {
+        var context = new EditContext(businessSearch);
+        var isvalid = context.Validate();
         alertMessage = string.Empty;
-        businesses = await Service.GetBusinessesAsync(businessName);
+        businesses = await Service.GetBusinessesAsync(businessSearch.Name);
         if (businesses.Count() == 0)
             alertMessage = "No businesses found";
     }

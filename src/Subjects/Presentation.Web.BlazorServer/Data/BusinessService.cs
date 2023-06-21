@@ -34,9 +34,10 @@ public class BusinessService
 
     public async Task<IEnumerable<BusinessEntity>> GetBusinessesAsync(string name)
     {
-        var httpClient = _clientFactory.CreateClient("SubjectsApiClient");
-        var response = await httpClient.GetAsync($"{httpClient.BaseAddress}/Businesses?name={name}&api-version=1");
         var business = new List<BusinessEntity>();
+        if (string.IsNullOrEmpty(name)) return business;
+        var httpClient = _clientFactory.CreateClient("SubjectsApiClient");
+        var response = await httpClient.GetAsync($"{httpClient.BaseAddress}/Businesses?name={name}&api-version=1");        
         if (response.StatusCode != HttpStatusCode.NotFound)
         {
             response.EnsureSuccessStatusCode();

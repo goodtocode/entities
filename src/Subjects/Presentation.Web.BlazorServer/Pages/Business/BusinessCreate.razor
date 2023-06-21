@@ -9,10 +9,19 @@
 <h1>Business Create</h1>
 
 <p>Create a businesses</p>
+
 <EditForm Model="@business">
-    <input placeholder="Business Name" @bind-value="@business.BusinessName" />
-    <input placeholder="Tax Number" @bind-value="@business.TaxNumber" />
-    <button class="btn btn-primary" @onclick="CreateBusineses">Create</button>
+    <form>
+        <div class="form-group mb-3">
+            <label for="businessName">Name</label>
+            <input type="text" class="form-control" id="businessName" placeholder="Business name" @bind-value="@business.BusinessName">
+        </div>
+        <div class="form-group mb-3">
+            <label for="taxNumber">Tax Number</label>
+            <input type="text" class="form-control" id="taxNumber" placeholder="Tax Number" @bind-value="@business.TaxNumber">
+        </div>
+        <button type="submit" class="btn btn-primary" @onclick="CreateBusineses">Create</button>
+    </form>
 </EditForm>
 
 @code {
