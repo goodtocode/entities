@@ -2,6 +2,7 @@
 @using Goodtocode.Subjects.BlazorServer.Data;
 @using Goodtocode.Subjects.BlazorServer.Models;
 @using Goodtocode.Subjects.Domain;
+@using System.ComponentModel.DataAnnotations;
 
 @inject BusinessService Service
 
@@ -46,12 +47,26 @@
     private string alertMessage = string.Empty;
     private BusinessSearchModel businessSearch = new BusinessSearchModel();
     private IEnumerable<BusinessEntity> businesses = new List<BusinessEntity>();
+    private CancellationTokenSource cts = new CancellationTokenSource();
 
     private async Task GetBusineses()
     {
-        alertMessage = string.Empty;
-        businesses = await Service.GetBusinessesAsync(businessSearch.Name);
-        if (businesses.Count() == 0)
-            alertMessage = "No businesses found";
+        if (!Validator.TryValidateObject(businessSearch, 
+            new ValidationContext(businessSearch, serviceProvider: null, items: null), new List<ValidationResult>(), true)) return;
+
+        if (cts != null) cts.Cancel();
+        cts = new CancellationTokenSource();
+        try
+        {
+            await Task.Delay(500, cts.Token);
+            alertMessage = string.Empty;
+            businesses = await Service.GetBusinessesAsync(businessSearch.Name);
+            if (businesses.Count() == 0)
+                alertMessage = "No businesses found";
+        }
+        catch (TaskCanceledException)
+        {
+            // Ignore exception if task was cancelled            
+        }
     }
 }
