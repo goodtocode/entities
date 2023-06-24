@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Goodtocode.Subjects.BlazorServer.Models
+namespace Goodtocode.Subjects.BlazorServer.Models;
+
+public class BusinessSearchModel
 {
-    public class BusinessSearchModel
-    {
-        [Required]
-        public string Name { get; set; } = string.Empty;
-    }
+    [Required]
+    public string Name { get; set; } = string.Empty;
 }

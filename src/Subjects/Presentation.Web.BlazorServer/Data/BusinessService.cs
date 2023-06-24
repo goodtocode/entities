@@ -1,5 +1,6 @@
 using Goodtocode.Common.Extensions;
 using Goodtocode.Subjects.Application;
+using Goodtocode.Subjects.BlazorServer.Models;
 using Goodtocode.Subjects.BlazorServer.Pages.Business;
 using Goodtocode.Subjects.Domain;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -46,7 +47,7 @@ public class BusinessService
         return business;
     }
 
-    public async Task<BusinessEntity> CreateBusinessAsync(BusinessObject business)
+    public async Task<BusinessEntity> CreateBusinessAsync(BusinessCreateModel business)
     {
         BusinessEntity? businessCreated = new();
         var httpClient = _clientFactory.CreateClient("SubjectsApiClient");
@@ -60,7 +61,7 @@ public class BusinessService
         return businessCreated;
     }
 
-    public async Task<BusinessEntity> UpdateBusinessAsync(BusinessEntity business)
+    public async Task<BusinessEntity> UpdateBusinessAsync(BusinessUpdateModel business)
     {
         BusinessEntity? businessUpdated = null;
         var httpClient = _clientFactory.CreateClient("SubjectsApiClient");

@@ -1,6 +1,8 @@
 ﻿@page "/businesscreate"
 @using Goodtocode.Subjects.BlazorServer.Data;
+@using Goodtocode.Subjects.BlazorServer.Models;
 @using Goodtocode.Subjects.Domain;
+@using System.ComponentModel.DataAnnotations;
 
 @inject BusinessService Service
 
@@ -10,26 +12,40 @@
 
 <p>Create a businesses</p>
 
-<EditForm Model="@business">
-    <form>
-        <div class="form-group mb-3">
-            <label for="businessName">Name</label>
-            <input type="text" class="form-control" id="businessName" placeholder="Business name" @bind-value="@business.BusinessName">
-        </div>
-        <div class="form-group mb-3">
-            <label for="taxNumber">Tax Number</label>
-            <input type="text" class="form-control" id="taxNumber" placeholder="Tax Number" @bind-value="@business.TaxNumber">
-        </div>
-        <button type="submit" class="btn btn-primary" @onclick="CreateBusineses">Create</button>
-    </form>
+<EditForm Model="@business" OnValidSubmit="@CreateBusineses">
+    <DataAnnotationsValidator />
+    <div class="input-group mb-3">
+        <label for="businessName">Name</label>
+        <input type="text" class="form-control" id="businessName" placeholder="Business name" aria-label="Search" aria-describedby="button-addon2"
+        @bind="@business.BusinessName">
+        <label for="taxNumber">Tax Number</label>
+        <input type="text" class="form-control" id="taxNumber" placeholder="Tax Number" @bind-value="@business.TaxNumber">
+    </div>
+    <button type="submit" class="btn btn-primary" @onclick="CreateBusineses">Create</button>
+    <ValidationSummary />
+    <div hidden="@string.IsNullOrEmpty(alertMessage)" class="alert alert-danger" role="alert">@alertMessage</div>
 </EditForm>
 
 @code {
-    private string businessName = string.Empty;
-    private BusinessObject business = new BusinessObject();
-
+    private BusinessCreateModel business = new BusinessCreateModel();
+    private string alertMessage = string.Empty;
+    private CancellationTokenSource cts = new CancellationTokenSource();
     private async Task CreateBusineses()
     {
-        await Service.CreateBusinessAsync(business);
-    }   
+        if (!Validator.TryValidateObject(business,
+            new ValidationContext(business, serviceProvider: null, items: null), new List<ValidationResult>(), true)) return;
+
+        if (cts != null) cts.Cancel();
+        cts = new CancellationTokenSource();
+        try
+        {
+            await Task.Delay(500, cts.Token);
+            alertMessage = string.Empty;
+            await Service.CreateBusinessAsync(business);
+        }
+        catch (TaskCanceledException)
+        {
+            // Ignore exception if task was cancelled
+        }        
+    }
 }
