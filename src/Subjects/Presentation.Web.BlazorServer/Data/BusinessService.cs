@@ -47,7 +47,7 @@ public class BusinessService
         return business;
     }
 
-    public async Task<BusinessEntity> CreateBusinessAsync(BusinessCreateModel business)
+    public async Task<BusinessEntity> CreateBusinessAsync(BusinessObject business)
     {
         BusinessEntity? businessCreated = new();
         var httpClient = _clientFactory.CreateClient("SubjectsApiClient");

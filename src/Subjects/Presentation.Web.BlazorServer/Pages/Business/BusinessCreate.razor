@@ -14,10 +14,12 @@
 
 <EditForm Model="@business" OnValidSubmit="@CreateBusineses">
     <DataAnnotationsValidator />
-    <div class="input-group mb-3">
+    <div class="form-group mb-3">
         <label for="businessName">Name</label>
         <input type="text" class="form-control" id="businessName" placeholder="Business name" aria-label="Search" aria-describedby="button-addon2"
         @bind="@business.BusinessName">
+    </div>
+    <div class="form-group mb-3">
         <label for="taxNumber">Tax Number</label>
         <input type="text" class="form-control" id="taxNumber" placeholder="Tax Number" @bind-value="@business.TaxNumber">
     </div>
@@ -42,6 +44,7 @@
             await Task.Delay(500, cts.Token);
             alertMessage = string.Empty;
             await Service.CreateBusinessAsync(business);
+            alertMessage = $"{business.BusinessName} created";
         }
         catch (TaskCanceledException)
         {
