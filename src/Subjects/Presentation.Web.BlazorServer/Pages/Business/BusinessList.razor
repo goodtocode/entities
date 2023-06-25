@@ -17,6 +17,9 @@
     </div>
     <ValidationSummary />
     <div hidden="@string.IsNullOrEmpty(alertMessage)" class="alert alert-danger" role="alert">@alertMessage</div>
+    <div hidden="@(!processing)" class="spinner-border text-primary center-screen" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
 </EditForm>
 
 
@@ -48,25 +51,32 @@
     private BusinessSearchModel businessSearch = new BusinessSearchModel();
     private IEnumerable<BusinessEntity> businesses = new List<BusinessEntity>();
     private CancellationTokenSource cts = new CancellationTokenSource();
+    private bool processing;
 
     private async Task GetBusineses()
     {
-        if (!Validator.TryValidateObject(businessSearch, 
+        alertMessage = string.Empty;
+
+        if (!Validator.TryValidateObject(businessSearch,
             new ValidationContext(businessSearch, serviceProvider: null, items: null), new List<ValidationResult>(), true)) return;
 
         if (cts != null) cts.Cancel();
         cts = new CancellationTokenSource();
         try
         {
-            await Task.Delay(500, cts.Token);
-            alertMessage = string.Empty;
+            processing = true;
+            await Task.Delay(500, cts.Token);            
             businesses = await Service.GetBusinessesAsync(businessSearch.Name);
             if (businesses.Count() == 0)
                 alertMessage = "No businesses found";
         }
         catch (TaskCanceledException)
         {
-            // Ignore exception if task was cancelled            
+            // Ignore exception if task was cancelled
+        }
+        finally
+        {
+            processing = false;
         }
     }
 }

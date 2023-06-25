@@ -25,7 +25,14 @@ a, .btn-link {
 .content {
     padding-top: 1.1rem;
 }
+/* Positioning */
+.center-screen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}
 
+/* Validation styles */
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
 }
