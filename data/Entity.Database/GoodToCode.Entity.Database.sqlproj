@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>GoodToCode.Entity.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{f8aa8218-1e36-483a-80b4-1ba49fd43e35}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>GoodToCode.Entity.Database</RootNamespace>
+    <AssemblyName>GoodToCode.Entity.Database</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TarGetFrameworkVersion>v4.6</TarGetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <DefaultSchema>dbo</DefaultSchema>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <TarGetFrameworkProfile />
+    <TargetDatabase>GoodToCode.Entity.Database</TargetDatabase>
+    <DacApplicationName>GoodToCode.Entity.EntityData</DacApplicationName>
+    <DacVersion>3.00.001</DacVersion>
+    <DacDescription>GoodToCode Framework data, schema, security objects and DBA objects.</DacDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <SqlTargetName>GoodToCode.Framework</SqlTargetName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Security\" />
+    <Folder Include="Publish" />
+    <Folder Include="Scripts" />
+    <Folder Include="Scripts\Data" />
+    <Folder Include="Scripts\Data\Shared" />
+    <Folder Include="Scripts\Data\Master" />
+    <Folder Include="Publish\Production" />
+    <Folder Include="Scripts\Environment" />
+    <Folder Include="Setting" />
+    <Folder Include="Setting\Tables" />
+    <Folder Include="Activity" />
+    <Folder Include="Activity\Stored Procedures" />
+    <Folder Include="Activity\Tables" />
+    <Folder Include="Identity" />
+    <Folder Include="Identity\Tables" />
+    <Folder Include="Entity" />
+    <Folder Include="EntityCode" />
+    <Folder Include="EntityCode\Stored Procedures" />
+    <Folder Include="EntityCode\Views" />
+    <Folder Include="Entity\Tables" />
+    <Folder Include="App_Data" />
+    <Folder Include="Publish\Dev" />
+    <Folder Include="Publish\Test" />
+    <Folder Include="Publish\Cloud" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Security\DBA.sql" />
+    <Build Include="Security\Activity.sql" />
+    <None Include="Scripts\Environment\Dev.sql" />
+    <None Include="Scripts\Environment\Production.sql" />
+    <None Include="Scripts\Environment\SQA.sql" />
+    <None Include="Scripts\Environment\Staging.sql" />
+    <None Include="Scripts\Data\Master\EventGroup.sql" />
+    <None Include="Scripts\Data\Shared\DetailType.sql" />
+    <None Include="Scripts\Data\Shared\EventType.sql" />
+    <None Include="Scripts\Data\Shared\Flow.sql" />
+    <None Include="Scripts\Data\Shared\FlowSequence.sql" />
+    <None Include="Scripts\Data\Shared\FlowStep.sql" />
+    <None Include="Scripts\Data\Shared\FlowType.sql" />
+    <None Include="Scripts\Data\Shared\Module.sql" />
+    <None Include="Scripts\Data\Shared\Option.sql" />
+    <None Include="Scripts\Data\Shared\OptionGroup.sql" />
+    <None Include="Scripts\Data\GoodToCodeData.sql" />
+    <Build Include="Setting\Tables\Setting.sql" />
+    <Build Include="Setting\Tables\ApplicationSetting.sql" />
+    <Build Include="Setting\Tables\ModuleSetting.sql" />
+    <Build Include="Setting\Tables\SettingType.sql" />
+    <None Include="Scripts\Data\Master\SettingType.sql" />
+    <Build Include="Security\Setting.sql" />
+    <Build Include="Activity\Tables\ExceptionLog.sql" />
+    <None Include="Scripts\Data\Master\Gender.sql" />
+    <Build Include="Security\Identity.sql" />
+    <Build Include="Identity\Tables\__MigrationHistory.sql" />
+    <Build Include="Identity\Tables\AspNetRoles.sql" />
+    <Build Include="Identity\Tables\AspNetUserClaims.sql" />
+    <Build Include="Identity\Tables\AspNetUserLogins.sql" />
+    <Build Include="Identity\Tables\AspNetUserRoles.sql" />
+    <Build Include="Identity\Tables\AspNetUsers.sql" />
+    <Build Include="Security\Role_db_executor.sql" />
+    <Build Include="Security\TestUser-Roles.sql" />
+    <Build Include="Entity\Tables\RecordState.sql" />
+    <None Include="Scripts\Data\Master\RecordState.sql" />
+    <Build Include="EntityCode\Views\EventLocation.sql" />
+    <Build Include="EntityCode\Stored Procedures\EventLocationSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\EventLocationDelete.sql" />
+    <Build Include="EntityCode\Views\ScheduleInfo.sql" />
+    <Build Include="EntityCode\Stored Procedures\ScheduleInfoSave.sql" />
+    <Build Include="EntityCode\Views\LocationInfo.sql" />
+    <Build Include="EntityCode\Views\LocationTimeRecurring.sql" />
+    <Build Include="Entity\Tables\TimeRecurring.sql" />
+    <Build Include="EntityCode\Views\ResourceTimeRecurring.sql" />
+    <Build Include="EntityCode\Stored Procedures\LocationTimeRecurringSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\ResourceTimeRecurringSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\LocationTimeRecurringDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\ResourceTimeRecurringDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\ResourcePersonSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\ResourcePersonDelete.sql" />
+    <Build Include="EntityCode\Views\ResourcePerson.sql" />
+    <Build Include="Entity\Tables\Item.sql" />
+    <Build Include="Entity\Tables\ItemType.sql" />
+    <Build Include="Entity\Tables\ItemGroup.sql" />
+    <Build Include="Entity\Tables\ResourceItem.sql" />
+    <Build Include="EntityCode\Stored Procedures\ItemInfoSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\ItemInfoDelete.sql" />
+    <Build Include="EntityCode\Views\EventGroup.sql" />
+    <Build Include="EntityCode\Views\ItemType.sql" />
+    <Build Include="EntityCode\Views\ItemGroup.sql" />
+    <Build Include="EntityCode\Views\ItemInfo.sql" />
+    <Build Include="EntityCode\Stored Procedures\ResourceItemSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\ResourceItemDelete.sql" />
+    <Build Include="Entity\Tables\Slot.sql" />
+    <Build Include="EntityCode\Views\SlotInfo.sql" />
+    <Build Include="EntityCode\Views\ResourceItem.sql" />
+    <Build Include="Entity\Tables\ScheduleSlot.sql" />
+    <Build Include="EntityCode\Views\SlotResource.sql" />
+    <Build Include="EntityCode\Views\SlotLocation.sql" />
+    <Build Include="EntityCode\Stored Procedures\SlotResourceSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\SlotLocationSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\LocationInfoSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\LocationInfoDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\ResourceInfoSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\ResourceInfoDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\ScheduleInfoDelete.sql" />
+    <Build Include="EntityCode\Views\ResourceInfo.sql" />
+    <Build Include="Entity\Tables\SlotTimeRecurring.sql" />
+    <Build Include="EntityCode\Views\SlotTimeRecurring.sql" />
+    <Build Include="EntityCode\Stored Procedures\SlotTimeRecurringSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\SlotTimeRecurringDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\SlotTimeRangeDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\SlotTimeRangeSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\SlotInfoDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\SlotInfoSave.sql" />
+    <Build Include="EntityCode\Views\SlotTimeRange.sql" />
+    <Build Include="Entity\Tables\EntityLocation.sql" />
+    <Build Include="Entity\Tables\LocationType.sql" />
+    <Build Include="EntityCode\Views\EntityLocation.sql" />
+    <Build Include="Entity\Tables\EventLocation.sql" />
+    <Build Include="Entity\Tables\ResourceType.sql" />
+    <Build Include="Entity\Tables\ScheduleType.sql" />
+    <Build Include="EntityCode\Views\ScheduleType.sql" />
+    <Build Include="EntityCode\Views\LocationType.sql" />
+    <Build Include="EntityCode\Views\ResourceType.sql" />
+    <Build Include="EntityCode\Views\TimeType.sql" />
+    <Build Include="EntityCode\Stored Procedures\EventResourceSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\EventResourceDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\EventScheduleSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\EventScheduleDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\EntityLocationSave.sql" />
+    <Build Include="Entity\Tables\EventResource.sql" />
+    <Build Include="Entity\Tables\TimeType.sql" />
+    <Build Include="EntityCode\Views\EventResource.sql" />
+    <Build Include="EntityCode\Views\EventSchedule.sql" />
+    <None Include="Scripts\Data\Shared\TimeType.sql" />
+    <Build Include="EntityCode\Stored Procedures\SlotResourceDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\SlotLocationDelete.sql" />
+    <Build Include="Entity\Tables\TimeCycle.sql" />
+    <None Include="Scripts\Data\Master\TimeCycle.sql" />
+    <Build Include="Entity\Tables\Venture.sql" />
+    <Build Include="Entity\Tables\VentureResource.sql" />
+    <Build Include="Entity\Tables\VentureLocation.sql" />
+    <Build Include="Entity\Tables\VentureSchedule.sql" />
+    <Build Include="EntityCode\Views\VentureSchedule.sql" />
+    <Build Include="EntityCode\Views\VentureResource.sql" />
+    <Build Include="EntityCode\Views\VentureLocation.sql" />
+    <Build Include="EntityCode\Views\VentureInfo.sql" />
+    <Build Include="EntityCode\Stored Procedures\VentureInfoDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\VentureInfoSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\VentureLocationDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\VentureLocationSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\VentureResourceDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\VentureResourceSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\VentureScheduleDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\VentureScheduleSave.sql" />
+    <Build Include="Entity\Tables\EventEntityOption.sql" />
+    <Build Include="Entity\Tables\VentureEntityOption.sql" />
+    <Build Include="EntityCode\Stored Procedures\VentureOptionDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\VentureOptionSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\EventOptionSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\EventOptionDelete.sql" />
+    <Build Include="Entity\Tables\EventOption.sql" />
+    <Build Include="Entity\Tables\VentureOption.sql" />
+    <Build Include="EntityCode\Stored Procedures\EventEntityOptionSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\EventEntityOptionDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\VentureEntityOptionDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\VentureEntityOptionSave.sql" />
+    <Build Include="EntityCode\Views\EventOption.sql" />
+    <Build Include="EntityCode\Views\VentureOption.sql" />
+    <Build Include="EntityCode\Views\VentureEntityOption.sql" />
+    <Build Include="EntityCode\Views\EventEntityOption.sql" />
+    <Build Include="Scripts\Data\Shared\Setting.sql" />
+    <Build Include="Scripts\Data\Shared\SettingModule.sql" />
+    <Build Include="Entity\Tables\Detail.sql" />
+    <Build Include="Entity\Tables\DetailType.sql" />
+    <Build Include="Entity\Tables\VentureDetail.sql" />
+    <Build Include="Entity\Tables\EntityDetail.sql" />
+    <Build Include="EntityCode\Views\DetailInfo.sql" />
+    <Build Include="EntityCode\Views\EntityDetail.sql" />
+    <Build Include="EntityCode\Views\VentureDetail.sql" />
+    <Build Include="EntityCode\Stored Procedures\EntityDetailSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\EntityDetailDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\VentureDetailSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\VentureDetailDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\EntityTimeRecurringDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\EntityTimeRecurringSave.sql" />
+    <Build Include="Entity\Tables\EntityTimeRecurring.sql" />
+    <Build Include="EntityCode\Views\EntityTimeRecurring.sql" />
+    <Build Include="EntityCode\Stored Procedures\EntityLocationDelete.sql" />
+    <Build Include="Entity\Tables\EventAppointment.sql" />
+    <Build Include="Entity\Tables\VentureAppointment.sql" />
+    <Build Include="EntityCode\Stored Procedures\EventAppointmentDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\EventAppointmentSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\VentureAppointmentSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\VentureAppointmentDelete.sql" />
+    <Build Include="EntityCode\Views\EventAppointment.sql" />
+    <Build Include="EntityCode\Views\VentureAppointment.sql" />
+    <Build Include="EntityCode\Views\ScheduleSlot.sql" />
+    <Build Include="Entity\Tables\EntityAppointment.sql" />
+    <Build Include="EntityCode\Stored Procedures\EntityAppointmentDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\EntityAppointmentSave.sql" />
+    <Build Include="EntityCode\Views\EntityAppointment.sql" />
+    <Build Include="EntityCode\Stored Procedures\ScheduleSlotSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\ScheduleSlotDelete.sql" />
+    <Build Include="Activity\Stored Procedures\ExceptionLogInsertByException.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App_Data\PostBuild.Debug.bat" />
+    <None Include="App_Data\PostBuild.Release.bat" />
+    <None Include="App_Data\PreBuild.Debug.bat" />
+    <None Include="App_Data\PreBuild.Release.bat" />
+    <None Include="Publish\Dev\PublishToDev.publish.xml" />
+    <None Include="Publish\Dev\PublishToDev-Compare.scmp" />
+    <None Include="Publish\PublishToFile.publish.xml" />
+    <Build Include="Security\TestUser-Login.sql" />
+    <Build Include="Security\TestUser-User.sql" />
+    <None Include="Publish\Test\PublishToTest.publish.xml" />
+    <None Include="Publish\Cloud\PublishToAzure.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Publish\Production\PublishToProd.publish.xml" />
+    <None Include="Publish\PublishToLocal.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Scripts\Script.PreDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="TargetEnvironment">
+      <DefaultValue>Dev</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="EntityCode\Stored Procedures\AppointmentInfoDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\AppointmentInfoSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\BusinessInfoDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\BusinessInfoSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\EventDetailDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\EventDetailSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\EventInfoDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\EventInfoSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\GovernmentInfoDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\GovernmentInfoSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\PersonInfoDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\PersonInfoSave.sql" />
+    <Build Include="EntityCode\Stored Procedures\EntityOptionDelete.sql" />
+    <Build Include="EntityCode\Stored Procedures\EntityOptionSave.sql" />
+    <Build Include="EntityCode\Views\ApplicationInfo.sql" />
+    <Build Include="EntityCode\Views\ApplicationSetting.sql" />
+    <Build Include="EntityCode\Views\AppointmentInfo.sql" />
+    <Build Include="EntityCode\Views\BusinessInfo.sql" />
+    <Build Include="EntityCode\Views\EntityInfo.sql" />
+    <Build Include="EntityCode\Views\EventDetail.sql" />
+    <Build Include="EntityCode\Views\DetailType.sql" />
+    <Build Include="EntityCode\Views\EventInfo.sql" />
+    <Build Include="EntityCode\Views\EventType.sql" />
+    <Build Include="EntityCode\Views\FlowInfo.sql" />
+    <Build Include="EntityCode\Views\GenderInfo.sql" />
+    <Build Include="EntityCode\Views\GovernmentInfo.sql" />
+    <Build Include="EntityCode\Views\ModuleInfo.sql" />
+    <Build Include="EntityCode\Views\ModuleSetting.sql" />
+    <Build Include="EntityCode\Views\PersonInfo.sql" />
+    <Build Include="EntityCode\Views\EntityOption.sql" />
+    <Build Include="EntityCode\Views\OptionGroup.sql" />
+    <Build Include="EntityCode\Views\OptionInfo.sql" />
+    <Build Include="Security\Entity.sql" />
+    <Build Include="Security\EntityCode.sql" />
+    <Build Include="Entity\Tables\Application.sql" />
+    <Build Include="Entity\Tables\Appointment.sql" />
+    <Build Include="Entity\Tables\Area.sql" />
+    <Build Include="Entity\Tables\Business.sql" />
+    <Build Include="Entity\Tables\Entity.sql" />
+    <Build Include="Entity\Tables\Event.sql" />
+    <Build Include="Entity\Tables\EventDetail.sql" />
+    <Build Include="Entity\Tables\EventGroup.sql" />
+    <Build Include="Entity\Tables\EventSchedule.sql" />
+    <Build Include="Entity\Tables\EventType.sql" />
+    <Build Include="Entity\Tables\Flow.sql" />
+    <Build Include="Entity\Tables\FlowSequence.sql" />
+    <Build Include="Entity\Tables\FlowStep.sql" />
+    <Build Include="Entity\Tables\FlowType.sql" />
+    <Build Include="Entity\Tables\Gender.sql" />
+    <Build Include="Entity\Tables\Government.sql" />
+    <Build Include="Entity\Tables\Location.sql" />
+    <Build Include="Entity\Tables\LocationArea.sql" />
+    <Build Include="Entity\Tables\LocationTimeRecurring.sql" />
+    <Build Include="Entity\Tables\Module.sql" />
+    <Build Include="Entity\Tables\Person.sql" />
+    <Build Include="Entity\Tables\Option.sql" />
+    <Build Include="Entity\Tables\EntityOption.sql" />
+    <Build Include="Entity\Tables\OptionGroup.sql" />
+    <Build Include="Entity\Tables\Resource.sql" />
+    <Build Include="Entity\Tables\ResourcePerson.sql" />
+    <Build Include="Entity\Tables\ResourceTimeRecurring.sql" />
+    <Build Include="Entity\Tables\Schedule.sql" />
+    <Build Include="Entity\Tables\SlotLocation.sql" />
+    <Build Include="Entity\Tables\SlotResource.sql" />
+    <Build Include="Entity\Tables\SlotTimeRange.sql" />
+    <Build Include="Entity\Tables\TimeRange.sql" />
+  </ItemGroup>
+  <PropertyGroup>
+    <PostBuildEvent>Call "$(MSBuildProjectDirectory)\App_Data\PostBuild.$(ConfigurationName).bat" "$(MSBuildProjectDirectory)\$(OutDir)" "$(ConfigurationName)" "$(ProjectName)"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>Call "$(MSBuildProjectDirectory)\App_Data\PreBuild.$(ConfigurationName).bat" "$(MSBuildProjectDirectory)" "$(ConfigurationName)" "$(ProjectName)"</PreBuildEvent>
+  </PropertyGroup>
+</Project>

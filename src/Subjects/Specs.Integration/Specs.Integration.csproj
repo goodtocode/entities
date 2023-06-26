@@ -1,0 +1,76 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>Goodtocode.Subjects.Integration</RootNamespace>
+		<AssemblyName>Goodtocode.Subjects.Integration</AssemblyName>
+		<Version>1.0.0</Version>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <SpecFlowObsoleteCodeBehindFiles Remove="Business\AddBusinessCommand.feature.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.2" />
+		<PackageReference Include="Moq" Version="4.18.4" />
+		<PackageReference Include="Respawn" Version="6.0.0" />
+		<PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
+		<PackageReference Include="SpecFlow.NUnit" Version="3.9.74" />
+		<PackageReference Include="nunit" Version="3.13.3" />
+		<PackageReference Include="FluentAssertions" Version="6.11.0" />
+		<PackageReference Include="NUnit3TestAdapter" Version="4.5.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Infrastructure.Persistence\Infrastructure.Persistence.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="appsettings.test.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Business\AddBusinessCommand.feature.cs">
+		  <DependentUpon>%(Filename)</DependentUpon>
+		</Compile>
+		<Compile Update="Business\DeleteBusinessCommand.feature.cs">
+		  <Visible>true</Visible>
+		  <DependentUpon>%(Filename)</DependentUpon>
+		  <DesignTime>true</DesignTime>
+		  <AutoGen>true</AutoGen>
+		</Compile>
+		<Compile Update="Business\GetBusinessesByKey.feature.cs">
+			<DependentUpon>GetBusinessesByKey.feature</DependentUpon>
+		</Compile>
+		<Compile Update="Business\GetBusinessesByName.feature.cs">
+			<DependentUpon>GetBusinessesByName.feature</DependentUpon>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<SpecFlowFeatureFiles Update="Business\AddBusinessCommand.feature">
+		  <Visible>$(UsingMicrosoftNETSdk)</Visible>
+		  <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
+		<SpecFlowFeatureFiles Update="Business\DeleteBusinessCommand.feature">
+		  <Visible>$(UsingMicrosoftNETSdk)</Visible>
+		  <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
+		<SpecFlowFeatureFiles Update="Business\GetBusinessesByKey.feature">
+			<Visible>$(UsingMicrosoftNETSdk)</Visible>
+			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
+		<SpecFlowFeatureFiles Update="Business\GetBusinessesByName.feature">
+			<Visible>$(UsingMicrosoftNETSdk)</Visible>
+			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
+	</ItemGroup>
+
+</Project>

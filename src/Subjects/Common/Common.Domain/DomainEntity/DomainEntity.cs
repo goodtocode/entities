@@ -1,4 +1,4 @@
-﻿using Goodtocode.Common.Domain;
+﻿using Goodtocode.Common.Extensions;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
@@ -76,11 +76,11 @@ public abstract class DomainEntity<TModel> : IDomainEntity<TModel> where TModel 
         return (GetRealType().ToString() + Key).GetHashCode();
     }
 
-    private Type GetRealType()
+    private Type GetRealType(string namespaceRoot = "")
     {
         var type = GetType();
 
-        if (type.ToString().Contains("Goodtocode.Subjects"))
+        if (type.ToString().Contains(namespaceRoot))
             return type.BaseType ?? type.GetType();
 
         return type;

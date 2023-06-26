@@ -44,13 +44,15 @@ jobs:
       RUNTIME_ENV: 'Development'
       SRC_PATH: './src/Subjects'
       SRC_SLN: 'Goodtocode.Subjects.sln'      
-      API_PATH: 'Presentation/Api.WebApi'
-      API_PROJECT: 'Api.WebApi.csproj'
+      API_PATH: 'Presentation.Api.WebApi'
+      API_PROJECT: 'Presentation.Api.WebApi.csproj'
       APPI_NAME: 'appi-subjects-dev-001'
-      INFRA_PATH: 'Infrastructure/Persistence'
-      INFRA_PROJECT: 'Persistence.csproj'
-      UNIT_PATH: 'Specs/Application.Unit'
-      UNIT_PROJECT: 'Application.Unit.csproj'
+      INFRA_PATH: 'Infrastructure.Persistence'
+      INFRA_PROJECT: 'Infrastructure.Persistence.csproj'
+      INTEGRATION_PATH: 'Specs.Integration'
+      INTEGRATION_PROJECT: 'Specs.Integration.csproj'
+      UNIT_PATH: 'Specs.Unit'
+      UNIT_PROJECT: 'Specs.Unit.csproj'
       SCRIPTS_PATH: './.github/scripts'
       SQL_NAME: 'sql-entities-dev-001'
       SQLDB_NAME: 'sqldb-entities-dev-001'
@@ -76,6 +78,7 @@ jobs:
         run: |
           dotnet build ${{ env.SRC_PATH }}/${{ env.SRC_SLN }} --configuration Release       
           dotnet test ${{ env.SRC_PATH }}/${{ env.UNIT_PATH }}/${{ env.UNIT_PROJECT }} --verbosity normal
+          dotnet test ${{ env.SRC_PATH }}/${{ env.INTEGRATION_PATH }}/${{ env.INTEGRATION_PROJECT }} --verbosity normal
           dotnet publish ${{ env.SRC_PATH }}/${{ env.API_PATH }}/${{ env.API_PROJECT }} --configuration Release -o ${{ env.AZURE_WEBAPP_NAME }} 
         shell: pwsh
 

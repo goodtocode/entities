@@ -1,0 +1,82 @@
+﻿@page "/businesssearch"
+@using Goodtocode.Subjects.BlazorServer.Data;
+@using Goodtocode.Subjects.BlazorServer.Models;
+@using Goodtocode.Subjects.Domain;
+@using System.ComponentModel.DataAnnotations;
+
+@inject BusinessService Service
+
+<PageTitle>Business Search</PageTitle>
+
+<EditForm Model="@businessSearch" OnValidSubmit="@GetBusineses">
+    <DataAnnotationsValidator />
+    <div class="input-group mb-3">
+        <input type="text" class="form-control form-control-lg" placeholder="Search" aria-label="Search" aria-describedby="button-addon2"
+        @bind="@businessSearch.Name" @onkeydown="@(async e => { if (e.Key == "Enter") { await GetBusineses(); } })">
+        <button class="btn btn-primary btn-lg" type="submit" id="button-addon2"><i class="bi bi-search"></i></button>
+    </div>
+    <ValidationSummary />
+    <div hidden="@string.IsNullOrEmpty(alertMessage)" class="alert alert-danger" role="alert">@alertMessage</div>
+    <div hidden="@(!processing)" class="spinner-border text-primary center-screen" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</EditForm>
+
+
+@if (businesses.Count() > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Name</th>
+                <th>Tax Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var business in businesses)
+            {
+                <tr>
+                    <td>@business.BusinessKey</td>
+                    <td>@business.BusinessName</td>
+                    <td>@business.TaxNumber</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private string alertMessage = string.Empty;
+    private BusinessSearchModel businessSearch = new BusinessSearchModel();
+    private IEnumerable<BusinessEntity> businesses = new List<BusinessEntity>();
+    private CancellationTokenSource cts = new CancellationTokenSource();
+    private bool processing;
+
+    private async Task GetBusineses()
+    {
+        alertMessage = string.Empty;
+
+        if (!Validator.TryValidateObject(businessSearch,
+            new ValidationContext(businessSearch, serviceProvider: null, items: null), new List<ValidationResult>(), true)) return;
+
+        if (cts != null) cts.Cancel();
+        cts = new CancellationTokenSource();
+        try
+        {
+            processing = true;
+            await Task.Delay(500, cts.Token);            
+            businesses = await Service.GetBusinessesAsync(businessSearch.Name);
+            if (businesses.Count() == 0)
+                alertMessage = "No businesses found";
+        }
+        catch (TaskCanceledException)
+        {
+            // Ignore exception if task was cancelled
+        }
+        finally
+        {
+            processing = false;
+        }
+    }
+}
