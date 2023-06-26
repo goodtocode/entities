@@ -74,7 +74,7 @@ public class BusinessController : BaseController
         var command = business.CopyPropertiesSafe<AddBusinessCommand>();
         var createdEntity = await Mediator.Send(command);
 
-        return Created(new Uri($"{Request.Path}/{createdEntity.Key}", UriKind.Relative), createdEntity);
+        return Created(new Uri($"{Request.Path}/{createdEntity.BusinessKey}", UriKind.Relative), createdEntity);
     }
 
     /// <summary>

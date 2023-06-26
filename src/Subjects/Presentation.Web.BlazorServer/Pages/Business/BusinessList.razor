@@ -3,16 +3,20 @@
 @using Goodtocode.Subjects.BlazorServer.Models;
 @using Goodtocode.Subjects.Domain;
 @using System.ComponentModel.DataAnnotations;
+@using Goodtocode.Subjects.Rcl;
+@using Microsoft.AspNetCore.Http.Extensions;
 
 @inject BusinessService Service
+@inject PageHistoryState PageHistory
+@inject NavigationManager UriHelper
 
 <PageTitle>Business Search</PageTitle>
 
-<EditForm Model="@businessSearch" OnValidSubmit="@GetBusineses">
+<EditForm Model="@businessSearch" OnValidSubmit="@GetBusinesses">
     <DataAnnotationsValidator />
     <div class="input-group mb-3">
         <input type="text" class="form-control form-control-lg" placeholder="Search" aria-label="Search" aria-describedby="button-addon2"
-        @bind="@businessSearch.Name" @onkeydown="@(async e => { if (e.Key == "Enter") { await GetBusineses(); } })">
+        @bind="@SearchTerm">
         <button class="btn btn-primary btn-lg" type="submit" id="button-addon2"><i class="bi bi-search"></i></button>
     </div>
     <ValidationSummary />
@@ -23,7 +27,7 @@
 </EditForm>
 
 
-@if (businesses.Count() > 0)
+@if (businesses.Results.Count() > 0)
 {
     <table class="table">
         <thead>
@@ -31,15 +35,34 @@
                 <th>Key</th>
                 <th>Name</th>
                 <th>Tax Number</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var business in businesses)
+            @foreach (var business in businesses.Results)
             {
                 <tr>
                     <td>@business.BusinessKey</td>
                     <td>@business.BusinessName</td>
                     <td>@business.TaxNumber</td>
+                    <td style="white-space: nowrap">
+                        <NavLink href="@($"/person/viewperson/{business.BusinessKey}")" class="oi oi-eye text-primary mr-3 nounderline"></NavLink>
+                        <NavLink href="@($"/person/updateperson/{business.BusinessKey}")" class="oi oi-pencil text-warning mr-2 nounderline"></NavLink>
+
+                        @if (business.IsDeleting)
+                        {
+                            <button @onclick="@(() => DeleteBusiness(business.BusinessKey))" disabled="@business.IsDeleting" class=" btn btn-link oi oi-trash text-danger mr-1 nounderline">
+                                <span class="spinner-border spinner-border-sm"></span>
+                            </button>
+                        }
+                        else
+                        {
+                            <button @onclick="@(() => DeleteBusiness(business.BusinessKey))" disabled="@business.IsDeleting" class=" btn btn-link oi oi-trash text-danger mr-1 nounderline">
+                                <span></span>
+                            </button>
+                        }
+                    </td>
                 </tr>
             }
         </tbody>
@@ -47,13 +70,48 @@
 }
 
 @code {
+    [Parameter]
+    public int Page { get; set; } = 1;
+    [Parameter]
+    public string SearchTerm { get; set; } = string.Empty;
     private string alertMessage = string.Empty;
-    private BusinessSearchModel businessSearch = new BusinessSearchModel();
-    private IEnumerable<BusinessEntity> businesses = new List<BusinessEntity>();
+    private BusinessModel businessSearch = new BusinessModel();
+    private PagedResult<BusinessModel> businesses = new PagedResult<BusinessModel>();
     private CancellationTokenSource cts = new CancellationTokenSource();
     private bool processing;
 
-    private async Task GetBusineses()
+    protected override void OnInitialized()
+    {
+        PageHistory.AddPageToHistory(UriHelper.Uri);
+        base.OnInitialized();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        businesses = await Service.GetBusinessesAsync(null, Page);
+        PageHistory.AddPageToHistory(UriHelper.Uri);
+    }
+
+    protected async Task SearchBoxKeyPress(KeyboardEventArgs ev)
+    {
+        if (ev.Key == "Enter")
+        {
+            await SearchClick();
+        }
+    }
+
+    protected async Task SearchClick()
+    {
+        if (string.IsNullOrEmpty(SearchTerm))
+        {
+            businesses = await Service.GetBusinessesAsync(null, Page);
+            return;
+        }
+        businesses = await Service.GetBusinessesAsync(SearchTerm, Page);
+        StateHasChanged();
+    }
+
+    private async Task GetBusinesses()
     {
         alertMessage = string.Empty;
 
@@ -65,9 +123,9 @@
         try
         {
             processing = true;
-            await Task.Delay(500, cts.Token);            
-            businesses = await Service.GetBusinessesAsync(businessSearch.Name);
-            if (businesses.Count() == 0)
+            await Task.Delay(500, cts.Token);
+            businesses = await Service.GetBusinessesAsync(businessSearch.Name, 1);
+            if (businesses.Results.Count() == 0)
                 alertMessage = "No businesses found";
         }
         catch (TaskCanceledException)
@@ -79,4 +137,18 @@
             processing = false;
         }
     }
+
+    private async Task DeleteBusiness(Guid businessKey)
+    {
+
+    }
+
+    //private async void DeletePerson(Person _person)
+    //{
+    //    var person = _person;
+    //    person.IsDeleting = true;
+    //    await PersonService.DeletePerson(person.PersonId);
+    //    people = await PersonService.GetPeople(null, Page);
+    //    StateHasChanged();
+    //}
 }

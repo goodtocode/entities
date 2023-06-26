@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Specs.Integration", "Specs.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Specs.Unit", "Specs.Unit\Specs.Unit.csproj", "{B1912655-E309-4886-A882-1C384ACFB165}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.Shared.Rcl", "Presentation.Shared.Rcl\Presentation.Shared.Rcl.csproj", "{52F8BCD2-BB2D-4A23-8638-BBDC777D167B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{B1912655-E309-4886-A882-1C384ACFB165}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1912655-E309-4886-A882-1C384ACFB165}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1912655-E309-4886-A882-1C384ACFB165}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52F8BCD2-BB2D-4A23-8638-BBDC777D167B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52F8BCD2-BB2D-4A23-8638-BBDC777D167B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52F8BCD2-BB2D-4A23-8638-BBDC777D167B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52F8BCD2-BB2D-4A23-8638-BBDC777D167B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
