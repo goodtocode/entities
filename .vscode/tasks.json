@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/Subjects/Presentation/WebApi/WebApi.csproj",
+                "${workspaceFolder}/src/Subjects/Presentation.Api.WebApi/Presentation.Api.WebApi.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -23,7 +23,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/src/Subjects/Presentation/WebApi/WebApi.csproj",
+                "${workspaceFolder}/src/Subjects/Presentation.Api.WebApi/Presentation.Api.WebApi.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -37,7 +37,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/src/Subjects/Presentation/WebApi/WebApi.csproj"
+                "${workspaceFolder}/src/Subjects/Presentation.Api.WebApi/Presentation.Api.WebApi.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
