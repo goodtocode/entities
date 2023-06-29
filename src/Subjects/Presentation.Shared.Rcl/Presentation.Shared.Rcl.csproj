@@ -17,4 +17,8 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.8" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Common\Common.Domain\Common.Domain.csproj" />
+	</ItemGroup>
+
 </Project>

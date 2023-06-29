@@ -1,7 +1,5 @@
-﻿using Goodtocode.Subjects.BlazorServer.Models;
-using Goodtocode.Subjects.Domain;
-using Goodtocode.Subjects.Rcl;
-using System;
+﻿using Goodtocode.Common.Extensions;
+using Goodtocode.Subjects.BlazorServer.Models;
 
 namespace Goodtocode.Subjects.BlazorServer.Data
 {

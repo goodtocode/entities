@@ -1,4 +1,4 @@
-namespace Goodtocode.Subjects.Rcl;
+namespace Goodtocode.Common.Extensions;
 
 public class PagedResult<T> : PagedResultBase where T : class
 {

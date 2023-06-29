@@ -1,5 +1,6 @@
 using CSharpFunctionalExtensions;
 using FluentValidation.Results;
+using Goodtocode.Common.Extensions;
 using Goodtocode.Subjects.Application;
 using Goodtocode.Subjects.Application.Common.Exceptions;
 using Goodtocode.Subjects.Domain;
@@ -15,7 +16,7 @@ public class GetBusinessesByNameStepDefinitions : TestBase
 {
     private IDictionary<string, string[]> _commandErrors = new ConcurrentDictionary<string, string[]>();
     private string[]? _expectedInvalidFields;
-    private List<BusinessEntity> _response = new();
+    private PagedResult<BusinessEntity> _response = new();
     private CommandResponseType _responseType;
     private ValidationResult _validationErrors = new();
     private string _businessName = string.Empty;
@@ -47,15 +48,17 @@ public class GetBusinessesByNameStepDefinitions : TestBase
         if (_businessExists)
         {
             userBusinessesRepoMock
-                .Setup(x => x.GetBusinessesByNameAsync(_businessName, It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(Result.Success(new List<BusinessEntity>
-                {
+                .Setup(x => x.GetBusinessesByNameAsync(_businessName, 1, It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(Result.Success(new PagedResult<BusinessEntity>(
                     new()
                     {
+                        new()
+                        {
                         BusinessKey = new Guid(),
                         BusinessName = "BusinessInDb"
-                    }
-                })));
+                        }
+                    })
+                )));
         }
 
         var request = new GetBusinessesByNameQuery
@@ -133,13 +136,13 @@ public class GetBusinessesByNameStepDefinitions : TestBase
     public void ThenIfTheResponseIsValidThenTheResponseContainsACollectionOfBusinesses()
     {
         if (_responseType != CommandResponseType.Successful) return;
-        _response.Any().Should().BeTrue();
+        _response.Results.Any().Should().BeTrue();
     }
 
     [Then(@"each business has a matching BusinessName of ""([^""]*)""")]
     public void ThenEachBusinessHasAMatchingBusinessNameOf(string businessInDb)
     {
         if (_responseType != CommandResponseType.Successful) return;
-        foreach (var business in _response) business.BusinessName.Should().Be(businessInDb);
+        foreach (var business in _response.Results) business.BusinessName.Should().Be(businessInDb);
     }
 }

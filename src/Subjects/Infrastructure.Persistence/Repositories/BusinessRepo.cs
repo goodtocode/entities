@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using Goodtocode.Common.Extensions;
 using Goodtocode.Subjects.Application;
 using Goodtocode.Subjects.Domain;
 using Microsoft.Data.SqlClient;
@@ -10,10 +11,12 @@ namespace Goodtocode.Subjects.Persistence.Repositories;
 public class BusinessRepo : IBusinessRepo
 {
     private readonly ISubjectsDbContext _context;
+    private readonly int _pageSize = 20;
 
-    public BusinessRepo(ISubjectsDbContext context)
+    public BusinessRepo(ISubjectsDbContext context, int pageSize = 20)
     {
         _context = context;
+        _pageSize = pageSize;
     }
 
     public async Task<Result<BusinessEntity?>> GetBusinessAsync(Guid businessKey, CancellationToken cancellationToken)
@@ -25,9 +28,12 @@ public class BusinessRepo : IBusinessRepo
             return Result.Failure<BusinessEntity?>("Business not found.");
     }
 
-    public async Task<Result<List<BusinessEntity>>> GetBusinessesByNameAsync(string businessName, CancellationToken cancellationToken)
+    public async Task<Result<PagedResult<BusinessEntity>>> GetBusinessesByNameAsync(string businessName, int page, CancellationToken cancellationToken)
     {
-        var businessResult = await _context.Business.Where(x => x.BusinessName == businessName).ToListAsync(cancellationToken);
+        var businessResult = await _context.Business
+            .Where(b => b.BusinessName.Contains(businessName, StringComparison.CurrentCultureIgnoreCase))
+            .OrderBy(b => b.BusinessKey)
+            .GetPagedAsync(page, _pageSize, cancellationToken);
         return Result.Success(businessResult);
     }
 

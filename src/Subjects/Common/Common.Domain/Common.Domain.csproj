@@ -9,4 +9,8 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Common.Extensions\Common.Extensions.csproj" />
+	</ItemGroup>
+
 </Project>

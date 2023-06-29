@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using Goodtocode.Common.Extensions;
 using Goodtocode.Subjects.Domain;
 
 namespace Goodtocode.Subjects.Application;
@@ -8,7 +9,7 @@ public interface IBusinessRepo
     Task<Result<BusinessEntity?>> GetBusinessAsync(Guid businessKey,
         CancellationToken cancellationToken);
 
-    Task<Result<List<BusinessEntity>>> GetBusinessesByNameAsync(string businessName,
+    Task<Result<PagedResult<BusinessEntity>>> GetBusinessesByNameAsync(string businessName, int page,
         CancellationToken cancellationToken);
 
     Task<Result<BusinessEntity>> AddBusinessAsync(IBusinessObject businessInfo,
