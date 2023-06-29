@@ -13,7 +13,7 @@
 
 <PageTitle>Business Search</PageTitle>
 
-<EditForm Model="@businessSearch" OnValidSubmit="@GetBusinesses">
+<EditForm Model="@SearchTerm" OnValidSubmit="@GetBusinesses">
     <DataAnnotationsValidator />
     <div class="input-group mb-3">
         <input type="text" class="form-control form-control-lg" placeholder="Search" aria-label="Search" aria-describedby="button-addon2"
@@ -74,6 +74,7 @@
     [Parameter]
     public int Page { get; set; } = 1;
     [Parameter]
+    [Required]
     public string SearchTerm { get; set; } = string.Empty;
     private string alertMessage = string.Empty;
     private BusinessModel businessSearch = new BusinessModel();
@@ -97,24 +98,15 @@
     {
         if (ev.Key == "Enter")
         {
-            await SearchClick();
+            await GetBusinesses();
         }
-    }
-
-    protected async Task SearchClick()
-    {
-        if (string.IsNullOrEmpty(SearchTerm))
-        {
-            businesses = await Service.GetBusinessesAsync(null, Page);
-            return;
-        }
-        businesses = await Service.GetBusinessesAsync(SearchTerm, Page);
-        StateHasChanged();
     }
 
     private async Task GetBusinesses()
     {
         alertMessage = string.Empty;
+        
+        businessSearch.Name = SearchTerm;
 
         if (!Validator.TryValidateObject(businessSearch,
             new ValidationContext(businessSearch, serviceProvider: null, items: null), new List<ValidationResult>(), true)) return;
@@ -136,6 +128,7 @@
         finally
         {
             processing = false;
+            StateHasChanged();
         }
     }
 
