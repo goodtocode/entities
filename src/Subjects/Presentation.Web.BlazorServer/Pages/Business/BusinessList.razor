@@ -74,10 +74,9 @@
     [Parameter]
     public int Page { get; set; } = 1;
     [Parameter]
-    [Required]
     public string SearchTerm { get; set; } = string.Empty;
     private string alertMessage = string.Empty;
-    private BusinessModel businessSearch = new BusinessModel();
+    private SearchModel businessSearch = new SearchModel();
     private PagedResult<BusinessModel> businesses = new PagedResult<BusinessModel>();
     private CancellationTokenSource cts = new CancellationTokenSource();
     private bool processing;
@@ -90,7 +89,7 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        businesses = await Service.GetBusinessesAsync(null, Page);
+        await GetBusinesses();
         PageHistory.AddPageToHistory(UriHelper.Uri);
     }
 

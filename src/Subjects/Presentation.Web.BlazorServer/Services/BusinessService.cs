@@ -35,7 +35,7 @@ public class BusinessService : IBusinessService
     {
         var business = new PagedResult<BusinessModel>();
         var httpClient = _clientFactory.CreateClient("SubjectsApiClient");
-        var response = await httpClient.GetAsync($"{httpClient.BaseAddress}/Businesses?name={name}&api-version=1");        
+        var response = await httpClient.GetAsync($"{httpClient.BaseAddress}Businesses?name={name}&pageNumber=1&pageSize=20&api-version=1");        
         if (response.StatusCode != HttpStatusCode.NotFound)
         {
             response.EnsureSuccessStatusCode();
