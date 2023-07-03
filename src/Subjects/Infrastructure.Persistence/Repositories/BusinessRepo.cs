@@ -31,8 +31,7 @@ public class BusinessRepo : IBusinessRepo
     public async Task<Result<PagedResult<BusinessEntity>>> GetBusinessesByNameAsync(string businessName, int page, CancellationToken cancellationToken)
     {
         var businessResult = await _context.Business
-            //.Where(b => b.BusinessName.Contains(businessName, StringComparison.CurrentCultureIgnoreCase))
-            .Where(b => b.BusinessName == businessName)
+            .Where(b => b.BusinessName.Contains(businessName))
             .OrderBy(b => b.BusinessKey)
             .GetPagedAsync(page, _pageSize, cancellationToken);
         return Result.Success(businessResult);
