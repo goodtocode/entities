@@ -39,8 +39,7 @@ public class BusinessService : IBusinessService
         if (response.StatusCode != HttpStatusCode.NotFound)
         {
             response.EnsureSuccessStatusCode();
-            business = new PagedResult<BusinessModel>(JsonSerializer.Deserialize<List<BusinessModel>>(response.Content.ReadAsStream()) 
-                ?? throw new Exception("Deserialization failed."));
+            business = JsonSerializer.Deserialize<PagedResult<BusinessModel>>(response.Content.ReadAsStream()) ?? throw new Exception("Deserialization failed.");
         }
 
         return business;

@@ -12,6 +12,14 @@ a, .btn-link {
     color: #0071c1;
 }
 
+.nounderline {
+    text-decoration: none !important
+}
+
+.nowrap {
+    white-space: nowrap
+}
+
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;

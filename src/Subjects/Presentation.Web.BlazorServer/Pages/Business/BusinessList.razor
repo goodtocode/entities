@@ -30,14 +30,13 @@
 
 @if (businesses.Results.Count() > 0)
 {
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Key</th>
                 <th>Name</th>
                 <th>Tax Number</th>
-                <th></th>
-                <th></th>
+                <th style="width:5%;"></th>
             </tr>
         </thead>
         <tbody>
@@ -47,22 +46,13 @@
                     <td>@business.BusinessKey</td>
                     <td>@business.BusinessName</td>
                     <td>@business.TaxNumber</td>
-                    <td style="white-space: nowrap">
-                        <NavLink href="@($"/person/viewperson/{business.BusinessKey}")" class="oi oi-eye text-primary mr-3 nounderline"></NavLink>
-                        <NavLink href="@($"/person/updateperson/{business.BusinessKey}")" class="oi oi-pencil text-warning mr-2 nounderline"></NavLink>
-
-                        @if (business.IsDeleting)
-                        {
-                            <button @onclick="@(() => DeleteBusiness(business.BusinessKey))" disabled="@business.IsDeleting" class=" btn btn-link oi oi-trash text-danger mr-1 nounderline">
-                                <span class="spinner-border spinner-border-sm"></span>
-                            </button>
-                        }
-                        else
-                        {
-                            <button @onclick="@(() => DeleteBusiness(business.BusinessKey))" disabled="@business.IsDeleting" class=" btn btn-link oi oi-trash text-danger mr-1 nounderline">
-                                <span></span>
-                            </button>
-                        }
+                    <td class="nowrap" style="width:5%;">
+                        <NavLink href="@($"/person/viewperson/{business.BusinessKey}")" class="btn btn-link oi oi-eye text-primary p-0 nounderline"></NavLink>
+                        <NavLink href="@($"/person/updateperson/{business.BusinessKey}")" class="btn btn-link oi oi-pencil text-warning p-0 nounderline"></NavLink>
+                        <button @onclick="@(() => DeleteBusiness(business.BusinessKey))" disabled="@business.IsDeleting" class="btn btn-link oi oi-trash text-danger p-0 nounderline">
+                            @if (business.IsDeleting) { <span class="spinner-border spinner-border-sm"></span> }
+                            else { <span></span> }
+                        </button>
                     </td>
                 </tr>
             }
@@ -104,7 +94,7 @@
     private async Task GetBusinesses()
     {
         alertMessage = string.Empty;
-        
+
         businessSearch.Name = SearchTerm;
 
         if (!Validator.TryValidateObject(businessSearch,
