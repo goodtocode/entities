@@ -19,11 +19,12 @@ public class GetBusinessesByNameStepDefinitions : TestBase
     private CommandResponseType _responseType;
     private ValidationResult _validationErrors = new();
     private string _businessName = string.Empty;
+    private bool _businessExists;
 
     [Given(@"I have a def ""([^""]*)""")]
-    public void GivenIHaveADef(string p0)
+    public void GivenIHaveADef(string def)
     {
-        _def = p0;
+        _def = def;
     }
 
     [Given(@"I have a BusinessName ""([^""]*)""")]
@@ -31,6 +32,13 @@ public class GetBusinessesByNameStepDefinitions : TestBase
     {
         _businessName = businessInDb;
     }
+
+    [Given(@"the business exists ""([^""]*)""")]
+    public void GivenTheBusinessExists(string exists)
+    {
+        _businessExists = bool.Parse(exists);
+    }
+
 
     [When(@"I query for matching Businesses")]
     public async Task WhenIQueryForMatchingBusinesses()
@@ -84,6 +92,7 @@ public class GetBusinessesByNameStepDefinitions : TestBase
                 break;
             case "NotFound":
                 _responseType.Should().Be(CommandResponseType.NotFound);
+                _businessExists.Should().Be(false);
                 break;
         }
     }

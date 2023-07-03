@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Application", "Commo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Domain", "Common\Common.Domain\Common.Domain.csproj", "{DCD762D0-8543-4436-969C-975A94833F20}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Infrastructure.ApiClient", "Common\Common.Infrastructure.ApiClient\Common.Infrastructure.ApiClient.csproj", "{38DDD951-3F89-41FE-A225-326DA46A39CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Extensions", "Common\Common.Extensions\Common.Extensions.csproj", "{1301D19A-3E5A-4EA2-BFC0-625DAA7436AC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.ApiClient", "Common\Common.ApiClient\Common.ApiClient.csproj", "{38DDD951-3F89-41FE-A225-326DA46A39CF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Application", "Core.Application\Core.Application.csproj", "{859E4300-2DB5-431A-9319-5AEA12552D85}"
 EndProject
@@ -28,8 +30,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Specs.Unit", "Specs.Unit\Specs.Unit.csproj", "{B1912655-E309-4886-A882-1C384ACFB165}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.Shared.Rcl", "Presentation.Shared.Rcl\Presentation.Shared.Rcl.csproj", "{52F8BCD2-BB2D-4A23-8638-BBDC777D167B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Extensions", "Common.Extensions\Common.Extensions.csproj", "{1301D19A-3E5A-4EA2-BFC0-625DAA7436AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -27,7 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Common\Common.Infrastructure.ApiClient\Common.Infrastructure.ApiClient.csproj" />
+	  <ProjectReference Include="..\Common\Common.ApiClient\Common.ApiClient.csproj" />
 	  <ProjectReference Include="..\Infrastructure.Persistence\Infrastructure.Persistence.csproj" />
 	  <ProjectReference Include="..\Presentation.Shared.Rcl\Presentation.Shared.Rcl.csproj" />
 	</ItemGroup>

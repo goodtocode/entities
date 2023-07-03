@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<RootNamespace>Goodtocode.Common.Infrastructure.ApiClient</RootNamespace>
-		<AssemblyName>Goodtocode.Common.Infrastructure.ApiClient</AssemblyName>
+		<RootNamespace>Goodtocode.Common.ApiClient</RootNamespace>
+		<AssemblyName>Goodtocode.Common.ApiClient</AssemblyName>
 		<Version>1.0.0</Version>
 		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
