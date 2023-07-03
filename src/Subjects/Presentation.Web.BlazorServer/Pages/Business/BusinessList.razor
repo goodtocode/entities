@@ -13,7 +13,7 @@
 
 <PageTitle>Business Search</PageTitle>
 
-<EditForm Model="@SearchTerm" OnValidSubmit="@GetBusinesses">
+<EditForm Model="@SearchTerm" OnValidSubmit="@GetBusinessesAsync">
     <DataAnnotationsValidator />
     <div class="input-group mb-3">
         <input type="text" class="form-control form-control-lg" placeholder="Search" aria-label="Search" aria-describedby="button-addon2"
@@ -47,9 +47,9 @@
                     <td>@business.BusinessName</td>
                     <td>@business.TaxNumber</td>
                     <td class="nowrap" style="width:5%;">
-                        <NavLink href="@($"/person/viewperson/{business.BusinessKey}")" class="btn btn-link oi oi-eye text-primary p-0 nounderline"></NavLink>
-                        <NavLink href="@($"/person/updateperson/{business.BusinessKey}")" class="btn btn-link oi oi-pencil text-warning p-0 nounderline"></NavLink>
-                        <button @onclick="@(() => DeleteBusiness(business.BusinessKey))" disabled="@business.IsDeleting" class="btn btn-link oi oi-trash text-danger p-0 nounderline">
+                        <NavLink href="@($"/person/viewperson/{business.BusinessKey}")" class="btn btn-link oi oi-eye p-0 nounderline"></NavLink>
+                        <NavLink href="@($"/person/updateperson/{business.BusinessKey}")" class="btn btn-link oi oi-pencil p-0 nounderline"></NavLink>
+                        <button @onclick="@(() => DeleteBusinessAsync(business))" disabled="@business.IsDeleting" class="btn btn-link oi oi-trash p-0 nounderline">
                             @if (business.IsDeleting) { <span class="spinner-border spinner-border-sm"></span> }
                             else { <span></span> }
                         </button>
@@ -79,7 +79,7 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        await GetBusinesses();
+        await GetBusinessesAsync();
         PageHistory.AddPageToHistory(UriHelper.Uri);
     }
 
@@ -87,11 +87,11 @@
     {
         if (ev.Key == "Enter")
         {
-            await GetBusinesses();
+            await GetBusinessesAsync();
         }
     }
 
-    private async Task GetBusinesses()
+    private async Task GetBusinessesAsync()
     {
         alertMessage = string.Empty;
 
@@ -106,7 +106,7 @@
         {
             processing = true;
             await Task.Delay(500, cts.Token);
-            businesses = await Service.GetBusinessesAsync(businessSearch.Name, 1);
+            businesses = await Service.GetBusinessesAsync(businessSearch.Name, Page);
             if (businesses.Results.Count() == 0)
                 alertMessage = "No businesses found";
         }
@@ -121,17 +121,28 @@
         }
     }
 
-    private async Task DeleteBusiness(Guid businessKey)
+    private async Task DeleteBusinessAsync(BusinessModel business)
     {
+        alertMessage = string.Empty;
 
+        if (cts != null) cts.Cancel();
+        cts = new CancellationTokenSource();
+        try
+        {
+            processing = true;
+            var businessToDelete = business;
+            await Task.Delay(500, cts.Token);
+            await Service.DeleteBusinessAsync(business.BusinessKey);
+            await GetBusinessesAsync();
+        }
+        catch (TaskCanceledException)
+        {
+            // Ignore exception if task was cancelled
+        }
+        finally
+        {
+            processing = false;
+            StateHasChanged();
+        }
     }
-
-    //private async void DeletePerson(Person _person)
-    //{
-    //    var person = _person;
-    //    person.IsDeleting = true;
-    //    await PersonService.DeletePerson(person.PersonId);
-    //    people = await PersonService.GetPeople(null, Page);
-    //    StateHasChanged();
-    //}
 }
