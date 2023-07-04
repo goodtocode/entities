@@ -9,6 +9,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>aspnet-Goodtocode.Subjects.BlazorServer-162fe164-2aae-4a7b-adcf-a4ef2cd6803d</UserSecretsId>
 		<WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
+		<ApplicationInsightsResourceId>/subscriptions/2d60a88f-6c6a-48e6-844b-69bb857dd4fe/resourceGroups/gtc-rg-subjects-dev-001/providers/microsoft.insights/components/appi-subjects-dev-001</ApplicationInsightsResourceId>
 	</PropertyGroup>
 
 	<ItemGroup>
