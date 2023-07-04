@@ -16,7 +16,7 @@
     <DataAnnotationsValidator />
     <div class="form-group mb-3">
         <label for="businessName">Name</label>
-        <input type="text" class="form-control" id="businessName" placeholder="Business name" aria-label="Search" aria-describedby="button-addon2"
+        <input type="text" class="form-control" id="businessName" placeholder="Business name" aria-label="Name" aria-describedby="button-addon2"
         @bind="@business.BusinessName">
     </div>
     <div class="form-group mb-3">
@@ -24,7 +24,7 @@
         <input type="text" class="form-control" id="taxNumber" placeholder="Tax Number" @bind-value="@business.TaxNumber">
     </div>
     <button type="submit" class="btn btn-primary" @onclick="CreateBusineses">Create</button>
-    <ValidationSummary />
+    <ValidationSummary class="mt-3" />
     <div hidden="@string.IsNullOrEmpty(alertMessage)" class="alert alert-danger" role="alert">@alertMessage</div>
 </EditForm>
 
