@@ -1,12 +1,10 @@
-﻿@page "/business"
-@page "/business/{page:int}"
+﻿@page "/business/search"
 @using Goodtocode.Common.Extensions;
 @using Goodtocode.Subjects.BlazorServer.Data;
 @using Goodtocode.Subjects.BlazorServer.Models;
 @using Goodtocode.Subjects.Domain;
 @using System.ComponentModel.DataAnnotations;
 @using Goodtocode.Subjects.Rcl;
-@using Goodtocode.Subjects.Rcl.Paging
 @using Microsoft.AspNetCore.Http.Extensions;
 
 @inject BusinessService Service
@@ -49,8 +47,8 @@
                     <td>@business.BusinessName</td>
                     <td>@business.TaxNumber</td>
                     <td class="nowrap" style="width:5%;">
-                        <NavLink href="@($"/business/details/{business.BusinessKey}")" class="btn btn-link oi oi-eye p-0 nounderline"></NavLink>
-                        <NavLink href="@($"/business/update/{business.BusinessKey}")" class="btn btn-link oi oi-pencil p-0 nounderline"></NavLink>
+                        <NavLink href="@($"/person/viewperson/{business.BusinessKey}")" class="btn btn-link oi oi-eye p-0 nounderline"></NavLink>
+                        <NavLink href="@($"/person/updateperson/{business.BusinessKey}")" class="btn btn-link oi oi-pencil p-0 nounderline"></NavLink>
                         <button @onclick="@(() => DeleteBusinessAsync(business))" disabled="@business.IsDeleting" class="btn btn-link oi oi-trash p-0 nounderline">
                             @if (business.IsDeleting) { <span class="spinner-border spinner-border-sm"></span> }
                             else { <span></span> }
@@ -60,12 +58,11 @@
             }
         </tbody>
     </table>
-    <Pager Result=@businesses PageChanged=PagerPageChanged />
 }
 
 @code {
     [Parameter]
-    public int page { get; set; } = 1;
+    public int Page { get; set; } = 1;
     [Parameter]
     public string SearchTerm { get; set; } = string.Empty;
     private string alertMessage = string.Empty;
@@ -83,12 +80,6 @@
     protected override async Task OnParametersSetAsync()
     {
         await GetBusinessesAsync();
-        PageHistory.AddPageToHistory(UriHelper.Uri);
-    }
-
-    protected void PagerPageChanged(int page)
-    {
-        UriHelper.NavigateTo("/businesslist/" + page);
         PageHistory.AddPageToHistory(UriHelper.Uri);
     }
 
@@ -115,7 +106,7 @@
         {
             processing = true;
             await Task.Delay(500, cts.Token);
-            businesses = await Service.GetBusinessesAsync(page);
+            businesses = await Service.GetBusinessesAsync(businessSearch.Name, Page);
             if (businesses.Results.Count() == 0)
                 alertMessage = "No businesses found";
         }
