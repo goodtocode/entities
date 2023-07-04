@@ -95,11 +95,11 @@ public class BusinessController : BaseController
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> Post(Guid businessKey, [FromBody] BusinessObject business)
+    public async Task<ActionResult> Post(Guid key, [FromBody] BusinessObject business)
     {
 
         var command = business.CopyPropertiesSafe<UpdateBusinessCommand>();
-        command.BusinessKey = businessKey;
+        command.BusinessKey = key;
         await Mediator.Send(command);
         
         return Ok();
@@ -120,12 +120,12 @@ public class BusinessController : BaseController
     [HttpDelete(Name = "DeleteBusinessCommand")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> Delete(Guid businessKey)
+    public async Task<ActionResult> Delete(Guid key)
     {
 
         var command = new DeleteBusinessCommand
         {
-            BusinessKey = businessKey
+            BusinessKey = key
         };
         await Mediator.Send(command);
 

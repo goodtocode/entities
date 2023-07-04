@@ -10,6 +10,7 @@ namespace Goodtocode.Subjects.BlazorServer.Data;
 public class BusinessService : IBusinessService
 {
     private readonly IHttpClientFactory _clientFactory;
+    private const int apiVersion = 1;
 
     public BusinessService(IHttpClientFactory clientFactory)
     {
@@ -19,7 +20,7 @@ public class BusinessService : IBusinessService
     public async Task<BusinessModel> GetBusinessAsync(Guid businessKey)
     {
         var httpClient = _clientFactory.CreateClient("SubjectsApiClient");
-        var response = await httpClient.GetAsync($"{httpClient.BaseAddress}/Business?key={businessKey}&api-version=1");
+        var response = await httpClient.GetAsync($"{httpClient.BaseAddress}/Business?key={businessKey}&api-version={apiVersion}");
         var business = new BusinessModel();
         if (response.StatusCode != HttpStatusCode.NotFound)
         {
@@ -35,7 +36,7 @@ public class BusinessService : IBusinessService
     {
         var business = new PagedResult<BusinessModel>();
         var httpClient = _clientFactory.CreateClient("SubjectsApiClient");
-        var response = await httpClient.GetAsync($"{httpClient.BaseAddress}Businesses?name={name}&pageNumber=1&pageSize=20&api-version=1");        
+        var response = await httpClient.GetAsync($"{httpClient.BaseAddress}Businesses?name={name}&pageNumber=1&pageSize=20&api-version={apiVersion}");        
         if (response.StatusCode != HttpStatusCode.NotFound)
         {
             response.EnsureSuccessStatusCode();
@@ -55,14 +56,14 @@ public class BusinessService : IBusinessService
     public async Task UpdateBusinessAsync(BusinessModel business)
     {
         var httpClient = _clientFactory.CreateClient("SubjectsApiClient");
-        var response = await httpClient.PostAsJsonAsync<BusinessObject>($"{httpClient.BaseAddress}/Business?key={business.BusinessKey}api-version=1", business.CopyPropertiesSafe<BusinessObject>());
+        var response = await httpClient.PostAsJsonAsync<BusinessObject>($"{httpClient.BaseAddress}/Business?key={business.BusinessKey}api-version={apiVersion}", business.CopyPropertiesSafe<BusinessObject>());
         response.EnsureSuccessStatusCode();
     }
 
     public async Task DeleteBusinessAsync(Guid businessKey)
     {
         var httpClient = _clientFactory.CreateClient("SubjectsApiClient");
-        var response = await httpClient.DeleteAsync($"{httpClient.BaseAddress}/Business?key={businessKey}api-version=1");
+        var response = await httpClient.DeleteAsync($"{httpClient.BaseAddress}/Business?key={businessKey}api-version={apiVersion}");
         response.EnsureSuccessStatusCode();
     }
 }
