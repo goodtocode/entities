@@ -50,8 +50,9 @@ builder.Services.AddApiClientServices("SubjectsApiClient", builder.Configuration
     builder.Configuration["Subjects:Scope"])
 );
 
-builder.Services.AddSingleton<BusinessService>();
 builder.Services.AddSingleton<PageHistoryState>();
+builder.Services.AddScoped<IAlertService, AlertService>();
+builder.Services.AddSingleton<BusinessService>();
 
 var app = builder.Build();
 

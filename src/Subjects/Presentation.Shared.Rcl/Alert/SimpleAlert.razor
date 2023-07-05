@@ -1,0 +1,12 @@
+@using Goodtocode.Common.Extensions;
+
+<div hidden="@string.IsNullOrEmpty(Message)" class="alert alert-danger m-4" role="alert">@Message</div>
+
+@code {
+    [Parameter]
+    public string Message { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+    }
+}
