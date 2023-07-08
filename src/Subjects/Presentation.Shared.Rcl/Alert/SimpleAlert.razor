@@ -1,12 +1,31 @@
 @using Goodtocode.Common.Extensions;
 
-<div hidden="@string.IsNullOrEmpty(Message)" class="alert alert-danger m-4" role="alert">@Message</div>
+<div hidden="@string.IsNullOrEmpty(Message)" class="alert m-4 @alertClass" role="alert">@Message</div>
 
 @code {
     [Parameter]
     public string Message { get; set; }
+    [Parameter]
+    public AlertTypes AlertType { get; set; } = AlertTypes.Error;
+
+    private string alertClass = "alert-danger";
 
     protected override async Task OnParametersSetAsync()
     {
+        switch(AlertType)
+        {
+            case AlertTypes.Error:
+                alertClass = "alert-danger";
+                break;
+            case AlertTypes.Warning:
+                alertClass = "alert-warning";
+                break;
+            case AlertTypes.Info:
+                alertClass = "alert-info";
+                break;
+            case AlertTypes.Success:
+                alertClass = "alert-success";
+                break;
+        }
     }
 }

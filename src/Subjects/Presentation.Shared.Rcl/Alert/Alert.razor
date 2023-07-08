@@ -101,11 +101,11 @@
 
         var classes = new List<string> { "alert", "alert-dismissable", "mt-4", "container" };
 
-        var alertTypeClass = new Dictionary<AlertType, string>();
-        alertTypeClass[AlertType.Success] = "alert-success";
-        alertTypeClass[AlertType.Error] = "alert-danger";
-        alertTypeClass[AlertType.Info] = "alert-info";
-        alertTypeClass[AlertType.Warning] = "alert-warning";
+        var alertTypeClass = new Dictionary<AlertTypes, string>();
+        alertTypeClass[AlertTypes.Success] = "alert-success";
+        alertTypeClass[AlertTypes.Error] = "alert-danger";
+        alertTypeClass[AlertTypes.Info] = "alert-info";
+        alertTypeClass[AlertTypes.Warning] = "alert-warning";
 
         classes.Add(alertTypeClass[alert.Type]);
 

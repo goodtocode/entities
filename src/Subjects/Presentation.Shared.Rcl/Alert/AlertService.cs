@@ -20,7 +20,7 @@ public class AlertService : IAlertService
     {
         this.Alert(new AlertModel
         {
-            Type = AlertType.Success,
+            Type = AlertTypes.Success,
             Message = message,
             KeepAfterRouteChange = keepAfterRouteChange,
             AutoClose = autoClose
@@ -31,7 +31,7 @@ public class AlertService : IAlertService
     {
         this.Alert(new AlertModel
         {
-            Type = AlertType.Error,
+            Type = AlertTypes.Error,
             Message = message,
             KeepAfterRouteChange = keepAfterRouteChange,
             AutoClose = autoClose
@@ -42,7 +42,7 @@ public class AlertService : IAlertService
     {
         this.Alert(new AlertModel
         {
-            Type = AlertType.Info,
+            Type = AlertTypes.Info,
             Message = message,
             KeepAfterRouteChange = keepAfterRouteChange,
             AutoClose = autoClose
@@ -53,7 +53,7 @@ public class AlertService : IAlertService
     {
         this.Alert(new AlertModel
         {
-            Type = AlertType.Warning,
+            Type = AlertTypes.Warning,
             Message = message,
             KeepAfterRouteChange = keepAfterRouteChange,
             AutoClose = autoClose
