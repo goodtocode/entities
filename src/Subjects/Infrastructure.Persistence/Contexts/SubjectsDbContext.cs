@@ -1,7 +1,6 @@
 ﻿using Goodtocode.Subjects.Application;
 using Goodtocode.Subjects.Domain;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Reflection;
 
 namespace Goodtocode.Subjects.Persistence.Contexts;
@@ -12,29 +11,29 @@ public partial class SubjectsDbContext : DbContext, ISubjectsDbContext
         : base(options)
     { }
 
-    public virtual DbSet<BusinessEntity> Business { get; set; }
-    //public virtual DbSet<Detail> Detail { get; set; }
-    //public virtual DbSet<DetailType> DetailType { get; set; }
-    //public virtual DbSet<Associate> Associate { get; set; }
-    //public virtual DbSet<AssociateDetail> AssociateDetail { get; set; }
-    //public virtual DbSet<AssociateOption> AssociateOption { get; set; }
-    //public virtual DbSet<Gender> Gender { get; set; }
-    //public virtual DbSet<Government> Government { get; set; }
-    //public virtual DbSet<Item> Item { get; set; }
-    //public virtual DbSet<ItemGroup> ItemGroup { get; set; }
-    //public virtual DbSet<ItemType> ItemType { get; set; }
-    //public virtual DbSet<Option> Option { get; set; }
-    //public virtual DbSet<OptionGroup> OptionGroup { get; set; }
-    //public virtual DbSet<Person> Person { get; set; }
-    //public virtual DbSet<Resource> Resource { get; set; }
-    //public virtual DbSet<ResourceItem> ResourceItem { get; set; }
-    //public virtual DbSet<ResourcePerson> ResourcePerson { get; set; }
-    //public virtual DbSet<ResourceType> ResourceType { get; set; }
-    //public virtual DbSet<Venture> Venture { get; set; }
-    //public virtual DbSet<VentureDetail> VentureDetail { get; set; }
-    //public virtual DbSet<VentureAssociateOption> VentureAssociateOption { get; set; }
-    //public virtual DbSet<VentureOption> VentureOption { get; set; }
-    //public virtual DbSet<VentureResource> VentureResource { get; set; }
+    public virtual DbSet<BusinessEntity> Business => Set<BusinessEntity>();
+    //public virtual DbSet<Detail> Detail => Set<Detail>();
+    //public virtual DbSet<DetailType> DetailType => Set<DetailType>();
+    //public virtual DbSet<Associate> Associate => Set<Associate>();
+    //public virtual DbSet<AssociateDetail> AssociateDetail => Set<AssociateDetail>();
+    //public virtual DbSet<AssociateOption> AssociateOption => Set<AssociateOption>();
+    //public virtual DbSet<Gender> Gender => Set<Gender>();
+    //public virtual DbSet<Government> Government => Set<Government>();
+    //public virtual DbSet<Item> Item => Set<Item>();
+    //public virtual DbSet<ItemGroup> ItemGroup => Set<ItemGroup>();
+    //public virtual DbSet<ItemType> ItemType => Set<ItemType>();
+    //public virtual DbSet<Option> Option => Set<Option>();
+    //public virtual DbSet<OptionGroup> OptionGroup => Set<OptionGroup>();
+    //public virtual DbSet<Person> Person => Set<Person>();
+    //public virtual DbSet<Resource> Resource => Set<Resource>();
+    //public virtual DbSet<ResourceItem> ResourceItem => Set<ResourceItem>();
+    //public virtual DbSet<ResourcePerson> ResourcePerson => Set<ResourcePerson>();
+    //public virtual DbSet<ResourceType> ResourceType => Set<ResourceType>();
+    //public virtual DbSet<Venture> Venture => Set<Venture>();
+    //public virtual DbSet<VentureDetail> VentureDetail => Set<VentureDetail>();
+    //public virtual DbSet<VentureAssociateOption> VentureAssociateOption => Set<VentureAssociateOption>();
+    //public virtual DbSet<VentureOption> VentureOption => Set<VentureOption>();
+    //public virtual DbSet<VentureResource> VentureResource => Set<VentureResource>();
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {

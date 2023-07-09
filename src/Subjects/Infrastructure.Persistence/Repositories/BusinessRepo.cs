@@ -28,7 +28,7 @@ public class BusinessRepo : IBusinessRepo
 
     public async Task<Result<PagedResult<BusinessEntity>>> GetBusinessesAllAsync(string businessName, int page, int results, CancellationToken cancellationToken)
     {
-        var businessResult = await _context.Business
+        var businessResult = await _context.Business.AsNoTracking()
             .OrderBy(b => b.BusinessKey)
             .GetPagedAsync(page, results, cancellationToken);
         return Result.Success(businessResult);
@@ -36,7 +36,7 @@ public class BusinessRepo : IBusinessRepo
 
     public async Task<Result<PagedResult<BusinessEntity>>> GetBusinessesByNameAsync(string businessName, int page, int results, CancellationToken cancellationToken)
     {
-        var businessResult = await _context.Business
+        var businessResult = await _context.Business.AsNoTracking()
             .Where(b => b.BusinessName.Contains(businessName))
             .OrderBy(b => b.BusinessKey)
             .GetPagedAsync(page, results, cancellationToken);

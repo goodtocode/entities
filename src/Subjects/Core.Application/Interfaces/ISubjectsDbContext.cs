@@ -5,7 +5,7 @@ namespace Goodtocode.Subjects.Application;
 
 public interface ISubjectsDbContext
 {
-    DbSet<BusinessEntity> Business { get; set; }
+    DbSet<BusinessEntity> Business { get; }
     //DbSet<Detail> Detail { get; set; }
     //DbSet<DetailType> DetailType { get; set; }
     //DbSet<Associate> Associate { get; set; }
