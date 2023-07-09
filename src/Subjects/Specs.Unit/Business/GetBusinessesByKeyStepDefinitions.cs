@@ -47,7 +47,7 @@ public class GetBusinessesByKeyStepDefinitions : TestBase
         if (_businessExists)
         {
             userBusinessesRepoMock
-                .Setup(x => x.GetBusinessAsync(_businessKey, It.IsAny<CancellationToken>()))
+                .Setup(x => x.GetBusinessByKeyAsync(_businessKey, It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(Result.Success<BusinessEntity?>(new BusinessEntity()
                 {
                     BusinessKey = new Guid("2016a497-e56c-4be8-8ef6-3dc5ae1699ce"),
@@ -55,19 +55,19 @@ public class GetBusinessesByKeyStepDefinitions : TestBase
                 })));
         }
 
-        var request = new GetBusinessQuery
+        var request = new GetBusinessByKeyQuery
         {
             BusinessKey = _businessKey
         };
 
-        var requestValidator = new GetBusinessQueryValidator();
+        var requestValidator = new GetBusinessbyKeyQueryValidator();
 
         _validationErrors = await requestValidator.ValidateAsync(request);
 
         if (_validationErrors.IsValid)
             try
             {
-                var handler = new GetBusinessQueryHandler(userBusinessesRepoMock.Object, Mapper);
+                var handler = new GetBusinessByKeyQueryHandler(userBusinessesRepoMock.Object, Mapper);
                 _response = await handler.Handle(request, CancellationToken.None) ?? new BusinessEntity();
                 _responseType = CommandResponseType.Successful;
             }

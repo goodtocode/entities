@@ -2,9 +2,9 @@
 
 namespace Goodtocode.Subjects.Application;
 
-public class GetBusinessesByNameQueryValidator : AbstractValidator<GetBusinessesByNameQuery>
+public class GetBusinessesAllQueryValidator : AbstractValidator<GetBusinessesAllQuery>
 {
-    public GetBusinessesByNameQueryValidator()
+    public GetBusinessesAllQueryValidator()
     {
         RuleFor(x => x.BusinessName).NotEmpty();
         RuleFor(x => x.Results).GreaterThan(0);

@@ -34,19 +34,19 @@ public class GetBusinessesByKeyStepDefinitions : TestBase
     [When(@"I query for matching Businesses")]
     public async Task WhenIQueryForMatchingBusinesses()
     {
-        var request = new GetBusinessQuery
+        var request = new GetBusinessByKeyQuery
         {
             BusinessKey = _businessKey
         };
 
-        var requestValidator = new GetBusinessQueryValidator();
+        var requestValidator = new GetBusinessbyKeyQueryValidator();
 
         _validationErrors = await requestValidator.ValidateAsync(request);
 
         if (_validationErrors.IsValid)
             try
             {
-                var handler = new GetBusinessQueryHandler(BusinessRepo, Mapper);
+                var handler = new GetBusinessByKeyQueryHandler(BusinessRepo, Mapper);
                 _response = await handler.Handle(request, CancellationToken.None) ?? new BusinessEntity();
                 _responseType = CommandResponseType.Successful;
             }

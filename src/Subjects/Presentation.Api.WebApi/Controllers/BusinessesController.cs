@@ -27,6 +27,21 @@ public class BusinessesController : BaseController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<PagedResult<BusinessEntity>> Get(string name, int pageNumber = 1, int pageSize = 20) => await Mediator.Send(new GetBusinessesByNameQuery
     {
-        BusinessName = name
+        BusinessName = name,
+        Page = pageNumber,
+    });
+
+    /// <summary> Get Businesses by Name</summary>
+    /// <remarks>
+    ///     Sample request:
+    ///     "businessName": "My Business"
+    ///     "api-version":  1
+    /// </remarks>
+    /// <returns>Collection of BusinessEntity</returns>
+    [HttpGet(Name = "GetBusinessesAllQuery")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<PagedResult<BusinessEntity>> Get(int pageNumber = 1, int pageSize = 20) => await Mediator.Send(new GetBusinessesAllQuery
+    {
     });
 }

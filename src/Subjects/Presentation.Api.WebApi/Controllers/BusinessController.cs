@@ -27,7 +27,7 @@ public class BusinessController : BaseController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<BusinessEntity> Get(Guid key)
     {
-        return await Mediator.Send(new GetBusinessQuery
+        return await Mediator.Send(new GetBusinessByKeyQuery
         {
             BusinessKey = key
         });

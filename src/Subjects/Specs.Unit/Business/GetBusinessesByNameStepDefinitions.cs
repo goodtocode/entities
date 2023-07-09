@@ -48,7 +48,7 @@ public class GetBusinessesByNameStepDefinitions : TestBase
         if (_businessExists)
         {
             userBusinessesRepoMock
-                .Setup(x => x.GetBusinessesByNameAsync(_businessName, 1, It.IsAny<CancellationToken>()))
+                .Setup(x => x.GetBusinessesByNameAsync(_businessName, 1, 20, It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(Result.Success(new PagedResult<BusinessEntity>(
                     new()
                     {
