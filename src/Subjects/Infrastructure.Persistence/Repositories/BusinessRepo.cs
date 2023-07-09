@@ -90,4 +90,10 @@ public class BusinessRepo : IBusinessRepo
         await _context.SaveChangesAsync(cancellationToken);
         return Result.Success();
     }
+
+    public void Dispose()
+    {
+        if (_context != null)
+            _context.Dispose();
+    }
 }

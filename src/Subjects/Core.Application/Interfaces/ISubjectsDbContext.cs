@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Goodtocode.Subjects.Application;
 
-public interface ISubjectsDbContext
+public interface ISubjectsDbContext : IDisposable
 {
     DbSet<BusinessEntity> Business { get; }
     //DbSet<Detail> Detail { get; set; }
