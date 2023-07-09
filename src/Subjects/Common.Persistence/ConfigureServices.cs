@@ -20,7 +20,7 @@ public static class ConfigureServices
             {
                 CacheTypes.Memory => serviceProvider.GetService<MemoryCacheService>(),
                 CacheTypes.Redis => serviceProvider.GetService<RedisCacheService>(),
-                _ => serviceProvider.GetService<MemoryCacheService>(),
+                _ => serviceProvider.GetService<MemoryCacheService>()
             };
         });
 

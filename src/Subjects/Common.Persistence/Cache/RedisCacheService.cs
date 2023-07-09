@@ -1,17 +1,43 @@
-﻿namespace Goodtocode.Common.Persistence.Cache;
+﻿using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Options;
+using System.Text.Json;
+
+namespace Goodtocode.Common.Persistence.Cache;
 
 public class RedisCacheService : ICacheService
 {
-    public void Remove(string cacheKey)
+    private readonly IDistributedCache _cache;
+    private readonly CacheConfiguration _config;
+    private readonly DistributedCacheEntryOptions _options;
+
+    public RedisCacheService(IDistributedCache cache, IOptions<CacheConfiguration> cacheConfig)
     {
-        throw new NotImplementedException();
+        _cache = cache;
+        _config = cacheConfig.Value;
+        if (_config != null)
+        {
+            _options = new DistributedCacheEntryOptions
+            {
+                AbsoluteExpiration = DateTime.Now.AddHours(_config.AbsoluteExpirationInHours),
+                SlidingExpiration = TimeSpan.FromMinutes(_config.SlidingExpirationInMinutes)
+            };
+        }
+    }
+
+    public bool TryGet<T>(string cacheKey, out T value)
+    {
+        var serialized = _cache.GetString(cacheKey);
+        value = JsonSerializer.Deserialize<T>(serialized);
+        if (value == null) return false;
+        else return true;
     }
     public T Set<T>(string cacheKey, T value)
     {
-        throw new NotImplementedException();
+        _cache.SetString(cacheKey, JsonSerializer.Serialize(value), _options);
+        return value;
     }
-    public bool TryGet<T>(string cacheKey, out T value)
+    public void Remove(string cacheKey)
     {
-        throw new NotImplementedException();
+        _cache.Remove(cacheKey);
     }
 }

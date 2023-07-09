@@ -5,35 +5,35 @@ namespace Goodtocode.Common.Persistence.Cache;
 
 public class MemoryCacheService : ICacheService
 {
-    private readonly IMemoryCache _memoryCache;
-    private readonly CacheConfiguration _cacheConfig;
-    private readonly MemoryCacheEntryOptions _cacheOptions;
+    private readonly IMemoryCache _cache;
+    private readonly CacheConfiguration _config;
+    private readonly MemoryCacheEntryOptions _options;
     public MemoryCacheService(IMemoryCache memoryCache, IOptions<CacheConfiguration> cacheConfig)
     {
-        _memoryCache = memoryCache;
-        _cacheConfig = cacheConfig.Value;
-        if (_cacheConfig != null)
+        _cache = memoryCache;
+        _config = cacheConfig.Value;
+        if (_config != null)
         {
-            _cacheOptions = new MemoryCacheEntryOptions
+            _options = new MemoryCacheEntryOptions
             {
-                AbsoluteExpiration = DateTime.Now.AddHours(_cacheConfig.AbsoluteExpirationInHours),
+                AbsoluteExpiration = DateTime.Now.AddHours(_config.AbsoluteExpirationInHours),
                 Priority = CacheItemPriority.High,
-                SlidingExpiration = TimeSpan.FromMinutes(_cacheConfig.SlidingExpirationInMinutes)
+                SlidingExpiration = TimeSpan.FromMinutes(_config.SlidingExpirationInMinutes)
             };
         }
     }
     public bool TryGet<T>(string cacheKey, out T value)
     {
-        _memoryCache.TryGetValue(cacheKey, out value);
+        _cache.TryGetValue(cacheKey, out value);
         if (value == null) return false;
         else return true;
     }
     public T Set<T>(string cacheKey, T value)
     {
-        return _memoryCache.Set(cacheKey, value, _cacheOptions);
+        return _cache.Set(cacheKey, value, _options);
     }
     public void Remove(string cacheKey)
     {
-        _memoryCache.Remove(cacheKey);
+        _cache.Remove(cacheKey);
     }
 }
