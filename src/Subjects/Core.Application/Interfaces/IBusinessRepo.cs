@@ -4,7 +4,7 @@ using Goodtocode.Subjects.Domain;
 
 namespace Goodtocode.Subjects.Application;
 
-public interface IBusinessRepo : IDisposable
+public interface IBusinessRepo
 {
     Task<Result<BusinessEntity?>> GetBusinessByKeyAsync(Guid businessKey,
         CancellationToken cancellationToken);

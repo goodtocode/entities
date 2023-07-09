@@ -7,7 +7,7 @@ public class GetBusinessesByNameQueryValidator : AbstractValidator<GetBusinesses
     public GetBusinessesByNameQueryValidator()
     {
         RuleFor(x => x.BusinessName).NotEmpty();
-        RuleFor(x => x.Results).GreaterThan(0);
-        RuleFor(x => x.Page).GreaterThan(0);
+        RuleFor(x => x.PageSize).GreaterThan(0);
+        RuleFor(x => x.PageNumber).GreaterThan(0);
     }
 }

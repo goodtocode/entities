@@ -13,13 +13,11 @@ public class GetBusinessByKeyQuery : IRequest<BusinessEntity>
 
 public class GetBusinessByKeyQueryHandler : IRequestHandler<GetBusinessByKeyQuery, BusinessEntity?>
 {
-    private readonly IMapper _mapper;
     private readonly IBusinessRepo _userBusinessRepo;
 
-    public GetBusinessByKeyQueryHandler(IBusinessRepo userBusinessRepo, IMapper mapper)
+    public GetBusinessByKeyQueryHandler(IBusinessRepo userBusinessRepo)
     {
         _userBusinessRepo = userBusinessRepo;
-        _mapper = mapper;
     }
 
     public async Task<BusinessEntity?> Handle(GetBusinessByKeyQuery request,

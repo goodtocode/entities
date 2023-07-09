@@ -46,7 +46,7 @@ public class GetBusinessesByKeyStepDefinitions : TestBase
         if (_validationErrors.IsValid)
             try
             {
-                var handler = new GetBusinessByKeyQueryHandler(BusinessRepo, Mapper);
+                var handler = new GetBusinessByKeyQueryHandler(BusinessRepo);
                 _response = await handler.Handle(request, CancellationToken.None) ?? new BusinessEntity();
                 _responseType = CommandResponseType.Successful;
             }
