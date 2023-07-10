@@ -1,6 +1,6 @@
 ﻿namespace Goodtocode.Common.Persistence.Repository;
 
-public interface ICacheRepository<T> where T : class
+public interface ICachedRepository<T> where T : class
 {
     Task<T> GetByIdAsync(int id);
     Task<IReadOnlyList<T>> GetAllAsync();

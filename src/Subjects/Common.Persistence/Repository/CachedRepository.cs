@@ -3,14 +3,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Goodtocode.Common.Persistence.Repository;
 
-public class CacheRepository<T> : ICacheRepository<T> where T : class
+public class CachedRepository<T> : ICachedRepository<T> where T : class
 {
     private readonly static CacheTypes CacheType = CacheTypes.Memory;
     private readonly string cacheKey = $"{typeof(T)}";
     private readonly DbContext _dbContext;
     private readonly Func<CacheTypes, ICacheService> _cacheService;
 
-    public CacheRepository(DbContext dbContext, Func<CacheTypes, ICacheService> cacheService)
+    public CachedRepository(DbContext dbContext, Func<CacheTypes, ICacheService> cacheService)
     {
         _dbContext = dbContext;
         _cacheService = cacheService;
