@@ -1,7 +1,10 @@
+@using Goodtocode.Subjects.Alerts;
 @using Microsoft.AspNetCore.Components.Routing;
 @implements IDisposable
 @inject IAlertService AlertService
 @inject NavigationManager NavigationManager
+
+@namespace Goodtocode.Subjects.Alerts
 
 @foreach (var alert in alerts)
 {

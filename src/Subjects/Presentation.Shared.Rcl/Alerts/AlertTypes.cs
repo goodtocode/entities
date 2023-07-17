@@ -1,4 +1,4 @@
-namespace Goodtocode.Subjects.Rcl;
+namespace Goodtocode.Subjects.Alerts;
 
 public enum AlertTypes
 {

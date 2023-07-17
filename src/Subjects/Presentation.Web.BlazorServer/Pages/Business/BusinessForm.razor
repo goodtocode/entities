@@ -1,5 +1,6 @@
-@using Goodtocode.Subjects.BlazorServer.Models;
-@inject Goodtocode.Subjects.Rcl.PageHistoryState PageHistoryState
+@using Goodtocode.Subjects.Models;
+@using Goodtocode.Subjects.Paging;
+@inject Goodtocode.Subjects.Paging.PageHistoryState PageHistoryState
 
 <EditForm Model="@business" OnValidSubmit="@OnValidSubmit">
     <FluentValidator TValidator="BusinessValidator" />

@@ -1,11 +1,11 @@
 ﻿using Goodtocode.Common.Extensions;
-using Goodtocode.Subjects.BlazorServer.Models;
+using Goodtocode.Subjects.Models;
 
-namespace Goodtocode.Subjects.BlazorServer.Data
+namespace Goodtocode.Subjects.Data
 {
     public interface IBusinessService
     {
-        Task<PagedResult<BusinessModel>> GetBusinessesAsync(string name, int page);
+        Task<PagedResult<BusinessModel>> GetBusinessesAsync(SearchModel search, int page);
         
         Task<BusinessModel> GetBusinessAsync(Guid businessKey);
 

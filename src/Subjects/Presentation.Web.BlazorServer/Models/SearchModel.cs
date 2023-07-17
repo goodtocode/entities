@@ -1,7 +1,7 @@
 ﻿using Goodtocode.Subjects.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace Goodtocode.Subjects.BlazorServer.Models;
+namespace Goodtocode.Subjects.Models;
 
 public class SearchModel
 {

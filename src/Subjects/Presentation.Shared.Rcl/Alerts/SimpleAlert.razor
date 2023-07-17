@@ -1,5 +1,7 @@
 @using Goodtocode.Common.Extensions;
 
+@namespace Goodtocode.Subjects.Alerts
+
 <div hidden="@string.IsNullOrEmpty(Message)" class="alert m-4 @alertClass" role="alert">@Message</div>
 
 @code {

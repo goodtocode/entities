@@ -129,14 +129,5 @@
             </remarks>
             <returns>Collection of BusinessEntity</returns>
         </member>
-        <member name="M:Goodtocode.Subjects.WebApi.Controllers.BusinessesController.Get(System.Int32,System.Int32)">
-            <summary> Get Businesses by Name</summary>
-            <remarks>
-                Sample request:
-                "businessName": "My Business"
-                "api-version":  1
-            </remarks>
-            <returns>Collection of BusinessEntity</returns>
-        </member>
     </members>
 </doc>

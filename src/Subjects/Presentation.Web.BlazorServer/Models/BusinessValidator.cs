@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Goodtocode.Subjects.BlazorServer.Models;
+namespace Goodtocode.Subjects.Models;
 
 public class BusinessValidator : AbstractValidator<BusinessModel>
 {

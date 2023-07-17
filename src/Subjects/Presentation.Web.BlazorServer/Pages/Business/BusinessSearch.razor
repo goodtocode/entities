@@ -1,11 +1,11 @@
-﻿@page "/business/search"
+﻿@page "/businesses/search"
 @using Goodtocode.Common.Extensions;
-@using Goodtocode.Subjects.BlazorServer.Data;
-@using Goodtocode.Subjects.BlazorServer.Models;
+@using Goodtocode.Subjects.Data;
 @using Goodtocode.Subjects.Domain;
-@using System.ComponentModel.DataAnnotations;
-@using Goodtocode.Subjects.Rcl;
+@using Goodtocode.Subjects.Models;
+@using Goodtocode.Subjects.Paging;
 @using Microsoft.AspNetCore.Http.Extensions;
+@using System.ComponentModel.DataAnnotations;
 
 @inject BusinessService Service
 @inject PageHistoryState PageHistory
@@ -106,7 +106,7 @@
         {
             processing = true;
             await Task.Delay(500, cts.Token);
-            businesses = await Service.GetBusinessesAsync(businessSearch.Name, Page);
+            businesses = await Service.GetBusinessesAsync(businessSearch, Page);
             if (businesses.Results.Count() == 0)
                 alertMessage = "No businesses found";
         }

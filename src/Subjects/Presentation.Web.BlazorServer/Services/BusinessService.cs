@@ -1,11 +1,10 @@
 using Goodtocode.Common.Extensions;
-using Goodtocode.Subjects.BlazorServer.Models;
+using Goodtocode.Subjects.Models;
 using Goodtocode.Subjects.Domain;
-using Goodtocode.Subjects.Rcl;
 using System.Net;
 using System.Text.Json;
 
-namespace Goodtocode.Subjects.BlazorServer.Data;
+namespace Goodtocode.Subjects.Data;
 
 public class BusinessService : IBusinessService
 {
@@ -32,25 +31,11 @@ public class BusinessService : IBusinessService
         return business;
     }
 
-    public async Task<PagedResult<BusinessModel>> GetBusinessesAsync(int page)
+    public async Task<PagedResult<BusinessModel>> GetBusinessesAsync(SearchModel search, int page)
     {
         var business = new PagedResult<BusinessModel>();
         var httpClient = _clientFactory.CreateClient("SubjectsApiClient");
-        var response = await httpClient.GetAsync($"{httpClient.BaseAddress}Businesses?pageNumber={page}&pageSize=20&api-version={apiVersion}");
-        if (response.StatusCode != HttpStatusCode.NotFound)
-        {
-            response.EnsureSuccessStatusCode();
-            business = JsonSerializer.Deserialize<PagedResult<BusinessModel>>(response.Content.ReadAsStream()) ?? throw new Exception("Deserialization failed.");
-        }
-
-        return business;
-    }
-
-    public async Task<PagedResult<BusinessModel>> GetBusinessesAsync(string name, int page)
-    {
-        var business = new PagedResult<BusinessModel>();
-        var httpClient = _clientFactory.CreateClient("SubjectsApiClient");
-        var response = await httpClient.GetAsync($"{httpClient.BaseAddress}Businesses?name={name}&pageNumber={page}&pageSize=20&api-version={apiVersion}");        
+        var response = await httpClient.GetAsync($"{httpClient.BaseAddress}Businesses?name={search.Name}&pageNumber={page}&pageSize=20&api-version={apiVersion}");
         if (response.StatusCode != HttpStatusCode.NotFound)
         {
             response.EnsureSuccessStatusCode();

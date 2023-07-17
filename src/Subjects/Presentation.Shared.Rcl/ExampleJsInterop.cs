@@ -1,6 +1,6 @@
 using Microsoft.JSInterop;
 
-namespace Goodtocode.Subjects.Rcl;
+namespace Goodtocode.Subjects;
 
 // This class provides an example of how JavaScript functionality can be wrapped
 // in a .NET class for easy consumption. The associated JavaScript module is
@@ -16,7 +16,7 @@ public class ExampleJsInterop : IAsyncDisposable
     public ExampleJsInterop(IJSRuntime jsRuntime)
     {
         moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-            "import", "./_content/Presentation.Shared.Rcl/exampleJsInterop.js").AsTask());
+            "import", "./_content/Presentation.Shared/exampleJsInterop.js").AsTask());
     }
 
     public async ValueTask<string> Prompt(string message)
