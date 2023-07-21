@@ -25,7 +25,7 @@ public class BusinessesController : BaseController
     [HttpGet(Name = "GetBusinessesByNameQuery")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<PagedResult<BusinessEntity>> Get(string? name, int pageNumber = 1, int pageSize = 20) => await Mediator.Send(new GetBusinessesByNameQuery
+    public async Task<PagedResult<BusinessEntity>> Get(string? name, int pageNumber = 1, int pageSize = 10) => await Mediator.Send(new GetBusinessesByNameQuery
     {
         BusinessName = name ?? string.Empty,
         PageNumber = pageNumber,
