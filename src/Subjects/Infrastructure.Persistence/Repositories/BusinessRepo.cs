@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using Goodtocode.Common.Extensions;
 using Goodtocode.Subjects.Application;
 using Goodtocode.Subjects.Domain;
 using Microsoft.Data.SqlClient;
@@ -16,7 +17,7 @@ public class BusinessRepo : IBusinessRepo
         _context = context;
     }
 
-    public async Task<Result<BusinessEntity?>> GetBusinessAsync(Guid businessKey, CancellationToken cancellationToken)
+    public async Task<Result<BusinessEntity?>> GetBusinessByKeyAsync(Guid businessKey, CancellationToken cancellationToken)
     {
         var businessResult = await _context.Business.FindAsync(new object?[] { businessKey, cancellationToken }, cancellationToken: cancellationToken);
         if (businessResult != null)
@@ -25,9 +26,20 @@ public class BusinessRepo : IBusinessRepo
             return Result.Failure<BusinessEntity?>("Business not found.");
     }
 
-    public async Task<Result<List<BusinessEntity>>> GetBusinessesByNameAsync(string businessName, CancellationToken cancellationToken)
+    public async Task<Result<PagedResult<BusinessEntity>>> GetBusinessesAllAsync(string businessName, int page, int results, CancellationToken cancellationToken)
     {
-        var businessResult = await _context.Business.Where(x => x.BusinessName == businessName).ToListAsync(cancellationToken);
+        var businessResult = await _context.Business.AsNoTracking()
+            .OrderBy(b => b.BusinessKey)
+            .GetPagedAsync(page, results, cancellationToken);
+        return Result.Success(businessResult);
+    }
+
+    public async Task<Result<PagedResult<BusinessEntity>>> GetBusinessesByNameAsync(string businessName, int page, int results, CancellationToken cancellationToken)
+    {
+        var businessResult = await _context.Business.AsNoTracking()
+            .Where(b => b.BusinessName.Contains(businessName))
+            .OrderBy(b => b.BusinessKey)
+            .GetPagedAsync(page, results, cancellationToken);
         return Result.Success(businessResult);
     }
 

@@ -21,8 +21,7 @@ on:
         description: 'Running mode'  
 
 env:
-  API_NAME: 'api-subjects-dev-001'
-  API_IDENTITY: 'identity-subjects-dev-001'
+  API_NAME: 'api-subjects-dev-001'  
   APPINSIGHTS_NAME: 'appi-subjects-dev-001'
   ARM_PATH: './.azure'
   AZURE_RG_ENVIRONMENT: 'Development'
@@ -32,6 +31,7 @@ env:
   PLAN_NAME: 'plan-entities-dev-001'
   SHARED_RG_NAME: 'gtc-rg-entities-dev-001'
   STORAGE_NAME: 'stsubjectsdev001'
+  USER_IDENTITY: 'identity-subjects-dev-001'
   WEB_NAME: 'web-subjects-dev-001'
   WORKSPACE_NAME: 'work-entities-dev-001'  
 
@@ -92,12 +92,13 @@ jobs:
           template: ${{ env.ARM_PATH }}/api-apiapp.json
           parameters: name=${{ env.API_NAME }} planName=${{ env.PLAN_NAME }} planResourceGroupName=${{ env.SHARED_RG_NAME }} appiKey=${{ secrets.APPI_KEY }} appiConnection=${{ secrets.APPI_CONNECTION }} rgEnvironment=${{ env.AZURE_RG_ENVIRONMENT }}
 
-      - name: Identity ${{ env.API_NAME }}
+      - name: Identity ${{ env.USER_IDENTITY }}
         run: |
-          az identity create --resource-group ${{ env.AZURE_RG_NAME }} --name ${{ env.API_IDENTITY }}
+          az identity create --resource-group ${{ env.AZURE_RG_NAME }} --name ${{ env.USER_IDENTITY }}
           # The following command requires Security Reader
-          $objectId = az ad sp list --display-name ${{ env.API_IDENTITY }} --query "[?displayName=='${{ env.API_IDENTITY }}'].id" --output tsv
+          $objectId = az ad sp list --display-name ${{ env.USER_IDENTITY }} --query "[?displayName=='${{ env.USER_IDENTITY }}'].id" --output tsv
           az webapp identity assign --resource-group ${{ env.AZURE_RG_NAME }} --name ${{ env.API_NAME }} --identities $objectId
+          az webapp identity assign --resource-group ${{ env.AZURE_RG_NAME }} --name ${{ env.WEB_NAME }} --identities $objectId
           az keyvault set-policy -n ${{ env.KEYVAULT_NAME }} -g ${{ env.AZURE_RG_NAME }} --object-id $objectId --secret-permissions get          
         shell: pwsh
 

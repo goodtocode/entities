@@ -2,9 +2,9 @@
 
 namespace Goodtocode.Subjects.Application;
 
-public class GetBusinessQueryValidator : AbstractValidator<GetBusinessQuery>
+public class GetBusinessbyKeyQueryValidator : AbstractValidator<GetBusinessByKeyQuery>
 {
-    public GetBusinessQueryValidator()
+    public GetBusinessbyKeyQueryValidator()
     {
         RuleFor(x => x.BusinessKey).NotEmpty();
     }

@@ -120,7 +120,7 @@
                 Businesses Controller V1.0
             </summary>
         </member>
-        <member name="M:Goodtocode.Subjects.WebApi.Controllers.BusinessesController.Get(System.String)">
+        <member name="M:Goodtocode.Subjects.WebApi.Controllers.BusinessesController.Get(System.String,System.Int32,System.Int32)">
             <summary> Get Businesses by Name</summary>
             <remarks>
                 Sample request:

@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using Microsoft.IdentityModel.Tokens;
+using RestSharp;
 using System.Text.Json;
 
 namespace Goodtocode.Common.Infrastructure.ApiClient;
@@ -53,15 +54,10 @@ public class AccessToken
 
         var restClient = new RestClient(tokenUrl);
         var response = await restClient.ExecuteAsync(request, CancellationToken.None);
-        if (!response.IsSuccessful) return string.Empty;
+        if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content)) return string.Empty;
         var tokenResponse = JsonSerializer.Deserialize<BearerToken>(response.Content);
+        if (tokenResponse == null) return string.Empty;
         ExpirationDateUtc = DateTime.UtcNow.AddSeconds(tokenResponse.expires_in);
         return tokenResponse.access_token;
-    }
-
-    private void SetAccessToken(string accessToken, DateTime expirationDate)
-    {
-        Token = accessToken;
-        ExpirationDateUtc = expirationDate;
     }
 }

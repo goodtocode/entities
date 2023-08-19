@@ -9,11 +9,8 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>aspnet-Goodtocode.Subjects.BlazorServer-162fe164-2aae-4a7b-adcf-a4ef2cd6803d</UserSecretsId>
 		<WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
+		<ApplicationInsightsResourceId>/subscriptions/2d60a88f-6c6a-48e6-844b-69bb857dd4fe/resourceGroups/gtc-rg-subjects-dev-001/providers/microsoft.insights/components/appi-subjects-dev-001</ApplicationInsightsResourceId>
 	</PropertyGroup>
-
-	<ItemGroup>
-	  <Content Remove="wwwroot\favicon.png" />
-	</ItemGroup>
 
 	<ItemGroup>
 	  <None Include="wwwroot\favicon.png" />
@@ -21,24 +18,19 @@
 
 	<ItemGroup>
 		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
-		<PackageReference Include="BlazorPro.Spinkit" Version="1.2.0" />
+		<PackageReference Include="FluentValidation" Version="11.5.2" />
 		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" NoWarn="NU1605" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.5" NoWarn="NU1605" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.8" NoWarn="NU1605" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.8" NoWarn="NU1605" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Identity.Web" Version="2.11.1" />
-		<PackageReference Include="Microsoft.Identity.Web.UI" Version="2.11.1" />
+		<PackageReference Include="Microsoft.Identity.Web" Version="2.12.4" />
+		<PackageReference Include="Microsoft.Identity.Web.UI" Version="2.12.4" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Common\Common.Infrastructure.ApiClient\Common.Infrastructure.ApiClient.csproj" />
+	  <ProjectReference Include="..\Common\Common.ApiClient\Common.ApiClient.csproj" />
 	  <ProjectReference Include="..\Infrastructure.Persistence\Infrastructure.Persistence.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Update="Pages\Business\BusinessCreate.razor">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	  </Content>
+	  <ProjectReference Include="..\Presentation.Shared.Rcl\Presentation.Shared.Rcl.csproj" />
 	</ItemGroup>
 
 </Project>

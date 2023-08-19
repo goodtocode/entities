@@ -6,29 +6,25 @@ using MediatR;
 
 namespace Goodtocode.Subjects.Application;
 
-public class GetBusinessQuery : IRequest<BusinessEntity>, IBusinessEntity
+public class GetBusinessByKeyQuery : IRequest<BusinessEntity>
 {
     public Guid BusinessKey { get; set; }
-    public string BusinessName { get; set; } = string.Empty;
-    public string TaxNumber { get; set; } = string.Empty;
 }
 
-public class GetBusinessQueryHandler : IRequestHandler<GetBusinessQuery, BusinessEntity?>
+public class GetBusinessByKeyQueryHandler : IRequestHandler<GetBusinessByKeyQuery, BusinessEntity?>
 {
-    private readonly IMapper _mapper;
     private readonly IBusinessRepo _userBusinessRepo;
 
-    public GetBusinessQueryHandler(IBusinessRepo userBusinessRepo, IMapper mapper)
+    public GetBusinessByKeyQueryHandler(IBusinessRepo userBusinessRepo)
     {
         _userBusinessRepo = userBusinessRepo;
-        _mapper = mapper;
     }
 
-    public async Task<BusinessEntity?> Handle(GetBusinessQuery request,
+    public async Task<BusinessEntity?> Handle(GetBusinessByKeyQuery request,
         CancellationToken cancellationToken)
     {
         var business =
-            await _userBusinessRepo.GetBusinessAsync(request.BusinessKey,
+            await _userBusinessRepo.GetBusinessByKeyAsync(request.BusinessKey,
                 cancellationToken);
 
         return business.Match(

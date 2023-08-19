@@ -1,4 +1,5 @@
-﻿using Goodtocode.Subjects.Application;
+﻿using Goodtocode.Common.Extensions;
+using Goodtocode.Subjects.Application;
 using Goodtocode.Subjects.Domain;
 using Goodtocode.Subjects.WebApi.Common;
 using Microsoft.AspNetCore.Mvc;
@@ -24,11 +25,9 @@ public class BusinessesController : BaseController
     [HttpGet(Name = "GetBusinessesByNameQuery")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<List<BusinessEntity>> Get(string name)
+    public async Task<PagedResult<BusinessEntity>> Get(string? name, int pageNumber = 1, int pageSize = 10) => await Mediator.Send(new GetBusinessesByNameQuery
     {
-        return await Mediator.Send(new GetBusinessesByNameQuery
-        {
-            BusinessName = name
-        });
-    }
+        BusinessName = name ?? string.Empty,
+        PageNumber = pageNumber,
+    });
 }

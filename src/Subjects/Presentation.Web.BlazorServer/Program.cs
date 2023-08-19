@@ -1,6 +1,8 @@
 using Azure.Identity;
 using Goodtocode.Common.Infrastructure.ApiClient;
-using Goodtocode.Subjects.BlazorServer.Data;
+using Goodtocode.Subjects.Alerts;
+using Goodtocode.Subjects.Data;
+using Goodtocode.Subjects.Paging;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
@@ -33,9 +35,7 @@ builder.Services.AddServerSideBlazor()
     .AddMicrosoftIdentityConsentHandler();
 
 if (builder.Environment.IsDevelopment() || string.Equals(builder.Environment.EnvironmentName, "local", StringComparison.InvariantCultureIgnoreCase))
-{
-    builder.WebHost.UseStaticWebAssets();
-}
+    builder.WebHost.UseStaticWebAssets(); // Required to serve static files from the wwwroot folder in environments other than Development.
 
 builder.Services.AddApplicationInsightsTelemetry(options =>
 {
@@ -50,6 +50,8 @@ builder.Services.AddApiClientServices("SubjectsApiClient", builder.Configuration
     builder.Configuration["Subjects:Scope"])
 );
 
+builder.Services.AddSingleton<PageHistoryState>();
+builder.Services.AddScoped<IAlertService, AlertService>();
 builder.Services.AddSingleton<BusinessService>();
 
 var app = builder.Build();

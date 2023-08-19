@@ -1,7 +1,8 @@
-﻿@page "/businesscreate"
-@using Goodtocode.Subjects.BlazorServer.Data;
-@using Goodtocode.Subjects.BlazorServer.Models;
+﻿@page "/business/create"
+@using Goodtocode.Subjects.Alerts;
+@using Goodtocode.Subjects.Data;
 @using Goodtocode.Subjects.Domain;
+@using Goodtocode.Subjects.Models;
 @using System.ComponentModel.DataAnnotations;
 
 @inject BusinessService Service
@@ -16,7 +17,7 @@
     <DataAnnotationsValidator />
     <div class="form-group mb-3">
         <label for="businessName">Name</label>
-        <input type="text" class="form-control" id="businessName" placeholder="Business name" aria-label="Search" aria-describedby="button-addon2"
+        <input type="text" class="form-control" id="businessName" placeholder="Business name" aria-label="Name" aria-describedby="button-addon2"
         @bind="@business.BusinessName">
     </div>
     <div class="form-group mb-3">
@@ -24,14 +25,15 @@
         <input type="text" class="form-control" id="taxNumber" placeholder="Tax Number" @bind-value="@business.TaxNumber">
     </div>
     <button type="submit" class="btn btn-primary" @onclick="CreateBusineses">Create</button>
-    <ValidationSummary />
-    <div hidden="@string.IsNullOrEmpty(alertMessage)" class="alert alert-danger" role="alert">@alertMessage</div>
+    <ValidationSummary class="mt-3" />
+    <SimpleAlert Message="@alertMessage" AlertType="@alertType" />
 </EditForm>
 
 @code {
-    private BusinessCreateModel business = new BusinessCreateModel();
+    private BusinessModel business = new BusinessModel();
     private string alertMessage = string.Empty;
-    private CancellationTokenSource cts = new CancellationTokenSource();
+    private AlertTypes alertType = AlertTypes.Error;
+    private CancellationTokenSource? cts;
     private async Task CreateBusineses()
     {
         if (!Validator.TryValidateObject(business,
@@ -45,6 +47,7 @@
             alertMessage = string.Empty;
             await Service.CreateBusinessAsync(business);
             alertMessage = $"{business.BusinessName} created";
+            alertType = AlertTypes.Success;
         }
         catch (TaskCanceledException)
         {

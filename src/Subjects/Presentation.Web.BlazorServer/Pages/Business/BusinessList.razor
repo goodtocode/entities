@@ -1,61 +1,99 @@
-﻿@page "/businesssearch"
-@using Goodtocode.Subjects.BlazorServer.Data;
-@using Goodtocode.Subjects.BlazorServer.Models;
+﻿@page "/businesses/{page:int}"
+@using Goodtocode.Common.Extensions;
+@using Goodtocode.Subjects.Data;
+@using Goodtocode.Subjects.Models;
 @using Goodtocode.Subjects.Domain;
 @using System.ComponentModel.DataAnnotations;
+@using Goodtocode.Subjects.Paging
+@using Microsoft.AspNetCore.Http.Extensions;
 
 @inject BusinessService Service
+@inject PageHistoryState PageHistory
+@inject NavigationManager UriHelper
 
-<PageTitle>Business Search</PageTitle>
+<PageTitle>Business List</PageTitle>
 
-<EditForm Model="@businessSearch" OnValidSubmit="@GetBusineses">
-    <DataAnnotationsValidator />
-    <div class="input-group mb-3">
-        <input type="text" class="form-control form-control-lg" placeholder="Search" aria-label="Search" aria-describedby="button-addon2"
-        @bind="@businessSearch.Name" @onkeydown="@(async e => { if (e.Key == "Enter") { await GetBusineses(); } })">
-        <button class="btn btn-primary btn-lg" type="submit" id="button-addon2"><i class="bi bi-search"></i></button>
-    </div>
-    <ValidationSummary />
-    <div hidden="@string.IsNullOrEmpty(alertMessage)" class="alert alert-danger" role="alert">@alertMessage</div>
-    <div hidden="@(!processing)" class="spinner-border text-primary center-screen" role="status">
-        <span class="visually-hidden">Loading...</span>
-    </div>
-</EditForm>
+<div hidden="@string.IsNullOrEmpty(alertMessage)" class="alert alert-danger" role="alert">@alertMessage</div>
+<div hidden="@(!processing)" class="spinner-border text-primary center-screen" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
 
 
-@if (businesses.Count() > 0)
+@if (businesses.Results.Count() > 0)
 {
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Key</th>
                 <th>Name</th>
                 <th>Tax Number</th>
+                <th style="width:5%;"></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var business in businesses)
+            @foreach (var business in businesses.Results)
             {
                 <tr>
                     <td>@business.BusinessKey</td>
                     <td>@business.BusinessName</td>
                     <td>@business.TaxNumber</td>
+                    <td class="nowrap" style="width:5%;">
+                        <NavLink href="@($"/business/details/{business.BusinessKey}")" class="btn btn-link oi oi-eye p-0 nounderline"></NavLink>
+                        <NavLink href="@($"/business/update/{business.BusinessKey}")" class="btn btn-link oi oi-pencil p-0 nounderline"></NavLink>
+                        <button @onclick="@(() => DeleteBusinessAsync(business))" disabled="@business.IsDeleting" class="btn btn-link oi oi-trash p-0 nounderline">
+                            @if (business.IsDeleting) { <span class="spinner-border spinner-border-sm"></span> }
+                            else { <span></span> }
+                        </button>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
+    <Pager Result=@businesses PageChanged=PagerPageChanged />
 }
 
 @code {
+    [Parameter]
+    public int page { get; set; } = 1;
+    [Parameter]
+    public string SearchTerm { get; set; } = string.Empty;
     private string alertMessage = string.Empty;
-    private BusinessSearchModel businessSearch = new BusinessSearchModel();
-    private IEnumerable<BusinessEntity> businesses = new List<BusinessEntity>();
+    private SearchModel businessSearch = new SearchModel();
+    private PagedResult<BusinessModel> businesses = new PagedResult<BusinessModel>();
     private CancellationTokenSource cts = new CancellationTokenSource();
     private bool processing;
 
-    private async Task GetBusineses()
+    protected override void OnInitialized()
+    {
+        PageHistory.AddPageToHistory(UriHelper.Uri);
+        base.OnInitialized();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await GetBusinessesAsync();
+        PageHistory.AddPageToHistory(UriHelper.Uri);
+    }
+
+    protected void PagerPageChanged(int page)
+    {
+        UriHelper.NavigateTo("/businesslist/" + page);
+        PageHistory.AddPageToHistory(UriHelper.Uri);
+    }
+
+    protected async Task SearchBoxKeyPress(KeyboardEventArgs ev)
+    {
+        if (ev.Key == "Enter")
+        {
+            await GetBusinessesAsync();
+        }
+    }
+
+    private async Task GetBusinessesAsync()
     {
         alertMessage = string.Empty;
+
+        businessSearch.Name = SearchTerm;
 
         if (!Validator.TryValidateObject(businessSearch,
             new ValidationContext(businessSearch, serviceProvider: null, items: null), new List<ValidationResult>(), true)) return;
@@ -65,9 +103,9 @@
         try
         {
             processing = true;
-            await Task.Delay(500, cts.Token);            
-            businesses = await Service.GetBusinessesAsync(businessSearch.Name);
-            if (businesses.Count() == 0)
+            await Task.Delay(500, cts.Token);
+            businesses = await Service.GetBusinessesAsync(businessSearch, page);
+            if (businesses.Results.Count() == 0)
                 alertMessage = "No businesses found";
         }
         catch (TaskCanceledException)
@@ -77,6 +115,32 @@
         finally
         {
             processing = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task DeleteBusinessAsync(BusinessModel business)
+    {
+        alertMessage = string.Empty;
+
+        if (cts != null) cts.Cancel();
+        cts = new CancellationTokenSource();
+        try
+        {
+            processing = true;
+            var businessToDelete = business;
+            await Task.Delay(500, cts.Token);
+            await Service.DeleteBusinessAsync(business.BusinessKey);
+            await GetBusinessesAsync();
+        }
+        catch (TaskCanceledException)
+        {
+            // Ignore exception if task was cancelled
+        }
+        finally
+        {
+            processing = false;
+            StateHasChanged();
         }
     }
 }
