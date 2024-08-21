@@ -4,7 +4,7 @@
 		<RootNamespace>Goodtocode.Common.ApiClient</RootNamespace>
 		<AssemblyName>Goodtocode.Common.ApiClient</AssemblyName>
 		<Version>1.0.0</Version>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>

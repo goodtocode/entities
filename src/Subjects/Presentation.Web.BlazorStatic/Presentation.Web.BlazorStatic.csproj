@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<RootNamespace>Goodtocode.Subjects.BlazorStatic</RootNamespace>
 		<AssemblyName>Goodtocode.Subjects.BlazorStatic</AssemblyName>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
@@ -11,7 +11,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.8" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.8" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="7.0.8" />
 	</ItemGroup>
 
